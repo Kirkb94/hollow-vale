@@ -59,7 +59,7 @@ function handle(r, cid, m) {
       if (!isHost || r.phase !== 'lobby' || !r.rnd || !humans(r).length || !m.picks) break;
       const picks = {}, names = {};
       sidesOf(r).forEach(s => { if (r.seats[s].kind === 'open') r.seats[s] = { kind: 'ai' }; const x = r.seats[s]; picks[s] = cleanPicks(m.picks[s]); names[s] = x.kind === 'human' && x.name ? x.name : null; });
-      r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, seed: Math.random() * 2147483647 | 0 }, log: [] };
+      r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, seed: Math.random() * 2147483647 | 0, gid: Math.random().toString(36).slice(2, 10) }, log: [] };
       r.phase = 'play';
       broadcast(r, { type: 'start', cfg: r.game.cfg }); pushLobby(r); break;
     }
@@ -118,13 +118,13 @@ function handle(r, cid, m) {
       if (!humans(r).every(s => r.seats[s].ready)) break;
       const picks = {}, names = {};
       sidesOf(r).forEach(s => { const x = r.seats[s]; picks[s] = x.kind === 'human' ? x.picks : cleanPicks(m.ai && m.ai[s]); names[s] = x.kind === 'human' && x.name ? x.name : null; });
-      r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, seed: Math.random() * 2147483647 | 0 }, log: [] };
+      r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, seed: Math.random() * 2147483647 | 0, gid: Math.random().toString(36).slice(2, 10) }, log: [] };
       r.phase = 'play';
       broadcast(r, { type: 'start', cfg: r.game.cfg }); pushLobby(r); break;
     }
     case 'rematch': {
       if (!isHost || r.phase !== 'play' || !r.game) break;
-      r.game.log = []; r.game.cfg.seat = cfgSeat(r); r.game.cfg.seed = Math.random() * 2147483647 | 0; r.game.cfg.opts = r.opts || {};
+      r.game.log = []; r.game.cfg.seat = cfgSeat(r); r.game.cfg.seed = Math.random() * 2147483647 | 0; r.game.cfg.gid = Math.random().toString(36).slice(2, 10); r.game.cfg.opts = r.opts || {};
       if (r.rnd && m.picks) sidesOf(r).forEach(s => { r.game.cfg.picks[s] = cleanPicks(m.picks[s]); });
       broadcast(r, { type: 'start', cfg: r.game.cfg }); break;
     }
@@ -146,7 +146,7 @@ function handle(r, cid, m) {
       if (typeof a.o === 'string' && /^[a-z]$/.test(a.o)) clean.o = a.o;
       if (typeof a.p === 'string' && /^[0-5]{1,8}$/.test(a.p)) clean.p = a.p;
       r.game.log.push(clean);
-      broadcast(r, { type: 'act', a: clean }, cid); break;
+      broadcast(r, { type: 'act', a: clean, n: r.game.log.length }, cid); break;
     }
   }
 }
@@ -164,7 +164,7 @@ const server = http.createServer((req, res) => {
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
   if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs() });
   if (u.pathname === '/api/create' && req.method === 'POST') { const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
-  if (u.pathname === '/api/state') { const r = room(); return r ? json(res, 200, { lobby: lobbyView(r), game: r.game }) : json(res, 404, { error: 'no room' }); }
+  if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } return r ? json(res, 200, { lobby: lobbyView(r), game: r.game }) : json(res, 404, { error: 'no room' }); }
   if (u.pathname === '/events') {
     const r = room(), cid = (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40);
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform', 'Connection': 'keep-alive', 'X-Accel-Buffering': 'no' });
@@ -181,7 +181,7 @@ const server = http.createServer((req, res) => {
     const s = seatOf(r, cid); if (s && c.name) r.seats[s].name = c.name;
     send(c, { type: 'state', lobby: lobbyView(r), game: r.game });
     pushLobby(r);
-    const ka = setInterval(() => { try { res.write(': ka\n\n'); } catch (e) { } }, 15000);
+    const ka = setInterval(() => { try { res.write('data: {"type":"ka"}\n\n'); } catch (e) { } }, 15000);
     req.on('close', () => { clearInterval(ka); if (c.res === res) { c.connected = false; pushLobby(r); } });
     return;
   }

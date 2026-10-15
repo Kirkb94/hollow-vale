@@ -1608,7 +1608,8 @@ if(a.t=='buy')return doBuy(a.s,a.item,a.i);
 if(a.t=='card')return playCard(a.s,a.i,a.x,a.y);
 if(a.t=='ult'){if(!MOPT.ults||(S.ult[a.s]||0)<ULT_MAX)return false;S.ult[a.s]=0;doUlt(a.s);return true}
 if(a.t=='end'){endTurn();return true}return false}
-function submit(a){const ok=perform(a);if(ok&&NET&&!RP)NET.send({type:'act',a});return ok}
+let NLOG=0,GID=null;
+function submit(a){const ok=perform(a);if(ok&&NET&&!RP){NLOG++;NET.send({type:'act',a})}return ok}
 let NET=null;
 // ui
 function autoEnd(){if(S.over||!isMine(S.turn)||S.units.some(u=>u.side==S.turn&&!u.used)||canSpawn(S.turn)||extraActs(S.turn))return;busy=true;msg('All heroes have acted. Ending turn...');render();const sd=S.turn;setTimeout(()=>{if(S.over||S.turn!=sd)return;busy=false;submit({t:'end',s:sd})},Math.max(800,cutUntil-performance.now()+300))}
@@ -1872,7 +1873,8 @@ try{myName=localStorage.getItem('hv-name')||''}catch(e){}
 const esc=t=>String(t==null?'':t).replace(/[<>&"'`\\]/g,'');
 const q=()=>'cid='+encodeURIComponent(CID)+'&room='+encodeURIComponent(ROOM||'');
 let SEQ=Date.now()*1000,QUEUE=Promise.resolve();
-const post=m=>{if(!ROOM)return QUEUE;m.seq=++SEQ;const body=JSON.stringify(m),qs=q();QUEUE=QUEUE.then(async()=>{for(let i=0;i<8;i++){try{const r=await fetch('/send?'+qs,{method:'POST',headers:{'Content-Type':'application/json'},body});if(r.ok||r.status==404)return}catch(e){}await new Promise(z=>setTimeout(z,300*(i+1)))}});return QUEUE};
+let PENDING=0,LASTMSG=Date.now();
+const post=m=>{if(!ROOM)return QUEUE;m.seq=++SEQ;PENDING++;const body=JSON.stringify(m),qs=q();QUEUE=QUEUE.then(async()=>{try{for(let i=0;i<8;i++){try{const r=await fetch('/send?'+qs,{method:'POST',headers:{'Content-Type':'application/json'},body});if(r.ok||r.status==404)return}catch(e){}await new Promise(z=>setTimeout(z,300*(i+1)))}}finally{PENDING--}});return QUEUE};
 let resyncing=false;const resync=()=>{if(resyncing||!ROOM)return;resyncing=true;QUEUE.then(()=>fetch('/api/state?'+q())).then(r=>r.json()).then(j=>{resyncing=false;if(j.game&&j.lobby&&j.lobby.phase=='play'){LOB=j.lobby;HOST=LOB.host==CID;begin(j.game.cfg,j.game.log)}}).catch(()=>{resyncing=false})};
 const act=L=>ALLS.slice(0,(L&&L.n)||3);
 const mySeat=()=>LOB?(act(LOB).find(sd=>LOB.seats[sd].kind=='human'&&LOB.seats[sd].cid==CID)||null):null;
@@ -1931,7 +1933,7 @@ openDraft('Ready',()=>{if(ND.ready){post({type:'unready'});ND.ready=false}else{N
 function setLabel(){const b=$('#start');if(!ND||$('#draft').hidden)return;const L=LOB,waiting=L?act(L).filter(sd=>L.seats[sd].kind=='human'&&!L.seats[sd].ready).map(sd=>esc(L.seats[sd].name||SIDEN[sd])):[];
 if(ND.ready){b.disabled=false;b.textContent=waiting.length?'Ready ✔  waiting for '+waiting.join(', ')+' (click to edit)':'Ready ✔  starting...'}}
 const _dc2=drawCards;drawCards=function(){_dc2();if(ND&&ND.ready&&picks.join()!=ND.sig){ND.ready=false;post({type:'unready'})}setLabel()};
-function begin(cfg,replay){HOTSEAT=false;inGame=true;inDraft=false;ND=null;const me=mySeat();SEAT=Object.assign({},cfg.seat);
+function begin(cfg,replay){NLOG=replay?replay.length:0;GID=cfg.gid||null;HOTSEAT=false;inGame=true;inDraft=false;ND=null;const me=mySeat();SEAT=Object.assign({},cfg.seat);
 const names={},pk={},nG=MODES[cfg.n]?cfg.n:3;ALLS.slice(0,nG).forEach(sd=>{if(cfg.names&&cfg.names[sd])names[sd]=esc(cfg.names[sd]).slice(0,16);pk[sd]=(cfg.picks[sd]||[]).filter(k=>H[k])});
 if(replay){RP=true;const r0=render,m0=muted;render=()=>{};muted=true;try{startGame({picks:pk,seat:SEAT,me,names,n:nG,opts:cfg.opts,seed:cfg.seed});replay.forEach(a=>{try{perform(a)}catch(e){}})}finally{render=r0;muted=m0;RP=false}
 busy=!(isMine(S.turn)&&!isAI(S.turn))||S.over;render();$('#tolobby').hidden=false;if(!S.over&&HOST&&isAI(S.turn))runAI(S.turn);else if(!S.over&&isMine(S.turn))autoEnd()}
@@ -1942,7 +1944,7 @@ else if(L.phase=='draft'){if(!inDraft&&!inGame){enterDraft()}else if(inGame){inG
 setLabel();renderLobby();
 if(HOST&&allReady(L)){const ai={};act(L).forEach(sd=>{if(L.seats[sd].kind!='human')ai[sd]=aiPick()});post({type:'start',ai})}}
 else if(L.phase=='play'){if(inGame&&S){SEAT=seatMap(L);if(HOST&&!S.over&&isAI(S.turn)&&(!wasHost||(was&&was.seats[S.turn].kind!='ai')))runAI(S.turn);render()}renderLobby()}}
-function onMsg(m){
+function onMsg(m){LASTMSG=Date.now();if(m.type=='ka')return;
 if(m.type=='noroom'||m.type=='full'){NOTE=m.type=='full'?'That game is full.':'That game no longer exists (the server may have restarted). Create a new one.';closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;show('#lobby');return}
 if(m.type=='state'){LOB=m.lobby;HOST=LOB.host==CID;NOTE='';
 if(LOB.phase=='play'&&m.game){begin(m.game.cfg,m.game.log);renderLobby()}
@@ -1950,11 +1952,16 @@ else if(LOB.phase=='draft'){if(!inDraft)enterDraft();setLabel()}
 else{inGame=false;inDraft=false;show('#lobby')}}
 else if(m.type=='lobby')onLobby(m.lobby);
 else if(m.type=='start'){$('#post').className='';begin(m.cfg)}
-else if(m.type=='act'){if(S&&inGame){if(!S.over&&perform(m.a)){render();if(m.a.t!='end')autoEnd()}else if(!S.over)resync()}}}
+else if(m.type=='act'){if(S&&inGame){if(m.n&&m.n!==NLOG+1){resync();return}if(!S.over&&perform(m.a)){NLOG=m.n||NLOG+1;render();if(m.a.t!='end')autoEnd()}else if(!S.over)resync()}}}
 function closeES(){if(es){try{es.close()}catch(x){}es=null}}
 function connect(){if(!ROOM)return;if(es&&es.readyState!==2)return;closeES();es=new EventSource('/events?'+q()+'&name='+encodeURIComponent(myName));es.onmessage=e=>{try{onMsg(JSON.parse(e.data))}catch(x){console.error(x)}};
 es.onerror=()=>{if(!es)return;$('#lmsg')&&($('#lmsg').textContent='Connection lost - trying to reconnect...');if(es.readyState===2)setTimeout(connect,2000)}}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ROOM&&(!es||es.readyState===2))connect()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ROOM){closeES();connect();setTimeout(syncCheck,800)}});
+let CHECKING=false,MISS=0;
+function syncCheck(){if(!ROOM||!inGame||CHECKING||resyncing||PENDING>0||document.hidden)return;CHECKING=true;
+fetch('/api/state?lite=1&'+q(),{cache:'no-store'}).then(r=>r.status==404?{gone:1}:r.json()).then(j=>{CHECKING=false;if(j.gone){onMsg({type:'noroom'});return}
+if(PENDING>0||resyncing)return;if(j.phase=='play'&&(j.n!==NLOG||(j.gid&&GID&&j.gid!==GID))){if(++MISS>=2){MISS=0;console.warn('desync: server',j.n,'local',NLOG);resync()}}else MISS=0}).catch(()=>{CHECKING=false})}
+setInterval(()=>{if(!ROOM)return;syncCheck();if(!document.hidden&&Date.now()-LASTMSG>40000){LASTMSG=Date.now();closeES();connect()}},3000);
 setInterval(()=>{if(ROOM&&!document.hidden)post({type:'ping'})},4*60*1000);
 function joinRoom(code){closeES();ROOM=code;LOB=null;NOTE='';inGame=false;inDraft=false;setURL();try{localStorage.setItem('hv-room',code)}catch(e){}show('#lobby');$('#lroom').dataset.m='';$('#lroom').innerHTML='<p class="sub">Connecting... (a sleeping server can take up to a minute to wake up)</p>';connect()}
 function createRoom(){$('#lroom').dataset.m='';$('#lroom').innerHTML='<p class="sub">Creating a game... (a sleeping server can take up to a minute to wake up)</p>';fetch('/api/create',{method:'POST'}).then(r=>r.json()).then(j=>{if(j.room)joinRoom(j.room);else{NOTE=esc(j.error||'Could not create a game.');$('#lroom').dataset.m='';renderLobby()}}).catch(()=>{NOTE='Could not reach the server.';$('#lroom').dataset.m='';renderLobby()})}
