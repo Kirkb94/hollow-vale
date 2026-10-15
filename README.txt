@@ -69,10 +69,30 @@ MOVING
   bend it, tap the tip again to move.
 
 CAMPAIGN (main menu)
-- Six chapters against preset AI armies: The Border Skirmish, Bog of Snares,
-  Three Crowns, Hold the Hill, The Siege of Four Banners, The Dread Colossus
-  (a raid with an AI ally). Win a chapter to unlock the next. Progress is
-  saved in the browser on that device.
+- An illustrated map of the Vale with 15 battles and branching paths. Win a
+  battle to open the paths beyond it and pick your own route. Crown nodes are
+  boss fights; the skull keep is the final raid against the Dread Colossus.
+  Progress is saved in the browser on that device.
+
+BOSSES (2 picks each, 5 per faction, each with a signature mechanic)
+- Kingdom: Lionheart King (Royal Command), High Seraph (Holy Aura), Warlord
+  Gideon (War Banner), Grand Templar (Tower Shield), Lord Marshal (Momentum)
+- Vampires: Vampire Lord (Blood Feast), Blood Queen (Exsanguinate),
+  Nosferatu (Mist Step), Crimson Matriarch (Blood Pact), Bat King (Swarm Call)
+- Undead: Lich King (Raise Dead), Bone Colossus (Ossuary), Death Knight
+  (Withering Strike), Banshee Queen (Wail), Plague Lord (Plague Aura)
+- Infernal: Ember Dragon (Wings of Flame), Pit Lord (Immolation), Inferno
+  Witch (Hellfire), Demon Prince (Hellgate), Phoenix (Rebirth)
+- Wilds: Ancient Mammoth (Trample), Elder Treant (Entangle), Alpha Direwolf
+  (Pack Howl), Storm Roc (Gale), Cave Bear (Thick Hide)
+- Iron Clan: Stone Titan (Aftershock), War Engine (Ballistic Arc), Forge
+  Master (Field Repairs), Iron Juggernaut (Spiked Plating), Thunder King
+  (Chain Lightning)
+- Arcane Order: Starweaver (Arcane Surge), Chronomancer (Time Slow), Void
+  Sorcerer (Mana Burn), Mirror Mage (Reflection), Runekeeper (Rune Ward)
+- Aura bosses show their area on the board (green gas, fire ring, holy glow,
+  banners...). Hover a hex to see which aura covers it.
+- Hovering a hero on PC shows its full card docked at the bottom of the screen.
 
 
 Two ways to host online games:
