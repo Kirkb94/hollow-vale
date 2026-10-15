@@ -1,0 +1,52 @@
+HOLLOW VALE - PUT THE GAME ONLINE (free, about 15 minutes, one time only)
+=========================================================================
+When this is done you get a web address like https://hollow-vale-ab12.onrender.com
+Anyone can open it on an iPhone, Android or computer, on any network.
+No computer has to stay on at home.
+
+You need: a computer for the setup (only once), and an email address.
+
+STEP 1 - PUT THE FILES ON GITHUB
+1. Go to https://github.com and sign up (free) or log in.
+2. Click the "+" at the top right, then "New repository".
+3. Name it  hollow-vale , leave it Public, and click "Create repository".
+4. On the next page click the link "uploading an existing file".
+5. Open the unzipped "hollow-vale" folder on your computer. Select EVERYTHING
+   inside it (server.js, package.json, render.yaml, the public folder, ...)
+   and drag it all into the GitHub page.
+   Important: server.js must end up at the top level of the repository,
+   not inside another folder.
+6. Click "Commit changes" at the bottom.
+
+STEP 2 - RUN IT ON RENDER
+1. Go to https://render.com and click "Get Started". Choosing
+   "Sign up with GitHub" makes the next part easiest.
+2. In the Render dashboard click "New +" then "Web Service".
+3. Connect your GitHub account if asked, and pick the  hollow-vale  repository.
+4. Check these settings (most are filled in for you):
+      Language / Runtime:  Node
+      Build Command:       npm install
+      Start Command:       node server.js
+      Instance Type:       Free
+5. Click "Create Web Service" (or "Deploy Web Service").
+6. Wait until it says "Live" (usually 2-5 minutes). Your address is shown at
+   the top of the page, ending in .onrender.com.
+
+STEP 3 - PLAY
+1. Open your .onrender.com address on your iPhone in Safari.
+2. Tap "Play online", then "Create a new game" and pick 1v1, 3 or 4 players.
+3. Tap "Share link" to text the link to your friends, or let them scan the
+   QR code. They tap the link, type a name and tap "Sit here".
+4. You (the first person in the room) are the host: tap "Start hero draft".
+5. Make it an app: in Safari tap Share, then "Add to Home Screen".
+
+GOOD TO KNOW
+- Free servers fall asleep after about 15 minutes with nobody playing. The
+  first visit after that takes up to a minute to load. Just wait.
+- While someone has the game open it stays awake.
+- If the server restarts (Render can do this at any time on the free plan),
+  rooms are cleared. Just create a new game.
+- Render gives 750 free hours each month, far more than game nights need.
+- To update the game later: upload the new files to the same GitHub
+  repository. Render redeploys automatically.
+- Room codes keep your game private. Only people with your link or code can join.
