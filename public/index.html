@@ -704,6 +704,8 @@ body.mob .ust{font-size:13px;padding:2px 7px}body.mob .ucn>b{font-size:16px}body
 .ctx{flex:1;min-width:0}.ctx b{font-family:MedievalSharp,Georgia,serif;font-size:18px;color:#ffe2a0}.ctx small{display:block;opacity:.75;font-size:12px}.ctx p{margin:4px 0 0;font-size:14px;line-height:1.4}
 .cch .go{width:auto!important;flex:none;padding:10px 18px!important;margin:0!important}
 body.mob .cch{flex-wrap:wrap}body.mob .cch .go{width:100%!important}
+
+#board,#board .cell{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 </style></head><body><div id="amb"></div><main>
 <h1><i class="fl s"></i>Hollow Vale<i class="fl s"></i></h1>
 <div class="size"><label for="size">Size</label><input type="range" id="size" min="30" max="300" value="100"><button id="fit">Fit</button></div>
@@ -1221,7 +1223,7 @@ const CSFX={dragon(){tone(80,.9,'sawtooth',.1,0,300);noise(.9,.12,2500,.2);tone(
 function playCut(u){const d=CUT[u.k],el=$('#cut');cutUntil=performance.now()+CUTMS;el.className='';el.style.cssText='--c:'+d.c;
 el.innerHTML=`<div class='cbg'></div><div class='cbar top'></div><div class='cbar bot'></div><div class='csp'>${spr(u.k,u.side)}</div><div class='cfx ${d.f}'>${fxParts(d.f)}</div><div class='cname'>${d.n}</div><div class='cflash'></div>`;
 void el.offsetWidth;el.className='on';try{CSFX[u.k]()}catch(e){}setTimeout(()=>{el.className='';el.innerHTML=''},CUTMS)}
-function cellAt(e){const r=$('#board').getBoundingClientRect(),cw=r.width/WF,ch=r.height/HF;let best=null,bd=1e9;for(let y=0;y<GEO.BH;y++)for(let x=0;x<GEO.BW;x++){if(!VALID.has(x+','+y))continue;const cx=r.left+(x+(y&1?.5:0)+.5)*cw,cy=r.top+(y*.75+.5)*ch,d=(e.clientX-cx)**2+(e.clientY-cy)**2;if(d<bd){bd=d;best={x,y}}}return bd<(ch*.62)**2?best:null}
+function cellAt(e){const el=e&&e.target&&e.target.closest?e.target.closest('#board .cell[data-x]'):null;if(el)return{x:+el.dataset.x,y:+el.dataset.y};const r=$('#board').getBoundingClientRect(),cw=r.width/WF,ch=r.height/HF;let best=null,bd=1e9;for(let y=0;y<GEO.BH;y++)for(let x=0;x<GEO.BW;x++){if(!VALID.has(x+','+y))continue;const cx=r.left+(x+(y&1?.5:0)+.5)*cw,cy=r.top+(y*.75+.5)*ch,d=(e.clientX-cx)**2+(e.clientY-cy)**2;if(d<bd){bd=d;best={x,y}}}return bd<(ch*.62)**2?best:null}
 const CLS={Tank:'#5f7fa6',Warrior:'#c0633a',Assassin:'#7a5aa8',Ranger:'#4f9a42',Mage:'#3f83d0',Healer:'#3fa883',Siege:'#a8843a','Shield Wall':'#7a8fa8',Volley:'#6fae4a',Harrier:'#e0623a',Flanker:'#c9a24a',Skirmisher:'#4fc3d8',Boss:'#cf3f34',Cavalry:'#c0479a'};
 const CLASSDESC={Cavalry:'Charge riders. They move and attack in the same turn, but are fragile and hit softly.',Tank:'Soaks damage and holds the line.',Warrior:'Frontline fighters that deal steady melee damage.',Assassin:'Fast, fragile units that kill one key target or race to a tower.',Ranger:'Attack from a distance and need protection.',Mage:'Mana-powered casters with strong special abilities.',Healer:'Keep allies alive but are weak on their own.',Siege:'Slow specialists that destroy towers.','Shield Wall':'Squad of 3 armored bodies. Screens the backline and soaks hits for the team.',Volley:'Squad of 3 ranged shooters. Spreads damage across several targets from behind the line.',Harrier:'Squad of 3 flying pests. Ignores blockers to chip towers and distract enemies.',Flanker:'Squad of 3 fast raiders. Sprints in to gang up on one target or a tower.',Skirmisher:'Squad of 3 tiny fliers. Hits from range 2 and finishes off wounded units.',Boss:'Elite units that cost 2 picks and play attack cutscenes.'};
 const ROLE={
