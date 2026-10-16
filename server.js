@@ -109,6 +109,13 @@ function handle(r, cid, m) {
       const k = String(m.k || '').replace(/[^a-z]/g, '').slice(0, 20); if (!k) break;
       r.seats[mine].ban = k; pushLobby(r); break;
     }
+    case 'takeover': {
+      if (mine || !sidesOf(r).includes(m.seat) || r.phase === 'lobby') break;
+      const tk = r.seats[m.seat]; if (tk.kind !== 'human') break;
+      const hc = tk.cid && r.clients.get(tk.cid); if (hc && hc.connected) break;
+      tk.cid = cid; if (c.name) tk.name = c.name;
+      pushLobby(r); send(c, { type: 'state', lobby: lobbyView(r), game: r.game }); break;
+    }
     case 'unready': {
       if (r.phase === 'draft' && mine) { r.seats[mine].ready = false; pushLobby(r); }
       break;

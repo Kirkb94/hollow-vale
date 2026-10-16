@@ -52,7 +52,7 @@ NEW HEROES
 - Stonewright (Iron Clan): builds 6 HP walls (2 mana, up to 3) that block
   movement and ranged shots. Enemies can knock them down.
 - Hexweaver (Arcane Order): Silence (3 mana) on a 3-hex-wide area up to 3
-  away. Enemies there cannot attack or use abilities for 2 turns.
+  away. Enemies there cannot attack or use abilities on their next turn.
 
 READING THE BOARD
 - Icons above heroes: 🏇 charge, 🏹 ranged / ⚔️ melee, 🩸 lifesteal, 🔥 fire,
@@ -93,6 +93,13 @@ BOSSES (2 picks each, 5 per faction, each with a signature mechanic)
 - Aura bosses show their area on the board (green gas, fire ring, holy glow,
   banners...). Hover a hex to see which aura covers it.
 - Hovering a hero on PC shows its full card docked at the bottom of the screen.
+
+REJOINING A GAME
+- Lost connection, closed the tab or refreshed? Open the game link again, or
+  open the site: the main menu shows a green "Rejoin game XXXX" button.
+- Playing from a different phone? Open the room link; you join as a
+  spectator and can tap "Take over <name>'s seat" for any player who is
+  disconnected.
 
 
 Two ways to host online games:
