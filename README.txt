@@ -20,16 +20,29 @@ ALWAYS ON
 - Terrain: forests (-1 damage from ranged attacks), hills (+1 range for
   ranged heroes), swamps (walking heroes stop when they enter). Random each
   game but mirrored so every seat gets the same ground.
-- Gold: 1 per kill (2 for a boss), 3 per tower. Recruit: once you have lost a
-  hero, bring back ANY hero from your starting team (5 gold, bosses 8).
-  Repair: your most damaged tower regains 4 HP (3 gold).
+- Fog of war: you only see enemies within sight of your heroes, towers and
+  buildings (most heroes 3 hexes, fliers and long-range 4, heavies 2, scouts
+  5-6, watchtowers 4). Walking into a hidden enemy is an ambush. Each faction
+  has a scout that fires flares to light up an area.
+- Gold: +2 a turn, +2 per gold mine, +1 per farm, +1 interest per 10 saved
+  (max 2). Also 1 per kill (2 for a boss), 2 per enemy building, 3 per tower,
+  4 per treasure chest (one appears in the middle every 3 rounds).
+- Market: Hire any unit from your main faction (3-7 gold, bosses 14, army of
+  up to 7). Recruit a fallen starting hero (5, bosses 8, +2 each time).
+  Repair a tower by 4 (3, +1 each time). Upgrades: Forge Weapons, Forge
+  Armor, Fortify Towers, Scout's Lens, Deep Shafts.
+- Buildings (next to your heroes or towers, not near enemy towers): Farm
+  (+1 gold a turn), Watchtower (sees 4), Barracks (spawn next to it), Mana
+  Well (+1 mana a turn). Enemies can knock them down.
+- Sudden death from round 14: towers crumble faster every round and can no
+  longer be repaired or fortified.
 - Combos: Flank (+1 melee damage when an ally is also next to the target),
   Shatter (+2 damage to stunned heroes), Rally (+1 damage next to your boss).
 
 MATCH OPTIONS (lobby host / local setup screen)
 - Shrines (on): a hero on a shrine at the start of your turn gives +1 mana
   and heals 2.
-- Closing fog (off): from round 8 a poison fog creeps in from the edges.
+- Poison mist (off): from round 8 a poison fog creeps in from the edges.
 - Hero levels (on): 2 kills = a star (+2 max HP, +1 damage), 5 kills = 2 stars.
 - Ban phase (on): every human player bans one hero before the draft.
 - Spell cards (off): draw one a turn, hold 3. Fireball, Frost Bolt, Meteor,
