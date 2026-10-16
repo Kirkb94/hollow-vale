@@ -20,6 +20,10 @@ ALWAYS ON
 - Terrain: forests (-1 damage from ranged attacks), hills (+1 range for
   ranged heroes), swamps (walking heroes stop when they enter). Random each
   game but mirrored so every seat gets the same ground.
+- Crits & counters: attacks on heroes can crit for +50% damage (10%, +10%
+  when flanking, +5% per star). A melee hero that survives a melee hit
+  strikes back for half its damage unless stunned or silenced. Red target
+  hexes preview the damage, crit chance and counter.
 - Fog of war: you only see enemies within sight of your heroes, towers and
   buildings (most heroes 3 hexes, fliers and long-range 4, heavies 2, scouts
   5-6, watchtowers 4). Walking into a hidden enemy is an ambush. Each faction
