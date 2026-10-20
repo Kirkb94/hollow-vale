@@ -2700,7 +2700,7 @@ setLabel();renderLobby();
 if(HOST&&allReady(L)){const ai={};act(L).forEach(sd=>{if(L.seats[sd].kind!='human')ai[sd]=aiPick()});post({type:'start',ai})}}
 else if(L.phase=='play'){if(inGame&&S){SEAT=seatMap(L);if(HOST&&!S.over&&isAI(S.turn)&&(!wasHost||(was&&was.seats[S.turn].kind!='ai')))runAI(S.turn);render()}renderLobby()}}
 function onMsg(m){LASTMSG=Date.now();if(m.type=='ka')return;
-if(m.type=='noroom'||m.type=='full'){NOTE=m.type=='full'?'That game is full.':'That game no longer exists (the server may have restarted). Create a new one.';closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;show('#lobby');return}
+if(m.type=='noroom'||m.type=='full'){NOTE=m.type=='full'?(m.why=='ip'?'Too many connections from your network are already in this game.':'That game is full (12 people connected). Try again in a minute.'):'That game no longer exists (the server may have restarted). Create a new one.';closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;show('#lobby');return}
 if(m.type=='state'){LOB=m.lobby;HOST=LOB.host==CID;NOTE='';
 if(LOB.phase=='play'&&m.game){if(inGame&&S&&GID&&m.game.cfg.gid===GID&&m.game.log.length===NLOG){SEAT=seatMap(LOB);render()}else begin(m.game.cfg,m.game.log);renderLobby()}
 else if(LOB.phase=='draft'){if(!inDraft)enterDraft();setLabel()}

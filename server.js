@@ -221,7 +221,8 @@ setInterval(() => { const now = Date.now(); for (const [k, b] of buckets) if (no
 
 let shuttingDown = false;
 const server = http.createServer((req, res) => {
-  const u = new URL(req.url, 'http://x');
+  let u;
+  try { u = new URL(req.url, 'http://x'); } catch (e) { res.writeHead(400); return res.end('Bad request'); }
   const room = () => rooms.get(cleanCode(u.searchParams.get('room')));
   if (u.pathname === '/healthz') return json(res, shuttingDown ? 503 : 200, { ok: !shuttingDown, rooms: rooms.size, uptime: Math.round(process.uptime()) });
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
@@ -237,8 +238,8 @@ const server = http.createServer((req, res) => {
     let c = r.clients.get(cid);
     if (!c) {
       if (r.clients.size >= MAX_CLIENTS) { pruneClients(r, 0); if (r.clients.size >= MAX_CLIENTS) evictOne(r); }
-      if (r.clients.size >= MAX_CLIENTS) { res.write('retry: 600000\n\ndata: {"type":"full"}\n\n'); return res.end(); }
-      if ([...r.clients.values()].filter(x => x.ip === ip).length >= MAX_PER_IP) { res.write('retry: 600000\n\ndata: {"type":"full"}\n\n'); return res.end(); }
+      if (r.clients.size >= MAX_CLIENTS) { res.write('retry: 600000\n\ndata: {"type":"full","why":"room"}\n\n'); return res.end(); }
+      if ([...r.clients.values()].filter(x => x.ip === ip).length >= MAX_PER_IP) { res.write('retry: 600000\n\ndata: {"type":"full","why":"ip"}\n\n'); return res.end(); }
       c = { name: '', order: ++r.order, ip }; r.clients.set(cid, c);
     }
     res.write('retry: 1500\n\n');
