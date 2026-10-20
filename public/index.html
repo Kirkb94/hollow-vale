@@ -2629,7 +2629,7 @@ const esc=t=>String(t==null?'':t).replace(/[<>&"'`\\]/g,'');
 const q=()=>'cid='+encodeURIComponent(CID)+'&room='+encodeURIComponent(ROOM||'');
 let SEQ=Date.now()*1000,QUEUE=Promise.resolve();
 let PENDING=0,LASTMSG=Date.now();
-const post=m=>{if(!ROOM)return QUEUE;m.seq=++SEQ;PENDING++;const body=JSON.stringify(m),qs=q();QUEUE=QUEUE.then(async()=>{try{for(let i=0;i<8;i++){try{const r=await fetch('/send?'+qs,{method:'POST',headers:{'Content-Type':'application/json'},body});if(r.ok||r.status==404)return}catch(e){}await new Promise(z=>setTimeout(z,300*(i+1)))}}finally{PENDING--}});return QUEUE};
+const post=m=>{if(!ROOM)return QUEUE;m.seq=++SEQ;PENDING++;const body=JSON.stringify(m),qs=q();QUEUE=QUEUE.then(async()=>{try{for(let i=0;i<8;i++){try{const r=await fetch('/send?'+qs,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body});if(r.ok||r.status==404)return}catch(e){}await new Promise(z=>setTimeout(z,300*(i+1)))}}finally{PENDING--}});return QUEUE};
 let resyncing=false;const resync=()=>{if(resyncing||!ROOM)return;resyncing=true;QUEUE.then(()=>fetch('/api/state?'+q())).then(r=>r.json()).then(j=>{resyncing=false;if(j.game&&j.lobby&&j.lobby.phase=='play'){LOB=j.lobby;HOST=LOB.host==CID;begin(j.game.cfg,j.game.log)}}).catch(()=>{resyncing=false})};
 const act=L=>ALLS.slice(0,(L&&L.n)||3);
 const mySeat=()=>LOB?(act(LOB).find(sd=>LOB.seats[sd].kind=='human'&&LOB.seats[sd].cid==CID)||null):null;
@@ -2683,7 +2683,7 @@ WAITBAN=null;if(DSTAGE!='pick'){DSTAGE='pick';pickStage()}else drawCards()}
 function enterDraft(){const me=mySeat();inDraft=true;DSTAGE=null;BANMODE=false;WAITBAN=null;
 if(!me){show('#lobby');return}
 ME=me;SEAT=seatMap(LOB);draftStep()}
-function pickStage(){ND={ready:false,sig:''};
+function pickStage(){ND={ready:false,sig:''};{const me0=mySeat();if(me0&&LOB&&LOB.seats[me0].ready)post({type:'unready'})}
 openDraft('Ready',()=>{if(ND.ready){post({type:'unready'});ND.ready=false}else{ND.ready=true;ND.sig=picks.join();post({type:'ready',picks:picks.slice()})}setLabel()});setLabel()}
 function setLabel(){const b=$('#start');if(!ND||$('#draft').hidden)return;const L=LOB,waiting=L?act(L).filter(sd=>L.seats[sd].kind=='human'&&!L.seats[sd].ready).map(sd=>esc(L.seats[sd].name||SIDEN[sd])):[];
 if(ND.ready){b.disabled=false;b.textContent=waiting.length?'Ready ✔  waiting for '+waiting.join(', ')+' (click to edit)':'Ready ✔  starting...'}}
@@ -2702,7 +2702,7 @@ else if(L.phase=='play'){if(inGame&&S){SEAT=seatMap(L);if(HOST&&!S.over&&isAI(S.
 function onMsg(m){LASTMSG=Date.now();if(m.type=='ka')return;
 if(m.type=='noroom'||m.type=='full'){NOTE=m.type=='full'?'That game is full.':'That game no longer exists (the server may have restarted). Create a new one.';closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;show('#lobby');return}
 if(m.type=='state'){LOB=m.lobby;HOST=LOB.host==CID;NOTE='';
-if(LOB.phase=='play'&&m.game){begin(m.game.cfg,m.game.log);renderLobby()}
+if(LOB.phase=='play'&&m.game){if(inGame&&S&&GID&&m.game.cfg.gid===GID&&m.game.log.length===NLOG){SEAT=seatMap(LOB);render()}else begin(m.game.cfg,m.game.log);renderLobby()}
 else if(LOB.phase=='draft'){if(!inDraft)enterDraft();setLabel()}
 else{inGame=false;inDraft=false;show('#lobby')}}
 else if(m.type=='lobby')onLobby(m.lobby);

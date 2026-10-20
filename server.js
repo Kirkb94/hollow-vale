@@ -3,13 +3,15 @@
    Serves the game and relays moves between players over server-sent events.
    Works on a home network (LAN) and on a cloud host such as Render.
    Every game lives in its own room with a 4-letter code. */
-const http = require('http'), fs = require('fs'), path = require('path'), os = require('os');
+const http = require('http'), fs = require('fs'), path = require('path'), os = require('os'), zlib = require('zlib');
 const PORT = +process.env.PORT || 3000;
 const PUB = path.join(__dirname, 'public');
 const ALL_SIDES = ['p', 'e', 'g', 'k'];
-const MAX_ROOMS = 300, MAX_CLIENTS = 12, ROOM_IDLE_MS = 2 * 60 * 60 * 1000;
+const MAX_ROOMS = 300, MAX_CLIENTS = 12, ROOM_IDLE_MS = 2 * 60 * 60 * 1000, CLIENT_GRACE_MS = 2 * 60 * 1000;
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4', '.ogg': 'audio/ogg' };
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+const TEXT_EXT = new Set(['.html', '.js', '.css', '.svg', '.json', '.webmanifest']);
+const assetCache = new Map(); // file path -> { etag, raw, gz }
 
 const rooms = new Map(); // code -> room
 const cleanName = n => String(n || '').replace(/[<>&"'`\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
@@ -24,6 +26,22 @@ function makeRoom() {
   rooms.set(code, r); return r;
 }
 const hostCid = r => { let best = null; for (const [cid, c] of r.clients) if (c.connected && (!best || c.order < r.clients.get(best).order)) best = cid; return best; };
+// drop disconnected clients that hold no seat and have been gone longer than graceMs; returns true if any were removed
+function pruneClients(r, graceMs) {
+  const now = Date.now(); let changed = false;
+  for (const [cid, c] of r.clients) {
+    if (c.connected || seatOf(r, cid) || now - (c.lostAt || 0) < graceMs) continue;
+    r.clients.delete(cid); changed = true;
+  }
+  return changed;
+}
+// when the room is full, evict the longest-disconnected seatless client
+function evictOne(r) {
+  let best = null, bt = Infinity;
+  for (const [cid, c] of r.clients) if (!c.connected && !seatOf(r, cid) && (c.lostAt || 0) < bt) { best = cid; bt = c.lostAt || 0; }
+  if (best) r.clients.delete(best);
+  return !!best;
+}
 const lobbyView = (r, v) => ({
   code: r.code, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r) === v ? v : (hostCid(r) ? 'x' : null),
   seats: Object.fromEntries(ALL_SIDES.map(s => {
@@ -184,9 +202,11 @@ function lanIPs() {
 }
 const json = (res, code, obj) => { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' }); res.end(JSON.stringify(obj)); };
 
+let shuttingDown = false;
 const server = http.createServer((req, res) => {
   const u = new URL(req.url, 'http://x');
   const room = () => rooms.get(cleanCode(u.searchParams.get('room')));
+  if (u.pathname === '/healthz') return json(res, shuttingDown ? 503 : 200, { ok: !shuttingDown, rooms: rooms.size, uptime: Math.round(process.uptime()) });
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
   if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs() });
   if (u.pathname === '/api/create' && req.method === 'POST') { const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
@@ -197,33 +217,73 @@ const server = http.createServer((req, res) => {
     if (!r || !cid) { res.write('retry: 600000\n\ndata: {"type":"noroom"}\n\n'); return res.end(); }
     let c = r.clients.get(cid);
     if (!c) {
+      if (r.clients.size >= MAX_CLIENTS) { pruneClients(r, 0); if (r.clients.size >= MAX_CLIENTS) evictOne(r); }
       if (r.clients.size >= MAX_CLIENTS) { res.write('retry: 600000\n\ndata: {"type":"full"}\n\n'); return res.end(); }
       c = { name: '', order: ++r.order }; r.clients.set(cid, c);
     }
     res.write('retry: 1500\n\n');
     if (c.res) { try { c.res.end(); } catch (e) { } }
-    c.res = res; c.connected = true; r.touched = Date.now();
+    c.res = res; c.connected = true; c.lostAt = 0; r.touched = Date.now();
     const nm = cleanName(u.searchParams.get('name')); if (nm) c.name = nm;
     const s = seatOf(r, cid); if (s && c.name) r.seats[s].name = c.name;
     send(c, { type: 'state', lobby: lobbyView(r, cid), game: r.game });
     pushLobby(r);
     const ka = setInterval(() => { try { res.write('data: {"type":"ka"}\n\n'); } catch (e) { } }, 15000);
-    req.on('close', () => { clearInterval(ka); if (c.res === res) { c.connected = false; pushLobby(r); } });
+    req.on('close', () => { clearInterval(ka); if (c.res === res) { c.connected = false; c.lostAt = Date.now(); pushLobby(r); } });
     return;
   }
   if (u.pathname === '/send' && req.method === 'POST') {
     let body = ''; req.on('data', d => { body += d; if (body.length > 100000) req.destroy(); });
-    req.on('end', () => { const r = room(); try { if (r) handle(r, (u.searchParams.get('cid') || ''), JSON.parse(body)); } catch (e) { } res.writeHead(r ? 204 : 404); res.end(); });
+    req.on('end', () => { const r = room(); try { if (r) handle(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40), JSON.parse(body)); } catch (e) { } res.writeHead(r ? 204 : 404); res.end(); });
     return;
   }
-  let p = u.pathname === '/' ? '/index.html' : decodeURIComponent(u.pathname);
-  const f = path.normalize(path.join(PUB, p));
-  if (!f.startsWith(PUB)) { res.writeHead(403); return res.end(); }
-  fs.readFile(f, (err, data) => {
-    if (err) { res.writeHead(404); return res.end('Not found'); }
-    res.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream', 'Cache-Control': 'no-cache' }); res.end(data);
+  let p;
+  try { p = u.pathname === '/' ? '/index.html' : decodeURIComponent(u.pathname); } catch (e) { res.writeHead(400); return res.end('Bad request'); }
+  if (p.indexOf('\0') !== -1) { res.writeHead(400); return res.end('Bad request'); }
+  const f = path.resolve(PUB, '.' + p);
+  if (!f.startsWith(PUB + path.sep)) { res.writeHead(403); return res.end(); }
+  fs.stat(f, (err, st) => {
+    if (err || !st.isFile()) { res.writeHead(404); return res.end('Not found'); }
+    const ext = path.extname(f).toLowerCase();
+    const etag = 'W/"' + st.size.toString(16) + '-' + Math.floor(st.mtimeMs).toString(16) + '"';
+    const text = TEXT_EXT.has(ext);
+    const h = {
+      'Content-Type': MIME[ext] || 'application/octet-stream',
+      'ETag': etag,
+      'Last-Modified': st.mtime.toUTCString(),
+      'Cache-Control': text ? 'no-cache' : 'public, max-age=86400',
+      'Vary': 'Accept-Encoding'
+    };
+    if (req.headers['if-none-match'] === etag) { res.writeHead(304, h); return res.end(); }
+    const head = req.method === 'HEAD';
+    if (!text) {
+      h['Content-Length'] = st.size; res.writeHead(200, h);
+      if (head) return res.end();
+      const rs = fs.createReadStream(f);
+      rs.on('error', () => { try { res.destroy(); } catch (e) { } });
+      return rs.pipe(res);
+    }
+    const wantsGzip = /\bgzip\b/i.test(String(req.headers['accept-encoding'] || ''));
+    let ent = assetCache.get(f);
+    const send = e => {
+      const body = wantsGzip ? e.gz : e.raw;
+      if (wantsGzip) h['Content-Encoding'] = 'gzip';
+      h['Content-Length'] = body.length; res.writeHead(200, h);
+      res.end(head ? undefined : body);
+    };
+    if (ent && ent.etag === etag) return send(ent);
+    fs.readFile(f, (err2, raw) => {
+      if (err2) { res.writeHead(404); return res.end('Not found'); }
+      ent = { etag, raw, gz: zlib.gzipSync(raw, { level: 9 }) };
+      assetCache.set(f, ent); send(ent);
+    });
   });
 });
+
+// prune seatless clients that stayed disconnected past the grace period
+setInterval(() => {
+  for (const r of rooms.values()) if (pruneClients(r, CLIENT_GRACE_MS)) pushLobby(r);
+}, 30 * 1000).unref();
 
 // forget rooms nobody has used for a while
 setInterval(() => {
@@ -241,3 +301,30 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log('\n  Keep this window open while you play. Press Ctrl+C to stop.\n');
 });
 server.on('error', e => { console.error(e.code === 'EADDRINUSE' ? 'Port ' + PORT + ' is already in use. Close the other copy, or run with PORT=3001.' : e.message); process.exit(1); });
+
+// graceful shutdown: tell SSE clients, stop accepting connections, then exit
+function shutdown(reason, code) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log('Shutting down (' + reason + '), notifying clients in ' + rooms.size + ' room(s)');
+  for (const r of rooms.values()) broadcast(r, { type: 'shutdown' });
+  const force = setTimeout(() => process.exit(code), 5000); force.unref();
+  server.close(() => process.exit(code));
+  setTimeout(() => {
+    for (const r of rooms.values()) for (const c of r.clients.values()) if (c.res) { try { c.res.end(); } catch (e) { } }
+    if (server.closeIdleConnections) server.closeIdleConnections();
+  }, 300).unref();
+}
+process.on('SIGTERM', () => shutdown('SIGTERM', 0));
+process.on('SIGINT', () => shutdown('SIGINT', 0));
+
+// keep live matches alive on stray errors; bail out cleanly if they pile up
+let errTimes = [];
+function noteError(kind, e) {
+  console.error(kind + ':', e && e.stack ? e.stack : e);
+  const now = Date.now();
+  errTimes = errTimes.filter(t => now - t < 60000); errTimes.push(now);
+  if (errTimes.length > 10) shutdown('too many errors', 1);
+}
+process.on('uncaughtException', e => noteError('uncaughtException', e));
+process.on('unhandledRejection', e => noteError('unhandledRejection', e));
