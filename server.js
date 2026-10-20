@@ -141,6 +141,25 @@ function handle(r, cid, m) {
       ALL_SIDES.forEach(s => { if (keep[s].kind === 'human') r.seats[s] = { kind: 'human', cid: keep[s].cid, name: keep[s].name, ready: false }; else if (keep[s].kind === 'ai') r.seats[s] = { kind: 'ai' }; });
       pushLobby(r); break;
     }
+    case 'result': {
+      if (r.phase !== 'play' || !r.game || !mine || m.gid !== r.game.cfg.gid || r.game.loggedGid === m.gid) break;
+      if (!sidesOf(r).includes(m.winner) || !Number.isInteger(m.rounds) || m.rounds < 1 || m.rounds > 999) break;
+      r.game.loggedGid = m.gid;
+      const cfg = r.game.cfg, SD_ROUND = 14;
+      const rec = {
+        t: new Date().toISOString(), room: r.code, gid: cfg.gid, seed: cfg.seed,
+        board: { 2: 'small hexagon', 3: 'big hexagon', 4: 'square' }[cfg.n] || String(cfg.n), players: cfg.n,
+        seats: Object.fromEntries(sidesOf(r).map(s => [s, { kind: cfg.seat[s] === 'h' ? 'human' : 'ai', name: (cfg.names && cfg.names[s]) || null }])),
+        heroes: cfg.picks,
+        bans: sidesOf(r).map(s => r.seats[s].ban).filter(Boolean),
+        opts: Object.keys(cfg.opts || {}).filter(k => cfg.opts[k]),
+        winner: m.winner, rounds: m.rounds,
+        suddenDeath: m.rounds >= SD_ROUND, suddenDeathRound: m.rounds >= SD_ROUND ? SD_ROUND : null,
+        actions: r.game.log.length
+      };
+      console.log('HV_MATCH ' + JSON.stringify(rec));
+      break;
+    }
     case 'act': {
       const a = m.a;
       if (r.phase !== 'play' || !r.game || !a || typeof a !== 'object' || !sidesOf(r).includes(a.s) || !['spawn', 'move', 'act', 'end', 'ult', 'buy', 'card', 'ally', 'accept', 'decline', 'betray'].includes(a.t)) break;
