@@ -24,16 +24,16 @@ function makeRoom() {
   rooms.set(code, r); return r;
 }
 const hostCid = r => { let best = null; for (const [cid, c] of r.clients) if (c.connected && (!best || c.order < r.clients.get(best).order)) best = cid; return best; };
-const lobbyView = r => ({
-  code: r.code, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r),
+const lobbyView = (r, v) => ({
+  code: r.code, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r) === v ? v : (hostCid(r) ? 'x' : null),
   seats: Object.fromEntries(ALL_SIDES.map(s => {
     const x = r.seats[s], c = x.cid && r.clients.get(x.cid);
-    return [s, { kind: x.kind, cid: x.cid || null, name: x.name || '', ready: !!x.ready, ban: x.ban || null, connected: x.kind === 'human' ? !!(c && c.connected) : true }];
+    return [s, { kind: x.kind, cid: x.cid ? (x.cid === v ? v : 'x') : null, name: x.name || '', ready: !!x.ready, ban: x.ban || null, connected: x.kind === 'human' ? !!(c && c.connected) : true }];
   }))
 });
 function send(c, obj) { try { c.res.write('data: ' + JSON.stringify(obj) + '\n\n'); } catch (e) { /* closed */ } }
 function broadcast(r, obj, except) { for (const [cid, c] of r.clients) if (c.connected && cid !== except) send(c, obj); }
-const pushLobby = r => broadcast(r, { type: 'lobby', lobby: lobbyView(r) });
+const pushLobby = r => { for (const [cid, c] of r.clients) if (c.connected) send(c, { type: 'lobby', lobby: lobbyView(r, cid) }); };
 const seatOf = (r, cid) => sidesOf(r).find(s => r.seats[s].kind === 'human' && r.seats[s].cid === cid) || null;
 const humans = r => sidesOf(r).filter(s => r.seats[s].kind === 'human');
 const cfgSeat = r => Object.fromEntries(sidesOf(r).map(s => [s, r.seats[s].kind === 'human' ? 'h' : 'a']));
@@ -114,7 +114,7 @@ function handle(r, cid, m) {
       const tk = r.seats[m.seat]; if (tk.kind !== 'human') break;
       const hc = tk.cid && r.clients.get(tk.cid); if (hc && hc.connected) break;
       tk.cid = cid; if (c.name) tk.name = c.name;
-      pushLobby(r); send(c, { type: 'state', lobby: lobbyView(r), game: r.game }); break;
+      pushLobby(r); send(c, { type: 'state', lobby: lobbyView(r, cid), game: r.game }); break;
     }
     case 'unready': {
       if (r.phase === 'draft' && mine) { r.seats[mine].ready = false; pushLobby(r); }
@@ -171,7 +171,7 @@ const server = http.createServer((req, res) => {
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
   if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs() });
   if (u.pathname === '/api/create' && req.method === 'POST') { const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
-  if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } return r ? json(res, 200, { lobby: lobbyView(r), game: r.game }) : json(res, 404, { error: 'no room' }); }
+  if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } return r ? json(res, 200, { lobby: lobbyView(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40)), game: r.game }) : json(res, 404, { error: 'no room' }); }
   if (u.pathname === '/events') {
     const r = room(), cid = (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40);
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform', 'Connection': 'keep-alive', 'X-Accel-Buffering': 'no' });
@@ -186,7 +186,7 @@ const server = http.createServer((req, res) => {
     c.res = res; c.connected = true; r.touched = Date.now();
     const nm = cleanName(u.searchParams.get('name')); if (nm) c.name = nm;
     const s = seatOf(r, cid); if (s && c.name) r.seats[s].name = c.name;
-    send(c, { type: 'state', lobby: lobbyView(r), game: r.game });
+    send(c, { type: 'state', lobby: lobbyView(r, cid), game: r.game });
     pushLobby(r);
     const ka = setInterval(() => { try { res.write('data: {"type":"ka"}\n\n'); } catch (e) { } }, 15000);
     req.on('close', () => { clearInterval(ka); if (c.res === res) { c.connected = false; pushLobby(r); } });
