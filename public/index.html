@@ -1163,7 +1163,7 @@ html body.mob #tray .info>*{display:-webkit-box;-webkit-line-clamp:3;-webkit-box
 </div>
 <div id="lsetup" hidden><h2>Play on this device</h2>
 <div class="lrow lmode" id="lsmode"></div>
-<div id="lsseats"></div><h3 class="opth">Match options</h3><div class="opts" id="lsopts"></div>
+<div class="lrow lmode" id="lsdiff"></div><div id="lsseats"></div><h3 class="opth">Match options</h3><div class="opts" id="lsopts"></div>
 <p class="sub">Choose who plays each seat. Human players take turns on this device and pass it on when their turn ends. AI seats play by themselves.</p>
 <div class="lrow lbtns"><button class="go" id="lsgo">Choose heroes</button><button class="go sec" id="lsback">Back</button></div></div>
 <div id="stats" hidden></div>
@@ -1862,7 +1862,7 @@ const ACH=[
 function trk(t,d){const a=curAtk&&G&&G[curAtk.side];if(!a)return;const um=x=>{if(MOPT.ults&&S.ult)S.ult[curAtk.side]=Math.min(ULT_MAX,(S.ult[curAtk.side]||0)+x)};if(t.t=='u'){const dd=Math.max(1,d-(H[t.v.k].armor||0));um(Math.min(dd,Math.max(0,t.v.hp)));a.dmg+=dd;a.hit=Math.max(a.hit,dd)}else{um(Math.min(d,t.T.hp));a.dmg+=Math.min(d,t.T.hp);a.hit=Math.max(a.hit,d);if(t.T.hp>0&&t.T.hp-d<=0){a.towers++;gainGold(curAtk.side,3,t.T);if(showCrown()&&leader()==t.T.side&&t.T.side!=curAtk.side){S.mana[curAtk.side]=Math.min(10,S.mana[curAtk.side]+2);gainGold(curAtk.side,2);pop(t.T,'Bounty! +2',1);if(!RP)msg(`${SHORT[curAtk.side]} claims the bounty on ${SHORT[t.T.side]}!`)}}}}
 function finish3(w){if(S.fin)return;S.fin=1;if(NET&&CFG&&CFG.gid)NET.send({type:'result',gid:CFG.gid,winner:w,rounds:S.round});if(HOTSEAT&&HUM!=1)ME=null;setTimeout(()=>endSplash(w),1700);setTimeout(()=>showPost(w),Math.max(1300,cutUntil-performance.now()+500))}
 function showPost(w){const t=ME?(myWin(w)?'VICTORY':'DEFEAT'):MOPT.raid?(w==S.boss?'THE BOSS WINS':'THE HEROES WIN'):NAMES[w].toUpperCase()+' WINS',row=(l,k)=>`<tr><td>${l}</td>${SIDES.map(sd=>`<td>${G[sd][k]}</td>`).join('')}</tr>`,place=[w].concat(S.order.slice().reverse().filter(x=>x!=w));
-$('#post').innerHTML=`<div class='pn'><h2 class='pt ${(!ME||myWin(w))?'win':'lose'}'>${t}</h2><p class='pl'>${place.map((sd,i)=>`${['1st','2nd','3rd','4th'][i]} <b style="color:${SCOL[sd]}">${NAMES[sd]}</b>`).join(' · ')}</p><table><tr><th></th>${SIDES.map(sd=>`<th style="color:${SCOL[sd]}">${SHORT[sd]}${isMine(sd)?' (you)':''}</th>`).join('')}</tr>${row('Damage dealt','dmg')}${row('Units defeated','kills')}${row('Units lost','lost')}${row('Towers destroyed','towers')}${row('HP healed','heals')}${row('Mana spent','mana')}${row('Turns','turns')}</table><div class='pb'>${HOST?"<button class='go' id='pr'>Rematch</button>":"<span class='hint'>Waiting for the host to start a rematch...</span>"}<button class='go sec' id='pm'>Main menu</button></div></div>`;
+$('#post').innerHTML=`<div class='pn'><h2 class='pt ${(!ME||myWin(w))?'win':'lose'}'>${t}</h2><p class='pl'>${place.map((sd,i)=>`${['1st','2nd','3rd','4th'][i]} <b style="color:${SCOL[sd]}">${NAMES[sd]}</b>`).join(' · ')}</p>${diffLine()}<table><tr><th></th>${SIDES.map(sd=>`<th style="color:${SCOL[sd]}">${SHORT[sd]}${isMine(sd)?' (you)':''}</th>`).join('')}</tr>${row('Damage dealt','dmg')}${row('Units defeated','kills')}${row('Units lost','lost')}${row('Towers destroyed','towers')}${row('HP healed','heals')}${row('Mana spent','mana')}${row('Turns','turns')}</table><div class='pb'>${HOST?"<button class='go' id='pr'>Rematch</button>":"<span class='hint'>Waiting for the host to start a rematch...</span>"}<button class='go sec' id='pm'>Main menu</button></div></div>`;
 if(CAMP!=null&&!NET){const won=myWin(w);if(won)campSave(CAMP);const fin=won&&CAMP===14;
 $('#post .pb').insertAdjacentHTML('afterbegin',fin?`<span class='hint'>The Dread Colossus has fallen. The Vale is yours!</span>`:'')+'';$('#post .pb').insertAdjacentHTML('afterbegin',`<button class='go' id='pnext'>${won?'Back to the map':'Retreat to the map'}</button>`);const pr=$('#pr');if(pr)pr.textContent=won?'Replay battle':'Try again';const nx=$('#pnext');if(nx)nx.onclick=()=>{$('#post').className='';music(false);aiRun++;$('#game').hidden=true;CSEL=null;openCamp()}}
 $('#post').className='on';
@@ -2029,15 +2029,21 @@ const me=()=>ME||S.turn;
 function openBan(sd,cb){BANMODE=true;BANCB=cb;WAITBAN=null;DSTAGE='ban';draftSide=sd;picks=[];$('#menu').hidden=true;$('#lobby')&&($('#lobby').hidden=true);$('#game').hidden=true;$('#lsetup').hidden=true;$('#draft').hidden=false;drawCards()}
 function openDraft(label,cb){BANMODE=false;mode=mode;picks=[];draftSide=ME||'p';READY_LABEL=label;DRAFT_CB=cb;$('#menu').hidden=true;$('#lobby')&&($('#lobby').hidden=true);$('#game').hidden=true;$('#draft').hidden=false;drawCards()}
 const LS={n:2,seat:{p:'h',e:'a',g:'a',k:'a'},rnd:false,opts:defOpts()};
+const DIFFN=['Easy','Normal','Hard'];let DIFF=1;
+function loadDiff(){try{const v=+localStorage.getItem('hv-diff');return v>=0&&v<=2&&localStorage.getItem('hv-diff')!==null?v:1}catch(e){return 1}}
+function saveDiff(v){DIFF=v;try{localStorage.setItem('hv-diff',String(v))}catch(e){}}
+const DN=()=>[1.6,.05,0][DIFF]??.05,DM=()=>[.9,.3,.05][DIFF]??.3;
+function diffLine(){try{if(!(HOST||mode=='local'))return '';if(!ALLS.slice(0,NPL).some(isAI))return '';return `<p class='pl'>AI difficulty: <b>${DIFFN[DIFF]}</b></p>`}catch(e){return ''}}
 const optHTML=(o,edit)=>OPTDEF.map(d=>`<button class="opt${o[d.k]?' on':''}" data-o="${d.k}"${edit?'':' disabled'}><i>${o[d.k]?'✔':''}</i><span><b>${d.n}</b><small>${d.d}</small></span></button>`).join('');
 function openLocal(){['#menu','#draft','#game','#stats','#lobby'].forEach(x=>{const el=$(x);if(el)el.hidden=true});$('#lsetup').hidden=false;drawLocal()}
 function drawLocal(){$('#lsmode').innerHTML='<span>Players:</span>'+[2,3,4].map(k=>`<button class="ft${LS.n==k?' on':''}" data-n="${k}">${k==2?'1v1':k+' players'}</button>`).join('')+'<span style="margin-left:12px">Heroes:</span>'+[['pick','Choose'],['rnd','Random']].map(([v,l])=>`<button class="ft${(LS.rnd?'rnd':'pick')==v?' on':''}" data-h="${v}">${l}</button>`).join('');
 const L=ALLS.slice(0,LS.n);$('#lsseats').className=LS.n==4?'n4':'';$('#lsseats').style.display='grid';$('#lsseats').style.gap='10px';$('#lsseats').style.gridTemplateColumns=LS.n==3?'repeat(3,1fr)':'repeat(2,1fr)';
 $('#lsseats').innerHTML=L.map(sd=>`<div class="ls" style="--sc:${SCOL[sd]}"><h3>${SIDEN[sd]} · ${seatPos(LS.n,sd)}</h3><div class="who">${LS.seat[sd]=='h'?'Human':'AI player'}</div><button data-s="${sd}">Make it ${LS.seat[sd]=='h'?'an AI':'a human'}</button></div>`).join('');
-$('#lsopts').innerHTML=optHTML(LS.opts,true);
+$('#lsopts').innerHTML=optHTML(LS.opts,true);DIFF=loadDiff();$('#lsdiff').innerHTML='<span>AI difficulty:</span>'+DIFFN.map((l,i)=>`<button class="ft${DIFF==i?' on':''}" data-d="${i}">${l}</button>`).join('');
 const nh=L.filter(sd=>LS.seat[sd]=='h').length;$('#lsgo').textContent=!nh?'Watch the AI battle':LS.rnd?'Deal random heroes and start':'Choose heroes'}
 $('#lsmode').onclick=e=>{const b=e.target.closest('button[data-n],button[data-h]');if(!b)return;if(b.dataset.h)LS.rnd=b.dataset.h=='rnd';else LS.n=+b.dataset.n;drawLocal()};
 $('#lsseats').onclick=e=>{const b=e.target.closest('button[data-s]');if(!b)return;const sd=b.dataset.s;LS.seat[sd]=LS.seat[sd]=='h'?'a':'h';drawLocal()};
+$('#lsdiff').onclick=e=>{const b=e.target.closest('button[data-d]');if(!b)return;saveDiff(+b.dataset.d);drawLocal()};
 $('#lsopts').onclick=e=>{const b=e.target.closest('.opt');if(!b)return;LS.opts[b.dataset.o]=!LS.opts[b.dataset.o];if(LS.opts.raid)LS.seat[ALLS[LS.n-1]]='a';drawLocal()};
 $('#lsback').onclick=()=>{$('#lsetup').hidden=true;$('#menu').hidden=false};
 $('#m1').onclick=()=>{mode='local';CAMP=null;openLocal()};
@@ -2124,7 +2130,7 @@ function showPass(sd,what,cb){const el=$('#pass');el.style.setProperty('--pc',SC
 function mk(k,side,x,y){return{k,side,hp:H[k].hp,x,y,used:false}}
 function showCheat(){try{if(localStorage.getItem('hv-cheat'))return;localStorage.setItem('hv-cheat','1')}catch(e){return}const d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:9600;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px';d.innerHTML='<div style="max-width:460px;max-height:85dvh;overflow:auto;background:#120e0a;border:2px solid #c9a24a;border-radius:12px;padding:14px 16px;color:#f4ead0;font-size:15px;line-height:1.45"><h3 style="margin:0 0 8px">Quick start</h3><ul style="margin:0 0 10px;padding-left:18px"><li><b>Spawn</b>: tap a Reserve hero, then a hex next to your tower. It cannot act that turn.</li><li><b>Turn</b>: each hero moves OR acts once. Blue hexes = move, red = attack.</li><li><b>Win</b>: destroy all 3 enemy towers. Every tower loses 1 HP each round.</li><li><b>Crit &amp; counter</b>: red hexes show damage, crit chance and the counter (↩) you will take.</li><li><b>Terrain</b>: forest = -1 ranged damage, hill = +1 ranged range, swamp stops movement. Hover or tap a hex to see what it does.</li><li><b>Fog</b>: you only see enemies near your heroes and towers.</li></ul><button class="go" style="width:100%">Got it</button></div>';d.onclick=e=>{if(e.target===d||e.target.tagName=='BUTTON')d.remove()};document.body.appendChild(d)}
 function startGame(cfg){CFG=cfg;setTimeout(showCheat,600);if((cfg.n||3)!=NPL||!S)setupMode(cfg.n||3);SEAT=cfg.seat;ME=cfg.me;aiRun++;Object.assign(NAMES,SIDEN);if(cfg.names)Object.assign(NAMES,cfg.names);
-MOPT=Object.assign(defOpts(),cfg.opts||{},Object.fromEntries(CORE.map(o=>[o.k,true])));SEED=(cfg.seed!=null?cfg.seed:(Math.random()*2147483647|0))|0;
+DIFF=loadDiff();MOPT=Object.assign(defOpts(),cfg.opts||{},Object.fromEntries(CORE.map(o=>[o.k,true])));SEED=(cfg.seed!=null?cfg.seed:(Math.random()*2147483647|0))|0;
 S={units:[],tw:{},mana:Object.assign({},MANA0),turn:'p',round:1,over:false,ghosts:[],pops:[],pool:{},ult:{},team:{},koth:{},truce:{},prop:{},walls:[],traps:[],sil:[],gold:{},hand:{},fallen:{},cap:Object.assign({},CAP0),sp:Object.fromEntries(SIDES.map(sd=>[sd,0])),dead:{},order:[],teams:{},syn:{},upg:{},flares:[],mines:[],chests:[]};
 SIDES.forEach(sd=>{S.tw[sd]=towerSpots(sd).map((c,i)=>{const hp=TOWER_HP[i]+(TB[sd][i]||0);return{x:c.x,y:c.y,hp,max:hp,side:sd}});S.pool[sd]=cfg.picks[sd].slice();S.teams[sd]=cfg.picks[sd].slice();S.syn[sd]=synFrom(S.teams[sd])});
 if(MOPT.raid){MOPT.koth=false;MOPT.truce=false;MOPT.bounty=false}
@@ -2221,11 +2227,11 @@ else if(t.t=='w')s=t.W.b?1.6:.4;
 else if(t.heal)s=(maxHp(t.v)-t.v.hp)>=2?2.5:0;
 else if(t.t=='t')s=(t.T.hp<=h.dmg?100:h.dmg*1.2)*(showCrown()&&leader()==t.T.side?1.25:1);
 else{const dd=h.dmg+comboB(u,t)[0];s=Math.min(dd,t.v.hp)+(t.v.hp<=dd?3:0)-(t.v.hp>dd&&!h0.stun&&canCounter(t.v,u)?cntrDmg(t.v,u)*.7:0)+(MOPT.koth&&S.hill&&S.hill.includes(t.v.x+','+t.v.y)?3:0)+(t.v.k=='raidboss'?1.5:0);if(h.aoe)S.units.forEach(v=>{if(isFoe(v.side,me)&&v!==t.v&&dist(v,t)==1)s+=Math.min(h.dmg,v.hp)})}
-s+=Math.random()*.05;if(s>bs){bs=s;best=t}});if(best)return{act:best}}
+s+=Math.random()*DN();if(s>bs){bs=s;best=t}});if(best&&DIFF==0&&!u.moved&&Math.random()<.2)best=null;if(best)return{act:best}}
 const foes=S.units.filter(v=>isFoe(v.side,me)&&canSee(me,v)).concat(foeTowers(me));
 const sup=h.heal&&h.dmg<=2;let goals=sup?S.units.filter(v=>v.side==me&&v!==u):foes;if(!goals.length)goals=foes;if(!goals.length)return{mv:{x:u.x,y:u.y}};
 const want=sup?1:(h.rng[0]>1||h.aoe?h.rng[1]:1);let bm=null,bsc=1e9;
-[{x:u.x,y:u.y}].concat(reach(u)).forEach(p=>{const d=Math.min(...goals.map(g=>dist(p,g))),tk=p.x+','+p.y,sc=Math.abs(d-want)+Math.random()*.3+(MOPT.shrines&&S.shr.includes(tk)?-1.3:0)+(MOPT.gold&&S.mines&&S.mines.some(m=>m.x==p.x&&m.y==p.y&&m.o!==me)?-1.8:0)+(chestAt(p.x,p.y)?-2.2:0)+(MOPT.fog&&S.cd[tk]>fogLimit()-1?2.5:0)+(MOPT.terrain&&S.ter[tk]=='hill'&&h.rng[1]>=2?-.6:0)+(MOPT.terrain&&S.ter[tk]=='swamp'?.4:0)+(MOPT.terrain&&S.ter[tk]=='forest'&&h.rng[0]>1?-.3:0)+(S.sil.some(z=>isFoe(z.side,me)&&(z.left[me]||0)>0&&z.cells.includes(tk))?1.5:0)+(MOPT.koth&&S.hill&&S.hill.includes(tk)?-3:0);if(sc<bsc){bsc=sc;bm=p}});
+[{x:u.x,y:u.y}].concat(reach(u)).forEach(p=>{const d=Math.min(...goals.map(g=>dist(p,g))),tk=p.x+','+p.y,sc=Math.abs(d-want)+Math.random()*DM()+(MOPT.shrines&&S.shr.includes(tk)?-1.3:0)+(MOPT.gold&&S.mines&&S.mines.some(m=>m.x==p.x&&m.y==p.y&&m.o!==me)?-1.8:0)+(chestAt(p.x,p.y)?-2.2:0)+(MOPT.fog&&S.cd[tk]>fogLimit()-1?2.5:0)+(MOPT.terrain&&S.ter[tk]=='hill'&&h.rng[1]>=2?-.6:0)+(MOPT.terrain&&S.ter[tk]=='swamp'?.4:0)+(MOPT.terrain&&S.ter[tk]=='forest'&&h.rng[0]>1?-.3:0)+(S.sil.some(z=>isFoe(z.side,me)&&(z.left[me]||0)>0&&z.cells.includes(tk))?1.5:0)+(MOPT.koth&&S.hill&&S.hill.includes(tk)?-3:0);if(sc<bsc){bsc=sc;bm=p}});
 return{mv:bm}}
 let aiRun=0;
 function aiDiplo(sd){if(!MOPT.truce||NPL<3)return;const L=leader(),al=SIDES.filter(o=>o!=sd&&!S.dead[o]);
@@ -2234,7 +2240,7 @@ al.forEach(o=>{if(allied(sd,o)&&S.tw[o].filter(T=>T.hp>0).length==1&&S.tw[o].red
 if(S.round>=3&&sd!=L&&!al.some(o=>allied(sd,o))&&Math.random()<.3){const c=al.filter(o=>o!=L&&!S.prop[sd+o]);if(c.length)submit({t:'ally',s:sd,o:c[Math.random()*c.length|0]})}}
 function aiBuild(sd,k){const hx=bldHexes(sd);if(!hx.length)return false;const own=S.tw[sd].filter(T=>T.hp>0),ft=foeTowers(sd),md=(p,L)=>L.length?Math.min(...L.map(o=>dist(p,o))):9;
 const sc=p=>k=='tower'?(S.cd[p.x+','+p.y]||0)+md(p,own)*.2:k=='barracks'?md(p,ft)-md(p,own)*.3:md(p,own)-md(p,ft)*.3;const b=hx.slice().sort((a,c)=>sc(a)-sc(c))[0];return submit({t:'buy',s:sd,item:'b'+k,x:b.x,y:b.y})}
-function aiShop(sd){if(!MOPT.gold||sd===S.boss)return;let g=0;const B=it=>submit({t:'buy',s:sd,item:it});while(g++<6&&!S.over&&S.turn==sd){
+function aiShop(sd){if(!MOPT.gold||sd===S.boss||(DIFF==0&&Math.random()<.4))return;let g=0;const B=it=>submit({t:'buy',s:sd,item:it});while(g++<6&&!S.over&&S.turn==sd){
 if(canBuy(sd,'recruit')){const op=recOpts(sd),best=op.map((k,i)=>[i,k]).filter(([i,k])=>recCost(k,sd)<=S.gold[sd]).sort((a,b)=>(H[b[1]].hp*H[b[1]].dmg)-(H[a[1]].hp*H[a[1]].dmg))[0];if(best&&submit({t:'buy',s:sd,item:'recruit',i:best[0]}))continue}
 const T=repTower(sd);if(T&&T.max-T.hp>=4&&S.gold[sd]>=8&&canBuy(sd,'repair')&&B('repair'))continue;
 if(S.round<=6&&bldOf(sd,'farm').length<2&&canBuild(sd,'farm')&&aiBuild(sd,'farm'))continue;
