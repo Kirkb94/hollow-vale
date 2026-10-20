@@ -202,6 +202,23 @@ function lanIPs() {
 }
 const json = (res, code, obj) => { res.writeHead(code, { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' }); res.end(JSON.stringify(obj)); };
 
+// ---- abuse protection: per-IP token buckets, body size cap ----
+const MAX_BODY = 100000, MAX_PER_IP = 6;
+const LIMITS = { create: { cap: 10, rate: 0.1 }, send: { cap: 100, rate: 40 }, events: { cap: 40, rate: 3 } }; // rate = tokens per second
+const buckets = new Map(); // 'kind|ip' -> { t, at }
+function allow(ip, kind) {
+  const L = LIMITS[kind], now = Date.now(), key = kind + '|' + ip;
+  let b = buckets.get(key); if (!b) { b = { t: L.cap, at: now }; buckets.set(key, b); }
+  b.t = Math.min(L.cap, b.t + (now - b.at) * L.rate / 1000); b.at = now;
+  if (b.t < 1) return false;
+  b.t -= 1; return true;
+}
+const clientIp = req => {
+  if (process.env.RENDER) { const x = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim(); if (x) return x.slice(0, 64); }
+  return req.socket.remoteAddress || '?';
+};
+setInterval(() => { const now = Date.now(); for (const [k, b] of buckets) if (now - b.at > 10 * 60 * 1000) buckets.delete(k); }, 5 * 60 * 1000).unref();
+
 let shuttingDown = false;
 const server = http.createServer((req, res) => {
   const u = new URL(req.url, 'http://x');
@@ -209,9 +226,11 @@ const server = http.createServer((req, res) => {
   if (u.pathname === '/healthz') return json(res, shuttingDown ? 503 : 200, { ok: !shuttingDown, rooms: rooms.size, uptime: Math.round(process.uptime()) });
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
   if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs() });
-  if (u.pathname === '/api/create' && req.method === 'POST') { const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
+  if (u.pathname === '/api/create' && req.method === 'POST') { if (!allow(clientIp(req), 'create')) { res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '10' }); return res.end(JSON.stringify({ error: 'Too many games created, wait a few seconds and try again.' })); } const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
   if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } return r ? json(res, 200, { lobby: lobbyView(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40)), game: r.game }) : json(res, 404, { error: 'no room' }); }
   if (u.pathname === '/events') {
+    const ip = clientIp(req);
+    if (!allow(ip, 'events')) { res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform' }); res.write('retry: 5000\n\ndata: {"type":"ratelimited"}\n\n'); return res.end(); }
     const r = room(), cid = (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40);
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform', 'Connection': 'keep-alive', 'X-Accel-Buffering': 'no' });
     if (!r || !cid) { res.write('retry: 600000\n\ndata: {"type":"noroom"}\n\n'); return res.end(); }
@@ -219,7 +238,8 @@ const server = http.createServer((req, res) => {
     if (!c) {
       if (r.clients.size >= MAX_CLIENTS) { pruneClients(r, 0); if (r.clients.size >= MAX_CLIENTS) evictOne(r); }
       if (r.clients.size >= MAX_CLIENTS) { res.write('retry: 600000\n\ndata: {"type":"full"}\n\n'); return res.end(); }
-      c = { name: '', order: ++r.order }; r.clients.set(cid, c);
+      if ([...r.clients.values()].filter(x => x.ip === ip).length >= MAX_PER_IP) { res.write('retry: 600000\n\ndata: {"type":"full"}\n\n'); return res.end(); }
+      c = { name: '', order: ++r.order, ip }; r.clients.set(cid, c);
     }
     res.write('retry: 1500\n\n');
     if (c.res) { try { c.res.end(); } catch (e) { } }
@@ -233,8 +253,13 @@ const server = http.createServer((req, res) => {
     return;
   }
   if (u.pathname === '/send' && req.method === 'POST') {
-    let body = ''; req.on('data', d => { body += d; if (body.length > 100000) req.destroy(); });
-    req.on('end', () => { const r = room(); try { if (r) handle(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40), JSON.parse(body)); } catch (e) { } res.writeHead(r ? 204 : 404); res.end(); });
+    if (!allow(clientIp(req), 'send')) { res.writeHead(429, { 'Retry-After': '2', 'Connection': 'close' }); res.end(); req.resume(); return; }
+    req.setEncoding('utf8');
+    let body = '', got = 0, tooBig = false;
+    const reject413 = () => { tooBig = true; body = ''; if (!res.headersSent) { res.writeHead(413, { 'Connection': 'close' }); res.end(); } };
+    if ((+req.headers['content-length'] || 0) > MAX_BODY) reject413();
+    req.on('data', d => { got += d.length; if (tooBig) { if (got > MAX_BODY * 10) req.destroy(); return; } body += d; if (got > MAX_BODY) reject413(); });
+    req.on('end', () => { if (tooBig) return; const r = room(); try { if (r) handle(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40), JSON.parse(body)); } catch (e) { } res.writeHead(r ? 204 : 404); res.end(); });
     return;
   }
   let p;
