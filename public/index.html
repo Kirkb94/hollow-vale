@@ -592,7 +592,7 @@ html body #board .cell.smn::after{background:radial-gradient(circle,#b8ffc8b0,#2
 .opt{display:flex;gap:8px;align-items:flex-start;text-align:left;padding:8px 10px;border-radius:10px;border:2px solid #6b5238;background:#14110d;color:#f2e6c8;font:inherit;cursor:pointer}
 .opt b{display:block;font-size:14px}.opt small{display:block;opacity:.75;font-size:12px;line-height:1.3}
 .opt i{flex:none;width:20px;height:20px;border-radius:6px;border:2px solid #c9a24a;margin-top:1px;font-style:normal;display:flex;align-items:center;justify-content:center;font-size:13px}
-.opt.on{border-color:#ffd24a;background:#2a2212}.opt.on i{background:#ffd24a;color:#2a1a08}
+.opt.on{border-color:#ffd24a;background:#2a2212}.opt.na{opacity:.45;cursor:not-allowed}.mods{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12px;margin:4px 0;grid-column:1/-1;color:#f4ead0}.mods .chip{background:#2a2212;border:1px solid #ffd24a;border-radius:10px;padding:1px 8px;color:#ffd24a;cursor:help}.opt.on i{background:#ffd24a;color:#2a1a08}
 .opt[disabled]{cursor:default;opacity:.85}
 
 #board .cell .lvst{position:absolute;left:4%;top:6%;font-style:normal;font-size:12px;color:#ffd24a;text-shadow:0 0 3px #000,0 0 6px #000;z-index:4;letter-spacing:-1px;pointer-events:none}
@@ -1147,6 +1147,9 @@ html body.mob #tray #udock .ucard{min-height:58px;box-sizing:border-box;justify-
 html body.mob #tray:has(#udock:not([hidden])) .info{display:none!important}
 html body.mob #tray .info{min-height:58px!important;box-sizing:border-box;display:flex!important;align-items:center}
 html body.mob #tray .info>*{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+:focus-visible{outline:2px solid #ffd36b;outline-offset:2px}
+button:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){outline:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style></head><body><div id="amb"></div><main>
 <h1><i class="fl s"></i>Hollow Vale<i class="fl s"></i></h1>
 <div class="size"><label for="size">Size</label><input type="range" id="size" min="30" max="300" value="100"><button id="fit">Fit</button></div>
@@ -1171,7 +1174,7 @@ html body.mob #tray .info>*{display:-webkit-box;-webkit-line-clamp:3;-webkit-box
 <div class="cards" id="cards"></div>
 <div class="team" id="team"></div><button class="go" id="start" disabled>Start battle</button></div>
 <div id="game" hidden>
-<div id="seats"></div><div id="syn"></div><div class="bar"><span id="turn"></span><span class="m" id="mana"></span><button id="mute" title="Toggle sound">🔊</button><button id="thrb" title="Show every hex an enemy can hit next turn">👁</button><button id="ult" hidden></button><button id="end">End turn</button></div>
+<div id="seats"></div><div id="syn"></div><div class="mods" id="mods"></div><div class="bar"><span id="turn"></span><span class="m" id="mana"></span><button id="mute" title="Toggle sound">🔊</button><button id="thrb" title="Show every hex an enemy can hit next turn">👁</button><button id="ult" hidden></button><button id="end">End turn</button></div>
 <div id="bw"><div id="board"></div><div id="fxl"></div><div id="ticker"></div></div><div class="res" id="res"></div><div class="hand" id="hand" hidden></div><div class="diplo" id="diplo" hidden></div>
 <div class="pckeys" id="pckeys"><kbd>1</kbd>-<kbd>5</kbd> pick reserve · <kbd>Tab</kbd> next hero · <kbd>Esc</kbd> cancel · <kbd>E</kbd> end turn · right-click to deselect</div><div class="info" id="info"></div>
 <div class="log" id="log"></div>
@@ -2034,12 +2037,14 @@ function loadDiff(){try{const v=+localStorage.getItem('hv-diff');return v>=0&&v<
 function saveDiff(v){DIFF=v;try{localStorage.setItem('hv-diff',String(v))}catch(e){}}
 const DN=()=>[1.6,.05,0][DIFF]??.05,DM=()=>[.9,.3,.05][DIFF]??.3;
 function diffLine(){try{if(!(HOST||mode=='local'))return '';if(!ALLS.slice(0,NPL).some(isAI))return '';return `<p class='pl'>AI difficulty: <b>${DIFFN[DIFF]}</b></p>`}catch(e){return ''}}
-const optHTML=(o,edit)=>OPTDEF.map(d=>`<button class="opt${o[d.k]?' on':''}" data-o="${d.k}"${edit?'':' disabled'}><i>${o[d.k]?'✔':''}</i><span><b>${d.n}</b><small>${d.d}</small></span></button>`).join('');
+const OPT_NA=(k,o,n)=>(n==2&&(k=='bounty'||k=='truce'))?'not used in 1v1':(o&&o.raid&&(k=='koth'||k=='truce'||k=='bounty'))?'off in Boss Raid':'';
+const modsHTML=(o,n)=>{const a=OPTDEF.filter(d=>o[d.k]&&!OPT_NA(d.k,o,n));return '<div class="mods"><b>Modifiers:</b> '+(a.length?a.map(d=>`<span class="chip" title="${d.d.replace(/"/g,'&quot;')}">${d.n}</span>`).join(''):'none')+'</div>'};
+const optHTML=(o,edit,n)=>modsHTML(o,n)+OPTDEF.map(d=>{const na=OPT_NA(d.k,o,n),on=o[d.k]&&!na;return `<button class="opt${on?' on':''}${na?' na':''}" data-o="${d.k}"${edit&&!na?'':' disabled'}><i>${on?'✔':''}</i><span><b>${d.n}</b><small>${na?'N/A - '+na:d.d}</small></span></button>`}).join('');
 function openLocal(){['#menu','#draft','#game','#stats','#lobby'].forEach(x=>{const el=$(x);if(el)el.hidden=true});$('#lsetup').hidden=false;drawLocal()}
 function drawLocal(){$('#lsmode').innerHTML='<span>Players:</span>'+[2,3,4].map(k=>`<button class="ft${LS.n==k?' on':''}" data-n="${k}">${k==2?'1v1':k+' players'}</button>`).join('')+'<span style="margin-left:12px">Heroes:</span>'+[['pick','Choose'],['rnd','Random']].map(([v,l])=>`<button class="ft${(LS.rnd?'rnd':'pick')==v?' on':''}" data-h="${v}">${l}</button>`).join('');
 const L=ALLS.slice(0,LS.n);$('#lsseats').className=LS.n==4?'n4':'';$('#lsseats').style.display='grid';$('#lsseats').style.gap='10px';$('#lsseats').style.gridTemplateColumns=LS.n==3?'repeat(3,1fr)':'repeat(2,1fr)';
 $('#lsseats').innerHTML=L.map(sd=>`<div class="ls" style="--sc:${SCOL[sd]}"><h3>${SIDEN[sd]} · ${seatPos(LS.n,sd)}</h3><div class="who">${LS.seat[sd]=='h'?'Human':'AI player'}</div><button data-s="${sd}">Make it ${LS.seat[sd]=='h'?'an AI':'a human'}</button></div>`).join('');
-$('#lsopts').innerHTML=optHTML(LS.opts,true);DIFF=loadDiff();$('#lsdiff').innerHTML='<span>AI difficulty:</span>'+DIFFN.map((l,i)=>`<button class="ft${DIFF==i?' on':''}" data-d="${i}">${l}</button>`).join('');
+$('#lsopts').innerHTML=optHTML(LS.opts,true,LS.n);DIFF=loadDiff();$('#lsdiff').innerHTML='<span>AI difficulty:</span>'+DIFFN.map((l,i)=>`<button class="ft${DIFF==i?' on':''}" data-d="${i}">${l}</button>`).join('');
 const nh=L.filter(sd=>LS.seat[sd]=='h').length;$('#lsgo').textContent=!nh?'Watch the AI battle':LS.rnd?'Deal random heroes and start':'Choose heroes'}
 $('#lsmode').onclick=e=>{const b=e.target.closest('button[data-n],button[data-h]');if(!b)return;if(b.dataset.h)LS.rnd=b.dataset.h=='rnd';else LS.n=+b.dataset.n;drawLocal()};
 $('#lsseats').onclick=e=>{const b=e.target.closest('button[data-s]');if(!b)return;const sd=b.dataset.s;LS.seat[sd]=LS.seat[sd]=='h'?'a':'h';drawLocal()};
@@ -2133,7 +2138,7 @@ function startGame(cfg){CFG=cfg;setTimeout(showCheat,600);if((cfg.n||3)!=NPL||!S
 DIFF=loadDiff();MOPT=Object.assign(defOpts(),cfg.opts||{},Object.fromEntries(CORE.map(o=>[o.k,true])));SEED=(cfg.seed!=null?cfg.seed:(Math.random()*2147483647|0))|0;
 S={units:[],tw:{},mana:Object.assign({},MANA0),turn:'p',round:1,over:false,ghosts:[],pops:[],pool:{},ult:{},team:{},koth:{},truce:{},prop:{},walls:[],traps:[],sil:[],gold:{},hand:{},fallen:{},cap:Object.assign({},CAP0),sp:Object.fromEntries(SIDES.map(sd=>[sd,0])),dead:{},order:[],teams:{},syn:{},upg:{},flares:[],mines:[],chests:[]};
 SIDES.forEach(sd=>{S.tw[sd]=towerSpots(sd).map((c,i)=>{const hp=TOWER_HP[i]+(TB[sd][i]||0);return{x:c.x,y:c.y,hp,max:hp,side:sd}});S.pool[sd]=cfg.picks[sd].slice();S.teams[sd]=cfg.picks[sd].slice();S.syn[sd]=synFrom(S.teams[sd])});
-if(MOPT.raid){MOPT.koth=false;MOPT.truce=false;MOPT.bounty=false}
+if(MOPT.raid){MOPT.koth=false;MOPT.truce=false;MOPT.bounty=false}if((cfg.n||3)==2){MOPT.truce=false;MOPT.bounty=false}{const mm=$('#mods');if(mm)mm.innerHTML=modsHTML(MOPT,cfg.n||3).replace(/^<div class="mods">|<\/div>$/g,'')}
 genBoard();if(MOPT.raid)setupRaid();SIDES.forEach((sd,si)=>{S.gold[sd]=1+(MOPT.raid?0:2*si);S.upg[sd]={w:0,a:0,t:0,s:0};S.fallen[sd]=[];S.hand[sd]=MOPT.cards?[drawCard()]:[]});econStart('p');
 G=Object.fromEntries(ALLS.map(sd=>[sd,newG()]));sel=null;spSel=null;busy=!isMine('p');if(!RP){ac();music(true);sfx('turn')}
 msg(isMine('p')?'Your turn. Pick a hero from your reserve and spawn it next to a tower.':NAMES.p+"'s turn.");
@@ -2665,7 +2670,7 @@ if(host&&!x.connected)btn=`<button data-a="ai" data-s="${sd}">Let an AI take ove
 else if(x.kind=='ai'){who='AI player';st='computer controlled';if(host&&L.phase=='lobby')btn=`<button data-a="open" data-s="${sd}">Open the seat</button>`}
 else{who='Open seat';st=L.phase=='lobby'?'a friend can join, or the AI fills it':'';if(L.phase=='lobby')btn=`<button data-a="claim" data-s="${sd}">${me?'Move here':'Sit here'}</button>`+(host?` <button data-a="ai" data-s="${sd}">Make it an AI</button>`:'')}
 return `<div class="ls${mine?' me':''}" style="--sc:${SCOL[sd]}"><h3>${SIDEN[sd]} · ${seatPos(nP,sd)}</h3><div class="who">${who}</div><div class="st">${st}</div>${btn}</div>`}).join('');
-{const lo=Object.assign(defOpts(),L.opts||{}),ed=host&&L.phase=='lobby';$('#lopts').innerHTML=optHTML(lo,ed)}
+{const lo=Object.assign(defOpts(),L.opts||{}),ed=host&&L.phase=='lobby';$('#lopts').innerHTML=optHTML(lo,ed,nP)}
 const nh=act(L).filter(sd=>L.seats[sd].kind=='human').length;
 $('#lgo').hidden=!(host&&L.phase=='lobby');$('#lgo').textContent=L.rnd?'Deal random heroes and start':'Start hero draft';$('#lgo').disabled=!nh;
 $('#lback').hidden=!(L.phase=='play'&&inGame);
