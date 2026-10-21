@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#12131a"><link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" href="icon-192.png">
 <title>Hollow Vale</title>
+<script>(function(){try{var d=JSON.parse(localStorage.getItem('hv-display')||'null')||{};var h=document.documentElement;if(d.big)h.classList.add('bigtext');var hc=d.hc;if(hc==null)hc=matchMedia('(prefers-contrast: more)').matches;if(hc)h.classList.add('hc');if(d.cb)h.classList.add('cb')}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=MedievalSharp&family=Cinzel:wght@700&family=Pirata+One&family=Grenze+Gotisch:wght@600&family=Metal+Mania&family=Uncial+Antiqua&family=Germania+One&display=swap">
 <style>
 :root{--bg:#e4edee;--fg:#16262e;--card:#f6fafa;--t1:#c6dcd7;--t2:#b5d0ca;--mv:#3b82c4;--tg:#d4493d;--p:#d9961a;--e:#8a4fc7;--ln:#9bb8b3;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -611,7 +612,7 @@ html body #board .cell.smn::after{background:radial-gradient(circle,#b8ffc8b0,#2
 .hand button small{display:block;font-size:11px;opacity:.75}
 .hand .hcard{max-width:190px;border-color:#5a4a8a;background:#1c1830}
 .hand .hcard.on{border-color:#ffd24a;box-shadow:0 0 10px #b08aff}
-.hand button:disabled{opacity:.45;cursor:default}
+.hand button:disabled,#hand button.dis{opacity:.45;cursor:default}
 body.mob .hand .hcard{max-width:46vw}
 #draft .card.ban{opacity:.35;filter:grayscale(1);pointer-events:none;position:relative}
 #draft .card.ban::after{content:'BANNED';position:absolute;top:40%;left:0;right:0;text-align:center;font-weight:800;color:#ff5a5a;font-size:20px;letter-spacing:2px;transform:rotate(-12deg);text-shadow:0 0 4px #000}
@@ -1074,6 +1075,13 @@ html body.mob.ingame #bz button{width:38px;height:38px;font-size:18px}
 /* bottom tray */
 html body.mob #tray{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;flex-direction:column;gap:5px;padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:linear-gradient(#2c261ff5,#14110df8);border-top:2px solid #6b5238;box-shadow:0 -8px 20px #0008}
 html body.mob:not(.ingame) #tray{display:none}
+/* sticky bottom bars: fade cue + clearance so the last items are never hidden */
+@media (max-width:979px){
+#draft #cards{padding-bottom:16px}
+#draft{padding-bottom:env(safe-area-inset-bottom,0px)}
+#dside::before{content:'';position:absolute;left:0;right:0;top:-24px;height:24px;background:linear-gradient(#0000,#0009);pointer-events:none;border-radius:14px 14px 0 0}
+}
+html body.mob.ingame #tray::before{content:'';position:absolute;left:0;right:0;top:-22px;height:22px;background:linear-gradient(#0000,#0009);pointer-events:none}
 html body.mob #tray .info{order:0;margin:0!important;padding:4px 8px!important;font-size:12.5px!important;line-height:1.3!important;min-height:0!important;border-width:1px!important;border-radius:8px!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 html body.mob #tray .info .uhelp{margin:0;font-size:12.5px!important}
 html body.mob #tray .info .take{display:flex}
@@ -1153,7 +1161,7 @@ button:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){outline:no
 </style></head><body><div id="amb"></div><main>
 <h1><i class="fl s"></i>Hollow Vale<i class="fl s"></i></h1>
 <div class="size"><label for="size">Size</label><input type="range" id="size" min="30" max="300" value="100"><button id="fit">Fit</button></div>
-<div id="menu"><div id="hero"></div><p class="sub">Choose a game mode, then read the rules below.</p><button class="go" id="m2" hidden>Play online</button><button class="go sec" id="m1">Play local (this device)</button><button class="go sec" id="m4">Campaign</button><button class="go sec" id="m3">Stats &amp; Achievements</button><p class="vsw"><a href="#" id="vswitch"></a></p><div id="rules"></div></div>
+<div id="menu"><div id="hero"></div><p class="sub">Choose a game mode, then read the rules below.</p><button class="go" id="m2" hidden>Play online</button><button class="go sec" id="m1">Play local (this device)</button><button class="go sec" id="m4">Campaign</button><button class="go sec" id="mdaily">Daily challenge</button><button class="go sec" id="m3">Stats &amp; Achievements</button><p class="vsw"><a href="#" id="vswitch"></a></p><div id="rules"></div></div>
 <div id="camp" hidden><h2>Campaign: The Hollow Vale</h2><p class="sub" id="cprog"></p><div id="cmapw"></div><div id="clist"></div><button class="go sec" id="cback">Back</button></div>
 <div id="lobby" hidden>
 <h2>Play with friends</h2>
@@ -1409,6 +1417,17 @@ function cardTargets(sd,k){const C=CARDS[k],P=o=>({x:o.x,y:o.y,o});if(!C)return[
 if(C.tg=='foe')return S.units.filter(v=>isFoe(v.side,sd)&&canSee(sd,v)).map(P);if(C.tg=='ally')return S.units.filter(v=>v.side==sd&&v.hp<maxHp(v)&&!(v.wither>0)).map(P);
 if(C.tg=='spent')return S.units.filter(v=>v.side==sd&&v.used).map(P);if(C.tg=='tower')return S.tw[sd].filter(T=>T.hp>0&&T.hp<T.max).map(P);return[]}
 const cardOK=(sd,k)=>MOPT.cards&&S.mana[sd]>=CARDS[k].c&&(!CARDS[k].tg||cardTargets(sd,k).length>0);
+function offWhy(M,my,b){const d=b.dataset,g=S.gold[M],need=c=>c>g?`Need ${c-g} more gold.`:'';
+if(!my)return S.over?'The match is over.':'Not your turn.';
+if(d.c!=null){const k=S.hand[M][+d.c];if(!k)return '';const C=CARDS[k];if(S.mana[M]<C.c)return `Need ${C.c-S.mana[M]} more mana.`;return 'No valid target for this spell.'}
+if(d.h!=null){const k=hireOpts(M)[+d.h];if(!k)return '';if(g<hireCost(k))return need(hireCost(k));if(H[k].elite&&hasBoss(M))return 'You can only have one boss.';return 'Army is full.'}
+if(d.r!=null){const k=recOpts(M)[+d.r];return k?need(recCost(k,M)):''}
+if(d.u){const c=upgCost(M,d.u);if(c==null)return 'Already at max level.';if(d.u=='fort'&&S.round>=SD_ROUND)return 'No fortifying in sudden death.';if(d.u=='fort'&&!S.tw[M].some(T=>T.hp>0))return 'You have no standing tower.';if(g<c)return need(c);return ''}
+if(d.bd){const B=BLD[d.bd];if(!B)return '';if(bldOf(M,d.bd).length>=B.mx)return `Already built the maximum (${B.mx}).`;if(g<B.c)return need(B.c);return 'No free hex next to your heroes or towers.'}
+if(d.b=='repair'){if(S.round>=SD_ROUND)return 'No repairs in sudden death.';if(!repTower(M))return 'No damaged tower to repair.';return need(repCost(M))}
+if(d.m=='recruit'){if(!S.fallen[M].length)return 'Nobody has fallen yet.';if(armySize(M)>=ARMY_CAP-.01)return 'Army is full.';return need(recCost('x',M))}
+return ''}
+function offReasons(hd,M,my){hd.querySelectorAll('button[disabled]').forEach(b=>{let w='';try{w=offWhy(M,my,b)}catch(e){}if(!w)return;b.removeAttribute('disabled');b.classList.add('dis');b.setAttribute('aria-disabled','true');b.dataset.why=w;b.dataset.tip=w;b.title=w})}
 function playCard(sd,i,x,y){if(!MOPT.cards)return false;const k=S.hand[sd][i];if(!k)return false;const C=CARDS[k];if(S.mana[sd]<C.c)return false;let t=null;
 if(C.tg){t=cardTargets(sd,k).find(p=>p.x==x&&p.y==y);if(!t)return false}
 S.mana[sd]-=C.c;G[sd].mana+=C.c;S.hand[sd].splice(i,1);if(t&&!RP&&!RUNFAST)reticle(t,C.tg=='foe'?'#ff6a3a':'#6ad0ff',0,C.e);const o=t&&t.o,dm=(v,a)=>{const r=Math.min(a,Math.max(0,v.hp));v.hp-=a;fx(v,'hurt');pop(v,'-'+a);G[sd].dmg+=r;if(MOPT.ults)S.ult[sd]=Math.min(ULT_MAX,(S.ult[sd]||0)+r)};
@@ -1505,7 +1524,7 @@ const canCounter=(v,u)=>!!v&&!!u&&v.hp>0&&isFoe(v.side,u.side)&&dist(u,v)==1&&H[
 const cntrDmg=(v,u)=>Math.max(1,dmgIn(u,Math.max(1,Math.floor(eff(v).dmg/2)),v)-armOf(u));
 function predHit(u,t,crit){const e=eff(u);if(t.t!='u')return e.dmg+e.siege;let d=e.dmg+comboB(u,t)[0];if(crit)d+=Math.ceil(d/2);const v=t.v;if(v.ward)return 0;if(MOPT.terrain&&dist(u,v)>=2&&terAt(v)=='forest')d=Math.max(1,d-1);if(v.markBy&&v.markBy===u.side)d+=1;d=dmgIn(v,d,u);return Math.max(1,d-armOf(v))}
 let EVB=0,EVT=0;const evVis=(sd,o)=>{const V=FOGV();return !V||sameTeam(sd,V)||!o||seesCell(V,o.x,o.y)};
-function evCut(o){if(RP||RUNFAST||typeof document=='undefined')return;const now=performance.now(),dur=o.major?1900:1250,st=Math.max(now,EVB,cutUntil),tk=EVT;EVB=st+dur;cutUntil=Math.max(cutUntil,EVB);setTimeout(()=>{if(tk!==EVT)return;showEv(o,dur)},st-now)}
+function evCut(o){if(RP||RUNFAST||typeof document=='undefined')return;const now=performance.now(),dur=evHold(o),st=Math.max(now,EVB,cutUntil),tk=EVT;EVB=st+dur;cutUntil=Math.max(cutUntil,EVB);setTimeout(()=>{if(tk!==EVT)return;showEv(o,dur)},st-now)}
 function showEv(o,dur){let el=document.getElementById('evc');if(!el){el=document.createElement('div');el.id='evc';document.body.appendChild(el);el.addEventListener('pointerdown',()=>{EVT++;EVB=0;cutUntil=performance.now();el.className=''})}
 let sp='';for(let i=0;i<16;i++)sp+=`<i style="left:${(i*61%100)}%;top:${30+(i*37%40)}%;--d:${(i%5)*.12}s;--x:${(i%2?1:-1)*(20+i*3)}px"></i>`;
 el.style.setProperty('--ec',o.c||'#ffd24a');el.style.setProperty('--dur',dur+'ms');el.innerHTML=`<div class="evbg"></div><div class="evb"><div class="eva">${o.art||''}</div><div class="evt"><small>${o.s||''}</small><b>${o.t}</b>${o.d?'<em>'+o.d+'</em>':''}</div></div><div class="evp">${sp}</div><div class="evskip">tap to skip</div>`;
@@ -1796,8 +1815,9 @@ function hitCellsOf(u,t){const h=H[u.k],cells=[t];if(h.aoe&&!t.heal){S.units.fil
 function telegraph(u,t){if(RP||RUNFAST)return;const col='#ff4a3a';actorRing(u,sideCol(u.side),1);strikeLine(u,t,col,1);hitCellsOf(u,t).forEach((c,i)=>reticle(c,col,1,i?'':'TARGET'));
 const L=fxLayer();if(L){const b=document.createElement('div');b.className='tban';b.style.setProperty('--c',sideCol(u.side));b.innerHTML=`<b>${SHORT[u.side]}</b> ${H[u.k].n} <span>prepares ${CUT[u.k]?CUT[u.k].n:'an attack'}!</span>`;L.appendChild(b);setTimeout(()=>b.remove(),TELE+100)}try{tone(220,.5,'sawtooth',.05,0,440);tone(440,.3,'square',.03,.35,660)}catch(e){}}
 function showAct(u,t){if(RP||RUNFAST||!visU(u))return;const col=t.heal?'#5fcf6f':t.summon?'#6ad0ff':sideCol(u.side);actorRing(u,sideCol(u.side));strikeLine(u,t,col);reticle(t,col,0)}
-let TICK=[];function tick(t){if(RP||RUNFAST||typeof t!='string')return;const m=t.match(/^(P[1-4]) /);if(!m)return;const sd=Object.keys(SHORT).find(k=>SHORT[k]==m[1]);const el=document.getElementById('ticker');if(!el)return;
-const d=document.createElement('div');d.className='tk';d.style.setProperty('--c',sideCol(sd));d.innerHTML=`<b>${esc0(NAMES[sd]||SHORT[sd])}</b> ${t.slice(3)}`;el.prepend(d);while(el.children.length>4)el.lastChild.remove();setTimeout(()=>{d.classList.add('out');setTimeout(()=>d.remove(),600)},4500)}
+let TICK=[];function tick(t){if(RP||RUNFAST||typeof t!='string'||!t.trim())return;const m=t.match(/^(P[1-4]) /);const sd=m?Object.keys(SHORT).find(k=>SHORT[k]==m[1]):null;const el=document.getElementById('ticker');if(!el)return;
+if(!m){const f=el.firstElementChild;if(f&&f.dataset.raw===t&&!f.classList.contains('out')){clearTimeout(f.ht);f.ht=setTimeout(()=>{f.classList.add('out');setTimeout(()=>f.remove(),600)},holdMs(t,'tick'));return}}
+const d=document.createElement('div');d.className='tk';if(!m)d.dataset.raw=t;d.style.setProperty('--c',sd?sideCol(sd):'#8a8f9a');d.innerHTML=sd?`<b>${esc0(NAMES[sd]||SHORT[sd])}</b> ${t.slice(3)}`:t;el.prepend(d);while(el.children.length>4)el.lastChild.remove();d.ht=setTimeout(()=>{d.classList.add('out');setTimeout(()=>d.remove(),600)},holdMs(t,'tick'))}
 function playCut(u){const d=CUT[u.k],el=$('#cut');cutUntil=performance.now()+CUTMS;el.className='';el.style.cssText='--c:'+d.c;
 el.innerHTML=`<div class='cbg'></div><div class='cbar top'></div><div class='cbar bot'></div><div class='csp'>${spr(u.k,u.side)}</div><div class='cfx ${d.f}'>${fxParts(d.f)}</div><div class='cname'>${d.n}</div><div class='cflash'></div>`;
 void el.offsetWidth;el.className='on';try{CSFX[(typeof BALIAS!='undefined'&&BALIAS[u.k])||u.k]()}catch(e){}setTimeout(()=>{el.className='';el.innerHTML=''},CUTMS)}
@@ -1866,10 +1886,11 @@ function trk(t,d){const a=curAtk&&G&&G[curAtk.side];if(!a)return;const um=x=>{if
 function finish3(w){if(S.fin)return;S.fin=1;if(NET&&CFG&&CFG.gid)NET.send({type:'result',gid:CFG.gid,winner:w,rounds:S.round});if(HOTSEAT&&HUM!=1)ME=null;setTimeout(()=>endSplash(w),1700);setTimeout(()=>showPost(w),Math.max(1300,cutUntil-performance.now()+500))}
 function showPost(w){const t=ME?(myWin(w)?'VICTORY':'DEFEAT'):MOPT.raid?(w==S.boss?'THE BOSS WINS':'THE HEROES WIN'):NAMES[w].toUpperCase()+' WINS',row=(l,k)=>`<tr><td>${l}</td>${SIDES.map(sd=>`<td>${G[sd][k]}</td>`).join('')}</tr>`,place=[w].concat(S.order.slice().reverse().filter(x=>x!=w));
 $('#post').innerHTML=`<div class='pn'><h2 class='pt ${(!ME||myWin(w))?'win':'lose'}'>${t}</h2><p class='pl'>${place.map((sd,i)=>`${['1st','2nd','3rd','4th'][i]} <b style="color:${SCOL[sd]}">${NAMES[sd]}</b>`).join(' · ')}</p>${diffLine()}<table><tr><th></th>${SIDES.map(sd=>`<th style="color:${SCOL[sd]}">${SHORT[sd]}${isMine(sd)?' (you)':''}</th>`).join('')}</tr>${row('Damage dealt','dmg')}${row('Units defeated','kills')}${row('Units lost','lost')}${row('Towers destroyed','towers')}${row('HP healed','heals')}${row('Mana spent','mana')}${row('Turns','turns')}</table><div class='pb'>${HOST?"<button class='go' id='pr'>Rematch</button>":"<span class='hint'>Waiting for the host to start a rematch...</span>"}<button class='go sec' id='pm'>Main menu</button></div></div>`;
+try{if(CFG&&CFG.daily)dailyDone(w);else lossPrompt(w)}catch(e){}
 if(CAMP!=null&&!NET){const won=myWin(w);if(won)campSave(CAMP);const fin=won&&CAMP===14;
 $('#post .pb').insertAdjacentHTML('afterbegin',fin?`<span class='hint'>The Dread Colossus has fallen. The Vale is yours!</span>`:'')+'';$('#post .pb').insertAdjacentHTML('afterbegin',`<button class='go' id='pnext'>${won?'Back to the map':'Retreat to the map'}</button>`);const pr=$('#pr');if(pr)pr.textContent=won?'Replay battle':'Try again';const nx=$('#pnext');if(nx)nx.onclick=()=>{$('#post').className='';music(false);aiRun++;$('#game').hidden=true;CSEL=null;openCamp()}}
 $('#post').className='on';
-if($('#pr'))$('#pr').onclick=()=>{$('#post').className='';if(NET&&NET.rematch)NET.rematch();else{if(mode=='local'&&LS.rnd)SIDES.forEach(sd=>CFG.picks[sd]=randomTeam());CFG.seed=Math.random()*2147483647|0;startGame(CFG)}};
+if($('#pr'))$('#pr').onclick=()=>{$('#post').className='';if(NET&&NET.rematch)NET.rematch();else{if(CFG.daily){startGame(CFG);return}if(mode=='local'&&LS.rnd)SIDES.forEach(sd=>CFG.picks[sd]=randomTeam());CFG.seed=Math.random()*2147483647|0;startGame(CFG)}};
 $('#pm').onclick=()=>{$('#post').className='';$('#restart').onclick()}}
 function openStats(){$('#menu').hidden=true;$('#draft').hidden=true;$('#game').hidden=true;drawStats();$('#stats').hidden=false}
 function drawStats(){const st=loadStats(),n=st.games,wr=n?Math.round(st.wins/n*100):0,fav=Object.keys(st.use).filter(k=>H[k]).sort((a,b)=>st.use[b]-st.use[a]).slice(0,3).map(k=>H[k].n+' ('+st.use[k]+')').join(', ')||'None yet',got=ACH.filter(a=>st.ach[a.id]).length,box=l=>l.map(([a,b])=>`<div><b>${b}</b><span>${a}</span></div>`).join('');
@@ -2035,6 +2056,12 @@ const LS={n:2,seat:{p:'h',e:'a',g:'a',k:'a'},rnd:false,opts:defOpts()};
 const DIFFN=['Easy','Normal','Hard'];let DIFF=1;
 function loadDiff(){try{const v=+localStorage.getItem('hv-diff');return v>=0&&v<=2&&localStorage.getItem('hv-diff')!==null?v:1}catch(e){return 1}}
 function saveDiff(v){DIFF=v;try{localStorage.setItem('hv-diff',String(v))}catch(e){}}
+function lossPrompt(w){if(!ME||CAMP!=null||NET&&!HOST||!(HOST||mode=='local'))return;if(!ALLS.slice(0,NPL).some(isAI))return;const key=NPL+'|'+DIFF+'|'+ALLS.slice(0,NPL).map(s=>isAI(s)?1:0).join('');let st={k:'',n:0};try{st=JSON.parse(localStorage.getItem('hv-loss'))||st}catch(e){}
+if(myWin(w)){st={k:key,n:0}}else{st.n=st.k===key?st.n+1:1;st.k=key}
+try{localStorage.setItem('hv-loss',JSON.stringify(st))}catch(e){}
+if(st.n<2||DIFF<=0)return;const nd=DIFF-1,pb=$('#post .pb');if(!pb)return;pb.insertAdjacentHTML('beforebegin',`<p class='pl' id='lossp'>Tough streak? You can lower the difficulty to the next level down, or keep it where it is. <button class='go' id='lossdn'>Lower difficulty to ${DIFFN[nd]}</button> <button class='go sec' id='lossno'>Keep ${DIFFN[DIFF]}</button></p>`);
+$('#lossdn').onclick=()=>{saveDiff(nd);try{localStorage.setItem('hv-loss',JSON.stringify({k:'',n:0}))}catch(e){}$('#lossp').textContent='AI difficulty lowered. It applies to your next match.'};
+$('#lossno').onclick=()=>{try{localStorage.setItem('hv-loss',JSON.stringify({k:key,n:0}))}catch(e){}$('#lossp').remove()}}
 const DN=()=>[1.6,.05,0][DIFF]??.05,DM=()=>[.9,.3,.05][DIFF]??.3;
 function diffLine(){try{if(!(HOST||mode=='local'))return '';if(!ALLS.slice(0,NPL).some(isAI))return '';return `<p class='pl'>AI difficulty: <b>${DIFFN[DIFF]}</b></p>`}catch(e){return ''}}
 const OPT_NA=(k,o,n)=>(n==2&&(k=='bounty'||k=='truce'))?'not used in 1v1':(o&&o.raid&&(k=='koth'||k=='truce'||k=='bounty'))?'off in Boss Raid':'';
@@ -2116,6 +2143,21 @@ function drawCamp(){const d=campDone();$('#cprog').textContent=`${d.length} / ${
 $('#clist').innerHTML=c?`<div class="cch${campOpen(c,d)?'':' lock'}${d.includes(c.id)?' done':''}${c.boss?' cboss':''}"><div class="cnum">${d.includes(c.id)?'✔':c.boss==2?'💀':c.boss?'👑':c.id+1}</div><div class="ctx"><b>${c.t}</b><small>${c.n==2?'1v1':c.n+' players'}${Object.keys(c.opts).length?' · '+Object.keys(c.opts).map(k=>(OPTDEF.find(o=>o.k==k)||{n:k}).n).join(', '):''} · Enemy: ${Object.values(c.foes)[0].map(k=>H[k]?H[k].n:k).join(', ')}</small><p>${campOpen(c,d)?c.s:'Locked. Win a battle connected to this one first.'}</p></div>${campOpen(c,d)?`<button class="go" data-c="${c.id}">${d.includes(c.id)?'Replay':'Fight'}</button>`:''}</div>`:'<p class="sub">Tap a glowing battle on the map. Win battles to open the paths beyond them; choose your own route to the Dread Colossus.</p>'}
 function campStart(i){const c=CAMPAIGN.find(c=>c.id===i);CAMP=i;mode='local';NET=null;HOST=true;HOTSEAT=true;HUM=1;BANS=[];BANMODE=false;WAITBAN=null;const L=ALLS.slice(0,c.n),seat={};L.forEach(sd=>seat[sd]=sd=='p'?'h':'a');SEAT=seat;ME='p';$('#camp').hidden=true;
 openDraft('Start battle',mine=>{const P={p:mine};L.forEach(sd=>{if(sd!='p')P[sd]=(c.foes[sd]||aiPick()).slice()});startGame({picks:P,seat,me:'p',n:c.n,opts:Object.assign({},c.opts),seed:Math.random()*2147483647|0})})}
+/* ---- daily challenge: UTC date seed fixes map, teams and one modifier ---- */
+const DAILY_MODS=[{k:'fog',n:'Poison mist'},{k:'cards',n:'Spell cards'},{k:'ults',n:'Ultimates'},{k:'gold',n:'Gold & market'},{k:'combos',n:'Combos'}];
+function dailyKey(){const d=new Date();return d.getUTCFullYear()*10000+(d.getUTCMonth()+1)*100+d.getUTCDate()}
+function dailyRng(s){let a=s|0;return()=>{a=(a+0x6D2B79F5)|0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+function dailyTeam(r){const ks=freeKeys(),o=[];let u=0,g=0;while(u<5&&g++<500){const k=ks[r()*ks.length|0],c=H[k].elite?2:1;if(u+c<=5){o.push(k);u+=c}}return o}
+function dailyLoad(){try{return JSON.parse(localStorage.getItem('hv-daily'))||{}}catch(e){return{}}}
+function dailyLabel(){const b=dailyLoad()[dailyKey()],el=$('#mdaily');if(el)el.textContent='Daily challenge'+(b?' (best '+b+')':'')}
+function dailyDone(w){const key=dailyKey(),won=myWin(w);let sc=0;if(won){sc=1000+S.tw[ME].reduce((a,T)=>a+Math.max(0,T.hp),0)+50*S.units.filter(u=>u.side==ME&&u.hp>0).length+25*Math.max(0,20-S.round)}
+const all=dailyLoad(),prev=all[key]||0;if(sc>prev)all[key]=sc;const ks=Object.keys(all).sort();while(ks.length>60)delete all[ks.shift()];try{localStorage.setItem('hv-daily',JSON.stringify(all))}catch(e){}
+const pb=$('#post .pb');if(pb)pb.insertAdjacentHTML('beforebegin',`<p class='pl'>Daily ${key}: score <b>${sc}</b> · best <b>${all[key]||0}</b>${sc>prev&&sc>0?' · new best!':''}</p>`);dailyLabel();const pr=$('#pr');if(pr)pr.textContent='Replay daily'}
+function dailyStart(){const key=dailyKey(),r=dailyRng(key*7919+13),mod=DAILY_MODS[r()*DAILY_MODS.length|0],n=2,seat={p:'h',e:'a'};mode='local';NET=null;HOST=true;HOTSEAT=true;HUM=1;CAMP=null;BANS=[];BANMODE=false;WAITBAN=null;SEAT=seat;ME='p';
+const P={p:dailyTeam(r),e:dailyTeam(r)},opts=Object.assign(defOpts(),{bans:false});opts[mod.k]=true;
+['#menu','#camp','#lobby','#lsetup','#draft','#stats'].forEach(x=>{const el=$(x);if(el)el.hidden=true});
+startGame({picks:P,seat,me:'p',n,opts,seed:(key*2654435761)%2147483647|0,daily:key});try{msg('Daily challenge: '+mod.n)}catch(e){}}
+$('#mdaily').onclick=dailyStart;dailyLabel();
 $('#m4').onclick=openCamp;$('#cback').onclick=()=>{$('#camp').hidden=true;$('#menu').hidden=false};
 $('#clist').onclick=e=>{const b=e.target.closest('button[data-c]');if(b)campStart(+b.dataset.c)};
 $('#cmapw').onclick=e=>{const n=e.target.closest('.cmn');if(!n)return;CSEL=+n.dataset.c;drawCamp();const l=$('#clist');if(l.scrollIntoView)l.scrollIntoView({behavior:'smooth',block:'nearest'})};
@@ -2274,11 +2316,15 @@ if(!best||!submit(Object.assign({t:'card',s:sd},best)))break}}
 function aiUltGood(sd){const f=ultFac(sd),mine=S.units.filter(u=>u.side==sd),foes=S.units.filter(v=>isFoe(v.side,sd)),miss=mine.reduce((a,u)=>a+maxHp(u)-u.hp,0);
 if(f=='kingdom'||f=='wilds')return miss>=4;if(f=='undead')return mine.length>=2;if(f=='iron')return foeTowers(sd).length>=2;if(f=='arcane')return foes.filter(v=>mine.some(u=>dist(u,v)<=2)).length>=2;return foes.length>=2}
 function runAI(sd){const tok=++aiRun;if(MOPT.ults&&(S.ult[sd]||0)>=ULT_MAX&&aiUltGood(sd)){submit({t:'ult',s:sd});if(S.over||S.turn!=sd)return}aiDiplo(sd);aiShop(sd);aiSpawnTurn(sd);aiCards(sd);if(S.over||S.turn!=sd){render();return}render();const list=S.units.filter(u=>u.side==sd&&!u.used);let i=0,hasted=0;
-const step=()=>{if(tok!==aiRun)return;if(S.over){render();return}if(S.turn!=sd){return}if(i>=list.length){const hi=MOPT.cards?S.hand[sd].indexOf('haste'):-1;if(!hasted&&hi>=0&&S.mana[sd]>=1){const hu=S.units.find(u=>u.side==sd&&u.used&&!u.stun&&(()=>{u.used=false;const r=targets(u).some(t=>!t.heal&&!t.summon);u.used=true;return r})());if(hu&&submit({t:'card',s:sd,i:hi,x:hu.x,y:hu.y})){hasted=1;list.push(hu);setTimeout(step,RUNFAST?0:400);return}}submit({t:'end',s:sd});return}
+const step=()=>{if(tok!==aiRun)return;if(S.over){render();return}if(S.turn!=sd){return}if(i>=list.length){const hi=MOPT.cards?S.hand[sd].indexOf('haste'):-1;if(!hasted&&hi>=0&&S.mana[sd]>=1){const hu=S.units.find(u=>u.side==sd&&u.used&&!u.stun&&(()=>{u.used=false;const r=targets(u).some(t=>!t.heal&&!t.summon);u.used=true;return r})());if(hu&&submit({t:'card',s:sd,i:hi,x:hu.x,y:hu.y})){hasted=1;list.push(hu);setTimeout(step,pz('haste'));return}}submit({t:'end',s:sd});return}
 const u=list[i++];if(u.hp<=0||u.used){step();return}if(u.moved&&!targets(u).some(t=>!t.heal)){u.used=true;step();return}const a=choose(u);
 if(a.act)submit(Object.assign({t:'act',s:sd,fx:u.x,fy:u.y,x:a.act.x,y:a.act.y},a.act.summon?{i:1}:{}));else{const ok=submit({t:'move',s:sd,fx:u.x,fy:u.y,x:a.mv.x,y:a.mv.y});if(ok&&H[u.k].charge&&u.moved&&!u.used)i--}
-render();setTimeout(step,Math.max(a.act?(RUNFAST?0:750):(RUNFAST?0:650),RUNFAST?0:cutUntil-performance.now()+300))};setTimeout(step,RUNFAST?0:500)}
+render();setTimeout(step,Math.max(a.act?pz('act'):pz('move'),RUNFAST?0:cutUntil-performance.now()+pz('cutPad')))};setTimeout(step,pz('start'))}
 const RUNFAST=!!(typeof location!='undefined'&&/[?&]fast/.test(location.search));
+/* pacing table (ms): start=pause before AI's first action, move/act=pause after a move/attack, haste=extra haste action, cutPad=padding after a cutscene, endMin=min wait before auto-ending your turn */
+const PACE={fast:{start:250,move:300,act:450,haste:250,cutPad:150,endMin:450},normal:{start:450,move:550,act:800,haste:400,cutPad:300,endMin:700},slow:{start:750,move:900,act:1150,haste:600,cutPad:450,endMin:1100}};
+let PACEMODE=(()=>{try{const m=/[?&]pace=(fast|normal|slow)/.exec(location.search);if(m){localStorage.setItem('hvPace',m[1]);return m[1]}const s=localStorage.getItem('hvPace');return PACE[s]?s:'normal'}catch(e){return 'normal'}})();
+const pz=k=>RUNFAST?0:PACE[PACEMODE][k];
 function aiSpawnTurn(sd){let g=0;while(S.pool[sd].length&&spLeft(sd)>0&&g++<12){const hx=spawnHexes(sd),idx=S.pool[sd].map((k,i)=>i).filter(i=>(H[S.pool[sd][i]].group||1)<=hx.length);if(!idx.length)break;
 const i=idx[Math.random()*idx.length|0],tp=foeTowers(sd),sc=h=>Math.min(...tp.map(T=>dist(h,T))),best=hx.slice().sort((a,b)=>sc(a)-sc(b)+(Math.random()-.5)*.2)[0];
 if(!best)break;submit({t:'spawn',s:sd,i,x:best.x,y:best.y})}}
@@ -2301,7 +2347,7 @@ let NLOG=0,GID=null;
 function submit(a){const ok=perform(a);if(ok&&NET&&!RP){NLOG++;NET.send({type:'act',a})}return ok}
 let NET=null;
 // ui
-function autoEnd(){if(S.over||!isMine(S.turn)||S.units.some(u=>u.side==S.turn&&!u.used)||canSpawn(S.turn)||extraActs(S.turn))return;busy=true;msg('All heroes have acted. Ending turn...');render();const sd=S.turn;setTimeout(()=>{if(S.over||S.turn!=sd)return;busy=false;submit({t:'end',s:sd})},Math.max(800,cutUntil-performance.now()+300))}
+function autoEnd(){if(S.over||!isMine(S.turn)||S.units.some(u=>u.side==S.turn&&!u.used)||canSpawn(S.turn)||extraActs(S.turn))return;busy=true;msg('All heroes have acted. Ending turn...');render();const sd=S.turn;setTimeout(()=>{if(S.over||S.turn!=sd)return;busy=false;submit({t:'end',s:sd})},Math.max(pz('endMin'),cutUntil-performance.now()+pz('cutPad')))}
 const tip=$('#tip');
 /* Tiny QR encoder: byte mode, ECC level M, versions 1-10. Returns a boolean matrix (true = dark). */
 function qrMatrix(text){
@@ -2347,12 +2393,17 @@ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${S} ${S}" width="$
 
 
 const TOUCH=matchMedia('(hover: none)').matches;
+/* shared UI hold times (ms): base + perChar*len, clamped to [min,max] */
+const HOLD={tip:{base:1500,per:22,min:2000,max:4500},tick:{base:2800,per:45,min:3000,max:7000},ev:{base:1250,evMajor:1900,per:30,free:28,max:3200},splash:4600};
+const plainLen=s=>String(s==null?'':s).replace(/<[^>]*>/g,'').length;
+function holdMs(text,kind){const h=HOLD[kind]||HOLD.tip;return Math.round(Math.max(h.min,Math.min(h.max,h.base+h.per*plainLen(text))))}
+function evHold(o){const h=HOLD.ev,b=o.major?h.evMajor:h.base,n=Math.max(0,plainLen((o.t||'')+(o.d||''))-h.free);return Math.min(h.max,b+h.per*n)}
 document.addEventListener('pointerdown',()=>{try{ac()}catch(x){}},{passive:true});
 let selAtTap=null;$('#board').addEventListener('pointerdown',()=>{selAtTap=sel},{passive:true});
 $('#board').addEventListener('click',e=>{if(!TOUCH||!S||selAtTap)return;const c=cellAt(e);if(!c)return;const u=at(c.x,c.y),T=twAt(c.x,c.y);
 if(!(T||(u&&(!isMine(u.side)||u.used))))return;const t=tipFor(c.x,c.y);if(!t)return;tip.innerHTML=t;tip.hidden=false;
 tip.style.left=Math.max(4,Math.min(e.clientX-tip.offsetWidth/2,innerWidth-tip.offsetWidth-4))+'px';tip.style.top=Math.max(4,e.clientY-tip.offsetHeight-14)+'px';
-clearTimeout(tip.t);tip.t=setTimeout(()=>{tip.hidden=true},2600)});
+clearTimeout(tip.t);tip.t=setTimeout(()=>{tip.hidden=true},holdMs(t,'tip'))});
 
 function tipFor(x,y){const u=atV(x,y),T=twAt(x,y);
 if(u){const h=H[u.k];return `<div class="tph">${classArt(ROLE[u.k][0])}${spr(u.k,u.side)}</div><b>${h.n}</b> ${roleTag(u.k)}${facTag(u.k)} (${SIDEN[u.side]}${isMine(u.side)?' · you':''})<br>HP ${u.hp}/${maxHp(u)} · Move ${h.mv} · Range ${h.rng[0]==h.rng[1]?h.rng[0]:h.rng.join('-')} · Dmg ${h.dmg+(u.star||0)}${u.star?' · '+'★'.repeat(u.star)+' level '+(u.star+1):''}${MOPT.levels&&u.kills?' · '+u.kills+' kill'+(u.kills>1?'s':''):''}<br>${TRAITS.filter(x=>traitsOf(u).includes(x[0])).map(x=>x[1]+' '+x[2]).join('<br>')}<br>${h.d}<br><i>${ROLE[u.k][1]}</i>${u.stun?'<br><i>Stunned</i>':''}${u.burn>0?'<br><i>Burning</i>':''}${u.rez?'<br><i>Has already risen once</i>':''}`}
@@ -2362,7 +2413,7 @@ $('#board').onmousemove=e=>{if(TOUCH)return;const c=cellAt(e);if(c&&S&&sel&&!PLO
 const hu=atV(c.x,c.y),k2=c.x+','+c.y;if(tip.dataset.k!==k2||tip.hidden){tip.dataset.k=k2;const tt=terTip(c.x,c.y);tip.innerHTML=hu?ucard(hu)+(tt?'<div class="dterr">'+tt+'</div>':''):t}tip.classList.add('dock');tip.style.left='';tip.style.top='';tip.hidden=false};
 $('#board').onmouseleave=()=>{tip.hidden=true;tip.dataset.k=''};
 $('#info').addEventListener('click',e=>{const tk=e.target.closest('[data-take]');if(tk&&NET&&NET.send){NET.send({type:'takeover',seat:tk.dataset.take});tk.disabled=true;tk.textContent='Taking over...';return}if(!e.target.closest('#sumbtn'))return;if(!sel||busy||!isMine(S.turn))return;sumMode=!sumMode;render()});
-$('#hand').onclick=e=>{const b=e.target.closest('.shop,.hcard,.rchip,.hchip,.uchip,.bchip,.shx');if(b&&b.classList.contains('shx')){MKT=null;bldSel=null;render();return}if(b&&b.classList.contains('bchip')&&!b.disabled&&!busy&&isMine(S.turn)){bldSel=bldSel==b.dataset.bd?null:b.dataset.bd;sel=null;spSel=null;cardSel=null;render();return}if(!b||b.disabled||busy||S.over||cutting()||!isMine(S.turn))return;
+$('#hand').onclick=e=>{const b=e.target.closest('.shop,.hcard,.rchip,.hchip,.uchip,.bchip,.shx');if(b&&b.dataset.why){msg(b.dataset.why);return}if(b&&b.classList.contains('shx')){MKT=null;bldSel=null;render();return}if(b&&b.classList.contains('bchip')&&!b.disabled&&!busy&&isMine(S.turn)){bldSel=bldSel==b.dataset.bd?null:b.dataset.bd;sel=null;spSel=null;cardSel=null;render();return}if(!b||b.disabled||busy||S.over||cutting()||!isMine(S.turn))return;
 if(b.classList.contains('rchip')){MKT=null;submit({t:'buy',s:S.turn,item:'recruit',i:+b.dataset.r});render();return}
 if(b.classList.contains('hchip')){submit({t:'buy',s:S.turn,item:'hire',i:+b.dataset.h});render();return}
 if(b.classList.contains('uchip')){submit({t:'buy',s:S.turn,item:b.dataset.u});render();autoEnd();return}
@@ -2372,7 +2423,7 @@ cardSel=cardSel===i?null:i;sel=null;spSel=null;if(cardSel!=null)msg(`${CARDS[k].
 $('#diplo').onclick=e=>{const b=e.target.closest('button[data-d]');if(!b||b.disabled||busy||S.over||!isMine(S.turn))return;if(b.dataset.d=='betray'&&!confirm('Break the truce? They get +2 mana.'))return;submit({t:b.dataset.d,s:S.turn,o:b.dataset.o});render()};
 (function(){let HT=null;const show=t=>{if(!HT){HT=document.createElement('div');HT.id='htip';document.body.appendChild(HT)}HT.textContent=t.dataset.tip;HT.style.display='block';const r=t.getBoundingClientRect();HT.style.left=Math.max(6,Math.min(r.left+r.width/2-HT.offsetWidth/2,innerWidth-HT.offsetWidth-6))+'px';HT.style.top=(r.top-HT.offsetHeight-8<4?r.bottom+8:r.top-HT.offsetHeight-8)+'px'},hide=()=>{if(HT)HT.style.display='none'};
 document.addEventListener('mouseover',e=>{const t=e.target.closest&&e.target.closest('[data-tip]');if(t)show(t);else hide()});
-document.addEventListener('touchstart',e=>{const t=e.target.closest&&e.target.closest('[data-tip]');if(t){show(t);clearTimeout(show.t);show.t=setTimeout(hide,2600)}else hide()},{passive:true});addEventListener('scroll',hide,{passive:true})})();
+document.addEventListener('touchstart',e=>{const t=e.target.closest&&e.target.closest('[data-tip]');if(t){show(t);clearTimeout(show.t);show.t=setTimeout(hide,holdMs(t.dataset.tip,'tip'))}else hide()},{passive:true});addEventListener('scroll',hide,{passive:true})})();
 $('#thrb').onclick=()=>{THR=!THR;try{localStorage.setItem('hv_thr',THR?'1':'0')}catch(e){}render()};
 $('#ult').onclick=()=>{if(!busy&&!S.over&&!cutting()&&isMine(S.turn)&&(S.ult[S.turn]||0)>=ULT_MAX){submit({t:'ult',s:S.turn});sel=null;render()}};
 $('#end').onclick=()=>{if(!busy&&!S.over&&!cutting()&&isMine(S.turn))submit({t:'end',s:S.turn})};
@@ -2461,7 +2512,7 @@ else if(my&&MKT=='recruit'&&canBuy(M,'recruit'))h+=`<div class="recrow mkrow" da
 else if(my&&MKT=='upg')h+=`<div class="recrow mkrow" data-sh="upg"><button class="shx" data-m="upg" aria-label="Close">✕</button>${Object.keys(UPGK).filter(it=>it!='eyes'||MOPT.sight).map(it=>{const U=SHOP[it],lv=upgLv(M,it),mx=U.cs.length,c=upgCost(M,it);return `<button class="uchip" data-u="${it}" data-tip="${U.n}: ${U.d}"${canBuy(M,it)?'':' disabled'}><b>${U.e} ${U.n}</b><small>${lv>=mx?'MAX':c+'🪙'} · ${'●'.repeat(lv)}${'○'.repeat(mx-lv)}</small></button>`}).join('')}</div>`;
 else if(my&&MKT=='build')h+=`<div class="recrow mkrow" data-sh="build"><button class="shx" data-m="build" aria-label="Close">✕</button>${Object.keys(BLD).map(k=>{const B=BLD[k],n=bldOf(M,k).length;return `<button class="bchip${bldSel==k?' on':''}" data-bd="${k}" data-tip="${B.n}: ${B.d} ${B.hp} HP. Up to ${B.mx}. Enemies can knock it down (they get 2 gold)."${canBuild(M,k)?'':' disabled'}><b>${BLD_S(k,M)}${B.n}</b><small>${B.c}🪙 · ${n}/${B.mx}</small></button>`}).join('')}</div>`;
 else if(!my)MKT=null}
-if(MOPT.cards)h+=`<span class="hl">Spells</span>`+(S.hand[M].length?S.hand[M].map((k,i)=>{const C=CARDS[k];return `<button class="hcard${cardSel===i?' on':''}" data-c="${i}" title="${C.n}: ${C.d}"${my&&cardOK(M,k)?'':' disabled'}><b>${C.e} ${C.n}</b><small>${C.c} mana · ${C.d}</small></button>`}).join(''):'<span class="hl">none yet</span>');hd.innerHTML=h}}{const b=$('#ult'),sd=S.turn,v=S.ult&&S.ult[sd]||0;b.hidden=!(MOPT.ults&&isMine(sd)&&!S.over);if(!b.hidden){const U=ULTS[ultFac(sd)];b.innerHTML=`⚡ ${U.n} <small>${v}/${ULT_MAX}</small>`;b.title=U.n+': '+U.d;b.disabled=busy||v<ULT_MAX;b.classList.toggle('ready',v>=ULT_MAX)}}
+if(MOPT.cards)h+=`<span class="hl">Spells</span>`+(S.hand[M].length?S.hand[M].map((k,i)=>{const C=CARDS[k];return `<button class="hcard${cardSel===i?' on':''}" data-c="${i}" title="${C.n}: ${C.d}"${my&&cardOK(M,k)?'':' disabled'}><b>${C.e} ${C.n}</b><small>${C.c} mana · ${C.d}</small></button>`}).join(''):'<span class="hl">none yet</span>');hd.innerHTML=h;offReasons(hd,M,my)}}{const b=$('#ult'),sd=S.turn,v=S.ult&&S.ult[sd]||0;b.hidden=!(MOPT.ults&&isMine(sd)&&!S.over);if(!b.hidden){const U=ULTS[ultFac(sd)];b.innerHTML=`⚡ ${U.n} <small>${v}/${ULT_MAX}</small>`;b.title=U.n+': '+U.d;b.disabled=busy||v<ULT_MAX;b.classList.toggle('ready',v>=ULT_MAX)}}
 if(S.over)$('#info').innerHTML=`<span class="win">${NAMES[S.winner]} wins${isMine(S.winner)?' - that is you!':'!'}</span>`;
 else if(sel){const h=H[sel.k];$('#info').innerHTML='<div class="uhelp">'+(sel.moved?'<b>Charge!</b> Tap a red target to strike now, or tap elsewhere to hold position.':h.charge?'Charge: move to a blue tile and you can still attack this turn, or attack a red target right away.':'Tap a blue tile to move or a red target to act. Either one ends this hero\'s turn.')+'</div>'+abBtn(sel)}
 else if(insp){$('#info').innerHTML='<div class="uhelp">Blue: where it can move. Red: what it can hit from where it stands. Tap it again to hide.</div>'}
@@ -2515,7 +2566,7 @@ const rays=Array.from({length:16},(_,i)=>`<path d='M0 0L-14 -150L14 -150Z' trans
 const vic=`<g class='sp-rays'>${rays}</g><circle r='96' fill='none' stroke='${col}' stroke-width='3' stroke-opacity='.55'/><circle r='84' fill='#120c07' stroke='${col}' stroke-width='2'/><g fill='none' stroke='#6fae5a' stroke-width='5' stroke-linecap='round'><path d='M-66 40Q-86 -10 -44 -62'/><path d='M66 40Q86 -10 44 -62'/></g><g fill='#6fae5a'>${[-52,-30,-8,14,34].map((y,i)=>`<ellipse cx='${-78+i*3}' cy='${y+10}' rx='6' ry='11' transform='rotate(${-30+i*8} ${-78+i*3} ${y+10})'/><ellipse cx='${78-i*3}' cy='${y+10}' rx='6' ry='11' transform='rotate(${30-i*8} ${78-i*3} ${y+10})'/>`).join('')}</g><path d='M-34 -30L-34 -50L-18 -38L0 -58L18 -38L34 -50L34 -30Z' fill='${col}' stroke='#2a1a10' stroke-width='2.5'/><rect x='-34' y='-30' width='68' height='9' fill='${col}' stroke='#2a1a10' stroke-width='2.5'/><path d='M-40 56L40 -22M40 56L-40 -22' stroke='#d6dde4' stroke-width='8' stroke-linecap='round'/><path d='M-40 56L40 -22M40 56L-40 -22' stroke='#2a1a10' stroke-width='2' stroke-linecap='round' stroke-opacity='.5'/><path d='M-46 50L-34 62M46 50L34 62' stroke='#caa04a' stroke-width='7' stroke-linecap='round'/>`;
 const def=`<g class='sp-rain'>${Array.from({length:22},(_,i)=>`<path d='M${-110+i*10} ${-150+(i*37)%60}l-8 26' stroke='#9aa8c0' stroke-opacity='.4' stroke-width='1.4'/>`).join('')}</g><circle r='90' fill='#0d0a10' stroke='#7a2a2a' stroke-width='3'/><path d='M-50 -46H50V6Q50 46 0 66Q-50 46 -50 6Z' fill='#2b2430' stroke='#7a7a88' stroke-width='3'/><path d='M0 -46L-6 -14L8 4L-4 30L2 62' stroke='#0d0a10' stroke-width='3.5' fill='none'/><path d='M-4 -30L-58 40' stroke='#9aa4b0' stroke-width='7' stroke-linecap='round'/><path d='M14 -4L52 -46M14 -4L22 6' stroke='#9aa4b0' stroke-width='7' stroke-linecap='round'/><path d='M-62 44L-70 52' stroke='#6b4a2f' stroke-width='7' stroke-linecap='round'/><g fill='#ff5a3a' fill-opacity='.6'><circle cx='-30' cy='-70' r='2'/><circle cx='36' cy='-76' r='2.4'/></g>`;
 el.className=win?'win':'lose';el.innerHTML=`<div class='sp-in'><svg viewBox='-170 -170 340 340' aria-hidden='true'>${win?vic:def}</svg><div class='sp-t'>${ME?(win?'Victory':'Defeat'):who+' wins'}</div><div class='sp-s'>${win?'Every rival has fallen.':who+' has won the vale.'}</div></div>`;
-el.hidden=false;el.style.animation='none';void el.offsetWidth;el.style.animation='';el.onclick=()=>{el.hidden=true};clearTimeout(endSplash.t);endSplash.t=setTimeout(()=>{el.hidden=true},4600)}
+el.hidden=false;el.style.animation='none';void el.offsetWidth;el.style.animation='';el.onclick=()=>{el.hidden=true};clearTimeout(endSplash.t);endSplash.t=setTimeout(()=>{el.hidden=true},HOLD.splash)}
 /* hero banner extras + board heraldry */
 function heroExtra(){const h=document.getElementById('hero');if(!h||h.querySelector('.hx'))return;h.insertAdjacentHTML('beforeend',`<svg class='hx' viewBox='0 0 400 190' aria-hidden='true'><path d='M0 130L40 96L70 118L120 70L160 112L210 84L260 118L310 78L350 108L400 90V190H0Z' fill='#120d24' fill-opacity='.75'/><path d='M0 150L60 124L110 146L170 118L230 148L290 126L350 146L400 130V190H0Z' fill='#0b0818'/><g class='hx-d'><path d='M0 0Q8 -6 14 0Q22 -9 30 -3L26 2Q20 -2 16 4Q10 0 6 5L2 3Q-4 6 -8 2Z' fill='#08060e'/><path d='M14 0L18 -9L22 0Z' fill='#08060e'/><path d='M-8 2L-18 6L-8 4Z' fill='#08060e'/></g><g class='hx-b'><path d='M0 0Q4 -4 8 0Q12 -4 16 0Q12 -1 8 3Q4 -1 0 0Z' fill='#05040a'/></g><g class='hx-b hx-b2'><path d='M0 0Q4 -4 8 0Q12 -4 16 0Q12 -1 8 3Q4 -1 0 0Z' fill='#05040a'/></g><g class='hx-b hx-b3'><path d='M0 0Q4 -4 8 0Q12 -4 16 0Q12 -1 8 3Q4 -1 0 0Z' fill='#05040a'/></g></svg>`)}
 function banners(){}
@@ -2818,6 +2869,76 @@ function sync(){btn();if(wanted()&&!playing)start();else if(!wanted()&&playing)s
 new MutationObserver(sync).observe($('#game'),{attributes:true,attributeFilter:['hidden']});
 $('#mtog').onclick=()=>{on=!on;try{localStorage.setItem('hv-music',on?'on':'off')}catch(e){}sync()};
 btn();return{sync,isPlaying:()=>playing}})();
+
+/* ===================== Display settings ===================== */
+const DISP=(()=>{const K='hv-display',H=document.documentElement;let d={};try{d=JSON.parse(localStorage.getItem(K)||'null')||{}}catch(e){}
+let mq=null;try{mq=matchMedia('(prefers-contrast: more)')}catch(e){}
+const sysHC=()=>!!(mq&&mq.matches);
+function apply(){H.classList.toggle('bigtext',!!d.big);H.classList.toggle('hc',d.hc==null?sysHC():!!d.hc);H.classList.toggle('cb',!!d.cb)}
+function save(){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}apply()}
+if(mq&&mq.addEventListener)mq.addEventListener('change',apply);
+const st=document.createElement('style');
+st.textContent=`
+#dspb{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:134px;z-index:60;white-space:nowrap;padding:7px 14px;border-radius:20px;background:#1b1713e6;border:2px solid #6b5238;color:#f2d69a;font-family:MedievalSharp,Georgia,serif;font-size:14px;cursor:pointer;box-shadow:0 2px 10px #0009}
+body.ingame #dspb{display:none}
+html body.mob #dspb{padding:0;width:42px;height:42px;font-size:20px;border-radius:50%;top:calc(6px + env(safe-area-inset-top,0px));right:62px}
+#dspo{position:fixed;inset:0;z-index:70;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}
+#dspo[hidden]{display:none}
+#dspo .dp{width:min(94vw,380px);background:linear-gradient(#352e27,#201a15);border:3px solid #7a5a34;border-radius:14px;padding:16px;color:#f0e6d0;font-family:Almendra,Georgia,serif;font-size:16px}
+#dspo h2{margin:0 0 10px;font-family:MedievalSharp,Georgia,serif;color:#f2c76a;font-size:24px}
+#dspo label{display:flex;gap:10px;align-items:flex-start;margin:10px 0;cursor:pointer;line-height:1.3}
+#dspo input{width:22px;height:22px;flex:none;margin:0;accent-color:#f2b84b}
+#dspo small{display:block;opacity:.8;font-size:13px}
+#dspo button{margin-top:8px;width:100%;padding:10px;font:inherit;font-weight:700;border:2px solid #2b1c0e;border-radius:8px;background:linear-gradient(#8a6338,#5a3d1f);color:#f8e8c0;cursor:pointer}
+html.bigtext body{font-size:19px}
+html.bigtext body .card small,html.bigtext body .ac small,html.bigtext body .sg span,html.bigtext body .kw,html.bigtext body .size{font-size:15px}
+html.bigtext body .card .st,html.bigtext body .hint,html.bigtext body .use,html.bigtext body .rl,html.bigtext body .kw.kc,html.bigtext body .ab i{font-size:14.5px}
+html.bigtext body .card b,html.bigtext body #rules summary{font-size:20px}
+html.bigtext body .info,html.bigtext body .log,html.bigtext body .bar,html.bigtext body #rules p,html.bigtext body #rules ul,html.bigtext body p.sub,html.bigtext body .pn table{font-size:17.5px}
+html.bigtext body .rb,html.bigtext body .bd,html.bigtext body .chip i,html.bigtext body .tn{font-size:13.5px}
+html.bigtext body #tip{font-size:16px;max-width:280px}
+html.bigtext body button.go{font-size:20px}
+html.bigtext #dspo .dp{font-size:19px}
+html.hc:root:root{--bg:#000;--fg:#fff;--card:#120f0c;--ln:#fff;--t1:#0f2a2c;--t2:#173b3d;--p:#ffd23f;--e:#e0b3ff;--mv:#7cc4ff;--tg:#ff7a6b}
+html.hc body{background:#000!important}
+html.hc #amb{display:none}
+html.hc .hint,html.hc .use,html.hc .card small,html.hc .rl,html.hc p.sub,html.hc .ab i,html.hc .ac,html.hc .u.used{opacity:1}
+html.hc body .card,html.hc body .info,html.hc body .bar,html.hc body #rules details,html.hc body #tip,html.hc .chip,html.hc .pn,html.hc #dspo .dp{border-color:#fff}
+html.hc body .card b,html.hc body h1,html.hc body h2{color:#fff}
+html.hc :focus-visible{outline:3px solid #fff;outline-offset:2px}
+html.cb:root:root{--p:#e69f00;--e:#0072b2;--mv:#56b4e9;--tg:#d55e00}
+html.cb #board .cell.mv::after{background-image:radial-gradient(circle,#fff 0 2px,#0000 2.5px);background-size:9px 9px}
+html.cb #board .cell.tg::after{background-image:repeating-linear-gradient(45deg,#fffc 0 2px,#0000 2px 7px)}
+html.cb #board .cell.zp::after{background-image:radial-gradient(circle,#fff6 0 1.5px,#0000 2px);background-size:12px 12px}
+html.cb #board .cell.ze::after{background-image:repeating-linear-gradient(-45deg,#fff5 0 1.5px,#0000 1.5px 8px)}
+html.cb .hp.e i{background-image:repeating-linear-gradient(45deg,#0000 0 3px,#000a 3px 5px)}
+html.cb .hp.p i{background-image:radial-gradient(circle,#0008 0 1px,#0000 1.5px);background-size:4px 4px}
+html.cb .hp.e,html.cb .hp.p{height:7px}
+html.cb .u.p{filter:drop-shadow(0 2px 0 var(--p)) drop-shadow(0 0 3px var(--p))}
+html.cb .u.e{filter:drop-shadow(0 0 0 var(--e)) drop-shadow(0 -2px 2px var(--e)) drop-shadow(0 0 4px var(--e))}
+html.cb .u.e::after{content:'\\25C6';position:absolute;left:-2px;top:-2px;font-size:11px;line-height:1;color:#fff;text-shadow:0 0 2px #000,0 0 3px var(--e)}
+html.cb .u.p::after{content:'\\25CF';position:absolute;left:-2px;top:-2px;font-size:10px;line-height:1;color:#fff;text-shadow:0 0 2px #000,0 0 3px var(--p)}
+`;
+document.head.appendChild(st);
+const b=document.createElement('button');b.id='dspb';b.type='button';b.title='Display settings';b.setAttribute('aria-label','Display settings');b.textContent=MOB?'\u2699':'\u2699 Display';
+const ov=document.createElement('div');ov.id='dspo';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-labelledby','dsph');
+ov.innerHTML='<div class="dp"><h2 id="dsph">Display</h2>'
++'<label><input type="checkbox" data-k="big"><span>Larger text<small>Bigger text in menus, tooltips and the log.</small></span></label>'
++'<label><input type="checkbox" data-k="hc"><span>High contrast<small>Follows your system setting until you change it here.</small></span></label>'
++'<label><input type="checkbox" data-k="cb"><span>Colorblind-safe<small>Safe palette plus patterns and markers (\u25CF you, \u25C6 enemy) next to colour.</small></span></label>'
++'<button type="button" id="dspx">Done</button></div>';
+document.body.appendChild(b);document.body.appendChild(ov);
+const boxes=[...ov.querySelectorAll('input')];
+function sync(){boxes.forEach(i=>{const k=i.dataset.k;i.checked=k==='hc'?(d.hc==null?sysHC():!!d.hc):!!d[k]})}
+boxes.forEach(i=>i.onchange=()=>{d[i.dataset.k]=i.checked;save()});
+let back=null;
+function open(){back=document.activeElement;sync();ov.hidden=false;boxes[0].focus()}
+function close(){ov.hidden=true;if(back&&back.focus)back.focus()}
+b.onclick=open;$('#dspx').onclick=close;
+ov.addEventListener('pointerdown',e=>{if(e.target===ov)close()});
+document.addEventListener('keydown',e=>{if(!ov.hidden&&e.key==='Escape'){e.stopPropagation();e.preventDefault();close()}},true);
+apply();
+return{open,close,apply}})();
 
 drawHero();heroExtra();drawAmb();drawRules();drawCards();pcMode();
 </script><script>/* balance pass after fog + economy (1,600 sim games) */
