@@ -79,6 +79,18 @@ const pick=f=>{let best=null,bs=1e9;GEO.cells.forEach(c=>{if(c.dep<3||!f(c)||S.s
 const mx=GEO.BW/2;pick(c=>true);if(rect)pick(c=>!S.shr.some(k=>{const [x,y]=k.split(',').map(Number);return Math.sign(x-mx+.25)==Math.sign(c.x-mx+.25)&&Math.sign(y-GEO.BH/2+.5)==Math.sign(c.y-GEO.BH/2+.5)}))}}
 </script>
 <script>const SLOTS=10;function slotCost(k){const h=H[k];if(!h)return 1;if(h.elite)return 5;const g=hireCost(k);return g<=4?1:g<=6?2:g<=8?3:4}</script>
+<script>/* combat shapes: splash at half damage, melee cleave cone, lancer pierce */
+const SPLASH=.5;
+function fromCube(q,r){return{x:q+((r-(r&1))>>1),y:r}}
+function pierceDir(u,t){const A=cube(u.x,u.y),B=cube(t.x,t.y),d=[B[0]-A[0],B[1]-A[1]],n=dist(u,t);if(n==1)return d;if(n==2&&d[0]%2==0&&d[1]%2==0)return[d[0]/2,d[1]/2];return null}
+function pierceCells(u,t){const d=pierceDir(u,t);if(!d)return[];const A=cube(u.x,u.y);return[fromCube(A[0]+d[0],A[1]+d[1]),fromCube(A[0]+2*d[0],A[1]+2*d[1])]}
+function coneCells(u,t){if(dist(u,t)!=1)return[];const A=cube(u.x,u.y),B=cube(t.x,t.y),dq=B[0]-A[0],dr=B[1]-A[1],ds=-dq-dr;return[fromCube(A[0]-dr,A[1]-ds),fromCube(A[0]-ds,A[1]-dq)]}
+function splashTargets(u,t){const h=H[u.k],out=[];if(!h||t.heal||!(h.aoe||h.pierce))return out;
+let cells=null,f=u.k=='raidboss'?1:SPLASH;if(h.pierce){cells=pierceCells(u,t).filter(c=>!(c.x==t.x&&c.y==t.y));f=1}else if(h.rng[1]<=1)cells=coneCells(u,t);
+const inC=p=>cells?cells.some(c=>c.x==p.x&&c.y==p.y):dist(p,t)==1;
+S.units.filter(v=>isFoe(v.side,u.side)&&v!==t.v&&inC(v)).forEach(v=>out.push({t:'u',v,f}));foeTowers(u.side).filter(T=>!(t.t=='t'&&t.T===T)&&inC(T)).forEach(T=>out.push({t:'t',T,f}));return out}
+const splDmg=(d,f)=>f>=1?d:Math.max(1,Math.round(d*f));
+</script>
 <script>var HVTS=1.45;var HVART=new Set(["brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
 <script>(function(){try{var d=JSON.parse(localStorage.getItem('hv-display')||'null')||{};var h=document.documentElement;if(d.big)h.classList.add('bigtext');var hc=d.hc;if(hc==null)hc=matchMedia('(prefers-contrast: more)').matches;if(hc)h.classList.add('hc');if(d.cb)h.classList.add('cb')}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=MedievalSharp&family=Cinzel:wght@700&family=Pirata+One&family=Grenze+Gotisch:wght@600&family=Metal+Mania&family=Uncial+Antiqua&family=Germania+One&display=swap">
@@ -1272,7 +1284,7 @@ mage:{n:'Pyromancer',e:'🔮',hp:4,mv:2,rng:[2,3],dmg:3,acost:2,aoe:1,d:'Firebal
 cleric:{n:'Cleric',e:'✨',hp:5,mv:2,rng:[1,2],dmg:1,heal:3,cost:1,d:'Heals an ally for 5 (1 mana) or pokes for 5.'},
 colossus:{n:'Colossus',e:'🗿',hp:14,mv:1,rng:[1,1],dmg:4,armor:1,d:'Huge and slow. Takes 1 less damage per hit.'},
 blade:{n:'Bloodblade',e:'🩸',hp:8,mv:2,rng:[1,1],dmg:3,drain:2,d:'Heals 2 whenever it hits a unit.'},
-lancer:{n:'Lancer',e:'🔱',hp:6,mv:3,rng:[1,2],dmg:3,d:'Fast with reach 2, can strike at point blank too.'},
+lancer:{n:'Lancer',e:'🔱',hp:6,mv:3,rng:[1,2],dmg:3,pierce:1,d:'Fast. Its spear pierces 2 hexes in a straight line and hits both.'},
 guard:{n:'Guardian',e:'🧱',hp:9,mv:1,rng:[1,1],dmg:2,armor:2,stun:1,d:'Takes 2 less damage. Hits stun the target for its next turn.'},
 sapper:{n:'Sapper',e:'🧨',hp:5,mv:2,rng:[1,1],dmg:2,siege:4,d:'Weak in a fight, deals +6 to towers.'},
 wraith:{n:'Wraith',e:'👻',hp:5,mv:3,rng:[1,1],dmg:3,fly:1,d:'Moves through units and slips past blockers.'},
@@ -1717,7 +1729,7 @@ if(h.drain)r.push(['Drain '+h.drain,`heals itself ${h.drain} HP when its hit dam
 if(h.stun)r.push(['Stun','a unit it hits cannot move or act on its next turn.']);
 if(h.siege)r.push(['Siege +'+h.siege,`deals ${h.siege} extra damage to towers.`]);
 if(h.fly)r.push(['Flying','moves through other units but must end on an empty tile.']);
-if(h.aoe)r.push(['Splash','also hits enemies next to the target for the same damage.']);
+if(h.aoe)r.push(h.rng[1]<=1?['Cleave','also hits the 2 hexes beside its target, in front of it, for half damage.']:['Splash','also hits enemies next to the target for half damage.']);if(h.pierce)r.push(['Pierce','its spear thrusts through 2 hexes in a straight line and hits every enemy on both for full damage.']);
 if(h.acost)r.push(['Mana '+h.acost,`each attack spends ${h.acost} of your shared mana${h.fac=='arcane'&&h.acost>1?` (${h.acost-1} with Arcane Flow)`:''}.`]);
 if(h.heal)r.push(['Heal '+h.heal,`restores ${h.heal} HP to a hurt ally in range${h.cost?' (costs '+h.cost+' mana)':' (free)'}.`]);
 if(h.rng[0]>1)r.push(['Min range '+h.rng[0],`cannot hit anything closer than ${h.rng[0]} tiles.`]);
@@ -1764,7 +1776,7 @@ css+='@keyframes dead2{0%{transform:scale(1) rotate(0);opacity:1}25%{transform:s
 const st=document.createElement('style');st.textContent=css;document.head.appendChild(st)})();
 const ANIM={brute:['stomp','smash'],colossus:['stomp','smash'],rogue:['hop','dash'],assassin:['twitch','dash'],raiders:['hop','dash'],archer:['sway','recoil'],bowmen:['sway','recoil'],ballista:['stomp','recoil'],knight:['breathe','slash'],blade:['sway','spin'],lancer:['hop','dash'],guard:['stomp','smash'],footmen:['sway','lunge'],sapper:['twitch','rear'],bomber:['hop','recoil'],mage:['pulse','cast'],witch:['float','cast'],storm:['pulse','cast'],druid:['sway','cast'],cleric:['float','cast'],paladin:['breathe','smash'],warlock:['float','cast'],wraith:['float','spin'],imps:['twitch','lunge'],sprites:['float','dash'],dragon:['flap','rear'],titan:['stomp','smash'],archmage:['float','cast']};
 const aCls=k=>{const a=ANIM[k]||['breathe','lunge'];return 'i-'+a[0]+' at-'+a[1]};
-const AFX={archer:['proj','#d9c35a'],bowmen:['proj','#d9c35a'],ballista:['bolt2','#cfd6de'],mage:['orb','#ff8a3a'],witch:['orb','#7fdcff'],storm:['bolt','#ffe45a'],warlock:['orb','#b67cff'],sprites:['orb','#fff7a8'],druid:['orb','#7ad66a'],cleric:['orb','#fff3b0'],bomber:['boom','#ff9a3a'],sapper:['boom','#ff9a3a'],brute:['ring','#d9c3a0'],colossus:['ring','#bfc6ce'],guard:['ring','#9fb0c0'],paladin:['ring','#ffe27a'],rogue:['slash','#e8eef5'],assassin:['slash','#e8eef5'],raiders:['slash','#e8eef5'],blade:['slash','#ff5a6a'],knight:['slash','#dfe8f0'],lancer:['proj','#dfe8f0'],footmen:['proj','#dfe8f0'],imps:['slash','#ff7a4a'],wraith:['slash','#9fd4ff']};
+const AFX={archer:['proj','#d9c35a'],bowmen:['proj','#d9c35a'],ballista:['bolt2','#cfd6de'],mage:['orb','#ff8a3a'],witch:['orb','#7fdcff'],storm:['bolt','#ffe45a'],warlock:['orb','#b67cff'],sprites:['orb','#fff7a8'],druid:['orb','#7ad66a'],cleric:['orb','#fff3b0'],bomber:['boom','#ff9a3a'],sapper:['boom','#ff9a3a'],brute:['ring','#d9c3a0'],colossus:['ring','#bfc6ce'],guard:['ring','#9fb0c0'],paladin:['ring','#ffe27a'],rogue:['slash','#e8eef5'],assassin:['slash','#e8eef5'],raiders:['slash','#e8eef5'],blade:['slash','#ff5a6a'],knight:['slash','#dfe8f0'],lancer:['pierce','#dfe8f0'],footmen:['proj','#dfe8f0'],imps:['slash','#ff7a4a'],wraith:['slash','#9fd4ff']};
 const ctr=o=>[(o.x+(o.y&1?.5:0)+.5)/WF*100,(o.y*.75+.5)/HF*100];
 function impact(b,c){const L=$('#fxl'),r=document.createElement('i');r.className='f-ring';r.style.cssText=`--c:${c};left:${b[0]}%;top:${b[1]}%`;L.appendChild(r);setTimeout(()=>r.remove(),600)}
 /* Elite aftermath particle system: plays after the cutscene to mark every tile that took damage */
@@ -1820,7 +1832,7 @@ for(let i=0;i<n;i++){const an=rr(0,7),sp=rr(40,170);psAdd({x,y,vx:Math.cos(an)*s
 for(let i=0;i<10;i++){const an=i/10*6.28;psAdd({x:x+Math.cos(an)*cell*.5,y:y+Math.sin(an)*cell*.3,vx:-Math.sin(an)*60,vy:Math.cos(an)*40-35,g:-15,dr:.97,life:rr(1,1.8),s:rr(1.8,3),s1:.4,col:'#cfe0ff',glow:1})}}}
 function eliteAfter(u,t){/* collect every tile that will take damage, then play the aftermath once the cutscene has finished */
 const h=H[u.k],cells=[{x:t.x,y:t.y,pw:1}];
-if(h.aoe){S.units.filter(v=>isFoe(v.side,u.side)&&v!==t.v&&dist(v,t)==1).forEach(v=>cells.push({x:v.x,y:v.y,pw:.65}));foeTowers(u.side).forEach(T=>{if(!(t.t=='t'&&t.T===T)&&dist(T,t)==1)cells.push({x:T.x,y:T.y,pw:.65})})}
+if(h.aoe||h.pierce){splashTargets(u,t).forEach(o=>{const q=o.t=='u'?o.v:o.T;cells.push({x:q.x,y:q.y,pw:o.f>=1?1:.65})})}
 const k=(typeof BALIAS!='undefined'&&BALIAS[u.k])||u.k;setTimeout(()=>{if(!psInit())return;const R=$('#board').getBoundingClientRect(),L=$('#fxl').getBoundingClientRect(),cell=R.width/WF;
 cells.forEach((c,i)=>setTimeout(()=>{const p=ctr(c),x=R.left-L.left+p[0]*R.width/100,y=R.top-L.top+p[1]*R.height/100;eliteBurst(k,x,y,cell,c.pw);psRun()},i*110))},CUTMS-250)}
 
@@ -1885,7 +1897,7 @@ function reticle(o,col,big,label){const L=fxLayer();if(!L)return;const c=ctr(o),
 function actorRing(u,col,big){const L=fxLayer();if(!L)return;const c=ctr(u),d=document.createElement('div');d.className='acr'+(big?' big':'');d.style.cssText=`left:${c[0]}%;top:${c[1]}%;--c:${col};width:${100/WF*1.1}%`;L.appendChild(d);setTimeout(()=>d.remove(),big?TELE+300:900)}
 function strikeLine(u,t,col,big){const sv=ovSvg('stk'+(big?' big':''),big?TELE+400:900);if(!sv)return;const a=cpx(u),b=cpx(t),w=Math.max(2.5,boardPx()[0]/WF*(big?.1:.06));
 sv.innerHTML=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#000a" stroke-width="${w+3}" stroke-linecap="round"/><line class="skl" x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${w*2.4} ${w*1.2}"/><path d="${arrowPath([a,b])}" fill="${col}" stroke="#000" stroke-width="1.5"/>`}
-function hitCellsOf(u,t){const h=H[u.k],cells=[t];if(h.aoe&&!t.heal){S.units.filter(v=>isFoe(v.side,u.side)&&v!==t.v&&dist(v,t)==1).forEach(v=>cells.push(v));foeTowers(u.side).forEach(T=>{if(!(t.t=='t'&&t.T===T)&&dist(T,t)==1)cells.push(T)})}return cells}
+function hitCellsOf(u,t){const h=H[u.k],cells=[t];if((h.aoe||h.pierce)&&!t.heal)splashTargets(u,t).forEach(o=>cells.push(o.t=='u'?o.v:o.T));return cells}
 function telegraph(u,t){if(RP||RUNFAST)return;const col='#ff4a3a';actorRing(u,sideCol(u.side),1);strikeLine(u,t,col,1);hitCellsOf(u,t).forEach((c,i)=>reticle(c,col,1,i?'':'TARGET'));
 const L=fxLayer();if(L){const b=document.createElement('div');b.className='tban';b.style.setProperty('--c',sideCol(u.side));b.innerHTML=`<b>${SHORT[u.side]}</b> ${H[u.k].n} <span>prepares ${CUT[u.k]?CUT[u.k].n:'an attack'}!</span>`;L.appendChild(b);setTimeout(()=>b.remove(),TELE+100)}try{tone(220,.5,'sawtooth',.05,0,440);tone(440,.3,'square',.03,.35,660)}catch(e){}}
 function showAct(u,t){if(RP||RUNFAST||!visU(u))return;const col=t.heal?'#5fcf6f':t.summon?'#6ad0ff':sideCol(u.side);actorRing(u,sideCol(u.side));strikeLine(u,t,col);reticle(t,col,0)}
@@ -1903,7 +1915,7 @@ brute:['Warrior','Frontline bruiser. Push forward and one-shot squishy targets.'
 knight:['Warrior','Reliable all-rounder. Hold the center and trade evenly.'],
 blade:['Warrior','Sustain fighter. Stays alive by draining with every hit.'],
 paladin:['Warrior','Frontline fighter with emergency heals for nearby allies.'],
-lancer:['Warrior','Reach striker. Hits from 2 hexes away and flanks quickly.'],
+lancer:['Warrior','Pierce striker. Its spear hits 2 hexes in a straight line, so line enemies up.'],
 colossus:['Tank','Meat shield. Plant it in front and soak up damage.'],
 guard:['Tank','Control tank. Stun dangerous enemies and block lanes.'],
 rogue:['Assassin','Fast flanker. Race to towers and pick off wounded units.'],
@@ -2296,7 +2308,7 @@ function pathOK(u,keys){if(!keys.length||!prefixOK(u,keys))return false;const[ex
 function encPath(u,keys){let p=[u.x,u.y],r='';for(const k of keys){const[x,y]=k.split(',').map(Number),d=NB[p[1]&1].findIndex(([dx,dy])=>p[0]+dx==x&&p[1]+dy==y);if(d<0)return null;r+=d;p=[x,y]}return r}
 function decPath(u,str){let p=[u.x,u.y];const r=[];for(const ch of String(str)){const d=NB[p[1]&1][+ch];if(!d)return null;p=[p[0]+d[0],p[1]+d[1]];r.push(p[0]+','+p[1])}return r}
 function pathTo(u,tx,ty){const par={};reach(u,par);const p=[];let k=tx+','+ty;while(k&&k!=u.x+','+u.y){p.unshift(k);k=par[k]}return p}
-function targets(u){const h=H[u.k],e=eff(u),r=[],a=h.rng[0],b=h.rng[1]+(MOPT.terrain&&h.rng[1]>=2&&terAt(u)=='hill'?1:0),okd=p=>{const d=dist(u,p);return d>=a&&d<=b},ok=p=>okd(p)&&(u.k=='warengine'||los(u,p)),sil=silenced(u);
+function targets(u){const h=H[u.k],e=eff(u),r=[],a=h.rng[0],b=h.rng[1]+(MOPT.terrain&&h.rng[1]>=2&&terAt(u)=='hill'?1:0),okd=p=>{const d=dist(u,p);return d>=a&&d<=b&&(!h.pierce||d<2||!!pierceDir(u,p))},ok=p=>okd(p)&&(u.k=='warengine'||los(u,p)),sil=silenced(u);
 if(!sil&&!(S.mana[u.side]<e.acost)){S.walls.filter(W=>isFoe(W.side,u.side)&&ok(W)).forEach(W=>r.push({t:'w',W,x:W.x,y:W.y}));S.units.filter(v=>isFoe(v.side,u.side)&&ok(v)&&canSee(u.side,v)).forEach(v=>r.push({t:'u',v,x:v.x,y:v.y}));
 foeTowers(u.side).filter(ok).forEach(T=>r.push({t:'t',T,x:T.x,y:T.y}))}
 if(h.heal&&S.mana[u.side]>=e.cost)S.units.filter(v=>v.side==u.side&&v!==u&&v.hp<maxHp(v)&&!(v.wither>0)&&okd(v)).forEach(v=>r.push({t:'u',v,x:v.x,y:v.y,heal:1}));
@@ -2311,7 +2323,7 @@ function act(u,t){if(t.ab){abil(u,t);return}if(t.summon){const h=H[u.k];curAtk=u
 if(MOPT.sight&&!t.heal)u.exp=1;curAtk=u;const cut=!RP&&!t.heal&&CUT[u.k];if(cut)G[u.side].cuts++;const tele=cut&&!RUNFAST?TELE:0;if(cut){HFZ={until:performance.now()+tele+CUTMS-300,m:new Map()};S.units.forEach(v=>HFZ.m.set(v,v.hp));SIDES.forEach(sd=>S.tw[sd].forEach(T=>HFZ.m.set(T,T.hp)));setTimeout(()=>{try{render()}catch(e){}},tele+CUTMS-250);telegraph(u,t);cutUntil=performance.now()+tele+CUTMS;setTimeout(()=>{playCut(u);eliteAfter(u,t)},tele)}else showAct(u,t);fxOff=cut?CUTMS-300+tele:0;fx(u,'atk',Math.sign(t.x-u.x)*18,Math.sign(t.y-u.y)*18);if(!cut){atkSfx(u.k,t.heal);if(!t.heal)atkFx(u,t)}const h=H[u.k],e=eff(u),who=SHORT[u.side]+' '+h.n;let cntr=null,an=[];
 if(t.heal){S.mana[u.side]-=e.cost;pop(t.v,'+'+e.heal,1);G[u.side].heals+=Math.min(e.heal,maxHp(t.v)-t.v.hp);t.v.hp=Math.min(maxHp(t.v),t.v.hp+e.heal);msg(`${who} heals ${H[t.v.k].n}.`)}
 else{S.mana[u.side]-=e.acost;G[u.side].mana+=e.acost;const hb=t.t=='u'?t.v.hp:0,cb=comboB(u,t);let base=t.t=='t'||t.t=='w'?e.dmg+e.siege:e.dmg+cb[0],crit=false;if(t.t=='u'&&!t.v.ward&&srand()<critCh(u,t)){crit=true;base+=Math.ceil(base/2);G[u.side].crits=(G[u.side].crits||0)+1}an=cb[1].slice();if(crit)an.push('Critical');if(an.length)pop(u,an.join(' + ')+'!',1);hit(t,base);if(crit)pop(t.v,'CRIT!');if(e.drain&&t.t=='u'){const bf=u.hp,dr=Math.min(e.drain,Math.max(0,Math.min(hb,hb-t.v.hp)));u.hp=Math.min(maxHp(u),u.hp+dr);if(u.hp>bf)pop(u,'+'+(u.hp-bf),1)}if(h.stun&&t.t=='u'&&!IMM(t.v))t.v.stun=1;if(t.t=='u')bossHit(u,t);if(e.burn&&t.t=='u'){t.v.burn=2;t.v.bd=e.burn}
-if(h.aoe){S.units.filter(v=>isFoe(v.side,u.side)&&v!==t.v&&dist(v,t)==1).forEach(v=>{hit({t:'u',v},e.dmg);if(e.burn){v.burn=2;v.bd=e.burn}});foeTowers(u.side).forEach(T=>{if(!(t.t=='t'&&t.T===T)&&dist(T,t)==1)hit({t:'t',T},e.dmg)})}
+if(h.aoe||h.pierce){splashTargets(u,t).forEach(o=>{hit(o,splDmg(e.dmg,o.f));if(o.t=='u'&&e.burn){o.v.burn=2;o.v.bd=e.burn}})}
 if(t.t=='u'&&t.v.hp>0&&S.units.includes(t.v)&&u.hp>0&&canCounter(t.v,u)){cntr=t.v;const pc=curAtk;curAtk=t.v;hit({t:'u',v:u},Math.max(1,Math.floor(eff(t.v).dmg/2)));curAtk=pc;pop(t.v,'Counter!',1);fx(t.v,'atk',Math.sign(u.x-t.v.x)*14,Math.sign(u.y-t.v.y)*14);an.push('Counter');if(!RP)setTimeout(()=>sfx('hit'),fxOff+260)}
 if(!RP&&an.length)annc(an,fxOff);msg(`${who} attacks${t.t=='t'?' the tower':''}${crit?' (critical hit!)':''}${cntr?' and takes a counterattack':''}.`)}
 u.used=true;S.units.forEach(v=>{if(v.hp<=0&&revive(v)){pop(v,'Undying!',1);fx(v,'spawn')}});S.units.filter(v=>v.hp<=0).forEach(v=>{const K=v===u&&cntr?cntr:u;G[v.side].lost++;fall(v);bossKill(K,v);G[K.side].kills++;gainGold(K.side,H[v.k].elite?2:1,v);levelUp(K);if(H[v.k].elite)G[K.side].boss++;killCam(v,fxOff,!!H[v.k].elite);fx(v,'dead');deathFx(v,fxOff);setTimeout(()=>sfx('death'),fxOff);S.ghosts.push(v);setTimeout(()=>{S.ghosts=S.ghosts.filter(g=>g!==v);render()},1100+fxOff)});S.units=S.units.filter(v=>v.hp>0);if(u.mom==2&&u.hp>0&&S.units.includes(u)){u.mom=1;u.used=false;pop(u,'Momentum!',1)}fxOff=0;check()}
@@ -2349,7 +2361,7 @@ else if(t.summon)s=S.mana[me]>=H[u.k].scost+e.acost?1.6+(S.mana[me]>=7?0.6:0):0;
 else if(t.t=='w')s=t.W.b?1.6:.4;
 else if(t.heal)s=(maxHp(t.v)-t.v.hp)>=2?2.5:0;
 else if(t.t=='t')s=(t.T.hp<=h.dmg?100:h.dmg*1.2)*(showCrown()&&leader()==t.T.side?1.25:1);
-else{const dd=h.dmg+comboB(u,t)[0];s=Math.min(dd,t.v.hp)+(t.v.hp<=dd?3:0)-(t.v.hp>dd&&!h0.stun&&canCounter(t.v,u)?cntrDmg(t.v,u)*.7:0)+(MOPT.koth&&S.hill&&S.hill.includes(t.v.x+','+t.v.y)?3:0)+(t.v.k=='raidboss'?1.5:0);if(h.aoe)S.units.forEach(v=>{if(isFoe(v.side,me)&&v!==t.v&&dist(v,t)==1)s+=Math.min(h.dmg,v.hp)})}
+else{const dd=h.dmg+comboB(u,t)[0];s=Math.min(dd,t.v.hp)+(t.v.hp<=dd?3:0)-(t.v.hp>dd&&!h0.stun&&canCounter(t.v,u)?cntrDmg(t.v,u)*.7:0)+(MOPT.koth&&S.hill&&S.hill.includes(t.v.x+','+t.v.y)?3:0)+(t.v.k=='raidboss'?1.5:0);if(h.aoe||h.pierce)splashTargets(u,t).forEach(o=>{if(o.t=='u')s+=Math.min(splDmg(h.dmg,o.f),o.v.hp)})}
 s+=Math.random()*DN();if(s>bs){bs=s;best=t}});if(best&&DIFF==0&&!u.moved&&Math.random()<.2)best=null;if(best)return{act:best}}
 const foes=S.units.filter(v=>isFoe(v.side,me)&&canSee(me,v)).concat(foeTowers(me));
 const sup=h.heal&&h.dmg<=2;let goals=sup?S.units.filter(v=>v.side==me&&v!==u):foes;if(!goals.length)goals=foes;if(!goals.length)return{mv:{x:u.x,y:u.y}};
@@ -3170,4 +3182,16 @@ $('#lsmaps').onclick=e=>{const b=e.target.closest('button[data-map]');if(!b||b.d
 #slots .slot i{font-size:10px}
 .slb{display:inline-block;margin-left:4px;padding:0 6px;border-radius:8px;font-size:11px;font-weight:700;line-height:17px;background:#e2b84a;color:#1a1408;vertical-align:middle}
 </style>
+<style id="hv-pierce">
+#fxl i.f-pierce{left:0;top:0;height:7px;border-radius:4px;transform-origin:0 50%;transform:translate(0,-50%) rotate(var(--a)) scaleX(0);background:linear-gradient(90deg,#fff0,var(--c) 25%,#fff 88%,#fff0);box-shadow:0 0 10px var(--c),0 0 20px #ffffffaa;animation:hvpierce .55s cubic-bezier(.2,.9,.3,1) forwards;z-index:9}
+#fxl i.f-pierce::after{content:'';position:absolute;right:-6px;top:50%;width:14px;height:14px;transform:translate(0,-50%) rotate(45deg);background:#fff;box-shadow:0 0 12px var(--c)}
+#fxl i.f-ptile{width:var(--w);height:var(--h);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:radial-gradient(circle,#ffffffcc,var(--c) 45%,#0000 75%);animation:hvptile .6s ease-out both}
+@keyframes hvpierce{0%{transform:translate(0,-50%) rotate(var(--a)) scaleX(0);opacity:1}35%{transform:translate(0,-50%) rotate(var(--a)) scaleX(1);opacity:1}100%{transform:translate(0,-50%) rotate(var(--a)) scaleX(1.04);opacity:0}}
+@keyframes hvptile{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}30%{opacity:.95;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.05)}}
+</style>
+<script>(function(){const af0=atkFx;atkFx=function(u,t){if(!(H[u.k]&&H[u.k].pierce)||t.heal)return af0(u,t);try{pierceFx(u,t)}catch(e){return af0(u,t)}};
+window.pierceFx=function(u,t){const L=$('#fxl'),B=$('#board');if(!L||!B)return;const cs=pierceCells(u,t),far=cs[1]||t,a=ctr(u),b=ctr(far),W=B.offsetWidth,Hh=B.offsetHeight;
+const dx=(b[0]-a[0])*W/100,dy=(b[1]-a[1])*Hh/100,len=Math.hypot(dx,dy)+W/WF*.25,ang=Math.atan2(dy,dx)*180/Math.PI,c=(AFX[u.k]||[0,'#dfe8f0'])[1];
+const e=document.createElement('i');e.className='f-pierce';e.style.cssText=`--c:${c};--a:${ang}deg;left:${a[0]}%;top:${a[1]}%;width:${len}px`;L.appendChild(e);setTimeout(()=>e.remove(),700);
+cs.forEach((p,i)=>{setTimeout(()=>{const q=ctr(p),z=document.createElement('i');z.className='f-ptile';z.style.cssText=`--c:${c};left:${q[0]}%;top:${q[1]}%;--w:${(100/WF).toFixed(3)}%;--h:${(100/HF).toFixed(3)}%`;L.appendChild(z);setTimeout(()=>z.remove(),700);try{impact(q,c)}catch(x){}},120+i*110)})}})();</script>
 </body></html>
