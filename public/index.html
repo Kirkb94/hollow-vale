@@ -3141,22 +3141,22 @@ body.holes #board{background:radial-gradient(ellipse at 50% 45%,#16384a,#0a1a24 
 </style>
 <script>/* ===== map picker, big-map camera (drag to pan, zoom), extra resources ===== */
 (function(){
-const big=()=>document.body.classList.contains('bigmap');
+const big=()=>document.body.classList.contains('bigmap')||(!MOB&&document.body.classList.contains('ingame'));
 /* desktop: put the board in a scrolling view */
 let V=null;
 if(!MOB){V=$('#bscroll');const wrap=V&&V.parentNode;if(wrap){wrap.style.position='relative';const t=$('#ticker');if(t)wrap.appendChild(t);
 const bar=document.createElement('div');bar.id='bzbar';bar.innerHTML='<span id="bzname"></span><span class="bzh">Drag the map to look around</span><button class="ft" id="bzo" title="Zoom out">−</button><button class="ft" id="bzi" title="Zoom in">+</button><button class="ft" id="bzf" title="Show the whole map">Whole map</button><button class="ft" id="bzm" title="Jump to your army">My army</button>';wrap.parentNode.insertBefore(bar,wrap)}}
 window.BZD=1;
-const zk=()=>parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zk'))||1;
+const zk=()=>(!MOB&&document.body.classList.contains('ingame'))?1:(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zk'))||1);
 window.applyBZD=function(anchor){if(!V)return;const ui=Math.min(BASE,860);document.documentElement.style.setProperty('--mwui',ui+'px');
 if(!big()){document.documentElement.style.setProperty('--bwpx',BASE+'px');return}
-const fit=(V.clientWidth-6)/BASE;BZD=Math.max(fit,Math.min(1.8,BZD));const old=V._k||BZD,cx=(anchor?anchor.x:V.scrollLeft+V.clientWidth/2),cy=(anchor?anchor.y:V.scrollTop+V.clientHeight/2);
+const pcf=!MOB&&document.body.classList.contains('ingame'),ar=GEO.BH*.75/(GEO.BW+.5)*1.1547,fit=pcf?Math.min((V.clientWidth-40)/BASE,(V.clientHeight-hudH()-30)/(BASE*ar)):(V.clientWidth-6)/BASE;if(pcf&&!BZD)BZD=fit;if(pcf&&BZD==='auto')BZD=HVMAP.big?1:fit;BZD=Math.max(Math.min(fit,.9),Math.min(2.4,BZD));const old=V._k||BZD,cx=(anchor?anchor.x:V.scrollLeft+V.clientWidth/2),cy=(anchor?anchor.y:V.scrollTop+V.clientHeight/2);
 document.documentElement.style.setProperty('--bwpx',Math.round(BASE*BZD)+'px');V._k=BZD;
 requestAnimationFrame(()=>{V.scrollLeft=cx*BZD/old-(anchor?anchor.vx:V.clientWidth/2);V.scrollTop=cy*BZD/old-(anchor?anchor.vy:V.clientHeight/2)})};
 window.camTo=function(x,y){if(MOB){try{applyBZ({x,y})}catch(e){}return}if(!V||!big())return;const el=document.querySelector(`#board .cell[data-x="${x}"][data-y="${y}"]`);if(!el)return;
 const r=el.getBoundingClientRect(),s=V.getBoundingClientRect(),z=zk();V.scrollTo({left:V.scrollLeft+(r.left+r.width/2-(s.left+s.width/2))/z,top:V.scrollTop+(r.top+r.height/2-(s.top+s.height/2))/z,behavior:'smooth'})};
 window.camSide=function(sd){if(!S||!big())return;const pts=S.units.filter(u=>u.side==sd).concat((S.tw[sd]||[]).filter(T=>T.hp>0));if(!pts.length)return;
-let x=0,y=0;pts.forEach(p=>{x+=p.x;y+=p.y});x/=pts.length;y/=pts.length;let b=null,bd=1e9;GEO.cells.forEach(c=>{const d=(c.x-x)**2+(c.y-y)**2;if(d<bd){bd=d;b=c}});if(b)setTimeout(()=>camTo(b.x,b.y),60)};
+let x=0,y=0;pts.forEach(p=>{x+=p.x;y+=p.y});x/=pts.length;y/=pts.length;let b=null,bd=1e9;GEO.cells.forEach(c=>{const d=(c.x-x)**2+(c.y-y)**2;if(d<bd){bd=d;b=c}});if(b){setTimeout(()=>camTo(b.x,b.y),60);setTimeout(()=>camTo(b.x,b.y),500)}};
 if(V){let dn=false,mv=false,sx=0,sy=0,sl=0,st=0;
 V.addEventListener('pointerdown',e=>{if(!big()||e.button!==0||e.pointerType=='touch')return;dn=true;mv=false;sx=e.clientX;sy=e.clientY;sl=V.scrollLeft;st=V.scrollTop});
 addEventListener('pointermove',e=>{if(!dn)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(!mv&&Math.hypot(dx,dy)>7){mv=true;V.classList.add('drag')}if(mv){const z=zk();V.scrollLeft=sl-dx/z;V.scrollTop=st-dy/z}});
@@ -3194,4 +3194,72 @@ window.pierceFx=function(u,t){const L=$('#fxl'),B=$('#board');if(!L||!B)return;c
 const dx=(b[0]-a[0])*W/100,dy=(b[1]-a[1])*Hh/100,len=Math.hypot(dx,dy)+W/WF*.25,ang=Math.atan2(dy,dx)*180/Math.PI,c=(AFX[u.k]||[0,'#dfe8f0'])[1];
 const e=document.createElement('i');e.className='f-pierce';e.style.cssText=`--c:${c};--a:${ang}deg;left:${a[0]}%;top:${a[1]}%;width:${len}px`;L.appendChild(e);setTimeout(()=>e.remove(),700);
 cs.forEach((p,i)=>{setTimeout(()=>{const q=ctr(p),z=document.createElement('i');z.className='f-ptile';z.style.cssText=`--c:${c};left:${q[0]}%;top:${q[1]}%;--w:${(100/WF).toFixed(3)}%;--h:${(100/HF).toFixed(3)}%`;L.appendChild(z);setTimeout(()=>z.remove(),700);try{impact(q,c)}catch(x){}},120+i*110)})}})();</script>
+<style id="hv-pcfull">
+/* ===== PC: use the whole window ===== */
+body.pcv:not(.ingame) main{zoom:1!important;width:min(1560px,96vw)!important;max-width:none!important;margin:0 auto}
+body.pcv:not(.ingame) #menu{max-width:none}
+/* in game: the board fills the screen, HUD floats on top */
+body.pcv.ingame{overflow:hidden}
+body.pcv.ingame main{position:fixed!important;inset:0;width:100vw!important;height:100vh;max-width:none!important;zoom:1!important;padding:0!important;margin:0!important;overflow:hidden}
+body.pcv.ingame main>h1,body.pcv.ingame main>.size,body.pcv.ingame main>header,body.pcv.ingame .ttl{display:none!important}
+body.pcv.ingame #game{position:fixed;inset:0}
+body.pcv.ingame .bwrap{position:fixed!important;inset:0;z-index:1;margin:0}
+body.pcv.ingame #bscroll{width:100vw;height:100vh;max-height:none!important;overflow:hidden!important;border-radius:0;box-shadow:none!important;display:flex;cursor:grab;background:radial-gradient(ellipse at 50% 50%,#1b2422,#0a0d0c 75%)}
+body.pcv.ingame #bscroll.drag{cursor:grabbing}
+body.pcv.ingame #bscroll{padding:var(--hudt,110px) 40px var(--hudb,170px);box-sizing:border-box}
+body.pcv.ingame #bw{width:var(--bwpx)!important;flex:0 0 auto;margin:auto}
+body.pcv.ingame #bz{display:none}
+#pctop,#pcbot{display:none}
+body.pcv.ingame #pctop{display:flex;position:fixed;left:0;right:0;top:0;z-index:20;gap:10px;align-items:flex-start;justify-content:space-between;padding:8px 14px 18px;background:linear-gradient(#0b0907f2,#0b0907c8 70%,#0b090700);pointer-events:none}
+body.pcv.ingame #pctop>*{pointer-events:auto}
+body.pcv.ingame #pctop .pcl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+body.pcv.ingame #pctop .pcc{flex:0 1 600px;min-width:380px}
+body.pcv.ingame #seats{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:0}
+body.pcv.ingame #pctop .pcr{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:1}
+body.pcv.ingame #pctop .bar{margin:0}
+body.pcv.ingame #bzbar{display:flex!important;margin:0;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+body.pcv.ingame #bzbar .bzh{display:none}
+body.pcv.ingame #pcbot{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;gap:14px;align-items:flex-end;padding:22px 14px 10px;max-height:38vh;background:linear-gradient(#0b090700,#0b0907c8 30%,#0b0907f2);pointer-events:none}
+body.pcv.ingame #pcbot>*{pointer-events:auto}
+body.pcv.ingame #pcbot .pbl{flex:1 1 55%;min-width:0;max-height:34vh;overflow:auto}
+body.pcv.ingame #pcbot .pbr{flex:1 1 45%;min-width:0;max-height:34vh;overflow:auto;display:flex;flex-direction:column;gap:6px}
+body.pcv.ingame #pcbot .pbr .go{margin:0;width:auto!important;padding:7px 16px!important;font-size:14px!important;min-height:0}
+body.pcv.ingame #pcbot .pbr{max-width:560px;margin-left:auto}
+body.pcv.ingame #pcbot #info{font-size:13px;padding:8px 12px}
+body.pcv.ingame #pcbot #log{font-size:12px;opacity:.85}
+@media (max-width:1500px){body.pcv.ingame #pckeys{display:none}}
+body.pcv.ingame #pcbot .pbb{display:flex;gap:8px;flex-wrap:wrap}
+body.pcv.ingame #ticker{position:fixed!important;left:14px;bottom:calc(var(--hudb,170px) + 6px);top:auto}
+body.pcv.ingame #pckeys{font-size:11px;opacity:.75}
+#pcfs{white-space:nowrap}
+</style>
+<script>(function(){if(MOB)return;
+/* build the floating HUD (PC only) by moving the existing panels, so every handler keeps working */
+const g=$('#game');if(!g)return;const top=document.createElement('div');top.id='pctop';top.innerHTML='<div class="pcl"></div><div class="pcc"></div><div class="pcr"></div>';
+const bot=document.createElement('div');bot.id='pcbot';bot.innerHTML='<div class="pbl"></div><div class="pbr"><div class="pbb"></div></div>';g.appendChild(top);g.appendChild(bot);
+const mv=(sel,to)=>{const e=typeof sel=='string'?$(sel):sel;if(e)to.appendChild(e)};
+const L=top.querySelector('.pcl'),C=top.querySelector('.pcc'),Rr=top.querySelector('.pcr'),BL=bot.querySelector('.pbl'),BR=bot.querySelector('.pbr'),BB=bot.querySelector('.pbb');
+const place=()=>{const on=document.body.classList.contains('ingame');if(on&&!top._in){top._in=1;mv('#seats',L);mv('#syn',L);mv('#mods',L);mv(g.querySelector('.bar'),C);mv('#bzbar',Rr);
+['#res','#hand','#diplo'].forEach(x=>mv(x,BL));['#info','#log','#pckeys'].forEach(x=>mv(x,BR));BR.appendChild(BB);mv('#restart',BB);mv('#tolobby',BB);measure()}};
+const measure=()=>{requestAnimationFrame(()=>{document.documentElement.style.setProperty('--hudt',(top.offsetHeight+6)+'px');document.documentElement.style.setProperty('--hudb',(bot.offsetHeight+6)+'px')})};
+window.hudH=()=>(top.offsetHeight||0)+(bot.offsetHeight||0);
+try{new ResizeObserver(measure).observe(top);new ResizeObserver(measure).observe(bot)}catch(e){}
+let wasIn=false;new MutationObserver(()=>{place();const on=document.body.classList.contains('ingame');if(on&&!wasIn){BZD='auto';setTimeout(()=>{try{applyBZD();if(S&&ME)camSide(ME)}catch(e){}},40)}wasIn=on}).observe(document.body,{attributes:true,attributeFilter:['class']});place();
+/* fullscreen button + F key; turns on when a match starts */
+const fsb=document.createElement('button');fsb.className='ft';fsb.id='pcfs';const lab=()=>{fsb.textContent=document.fullscreenElement?'Exit fullscreen':'⛶ Fullscreen'};lab();
+const tog=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};fsb.onclick=tog;document.addEventListener('fullscreenchange',()=>{lab();setTimeout(()=>{try{applyBZD()}catch(e){}},120)});
+const bz=$('#bzbar');if(bz)bz.appendChild(fsb);
+addEventListener('keydown',e=>{if(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if((e.key=='f'||e.key=='F')&&!e.ctrlKey&&!e.metaKey&&!e.altKey){tog();e.preventDefault()}});
+const sg0=startGame;startGame=function(){const o=sg0.apply(this,arguments);setTimeout(()=>{try{if(document.body.classList.contains('ingame')){BZD='auto';applyBZD();if(ME)camSide(ME)}}catch(e){}},80);try{if(!RP&&!document.fullscreenElement&&navigator.userActivation&&navigator.userActivation.isActive)document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}return o};
+/* edge scrolling + arrow keys */
+const V=$('#bscroll');let mx=-1,my=-1,inWin=false,keys={};
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;inWin=true});document.addEventListener('mouseleave',()=>{inWin=false});addEventListener('blur',()=>{inWin=false;keys={}});
+document.addEventListener('mouseout',e=>{if(!e.relatedTarget)inWin=false});
+addEventListener('keydown',e=>{if(/^Arrow/.test(e.key)&&document.body.classList.contains('ingame')&&!(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))){keys[e.key]=1;e.preventDefault()}});addEventListener('keyup',e=>{delete keys[e.key]});
+const EDGE=24,blocked=()=>{const p=$('#pass'),c=$('#cut');return (p&&!p.hidden)||(c&&c.classList.contains('on'))||(V&&V.classList.contains('drag'))};
+let last=performance.now();(function loop(t){const dt=Math.min(50,t-last);last=t;if(V&&document.body.classList.contains('ingame')&&!blocked()){let vx=0,vy=0;const W=innerWidth,Hh=innerHeight;
+if(inWin&&mx>=0){if(mx<EDGE)vx=-(EDGE-mx)/EDGE;else if(mx>W-EDGE)vx=(mx-(W-EDGE))/EDGE;if(my<EDGE)vy=-(EDGE-my)/EDGE;else if(my>Hh-EDGE)vy=(my-(Hh-EDGE))/EDGE}
+if(keys.ArrowLeft)vx=-1;if(keys.ArrowRight)vx=1;if(keys.ArrowUp)vy=-1;if(keys.ArrowDown)vy=1;
+if(vx||vy){const sp=.9*dt;V.scrollLeft+=vx*sp*(.4+.6*Math.abs(vx));V.scrollTop+=vy*sp*(.4+.6*Math.abs(vy))}}requestAnimationFrame(loop)})(last);
+})();</script>
 </body></html>
