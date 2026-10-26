@@ -32,14 +32,19 @@ ALWAYS ON
   (max 2). Also 1 per kill (2 for a boss), 2 per enemy building, 3 per tower,
   4 per treasure chest (one appears in the middle every 3 rounds).
 - Market: Hire any unit from your main faction (3-7 gold, bosses 14, army of
-  up to 7). Recruit a fallen starting hero (5, bosses 8, +2 each time).
+  up to 20 slots, more with Cottages and a Great Hall; the draft is still
+  10 slots). Recruit a fallen starting hero (5, bosses 8, +2 each time).
   Repair a tower by 4 (3, +1 each time). Upgrades: Forge Weapons, Forge
   Armor, Fortify Towers, Scout's Lens, Deep Shafts.
 - Buildings (next to your heroes or towers, not near enemy towers): Farm
   (+1 gold a turn), Watchtower (sees 4), Barracks (spawn next to it), Mana
-  Well (+1 mana a turn). Enemies can knock them down.
-- Sudden death from round 14: towers crumble faster every round and can no
-  longer be repaired or fortified.
+  Well (+1 mana a turn), Cottage (5 gold, +2 army slots, up to 3), Great Hall
+  (12 gold, +5 army slots, 1). Max army cap is 31. Enemies can knock them
+  down; if a Cottage or Great Hall falls your cap drops, your units stay, but
+  you cannot hire or recruit until you are back under the cap.
+- Towers never lose HP on their own before sudden death. From round 14 every
+  tower crumbles each round (2 HP, +1 every 3 rounds) and can no longer be
+  repaired or fortified.
 - Combos: Flank (+1 melee damage when an ally is also next to the target),
   Shatter (+2 damage to stunned heroes), Rally (+1 damage next to your boss).
 
@@ -151,8 +156,8 @@ MUSIC
 IN THE GAME
 - Everyone types a name and taps "Sit here". Empty seats are played by the AI.
 - The first person in the room is the host and starts the hero draft.
-- Free-for-all. Turns go in seat order. Every tower loses 1 HP at the start
-  of each round. Last player standing wins.
+- Free-for-all. Turns go in seat order. From round 14 (sudden death) every
+  tower crumbles at the start of each round. Last player standing wins.
 - Cavalry units (Outrider, Boar Rider, Bone Rider, Blood Hunter) have Charge:
   they can move AND attack in the same turn, but are fragile and hit softly.
 - Every faction has an Elite boss (2 picks) with its own attack cutscene.
