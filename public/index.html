@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#12131a"><link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" href="icon-192.png">
 <title>Hollow Vale</title>
-<script>var HVART=new Set(["brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
+<script>var HVTS=1.45;var HVART=new Set(["brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
 <script>(function(){try{var d=JSON.parse(localStorage.getItem('hv-display')||'null')||{};var h=document.documentElement;if(d.big)h.classList.add('bigtext');var hc=d.hc;if(hc==null)hc=matchMedia('(prefers-contrast: more)').matches;if(hc)h.classList.add('hc');if(d.cb)h.classList.add('cb')}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=MedievalSharp&family=Cinzel:wght@700&family=Pirata+One&family=Grenze+Gotisch:wght@600&family=Metal+Mania&family=Uncial+Antiqua&family=Germania+One&display=swap">
 <style>
@@ -1563,7 +1563,7 @@ else{for(let r=-RAD;r<=RAD;r++){const y=r+RAD;for(let q=Math.max(-RAD,-RAD-r);q<
 cells.forEach(c=>{c.x=c.x0-mn});GEO={cells,BW:mx-mn+1,BH:2*RAD+1}}
 WF=GEO.BW+.5;HF=GEO.BH*.75+.25;VALID=new Set(GEO.cells.map(c=>c.x+','+c.y));
 ZN={};GEO.cells.forEach(c=>{let z='m',b=9;SIDES.forEach(sd=>{const d=SIDE_DEPTH[sd](c);if(d<=1&&d<b){b=d;z=sd}});ZN[c.x+','+c.y]=z});
-BASE=Math.round(57.3*WF);
+BASE=Math.round(57.3*WF*HVTS);
 const r=document.documentElement.style;r.setProperty('--ar',(WF/(HF*1.1547)).toFixed(4));r.setProperty('--cwp',(100/WF).toFixed(4)+'%');r.setProperty('--chp',(100/HF).toFixed(4)+'%');r.setProperty('--mw',BASE+'px');
 fillObj(TB,M.tb);fillObj(MANA0,M.mana);fillObj(CAP0,M.cap);
 try{setK(fitK())}catch(e){}try{applyBZ()}catch(e){}}
@@ -2522,7 +2522,7 @@ else if(insp){$('#info').innerHTML='<div class="uhelp">Blue: where it can move. 
 else if(!ME&&NET&&NET.lob&&NET.lob()&&NET.lob().seats){const LB=NET.lob(),off=SIDES.filter(sd=>LB.seats[sd]&&LB.seats[sd].kind=='human'&&!LB.seats[sd].connected&&!S.dead[sd]);$('#info').innerHTML='You are spectating.'+(off.length?'<div class="take">'+off.map(sd=>`<button class="go sec" data-take="${sd}">Take over ${esc0(NAMES[sd])}'s seat (disconnected)</button>`).join('')+'</div>':'')}
 else $('#info').textContent=bldSel?'Tap a highlighted hex next to your heroes or towers to build a '+BLD[bldSel].n+' ('+BLD[bldSel].c+' gold). Not within 2 hexes of an enemy tower.':spSel!=null?'Tap a highlighted hex next to your towers to spawn. A hero cannot act on the turn it spawns.':ME&&S.dead[ME]?'You were eliminated - placed '+(SIDES.length-S.order.indexOf(ME))+'. You can see the whole board, so just watch it play out.':ME?'Spawn heroes from your reserve next to your towers, or tap a hero that has not acted. Every other player is your enemy. Last one standing wins.':'You are spectating.';
 $('#log').textContent=S.over?'':logt}
-BASE=Math.round(57.3*WF);const maxK=()=>(document.documentElement.clientWidth-24)/BASE,fitK=()=>Math.min(maxK(),innerHeight/(BASE*(HF*1.1547/WF)+360));
+BASE=Math.round(57.3*WF*HVTS);const maxK=()=>(document.documentElement.clientWidth-24)/BASE,fitK=()=>Math.min(maxK(),innerHeight/(BASE*(HF*1.1547/WF)+360));
 function setK(k,save){k=Math.max(.3,Math.min(k,maxK()));document.documentElement.style.setProperty('--zk',k);const z=$('#size');z.max=Math.max(30,Math.floor(maxK()*100));z.value=Math.round(k*100);if(save){try{localStorage.setItem('hv-k',k)}catch(e){}}}
 let k0=NaN;try{k0=parseFloat(localStorage.getItem('hv-k'))}catch(e){}
 setK(k0||fitK());
@@ -3020,7 +3020,7 @@ setTimeout(function(){try{scan()}catch(e){}},300);
 </script><style id="hv-paint">
 /* painted hero art (Sprite Forge overhaul) */
 img.sp.pt{object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
-.u img.sp.pt{width:1.7em;height:2.55em;margin:-1.5em -.22em 0;display:block}
+.u img.sp.pt{width:1.7em;height:2.55em;margin:-.5em -.22em 0;display:block}
 .chip img.sp.pt,.hchip img.sp.pt,.rchip img.sp.pt{height:150%;width:auto;margin-top:-35%}
 .ucs img.sp.pt{height:150%;width:auto;margin-top:-30%}
 .csp img.sp.pt{height:100%;width:auto}
