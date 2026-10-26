@@ -6,6 +6,78 @@
 <meta name="theme-color" content="#12131a"><link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" href="icon-192.png">
 <title>Hollow Vale</title>
+<script>/* ===== Hollow Vale maps: Classic, 5 pre-built maps and mirrored random maps (4x the tiles) ===== */
+var HVMAP={id:'classic',key:'classic',big:false,holes:false,name:'Classic'};
+const MAPS_PRE=[
+ {id:'p:crossroads',n:'Crossroads',shape:'open',seed:1103,d:'A wide open field with room to flank.'},
+ {id:'p:twinlakes',n:'Twin Lakes',shape:'lakes',seed:2207,d:'Lakes split the field into lanes.'},
+ {id:'p:moatkeep',n:'Moat Keep',shape:'ring',seed:3301,d:'A moated island holds the centre. Bridges lead in.'},
+ {id:'p:hourglass',n:'Hourglass Pass',shape:'pass',seed:4409,d:'Chasms squeeze every army into three passes.'},
+ {id:'p:riverlands',n:'Riverlands',shape:'rivers',seed:5501,d:'A river circles the field. Fight for the fords.'}];
+const MAP_SHAPES=[['any','Any shape'],['open','Open'],['lakes','Lakes'],['ring','Moat'],['pass','Passes'],['rivers','Rivers'],['wild','Wild']];
+function mapInfo(id){if(!id||id=='classic')return{id:'classic',n:'Classic',shape:'classic',d:'The original small board.'};
+const p=MAPS_PRE.find(m=>m.id==id);if(p)return p;const m=/^r:([a-z]+)$/.exec(id);if(m&&MAP_SHAPES.some(s=>s[0]==m[1]))return{id,n:'Random'+(m[1]=='any'?'':' · '+MAP_SHAPES.find(s=>s[0]==m[1])[1]),shape:m[1],seed:null,d:'A new mirrored map every game.'};return null}
+function hvRng(seed){let s=seed|0;return()=>{s=(s+0x6D2B79F5)|0;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+/* Pure geometry builder. Returns the cells of a map for n players, mirrored so every side gets the same layout. */
+function hvGeo(n,id,seed){const info=mapInfo(id);if(!info)return null;const classic=info.shape=='classic';
+const r=hvRng(info.seed!=null?info.seed:((seed|0)^0x5bd1e995)),rect=n==4,R=classic?(n==2?4:5):(n==2?9:11),W=classic?10:20,Hh=classic?10:20;
+let shape=info.shape;if(shape=='any')shape=['open','lakes','ring','pass','rivers','wild'][r()*6|0];
+const all=[];let BW,BH;
+if(rect){for(let y=0;y<Hh;y++)for(let x=0;x<W;x++){const q=x-((y-(y&1))>>1);all.push({q,r:y,s:-q-y,x,y})}BW=W;BH=Hh}
+else{let mn=1e9,mx=-1e9;for(let rr=-R;rr<=R;rr++){const y=rr+R;for(let q=Math.max(-R,-R-rr);q<=Math.min(R,R-rr);q++){const x0=q+((y-(y&1))>>1);all.push({q,r:rr,s:-q-rr,y,x0});mn=Math.min(mn,x0);mx=Math.max(mx,x0)}}
+all.forEach(c=>{c.x=c.x0-mn;delete c.x0});BW=mx-mn+1;BH=2*R+1}
+const M=MODES[n],sides=M.sides,edges=M.edges,D={bottom:c=>R-c.r,top:c=>R+c.r,upperLeft:c=>R-c.s,upperRight:c=>R-c.q,bBottom:c=>Hh-1-c.y,bTop:c=>c.y,bLeft:c=>c.x,bRight:c=>W-1-c.x};
+const dep=c=>Math.min(...sides.map(sd=>D[edges[sd]](c)));
+const PX=c=>c.x+(c.y&1?.5:0),PY=c=>c.y*.866;let cx=0,cy=0;all.forEach(c=>{cx+=PX(c);cy+=PY(c)});cx/=all.length;cy/=all.length;
+let rmax=0;all.forEach(c=>{rmax=Math.max(rmax,Math.hypot(PX(c)-cx,PY(c)-cy))});
+const k=sides.length,w=2*Math.PI/k;
+all.forEach(c=>{const dx=PX(c)-cx,dy=PY(c)-cy;c.rr=Math.hypot(dx,dy)/rmax;let th=Math.atan2(dy,dx)-Math.PI/2;let a=((th%w)+w)%w;if(a>w/2)a=w-a;c.A=a/(w/2);c.dep=dep(c)});
+if(classic)return{rect,R,W,H:Hh,cells:all,BW,BH,shape,holes:false,big:false};
+/* shape: does a hole sit at (rr = 0 centre .. 1 rim, A = 0 facing a side .. 1 between two sides)? */
+const fx=(rr,A)=>{const a=A*w/2;return[rr*Math.cos(a),rr*Math.sin(a)]};
+const blobs=(cnt,r0,r1,s0,s1)=>Array.from({length:cnt},()=>{const rr=r0+r()*(r1-r0),A=r(),rad=s0+r()*(s1-s0);return{p:fx(rr,A),rad}});
+const inBlob=(B,rr,A)=>{const p=fx(rr,A);return B.some(b=>Math.hypot(p[0]-b.p[0],p[1]-b.p[1])<b.rad)};
+let hole=()=>false;
+if(shape=='lakes'){const B=blobs(2+(r()*2|0),.3,.72,.09,.15);hole=(rr,A)=>inBlob(B,rr,A)}
+else if(shape=='ring'){const i0=.15+r()*.03,wd=.12+r()*.05,b2=.82+r()*.12;hole=(rr,A)=>rr>i0&&rr<i0+wd&&A>.22&&!(A>b2)}
+else if(shape=='pass'){const t0=.28+r()*.08;hole=(rr,A)=>rr>.16&&rr<.9&&A>t0+.9*Math.abs(rr-.52)&&A<.9}
+else if(shape=='rivers'){const rc=.46+r()*.08,wd=.05+r()*.025,fa=.35+r()*.4;hole=(rr,A)=>Math.abs(rr-rc)<wd&&A>.09&&Math.abs(A-fa)>.08}
+else if(shape=='wild'){const B=blobs(3+(r()*3|0),.25,.8,.06,.12),m=2+(r()*3|0),ph=r()*6.28;hole=(rr,A)=>inBlob(B,rr,A)||(A>.25&&rr>.93-.14*(.5+.5*Math.sin(A*Math.PI*m+ph)))}
+/* exact mirror: decide each orbit once, on its first member */
+const key=c=>c.x+','+c.y,byQR={},byXY={};all.forEach(c=>{byQR[c.q+','+c.r]=c;byXY[key(c)]=c});
+const orbit=c=>rect?[c,byXY[(W-1-c.x)+','+(Hh-1-c.y)]]:n==2?[c,byQR[(-c.q)+','+(-c.r)]]:(()=>{const a=byQR[c.r+','+c.s],b=a&&byQR[a.r+','+a.s];return[c,a,b]})();
+const H0=new Set();all.forEach(c=>{if(H0.has(key(c)))return;const o=orbit(c).filter(Boolean),c0=o.slice().sort((a,b)=>key(a)<key(b)?-1:1)[0];
+const prot=o.some(d=>d.dep<=3||d.rr<.16);if(!prot&&hole(c0.rr,c0.A))o.forEach(d=>H0.add(key(d)))});
+let cells=all.filter(c=>!H0.has(key(c)));
+/* keep only what the first side can walk to; every side must still be connected */
+const NB=c=>{const odd=c.y&1,d=odd?[[1,0],[-1,0],[0,-1],[1,-1],[0,1],[1,1]]:[[1,0],[-1,0],[-1,-1],[0,-1],[-1,1],[0,1]];return d.map(([a,b])=>(c.x+a)+','+(c.y+b))};
+const live=new Set(cells.map(key)),seen=new Set(),q=cells.filter(c=>D[edges[sides[0]]](c)==0).map(key);q.forEach(x=>seen.add(x));
+while(q.length){const kk=q.pop(),c=byXY[kk];NB(c).forEach(nk=>{if(live.has(nk)&&!seen.has(nk)){seen.add(nk);q.push(nk)}})}
+const cmin=all.reduce((m,c)=>c.rr<m.rr?c:m,all[0]);const ok=seen.has(key(cmin))&&all.filter(c=>c.rr<.16).every(c=>seen.has(key(c)))&&sides.every(sd=>cells.filter(c=>D[edges[sd]](c)==0&&seen.has(key(c))).length>=5);
+if(!ok){shape='open';cells=all.slice()}else cells=cells.filter(c=>seen.has(key(c)));
+return{rect,R,W,H:Hh,cells,BW,BH,shape,holes:cells.length<all.length,big:true,full:all.length}}
+function mapPreview(n,id){const g=hvGeo(n,id,4242);if(!g)return '';const PX=c=>c.x+(c.y&1?.5:0)+.5,PY=c=>c.y*.75+.5,live=new Set(g.cells.map(c=>c.x+','+c.y));
+const s=Math.min(100/(g.BW+.5),100/(g.BH*.75+.25)),hx=(cx,cy)=>{const p=[];for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6;p.push(((cx+Math.cos(a)*.577)*s).toFixed(1)+','+((cy+Math.sin(a)*.577)*s).toFixed(1))}return p.join(' ')};
+const cells=g.cells.map(c=>{const z=c.dep<=1?'#6b5a3a':c.rr<.16?'#c9a24a':'#3f6a4a';return `<polygon points="${hx(PX(c),PY(c))}" fill="${z}"/>`}).join('');
+return `<svg viewBox="0 0 ${((g.BW+.5)*s).toFixed(0)} ${((g.BH*.75+.25)*s).toFixed(0)}" class="mpv" aria-hidden="true">${cells}</svg>`}
+function mapPickHTML(sel,edit,n){sel=mapInfo(sel)?sel:'classic';const rnd=/^r:/.test(sel),cards=[{id:'classic'}].concat(MAPS_PRE).concat([{id:rnd?sel:'r:any',rnd:1}]);
+return '<div class="mapgrid">'+cards.map(m=>{const I=mapInfo(m.id),on=m.rnd?rnd:sel==m.id;return `<button class="mapc${on?' on':''}" data-map="${m.rnd?(rnd?sel:'r:any'):m.id}"${edit?'':' disabled'}>${m.rnd?'<span class="mpq">?</span>':mapPreview(n,m.id)}<b>${m.rnd?'Random':I.n}</b><small>${m.rnd?'A new mirrored map every game':I.d}</small>${m.id!='classic'?'<i>4x size</i>':''}</button>`}).join('')+'</div>'
++(rnd?'<div class="mapshapes"><span>Shape:</span>'+MAP_SHAPES.map(([k,l])=>`<button class="ft${sel=='r:'+k?' on':''}" data-map="r:${k}"${edit?'':' disabled'}>${l}</button>`).join('')+'</div>':'')
++'<p class="maphint">Every big map is mirrored, so each player has the same terrain, shrines, gold mines and chest spots.</p>'}
+function mapChip(o){const I=o&&o.map&&o.map!='classic'?mapInfo(o.map):null;return I?`<span class="chip mapchip" title="${I.d}">Map: ${I.n}</span> `:''}
+/* walking distance on maps with holes (AI path sense); straight hex distance elsewhere */
+let WD={k:null,m:{}};
+function wdist(a,b){if(!HVMAP.holes)return dist(a,b);if(WD.k!==HVMAP.key){WD={k:HVMAP.key,m:{}}}const tk=b.x+','+b.y;let m=WD.m[tk];
+if(!m){m={};m[tk]=0;const q=[[b.x,b.y]];let i=0;while(i<q.length){const [x,y]=q[i++],d=m[x+','+y],odd=y&1,dd=odd?[[1,0],[-1,0],[0,-1],[1,-1],[0,1],[1,1]]:[[1,0],[-1,0],[-1,-1],[0,-1],[-1,1],[0,1]];
+for(const [ax,ay] of dd){const nx=x+ax,ny=y+ay,nk=nx+','+ny;if(VALID.has(nk)&&m[nk]===undefined){m[nk]=d+1;q.push([nx,ny])}}}WD.m[tk]=m}
+const v=m[a.x+','+a.y];return v===undefined?dist(a,b)+20:v}
+
+function genBoard(){const fixed=HVMAP.big&&HVMAP.seed!=null,s0=SEED;if(fixed)SEED=HVMAP.seed;try{genBoard0()}finally{if(fixed)SEED=s0}
+if(HVMAP.big&&MOPT.shrines){const by={},bx={};GEO.cells.forEach(c=>{by[c.q+','+c.r]=c;bx[c.x+','+c.y]=c});const rect=NPL==4;
+const orb=c=>rect?[c,bx[(GEO.BW-1-c.x)+','+(GEO.BH-1-c.y)]]:NPL==2?[c,by[(-c.q)+','+(-c.r)]]:(()=>{const a=by[c.r+','+c.s],b=a&&by[a.r+','+a.s];return[c,a,b]})();
+const pick=f=>{let best=null,bs=1e9;GEO.cells.forEach(c=>{if(c.dep<3||!f(c)||S.shr.includes(c.x+','+c.y)||(S.mines||[]).some(m=>m.x==c.x&&m.y==c.y))return;const o=orb(c);if(o.some(d=>!d))return;const sc=Math.abs(c.rr-.5)+Math.abs(c.A-1)*.6;if(sc<bs){bs=sc;best=o}});if(best)best.forEach(d=>{const k=d.x+','+d.y;if(!S.shr.includes(k))S.shr.push(k);S.ter[k]=null})};
+const mx=GEO.BW/2;pick(c=>true);if(rect)pick(c=>!S.shr.some(k=>{const [x,y]=k.split(',').map(Number);return Math.sign(x-mx+.25)==Math.sign(c.x-mx+.25)&&Math.sign(y-GEO.BH/2+.5)==Math.sign(c.y-GEO.BH/2+.5)}))}}
+</script>
 <script>var HVTS=1.45;var HVART=new Set(["brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
 <script>(function(){try{var d=JSON.parse(localStorage.getItem('hv-display')||'null')||{};var h=document.documentElement;if(d.big)h.classList.add('bigtext');var hc=d.hc;if(hc==null)hc=matchMedia('(prefers-contrast: more)').matches;if(hc)h.classList.add('hc');if(d.cb)h.classList.add('cb')}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=MedievalSharp&family=Cinzel:wght@700&family=Pirata+One&family=Grenze+Gotisch:wght@600&family=Metal+Mania&family=Uncial+Antiqua&family=Germania+One&display=swap">
@@ -1169,13 +1241,13 @@ button:focus:not(:focus-visible),[tabindex]:focus:not(:focus-visible){outline:no
 <div id="lroom"></div>
 <div class="sub" id="lurl"></div>
 <div class="lrow"><label for="lname">Your name</label><input id="lname" maxlength="16" placeholder="Enter a name" autocomplete="off"></div>
-<div class="lrow lmode" id="lmode"></div><div id="lseats"></div><h3 class="opth" id="loptsh">Match options</h3><div class="opts" id="lopts"></div>
+<div class="lrow lmode" id="lmode"></div><div id="lseats"></div><h3 class="opth" id="lmapsh">Map</h3><div class="maps" id="lmaps"></div><h3 class="opth" id="loptsh">Match options</h3><div class="opts" id="lopts"></div>
 <p class="sub" id="lmsg"></p>
 <div class="lrow lbtns"><button class="go" id="lgo">Start hero draft</button><button class="go sec" id="lback" hidden>Back to the battle</button><button class="go sec" id="lmenu">Main menu</button></div>
 </div>
 <div id="lsetup" hidden><h2>Play on this device</h2>
 <div class="lrow lmode" id="lsmode"></div>
-<div class="lrow lmode" id="lsdiff"></div><div id="lsseats"></div><h3 class="opth">Match options</h3><div class="opts" id="lsopts"></div>
+<div class="lrow lmode" id="lsdiff"></div><div id="lsseats"></div><h3 class="opth">Map</h3><div class="maps" id="lsmaps"></div><h3 class="opth">Match options</h3><div class="opts" id="lsopts"></div>
 <p class="sub">Choose who plays each seat. Human players take turns on this device and pass it on when their turn ends. AI seats play by themselves.</p>
 <div class="lrow lbtns"><button class="go" id="lsgo">Choose heroes</button><button class="go sec" id="lsback">Back</button></div></div>
 <div id="stats" hidden></div>
@@ -1316,7 +1388,7 @@ let SEED=1;function srand(){SEED=(SEED+0x6D2B79F5)|0;let t=SEED;t=Math.imul(t^t>
 const maxHp=u=>(u.mhp||H[u.k].hp)+2*(u.star||0);
 const terAt=o=>S&&S.ter?S.ter[o.x+','+o.y]:null;
 const isShrine=o=>!!(S&&S.shr&&S.shr.includes(o.x+','+o.y));
-const FOG_START=8;const fogLimit=()=>(MOPT.fog&&S&&S.round>=FOG_START)?S.maxCD-1-Math.floor((S.round-FOG_START)/2):99;
+const FOG_START=8;const fogLimit=()=>(MOPT.fog&&S&&S.round>=FOG_START)?S.maxCD-1-Math.floor((S.round-FOG_START)/(HVMAP.big?1:2)):99;
 const inFog=o=>!!(S&&S.cd&&S.cd[o.x+','+o.y]>fogLimit());
 /* who is an enemy of whom (alliances and co-op teams hook in here) */
 const tkey=(a,b)=>[a,b].sort().join('');
@@ -1329,7 +1401,7 @@ const FOGV=()=>(MOPT.sight&&S&&ME&&!S.over&&!(S.dead&&S.dead[ME]))?ME:null;
 const visU=u=>{const V=FOGV();return !V||canSee(V,u)};
 const atV=(x,y)=>{const u=at(x,y);return u&&visU(u)?u:null};
 const isFoe=(a,b)=>a!==b&&!(S&&S.team&&S.team[a]&&S.team[a]===S.team[b])&&!allied(a,b);
-function genBoard(){S.ter={};S.shr=[];S.cd={};const key=c=>c.x+','+c.y,byQR={};GEO.cells.forEach(c=>byQR[c.q+','+c.r]=c);
+function genBoard0(){S.ter={};S.shr=[];S.cd={};const key=c=>c.x+','+c.y,byQR={};GEO.cells.forEach(c=>byQR[c.q+','+c.r]=c);
 const rect=MODES[NPL].shape=='rect',byXY={};GEO.cells.forEach(c=>byXY[c.x+','+c.y]=c);
 const img=c=>rect?[c,byXY[(GEO.BW-1-c.x)+','+(GEO.BH-1-c.y)]]:NPL==2?[c,byQR[(-c.q)+','+(-c.r)]]:(()=>{const a=byQR[c.r+','+c.s],b=a&&byQR[a.r+','+a.s];return[c,a,b]})();
 let centers=[];if(rect){const a=byXY[(GEO.BW/2-1)+','+(GEO.BH/2-1)];centers=img(a)}else if(NPL==2)centers=[byQR['1,0'],byQR['-1,0']];else centers=[byQR['0,0']];
@@ -1340,7 +1412,7 @@ GEO.cells.forEach(c=>{if(S.ter[key(c)]!==undefined||!ok(c))return;const im=img(c
 const r=srand();let t=null;if(r<.3){const q=srand();t=q<.45?'forest':q<.75?'hill':'swamp'}im.forEach(d=>S.ter[key(d)]=t)})}
 placeMines(img,key)}
 function placeMines(img,key){S.mines=[];const tgt=Math.max(2,Math.round(S.maxCD*.5)),ok=c=>c&&SIDES.every(sd=>SIDE_DEPTH[sd](c)>=2)&&!S.shr.includes(key(c))&&!(S.hill||[]).includes(key(c));
-const cand=GEO.cells.filter(ok).map(c=>({c,s:Math.abs(S.cd[key(c)]-tgt)})).sort((a,b)=>a.s-b.s||key(a.c).localeCompare(key(b.c)));const want=NPL==4?2:1;let got=0;
+const cand=GEO.cells.filter(ok).map(c=>({c,s:Math.abs(S.cd[key(c)]-tgt)})).sort((a,b)=>a.s-b.s||key(a.c).localeCompare(key(b.c)));const want=(NPL==4?2:1)*(HVMAP.big?2:1);let got=0;
 for(const o of cand){if(got>=want)break;const im=img(o.c);if(im.some(d=>!ok(d))||new Set(im.map(key)).size!=im.length)continue;if(S.mines.some(m=>im.some(d=>dist(d,m)<3)))continue;im.forEach(d=>{S.ter[key(d)]=null;S.mines.push({x:d.x,y:d.y,o:null})});got++}}
 const mineAt=(x,y)=>(S.mines||[]).find(m=>m.x==x&&m.y==y);
 function capMine(u){if(!MOPT.gold||!u)return;takeChest(u);const m=mineAt(u.x,u.y);if(!m||m.o===u.side||u.side===S.boss)return;m.o=u.side;pop(u,'⛏ Mine claimed!',1);if(!RP){msg(`${SHORT[u.side]} claims a gold mine.`);if(evVis(u.side,u))evCut({art:`<span class="evm" style="--mc:${SCOL[u.side]}">${MINES}</span>`,t:'Gold mine claimed',s:esc0(NAMES[u.side]),d:'+'+(2+upgLv(u.side,'shafts'))+' gold every turn',c:SCOL[u.side]})}}
@@ -1382,7 +1454,7 @@ src.forEach(o=>NB[o.y&1].forEach(([dx,dy])=>{const x=o.x+dx,y=o.y+dy,k=x+','+y;i
 const canBuild=(sd,k,x,y)=>{const B=BLD[k];if(!B||!MOPT.gold||sd===S.boss||S.gold[sd]==null||S.gold[sd]<B.c||bldOf(sd,k).length>=B.mx)return false;const hx=bldHexes(sd);return x==null?hx.length>0:hx.some(p=>p.x==x&&p.y==y)};
 function doBuild(sd,k,x,y){if(!canBuild(sd,k,x,y))return false;const B=BLD[k];S.gold[sd]-=B.c;const W={x,y,side:sd,hp:B.hp,max:B.hp,b:k};S.walls.push(W);fx(W,'spawn');if(!RP){msg(`${SHORT[sd]} builds a ${B.n}.`);sfx('spawn')}return true}
 const chestAt=(x,y)=>(S.chests||[]).find(c=>c.x==x&&c.y==y);
-function spawnChest(){if(!MOPT.gold)return;S.chests=S.chests||[];if(S.chests.length>=2)return;const c=GEO.cells.filter(c=>{const k=c.x+','+c.y;return S.cd[k]<=1&&free(c.x,c.y)&&!mineAt(c.x,c.y)&&!S.shr.includes(k)&&!chestAt(c.x,c.y)&&!trapAt(c.x,c.y)});if(!c.length)return;const p=c[Math.floor(srand()*c.length)];S.chests.push({x:p.x,y:p.y,g:4});if(!RP)msg('A treasure chest appears in the middle of the vale!')}
+function spawnChest(){if(!MOPT.gold)return;S.chests=S.chests||[];if(S.chests.length>=(HVMAP.big?4:2))return;const c=GEO.cells.filter(c=>{const k=c.x+','+c.y;return S.cd[k]<=(HVMAP.big?2:1)&&free(c.x,c.y)&&!mineAt(c.x,c.y)&&!S.shr.includes(k)&&!chestAt(c.x,c.y)&&!trapAt(c.x,c.y)});if(!c.length)return;const p=c[Math.floor(srand()*c.length)];S.chests.push({x:p.x,y:p.y,g:4});if(!RP)msg('A treasure chest appears in the middle of the vale!')}
 function takeChest(u){const c=u&&chestAt(u.x,u.y);if(!c||u.side===S.boss)return;S.chests=S.chests.filter(q=>q!==c);gainGold(u.side,c.g,u);if(!RP){msg(`${SHORT[u.side]} ${H[u.k].n} opens a treasure chest (+${c.g} gold).`);if(evVis(u.side,u))evCut({art:CHEST_S,t:'Treasure!',s:esc0(NAMES[u.side]),d:'+'+c.g+' gold',c:'#ffd24a'})}}
 const interest=sd=>Math.min(2,Math.floor(((S.gold&&S.gold[sd])||0)/10));
 const upgLv=(sd,it)=>(S.upg&&S.upg[sd]&&S.upg[sd][UPGK[it]])||0,upgCost=(sd,it)=>SHOP[it].cs[upgLv(sd,it)];
@@ -1555,10 +1627,10 @@ shrine:`<svg class='ter shr-s' viewBox='0 0 40 40'><circle cx='20' cy='22' r='15
 function terCls(x,y){if(!S||!S.ter)return '';const k=x+','+y,t=S.ter[k];return (t?' tr-'+t:'')+(S.shr&&S.shr.includes(k)?' shrc':'')+(S.cd&&S.cd[k]>fogLimit()?' fogc':'')}
 function terArt(x,y){if(!S||!S.ter)return '';const k=x+','+y;return (S.shr&&S.shr.includes(k))?TART.shrine:(S.ter[k]?TART[S.ter[k]]:'')}
 const fillObj=(o,src)=>{Object.keys(o).forEach(k=>delete o[k]);Object.keys(src).forEach(k=>o[k]=Array.isArray(src[k])?src[k].slice():src[k])};
-function setupMode(n){n=MODES[n]?n:3;const M=MODES[n];NPL=n;RAD=M.rad;SIDES.splice(0,SIDES.length,...M.sides);
+function setupMode(n,mid,seed){n=MODES[n]?n:3;const M=MODES[n];const G=(mid&&mid!='classic'&&mapInfo(mid))?hvGeo(n,mid,seed):null;const MI=mapInfo(mid)||mapInfo('classic');HVMAP=G?{id:mid,key:mid+':'+n+':'+(MI.seed!=null?MI.seed:seed|0),big:true,holes:G.holes,shape:G.shape,name:MI.n,seed:MI.seed!=null?MI.seed:null}:{id:'classic',key:'classic:'+n,big:false,holes:false,name:'Classic'};NPL=n;RAD=G&&!G.rect?G.R:M.rad;SIDES.splice(0,SIDES.length,...M.sides);
 Object.keys(SIDE_DEPTH).forEach(k=>delete SIDE_DEPTH[k]);SIDES.forEach(sd=>{const E=EDGES[M.edges[sd]];SIDE_DEPTH[sd]=E[0];DIRV[sd]=E[1]});
 const cells=[];let mn=1e9,mx=-1e9;
-if(M.shape=='rect'){BW_=M.w;BH_=M.h;for(let y=0;y<BH_;y++)for(let x=0;x<BW_;x++){const q=x-((y-(y&1))>>1);cells.push({q,r:y,s:-q-y,x,y})}GEO={cells,BW:BW_,BH:BH_}}
+if(G){if(G.rect){BW_=G.W;BH_=G.H}GEO={cells:G.cells,BW:G.BW,BH:G.BH}}else if(M.shape=='rect'){BW_=M.w;BH_=M.h;for(let y=0;y<BH_;y++)for(let x=0;x<BW_;x++){const q=x-((y-(y&1))>>1);cells.push({q,r:y,s:-q-y,x,y})}GEO={cells,BW:BW_,BH:BH_}}
 else{for(let r=-RAD;r<=RAD;r++){const y=r+RAD;for(let q=Math.max(-RAD,-RAD-r);q<=Math.min(RAD,RAD-r);q++){const x0=q+((y-(y&1))>>1);cells.push({q,r,s:-q-r,y,x0});mn=Math.min(mn,x0);mx=Math.max(mx,x0)}}
 cells.forEach(c=>{c.x=c.x0-mn});GEO={cells,BW:mx-mn+1,BH:2*RAD+1}}
 WF=GEO.BW+.5;HF=GEO.BH*.75+.25;VALID=new Set(GEO.cells.map(c=>c.x+','+c.y));
@@ -1566,8 +1638,8 @@ ZN={};GEO.cells.forEach(c=>{let z='m',b=9;SIDES.forEach(sd=>{const d=SIDE_DEPTH[
 BASE=Math.round(57.3*WF*HVTS);
 const r=document.documentElement.style;r.setProperty('--ar',(WF/(HF*1.1547)).toFixed(4));r.setProperty('--cwp',(100/WF).toFixed(4)+'%');r.setProperty('--chp',(100/HF).toFixed(4)+'%');r.setProperty('--mw',BASE+'px');
 fillObj(TB,M.tb);fillObj(MANA0,M.mana);fillObj(CAP0,M.cap);
-try{setK(fitK())}catch(e){}try{applyBZ()}catch(e){}}
-function towerSpots(sd){const e=GEO.cells.filter(c=>SIDE_DEPTH[sd](c)==0),px=c=>c.x+(c.y&1?.5:0),py=c=>c.y*.75,d=DIRV[sd];e.sort((a,b)=>(px(a)*d[0]+py(a)*d[1])-(px(b)*d[0]+py(b)*d[1]));const s0=Math.max(0,Math.floor((e.length-5)/2));return [s0,s0+2,s0+4].map(i=>e[i])}
+document.body.classList.toggle('bigmap',HVMAP.big);document.body.classList.toggle('holes',!!HVMAP.holes);try{if(typeof applyBZD=='function'){BZD=1;applyBZD()}}catch(e){}try{setK(fitK())}catch(e){}try{if(MOB)BZ=HVMAP.big?2.6:1;applyBZ()}catch(e){}try{mapNameUI()}catch(e){}}
+function towerSpots(sd){const e=GEO.cells.filter(c=>SIDE_DEPTH[sd](c)==0),px=c=>c.x+(c.y&1?.5:0),py=c=>c.y*.75,d=DIRV[sd];e.sort((a,b)=>(px(a)*d[0]+py(a)*d[1])-(px(b)*d[0]+py(b)*d[1]));if(HVMAP.big){const sp=Math.max(2,Math.round(e.length/4)),b=Math.max(0,Math.floor((e.length-1-2*sp)/2));return [b,b+sp,b+2*sp].map(i=>e[i])}const s0=Math.max(0,Math.floor((e.length-5)/2));return [s0,s0+2,s0+4].map(i=>e[i])}
 setupMode(3);
 const twAt=(x,y)=>SIDES.flatMap(k=>S.tw[k]).find(t=>t.hp>0&&t.x==x&&t.y==y);
 const wallAt=(x,y)=>S&&S.walls?S.walls.find(w=>w.x==x&&w.y==y):null;
@@ -2068,7 +2140,7 @@ $('#lossno').onclick=()=>{try{localStorage.setItem('hv-loss',JSON.stringify({k:k
 const DN=()=>[1.6,.05,0][DIFF]??.05,DM=()=>[.9,.3,.05][DIFF]??.3;
 function diffLine(){try{if(!(HOST||mode=='local'))return '';if(!ALLS.slice(0,NPL).some(isAI))return '';return `<p class='pl'>AI difficulty: <b>${DIFFN[DIFF]}</b></p>`}catch(e){return ''}}
 const OPT_NA=(k,o,n)=>(n==2&&(k=='bounty'||k=='truce'))?'not used in 1v1':(o&&o.raid&&(k=='koth'||k=='truce'||k=='bounty'))?'off in Boss Raid':'';
-const modsHTML=(o,n)=>{const a=OPTDEF.filter(d=>o[d.k]&&!OPT_NA(d.k,o,n));return '<div class="mods"><b>Modifiers:</b> '+(a.length?a.map(d=>`<span class="chip" title="${d.d.replace(/"/g,'&quot;')}">${d.n}</span>`).join(''):'none')+'</div>'};
+const modsHTML=(o,n)=>{const a=OPTDEF.filter(d=>o[d.k]&&!OPT_NA(d.k,o,n));return '<div class="mods">'+mapChip(o)+'<b>Modifiers:</b> '+(a.length?a.map(d=>`<span class="chip" title="${d.d.replace(/"/g,'&quot;')}">${d.n}</span>`).join(''):'none')+'</div>'};
 const optHTML=(o,edit,n)=>modsHTML(o,n)+OPTDEF.map(d=>{const na=OPT_NA(d.k,o,n),on=o[d.k]&&!na;return `<button class="opt${on?' on':''}${na?' na':''}" data-o="${d.k}"${edit&&!na?'':' disabled'}><i>${on?'✔':''}</i><span><b>${d.n}</b><small>${na?'N/A - '+na:d.d}</small></span></button>`}).join('');
 function openLocal(){['#menu','#draft','#game','#stats','#lobby'].forEach(x=>{const el=$(x);if(el)el.hidden=true});$('#lsetup').hidden=false;drawLocal()}
 function drawLocal(){$('#lsmode').innerHTML='<span>Players:</span>'+[2,3,4].map(k=>`<button class="ft${LS.n==k?' on':''}" data-n="${k}">${k==2?'1v1':k+' players'}</button>`).join('')+'<span style="margin-left:12px">Heroes:</span>'+[['pick','Choose'],['rnd','Random']].map(([v,l])=>`<button class="ft${(LS.rnd?'rnd':'pick')==v?' on':''}" data-h="${v}">${l}</button>`).join('');
@@ -2179,7 +2251,7 @@ $('#restart').onclick=()=>{music(false);aiRun++;$('#game').hidden=true;$('#draft
 function showPass(sd,what,cb){const el=$('#pass');el.style.setProperty('--pc',SCOL[sd]);el.innerHTML=`<div class="pn2">${NAMES[sd]||SIDEN[sd]}</div><p>Pass the device to ${NAMES[sd]||SIDEN[sd]} to ${what}.</p><button class="go" id="passgo">I'm ${NAMES[sd]||SIDEN[sd]} - go!</button>`;el.hidden=false;$('#passgo').onclick=()=>{el.hidden=true;if(cb)cb()}}
 function mk(k,side,x,y){return{k,side,hp:H[k].hp,x,y,used:false}}
 function showCheat(){try{if(localStorage.getItem('hv-cheat'))return;localStorage.setItem('hv-cheat','1')}catch(e){return}const d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:9600;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px';d.innerHTML='<div style="max-width:460px;max-height:85dvh;overflow:auto;background:#120e0a;border:2px solid #c9a24a;border-radius:12px;padding:14px 16px;color:#f4ead0;font-size:15px;line-height:1.45"><h3 style="margin:0 0 8px">Quick start</h3><ul style="margin:0 0 10px;padding-left:18px"><li><b>Spawn</b>: tap a Reserve hero, then a hex next to your tower. It cannot act that turn.</li><li><b>Turn</b>: each hero moves OR acts once. Blue hexes = move, red = attack.</li><li><b>Win</b>: destroy all 3 enemy towers. Every tower loses 1 HP each round.</li><li><b>Crit &amp; counter</b>: red hexes show damage, crit chance and the counter (↩) you will take.</li><li><b>Terrain</b>: forest = -1 ranged damage, hill = +1 ranged range, swamp stops movement. Hover or tap a hex to see what it does.</li><li><b>Fog</b>: you only see enemies near your heroes and towers.</li></ul><button class="go" style="width:100%">Got it</button></div>';d.onclick=e=>{if(e.target===d||e.target.tagName=='BUTTON')d.remove()};document.body.appendChild(d)}
-function startGame(cfg){CFG=cfg;setTimeout(showCheat,600);if((cfg.n||3)!=NPL||!S)setupMode(cfg.n||3);SEAT=cfg.seat;ME=cfg.me;aiRun++;Object.assign(NAMES,SIDEN);if(cfg.names)Object.assign(NAMES,cfg.names);
+function startGame(cfg){CFG=cfg;setTimeout(showCheat,600);{const mid=(cfg.opts||{}).map,MI=mapInfo(mid),kk=MI&&MI.id!='classic'?MI.id+':'+(cfg.n||3)+':'+(MI.seed!=null?MI.seed:(cfg.seed|0)):'classic:'+(cfg.n||3);if((cfg.n||3)!=NPL||!S||kk!==HVMAP.key)setupMode(cfg.n||3,mid,cfg.seed)}SEAT=cfg.seat;ME=cfg.me;aiRun++;Object.assign(NAMES,SIDEN);if(cfg.names)Object.assign(NAMES,cfg.names);
 DIFF=loadDiff();MOPT=Object.assign(defOpts(),cfg.opts||{},Object.fromEntries(CORE.map(o=>[o.k,true])));SEED=(cfg.seed!=null?cfg.seed:(Math.random()*2147483647|0))|0;
 S={units:[],tw:{},mana:Object.assign({},MANA0),turn:'p',round:1,over:false,ghosts:[],pops:[],pool:{},ult:{},team:{},koth:{},truce:{},prop:{},walls:[],traps:[],sil:[],gold:{},hand:{},fallen:{},cap:Object.assign({},CAP0),sp:Object.fromEntries(SIDES.map(sd=>[sd,0])),dead:{},order:[],teams:{},syn:{},upg:{},flares:[],mines:[],chests:[]};
 SIDES.forEach(sd=>{S.tw[sd]=towerSpots(sd).map((c,i)=>{const hp=TOWER_HP[i]+(TB[sd][i]||0);return{x:c.x,y:c.y,hp,max:hp,side:sd}});S.pool[sd]=cfg.picks[sd].slice();S.teams[sd]=cfg.picks[sd].slice();S.syn[sd]=synFrom(S.teams[sd])});
@@ -2281,7 +2353,7 @@ s+=Math.random()*DN();if(s>bs){bs=s;best=t}});if(best&&DIFF==0&&!u.moved&&Math.r
 const foes=S.units.filter(v=>isFoe(v.side,me)&&canSee(me,v)).concat(foeTowers(me));
 const sup=h.heal&&h.dmg<=2;let goals=sup?S.units.filter(v=>v.side==me&&v!==u):foes;if(!goals.length)goals=foes;if(!goals.length)return{mv:{x:u.x,y:u.y}};
 const want=sup?1:(h.rng[0]>1||h.aoe?h.rng[1]:1);let bm=null,bsc=1e9;
-[{x:u.x,y:u.y}].concat(reach(u)).forEach(p=>{const d=Math.min(...goals.map(g=>dist(p,g))),tk=p.x+','+p.y,sc=Math.abs(d-want)+Math.random()*DM()+(MOPT.shrines&&S.shr.includes(tk)?-1.3:0)+(MOPT.gold&&S.mines&&S.mines.some(m=>m.x==p.x&&m.y==p.y&&m.o!==me)?-1.8:0)+(chestAt(p.x,p.y)?-2.2:0)+(MOPT.fog&&S.cd[tk]>fogLimit()-1?2.5:0)+(MOPT.terrain&&S.ter[tk]=='hill'&&h.rng[1]>=2?-.6:0)+(MOPT.terrain&&S.ter[tk]=='swamp'?.4:0)+(MOPT.terrain&&S.ter[tk]=='forest'&&h.rng[0]>1?-.3:0)+(S.sil.some(z=>isFoe(z.side,me)&&(z.left[me]||0)>0&&z.cells.includes(tk))?1.5:0)+(MOPT.koth&&S.hill&&S.hill.includes(tk)?-3:0);if(sc<bsc){bsc=sc;bm=p}});
+[{x:u.x,y:u.y}].concat(reach(u)).forEach(p=>{const d=Math.min(...goals.map(g=>wdist(p,g))),tk=p.x+','+p.y,sc=Math.abs(d-want)+Math.random()*DM()+(MOPT.shrines&&S.shr.includes(tk)?-1.3:0)+(MOPT.gold&&S.mines&&S.mines.some(m=>m.x==p.x&&m.y==p.y&&m.o!==me)?-1.8:0)+(chestAt(p.x,p.y)?-2.2:0)+(MOPT.fog&&S.cd[tk]>fogLimit()-1?2.5:0)+(MOPT.terrain&&S.ter[tk]=='hill'&&h.rng[1]>=2?-.6:0)+(MOPT.terrain&&S.ter[tk]=='swamp'?.4:0)+(MOPT.terrain&&S.ter[tk]=='forest'&&h.rng[0]>1?-.3:0)+(S.sil.some(z=>isFoe(z.side,me)&&(z.left[me]||0)>0&&z.cells.includes(tk))?1.5:0)+(MOPT.koth&&S.hill&&S.hill.includes(tk)?-3:0);if(sc<bsc){bsc=sc;bm=p}});
 return{mv:bm}}
 let aiRun=0;
 function aiDiplo(sd){if(!MOPT.truce||NPL<3)return;const L=leader(),al=SIDES.filter(o=>o!=sd&&!S.dead[o]);
@@ -2522,7 +2594,7 @@ else if(insp){$('#info').innerHTML='<div class="uhelp">Blue: where it can move. 
 else if(!ME&&NET&&NET.lob&&NET.lob()&&NET.lob().seats){const LB=NET.lob(),off=SIDES.filter(sd=>LB.seats[sd]&&LB.seats[sd].kind=='human'&&!LB.seats[sd].connected&&!S.dead[sd]);$('#info').innerHTML='You are spectating.'+(off.length?'<div class="take">'+off.map(sd=>`<button class="go sec" data-take="${sd}">Take over ${esc0(NAMES[sd])}'s seat (disconnected)</button>`).join('')+'</div>':'')}
 else $('#info').textContent=bldSel?'Tap a highlighted hex next to your heroes or towers to build a '+BLD[bldSel].n+' ('+BLD[bldSel].c+' gold). Not within 2 hexes of an enemy tower.':spSel!=null?'Tap a highlighted hex next to your towers to spawn. A hero cannot act on the turn it spawns.':ME&&S.dead[ME]?'You were eliminated - placed '+(SIDES.length-S.order.indexOf(ME))+'. You can see the whole board, so just watch it play out.':ME?'Spawn heroes from your reserve next to your towers, or tap a hero that has not acted. Every other player is your enemy. Last one standing wins.':'You are spectating.';
 $('#log').textContent=S.over?'':logt}
-BASE=Math.round(57.3*WF*HVTS);const maxK=()=>(document.documentElement.clientWidth-24)/BASE,fitK=()=>Math.min(maxK(),innerHeight/(BASE*(HF*1.1547/WF)+360));
+BASE=Math.round(57.3*WF*HVTS);const UIB=()=>(HVMAP.big&&!MOB)?Math.min(BASE,860):BASE;const maxK=()=>(document.documentElement.clientWidth-24)/UIB(),fitK=()=>Math.min(maxK(),(HVMAP.big&&!MOB)?innerHeight/(UIB()*.85+360):innerHeight/(BASE*(HF*1.1547/WF)+360));
 function setK(k,save){k=Math.max(.3,Math.min(k,maxK()));document.documentElement.style.setProperty('--zk',k);const z=$('#size');z.max=Math.max(30,Math.floor(maxK()*100));z.value=Math.round(k*100);if(save){try{localStorage.setItem('hv-k',k)}catch(e){}}}
 let k0=NaN;try{k0=parseFloat(localStorage.getItem('hv-k'))}catch(e){}
 setK(k0||fitK());
@@ -2706,7 +2778,7 @@ const joinURL=()=>{const ips=INFO&&INFO.ips||[];const base=isLocalHost()&&ips.le
 function setURL(){try{const u=new URL(location.href);if(ROOM)u.searchParams.set('room',ROOM);else u.searchParams.delete('room');u.searchParams.delete('lobby');history.replaceState(null,'',u.pathname+u.search)}catch(e){}}
 function renderLobby(){if($('#lobby').hidden)return;
 const inRoom=!!(ROOM&&LOB);
-['#lurl','#lseats','#lmsg','#lgo','#lback','#lmode','#lopts','#loptsh'].forEach(x=>{if(!inRoom)$(x).hidden=true});if(inRoom){['#lurl','#lseats','#lmsg','#lmode','#lopts','#loptsh'].forEach(x=>$(x).hidden=false)}
+['#lurl','#lseats','#lmsg','#lgo','#lback','#lmode','#lopts','#loptsh','#lmaps','#lmapsh'].forEach(x=>{if(!inRoom)$(x).hidden=true});if(inRoom){['#lurl','#lseats','#lmsg','#lmode','#lopts','#loptsh','#lmaps','#lmapsh'].forEach(x=>$(x).hidden=false)}
 if(!inRoom){const lr=$('#lroom');if(lr.dataset.m=='pick'){const w=lr.querySelector('.warn');if(w)w.textContent=NOTE;if(w)w.hidden=!NOTE;return}lr.dataset.m='pick';lr.innerHTML=`<div class="rpick"><button class="go" id="rcreate">Create a new game</button><div class="lrow"><input id="rcode" maxlength="4" placeholder="Room code" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="go sec" id="rjoin">Join</button></div><p class="sub warn"${NOTE?'':' hidden'}>${NOTE}</p><p class="sub">Create a game, then send your friends the link or let them scan the QR code. Anyone with the link can join from a phone or computer.</p></div>`;
 $('#rcreate').onclick=createRoom;$('#rjoin').onclick=()=>{const c=$('#rcode').value.toUpperCase().replace(/[^A-Z]/g,'');if(c.length==4)joinRoom(c);else{NOTE='Room codes are 4 letters.';renderLobby()}};
 $('#rcode').onkeydown=e=>{if(e.key=='Enter')$('#rjoin').click()};if(!$('#iphelp'))$('#lmsg').insertAdjacentHTML('afterend',IPHONE_HELP);return}
@@ -2724,7 +2796,7 @@ if(host&&!x.connected)btn=`<button data-a="ai" data-s="${sd}">Let an AI take ove
 else if(x.kind=='ai'){who='AI player';st='computer controlled';if(host&&L.phase=='lobby')btn=`<button data-a="open" data-s="${sd}">Open the seat</button>`}
 else{who='Open seat';st=L.phase=='lobby'?'a friend can join, or the AI fills it':'';if(L.phase=='lobby')btn=`<button data-a="claim" data-s="${sd}">${me?'Move here':'Sit here'}</button>`+(host?` <button data-a="ai" data-s="${sd}">Make it an AI</button>`:'')}
 return `<div class="ls${mine?' me':''}" style="--sc:${SCOL[sd]}"><h3>${SIDEN[sd]} · ${seatPos(nP,sd)}</h3><div class="who">${who}</div><div class="st">${st}</div>${btn}</div>`}).join('');
-{const lo=Object.assign(defOpts(),L.opts||{}),ed=host&&L.phase=='lobby';$('#lopts').innerHTML=optHTML(lo,ed,nP)}
+{const lo=Object.assign(defOpts(),L.opts||{}),ed=host&&L.phase=='lobby';$('#lopts').innerHTML=optHTML(lo,ed,nP);try{$('#lmaps').innerHTML=mapPickHTML(lo.map,ed,nP)}catch(e){}}
 const nh=act(L).filter(sd=>L.seats[sd].kind=='human').length;
 $('#lgo').hidden=!(host&&L.phase=='lobby');$('#lgo').textContent=L.rnd?'Deal random heroes and start':'Start hero draft';$('#lgo').disabled=!nh;
 $('#lback').hidden=!(L.phase=='play'&&inGame);
@@ -2736,6 +2808,7 @@ $('#lname').value=myName;
 $('#lname').oninput=e=>{myName=esc(e.target.value).trim().slice(0,16);try{localStorage.setItem('hv-name',myName)}catch(x){}post({type:'name',name:myName})};
 $('#lgo').onclick=()=>{if(LOB&&LOB.rnd){const pk={};act(LOB).forEach(sd=>pk[sd]=randomTeam());post({type:'startRandom',picks:pk})}else post({type:'draft'})};
 $('#lopts').onclick=e=>{const b=e.target.closest('.opt');if(!b||b.disabled||!LOB)return;const lo=Object.assign(defOpts(),LOB.opts||{});lo[b.dataset.o]=!lo[b.dataset.o];post({type:'opts',opts:lo})};
+$('#lmaps').onclick=e=>{const b=e.target.closest('button[data-map]');if(!b||b.disabled||!LOB)return;const lo=Object.assign(defOpts(),LOB.opts||{});lo.map=b.dataset.map;post({type:'opts',opts:lo})};
 $('#lmode').onclick=e=>{const b=e.target.closest('button[data-n],button[data-h]');if(!b)return;if(b.dataset.h)post({type:'random',on:b.dataset.h=='rnd'});else post({type:'mode',n:+b.dataset.n})};
 $('#lback').onclick=()=>{show('#game');render()};
 $('#lmenu').onclick=()=>{if(inGame&&LOB&&LOB.host==CID&&LOB.phase!='lobby'){post({type:'reset'})}show('#menu')};
@@ -2837,7 +2910,7 @@ document.documentElement.style.setProperty('--bk',k.toFixed(4));
 sc.style.maxHeight=BZ>1?Math.round(innerHeight*.62)+'px':'';
 requestAnimationFrame(()=>{if(focus){const el=document.querySelector(`#board .cell[data-x="${focus.x}"][data-y="${focus.y}"]`);if(el){const r=el.getBoundingClientRect(),s=sc.getBoundingClientRect();sc.scrollLeft+=r.left+r.width/2-(s.left+s.width/2);sc.scrollTop+=r.top+r.height/2-(s.top+s.height/2);return}}
 sc.scrollLeft=cx*k/old-sc.clientWidth/2;sc.scrollTop=cy*k/old-sc.clientHeight/2})}
-$('#bzin').onclick=()=>{BZ=BZ>=2.2?2.2:BZ+.6;applyBZ(sel)};$('#bzout').onclick=()=>{BZ=Math.max(1,BZ-.6);applyBZ(sel)};
+$('#bzin').onclick=()=>{BZ=Math.min(HVMAP.big?4:2.2,BZ+.6);applyBZ(sel)};$('#bzout').onclick=()=>{BZ=Math.max(1,BZ-.6);applyBZ(sel)};
 addEventListener('resize',()=>applyBZ());if(MOB)applyBZ();
 new MutationObserver(()=>{if(!$('#game').hidden)applyBZ()}).observe($('#game'),{attributes:true,attributeFilter:['hidden']});
 /* mobile hero picker: compact cards + info sheet */
@@ -3028,4 +3101,62 @@ img.pp{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-
 .cs,.dpa,.slot,.tph{position:relative;overflow:hidden}
 .dpa img.pp{object-position:50% 15%}
 </style>
+<style id="hv-maps">
+/* map picker */
+.mapgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:4px 0 8px}
+.mapc{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:8px;border-radius:10px;background:#1a1712;border:1.5px solid #4a3a26;color:#e8dcc8;cursor:pointer;font:inherit}
+.mapc.on{border-color:#e2b84a;box-shadow:0 0 0 2px #e2b84a55,0 0 18px #e2b84a33;background:#241e14}
+.mapc:disabled{cursor:default;opacity:.85}.mapc b{font-size:15px}.mapc small{font-size:11.5px;color:#b8aa94;line-height:1.35}
+.mapc i{position:absolute;top:8px;right:8px;font-style:normal;font-size:10px;padding:1px 6px;border-radius:8px;background:#e2b84a;color:#1a1408;font-weight:700}
+.mapc .mpv{width:100%;height:74px;background:#0b1620;border-radius:6px}
+.mapc .mpq{display:flex;align-items:center;justify-content:center;width:100%;height:74px;border-radius:6px;background:repeating-linear-gradient(45deg,#1c2a24,#1c2a24 8px,#16221d 8px,#16221d 16px);font-size:34px;color:#e2b84a;font-weight:800}
+.mapshapes{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 6px}.mapshapes span{color:#b8aa94;margin-right:4px}
+.maphint{margin:2px 0 10px;font-size:12px;color:#9a8c7a}
+.mapchip{background:#2a3a2a!important;border-color:#5cc070!important}
+/* big maps: scrolling board with drag to pan */
+#bzbar{display:none}
+body.bigmap:not(.mob) #bzbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0 6px}
+#bzbar #bzname{font-weight:700;color:#e2b84a;margin-right:auto}#bzbar .bzh{font-size:12px;color:#9a8c7a;margin-right:6px}
+body.bigmap:not(.mob) main{width:var(--mwui)}
+body.bigmap:not(.mob) #bscroll{overflow:auto!important;max-height:72vh;cursor:grab;box-shadow:0 0 0 4px #6b4f33,0 10px 26px #0006}
+body.bigmap:not(.mob) #bscroll.drag{cursor:grabbing}body.bigmap:not(.mob) #bscroll.drag *{pointer-events:none}
+body.bigmap:not(.mob) #bw{width:var(--bwpx)}
+body.mob.bigmap #bw{flex:0 0 auto}
+body.holes #board{background:radial-gradient(ellipse at 50% 45%,#16384a,#0a1a24 70%);box-shadow:0 0 0 4px #6b4f33,0 10px 26px #0006}
+</style>
+<script>/* ===== map picker, big-map camera (drag to pan, zoom), extra resources ===== */
+(function(){
+const big=()=>document.body.classList.contains('bigmap');
+/* desktop: put the board in a scrolling view */
+let V=null;
+if(!MOB){V=$('#bscroll');const wrap=V&&V.parentNode;if(wrap){wrap.style.position='relative';const t=$('#ticker');if(t)wrap.appendChild(t);
+const bar=document.createElement('div');bar.id='bzbar';bar.innerHTML='<span id="bzname"></span><span class="bzh">Drag the map to look around</span><button class="ft" id="bzo" title="Zoom out">−</button><button class="ft" id="bzi" title="Zoom in">+</button><button class="ft" id="bzf" title="Show the whole map">Whole map</button><button class="ft" id="bzm" title="Jump to your army">My army</button>';wrap.parentNode.insertBefore(bar,wrap)}}
+window.BZD=1;
+const zk=()=>parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zk'))||1;
+window.applyBZD=function(anchor){if(!V)return;const ui=Math.min(BASE,860);document.documentElement.style.setProperty('--mwui',ui+'px');
+if(!big()){document.documentElement.style.setProperty('--bwpx',BASE+'px');return}
+const fit=(V.clientWidth-6)/BASE;BZD=Math.max(fit,Math.min(1.8,BZD));const old=V._k||BZD,cx=(anchor?anchor.x:V.scrollLeft+V.clientWidth/2),cy=(anchor?anchor.y:V.scrollTop+V.clientHeight/2);
+document.documentElement.style.setProperty('--bwpx',Math.round(BASE*BZD)+'px');V._k=BZD;
+requestAnimationFrame(()=>{V.scrollLeft=cx*BZD/old-(anchor?anchor.vx:V.clientWidth/2);V.scrollTop=cy*BZD/old-(anchor?anchor.vy:V.clientHeight/2)})};
+window.camTo=function(x,y){if(MOB){try{applyBZ({x,y})}catch(e){}return}if(!V||!big())return;const el=document.querySelector(`#board .cell[data-x="${x}"][data-y="${y}"]`);if(!el)return;
+const r=el.getBoundingClientRect(),s=V.getBoundingClientRect(),z=zk();V.scrollTo({left:V.scrollLeft+(r.left+r.width/2-(s.left+s.width/2))/z,top:V.scrollTop+(r.top+r.height/2-(s.top+s.height/2))/z,behavior:'smooth'})};
+window.camSide=function(sd){if(!S||!big())return;const pts=S.units.filter(u=>u.side==sd).concat((S.tw[sd]||[]).filter(T=>T.hp>0));if(!pts.length)return;
+let x=0,y=0;pts.forEach(p=>{x+=p.x;y+=p.y});x/=pts.length;y/=pts.length;let b=null,bd=1e9;GEO.cells.forEach(c=>{const d=(c.x-x)**2+(c.y-y)**2;if(d<bd){bd=d;b=c}});if(b)setTimeout(()=>camTo(b.x,b.y),60)};
+if(V){let dn=false,mv=false,sx=0,sy=0,sl=0,st=0;
+V.addEventListener('pointerdown',e=>{if(!big()||e.button!==0||e.pointerType=='touch')return;dn=true;mv=false;sx=e.clientX;sy=e.clientY;sl=V.scrollLeft;st=V.scrollTop});
+addEventListener('pointermove',e=>{if(!dn)return;const dx=e.clientX-sx,dy=e.clientY-sy;if(!mv&&Math.hypot(dx,dy)>7){mv=true;V.classList.add('drag')}if(mv){const z=zk();V.scrollLeft=sl-dx/z;V.scrollTop=st-dy/z}});
+addEventListener('pointerup',()=>{if(dn){dn=false;V.classList.remove('drag');if(mv)V._sup=Date.now()}});
+V.addEventListener('click',e=>{if(V._sup&&Date.now()-V._sup<350){e.stopPropagation();e.preventDefault()}},true);
+V.addEventListener('wheel',e=>{if(!big()||!(e.ctrlKey||e.metaKey))return;e.preventDefault();const s=V.getBoundingClientRect(),z=zk(),vx=(e.clientX-s.left)/z,vy=(e.clientY-s.top)/z;BZD*=e.deltaY<0?1.15:1/1.15;applyBZD({x:V.scrollLeft+vx,y:V.scrollTop+vy,vx,vy})},{passive:false});
+$('#bzi').onclick=()=>{BZD*=1.25;applyBZD()};$('#bzo').onclick=()=>{BZD/=1.25;applyBZD()};$('#bzf').onclick=()=>{BZD=0;applyBZD()};
+$('#bzm').onclick=()=>{const sd=ME||(S&&S.turn);if(sd)camSide(sd)};
+addEventListener('resize',()=>applyBZD())}
+/* follow the turn on big maps */
+const r0=render;let lastT=null;render=function(){const o=r0.apply(this,arguments);try{if(S&&big()&&!RP&&S.turn!==lastT){lastT=S.turn;if(SEAT&&SEAT[S.turn]=='h'&&(!ME||ME==S.turn||HOTSEAT))camSide(S.turn)}}catch(e){}return o};
+window.mapNameUI=function(){const n=$('#bzname');if(n)n.textContent=HVMAP.big?'Map: '+HVMAP.name:''};
+/* local setup picker */
+const d0=drawLocal;drawLocal=function(){d0.apply(this,arguments);try{$('#lsmaps').innerHTML=mapPickHTML(LS.opts.map,true,LS.n)}catch(e){}};
+$('#lsmaps').onclick=e=>{const b=e.target.closest('button[data-map]');if(!b||b.disabled)return;LS.opts.map=b.dataset.map;drawLocal()};
+})();
+</script>
 </body></html>

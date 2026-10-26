@@ -66,7 +66,7 @@ function handle(r, cid, m) {
     case 'ping': break;
     case 'opts': {
       if (!isHost || r.phase !== 'lobby' || !m.opts || typeof m.opts !== 'object') break;
-      const o = {}; Object.keys(m.opts).slice(0, 30).forEach(k => { if (/^[a-z]{1,16}$/.test(k)) o[k] = !!m.opts[k]; });
+      const o = {}; Object.keys(m.opts).slice(0, 30).forEach(k => { if (k === 'map') { if (typeof m.opts.map === 'string' && /^(classic|[pr]:[a-z]{1,16})$/.test(m.opts.map)) o.map = m.opts.map; } else if (/^[a-z]{1,16}$/.test(k)) o[k] = !!m.opts[k]; });
       r.opts = o; pushLobby(r); break;
     }
     case 'random': {
@@ -166,11 +166,11 @@ function handle(r, cid, m) {
       const cfg = r.game.cfg, SD_ROUND = 14;
       const rec = {
         t: new Date().toISOString(), room: r.code, gid: cfg.gid, seed: cfg.seed,
-        board: { 2: 'small hexagon', 3: 'big hexagon', 4: 'square' }[cfg.n] || String(cfg.n), players: cfg.n,
+        board: { 2: 'small hexagon', 3: 'big hexagon', 4: 'square' }[cfg.n] || String(cfg.n), map: (cfg.opts && cfg.opts.map) || 'classic', players: cfg.n,
         seats: Object.fromEntries(sidesOf(r).map(s => [s, { kind: cfg.seat[s] === 'h' ? 'human' : 'ai', name: (cfg.names && cfg.names[s]) || null }])),
         heroes: cfg.picks,
         bans: sidesOf(r).map(s => r.seats[s].ban).filter(Boolean),
-        opts: Object.keys(cfg.opts || {}).filter(k => cfg.opts[k]),
+        opts: Object.keys(cfg.opts || {}).filter(k => k !== 'map' && cfg.opts[k]),
         winner: m.winner, rounds: m.rounds,
         suddenDeath: m.rounds >= SD_ROUND, suddenDeathRound: m.rounds >= SD_ROUND ? SD_ROUND : null,
         actions: r.game.log.length
