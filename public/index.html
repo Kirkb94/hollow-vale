@@ -1462,7 +1462,7 @@ const repCost=sd=>SHOP.repair.c+((S&&S.repN&&S.repN[sd])||0);
 function repTower(sd){return S.tw[sd].filter(T=>T.hp>0&&T.hp<T.max).sort((a,b)=>a.hp/a.max-b.hp/b.max)[0]}
 const recOpts=sd=>[...new Set(S.teams[sd]||[])].filter(k=>!H[k].hidden),recCost=(k,sd)=>(H[k]&&H[k].elite?8:5)+2*((S&&S.recN&&sd&&S.recN[sd])||0);
 const hireOpts=sd=>{const f=ultFac(sd);return Object.keys(H).filter(k=>H[k].fac==f&&!H[k].hidden)};
-const hireCost=k=>{const h=H[k];if(h.elite)return 14;const g=h.group||1,v=Math.sqrt(h.hp*g*h.dmg*g)*(1+(h.armor||0)*.25)*(h.rng[1]>=2?1.15:1)*(h.mv>=3?1.1:1)*(h.heal?1.6:1)*(h.summon||h.trap||h.wall||h.silence||h.flare?1.3:1);return Math.max(3,Math.min(7,Math.round(v/2)))};
+const hireCost=k=>{const h=H[k];if(h.elite)return 14;const g=h.group||1,v=Math.sqrt(h.hp*g*h.dmg*g)*(1+(h.armor||0)*.25)*(h.rng[1]>=2?1.15:1)*(h.mv>=3?1.1:1)*(h.heal?1.6:1)*(h.summon||h.trap||h.wall||h.silence||h.flare?1.3:1);const r=h.rng[1],pr=(h.stun?(r>=2?4:1):0)+(h.aoe?2:0)+(h.silence?2:0)+(r>=4&&h.dmg>=4?1:0)+((h.drain||0)>=2?1:0);/* ability premium: freeze, splash, silence, long range, drain */return Math.min(10,Math.max(3,Math.min(7,Math.round(v/2)))+pr)};
 const ARMY_CAP=7;
 const armySize=sd=>S.units.filter(u=>u.side==sd&&!u.sumBy).reduce((a,u)=>a+1/(H[u.k].group||1),0)+S.pool[sd].length;
 const hasBoss=sd=>S.units.some(u=>u.side==sd&&H[u.k].elite&&!u.sumBy)||S.pool[sd].some(k=>H[k].elite);
