@@ -38,8 +38,8 @@ ALWAYS ON
 - Gold: +2 a turn, +2 per gold mine, +1 per farm, +1 interest per 10 saved
   (max 2). Also 1 per kill (2 for a boss), 2 per enemy building, 3 per tower,
   4 per treasure chest (one appears in the middle every 3 rounds).
-- Market: Hire any unit from your main faction (3-8 gold, bosses 14, army of
-  up to 20 slots, more with Cottages and a Great Hall; the draft is still
+- Market: Hire any unit from your main faction (3-8 gold, bosses 14, only one
+  of each boss at a time, army of up to 20 slots, more with Cottages and a Great Hall; the draft is still
   10 slots). Recruit a fallen starting hero (5, bosses 8, +2 each time).
   Repair a tower by 4 (3, +1 each time). Upgrades: Forge Weapons, Forge
   Armor, Fortify Towers, Scout's Lens, Deep Shafts.
@@ -108,7 +108,8 @@ MATCH OPTIONS (lobby host / local setup screen)
   and heals 2.
 - Poison mist (off): from round 8 a poison fog creeps in from the edges.
 - Hero levels (on): 2 kills = a star (+2 max HP, +1 damage), 5 kills = 2 stars.
-- Ban phase (on): every human player bans one hero before the draft.
+- Ban phase (on): every human player bans one hero before the draft (you
+  confirm the ban), and in games on one device each AI seat bans one too.
 - Spell cards (off): draw one a turn, hold 3. Fireball, Frost Bolt, Meteor,
   Mend, Haste, Stonemason, Tribute. Spells cost mana and ignore armor.
 - Bounties (on, 3-4 players): the leader (most tower HP) wears a crown;
@@ -130,6 +131,16 @@ NEW HEROES
   movement and ranged shots. Enemies can knock them down.
 - Hexweaver (Arcane Order): Silence (1 mana) on a 3-hex-wide area up to 3
   away. Enemies there cannot attack or use abilities on their next turn.
+
+CONTROLS AND SETTINGS (playtest fixes)
+- Abilities (flare, snare, wall, silence, raise skeleton): when you select the
+  hero, violet hexes show where it can be used; click a violet hex twice to use
+  it. Q or the ✦ button on the hero card aims it anywhere in range.
+- Turn log: the 📜 Turn log button (or L) shows the last 20 events. After an AI
+  turn a short summary pops up.
+- Display settings: Battle speed (slow / normal / fast), Sound volume and an
+  optional terrain icon on the hovered hex.
+- Online: new rooms start as 1v1 with the host already in Player 1's seat.
 
 READING THE BOARD
 - Icons above heroes: 🏇 charge, 🏹 ranged / ⚔️ melee, 🩸 lifesteal, 🔥 fire,
@@ -229,7 +240,9 @@ IN THE GAME
   their owner's turns. They have no Undying or on-death effects, do not
   count toward the army cap and cannot be recruited. No free hex means
   nothing rises. Raising never uses up a Grave.
-- Towers have 12, 14 and 15 HP.
+- Towers have 12, 14 and 15 HP; a few get a little extra to even out the turn
+  order (1v1: Player 1 12/14/16, Player 2 12/15/16; 3 players: Player 1
+  12/15/16, Players 2-3 12/14/15; 4 players: 12/14/15 each).
 - Dropped out or refreshed? Open the link again: your seat and the battle come
   back. The host can also hand a missing player's seat to the AI.
 

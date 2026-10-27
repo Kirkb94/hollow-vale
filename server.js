@@ -29,7 +29,7 @@ const sidesOf = r => ALL_SIDES.slice(0, r.n || 3);
 function makeRoom() {
   if (rooms.size >= MAX_ROOMS) return null;
   let code; do { code = Array.from({ length: 4 }, () => CODE_CHARS[Math.random() * CODE_CHARS.length | 0]).join(''); } while (rooms.has(code));
-  const r = { code, n: 3, phase: 'lobby', seats: blankSeats(), game: null, clients: new Map(), order: 0, touched: Date.now() };
+  const r = { code, n: 2, phase: 'lobby', seats: blankSeats(), game: null, clients: new Map(), order: 0, touched: Date.now() };
   rooms.set(code, r); return r;
 }
 const hostCid = r => { let best = null; for (const [cid, c] of r.clients) if (c.connected && (!best || c.order < r.clients.get(best).order)) best = cid; return best; };
@@ -257,6 +257,8 @@ const server = http.createServer((req, res) => {
     if (c.res) { try { c.res.end(); } catch (e) { } }
     c.res = res; c.connected = true; c.lostAt = 0; r.touched = Date.now();
     const nm = cleanName(u.searchParams.get('name')); if (nm) c.name = nm;
+    // the first person in a new room is the host: seat them in P1 so they can set up the game right away
+    if (c.order === 1 && r.phase === 'lobby' && !humans(r).length && r.seats.p.kind === 'open') r.seats.p = { kind: 'human', cid, name: c.name || '', ready: false };
     const s = seatOf(r, cid); if (s && c.name) r.seats[s].name = c.name;
     send(c, { type: 'state', lobby: lobbyView(r, cid), game: r.game });
     pushLobby(r);

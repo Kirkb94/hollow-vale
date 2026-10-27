@@ -1405,6 +1405,8 @@ const MODES={
  4:{shape:'rect',w:10,h:10,rad:5,sides:['p','e','g','k'],edges:{p:'bBottom',e:'bLeft',g:'bTop',k:'bRight'},mana:{p:2,e:1,g:0,k:0},cap:{p:99,e:99,g:99,k:99},tb:{p:[0,0,0],e:[0,0,0],g:[0,0,0],k:[0,0,0]}}};
 const seatPos=(n,sd)=>{const M=MODES[n]||MODES[3];return M.edges[sd]?EDGE_NAME[M.edges[sd]]:''};
 const TB={},MANA0={},CAP0={};const TOWER_HP=[12,14,15];
+/* HV_MARLOWE: tower HP text built from TOWER_HP + each mode's turn-order bonus */
+function towerRuleHTML(){const t=(n,sd)=>TOWER_HP.map((v,i)=>v+((MODES[n].tb[sd]||[])[i]||0)).join(' / '),row=n=>{const M=MODES[n],g=[];M.sides.forEach((sd,i)=>{const h=t(n,sd),l=g[g.length-1];if(l&&l.h===h)l.s.push(i+1);else g.push({h,s:[i+1]})});return g.length==1?'every player <b>'+g[0].h+'</b>':g.map(x=>(x.s.length>1?'Players '+x.s[0]+'-'+x.s[x.s.length-1]:'Player '+x.s[0])+' <b>'+x.h+'</b>').join(', ')};return 'Each player has 3 towers, counted left to right as you face your own edge of the board. A few towers get a little extra HP to even out the turn order: <b>1v1</b>: '+row(2)+'. <b>3 players</b>: '+row(3)+'. <b>4 players</b>: '+row(4)+'. Fortify Towers adds 3 to each.'}
 /* ---- match options (synced in cfg.opts) ---- */
 const OPTDEF=[
  {k:'shrines',n:'Shrines',def:true,d:'Hold a glowing shrine in the middle at the start of your turn: +1 mana and that hero heals 2.'},
@@ -1505,7 +1507,9 @@ const capSrc=sd=>['Base '+ARMY_BASE].concat(Object.keys(BLD).filter(k=>BLD[k].ca
 const overCap=sd=>Math.ceil(armySize(sd)-.01)>armyCap(sd),capMsg=sd=>`Army is over its cap (${Math.ceil(armySize(sd)-.01)}/${armyCap(sd)}): build or rebuild a Cottage or Great Hall to hire again.`;
 const armySize=sd=>S.units.filter(u=>u.side==sd&&!u.sumBy).reduce((a,u)=>a+slotCost(u.k)/(H[u.k].group||1),0)+S.pool[sd].reduce((a,k)=>a+slotCost(k),0);/* army size in team slots */
 const hasBoss=sd=>S.units.some(u=>u.side==sd&&H[u.k].elite&&!u.sumBy)||S.pool[sd].some(k=>H[k].elite);
-const canHire=(sd,k)=>!!k&&!!H[k]&&S.gold[sd]>=hireCost(k)&&armySize(sd)+slotCost(k)<=armyCap(sd)+0.01;
+/* HV_MARLOWE: one copy of each boss per side (alive on the board or waiting in the reserve) */
+const hvHasBoss=(sd,k)=>!!(H[k]&&H[k].elite)&&(S.units.some(u=>u.side==sd&&!u.sumBy&&(u.k==k||(u.shape&&u.shape.k0==k)))||S.pool[sd].includes(k));window.hvHasBoss=hvHasBoss;
+const canHire=(sd,k)=>!!k&&!!H[k]&&!hvHasBoss(sd,k)&&S.gold[sd]>=hireCost(k)&&armySize(sd)+slotCost(k)<=armyCap(sd)+0.01;
 function canBuy(sd,it,i){if(!MOPT.gold||!SHOP[it]||sd===S.boss||S.gold[sd]==null)return false;const g=S.gold[sd];
 if(it=='hire')return i==null?hireOpts(sd).some(k=>canHire(sd,k)):canHire(sd,hireOpts(sd)[i]);
 if(it=='recruit')return g>=recCost('x',sd)&&S.fallen[sd].length>0&&armySize(sd)+1<=armyCap(sd)+0.01;
@@ -1513,7 +1517,7 @@ if((it=='repair'||it=='fort')&&S.round>=SDR())return false;if(it=='repair')retur
 const c=upgCost(sd,it);if(c==null||g<c)return false;if(it=='eyes'&&!MOPT.sight)return false;if(it=='fort'&&!S.tw[sd].some(T=>T.hp>0))return false;return true}
 function doBuy(sd,it,ri){if(!canBuy(sd,it,it=='hire'?(ri==null?-1:ri):undefined))return false;
 if(it=='hire'){const k=hireOpts(sd)[ri];S.gold[sd]-=hireCost(k);S.pool[sd].push(k);if(!RP)msg(`${SHORT[sd]} hires a ${H[k].n}.`)}
-else if(it=='recruit'){const op=recOpts(sd),k=ri!=null&&op[ri]?op[ri]:S.fallen[sd][S.fallen[sd].length-1];if(!k||S.gold[sd]<recCost(k,sd)||armySize(sd)+slotCost(k)>armyCap(sd)+0.01)return false;S.gold[sd]-=recCost(k,sd);S.recN=S.recN||{};S.recN[sd]=(S.recN[sd]||0)+1;S.fallen[sd].pop();S.pool[sd].push(k);if(!RP)msg(`${SHORT[sd]} recruits a new ${H[k].n}.`)}
+else if(it=='recruit'){const op=recOpts(sd),k=ri!=null&&op[ri]?op[ri]:S.fallen[sd][S.fallen[sd].length-1];if(!k||hvHasBoss(sd,k)||S.gold[sd]<recCost(k,sd)||armySize(sd)+slotCost(k)>armyCap(sd)+0.01)return false;S.gold[sd]-=recCost(k,sd);S.recN=S.recN||{};S.recN[sd]=(S.recN[sd]||0)+1;S.fallen[sd].pop();S.pool[sd].push(k);if(!RP)msg(`${SHORT[sd]} recruits a new ${H[k].n}.`)}
 else if(it=='repair'){S.gold[sd]-=repCost(sd);S.repN=S.repN||{};S.repN[sd]=(S.repN[sd]||0)+1;const T=repTower(sd),a=Math.min(4,T.max-T.hp);T.hp+=a;pop(T,'+'+a,1);fx(T,'spawn');if(!RP)msg(`${SHORT[sd]} repairs a tower.`)}
 else{const c=upgCost(sd,it);S.gold[sd]-=c;S.upg[sd][UPGK[it]]=upgLv(sd,it)+1;if(it=='fort')S.tw[sd].filter(T=>T.hp>0).forEach(T=>{T.max+=3;T.hp+=3;pop(T,'+3',1);fx(T,'spawn')});if(!RP)msg(`${SHORT[sd]} buys ${SHOP[it].n}${SHOP[it].cs.length>1?' '+['I','II'][upgLv(sd,it)-1]:''}.`)}
 if(!RP)sfx('spawn');return true}
@@ -2664,7 +2668,7 @@ if(S.over)$('#info').innerHTML=`<span class="win">${NAMES[S.winner]} wins${isMin
 else if(sel){const h=H[sel.k];$('#info').innerHTML='<div class="uhelp">'+(sel.moved?'<b>Charge!</b> Tap a red target to strike now, or tap elsewhere to hold position.':h.charge?'Charge: move to a blue tile and you can still attack this turn, or attack a red target right away.':'Tap a blue tile to move or a red target to act. Either one ends this hero\'s turn.')+'</div>'+abBtn(sel)}
 else if(insp){$('#info').innerHTML='<div class="uhelp">Blue: where it can move. Red: what it can hit from where it stands. Tap it again to hide.</div>'}
 else if(!ME&&NET&&NET.lob&&NET.lob()&&NET.lob().seats){const LB=NET.lob(),off=SIDES.filter(sd=>LB.seats[sd]&&LB.seats[sd].kind=='human'&&!LB.seats[sd].connected&&!S.dead[sd]);$('#info').innerHTML='You are spectating.'+(off.length?'<div class="take">'+off.map(sd=>`<button class="go sec" data-take="${sd}">Take over ${esc0(NAMES[sd])}'s seat (disconnected)</button>`).join('')+'</div>':'')}
-else $('#info').textContent=bldSel?'Tap a highlighted hex next to your heroes or towers to build a '+BLD[bldSel].n+' ('+BLD[bldSel].c+' gold). Not within 2 hexes of an enemy tower.':spSel!=null?'Tap a highlighted hex next to your towers to spawn. A hero cannot act on the turn it spawns.':ME&&S.dead[ME]?'You were eliminated - placed '+(SIDES.length-S.order.indexOf(ME))+'. You can see the whole board, so just watch it play out.':ME?'Spawn heroes from your reserve next to your towers, or tap a hero that has not acted. Every other player is your enemy. Last one standing wins.':'You are spectating.';
+else $('#info').textContent=bldSel?'Tap a highlighted hex next to your heroes or towers to build a '+BLD[bldSel].n+' ('+BLD[bldSel].c+' gold). Not within 2 hexes of an enemy tower.':spSel!=null?'Tap a highlighted hex next to your towers to spawn. A hero cannot act on the turn it spawns.':ME&&S.dead[ME]?'You were eliminated - placed '+(SIDES.length-S.order.indexOf(ME))+'. You can see the whole board, so just watch it play out.':ME?(TOUCH?'Spawn heroes from your reserve next to your towers, or tap a hero that has not acted. ':'Spawn heroes from your reserve next to your towers, or click a hero that has not acted. ')+(NPL==2?'Destroy the 3 enemy towers to win.':'Every other player is your enemy. Last one standing wins.'):'You are spectating.';
 $('#log').textContent=S.over?'':logt}
 BASE=Math.round(57.3*WF*HVTS);const UIB=()=>(HVMAP.big&&!MOB)?Math.min(BASE,860):BASE;const maxK=()=>(document.documentElement.clientWidth-24)/UIB(),fitK=()=>Math.min(maxK(),(HVMAP.big&&!MOB)?innerHeight/(UIB()*.85+360):innerHeight/(BASE*(HF*1.1547/WF)+360));
 function setK(k,save){k=Math.max(.3,Math.min(k,maxK()));document.documentElement.style.setProperty('--zk',k);const z=$('#size');z.max=Math.max(30,Math.floor(maxK()*100));z.value=Math.round(k*100);if(save){try{localStorage.setItem('hv-k',k)}catch(e){}}}
@@ -2673,7 +2677,7 @@ setK(k0||fitK());
 $('#size').oninput=e=>setK(e.target.value/100,true);
 $('#fit').onclick=()=>{try{localStorage.removeItem('hv-k')}catch(e){}setK(fitK())};
 addEventListener('resize',()=>setK(parseFloat(document.documentElement.style.getPropertyValue('--zk'))||1));
-function drawRules(){const cl=`<details open><summary>Battlefield &amp; economy (always on)</summary><ul>${CORE.map(o=>`<li><b>${o.n}</b>: ${o.d}</li>`).join('')}</ul><p>Terrain is mirrored so every seat gets the same ground. Hover a hex (or tap it on a phone) to see what it does.</p><p><b>Market</b> (next to your reserve): <b>Hire</b> any unit from your main faction (${(()=>{const c=Object.keys(H).filter(k=>!H[k].hidden&&!H[k].elite).map(hireCost);return Math.min(...c)+'-'+Math.max(...c)})()} gold, bosses 14, as many as your army slots allow, army of up to ${ARMY_BASE} slots, more with Cottages and a Great Hall). <b>Recruit</b> brings back a fallen starting hero (5, bosses 8, +2 each time you recruit). <b>Repair</b> heals your most damaged tower by 4 (3, +1 each time). <b>Build</b> next to your heroes or towers (not within 2 hexes of an enemy tower): 🌾 Farm +1 gold a turn (6, up to 3), 🗼 Watchtower sees 4 hexes (5, up to 2), ⛺ Barracks lets you spawn next to it (10, 1), 🔮 Mana Well +1 mana a turn (9, 1), 🏠 Cottage +2 army slots (5, up to 3), 🏛️ Great Hall +5 army slots (12, 1). Enemies can knock buildings down for 2 gold; if a Cottage or Great Hall falls your cap drops, your units stay, but you cannot hire or recruit until you are back under it. <b>Upgrades</b>: Forge Weapons (+1 damage, 8 then 14), Forge Armor (+1 armor, 12), Fortify Towers (+3 max HP, 5 then 8), Scout's Lens (+1 sight, 4), Deep Shafts (mines pay +1, 6).</p><p><b>⛏ Gold mines</b> sit between the bases. Move a hero onto one to claim it; it pays its owner +2 gold every turn until someone else claims it.</p><p><b>Fog of war</b> (match option): enemies outside your sight are hidden. Scouts (one per faction) see 5-6 hexes and fire <b>flares</b> that light up an area, mark enemies for +1 damage and burn snares.</p></details>`+`<details><summary>Hero icons</summary><p>Small icons above each hero on the board:</p><ul>${TRAITS.map(x=>`<li>${x[1]} ${x[2]}</li>`).join('')}<li>✓ already acted this turn</li><li>🪤 rooted by a snare · 🔇 silenced · ★ hero level</li></ul></details>`+`<details><summary>Match options</summary><p>Turn these on or off in the lobby (online) or the setup screen (local).</p><ul>${OPTDEF.map(o=>`<li><b>${o.n}</b>${o.def?' (on by default)':''}: ${o.d}</li>`).join('')}</ul><p><b>Ultimates</b> (your most common faction decides yours):</p><ul>${Object.keys(ULTS).map(f=>`<li><b>${FAC[f].n}, ${ULTS[f].n}</b>: ${ULTS[f].d}</li>`).join('')}</ul></details>`+factionRules()+classRules();
+function drawRules(){const cl=`<details open><summary>Battlefield &amp; economy (always on)</summary><ul>${CORE.map(o=>`<li><b>${o.n}</b>: ${o.d}</li>`).join('')}</ul><p>Terrain is mirrored so every seat gets the same ground. Hover a hex (or tap it on a phone) to see what it does.</p><p><b>Market</b> (next to your reserve): <b>Hire</b> any unit from your main faction (${(()=>{const c=Object.keys(H).filter(k=>!H[k].hidden&&!H[k].elite).map(hireCost);return Math.min(...c)+'-'+Math.max(...c)})()} gold, bosses 14 and only one of each boss at a time, as many as your army slots allow, army of up to ${ARMY_BASE} slots, more with Cottages and a Great Hall). <b>Recruit</b> brings back a fallen starting hero (5, bosses 8, +2 each time you recruit). <b>Repair</b> heals your most damaged tower by 4 (3, +1 each time). <b>Build</b> next to your heroes or towers (not within 2 hexes of an enemy tower): 🌾 Farm +1 gold a turn (6, up to 3), 🗼 Watchtower sees 4 hexes (5, up to 2), ⛺ Barracks lets you spawn next to it (10, 1), 🔮 Mana Well +1 mana a turn (9, 1), 🏠 Cottage +2 army slots (5, up to 3), 🏛️ Great Hall +5 army slots (12, 1). Enemies can knock buildings down for 2 gold; if a Cottage or Great Hall falls your cap drops, your units stay, but you cannot hire or recruit until you are back under it. <b>Upgrades</b>: Forge Weapons (+1 damage, 8 then 14), Forge Armor (+1 armor, 12), Fortify Towers (+3 max HP, 5 then 8), Scout's Lens (+1 sight, 4), Deep Shafts (mines pay +1, 6).</p><p><b>⛏ Gold mines</b> sit between the bases. Move a hero onto one to claim it; it pays its owner +2 gold every turn until someone else claims it.</p><p><b>Fog of war</b> (match option): enemies outside your sight are hidden. Scouts (one per faction) see 5-6 hexes and fire <b>flares</b> that light up an area, mark enemies for +1 damage and burn snares.</p></details>`+`<details><summary>Hero icons</summary><p>Small icons above each hero on the board:</p><ul>${TRAITS.map(x=>`<li>${x[1]} ${x[2]}</li>`).join('')}<li>✓ already acted this turn</li><li>🪤 rooted by a snare · 🔇 silenced · ★ hero level</li></ul></details>`+`<details><summary>Match options</summary><p>Turn these on or off in the lobby (online) or the setup screen (local).</p><ul>${OPTDEF.map(o=>`<li><b>${o.n}</b>${o.def?' (on by default)':''}: ${o.d}</li>`).join('')}</ul><p><b>Ultimates</b> (your most common faction decides yours):</p><ul>${Object.keys(ULTS).map(f=>`<li><b>${FAC[f].n}, ${ULTS[f].n}</b>: ${ULTS[f].d}</li>`).join('')}</ul></details>`+factionRules()+classRules();
 const mc=Object.keys(H).filter(k=>H[k].acost||H[k].heal||H[k].slcost).map(k=>{const h=H[k],p=[];if(h.acost)p.push('attacks cost '+(h.fac=='arcane'&&h.acost>1?h.acost-1:h.acost)+' mana');if(h.slcost)p.push('Silence costs '+(h.fac=='arcane'&&h.slcost>1?h.slcost-1:h.slcost)+' mana');if(h.heal)p.push('heals '+h.heal+' HP, '+(h.cost?'costs '+h.cost+' mana':'free'));return `<li><b>${h.n}</b>: ${p.join('; ')}</li>`}).join('');
 $('#rules').innerHTML=`<h2>How to play</h2>
 <details open><summary>The goal</summary><p>Play <b>1v1</b>, or a <b>3- or 4-player free-for-all</b>, online or on one device. A player is <b>eliminated</b> when all 3 of their towers fall, or when they have no units on the board <i>and</i> nothing left in their Reserve. An eliminated player's units vanish. The <b>last player standing wins</b>. In bigger games every other player is your enemy.</p></details>
@@ -2685,7 +2689,7 @@ ${cl}<details><summary>Building your team</summary><ul><li>You have <b>10 slots<
 <details><summary>Spawning heroes</summary><ul><li>Nobody starts on the board. Your picks wait in the <b>Reserve</b> under the board.</li><li>Tap a Reserve hero, then tap a highlighted hex <b>next to one of your living towers</b> to spawn it.</li><li>A hero cannot move or act on the turn it spawns.</li><li>A squad uses one spawn but needs 3 free hexes next to your towers.</li><li>Once a tower is destroyed you can no longer spawn next to it.</li></ul></details>
 <details><summary>Your turn</summary><ul><li>Each unit can <b>move or act once</b> per turn, never both.</li><li>Tap a unit: <b>blue hexes</b> are where it can move, <b>red hexes</b> are targets for its attack or heal.</li><li>Your turn ends automatically once every unit has acted and you cannot spawn. You can also press <b>End turn</b> at any time.</li><li>A stunned unit cannot move or act on its next turn.</li></ul></details>
 <details><summary>Moving and fighting</summary><ul><li>The board is a hex grid, so every hex has 6 neighbors. Movement and range are counted in hexes.</li><li>Units cannot walk through other units. Flying units can pass over them but must end on an empty hex. Heroes walk their route hex by hex and fliers glide (instant with reduced motion).</li><li>A hero that counters deals less the more hurt it is: half its damage times the share of HP it has left (at least 1).</li><li>Attacks hit enemy units and enemy towers. A unit at 0 HP is defeated. Some heroes have a minimum range and cannot hit anything closer.</li><li>Casters, healers, squads and others have extra abilities. Select a hero, or look at its card, to see its keywords.</li></ul></details>
-<details><summary>Towers</summary><ul><li>Each player has 3 towers with <b>12, 14 and 15 HP</b>, counted left to right as you face your own edge of the board.</li><li>The board is a hexagon. In <b>1v1</b> it is smaller: Player 1 holds the bottom edge and Player 2 the top. In a <b>3-player</b> game Player 1 holds the bottom edge, Player 2 the upper-left and Player 3 the upper-right. With <b>4 players</b> the board is a square field: Player 1 bottom, Player 2 left, Player 3 top and Player 4 (red) right. Turns always go in seat order: 1, 2, 3, 4. To even out turn order in 3-player games, on their very first turn Player 2 may spawn at most <b>4</b> heroes and Player 3 at most <b>3</b>. After that there is no limit.</li><li>Towers do not lose HP on their own until <b>sudden death</b>. From round 14 (56 on larger maps) <b>every tower crumbles</b> at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired or fortified, so stalling is dangerous. All players crumble at the same moment, so turn order does not matter.</li><li>Towers <b>strike back</b> at a hero that hits them from the next hex: 3 damage at full HP, less as the tower is damaged (at least 1). Farms, Watchtowers, Barracks, Mana Wells, Cottages, the Great Hall and walls strike back for 1. Ranged attacks from 2 or more hexes away are never struck back, and the preview on a red hex shows it ("Tower strikes back for 3").</li><li>If the last players standing all lose their final tower at the same moment, the one with the most total unit HP left on the board wins.</li><li>Destroyed towers disappear from the board.</li></ul></details>
+<details><summary>Towers</summary><ul><li>${towerRuleHTML()}</li><li>The board is a hexagon. In <b>1v1</b> it is smaller: Player 1 holds the bottom edge and Player 2 the top. In a <b>3-player</b> game Player 1 holds the bottom edge, Player 2 the upper-left and Player 3 the upper-right. With <b>4 players</b> the board is a square field: Player 1 bottom, Player 2 left, Player 3 top and Player 4 (red) right. Turns always go in seat order: 1, 2, 3, 4. To even out turn order in 3-player games, on their very first turn Player 2 may spawn at most <b>4</b> heroes and Player 3 at most <b>3</b>. After that there is no limit.</li><li>Towers do not lose HP on their own until <b>sudden death</b>. From round 14 (56 on larger maps) <b>every tower crumbles</b> at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired or fortified, so stalling is dangerous. All players crumble at the same moment, so turn order does not matter.</li><li>Towers <b>strike back</b> at a hero that hits them from the next hex: 3 damage at full HP, less as the tower is damaged (at least 1). Farms, Watchtowers, Barracks, Mana Wells, Cottages, the Great Hall and walls strike back for 1. Ranged attacks from 2 or more hexes away are never struck back, and the preview on a red hex shows it ("Tower strikes back for 3").</li><li>If the last players standing all lose their final tower at the same moment, the one with the most total unit HP left on the board wins.</li><li>Destroyed towers disappear from the board.</li></ul></details>
 <details><summary>Keywords</summary><ul><li><b>Armor N</b>: takes N less damage from each hit (minimum 1).</li><li><b>Drain N</b>: heals itself N HP when its hit damages a unit.</li><li><b>Stun</b>: the unit it hits skips its next turn.</li><li><b>Siege +N</b>: deals N extra damage to towers and walls (Iron Clan units add +1 more).</li><li><b>Flying</b>: moves over units, walls and water (never stops over deep water).</li><li><b>Splash</b>: also hits enemies next to the target for half damage.</li><li><b>Cleave</b> (melee splash): also hits the 2 hexes beside the target, in front of the attacker, for half damage.</li><li><b>Pierce</b> (Lancer): its spear hits both hexes in a straight line for full damage.</li><li><b>Squad xN</b>: spawns as N separate units.</li><li><b>Heal N</b>: restores N HP to a hurt ally in range.</li><li><b>Raise the Slain</b> (Necromancer): an enemy hero it kills (attack, counterattack or splash) rises as a random Undead hero of the same gold cost, or the nearest cheaper one, on that hex or next to it. A slain boss raises an Undead boss. An enemy squad raises once, when its last member falls; if the risen hero is a squad, the whole squad rises. Summoned and raised units never rise, and a raised Necromancer cannot raise. The raised unit fights for the Necromancer's side, starts used, shows a ⌛ countdown and crumbles after 3 of its owner's turns. It has no Undying or on-death effects, does not count toward the army cap and cannot be recruited. If no hex is free, nothing rises. Raising never uses up a Grave.</li><li><b>Wounds</b>: units deal less damage as they lose HP (50% at near-zero HP, full damage at full HP). Healing restores it.</li></ul></details>
 <details><summary>Playing on iPhone or iPad</summary><ul><li>Open the game's web address in Safari, choose <b>Play with friends</b>, then create a game or join one with its 4-letter room code. Friends can scan the QR code in the lobby.</li><li>In Safari tap Share, then <b>Add to Home Screen</b> to install Hollow Vale as an app with its own icon.</li><li>Tap to select and act. Tap an enemy or tower to see its stats. Turn the phone sideways for a bigger board.</li></ul></details><details><summary>Controls and tips</summary><ul><li>On a computer, hover a unit or tower to see its stats. The Size slider and the sound button are at the top of the battle screen.</li><li>Use hexes next to your towers carefully, since they are your only spawn points.</li><li><b>View: Classic / Tilted</b>: Tilted lays the board back like a diorama with the heroes standing up. Switch it with the View button in a battle (V on a computer) or in ⚙ Display, where you can also set the tilt. It only changes your own screen, so friends can each pick their own.</li></ul></details>`}
 
@@ -3112,20 +3116,26 @@ document.head.appendChild(st);
 var cues=new Map(),SKIP='#bscroll,#cmapw,[data-nocue],.sfc',TH=4,MAXC=8;
 function mk(){var d=document.createElement('div');d.className='sfc';d.setAttribute('aria-hidden','true');document.body.appendChild(d);return d}
 function hide(c){c.classList.remove('on')}
+var DONE=new Set(),SEEN=new Map();
+function ckey(el){return el.id||((el.parentNode&&el.parentNode.id?el.parentNode.id+'>':'')+el.tagName+'.'+String(el.className||'').split(' ')[0])}
+function hits(x0,y0,x1,y1){var P=[[x0+4,y0+4],[x1-4,y0+4],[x0+4,y1-4],[x1-4,y1-4],[(x0+x1)/2,(y0+y1)/2]];for(var i=0;i<P.length;i++){var e=document.elementFromPoint(P[i][0],P[i][1]);if(e&&e.closest&&e.closest('button,a,input,select,label,[role=button],.card,.chip,.ft,.ff,.slot,.shop,[data-tip]'))return true}return false}
 function upd(el,vert,c){
+ var k=ckey(el);if(DONE.has(k)){hide(c);return}
  var r=el.getBoundingClientRect(),vw=window.innerWidth,vh=window.innerHeight;
  var more=vert?el.scrollHeight-el.scrollTop-el.clientHeight>TH:el.scrollWidth-el.scrollLeft-el.clientWidth>TH;
- if(!more||r.width<20||r.height<20||r.bottom<=0||r.top>=vh||r.right<=0||r.left>=vw){hide(c);return}
+ if(!more||r.width<20||r.height<20||r.bottom<=0||r.top>=vh||r.right<=0||r.left>=vw){hide(c);if(!more&&SEEN.has(k))DONE.add(k);return}
+ if(!SEEN.has(k)){SEEN.set(k,Date.now());setTimeout(function(){DONE.add(k);hide(c)},2600)}
  var s=c.style;
  if(vh-r.bottom>=34){
+  var lx=Math.max(70,Math.min(vw-70,r.left+r.width/2));if(hits(lx-80,r.bottom+6,lx+80,r.bottom+32)){c.className='sfc';DONE.add(k);return}
   c.className='sfc pill on';c.textContent=vert?'\u25BC Scroll for more':'Scroll for more \u203A';
-  s.left=Math.max(70,Math.min(vw-70,r.left+r.width/2))+'px';s.top=(r.bottom+6)+'px';s.width='';s.height='';
+  s.left=lx+'px';s.top=(r.bottom+6)+'px';s.width='';s.height='';
  }else if(vert){
-  var b=Math.min(r.bottom,vh),l=Math.max(r.left,0),w=Math.min(r.right,vw)-l;
+  var b=Math.min(r.bottom,vh),l=Math.max(r.left,0),w=Math.min(r.right,vw)-l;if(hits(l,b-30,l+w,b)){c.className='sfc';DONE.add(k);return}
   c.className='sfc fv on';c.textContent='\u25BC';
   s.left=l+'px';s.width=w+'px';s.height='30px';s.top=(b-30)+'px';
  }else{
-  var rr=Math.min(r.right,vw);
+  var rr=Math.min(r.right,vw);if(hits(rr-30,Math.max(r.top,0),rr,Math.min(r.bottom,vh))){c.className='sfc';DONE.add(k);return}
   c.className='sfc fh on';c.textContent='\u203A';
   s.left=(rr-30)+'px';s.width='30px';s.top=Math.max(r.top,0)+'px';s.height=(Math.min(r.bottom,vh)-Math.max(r.top,0))+'px';
  }
@@ -3159,7 +3169,7 @@ function scan(){
 }
 var raf=0;
 function sched(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;refresh()})}
-document.addEventListener('scroll',sched,true);
+document.addEventListener('scroll',function(e){var t=e.target;if(t&&t.nodeType===1){var k=ckey(t);if(SEEN.has(k))DONE.add(k)}sched()},true);
 window.addEventListener('resize',function(){scan()});
 setInterval(function(){try{scan()}catch(e){}},700);
 setTimeout(function(){try{scan()}catch(e){}},300);
@@ -5453,6 +5463,433 @@ function mark(o,foe,delay){const L=document.getElementById('fxl');if(!L||typeof 
 const p0=pop;pop=function(o,txt,g){const r=p0.apply(this,arguments);
  try{if(!RP&&!FAST&&o&&(txt==='Ambushed!'||txt==='Ambush!')&&document.body.classList.contains('ingame'))mark(o,txt==='Ambush!',typeof fxOff=='number'?fxOff:0)}catch(e){}
  return r};
+})();
+</script>
+<style id="hv-marlowe">
+/* ===== HV_MARLOWE (see the HV_MARLOWE script) ===== */
+:root{--hvab:#c77dff;--hvgold:#e9c46a}
+/* ---------- 1. market: 64 px portraits, name and price, one row that scrolls, never over the board ---------- */
+html body #hand .recrow.mkrow{display:flex;flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;gap:6px;align-items:stretch;max-width:100%;scrollbar-width:thin;scrollbar-color:#6b5238 transparent;padding-bottom:4px;overscroll-behavior-x:contain}
+html body #hand .recrow.mkrow>.hl{flex:none;align-self:center;max-width:150px;white-space:normal;line-height:1.2}
+html body #hand .recrow .hchip.hvm,html body #hand .recrow .rchip.hvm{flex:none;width:78px!important;min-width:78px;height:auto!important;max-height:none;padding:4px 3px 3px!important;display:flex!important;flex-direction:column;align-items:center;gap:1px;overflow:hidden;border-radius:10px}
+html body #hand .recrow .hvm .hth{position:relative;display:block;width:64px;height:64px;flex:none;border-radius:8px;overflow:hidden;background:#0c0d12;box-shadow:inset 0 0 0 1px #0008}
+html body #hand .recrow .hvm .hth.boss{box-shadow:0 0 0 2px #ffd24a99}
+html body #hand .recrow .hvm .hth .hvf{border-radius:8px}
+html body #hand .recrow .hvm .hth>img.sp,html body #hand .recrow .hvm .hth>svg.sp{position:absolute;left:50%;bottom:0;width:auto!important;height:100%!important;margin:0!important;transform:translateX(-50%)}
+html body #hand .recrow .hvm .hnm{display:block;max-width:74px;font:700 11px/1.15 'Alegreya Sans',system-ui,sans-serif;color:#f4ead0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+html body #hand .recrow .hvm small{position:static!important;display:block;font-size:11px;line-height:1.1;opacity:1;color:#ffd77a}
+html body #hand .recrow .hvm:disabled .hth{filter:grayscale(.7) brightness(.7)}
+html body #hand .recrow .hvm.hvdup .hnm::after{content:' ✓';color:#9fd08a}
+html body.mob #tray .recrow .hchip.hvm,html body.mob #tray .recrow .rchip.hvm{width:66px!important;min-width:66px}
+html body.mob #tray .recrow .hvm .hth{width:54px;height:54px}
+html body.mob #tray .recrow .hvm .hnm{max-width:62px;font-size:10px}
+
+/* ---------- 2. abilities: violet hexes, armed target, dock button ---------- */
+html body #board .cell.abt::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='50,2 98,26 98,74 50,98 2,74 2,26' fill='none' stroke='%23d9a6ff' stroke-width='3' stroke-dasharray='9 6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center/100% 100% no-repeat,#9b4ee02e;animation:none}
+html body #board .cell.abp::before{content:'✦';position:absolute;inset:auto;left:50%;top:10%;transform:translateX(-50%);z-index:6;width:auto;height:auto;clip-path:none;background:none!important;color:#e2c2ff;font:700 13px/1 system-ui,sans-serif;text-shadow:0 0 4px #6a1fb0,0 0 2px #000}
+html body #board .cell.abarea::after{background:#b06aff55;box-shadow:inset 0 0 0 2px #e6c8ff99}
+html body #board .cell.abarm::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='50,2 98,26 98,74 50,98 2,74 2,26' fill='none' stroke='%23ffffff' stroke-width='4' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center/100% 100% no-repeat,#b06affa6;animation:hvabp .8s ease-in-out infinite alternate}
+@keyframes hvabp{from{opacity:.75}to{opacity:1}}
+.hvabh{margin:0 0 6px;font-size:12.5px;color:#e6d2ff;line-height:1.35}
+.hvabh .hvsw{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin-right:3px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:#b06aff;box-shadow:inset 0 0 0 2px #e2c2ff}
+.hvabh kbd,.hvabb kbd{background:#14110d;border:1px solid #6b5238;border-radius:4px;padding:0 4px;font:600 11px system-ui,sans-serif;color:#f2e6c8}
+.ucard .hvabb{display:inline-flex;align-items:center;gap:6px;margin:6px 0 0;padding:6px 12px;border-radius:9px;border:1.5px solid #b06aff;background:linear-gradient(#3a2452,#22163a);color:#f1e2ff;font:700 13px 'Alegreya Sans',system-ui,sans-serif;cursor:pointer;pointer-events:auto}
+.ucard .hvabb.on{background:#b06aff;color:#1a0b2a;border-color:#e2c2ff}
+.ucard .hvabb:hover{filter:brightness(1.15)}
+#udock.pass .hvabb{pointer-events:auto}
+html.cb #board .cell.abt::after{background-image:repeating-linear-gradient(45deg,#d9a6ff66 0 3px,#0000 3px 8px)}
+
+/* ---------- 12. readable hexes: strong rim on valid hexes, brighter spawn / build hexes, darker ground under units ---------- */
+html:not(.cb) body #board .cell.mv::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='50,2 98,26 98,74 50,98 2,74 2,26' fill='none' stroke='%23bfe2ff' stroke-width='3.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center/100% 100% no-repeat,radial-gradient(circle,#4a9cf088,#2f78d0a0 75%)}
+html:not(.cb) body #board .cell.tg::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='50,2 98,26 98,74 50,98 2,74 2,26' fill='none' stroke='%23ffd0c4' stroke-width='3.5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center/100% 100% no-repeat,radial-gradient(circle,#ff5a4ab0,#d4493da0 60%,#d4493d80)}
+html:not(.cb) body #board.hvspw .cell.mv::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpolygon points='50,2 98,26 98,74 50,98 2,74 2,26' fill='none' stroke='%23fff3b0' stroke-width='5' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center/100% 100% no-repeat,radial-gradient(circle,#ffe06ab0,#e9b52ac0 70%);animation:hvspw 1s ease-in-out infinite alternate}
+@keyframes hvspw{from{filter:brightness(.92)}to{filter:brightness(1.25)}}
+html.cb body #board.hvspw .cell.mv::after{box-shadow:inset 0 0 0 4px #fff}
+#bw.hvt #board .cell:not([class*=" tr-"]):has(>.u) .tint{background-image:radial-gradient(ellipse 62% 54% at 50% 60%,#081006a8,#08100660 55%,#0810060a 80%)}
+/* terrain icon on the hovered hex */
+#board .cell .hvti{position:absolute;right:8%;top:16%;z-index:7;display:flex;align-items:center;gap:3px;padding:2px 6px 2px 4px;border-radius:9px;background:#0d0b09d9;border:1px solid #c9a24a88;pointer-events:none;font-style:normal;white-space:nowrap;box-shadow:0 1px 4px #000a;animation:hvtin .15s ease-out}
+#board .cell .hvti span{font-size:13px;line-height:1}
+#board .cell .hvti em{font:600 10px/1 'Alegreya Sans',system-ui,sans-serif;font-style:normal;color:#f2e6c8}
+@keyframes hvtin{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+html.tvon #board .cell .hvti{transform-origin:50% 100%}
+
+/* ---------- 7. turn log + toast ---------- */
+#hvlog{font:13px/1.35 'Alegreya Sans',system-ui,sans-serif;color:#f2e6c8}
+#hvlog .hvlh{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:5px 10px;border-radius:9px;background:#14110dd9;border:1px solid #6b5238;font:700 13px 'Alegreya Sans',system-ui,sans-serif;color:#f2d69a}
+#hvlog .hvlh:hover{border-color:#c9a24a}
+#hvlog .hvlh:focus-visible{outline:2px solid #ffd36b}
+#hvlog .hvll{list-style:none;margin:4px 0 0;padding:4px 6px;max-height:min(17vh,180px);overflow:auto;border-radius:9px;background:#0d0b09e6;border:1px solid #4a3a28}
+#hvlog:not(.open) .hvll{display:none}
+#hvlog .hvll li{display:flex;gap:7px;padding:3px 2px 3px 7px;border-left:3px solid var(--c);margin:2px 0}
+#hvlog .hvll li i{flex:none;font-style:normal;font-size:11px;opacity:.6;min-width:22px;padding-top:1px}
+#hvlog .hvll li b{color:var(--c)}
+#hvlog .hvll li small{display:block;font-size:11.5px;color:#ffb3a3;opacity:.95}
+#hvlog .hvll li.hvle{border:0;opacity:.6}
+body.pcv.ingame #pcbot #log{display:none}
+body.pcv.ingame #pcbot .pbr:has(#hvlog.open){max-height:42vh}
+body.pcv.ingame #pcbot:has(#hvlog.open){max-height:46vh}
+body.mob #hvlog{position:fixed;left:8px;right:8px;bottom:calc(var(--trayh,180px) + 8px);z-index:46;display:none}
+body.mob #hvlog.open{display:block}
+body.mob #hvlog .hvll{max-height:38vh}
+#hvlogb{display:none}
+body.mob #bz #hvlogb{display:flex;align-items:center;justify-content:center;font-size:17px}
+#hvtoast{position:fixed;left:50%;top:calc(96px + env(safe-area-inset-top,0px));z-index:9400;transform:translate(-50%,-8px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:min(560px,calc(100vw - 24px));padding:9px 16px;border-radius:12px;background:linear-gradient(#211b15f5,#14110df5);border:1px solid #c9a24a;box-shadow:0 8px 24px #000c;color:#f4ead0;font:14px/1.35 'Alegreya Sans',system-ui,sans-serif;display:flex;flex-direction:column;gap:2px;cursor:pointer}
+#hvtoast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#hvtoast b{font-weight:700;color:#ffe2a0}
+#hvtoast .tdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+#hvtoast .hvhurt{color:#ffb3a3}
+#hvtoast em{font-size:11.5px;opacity:.6;font-style:normal}
+body.mob #hvtoast{top:calc(118px + env(safe-area-inset-top,0px));font-size:13px}
+@media (prefers-reduced-motion:reduce){#hvtoast{transition:none}}
+
+/* ---------- 8. one map / modifier pill ---------- */
+#mods.hvp{display:flex;align-items:center;gap:6px;margin:0}
+#mods .hvpill{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:999px;background:#14110dd9;border:1px solid #6b5238;font:13px/1.2 'Alegreya Sans',system-ui,sans-serif;color:#e8dcc0;white-space:nowrap;cursor:help}
+#mods .hvpill b{color:#f2d69a;font-weight:700}
+#mods .hvpill:hover,#mods .hvpill:focus-visible{border-color:#c9a24a;outline:none}
+body.pcv.ingame #bzname{display:none!important}
+html body.mob.ingame #mods{display:none!important}
+
+/* ---------- 9. phone: zoom buttons clear of the towers, title clear of the gear ---------- */
+html body.mob.ingame #bz{top:42%!important;bottom:auto!important;right:4px!important;transform:translateY(-50%);flex-direction:column;align-items:flex-end;gap:6px}
+html body.mob.ingame #bz button{width:36px;height:36px;font-size:17px;opacity:.9}
+html body.mob.ingame #bz #tvbm{width:auto;height:30px;padding:0 10px;font-size:12px;border-radius:15px}
+html body.mob:not(.ingame) main>h1{padding:0 104px 0 8px;box-sizing:border-box;font-size:clamp(22px,7.4vw,34px)!important;text-align:left;white-space:nowrap}
+html body.mob:not(.ingame) main>h1 .fl{display:none}
+
+/* ---------- 10. Display settings additions ---------- */
+#dspo .hvset{margin:12px 0 4px;padding-top:10px;border-top:1px solid #7a5a3466;display:flex;flex-direction:column;gap:6px}
+#dspo .hvset>b,#dspo .hvvol b{display:block}
+#dspo .hvset small{display:block;font-size:12px;opacity:.75}
+#dspo .hvpace{display:flex;gap:6px}
+#dspo .hvpace button{flex:1;padding:7px 8px;border-radius:9px;border:1.5px solid #6b5238;background:#1b1713;color:#f2e6c8;font:inherit;font-weight:700;cursor:pointer}
+#dspo .hvpace button.on{background:linear-gradient(#f2c95a,#b8861a);color:#2a1a10;border-color:#f2c95a}
+#dspo .hvvol{display:grid;grid-template-columns:1fr 46px;align-items:center;gap:4px 10px;margin-top:6px}
+#dspo .hvvol b{grid-column:1/-1}
+#dspo .hvvol input{width:100%;accent-color:#e9c46a}
+#dspo .hvvol span{font-variant-numeric:tabular-nums;text-align:right}
+#dspo .hvtic{display:flex;gap:8px;align-items:flex-start;margin-top:6px}
+
+/* ---------- 11. ban phase ---------- */
+#draft.hvban #dside .dst,#draft.hvban #dside #slots,#draft.hvban #dside #dsyn,#draft.hvban #dside #team,#draft.hvban #dside #start,#draft.hvban #dside .dkeys,#draft.hvban #team{display:none!important}
+html body #draft.hvban #dside{display:none!important}
+html body.pc #draft.hvban #dside{display:flex!important}
+#draft.hvban #dside::after{content:'Ban phase: pick one hero nobody can draft this match. Your team comes next.';display:block;font:13px/1.4 'Alegreya Sans',system-ui,sans-serif;color:#d9cfb8;opacity:.85;order:-1}
+#cards .card.hvpend{outline:3px solid #ff6a5a;outline-offset:2px;box-shadow:0 0 18px #ff4a3a88!important}
+#hvbanbar{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9300;display:flex;align-items:center;gap:12px;padding:10px 14px;max-width:calc(100vw - 20px);border-radius:14px;background:linear-gradient(#2a1f18f8,#16110df8);border:2px solid #ff6a5a;box-shadow:0 10px 30px #000d;color:#f4ead0;font:15px/1.3 'Alegreya Sans',system-ui,sans-serif;animation:shup .16s ease-out}
+#hvbanbar[hidden]{display:none}
+#hvbanbar .hvbp{position:relative;flex:none;width:54px;height:54px;border-radius:9px;overflow:hidden;background:#0c0d12}
+#hvbanbar .hvbt small{display:block;font-size:12px;opacity:.7}
+#hvbanbar .go{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif!important;letter-spacing:.04em;margin:0!important;width:auto!important;padding:9px 16px!important;white-space:nowrap}
+#hvbanbar .go:not(.sec){background:#e0453a;color:#fff}
+body.mob #hvbanbar{bottom:calc(10px + env(safe-area-inset-bottom,0px));flex-wrap:wrap;justify-content:center;font-size:14px}
+#dh .hvaib{font-style:normal;color:#ffb3a3;font-weight:600}
+/* the floating Display / Music buttons sit above the sticky team panel, not on it */
+body.pc #dside{top:64px!important}
+
+/* ---------- 6. first-match card ---------- */
+#hvfm{position:fixed;inset:0;z-index:9600;background:#000b;display:flex;align-items:center;justify-content:center;padding:12px}
+#hvfm .hvfmb{max-width:560px;max-height:88dvh;overflow:auto;background:linear-gradient(#17130f,#0d0b09);border:1px solid #c9a24a;border-radius:14px;padding:18px 20px;color:#f4ead0;font:15px/1.45 'Alegreya Sans',system-ui,sans-serif;box-shadow:0 20px 50px #000}
+#hvfm h3{margin:0 0 10px;font:700 21px 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.04em;color:#f2e7c9}
+#hvfm ol{margin:0 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:7px}
+#hvfm li::marker{color:#e9c46a;font-weight:700}
+#hvfm li b{color:#ffe2a0}
+#hvfm .k{display:inline-block;padding:0 6px;border-radius:5px;font-weight:700;color:#fff}
+#hvfm .k.mv{background:#2f78d0}#hvfm .k.tg{background:#c9413a}#hvfm .k.ab{background:#8a4ad4}
+#hvfm kbd{background:#14110d;border:1px solid #6b5238;border-radius:4px;padding:0 5px;font:600 12px system-ui,sans-serif}
+#hvfm .hvfmc{margin:8px 0;padding:8px 10px;border-radius:9px;background:#e9c46a1a;border:1px solid #e9c46a55}
+#hvfm .hvfmx{display:flex;gap:8px;flex-wrap:wrap}
+#hvfm .hvfmx .go{flex:1 1 200px;margin:0!important;width:auto!important}
+#hvfm .hvfms{margin:10px 0 0;font-size:12.5px;opacity:.65}
+#rules .hvnew{padding:8px 12px;border-radius:10px;background:#e9c46a1a;border:1px solid #e9c46a55}
+#rules .hvnew .go{display:inline-block;width:auto!important;margin:6px 0 0!important;padding:6px 14px!important}
+
+/* ---------- 14. Hex Rose look for Play vs AI, the online lobby and the draft (when the menu style is Hex Rose) ---------- */
+main>.size{display:none!important}
+html.hvplay main>.size{display:flex!important}
+body.pcv.ingame main>.size{display:none!important}
+html.hvrose body:not(.ingame){background:radial-gradient(80% 60% at 50% 0%,rgba(70,96,92,.28),transparent 70%),radial-gradient(60% 50% at 80% 100%,rgba(233,196,106,.07),transparent 70%),#05080a!important}
+html.hvrose body:not(.ingame) #amb{opacity:.35}
+html.hvrose body:not(.ingame) main>h1{font:400 clamp(34px,4.4vw,64px)/1 'Uncial Antiqua','Luminari',Georgia,serif;color:#f2e7c9;text-shadow:0 3px 0 rgba(0,0,0,.6),0 0 40px rgba(233,196,106,.18);letter-spacing:0;margin:18px 0 8px}
+html.hvrose body:not(.ingame) main>h1 .fl{display:none}
+html.hvrose :is(#lsetup,#lobby,#draft){font-family:'Alegreya Sans',system-ui,sans-serif;color:#e8e1cf}
+html.hvrose :is(#lsetup,#lobby,#draft) :is(h2,h3,.opth){font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;font-weight:700;letter-spacing:.06em;color:#f2e7c9}
+html.hvrose :is(#lsetup,#lobby)>h2,html.hvrose #draft>h2{font-size:clamp(24px,2.4vw,34px)}
+html.hvrose :is(#lsetup,#lobby,#draft) .sub{color:#c9c1ae;font-family:'Alegreya Sans',system-ui,sans-serif}
+html.hvrose :is(#lsetup,#lobby,#draft) .ft,html.hvrose :is(#lsetup,#lobby) .lmode button{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;font-weight:700;letter-spacing:.05em;color:#d9d1bd;background:rgba(7,10,12,.7);border:0;box-shadow:inset 0 0 0 1px rgba(239,232,214,.28);border-radius:0;padding-left:18px;padding-right:18px;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+html.hvrose :is(#lsetup,#lobby,#draft) .ft.on,html.hvrose :is(#lsetup,#lobby) .lmode button.on{background:#e9c46a;color:#1a1206;box-shadow:none}
+html.hvrose :is(#lsetup,#lobby,#draft) .ft:hover:not(.on){background:rgba(30,36,38,.9);color:#fff}
+html.hvrose #draft .ff{font-family:'Alegreya Sans',system-ui,sans-serif;background:rgba(7,10,12,.7)}
+html.hvrose #draft .ff.on{background:color-mix(in srgb,var(--fc,#e9c46a) 55%,#07090c);color:#fff;box-shadow:inset 0 0 0 1px var(--fc,#e9c46a)}
+html.hvrose :is(#lsetup,#lobby,#draft) button.go{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.06em;font-weight:700;border-radius:4px;background:#e9c46a;color:#1a1206;box-shadow:0 2px 0 #7a5a20,0 0 20px rgba(233,196,106,.15)}
+html.hvrose :is(#lsetup,#lobby,#draft) button.go.sec{background:rgba(7,10,12,.7);color:#e8e1cf;border:0;box-shadow:inset 0 0 0 1px rgba(239,232,214,.3)}
+html.hvrose :is(#lsetup,#lobby,#draft) button.go:disabled{opacity:.45}
+html.hvrose :is(#lsetup,#lobby) :is(.ls,.opt,.mapb,.maps>button,#lroom .rpick,.qrw){background:rgba(7,10,12,.62)!important;border-color:rgba(239,232,214,.22)!important;border-radius:6px!important;box-shadow:none}
+html.hvrose :is(#lsetup,#lobby) :is(.ls,.opt).on,html.hvrose :is(#lsetup,#lobby) .maps>button.on{border-color:#e9c46a!important;box-shadow:0 0 0 1px #e9c46a,0 0 18px rgba(233,196,106,.12)!important}
+html.hvrose :is(#lsetup,#lobby) input:not([type]),html.hvrose :is(#lsetup,#lobby) input[type=text],html.hvrose #draft #dq{background:rgba(7,10,12,.75);border:1px solid rgba(239,232,214,.3);border-radius:4px;color:#f2e7c9;font-family:'Alegreya Sans',system-ui,sans-serif}
+html.hvrose #draft .card{border-radius:8px}
+html.hvrose #draft .card b{font-family:'Alegreya Sans',system-ui,sans-serif;font-weight:800;letter-spacing:.01em}
+html.hvrose body.pc #dside{background:linear-gradient(rgba(14,18,20,.96),rgba(7,10,12,.96));border:1px solid rgba(239,232,214,.22);box-shadow:0 12px 30px #000a;border-radius:8px}
+html.hvrose #dside .dst{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;font-weight:700;letter-spacing:.06em;color:#f2e7c9}
+html.hvrose #dside .dpn b{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif}
+html.hvrose #dside{font-family:'Alegreya Sans',system-ui,sans-serif}
+html.hvrose body:not(.ingame) #dspb,html.hvrose body:not(.ingame) #mtog{font-family:'Alegreya Sans',system-ui,sans-serif;background:rgba(7,10,12,.6);border:0;box-shadow:inset 0 0 0 1px rgba(239,232,214,.3);color:#e8e1cf}
+html.hvrose #dh{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif}
+html.hvrose #lobby .lrow label{font-family:'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.05em}
+
+/* phone: the market sheet sits inside the tray (the board shrinks above it) instead of floating over the board */
+html body.mob #tray .recrow.mkrow{position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;order:-1;flex:1 0 100%;width:100%;box-sizing:border-box;margin:0 0 4px;padding:24px 8px 6px!important;border-radius:12px;box-shadow:none;animation:none}
+html body.mob #tray .recrow.mkrow .shx{top:2px;right:6px;width:24px;height:24px}
+html body.mob #hvbanbar{left:8px;right:8px;transform:none;max-width:none;display:grid;grid-template-columns:54px 1fr;gap:8px 10px}
+html body.mob #hvbanbar .go{grid-column:span 1}
+html body.mob #hvbanbar .hvbt{grid-column:2}
+html body.mob #hvbanbar .go[data-a="ok"]{grid-column:1/2;grid-column:1/-1}
+html body.mob #hvbanbar .go[data-a="no"]{grid-column:1/-1}
+/* the Display dialog grew: keep it inside short screens */
+#dspo .dp{max-height:calc(100dvh - 24px);overflow-y:auto;box-sizing:border-box}
+</style>
+<script id="hv-marlowe-js">
+/* ===== HV_MARLOWE: fixes from the Marlowe playtest =====
+ Client-only UI and AI changes. Game state (S) is only changed through perform()/submit(); nothing here uses Math.random on S.
+ 1 market thumbnails · 2 ability targets, Q and dock button · 3 AI pushes towers / contests the chest · 4 lighter draft (one card per pick)
+ 5 camera on your side · 6 first-match card · 7 turn log + AI turn toast · 8 one map/modifier pill · 9 phone overlaps
+ 10 battle speed + volume · 11 ban confirm, AI bans · 12 readable hexes, terrain icon on hover · 14 Hex Rose screens · 15 tower HP and 1v1 text */
+(function(){
+if(typeof H=='undefined'||window.HVM)return;
+const HVM=window.HVM={log:[],ver:1};
+const Q=s=>document.querySelector(s);
+const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const touchy=()=>{try{return !!(TOUCH||MOB)}catch(e){return false}};
+const Verb=()=>touchy()?'Tap':'Click',verb=()=>touchy()?'tap':'click';
+const E=t=>String(t==null?'':t).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+const inGame=()=>!!(S&&Q('#game')&&!Q('#game').hidden);
+const nm=k=>H[k]?H[k].n:k;
+const ME0=()=>{try{return ME||(S&&S.turn)}catch(e){return null}};
+
+/* ---------- 15. tower HP text from the real tower data ---------- */
+const twHP=(n,sd)=>{const M=MODES[n]||MODES[3];return TOWER_HP.map((v,i)=>v+(((M.tb||{})[sd]||[])[i]||0))};
+HVM.towerLine=function(n){const M=MODES[n]||MODES[3],g=[];M.sides.forEach((sd,i)=>{const h=twHP(n,sd).join('/'),last=g[g.length-1];if(last&&last.h===h)last.s.push(i+1);else g.push({h,s:[i+1]})});
+ if(g.length==1)return 'every tower set is '+g[0].h+' HP';
+ return g.map(x=>(x.s.length>1?'Players '+x.s[0]+'-'+x.s[x.s.length-1]:'Player '+x.s[0])+' '+x.h).join(', ')+' HP'};
+const draftN=()=>{try{if(typeof CAMP!='undefined'&&CAMP!=null&&typeof CAMPAIGN!='undefined'){const c=CAMPAIGN.find(c=>c.id===CAMP);if(c)return c.n}}catch(e){}
+ try{const lb=NET&&NET.lob&&NET.lob();if(lb&&lb.n)return lb.n}catch(e){}try{return LS.n||2}catch(e){return 2}};
+function draftIntro(){const p=Q('#draft>p.sub');if(!p)return;if(!p.dataset.hv0)p.dataset.hv0=p.textContent;const n=draftN();
+ const t=p.dataset.hv0.replace(/Towers have 12, 14 and 15 HP \(left to right\)\.\s*/,'Towers ('+(n==2?'1v1':n+' players')+', left to right): '+HVM.towerLine(n)+'. ')
+  .replace('Be the last player standing.',n==2?'Destroy the 3 enemy towers to win.':'Be the last player standing.')
+  .replace('Duplicates allowed.','Duplicates allowed (bosses: one of each).');
+ if(p.textContent!==t)p.textContent=t}
+
+/* ---------- 4. draft: only the changed card is rebuilt (see hvCardsSet); intro text per mode ---------- */
+{const dc=drawCards;drawCards=function(){const r=dc.apply(this,arguments);try{draftIntro();banUI()}catch(e){}return r}}
+
+/* ---------- 11. ban phase: confirm step, team panel hidden, AI bans shown ---------- */
+let banPend=null,banOK=null;HVM.aiBans=[];
+function banUI(){const d=Q('#draft');if(!d)return;const on=!!(BANMODE&&!d.hidden);d.classList.toggle('hvban',on);
+ let bar=Q('#hvbanbar');if(!on||!banPend){if(bar)bar.hidden=true;if(!on)banPend=null}
+ else{if(!bar){bar=document.createElement('div');bar.id='hvbanbar';bar.setAttribute('role','dialog');document.body.appendChild(bar);
+   bar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.a=='ok'){const k=banPend;banPend=null;bar.hidden=true;const c=Q(`#cards .card[data-k="${k}"]`);banOK=k;if(c)c.click();banOK=null}else{banPend=null;bar.hidden=true;markPend()}})}
+  bar.innerHTML=`<span class="hvbp">${port(banPend)||''}</span><span class="hvbt">Ban <b>${E(nm(banPend))}</b> for everyone?<small>Nobody can pick a banned hero this match.</small></span><button class="go" data-a="ok">Ban ${E(nm(banPend))}</button><button class="go sec" data-a="no">Pick another</button>`;bar.hidden=false}
+ markPend();
+ const h=Q('#dh'),sb=h&&h.querySelector('small.bans');if(sb&&HVM.aiBans.length&&!sb.dataset.hv){sb.dataset.hv=1;sb.innerHTML='Banned: '+BANS.map(k=>{const a=HVM.aiBans.find(b=>b.k===k);return E(nm(k))+(a?' <i class="hvaib">(AI'+(a.sd&&NAMES[a.sd]&&LS.n>2?', '+E(NAMES[a.sd]):'')+')</i>':'')}).join(', ')}
+}
+function markPend(){document.querySelectorAll('#cards .card.hvpend').forEach(c=>c.classList.remove('hvpend'));if(banPend){const c=Q(`#cards .card[data-k="${banPend}"]`);if(c)c.classList.add('hvpend')}}
+Q('#cards').addEventListener('click',e=>{if(!BANMODE)return;const c=e.target.closest('.card');if(!c||e.target.closest('.cinfo'))return;const k=c.dataset.k;if(BANS.includes(k)||WAITBAN)return;
+ if(banOK===k)return;/* confirmed: let the game's own handler ban it */
+ e.stopImmediatePropagation();e.preventDefault();banPend=k;try{if(typeof DF!='undefined'){DF.prev=k;dprev(k)}}catch(x){}banUI()},true);
+addEventListener('keydown',e=>{if(!banPend)return;if(e.key=='Escape'){banPend=null;banUI();e.preventDefault()}else if(e.key=='Enter'){const b=Q('#hvbanbar button[data-a="ok"]');if(b){e.preventDefault();e.stopImmediatePropagation();b.click()}}},true);
+/* AI seats ban too (local games): strong heroes, never one a human already banned. Pre-match config only, never part of S. */
+function aiBanPick(){const ks=freeKeys().filter(k=>!H[k].hidden),pw=k=>{const h=H[k];return (h.hp*(h.group||1))*(h.dmg*(h.group||1))*(h.elite?.8:1)*(1+(h.armor||0)*.2)*(h.rng[1]>=2?1.2:1)};
+ const top=ks.sort((a,b)=>pw(b)-pw(a)).slice(0,14);return top[Math.random()*top.length|0]}
+let aiBanArm=false;
+{const ls=localStart;localStart=function(){HVM.aiBans=[];aiBanArm=!!(LS.opts&&LS.opts.bans&&!LS.rnd&&(LS.opts.raid?true:true));return ls.apply(this,arguments)}}
+{const od=openDraft;openDraft=function(){if(aiBanArm){aiBanArm=false;try{const n=LS.n,L=ALLS.slice(0,n);L.filter(sd=>LS.seat[sd]=='a').forEach(sd=>{const k=aiBanPick();if(k){BANS.push(k);HVM.aiBans.push({k,sd})}});
+  if(HVM.aiBans.length)setTimeout(()=>toast(`<b>AI bans</b> ${HVM.aiBans.map(b=>E(nm(b.k))).join(', ')}`,'',4200),300)}catch(e){}}return od.apply(this,arguments)}}
+{const cs=campStart;campStart=function(){HVM.aiBans=[];aiBanArm=false;return cs.apply(this,arguments)}}
+
+/* ---------- toast ---------- */
+function toast(html,cls,ms,onclick){let t=Q('#hvtoast');if(!t){t=document.createElement('div');t.id='hvtoast';t.setAttribute('role','status');t.setAttribute('aria-live','polite');document.body.appendChild(t);
+  t.addEventListener('click',()=>{const f=t._cb;t.classList.remove('on');if(f)f()})}
+ HVM.lastToast={html,t:Date.now()};t.className=cls||'';t.innerHTML=html;t._cb=onclick||null;void t.offsetWidth;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('on'),ms||5000)}
+HVM.toast=toast;
+
+/* ---------- 7. turn log (last 20 events) + AI turn summary ---------- */
+const LOGN=20;let cur=null,inPerf=0,lastTurn=null;
+const sideName=sd=>sd&&NAMES[sd]?NAMES[sd]:'';
+function logPush(t,sd){if(typeof t!='string'||!t.trim())return null;if(RP||RUNFAST)return null;
+ const m=t.match(/^(P[1-4]) /),s=m?Object.keys(SHORT).find(k=>SHORT[k]==m[1]):sd||null;
+ if(m?/\(AI\) is thinking\.\.\.$/.test(t):!/chest appears|Sudden death|eliminated|WINS|wins|Night falls|Dawn|Day breaks|raid boss|holds the hill/i.test(t))return null;/* player actions and world events only, no prompts */
+ const last=HVM.log[HVM.log.length-1];if(last&&last.t===t&&last.r===(S&&S.round)){last.n=(last.n||1)+1;return last}
+ const e={t:m?t.slice(3):t,s,r:S?S.round:0,id:(HVM.lid=(HVM.lid||0)+1)};HVM.log.push(e);if(HVM.log.length>60)HVM.log.splice(0,HVM.log.length-60);return e}
+{const m0=msg;msg=function(t){const r=m0.apply(this,arguments);try{const e=logPush(t,S&&S.turn);if(e&&inPerf&&cur)cur.last=e;drawLog()}catch(x){}return r}}
+const hpSnap=()=>{const m=new Map();S.units.forEach(u=>m.set(u,u.hp));SIDES.forEach(sd=>(S.tw[sd]||[]).forEach(T=>m.set(T,T.hp)));return m};
+function turnRec(sd){if(!cur||cur.sd!==sd||cur.r!==S.round)cur={sd,r:S.round,spawn:[],mv:0,atk:0,ab:0,buy:[],hurt:[],dead:[],tw:[],last:null};return cur}
+{const p0=perform;perform=function(a){if(RP||RUNFAST||!S||!a||S.over)return p0.apply(this,arguments);
+ let snap=null,ul=null,rec=null,k=null;try{snap=hpSnap();ul=S.units.slice();rec=turnRec(a.s);rec.last=null;if(a.t=='spawn')k=S.pool[a.s]&&S.pool[a.s][a.i]}catch(e){}
+ inPerf++;let ok;try{ok=p0.apply(this,arguments)}finally{inPerf--}
+ try{if(ok&&rec&&snap){if(a.t=='spawn'&&k)rec.spawn.push(k);else if(a.t=='move')rec.mv++;else if(a.t=='act')(a.i?rec.ab++:rec.atk++);else if(a.t=='buy'&&a.item=='hire'){const hk=hireOpts(a.s)[a.i];if(hk)rec.buy.push(hk)}
+  const me=ME0(),det=[];
+  snap.forEach((hp0,o)=>{const isT=!o.k,alive=isT?o.hp>0:S.units.includes(o),hp1=alive?o.hp:0;if(hp1===hp0)return;const mine=me&&(o.side===me||(typeof allied=='function'&&allied(me,o.side)));
+   const seen=isT||mine||(typeof visU=='function'?visU(o):true);if(!seen)return;const who=isT?(mine?'your tower':sideName(o.side)+' tower'):(mine?'your ':'')+nm(o.k);
+   if(hp1<hp0){det.push(`${who} −${hp0-hp1}${alive?' ('+hp1+' left)':isT?' (destroyed)':' (falls)'}`);if(mine&&a.s!==me){if(isT)rec.tw.push(hp0-hp1);else if(alive)rec.hurt.push(nm(o.k)+' −'+(hp0-hp1));else rec.dead.push(nm(o.k))}}
+   else if(alive)det.push(`${who} +${hp1-hp0}`)});
+  if(det.length){const e=rec.last||logPush((SHORT[a.s]||'')+' '+(a.t=='act'?'acts.':'…'),a.s);if(e){e.d=(e.d?e.d+'; ':'')+det.slice(0,5).join(', ')+(det.length>5?'…':'')}}
+  drawLog()}}catch(e){}
+ return ok}}
+function summary(r){const p=[];const L=a=>{const c={};a.forEach(k=>c[k]=(c[k]||0)+1);return Object.keys(c).map(k=>nm(k)+(c[k]>1?' ×'+c[k]:'')).join(', ')};
+ if(r.spawn.length)p.push('spawned '+L(r.spawn));if(r.mv)p.push(r.mv+' move'+(r.mv>1?'s':''));if(r.atk)p.push(r.atk+' attack'+(r.atk>1?'s':''));if(r.ab)p.push(r.ab+' abilit'+(r.ab>1?'ies':'y'));if(r.buy.length)p.push('hired '+L(r.buy));
+ const y=[];if(r.hurt.length)y.push(r.hurt.join(', '));if(r.dead.length)y.push(r.dead.join(', ')+' fell');if(r.tw.length)y.push('towers −'+r.tw.reduce((a,b)=>a+b,0));
+ return {did:p.join(' · ')||'no actions',you:y.join(' · ')}}
+/* the toast after an AI (or other player's) turn, shown when the turn comes back to you */
+{const r0=render;render=function(){const o=r0.apply(this,arguments);try{if(S&&!RP&&!S.over&&S.turn!==lastTurn){const prev=lastTurn;lastTurn=S.turn;
+ if(prev&&cur&&cur.sd===prev&&isMine(S.turn)&&!isMine(prev)&&inGame()){const s=summary(cur);toast(`<b><i class="tdot" style="background:${SCOL[prev]}"></i>${E(sideName(prev))}${isAI(prev)?' (AI)':''} turn</b><span>${E(s.did)}</span>${s.you?'<span class="hvhurt">You: '+E(s.you)+'</span>':''}<em>${Verb()} for the turn log</em>`,'hvai',6500,()=>openLog(true))}}}catch(e){}return o}}
+function openLog(on){HVM.logOpen=on==null?!HVM.logOpen:!!on;lsSet('hv-log',HVM.logOpen?'1':'0');drawLog()}
+HVM.logOpen=lsGet('hv-log','0')=='1';
+function drawLog(){if(!inGame())return;let b=Q('#hvlog');if(!b){b=document.createElement('div');b.id='hvlog';b.innerHTML='<button type="button" class="hvlh" aria-expanded="false" data-tip="The last 20 things that happened. L opens and closes it."><span>📜 Turn log</span><b></b></button><ol class="hvll" aria-live="off"></ol>';
+  b.querySelector('.hvlh').onclick=()=>openLog()}
+ const pbr=Q('#pcbot .pbr');if(!MOB&&pbr){if(b.parentNode!==pbr)pbr.insertBefore(b,pbr.firstChild)}else if(b.parentNode!==document.body)document.body.appendChild(b);
+ if(MOB){const bz=Q('#bz');if(bz&&!Q('#hvlogb')){const x=document.createElement('button');x.id='hvlogb';x.type='button';x.setAttribute('aria-label','Turn log');x.textContent='📜';x.onclick=()=>openLog();bz.appendChild(x)}}
+ b.classList.toggle('open',!!HVM.logOpen);b.querySelector('.hvlh').setAttribute('aria-expanded',HVM.logOpen?'true':'false');
+ const items=HVM.log.slice(-LOGN).reverse();b.querySelector('.hvlh b').textContent=HVM.logOpen?'▾':'▸ '+(items.length?items.length:'');
+ if(!HVM.logOpen){b.querySelector('.hvll').innerHTML='';return}
+ b.querySelector('.hvll').innerHTML=items.map(e=>`<li style="--c:${e.s&&SCOL[e.s]?SCOL[e.s]:'#8a8f9a'}"><i>R${e.r}</i><span>${e.s?'<b>'+E(sideName(e.s))+'</b> ':''}${E(e.t)}${e.n>1?' ×'+e.n:''}${e.d?'<small>'+E(e.d)+'</small>':''}</span></li>`).join('')||'<li class="hvle">Nothing yet.</li>'}
+addEventListener('keydown',e=>{if(!inGame()||S.over)return;const tg=e.target&&e.target.tagName;if(tg=='INPUT'||tg=='TEXTAREA')return;if((e.key=='l'||e.key=='L')&&!e.ctrlKey&&!e.metaKey){openLog();e.preventDefault()}});
+
+/* ---------- 2. abilities: own colour on the board, Q hotkey, dock button, a click on a target cancels the move path ---------- */
+const AB={trap:['Set a snare','set a snare'],wall:['Build a wall','build a wall'],flare:['Fire a flare','fire a flare'],sil:['Silence','silence the area']};
+let ARM=null;
+const abList=u=>{try{if(!u||!S||S.over||busy||!isMine(u.side)||u.used||sumMode)return[];return targets(u).filter(t=>t.summon&&!t.sp&&!t.spell)}catch(e){return[]}};
+const abName=(u,t)=>t&&t.ab&&AB[t.ab]?AB[t.ab]:['Raise a skeleton','raise a skeleton'];
+function abPaint(){const b=Q('#board');if(!b||!S)return;b.querySelectorAll('.cell.abt,.cell.abp,.cell.abarm,.cell.abarea').forEach(c=>c.classList.remove('abt','abp','abarm','abarea'));
+ if(!sel||sumMode){ARM=null;return}if(ARM&&ARM.u!==sel)ARM=null;
+ const L=abList(sel);if(!L.length){ARM=null;return}const mv=new Set((moves||[]).map(p=>p.x+','+p.y)),at=new Set((tg||[]).map(t=>t.x+','+t.y));
+ L.forEach(t=>{const k=t.x+','+t.y,c=b.querySelector(`.cell[data-x="${t.x}"][data-y="${t.y}"]`);if(!c)return;c.classList.add(mv.has(k)||at.has(k)?'abp':'abt')});
+ if(ARM){const t=ARM.t,r=t.ab=='flare'?2:t.ab=='sil'?1:0;GEO.cells.forEach(q=>{if(dist(q,t)<=r){const c=b.querySelector(`.cell[data-x="${q.x}"][data-y="${q.y}"]`);if(c)c.classList.add('abarea')}});const c=b.querySelector(`.cell[data-x="${t.x}"][data-y="${t.y}"]`);if(c)c.classList.add('abarm')}}
+{const r0=render;render=function(){const o=r0.apply(this,arguments);try{abPaint();abHint()}catch(e){}return o}}
+function abHint(){const i=Q('#info');if(!i||!sel||sumMode)return;const L=abList(sel);if(!L.length||i.querySelector('.hvabh'))return;const h=abName(sel,L[0]);
+ i.insertAdjacentHTML('afterbegin',`<div class="hvabh"><i class="hvsw"></i> Violet hexes: ${h[0].toLowerCase()} (${verb()} twice). Press <kbd>Q</kbd> or the ✦ button to aim it anywhere in range.</div>`)}
+Q('#board').addEventListener('click',e=>{if(!S||!sel||sumMode||busy||S.over||!isMine(S.turn))return;let c;try{c=cellAt(e)}catch(x){return}if(!c)return;const k=c.x+','+c.y;
+ const mv=(moves||[]).some(p=>p.x==c.x&&p.y==c.y),at=(tg||[]).some(t=>t.x==c.x&&t.y==c.y);if(mv||at){ARM=null;return}
+ const t=abList(sel).find(t=>t.x==c.x&&t.y==c.y);if(!t){ARM=null;return}
+ e.stopImmediatePropagation();e.preventDefault();PATH=[];PLOCK=false;
+ if(ARM&&ARM.k===k&&ARM.u===sel){const u=sel;ARM=null;submit({t:'act',s:S.turn,fx:u.x,fy:u.y,x:t.x,y:t.y,i:1});sel=null;render();autoEnd();return}
+ ARM={u:sel,k,t};const h=abName(sel,t);msg(`${Verb()} the violet hex again to ${h[1]} there. Esc cancels.`);render()},true);
+const abBtnEl=()=>Q('#sumbtn');
+function abToggle(){const b=abBtnEl();if(b&&!b.disabled){ARM=null;b.click();return true}return false}
+addEventListener('keydown',e=>{if(!inGame()||S.over)return;const tg0=e.target&&e.target.tagName;if(tg0=='INPUT'||tg0=='TEXTAREA')return;
+ if(e.key=='Escape'&&ARM){ARM=null;render();e.stopImmediatePropagation();return}
+ if((e.key=='q'||e.key=='Q')&&!e.ctrlKey&&!e.metaKey&&sel&&isMine(S.turn)&&!busy){if(abToggle())e.preventDefault()}},true);
+/* dock button: same as the ability button under the board */
+{const u0=ucard;ucard=function(u){let c=u0.apply(this,arguments);try{if(u&&u===sel&&S&&isMine(u.side)&&S.turn===u.side&&!busy&&!S.over&&!u.used){const ab=abBtn(u);
+ if(ab&&/id="sumbtn"/.test(ab)){const lbl=(/<button[^>]*>([\s\S]*?)<\/button>/.exec(ab)||[])[1]||'Ability';c=c.replace(/(<\/div>\s*)$/,`<button type="button" class="hvabb${sumMode?' on':''}" data-hvab="1" data-tip="Use this hero's ability (Q).">✦ ${lbl.replace(/<[^>]+>/g,'')} <kbd>Q</kbd></button>$1`)}}}catch(e){}return c}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hvab]');if(!b)return;e.preventDefault();e.stopPropagation();abToggle()});
+
+/* ---------- 16. one copy of each boss: tooltip on the disabled hire chip ---------- */
+/* ---------- 1. market: 64 px portraits with name and price in one scrolling row ---------- */
+function market(){const hd=Q('#hand');if(!hd||hd.hidden)return;const M=ME0();if(!M)return;
+ const fix=(sel,list,kind)=>hd.querySelectorAll(sel).forEach(b=>{if(b.classList.contains('hvm'))return;const i=+(b.dataset.h!=null?b.dataset.h:b.dataset.r),k=list[i];if(!k||!H[k])return;
+  const price=b.querySelector('small');const pr=price?price.innerHTML:'';const th=port(k)||spr(k,M);
+  b.innerHTML=`<span class="hth${H[k].elite?' boss':''}">${th}</span><b class="hnm">${E(H[k].n)}</b><small>${pr}</small>`;b.classList.add('hvm');
+  if(kind=='hire'&&H[k].elite&&typeof hvHasBoss=='function'&&hvHasBoss(M,k)){b.disabled=true;b.dataset.why=`You already have a ${H[k].n}. Bosses are one of each: hire a different boss.`;b.classList.add('hvdup');b.dataset.tip=b.dataset.why}
+  if(kind=='rec'&&H[k].elite&&typeof hvHasBoss=='function'&&hvHasBoss(M,k)){b.disabled=true;b.dataset.why=`You already have a ${H[k].n} in play. Bosses are one of each.`;b.dataset.tip=b.dataset.why}});
+ try{fix('.recrow .hchip',hireOpts(M),'hire')}catch(e){}try{fix('.recrow .rchip',recOpts(M),'rec')}catch(e){}
+ const row=hd.querySelector('.recrow.mkrow');{const op=!!row;if(MOB&&op&&!HVM.mkOpen)setTimeout(()=>{if(HVM.mkOpen)camMine()},180);HVM.mkOpen=op}/* phone: the sheet sits in the tray, keep your towers in view */
+ if(row){row.dataset.nocue='1';const sc=row._sl;if(sc)row.scrollLeft=sc;row.onscroll=()=>{HVM.mksl=row.scrollLeft};if(HVM.mksl&&row.dataset.sh==HVM.mksh)row.scrollLeft=HVM.mksl;HVM.mksh=row.dataset.sh}}
+{const r0=render;render=function(){const o=r0.apply(this,arguments);try{market()}catch(e){}return o}}
+/* the market row can be scrolled with the mouse wheel on PC */
+Q('#hand')&&Q('#hand').addEventListener('wheel',e=>{const row=e.target.closest&&e.target.closest('.recrow.mkrow');if(!row||Math.abs(e.deltaY)<Math.abs(e.deltaX)||row.scrollWidth<=row.clientWidth)return;row.scrollLeft+=e.deltaY;e.preventDefault()},{passive:false});
+
+/* ---------- 3. AI: push towers with the bigger army, contest the chest ---------- */
+const pwU=u=>{const h=H[u.k];return Math.max(0,u.hp)*.6+h.dmg*1.6+(h.elite?4:0)};
+let PC={key:'',m:{}};
+function power(){const k=S.round+'/'+S.turn+'/'+S.units.length+'/'+S.units.reduce((a,u)=>a+u.hp,0);if(PC.key===k)return PC.m;const m={};
+ SIDES.forEach(sd=>{if(S.dead[sd]){m[sd]=0;return}m[sd]=S.units.filter(u=>u.side==sd&&!u.sumBy).reduce((a,u)=>a+pwU(u),0)+(S.pool[sd]||[]).reduce((a,k)=>a+(H[k]?(H[k].hp*.6+H[k].dmg*1.6)*.5:0),0)+S.tw[sd].filter(T=>T.hp>0).reduce((a,T)=>a+T.hp*.25,0)});
+ PC={key:k,m};return m}
+function pushMode(sd){if(!S||MOPT.raid)return 0;const m=power(),foes=SIDES.filter(o=>o!==sd&&!S.dead[o]&&isFoe(o,sd));if(!foes.length)return 0;const f=Math.max(...foes.map(o=>m[o]||0)),r=(m[sd]||0)/Math.max(1,f);
+ if(r>=1.25)return Math.min(2,r-.25);/* clearly bigger army */if(S.round>=9&&r>=.9)return .7;/* long stalemate: press anyway */if(S.round>=12)return .5;return 0}
+HVM.pushMode=pushMode;
+const nearT=(p,sd)=>{const ft=foeTowers(sd);return ft.length?Math.min(...ft.map(T=>typeof wdist=='function'?wdist(p,T):dist(p,T))):0};
+{const c0=window.hvAIc;window.hvAIc=function(u,p,d,want){let s=c0?c0(u,p,d,want):0;try{const h=H[u.k],sup=h.heal&&h.dmg<=2;if(sup)return s;
+ const pm=pushMode(u.side);if(pm>0){const w=Math.min(1.1,.55+.35*pm);s+=w*nearT(p,u.side)-.5*Math.min(4,Math.abs(d-want))}/* march on the towers: tower distance counts, chasing far units counts less */
+ const ch=(S.chests||[]);if(ch.length&&MOPT.gold){const c=ch.reduce((b,q)=>dist(q,u)<dist(b,u)?q:b,ch[0]);const du=dist(c,u);if(du<=6&&!S.units.some(v=>v!==u&&v.side==u.side&&dist(v,c)<du))s+=.45*dist(c,p)}}catch(e){}return s}}
+{const t0=window.hvAIt;window.hvAIt=function(u,t){let s=t0?t0(u,t):0;try{if(t&&t.t=='t'){const pm=pushMode(u.side);if(pm>0)s+=1.5+pm}}catch(e){}return s}}
+
+/* ---------- 5. camera starts on your own side ---------- */
+let camT=[];
+function camMine(){try{const sd=ME||(S&&SEAT&&SEAT[S.turn]=='h'?S.turn:null);if(!sd||!S||S.over)return;if(typeof camSide=='function')camSide(sd);if(MOB&&typeof camTo=='function'){const T=S.tw[sd].filter(T=>T.hp>0);if(T.length){const x=Math.round(T.reduce((a,t)=>a+t.x,0)/T.length),y=Math.round(T.reduce((a,t)=>a+t.y,0)/T.length);const c=GEO.cells.reduce((b,q)=>((q.x-x)**2+(q.y-y)**2<(b.x-x)**2+(b.y-y)**2?q:b),GEO.cells[0]);camTo(c.x,c.y)}}}catch(e){}}
+HVM.camMine=camMine;
+{const sg=startGame;startGame=function(cfg){HVM.log=[];cur=null;lastTurn=null;ARM=null;const r=sg.apply(this,arguments);try{if(!RP){camT.forEach(clearTimeout);camT=[700,1500,2600].map(ms=>setTimeout(()=>{if(S&&S.round==1&&!HVM.camMoved)camMine()},ms));HVM.camMoved=false;pill();drawLog()}}catch(e){}return r}}
+/* the player moved the camera: stop re-centering */
+['pointerdown','wheel','keydown'].forEach(t=>addEventListener(t,e=>{if(!inGame())return;if(t=='keydown'&&!/^Arrow/.test(e.key))return;if(t=='pointerdown'&&!(e.target.closest&&e.target.closest('#bscroll,#bw')))return;HVM.camMoved=true},{passive:true,capture:true}));
+
+/* ---------- 6. 5-step first-match card ---------- */
+window.showCheat=showCheat=function(){if(lsGet('hv-cheat',null))return;lsSet('hv-cheat','1');const V=Verb(),v=verb(),inCamp=typeof CAMP!='undefined'&&CAMP!=null;
+ const d=document.createElement('div');d.id='hvfm';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.setAttribute('aria-labelledby','hvfmh');
+ d.innerHTML=`<div class="hvfmb"><h3 id="hvfmh">Your first match in 5 steps</h3><ol>
+<li><b>Spawn.</b> ${V} a hero in your Reserve (bottom left), then a glowing hex next to one of your towers. A new hero waits a turn before it acts.</li>
+<li><b>Move or attack.</b> ${V} one of your heroes: <span class="k mv">blue</span> hexes move it, <span class="k tg">red</span> hexes attack, <span class="k ab">violet</span> hexes use its ability (or press ${touchy()?'its ✦ button':'<kbd>Q</kbd>'}). Each hero does one of these per turn.</li>
+<li><b>Gold.</b> You get +2 gold every turn. Step on a ⛏ gold mine to own it (+2 a turn) and grab the 🎁 chest that appears in the middle every 3 rounds.</li>
+<li><b>Market.</b> The buttons next to your gold: <b>Hire</b> new units of your faction, <b>Recruit</b> fallen heroes, <b>Upgrade</b> weapons and armour, <b>Repair</b> a tower.</li>
+<li><b>Build, then win.</b> <b>Build</b> farms (+gold), watchtowers (sight), a barracks (a forward spawn point) and cottages (more army slots) next to your heroes. Destroy all 3 enemy towers to win; from round ${typeof SDR=='function'?SDR():14} every tower crumbles.</li></ol>
+<p class="hvfmc">${inCamp?'Tip: the campaign gets harder battle by battle.':`New to Hollow Vale? <b>Campaign battle 1</b> is a gentle first fight that teaches the basics.`}</p>
+<div class="hvfmx">${inCamp?'':'<button class="go sec" data-a="camp">Play Campaign battle 1 instead</button>'}<button class="go" data-a="ok">Got it, let's play</button></div>
+<p class="hvfms">Rules and tips: ☰ menu → How to play.${touchy()?'':' Keys: 1-5 reserve, Tab next hero, Q ability, L turn log, E end turn.'}</p></div>`;
+ const done=()=>{d.remove();setTimeout(()=>{HVM.camMoved=false;camMine()},60)};
+ d.addEventListener('click',e=>{const b=e.target.closest('button');if(e.target===d||(b&&b.dataset.a=='ok')){done();return}
+  if(b&&b.dataset.a=='camp'){d.remove();goCamp1()}});
+ d.addEventListener('keydown',e=>{if(e.key=='Escape'){e.stopPropagation();done()}});
+ document.body.appendChild(d);setTimeout(()=>{const b=d.querySelector('button[data-a="ok"]');if(b)b.focus()},30)};
+function goCamp1(){try{music(false)}catch(e){}try{aiRun++}catch(e){}try{if(NET&&NET.leaveGame)NET.leaveGame()}catch(e){}
+ try{$('#game').hidden=true;$('#draft').hidden=true;$('#pass').hidden=true}catch(e){}try{const c=CAMPAIGN[0];if(c&&typeof campStart=='function')campStart(c.id);else openCamp()}catch(e){try{openCamp()}catch(x){}}}
+HVM.goCamp1=goCamp1;
+/* How to play: point new players to Campaign battle 1 */
+{const dr=drawRules;drawRules=function(){const r=dr.apply(this,arguments);try{const R=Q('#rules');if(R&&!R.querySelector('.hvnew')){const h=R.querySelector('h2');const x=`<p class="hvnew"><b>New here?</b> Play <b>Campaign battle 1</b> first: a small, gentle fight that shows spawning, moving, gold and the market. <button type="button" class="go sec rbtn" data-hvcamp="1">Start Campaign battle 1</button></p>`;if(h)h.insertAdjacentHTML('afterend',x);else R.insertAdjacentHTML('afterbegin',x)}}catch(e){}return r}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hvcamp]');if(!b)return;e.preventDefault();document.querySelectorAll('#rsheet,#mpop').forEach(x=>x.hidden=true);try{const dr=document.querySelector('.hvm-drawer,[class*="hvm-rd"]');if(dr)dr.hidden=true}catch(x){}goCamp1()});
+
+/* ---------- 8. map + modifiers: one pill with a tooltip ---------- */
+function pill(){const mm=Q('#mods');if(!mm||!S)return;try{const o=MOPT,n=NPL,a=OPTDEF.filter(d=>o[d.k]&&!OPT_NA(d.k,o,n)),I=o.map&&o.map!='classic'?mapInfo(o.map):null,mn=I?I.n:'Classic';
+ const tip=`Map: ${mn}${I&&I.d?' — '+I.d:''}. `+(a.length?'Modifiers: '+a.map(d=>d.n+' ('+d.d+')').join(' · '):'No modifiers.');
+ mm.innerHTML=`<span class="hvpill" tabindex="0" data-tip="${E(tip)}" aria-label="${E(tip)}"><b>${E(mn)}</b> · ${a.length?a.length+' modifier'+(a.length>1?'s':''):'no modifiers'}</span>`;mm.classList.add('hvp')}catch(e){}}
+HVM.pill=pill;
+
+/* ---------- 10. Display: battle speed and sound volume; 12. terrain icon on hover ---------- */
+let VOL=+lsGet('hv-vol','80');if(!(VOL>=0&&VOL<=100))VOL=80;
+const vol=()=>Math.pow(VOL/100,1.6);
+try{const P=(window.BaseAudioContext||window.AudioContext).prototype,dd=Object.getOwnPropertyDescriptor(P,'destination');
+ if(dd&&dd.get)Object.defineProperty(P,'destination',{configurable:true,get(){const d=dd.get.call(this);if(!this.__hvg){try{const g=this.createGain();g.gain.value=vol();g.connect(d);this.__hvg=g;(HVM.gains=HVM.gains||[]).push(g)}catch(e){return d}}return this.__hvg}})}catch(e){}
+try{const p0=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){try{if(this.__hvb==null||Math.abs(this.volume-this.__hvs)>.001)this.__hvb=this.volume;this.volume=this.__hvs=Math.max(0,Math.min(1,this.__hvb*vol()))}catch(e){}return p0.apply(this,arguments)}}catch(e){}
+function setVol(v){VOL=Math.max(0,Math.min(100,Math.round(v)));lsSet('hv-vol',String(VOL));(HVM.gains||[]).forEach(g=>{try{g.gain.value=vol()}catch(e){}})}
+HVM.setVol=setVol;
+let TICON=lsGet('hv-ticon','1')!='0';
+function setPace(m){if(!PACE[m])return;PACEMODE=m;lsSet('hvPace',m)}
+(function dispUI(){const dx=Q('#dspx');if(!dx||Q('#dspo .hvset'))return;const d=document.createElement('div');d.className='hvset';
+ d.innerHTML='<b id="hvbsl">Battle speed</b><div class="tvseg hvpace" role="group" aria-labelledby="hvbsl">'+[['slow','Slow'],['normal','Normal'],['fast','Fast']].map(([k,l])=>`<button type="button" data-pace="${k}">${l}</button>`).join('')+'</div><small>How long the AI and your own moves pause between actions.</small>'
+ +'<label class="hvvol"><b>Sound volume</b><input type="range" min="0" max="100" step="5" id="hvvol" aria-label="Sound volume"><span id="hvvoln"></span></label>'
+ +'<label class="hvtic"><input type="checkbox" id="hvtic"><span>Terrain icon on hover<small>Shows a small forest / hill / swamp / water icon on the hex under the pointer.</small></span></label>';
+ dx.parentNode.insertBefore(d,dx);
+ const sync=()=>{d.querySelectorAll('[data-pace]').forEach(b=>{const on=b.dataset.pace===PACEMODE;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')});d.querySelector('#hvvol').value=VOL;d.querySelector('#hvvoln').textContent=VOL+'%';d.querySelector('#hvtic').checked=TICON};
+ d.addEventListener('click',e=>{const b=e.target.closest('[data-pace]');if(b){setPace(b.dataset.pace);sync()}});
+ d.querySelector('#hvvol').addEventListener('input',e=>{setVol(+e.target.value);sync()});
+ d.querySelector('#hvvol').addEventListener('change',()=>{try{sfx('turn')}catch(e){}});
+ d.querySelector('#hvtic').addEventListener('change',e=>{TICON=e.target.checked;lsSet('hv-ticon',TICON?'1':'0');if(!TICON)tIcon(null)});
+ const b=Q('#dspb');if(b)b.addEventListener('click',sync);new MutationObserver(sync).observe(Q('#dspo'),{attributes:true,attributeFilter:['hidden']});sync()})();
+/* terrain icon on the hovered hex (PC) */
+const TIC={forest:['🌲','Forest'],hill:['⛰️','Hill'],swamp:['🪷','Swamp'],deep:['🌊','Deep water'],shallow:['💧','Shallow water'],sand:['🏖️','Beach'],ash:['🔥','Ash']};
+let HOVC=null;
+function tIcon(c){const b=Q('#board');if(!b)return;b.querySelectorAll('.hvti').forEach(i=>i.remove());HOVC=c;if(!c||!TICON||!S||!S.ter)return;const k=c.x+','+c.y;let t=S.ter[k];
+ try{if(!t&&typeof hvIsWater=='function'&&hvIsWater(c.x,c.y))t=(typeof hvWB=='function'&&hvWB(c.x,c.y))?'deep':'shallow'}catch(e){}
+ let ic=t&&TIC[t]?TIC[t]:null;if(!ic&&S.shr&&S.shr.includes(k))ic=['✨','Shrine'];if(!ic&&typeof mineAt=='function'&&mineAt(c.x,c.y))ic=['⛏','Gold mine'];if(!ic)return;
+ const el=b.querySelector(`.cell[data-x="${c.x}"][data-y="${c.y}"]`);if(el)el.insertAdjacentHTML('beforeend',`<i class="hvti" aria-hidden="true"><span>${ic[0]}</span><em>${ic[1]}</em></i>`)}
+Q('#board').addEventListener('mousemove',e=>{if(MOB||!TICON)return;let c=null;try{c=cellAt(e)}catch(x){}const k=c?c.x+','+c.y:null,o=HOVC?HOVC.x+','+HOVC.y:null;if(k!==o)tIcon(c)},{passive:true});
+Q('#board').addEventListener('mouseleave',()=>tIcon(null));
+{const r0=render;render=function(){const o=r0.apply(this,arguments);try{if(HOVC)tIcon(HOVC);const b=Q('#board');if(b)b.classList.toggle('hvspw',spSel!=null||!!bldSel)}catch(e){}return o}}
+
+/* ---------- 14. Hex Rose look for the other menus: follows the menu style ---------- */
+(function(){const m=Q('#menu');if(!m)return;const f=()=>document.documentElement.classList.toggle('hvrose',m.classList.contains('ms-rose'));f();new MutationObserver(f).observe(m,{attributes:true,attributeFilter:['class']})})();
+const scr=()=>{const g=Q('#game');document.documentElement.classList.toggle('hvplay',!!(g&&!g.hidden))};scr();new MutationObserver(scr).observe(Q('#game'),{attributes:true,attributeFilter:['hidden']});
+
+/* draft/rules pick up the new text */
+try{drawRules()}catch(e){}try{if(!Q('#draft').hidden)drawCards()}catch(e){}
 })();
 </script>
 </body></html>
