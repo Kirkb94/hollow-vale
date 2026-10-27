@@ -5425,4 +5425,28 @@ addEventListener('resize',()=>{if(st.on)vars()});
 sync();
 })();
 </script>
+<style id="hv-ambush">
+#fxl .hv-amb{position:absolute;width:0;height:0;pointer-events:none;z-index:9}
+#fxl .hv-amb b{position:absolute;left:0;bottom:0;transform:translate(-50%,-38%);display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffe27a,#f2a81e 60%,#b85f08);border:3px solid #2a1404;box-shadow:0 0 0 3px #ffd75a88,0 4px 14px #000c;color:#2a1404;font:900 34px/1 Georgia,serif;animation:hvamb 1.6s cubic-bezier(.2,1.4,.4,1) both}
+#fxl .hv-amb b::after{content:'';position:absolute;inset:-10px;border-radius:50%;border:3px solid #ffd75a;animation:hvambr 1s ease-out .1s both}
+#fxl .hv-amb.foe b{width:30px;height:30px;font-size:20px;background:radial-gradient(circle at 40% 35%,#ff9a8a,#d8392a 60%,#7a1208);color:#fff;border-color:#3a0804}
+#fxl .hv-amb.foe b::after{display:none}
+@keyframes hvamb{0%{opacity:0;transform:translate(-50%,10%) scale(.2)}14%{opacity:1;transform:translate(-50%,-70%) scale(1.25)}26%{transform:translate(-50%,-55%) scale(1)}80%{opacity:1;transform:translate(-50%,-60%) scale(1)}100%{opacity:0;transform:translate(-50%,-90%) scale(.9)}}
+@keyframes hvambr{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(1.8)}}
+@media (prefers-reduced-motion:reduce){#fxl .hv-amb b{animation:hvambrm 1.6s linear both}#fxl .hv-amb b::after{display:none}@keyframes hvambrm{0%,85%{opacity:1}100%{opacity:0}}}
+</style>
+<script id="hv-ambush-js">/* Ambush alert: when a move is stopped by a hidden enemy (fog of war or a forest-hidden Wilds unit), a big "!" pops over the stopped unit and a small one over the ambusher, with a sound.
+   Cosmetic only: hooks pop() for the existing 'Ambushed!' / 'Ambush!' texts, never touches game state, skipped in replays and ?fast. */
+(function(){if(typeof pop!='function')return;
+const FAST=/[?&]fast\b/.test(location.search);
+try{if(typeof SFX=='object'&&!SFX.ambush)SFX.ambush=()=>{tone(660,.07,'square',.07,0,990);tone(990,.16,'square',.07,.08,1320);noise(.08,.06,3000,.02)}}catch(e){}
+let lastSnd=0;
+function mark(o,foe,delay){const L=document.getElementById('fxl');if(!L||typeof ctr!='function')return;
+ setTimeout(()=>{try{const q=ctr(o),z=document.createElement('i');z.className='hv-amb'+(foe?' foe':'');z.style.left=q[0]+'%';z.style.top=q[1]+'%';z.innerHTML='<b aria-hidden="true">!</b>';L.appendChild(z);setTimeout(()=>z.remove(),1700);
+  if(!foe&&performance.now()-lastSnd>400){lastSnd=performance.now();sfx('ambush')}}catch(e){}},Math.max(0,delay||0))}
+const p0=pop;pop=function(o,txt,g){const r=p0.apply(this,arguments);
+ try{if(!RP&&!FAST&&o&&(txt==='Ambushed!'||txt==='Ambush!')&&document.body.classList.contains('ingame'))mark(o,txt==='Ambush!',typeof fxOff=='number'?fxOff:0)}catch(e){}
+ return r};
+})();
+</script>
 </body></html>
