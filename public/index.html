@@ -7432,4 +7432,511 @@ new MutationObserver(()=>{try{info()}catch(e){}}).observe(q('#info')||D.body,{ch
 setInterval(()=>{try{tick()}catch(e){}},1500);
 })();
 </script>
+<style id="hv-help">
+/* ===== hv-help: searchable Help panel, first-time tips and the guided Tutorial (see <script id="hv-help-js">). Hex Rose look, Alegreya Sans. ===== */
+#hvh{position:fixed;inset:0;z-index:74;display:flex;align-items:center;justify-content:center;padding:calc(14px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:radial-gradient(70% 60% at 50% 42%,rgba(18,26,24,.6),rgba(3,5,6,.88));color:#efe8d6;font-family:'Alegreya Sans','Segoe UI',system-ui,sans-serif}
+#hvh[hidden]{display:none}
+#hvh *{box-sizing:border-box}
+#hvh .hh-card{position:relative;width:min(1080px,100%);height:min(820px,100%);display:flex;flex-direction:column;padding:7px;border-radius:6px;overflow:hidden;
+ background:radial-gradient(120% 70% at 50% 0%,rgba(233,196,106,.1),transparent 62%),linear-gradient(180deg,#1c1913,#0f0d0a);
+ box-shadow:0 30px 80px rgba(0,0,0,.72),inset 0 0 0 1px rgba(233,196,106,.42),inset 0 0 0 6px #0b0a07,inset 0 0 0 7px rgba(233,196,106,.16);animation:hvhIn .2s ease-out}
+@keyframes hvhIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
+#hvh .hh-top{display:flex;align-items:center;gap:14px;padding:12px 14px 10px 16px;border-bottom:1px solid rgba(233,196,106,.2)}
+#hvh .hh-k{margin:0;font:700 13px/1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.16em;color:#e9c46a}
+#hvh h2{margin:4px 0 0;font:700 25px/1.05 'Alegreya Sans',system-ui,sans-serif;color:#f4eddc}
+#hvh .hh-tt{flex:none}
+#hvh .hh-sw{flex:1;min-width:0;position:relative}
+#hvh .hh-sw svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#b9a06a;pointer-events:none}
+#hvh .hh-q{width:100%;height:44px;padding:0 40px 0 40px;border-radius:22px;border:1px solid rgba(233,196,106,.45);background:#0d0b08;color:#f4eddc;font:500 17px 'Alegreya Sans',system-ui,sans-serif;outline:0}
+#hvh .hh-q:focus{border-color:#e9c46a;box-shadow:0 0 0 2px rgba(233,196,106,.25)}
+#hvh .hh-q::placeholder{color:#8f8877}
+#hvh .hh-q::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+#hvh .hh-qx{all:unset;position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#cfc7b3}
+#hvh .hh-qx[hidden]{display:none}
+#hvh .hh-x{all:unset;box-sizing:border-box;flex:none;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#e8dcc0;box-shadow:inset 0 0 0 1px rgba(233,196,106,.4)}
+#hvh .hh-x:hover{box-shadow:inset 0 0 0 1px #f1d283;color:#fff}
+#hvh .hh-main{flex:1;min-height:0;display:flex}
+#hvh .hh-nav{flex:none;width:228px;overflow-y:auto;overscroll-behavior:contain;padding:10px 8px 14px;border-right:1px solid rgba(233,196,106,.14);scrollbar-color:#6b5238 transparent}
+#hvh .hh-nav button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:9px;width:100%;min-height:38px;padding:6px 10px;border-radius:4px;cursor:pointer;font:500 16.5px/1.15 'Alegreya Sans',system-ui,sans-serif;color:#d9d0bb}
+#hvh .hh-nav button i{flex:none;width:22px;text-align:center;font-style:normal}
+#hvh .hh-nav button small{margin-left:auto;font-size:13px;color:#e9c46a}
+#hvh .hh-nav button:hover{background:rgba(233,196,106,.08);color:#fff}
+#hvh .hh-nav button[aria-current=true]{background:linear-gradient(90deg,rgba(233,196,106,.22),rgba(233,196,106,.04));color:#f6e7b8;box-shadow:inset 3px 0 0 #e9c46a}
+#hvh .hh-nav button.dim{opacity:.38}
+#hvh .hh-tut{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:12px 0 0;min-height:42px;padding:6px 10px;cursor:pointer;clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,9px 100%,0 50%);background:linear-gradient(#f1d283,#c99a3c);color:#1a1206;font:700 16px 'Alegreya Sans',system-ui,sans-serif}
+#hvh .hh-tut:hover{filter:brightness(1.08)}
+#hvh .hh-body{flex:1;min-width:0;overflow-y:auto;overscroll-behavior:contain;padding:8px 24px 28px;scrollbar-color:#6b5238 transparent;outline:0}
+#hvh .hh-body h3{margin:18px 0 8px;font:700 24px/1.1 'Alegreya Sans',system-ui,sans-serif;color:#f4eddc}
+#hvh .hh-body h4{display:flex;align-items:center;gap:9px;margin:20px 0 6px;font:700 17px/1.1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.07em;color:#e9c46a}
+#hvh .hh-body h4::before{content:"";flex:none;width:11px;height:13px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:currentColor}
+#hvh .hh-body p,#hvh .hh-body li{font:400 17.5px/1.45 'Alegreya Sans',system-ui,sans-serif;color:#e8e0cc;max-width:72ch}
+#hvh .hh-body p{margin:6px 0}
+#hvh .hh-body ul{margin:4px 0 8px;padding:0 0 0 20px}
+#hvh .hh-body li{margin:3px 0}
+#hvh .hh-body li::marker{color:rgba(233,196,106,.6)}
+#hvh .hh-body b{color:#f6ecd2}
+#hvh .hh-body details{margin:0}
+#hvh .hh-body summary{display:none}
+#hvh .hh-body kbd{display:inline-block;min-width:22px;padding:1px 6px;border-radius:3px;border:1px solid #6b5238;background:#211b14;color:#f2d69a;font:600 14px ui-monospace,Consolas,monospace;text-align:center}
+#hvh .hh-live{margin:10px 0;padding:10px 14px;border-left:3px solid #8fcdb9;background:rgba(143,205,185,.07);border-radius:0 4px 4px 0}
+#hvh .hh-live b{color:#bfe8da}
+#hvh .hh-tbl{overflow-x:auto;margin:8px 0}
+#hvh table{border-collapse:collapse;font:400 16px/1.3 'Alegreya Sans',system-ui,sans-serif;color:#e8e0cc}
+#hvh th,#hvh td{padding:5px 10px;border-bottom:1px solid rgba(233,196,106,.12);text-align:left;vertical-align:top}
+#hvh th{font-weight:700;color:#e9c46a;white-space:nowrap}
+#hvh td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+#hvh .hh-fac{margin:16px 0 0}
+#hvh .hh-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin:8px 0}
+#hvh .hh-hero{min-width:0;padding:10px 12px;border-radius:4px;background:rgba(239,232,214,.035);box-shadow:inset 0 0 0 1px rgba(233,196,106,.14)}
+#hvh .hh-hero.flash,#hvh .flash{animation:hvhFlash 1.6s ease-out}
+@keyframes hvhFlash{0%,30%{box-shadow:inset 0 0 0 2px #f1d283,0 0 18px rgba(241,210,131,.35);background:rgba(241,210,131,.12)}100%{}}
+#hvh .hh-hero header{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+#hvh .hh-hero header b{font-size:18px}
+#hvh .hh-hero header span{font-size:14px;color:#b9b19e}
+#hvh .hh-st{display:flex;flex-wrap:wrap;gap:4px 10px;margin:4px 0;font:500 15px 'Alegreya Sans',system-ui,sans-serif;color:#cfc7b3;font-variant-numeric:tabular-nums}
+#hvh .hh-hero .kw{margin:4px 0 0;padding-left:18px}
+#hvh .hh-hero .kw li{font-size:15.5px;line-height:1.38}
+#hvh .hh-hero p.d{margin:2px 0;font-size:15.5px;color:#cfc7b3}
+#hvh a.hh-l{color:#f1d283;text-decoration:underline;text-decoration-color:rgba(241,210,131,.4);text-underline-offset:2px;cursor:pointer}
+#hvh a.hh-l:hover{color:#fff;text-decoration-color:#fff}
+#hvh mark{background:rgba(241,210,131,.28);color:#fff;border-radius:2px;padding:0 1px}
+#hvh .hh-res{list-style:none;margin:8px 0;padding:0}
+#hvh .hh-res li{margin:0;padding:0}
+#hvh .hh-res button{all:unset;box-sizing:border-box;display:block;width:100%;padding:9px 12px;border-radius:4px;cursor:pointer}
+#hvh .hh-res button:hover,#hvh .hh-res button:focus-visible{background:rgba(233,196,106,.08)}
+#hvh .hh-res button b{display:block;font:700 17px 'Alegreya Sans',system-ui,sans-serif;color:#f4eddc}
+#hvh .hh-res button b small{font-weight:500;font-size:13px;letter-spacing:.08em;color:#e9c46a;margin-left:6px;text-transform:uppercase}
+#hvh .hh-res button span{display:block;font:400 15.5px/1.35 'Alegreya Sans',system-ui,sans-serif;color:#cfc7b3}
+#hvh .hh-none{color:#b9b19e}
+#hvh :focus-visible{outline:2px solid #fff;outline-offset:2px}
+#hvh .hh-foot{display:flex;gap:14px;align-items:center;padding:8px 16px;border-top:1px solid rgba(233,196,106,.14);font:500 14px 'Alegreya Sans',system-ui,sans-serif;color:#9d9583}
+#hvh .hh-foot kbd{display:inline-block;padding:0 5px;border-radius:3px;border:1px solid #6b5238;color:#f2d69a;font:600 12px ui-monospace,Consolas,monospace}
+@media (max-width:760px){
+ #hvh{padding:env(safe-area-inset-top,0px) 0 0}
+ #hvh .hh-card{height:100%;border-radius:0;padding:4px}
+ #hvh .hh-top{flex-wrap:wrap;gap:8px 10px;padding:10px 10px 8px}
+ #hvh .hh-tt{order:1;flex:1}
+ #hvh .hh-x{order:2}
+ #hvh .hh-sw{order:3;flex:1 1 100%}
+ #hvh h2{font-size:22px}
+ #hvh .hh-main{flex-direction:column}
+ #hvh .hh-nav{width:auto;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:8px 10px;border-right:0;border-bottom:1px solid rgba(233,196,106,.14);scrollbar-width:none}
+ #hvh .hh-nav button{width:auto;flex:none;min-height:36px;padding:4px 12px;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(233,196,106,.22);white-space:nowrap;font-size:15.5px}
+ #hvh .hh-nav button[aria-current=true]{box-shadow:inset 0 0 0 1px #e9c46a}
+ #hvh .hh-nav button i{width:auto}
+ #hvh .hh-tut{width:auto;flex:none;margin:0;padding:4px 18px;min-height:36px}
+ #hvh .hh-body{padding:4px 14px calc(24px + env(safe-area-inset-bottom,0px))}
+ #hvh .hh-foot{display:none}
+ #hvh .hh-heroes{grid-template-columns:1fr}
+}
+#hvh-b{min-width:36px}
+html body.mob #hvh-b{font-weight:800}
+
+/* ---------- first-time tips: never block the board (pointer-events only on the close button) ---------- */
+#hvtip{position:fixed;z-index:65;left:50%;top:calc(78px + env(safe-area-inset-top,0px));transform:translateX(-50%);width:min(440px,calc(100vw - 24px));pointer-events:none;display:flex;justify-content:center}
+#hvtip[hidden]{display:none}
+#hvtip .tp{position:relative;display:flex;gap:12px;align-items:flex-start;padding:11px 44px 11px 13px;border-radius:5px;background:linear-gradient(180deg,rgba(32,27,20,.96),rgba(17,14,10,.96));box-shadow:0 10px 30px rgba(0,0,0,.6),inset 0 0 0 1px rgba(233,196,106,.5);color:#efe8d6;font-family:'Alegreya Sans','Segoe UI',system-ui,sans-serif;animation:hvtipIn .3s ease-out}
+@keyframes hvtipIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+#hvtip .tp.out{opacity:0;transition:opacity .4s}
+#hvtip .ic{flex:none;font-size:24px;line-height:1.1}
+#hvtip .tk{margin:0;font:700 12px/1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.16em;color:#e9c46a}
+#hvtip b{display:block;margin:3px 0 2px;font:700 17px/1.15 'Alegreya Sans',system-ui,sans-serif;color:#f4eddc}
+#hvtip p{margin:0;font:400 15.5px/1.35 'Alegreya Sans',system-ui,sans-serif;color:#ddd4bf}
+#hvtip .x{all:unset;pointer-events:auto;position:absolute;right:6px;top:6px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#cfc7b3}
+#hvtip .x:hover{color:#fff;background:rgba(239,232,214,.08)}
+#hvtip .more{all:unset;pointer-events:auto;margin-top:5px;display:inline-block;cursor:pointer;font:600 14px 'Alegreya Sans',system-ui,sans-serif;color:#f1d283;text-decoration:underline;text-underline-offset:2px}
+html body.mob #hvtip{top:calc(54px + env(safe-area-inset-top,0px))}
+#dspo .hvt-row{display:flex;gap:8px;align-items:center;margin:4px 0 6px 32px}
+#dspo .hvt-row button{margin:0;width:auto;padding:6px 12px;font-size:14px}
+#dspo .hvt-row small{opacity:.8}
+
+/* ---------- tutorial ---------- */
+#hvtut{position:fixed;z-index:66;left:max(12px,env(safe-area-inset-left,0px));top:calc(150px + env(safe-area-inset-top,0px));width:min(400px,calc(50vw - 230px));pointer-events:none;font-family:'Alegreya Sans','Segoe UI',system-ui,sans-serif}
+@media (max-width:1100px){#hvtut{left:50%;transform:translateX(-50%);top:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(560px,calc(100vw - 20px))}}
+#hvtut[hidden]{display:none}
+#hvtut .tc{pointer-events:auto;position:relative;padding:11px 14px 10px;border-radius:5px;background:linear-gradient(180deg,rgba(34,29,21,.97),rgba(16,13,10,.97));box-shadow:0 12px 34px rgba(0,0,0,.65),inset 0 0 0 1px rgba(233,196,106,.6),inset 0 0 0 4px #0b0a07,inset 0 0 0 5px rgba(233,196,106,.18);color:#efe8d6}
+#hvtut .th{display:flex;align-items:center;gap:10px}
+#hvtut .tk{margin:0;font:700 12.5px/1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.16em;color:#e9c46a}
+#hvtut .pips{display:flex;gap:4px;margin-left:auto}
+#hvtut .pips i{width:10px;height:11px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:rgba(233,196,106,.25)}
+#hvtut .pips i.on{background:#e9c46a}#hvtut .pips i.now{background:#fff6d8;box-shadow:0 0 6px #fff}
+#hvtut h3{margin:5px 0 3px;font:700 20px/1.15 'Alegreya Sans',system-ui,sans-serif;color:#f4eddc}
+#hvtut p{margin:0 0 3px;font:400 16.5px/1.4 'Alegreya Sans',system-ui,sans-serif;color:#e4dbc6}
+#hvtut p.hint{color:#f1b07a;font-weight:600}
+#hvtut p.hint[hidden]{display:none}
+#hvtut p.ok{color:#9fe0b0;font-weight:700}
+#hvtut .tb{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+#hvtut .tb button{all:unset;box-sizing:border-box;cursor:pointer;min-height:36px;padding:5px 14px;border-radius:18px;font:600 15px 'Alegreya Sans',system-ui,sans-serif;color:#e8dcc0;box-shadow:inset 0 0 0 1px rgba(233,196,106,.4)}
+#hvtut .tb button:hover{color:#fff;box-shadow:inset 0 0 0 1px #f1d283}
+#hvtut .tb button.pri{color:#1a1206;background:linear-gradient(#f1d283,#c99a3c);box-shadow:none;font-weight:700}
+#hvtut .tb .sp{flex:1}
+#hvtut :focus-visible{outline:2px solid #fff;outline-offset:2px}
+#hvtut.end{left:50%;top:50%;bottom:auto;width:min(560px,calc(100vw - 20px));transform:translate(-50%,-50%)}
+#hvtut.end .tc{padding:20px 22px 18px;text-align:center}
+#hvtut.end h3{font-size:30px}
+#hvtut.end .tb{justify-content:center}
+html body.mob #hvtut{top:auto;bottom:calc(var(--trayh,0px) + 8px + env(safe-area-inset-bottom,0px))}
+html body.mob #hvtut.end{bottom:auto}
+html body.mob #hvtut h3{font-size:18px}
+html body.mob #hvtut p{font-size:15.5px}
+.hvt-hl{position:relative;z-index:3;animation:hvtPulse 1.25s ease-in-out infinite!important;outline:3px solid #ffe27a!important;outline-offset:2px}
+@keyframes hvtPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,226,122,.75)}50%{box-shadow:0 0 0 9px rgba(255,226,122,0)}}
+#board .cell.hvt-hc{z-index:4}
+#board .cell .hvt-ring{position:absolute;inset:-3%;pointer-events:none;z-index:8;display:block}
+#board .cell .hvt-ring svg{width:100%;height:100%;overflow:visible;display:block}
+#board .cell .hvt-ring polygon{fill:rgba(255,226,122,.16);stroke:#ffe27a;stroke-width:6;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px rgba(255,214,90,.9));animation:hvtHex 1.25s ease-in-out infinite;transform-origin:50% 50%}
+@keyframes hvtHex{0%,100%{opacity:.55}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.hvt-hl,#board .cell .hvt-ring polygon{animation:none!important}}
+/* menu entry */
+.hvm-tutb{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:10px;margin:18px 0 0;min-height:46px;padding:6px 22px 6px 16px;cursor:pointer;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);background:linear-gradient(#f1d283,#c99a3c);color:#1a1206;font:700 18px/1.1 'Alegreya Sans',system-ui,sans-serif;pointer-events:auto}
+.hvm-tutb small{display:block;font:500 13.5px 'Alegreya Sans',system-ui,sans-serif;opacity:.8}
+.hvm-tutb.done{background:transparent;color:#f1d283;box-shadow:inset 0 0 0 1px rgba(233,196,106,.5);clip-path:none;border-radius:23px}
+.hvm-tutb:hover{filter:brightness(1.08)}
+.hvm-tutb:focus-visible{outline:2px solid #fff;outline-offset:3px}
+#hvm-rules .hvm-rh .hh-open{all:unset;cursor:pointer;margin-left:auto;margin-right:8px;padding:6px 12px;border-radius:18px;color:#f2d69a;font:600 15px Georgia,serif;box-shadow:inset 0 0 0 1px #6b5238}
+#hvm-rules .hvm-rh .hh-open:hover{box-shadow:inset 0 0 0 1px #f2d69a}
+
+/* phone: the tutorial card is compact and sits over the top bar (bottom for the last two steps), never over the spawn hexes */
+html body.mob #hvtut{top:calc(4px + env(safe-area-inset-top,0px));bottom:auto;left:50%;transform:translateX(-50%);width:calc(100vw - 12px)}
+html body.mob #hvtut.bot{top:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+html body.mob #hvtut.end{top:50%;bottom:auto;transform:translate(-50%,-50%)}
+html body.mob #hvtut .tc{padding:8px 11px 7px}
+html body.mob #hvtut .pips i{width:7px;height:8px}
+html body.mob #hvtut .tk{font-size:11px}
+html body.mob #hvtut h3{font-size:16px;margin:3px 0 2px}
+html body.mob #hvtut p{font-size:14px;line-height:1.32}
+html body.mob #hvtut .tb{margin-top:5px;gap:6px}
+html body.mob #hvtut .tb button{min-height:30px;padding:3px 11px;font-size:13.5px}
+html body.mob .hvm-tutb{display:none}
+@media (max-width:760px){.hvm-tutb{display:none}}
+#hvm-tut.done{opacity:.85}
+</style>
+<script id="hv-help-js">/* ===== hv-help: (1) searchable Help panel (?/H, HUD button, How to play drawer), built from the live How to Play text and live data
+   (H, kwH, TOWER_HP, SDR, BLD, HVFAC) so numbers never go stale; (2) first-time tips in real matches (once per player, localStorage
+   'hv-tips', Display toggle + reset); (3) the guided Tutorial: a scripted 1v1 practice battle, 8 steps, menu entry, replayable
+   (localStorage 'hv-tut-done'). Cosmetic/UI only outside the tutorial match; the tutorial is a local match that never goes online. ===== */
+(function(){
+const FAST=/[?&]fast\b/.test(location.search);
+const $q=s=>document.querySelector(s),$a=s=>[...document.querySelectorAll(s)];
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const strip=s=>String(s||'').replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&rsquo;/g,'\u2019');
+const touch=()=>!!(typeof MOB!='undefined'&&MOB);
+const W=()=>touch()?{click:'tap',Click:'Tap',hover:'tap',Hover:'Tap'}:{click:'click',Click:'Click',hover:'hover over',Hover:'Hover over'};
+const inGame=()=>{const g=$q('#game');return !!(g&&!g.hidden&&typeof S!='undefined'&&S)};
+const ICS={search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>',
+ x:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
+
+/* ================= live data helpers ================= */
+const fmtList=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
+function rulesSec(title){const R=$q('#rules');if(!R)return '';const d=[...R.querySelectorAll('details')].find(x=>{const s=x.querySelector('summary');return s&&s.textContent.trim().toLowerCase().startsWith(title.toLowerCase())});if(!d)return '';const c=d.cloneNode(true);const s=c.querySelector('summary');if(s)s.remove();return c.innerHTML}
+function coreD(k){try{const o=(CORE||[]).concat(OPTDEF||[]).find(o=>o.k===k);return o?o.d:''}catch(e){return ''}}
+function sdText(){let c=14,b=56;try{const o=HVMAP;HVMAP={big:false};c=SDR();HVMAP={big:true};b=SDR();HVMAP=o}catch(e){}return{c,b}}
+function towerText(){let base=[12,14,15];try{base=TOWER_HP.slice()}catch(e){}return base}
+function liveTowers(){if(!inGame())return '';try{const sd=ME||S.turn;const tw=(S.tw[sd]||[]);if(!tw.length)return '';const sdr=SDR();
+ return `<div class="hh-live"><b>This match</b>: your towers have ${fmtList(tw.map(T=>T.hp+'/'+T.max+' HP'))}. Sudden death starts in <b>round ${sdr}</b> on this map${S.round>=sdr?' (it has started)':` (now round ${S.round})`}.</div>`}catch(e){return ''}}
+function fixText(h){const t=towerText(),sd=sdText();
+ h=h.replace(/12, 14 and 15 HP/g,fmtList(t.map(String))+' HP');
+ h=h.replace(/round 14 \(56 on larger maps\)/g,`round ${sd.c} (${sd.b} on larger maps)`).replace(/round 14 \(sudden death; round 56 on larger maps\)/g,`round ${sd.c} (sudden death; round ${sd.b} on larger maps)`);
+ return h}
+const HV_FC=()=>{try{return window.HVFAC||{}}catch(e){return {}}};
+
+/* ================= topics ================= */
+function heroList(){try{return Object.keys(H).filter(k=>!H[k].hidden)}catch(e){return []}}
+function facOf(k){const h=H[k];return h.fac||(typeof FACOF!='undefined'&&FACOF[k])||''}
+function facName(f){try{return FAC[f]?FAC[f].n:(f||'Other')}catch(e){return f||'Other'}}
+function kwPairs(k){try{const d=document.createElement('div');d.innerHTML=kwH(k);return [...d.querySelectorAll('li')].map(li=>{const b=li.querySelector('b');const n=b?b.textContent:'';return [n,li.innerHTML]})}catch(e){return []}}
+function heroCard(k){const h=H[k],r=(typeof ROLE!='undefined'&&ROLE[k])||[];let cost='',sl='';try{cost=hireCost(k)}catch(e){}try{sl=slotCost(k)}catch(e){}
+ const rng=h.rng?(h.rng[0]==h.rng[1]?h.rng[0]:h.rng[0]+'-'+h.rng[1]):1;
+ return `<article class="hh-hero" id="hh-h-${k}" data-hero="${k}"><header><b>${E(h.e||'')} ${E(h.n)}</b><span>${E(r[0]||'')}${h.elite&&r[0]!=='Boss'?' · Boss':''} · ${E(facName(facOf(k)))}</span></header>
+ <div class="hh-st"><span>❤ ${h.hp} HP</span><span>⚔ ${h.dmg} dmg</span><span>👣 ${h.mv} move</span><span>🎯 range ${rng}</span>${h.armor?`<span>🛡 armor ${h.armor}</span>`:''}${cost!==''?`<span>🪙 ${cost}</span>`:''}${sl!==''?`<span>${sl} slot${sl==1?'':'s'}</span>`:''}</div>
+ ${r[1]?`<p class="d">${E(r[1])}</p>`:''}${h.d?`<p class="d">${E(h.d)}</p>`:''}${(()=>{try{return kwH(k)}catch(e){return ''}})()}</article>`}
+function heroesHTML(){const by={};heroList().forEach(k=>{const f=facOf(k)||'zz';(by[f]=by[f]||[]).push(k)});
+ const order=Object.keys(by).sort((a,b)=>facName(a).localeCompare(facName(b)));
+ return `<p>Every hero in the game with its live stats, price and keywords. ${W().Click} a name anywhere in Help to jump here, or search for it.</p>`+order.map(f=>{const L=by[f].sort((a,b)=>(H[a].elite?1:0)-(H[b].elite?1:0)||H[a].n.localeCompare(H[b].n));return `<h4 class="hh-fac">${E(facName(f))} <small style="color:#b9b19e;font-size:14px;letter-spacing:0">${L.length}</small></h4><div class="hh-heroes">${L.map(heroCard).join('')}</div>`}).join('')}
+function statusList(){const F=HV_FC();return [
+ ['🔥','Burning','Burn','Takes burn damage at the start of its owner\u2019s next turns (Infernal attacks and burning ground cause it).'],
+ ['🔥','Burning ground','On fire',`Infernal fire on a hex: walking heroes that enter or start there take 1 damage and Burn. Lasts ${F.fireDur||2} rounds (max ${F.fireCap||8} at once). Fliers and Infernal are immune.`],
+ ['♨','Heat & Overheat','Heat',`Every Burn tick on an enemy gives the Infernal side +1 Heat (max ${F.heatMax||10}). At ${F.heatCost||5} Heat the next Infernal attack Overheats: +${F.ovhDmg||2} damage and splash, spending ${F.heatCost||5} Heat.`],
+ ['💫','Stunned','Stun','Loses its next turn. Stunned heroes take +2 from Shatter (Combos option) and cannot counter.'],
+ ['🔇','Silenced','Silence','Inside a silence zone: cannot attack or use abilities, and cannot counter.'],
+ ['🪤','Rooted / Snared','Snare','A hidden snare stopped it: cannot move on its next turn. Fliers are immune.'],
+ ['🛡','Ward','Ward','Rune Ward: the next hit deals no damage.'],
+ ['🌫','Mist','Mist','Mist form: takes 2 less damage until its next turn.'],
+ ['🥀','Withered','Wither','Cannot be healed for a few turns.'],
+ ['🎯','Marked','Marked','Lit by a flare: takes +1 damage from that player\u2019s attacks until their next turn.'],
+ ['📍','Revealed','Revealed','Visible to everyone until its next turn because it attacked or was ambushed.'],
+ ['❗','Ambushed','Ambush','It walked into a hidden enemy (fog or forest): it stops short and is spent for the turn, and both units are revealed.'],
+ ['🌲','Hidden','Hidden','A Wilds ranger in a forest: enemies more than 1 hex away cannot see it, even inside sight, unless it is flared, it attacked last turn, or a tracker is within 2.'],
+ ['🪦','Grave','Grave',`A fallen unit leaves a Grave for ${F.graveDur||4} rounds (max ${F.graveCap||6}). Undead heroes can spawn next to a Grave within ${F.graveRange||3} hexes of an Undead unit.`],
+ ['👁','Risen','Risen','Vengeful Dead: it rose with Undying. +1 damage, but allied heals cannot heal it (shrines still do).'],
+ ['⚰️','Raised','Raised','Raised by a Necromancer: fights for him, starts used, shows a ⌛ countdown and crumbles after 3 of its owner\u2019s turns.'],
+ ['🦇','Bat form','Bat form','Warlock only: before moving he can turn into a bat for free (🦇 button'+(touch()?'':' or B')+') and fly like a Bat; he turns back when he lands.'],
+ ['🌙','Night','Night','With Vampires in the match, rounds 1-3 are Day, 4-6 Night, and so on. At Night vampires get +1 move and +1 drain, and everyone else sees 2 hexes less (min 1).'],
+ ['★','Hero level','Level','A hero with 2 kills earns a star (+2 max HP, +1 damage); a second star at 5 kills (Hero levels option).']]}
+function statusHTML(){return `<p>Status badges appear on the unit and in its info card. ${W().Hover} a badge for a reminder.</p><ul>`+statusList().map(s=>`<li id="hh-s-${slug(s[2])}"><b>${s[0]} ${E(s[1])}</b>: ${E(s[3])}</li>`).join('')+'</ul>'}
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function buildingsHTML(){try{return `<div class="hh-tbl"><table><thead><tr><th>Building</th><th>Cost</th><th>HP</th><th>Max</th><th>Effect</th></tr></thead><tbody>${Object.keys(BLD).map(k=>{const b=BLD[k];return `<tr><td>${b.e} ${E(b.n)}</td><td class="n">${b.c}🪙</td><td class="n">${b.hp}</td><td class="n">${b.mx}</td><td>${E(b.d)}</td></tr>`}).join('')}</tbody></table></div>`}catch(e){return ''}}
+function controlsHTML(){const w=W();
+ const pc=`<h4>Mouse and keyboard</h4><ul><li><b>Select</b>: ${'click'} a hero, then a blue hex to move or a red hex to attack. Right-click or <kbd>Esc</kbd> deselects.</li>
+ <li><kbd>1</kbd>-<kbd>9</kbd> pick a Reserve hero to spawn · <kbd>Tab</kbd> next hero that can still act · <kbd>E</kbd> or <kbd>Space</kbd> end turn</li>
+ <li><kbd>B</kbd> Warlock bat form · <kbd>V</kbd> Classic / Tilted view · <kbd>F</kbd> fullscreen · arrow keys pan big maps · <kbd>?</kbd> or <kbd>H</kbd> this Help</li>
+ <li>Hover a unit, tower or hex for its stats; hover a red hex to see the damage, crit chance and the counter (↩) before you attack.</li></ul>`;
+ const tc=`<h4>Touch</h4><ul><li><b>Tap</b> a hero to select it, then tap a blue hex to move or a red hex to attack. Tap it again or tap empty ground to deselect.</li><li>Tap an enemy, tower or hex to see what it is. Drag to pan big maps and pinch or use the zoom bar to zoom.</li><li>Turn the phone sideways for a bigger board. The <b>?</b> button in the battle bar opens this Help.</li></ul>`;
+ return (touch()?tc+pc:pc+tc)+(rulesSec('Controls and tips')?`<h4>Tips</h4>${rulesSec('Controls and tips')}`:'')+(rulesSec('Playing on iPhone')?`<h4>iPhone and iPad</h4>${rulesSec('Playing on iPhone')}`:'')}
+function onlineHTML(){return `<ul><li>Choose <b>Play online</b> on the main menu to create a room. Send friends the link or the 4-letter room code; they can also scan the QR code in the lobby.</li>
+ <li>The host picks the mode, map and match options in the lobby, then everyone drafts heroes. Bans happen first when the Ban phase option is on.</li>
+ <li>Turns are taken in seat order. While it is someone else\u2019s turn you can look around, read Help and check units, but you cannot act. Opening Help never pauses an online match.</li>
+ <li>If you lose connection or close the tab, open the game again and use <b>Rejoin game</b> on the main menu to get back to your seat.</li>
+ <li>Your Display settings, view (Classic or Tilted) and tips only change your own screen.</li></ul>`}
+function quickHTML(){const w=W();return `<ol style="padding-left:22px">
+ <li><b>Spawn</b>: ${w.click} a hero in your <b>Reserve</b> (under the board), then a glowing hex next to one of your towers. It cannot act on the turn it spawns.</li>
+ <li><b>Move or act</b>: ${w.click} a hero. Blue hexes are moves, red hexes are attacks or heals. Each hero does one of the two per turn (Charge heroes can do both).</li>
+ <li><b>Read the preview</b>: ${w.hover} a red hex to see the damage, crit chance and the counterattack (↩) you will take.</li>
+ <li><b>End turn</b> with the button at the top${touch()?'':' or <kbd>E</kbd>'}.</li>
+ <li><b>Win</b> by destroying all 3 enemy towers, or by being the last player with units.</li></ol>
+ <p><button type="button" class="hh-tut" data-tut style="width:auto;padding:6px 22px">▶ Play the tutorial</button></p>`}
+function topics(){const sd=sdText();return [
+ {id:'start',ic:'⭐',t:'Quick start',h:()=>quickHTML()},
+ {id:'basics',ic:'🎲',t:'Turns & spawning',h:()=>rulesSec('The goal')+'<h4>Your turn</h4>'+rulesSec('Your turn')+'<h4>Spawning heroes</h4>'+rulesSec('Spawning heroes')+'<h4>Building your team</h4>'+rulesSec('Building your team')},
+ {id:'combat',ic:'⚔️',t:'Combat',h:()=>rulesSec('Moving and fighting')+`<h4>Crits & counters</h4><p>${coreD('clash')}</p><h4>Combos (option)</h4><p>${coreD('combos')}</p><h4>Splash, cleave and pierce</h4>`+kwSubset(['Splash','Cleave','Pierce','Armor','Siege'])},
+ {id:'terrain',ic:'🌲',t:'Terrain, water & fog',h:()=>`<h4>Terrain</h4><p>${coreD('terrain')}</p><p>Water (big maps): shallow water can be waded, but you only step in or out of it on a beach (sand); deep water blocks walking heroes. Fliers cross both but cannot stop over deep water. Ranged attacks and sight pass over water.</p><h4>Fog of war</h4><p>${coreD('sight')}</p><p>Factions add more ground effects: burning ground and Ash (Infernal), Graves (Undead), grown forest and forest stealth (Wilds). ${W().Hover} any hex to see what it does.</p>`},
+ {id:'economy',ic:'🪙',t:'Gold, market & army',h:()=>`<p>${coreD('gold')}</p>`+(()=>{const R=$q('#rules');if(!R)return '';const d=[...R.querySelectorAll('details')].find(x=>/Battlefield/.test((x.querySelector('summary')||{}).textContent||''));if(!d)return '';return [...d.querySelectorAll(':scope>p')].map(p=>p.outerHTML).join('')})()+'<h4>Buildings</h4>'+buildingsHTML()},
+ {id:'towers',ic:'🏰',t:'Towers, winning & sudden death',h:()=>liveTowers()+rulesSec('Towers')+`<h4>Sudden death</h4><p>From round <b>${sd.c}</b> on Classic (round <b>${sd.b}</b> on the larger maps) every tower crumbles at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired or fortified.</p>`},
+ {id:'mana',ic:'✦',t:'Mana & spells',h:()=>rulesSec('Mana')},
+ {id:'factions',ic:'🛡',t:'Factions',h:()=>rulesSec('Factions')},
+ {id:'classes',ic:'🎭',t:'Classes',h:()=>rulesSec('Classes')},
+ {id:'status',ic:'💫',t:'Status effects',h:()=>statusHTML()},
+ {id:'keywords',ic:'📜',t:'Keywords & icons',h:()=>rulesSec('Keywords')+'<h4>Hero icons</h4>'+rulesSec('Hero icons')},
+ {id:'heroes',ic:'🧙',t:'All heroes',h:()=>heroesHTML()},
+ {id:'options',ic:'⚙',t:'Match options',h:()=>rulesSec('Match options')},
+ {id:'controls',ic:'🎮',t:'Controls & views',h:()=>controlsHTML()},
+ {id:'online',ic:'🌐',t:'Online play',h:()=>onlineHTML()}]}
+function kwSubset(names){const R=$q('#rules');if(!R)return '';const d=[...R.querySelectorAll('details')].find(x=>/^Keywords/.test(((x.querySelector('summary')||{}).textContent||'').trim()));if(!d)return '';
+ const li=[...d.querySelectorAll('li')].filter(l=>{const b=l.querySelector('b');return b&&names.some(n=>b.textContent.trim().startsWith(n))});return li.length?'<ul>'+li.map(l=>l.outerHTML).join('')+'</ul>':''}
+
+/* ================= links (hero names, keywords, statuses) ================= */
+let LINKS=null;
+function linkTable(){const m=[];heroList().forEach(k=>{const n=H[k].n;if(n&&n.length>4)m.push([n,'h:'+k])});
+ statusList().forEach(s=>{if(s[1].length>5&&s[1]!=='Night')m.push([s[1],'s:'+slug(s[2])])});
+ const R=$q('#rules');const d=R&&[...R.querySelectorAll('details')].find(x=>/^Keywords/.test(((x.querySelector('summary')||{}).textContent||'').trim()));
+ if(d)[...d.querySelectorAll('li>b')].forEach(b=>{const n=b.textContent.trim().replace(/\s+(N|xN|\+N|\d+)$/,'').replace(/\s*\(.*\)$/,'');if(n.length>3)m.push([n,'k:'+slug(n)])});
+ const seen=new Set();const L=m.filter(([n])=>{const k=n.toLowerCase();if(seen.has(k))return false;seen.add(k);return true}).sort((a,b)=>b[0].length-a[0].length);
+ const re=new RegExp('\\b('+L.map(x=>x[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')\\b','g');const map={};L.forEach(([n,t])=>map[n]=t);return{re,map}}
+function linkify(root,selfTarget){if(!LINKS)LINKS=linkTable();const {re,map}=LINKS;const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!p||p.closest('a,button,h3,h4,b,header,kbd,.hh-st,summary,input'))return NodeFilter.FILTER_REJECT;return re.test(n.nodeValue)?(re.lastIndex=0,NodeFilter.FILTER_ACCEPT):NodeFilter.FILTER_REJECT}});
+ const nodes=[];while(tw.nextNode())nodes.push(tw.currentNode);
+ nodes.forEach(n=>{const own=n.parentElement.closest('[data-hero]');const ownK=own&&('h:'+own.dataset.hero);const t=n.nodeValue;let last=0,out=document.createDocumentFragment(),hit=false;re.lastIndex=0;let m;
+  while((m=re.exec(t))){const tg=map[m[1]];if(!tg||tg===ownK)continue;hit=true;out.appendChild(document.createTextNode(t.slice(last,m.index)));const a=document.createElement('a');a.className='hh-l';a.dataset.go=tg;a.href='#';a.textContent=m[1];out.appendChild(a);last=m.index+m[1].length}
+  if(hit){out.appendChild(document.createTextNode(t.slice(last)));n.parentNode.replaceChild(out,n)}})}
+
+/* ================= help panel ================= */
+let HV=null,cur='start',back=null,pausedAI=null;
+const soloish=()=>{try{return !NET&&inGame()&&!S.over}catch(e){return false}};
+function build(){if(HV)return HV;HV=document.createElement('div');HV.id='hvh';HV.hidden=true;HV.setAttribute('role','dialog');HV.setAttribute('aria-modal','true');HV.setAttribute('aria-labelledby','hvh-t');
+ HV.innerHTML=`<div class="hh-card"><div class="hh-top"><div class="hh-tt"><p class="hh-k">Hollow Vale</p><h2 id="hvh-t">Help</h2></div>
+ <div class="hh-sw">${ICS.search}<input class="hh-q" type="search" placeholder="Search rules, heroes, keywords…" aria-label="Search help" autocomplete="off" spellcheck="false"><button type="button" class="hh-qx" hidden aria-label="Clear search">${ICS.x}</button></div>
+ <button type="button" class="hh-x" aria-label="Close help">${ICS.x}</button></div>
+ <div class="hh-main"><nav class="hh-nav" aria-label="Help topics"></nav><div class="hh-body" tabindex="-1" aria-live="polite"></div></div>
+ <div class="hh-foot"><span><kbd>?</kbd> or <kbd>H</kbd> opens Help</span><span><kbd>Esc</kbd> closes</span><span style="margin-left:auto" class="hh-ft"></span></div></div>`;
+ document.body.appendChild(HV);
+ const q=HV.querySelector('.hh-q'),qx=HV.querySelector('.hh-qx');
+ q.addEventListener('input',()=>{qx.hidden=!q.value;if(q.value.trim())search(q.value);else show(cur)});
+ qx.onclick=()=>{q.value='';qx.hidden=true;show(cur);q.focus()};
+ HV.querySelector('.hh-x').onclick=close;
+ HV.addEventListener('pointerdown',e=>{if(e.target===HV)close()});
+ HV.addEventListener('click',e=>{const a=e.target.closest('[data-go]');if(a){e.preventDefault();go(a.dataset.go);return}
+  const t=e.target.closest('[data-top]');if(t){q.value='';qx.hidden=true;show(t.dataset.top);return}
+  if(e.target.closest('[data-tut]')){e.preventDefault();close();TUT.start();return}});
+ q.addEventListener('keydown',e=>{if(e.key==='Enter'){const f=HV.querySelector('.hh-res button');if(f){f.click();e.preventDefault()}}});
+ return HV}
+function nav(){const N=HV.querySelector('.hh-nav');N.innerHTML=topics().map(t=>`<button type="button" data-top="${t.id}" aria-current="${t.id===cur}"><i aria-hidden="true">${t.ic}</i><span>${E(t.t)}</span></button>`).join('')+(inGame()&&TUT.on?'':`<button type="button" class="hh-tut" data-tut>▶ ${LS.get('hv-tut-done',0)?'Replay':'Play'} the tutorial</button>`)}
+function show(id,focusSel){const T=topics();const t=T.find(x=>x.id===id)||T[0];cur=t.id;nav();const B=HV.querySelector('.hh-body');
+ let h='';try{h=fixText(t.h())}catch(e){h='<p class="hh-none">This section could not be built.</p>'}
+ B.innerHTML=`<h3>${t.ic} ${E(t.t)}</h3>`+(h||'<p class="hh-none">Nothing here yet.</p>');linkify(B);B.scrollTop=0;
+ HV.querySelector('.hh-ft').textContent=inGame()?(soloish()&&pausedAI!=null?'The AI waits while Help is open':''):'';
+ if(focusSel){const el=B.querySelector(focusSel);if(el){el.scrollIntoView({block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')}}}
+function go(tg){const [kind,v]=tg.split(':');const q=HV.querySelector('.hh-q');q.value='';HV.querySelector('.hh-qx').hidden=true;
+ if(kind==='h')show('heroes','#hh-h-'+v);else if(kind==='s')show('status','#hh-s-'+v);else if(kind==='k'){show('keywords');const B=HV.querySelector('.hh-body');const li=[...B.querySelectorAll('li')].find(l=>{const b=l.querySelector('b');return b&&slug(b.textContent.replace(/\s+(N|xN|\+N|\d+)$/,'').replace(/\s*\(.*\)$/,''))===v});if(li){li.scrollIntoView({block:'center'});li.classList.add('flash')}}
+ else if(kind==='t'){const [id,needle]=v.split('|');show(id);if(needle)flashText(needle)}}
+function flashText(needle){const B=HV.querySelector('.hh-body');const n=needle.toLowerCase();const el=[...B.querySelectorAll('li,p,tr,.hh-hero')].find(e=>e.textContent.toLowerCase().includes(n));if(el){el.scrollIntoView({block:'center'});el.classList.add('flash');markIn(el,needle)}}
+function markIn(el,needle){const re=new RegExp('('+needle.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');const tw=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const ns=[];while(tw.nextNode())ns.push(tw.currentNode);ns.forEach(n=>{if(!re.test(n.nodeValue))return;re.lastIndex=0;const s=document.createElement('span');s.innerHTML=E(n.nodeValue).replace(re,'<mark>$1</mark>');n.parentNode.replaceChild(s,n)})}
+function index(){const out=[];
+ topics().forEach(t=>{let h='';try{h=fixText(t.h())}catch(e){}const d=document.createElement('div');d.innerHTML=h;
+  out.push({kind:'Topic',title:t.t,text:d.textContent.replace(/\s+/g,' '),go:'t:'+t.id});
+  if(t.id!=='heroes'&&t.id!=='status')[...d.querySelectorAll('li')].forEach(li=>{const b=li.querySelector('b');if(b)out.push({kind:t.id==='keywords'?'Keyword':t.t,title:b.textContent.replace(/:$/,''),text:li.textContent.replace(/\s+/g,' '),go:'t:'+t.id+'|'+b.textContent.slice(0,40)})})});
+ heroList().forEach(k=>{const h=H[k],r=(typeof ROLE!='undefined'&&ROLE[k])||[];out.push({kind:h.elite?'Boss':'Hero',title:h.n,text:[h.n,k,r[0],r[1],h.d,facName(facOf(k)),kwPairs(k).map(p=>strip(p[1])).join(' ')].join(' '),go:'h:'+k,tw:3})});
+ statusList().forEach(s=>out.push({kind:'Status',title:s[0]+' '+s[1],text:s[1]+' '+s[2]+' '+s[3],go:'s:'+slug(s[2]),tw:2}));return out}
+function search(qs){const B=HV.querySelector('.hh-body');const toks=qs.toLowerCase().split(/\s+/).filter(Boolean);const I=index();
+ const sc=I.map(e=>{const T=e.title.toLowerCase(),X=e.text.toLowerCase();if(!toks.every(t=>X.includes(t)||T.includes(t)))return null;let s=(e.tw||1);toks.forEach(t=>{if(T.startsWith(t))s+=6;else if(T.includes(t))s+=3});if(e.kind==='Topic')s-=1;return {e,s}}).filter(Boolean).sort((a,b)=>b.s-a.s).slice(0,40);
+ const tset=new Set(sc.filter(x=>x.e.go.startsWith('t:')).map(x=>x.e.go.slice(2).split('|')[0]));
+ HV.querySelectorAll('.hh-nav [data-top]').forEach(b=>{b.classList.toggle('dim',!tset.has(b.dataset.top));b.setAttribute('aria-current','false')});
+ const snip=(txt)=>{const x=txt.toLowerCase(),i=Math.max(0,x.indexOf(toks[0]));const s=Math.max(0,i-60);let o=(s?'…':'')+txt.slice(s,s+170)+(txt.length>s+170?'…':'');let h=E(o);toks.forEach(t=>{h=h.replace(new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>')});return h};
+ B.innerHTML=`<h3>${ICS.search} Results for “${E(qs.trim())}”</h3>`+(sc.length?`<ul class="hh-res">${sc.map(({e})=>`<li><button type="button" data-go="${E(e.go)}"><b>${E(e.title)}<small>${E(e.kind)}</small></b><span>${snip(e.text)}</span></button></li>`).join('')}</ul>`:`<p class="hh-none">Nothing matches. Try a hero name, a keyword like “splash”, or a rule like “sudden death”.</p>`);B.scrollTop=0}
+function open(id){build();if(!HV.hidden){if(id)show(id);return}LINKS=null;back=document.activeElement;HV.hidden=false;
+ if(soloish()&&SEAT&&SEAT[S.turn]=='a'){pausedAI=S.turn;try{aiRun++}catch(e){}}else pausedAI=null;
+ show(id||cur);const q=HV.querySelector('.hh-q');q.value='';HV.querySelector('.hh-qx').hidden=true;setTimeout(()=>{if(!touch())q.focus();else HV.querySelector('.hh-body').focus()},30)}
+function close(){if(!HV||HV.hidden)return;HV.hidden=true;const p=pausedAI;pausedAI=null;
+ if(p!=null&&inGame()&&!S.over&&S.turn===p&&SEAT&&SEAT[p]=='a'){try{setTimeout(()=>{if(S&&!S.over&&S.turn===p&&(!HV||HV.hidden))runAI(p)},250)}catch(e){}}
+ if(back&&back.focus&&document.contains(back))back.focus()}
+/* AI waits while Help is open in local play (never online) */
+try{const ra=runAI;runAI=function(sd){if(HV&&!HV.hidden&&soloish()){pausedAI=sd;return}if(TUT.on&&TUT.blockAI)return;return ra.apply(this,arguments)}}catch(e){}
+addEventListener('keydown',e=>{if(HV&&!HV.hidden){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close()}return}
+ if(e.ctrlKey||e.metaKey||e.altKey)return;const t=e.target;if(t&&/INPUT|TEXTAREA|SELECT/.test(t.tagName))return;
+ if(e.key==='?'||e.key==='h'||e.key==='H'){const blockers=['#dspo','#hv-news','#hvm-rules','#pass'];if(blockers.some(s=>{const x=$q(s);return x&&!x.hidden}))return;e.preventDefault();e.stopPropagation();open()}},true);
+window.hvHelp={open,close};
+
+/* HUD + drawer + menu entries */
+function hud(){const bar=$q('#game .bar');if(!bar||$q('#hvh-b'))return;const b=document.createElement('button');b.id='hvh-b';b.type='button';b.textContent='?';b.title='Help ('+(touch()?'rules, heroes, keywords':'H or ?')+')';b.setAttribute('aria-label','Help');b.onclick=()=>open();const th=$q('#thrb');if(th&&th.parentNode===bar)th.after(b);else bar.appendChild(b)}
+function drawerBtn(){const h=$q('#hvm-rules .hvm-rh');if(!h||h.querySelector('.hh-open'))return;const b=document.createElement('button');b.type='button';b.className='hh-open';b.textContent='Search help';b.onclick=()=>{const x=$q('#hvm-rules .hvm-rx');if(x)x.click();open()};const x=h.querySelector('.hvm-rx');h.insertBefore(b,x);
+ const t=document.createElement('button');t.type='button';t.className='hh-open';t.textContent='▶ Tutorial';t.onclick=()=>{const x=$q('#hvm-rules .hvm-rx');if(x)x.click();TUT.start()};h.insertBefore(t,b)}
+function menuBtn(){const ut=$q('#menu .hvm-util');if(ut&&!$q('#hvm-tut')){const p=document.createElement('button');p.type='button';p.className='hvm-pill';p.id='hvm-tut';p.title='Tutorial';p.setAttribute('aria-label','Tutorial');p.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/><path d="M22 9v5"/></svg><span class="t">Tutorial</span>';p.onclick=()=>TUT.start();ut.insertBefore(p,ut.firstChild)}
+ const pl=$q('#hvm-tut');if(pl)pl.classList.toggle('done',!!LS.get('hv-tut-done',0));
+ const br=$q('#menu .hvm-brand');if(!br)return;let b=br.querySelector('.hvm-tutb');if(!b){b=document.createElement('button');b.type='button';b.className='hvm-tutb';b.id='mtut';b.onclick=()=>TUT.start();br.appendChild(b)}
+ const done=LS.get('hv-tut-done',0);b.classList.toggle('done',!!done);b.innerHTML=done?`✓ <span>Tutorial done <small>Replay it any time</small></span>`:`▶ <span>New here? Play the tutorial <small>8 short steps, about 3 minutes</small></span>`}
+const mo=new MutationObserver(()=>{hud();drawerBtn()});
+function boot(){hud();drawerBtn();menuBtn();try{mo.observe($q('#game'),{childList:true,subtree:false})}catch(e){}}
+
+/* ================= first-time tips ================= */
+const TIPS={
+ night:['🌙','Night falls','Vampires get +1 move and +1 drain, and everyone else sees 2 hexes less. It lasts 3 rounds.','status','Night'],
+ burn:['🔥','Burning','A burning unit takes damage at the start of its next turns. Infernal fire also spreads on the ground.','status','Burn'],
+ heat:['♨','Heat','Burn ticks on enemies build Heat for the Infernal side. At 5 Heat their next attack Overheats: more damage and splash.','status','Heat'],
+ grave:['🪦','A Grave appeared','Fallen units leave Graves for a few rounds. Undead heroes can spawn next to them.','status','Grave'],
+ hidden:['🌲','Hidden in the forest','Wilds rangers in forests are invisible to enemies more than 1 hex away, unless flared or a tracker is close.','status','Hidden'],
+ shield:['🛡','Shielded','Ward blocks the next hit completely; Mist takes 2 less damage until its next turn.','status','Ward'],
+ stun:['💫','Stunned','A stunned unit loses its next turn and cannot strike back.','status','Stun'],
+ silence:['🔇','Silence zone','Units inside cannot attack or use abilities until the zone fades.','status','Silence'],
+ cap:['🏠','Army is full','You reached your army cap. Build a Cottage (+2) or a Great Hall (+5) in the market to hire more.','economy','Cottage'],
+ sd:['💀','Sudden death','Every tower now crumbles each round and can no longer be repaired. Finish the fight!','towers','Sudden death'],
+ boss:['👑','Boss in play','Bosses take 5 slots and have unique powers. Keep your heroes next to yours: with Combos on they deal +1 (Rally).','heroes',''],
+ water:['🌊','Water on this map','Wade shallow water, but step in or out only on a beach. Deep water blocks walkers; fliers cross both.','terrain','Water'],
+ tilt:['🗺','Tilted view','The board is laid back like a diorama. It only changes your screen; switch back with the View button'+(''),'controls','Tilted'],
+ ambush:['❗','Ambush!','Your hero walked into an enemy it could not see. It stops and is spent for this turn. Scouts and flares help.','status','Ambush']};
+const tipsOn=()=>LS.get('hv-tips',{}).off!==true;
+function seenTip(id){return !!(LS.get('hv-tips',{}).seen||{})[id]}
+function markTip(id){const t=LS.get('hv-tips',{});t.seen=t.seen||{};t.seen[id]=1;LS.set('hv-tips',t)}
+let tipEl=null,tipQ=[],tipT=0;
+function canTip(){try{if(FAST||RP||!tipsOn()||TUT.on||!inGame()||S.over)return false;if(typeof cutting=='function'&&cutting())return false;if(NET&&ME&&S.turn!==ME)return false;const p=$q('#pass');if(p&&!p.hidden)return false;if(HV&&!HV.hidden)return false;return true}catch(e){return false}}
+function tip(id){if(seenTip(id)||!TIPS[id]||tipQ.includes(id))return;tipQ.push(id);pumpTip()}
+function pumpTip(){if(tipEl&&!tipEl.hidden)return;if(!tipQ.length)return;if(!canTip()){setTimeout(pumpTip,1500);return}const id=tipQ.shift();if(seenTip(id)){pumpTip();return}markTip(id);const [ic,t,d,top,nd]=TIPS[id];
+ if(!tipEl){tipEl=document.createElement('div');tipEl.id='hvtip';tipEl.setAttribute('role','status');tipEl.setAttribute('aria-live','polite');document.body.appendChild(tipEl)}
+ tipEl.innerHTML=`<div class="tp"><span class="ic" aria-hidden="true">${ic}</span><div><p class="tk">Tip</p><b>${E(t)}</b><p>${E(d)}</p><button type="button" class="more">More in Help</button></div><button type="button" class="x" aria-label="Dismiss tip">${ICS.x}</button></div>`;tipEl.hidden=false;
+ const done=()=>{clearTimeout(tipT);const c=tipEl.querySelector('.tp');if(c)c.classList.add('out');setTimeout(()=>{tipEl.hidden=true;setTimeout(pumpTip,900)},400)};
+ tipEl.querySelector('.x').onclick=done;tipEl.querySelector('.more').onclick=()=>{done();open(top);if(nd)setTimeout(()=>flashText(nd),60)};clearTimeout(tipT);tipT=setTimeout(done,11000)}
+function scanTips(){if(!canTip())return;try{const me=ME||S.turn,fm=S.fm||{};
+ if(fm.night&&Math.floor((S.round-1)/3)%2==1)tip('night');
+ if(S.units.some(u=>u.burn>0&&canSeeU(u)))tip('burn');
+ if(fm.heat&&Object.values(fm.heat).some(v=>v>0))tip('heat');
+ if(fm.gr&&fm.gr.length)tip('grave');
+ if(typeof hvStealthAny=='function'&&S.units.some(u=>sameTeam(u.side,me)&&hvStealthAny(u)))tip('hidden');
+ if(S.units.some(u=>(u.ward||u.mist)&&canSeeU(u)))tip('shield');
+ if(S.units.some(u=>u.stun>0&&canSeeU(u)))tip('stun');
+ if(S.sil&&S.sil.length)tip('silence');
+ if(me&&typeof armySize=='function'&&MOPT.gold&&S.gold[me]!=null&&armySize(me)>=armyCap(me)-.01&&S.round>1)tip('cap');
+ if(S.round>=SDR())tip('sd');
+ if(me&&S.units.concat().some(u=>u.side===me&&H[u.k]&&H[u.k].elite)||me&&(S.pool[me]||[]).some(k=>H[k]&&H[k].elite))tip('boss');
+ if(typeof hvIsWater=='function'&&GEO&&GEO.cells&&GEO.cells.some(c=>hvIsWater(c.x,c.y)))tip('water');
+ if(document.documentElement.classList.contains('tvon'))tip('tilt')}catch(e){}}
+const canSeeU=u=>{try{return !FOGV()||canSee(FOGV(),u)}catch(e){return true}};
+let scanT=0;
+function hookRender(){try{const r0=render;render=function(){const r=r0.apply(this,arguments);if(!RP){if(TUT.on)TUT.after();else if(!scanT)scanT=setTimeout(()=>{scanT=0;scanTips()},350)}return r}}catch(e){}}
+try{const p0=pop;pop=function(o,txt){const r=p0.apply(this,arguments);try{if(!RP&&txt==='Ambushed!'&&o&&ME&&o.side===ME)tip('ambush')}catch(e){}return r}}catch(e){}
+function dispRow(){const dp=$q('#dspo .dp');if(!dp||dp.querySelector('[data-k=hvtips]'))return;const x=$q('#dspx');const l=document.createElement('label');l.innerHTML='<input type="checkbox" data-k="hvtips"><span>Tips<small>Short one-time tips the first time something new happens in a match.</small></span>';
+ const row=document.createElement('div');row.className='hvt-row';row.innerHTML='<button type="button">Reset tips</button><small></small>';
+ const i=l.querySelector('input');i.checked=tipsOn();i.onchange=e=>{e.stopPropagation();const t=LS.get('hv-tips',{});t.off=!i.checked;LS.set('hv-tips',t)};
+ row.querySelector('button').onclick=()=>{const t=LS.get('hv-tips',{});t.seen={};LS.set('hv-tips',t);row.querySelector('small').textContent='Tips will show again.'};
+ if(x){dp.insertBefore(l,x);dp.insertBefore(row,x)}else{dp.appendChild(l);dp.appendChild(row)}
+ const ob=new MutationObserver(()=>{const o=$q('#dspo');if(o&&!o.hidden){i.checked=tipsOn();row.querySelector('small').textContent=''}});const o=$q('#dspo');if(o)ob.observe(o,{attributes:true,attributeFilter:['hidden']})}
+
+/* ================= guided tutorial ================= */
+const RING='<i class="hvt-ring" aria-hidden="true"><svg viewBox="0 0 100 115.47" preserveAspectRatio="none"><polygon points="50,1 99,29.4 99,86.1 50,114.5 1,86.1 1,29.4"/></svg></i>';
+const TUT={on:false,i:0,blockAI:false,ui:null,
+ start(){if(this.on)return;try{if(NET&&NET.leaveGame&&inGame())return}catch(e){}this.on=true;this.blockAI=true;this.i=0;this.wrong=0;
+  try{['#hvm-rules','#dspo','#hv-news'].forEach(s=>{const x=$q(s);if(x&&!x.hidden){const c=x.querySelector('.hvm-rx,#dspx,.hvn-x');if(c)c.click();else x.hidden=true}})}catch(e){}
+  try{localStorage.setItem('hv-cheat','1')}catch(e){}
+  try{mode='local';NET=null;HOST=true;CAMP=null;HOTSEAT=false;HUM=1;BANS=[];BANMODE=false;WAITBAN=null;SEAT={p:'h',e:'a'};
+   $a('#menu,#camp,#lobby,#lsetup,#stats,#draft').forEach(e=>e.hidden=true);
+   setupMode(2,'classic');
+   startGame({picks:{p:['knight'],e:['brute']},seat:{p:'h',e:'a'},me:'p',n:2,opts:{map:'classic',shrines:false,levels:false,bans:false,cards:false,bounty:false,truce:false,koth:false,raid:false,ults:false,fog:false,combos:false},seed:424242,tutorial:1});
+  }catch(e){console.error(e);this.stop();return}
+  setTimeout(()=>{try{this.setup();this.card();render()}catch(e){console.error(e);this.stop()}},120)},
+ setup(){const T=this;S.ter={};S.mines=[];S.chests=[];S.walls=S.walls||[];
+  const P=(k,x,y)=>{const u=mk(k,'p',x,y);S.units.push(u);return u},Q=(k,x,y)=>{const u=mk(k,'e',x,y);S.units.push(u);return u};
+  S.units=S.units.filter(u=>false);
+  T.arch=P('archer',2,6);T.kn=P('knight',4,5);T.cl=P('cleric',5,6);T.foe=Q('brute',4,4);
+  if(!(dist(T.kn,T.foe)==1)){const nb=NB[T.kn.y&1].map(([dx,dy])=>({x:T.kn.x+dx,y:T.kn.y+dy})).find(c=>free(c.x,c.y));if(nb){T.foe.x=nb.x;T.foe.y=nb.y}}
+  S.ter['1,5']='forest';S.ter['6,4']='swamp';S.mana.p=Math.max(S.mana.p,3);S.gold.p=Math.max(S.gold.p,3);S.turn='p';S.round=1;
+  T.base={n:S.units.filter(u=>u.side=='p').length,pool:S.pool.p.length}},
+ refresh(){S.units.forEach(u=>{if(u.side=='p'){u.used=false;u.moved=0}})},
+ steps(){const w=W(),T=this;return [
+  {k:'spawn',t:'Spawn a hero',d:`Your <b>Reserve</b> holds heroes waiting to join. ${w.Click} the Knight in your Reserve, then ${w.click} a glowing hex next to one of your towers.`,
+   hint:`First ${w.click} the Knight in the Reserve under the board, then a glowing hex next to your tower.`,
+   ok:a=>a.t=='spawn',done:()=>S.pool.p.length<T.base.pool,hl:()=>['#res .chip'].concat(typeof spSel!='undefined'&&spSel!=null?spawnHexes('p').map(c=>c):[]),after:'Spawned heroes cannot act on the turn they arrive.'},
+  {k:'move',t:'Move',d:`${w.Click} your <b>Archer</b>. The blue hexes show where it can go. ${w.Click} one of them to move.`,hint:`Move the Archer: ${w.click} it, then a blue hex.`,
+   ok:a=>a.t=='move'&&a.fx==T.arch.x&&a.fy==T.arch.y,pre:()=>{T.ax=T.arch.x;T.ay=T.arch.y},done:()=>T.arch.x!=T.ax||T.arch.y!=T.ay,hl:()=>[{x:T.arch.x,y:T.arch.y}],after:'Each hero can move <b>or</b> act once per turn. Charge heroes can do both.'},
+  {k:'attack',t:'Attack and read the preview',d:`${w.Click} your <b>Knight</b>. The enemy Brute is on a red hex. ${w.Hover} the red hex to read the preview: damage, crit chance and the counterattack (↩) you will take. Then ${w.click} it to attack.`,
+   hint:`Attack with the Knight: ${w.click} it, then the red hex with the Brute.`,ok:a=>a.t=='act'&&a.fx==T.kn.x&&a.fy==T.kn.y,pre:()=>{T.foe.hp=Math.max(T.foe.hp,H.brute.hp);T.fh=T.foe.hp},done:()=>T.foe.hp<T.fh||T.kn.used,hl:()=>[{x:T.kn.x,y:T.kn.y},{x:T.foe.x,y:T.foe.y}],
+   after:'Melee heroes that survive strike back for half damage, less when hurt. Towers strike back at melee attackers too, so hit towers from range when you can.'},
+  {k:'terrain',t:'Use the terrain',d:`Terrain matters. <b>Hills</b> give ranged heroes +1 range, <b>forests</b> give cover (−1 ranged damage) and <b>swamps</b> stop movement. On big maps, <b>water</b> can only be entered from a beach. Move your Archer onto the glowing <b>hill</b>.`,
+   hint:'Move the Archer onto the glowing hill.',pre:()=>{const sp=new Set(spawnHexes('p').map(c=>c.x+','+c.y));const R=reach(T.arch).filter(c=>!at(c.x,c.y)&&!twAt(c.x,c.y));R.sort((a,b)=>(sp.has(a.x+','+a.y)-sp.has(b.x+','+b.y))||(a.y-b.y)||(dist(b,T.arch)-dist(a,T.arch)));const c=R.find(c=>dist(c,T.arch)>=1)||R[0];if(c){T.hill=c;S.ter[c.x+','+c.y]='hill'}},
+   ok:a=>a.t=='move'&&a.fx==T.arch.x&&a.fy==T.arch.y&&(!T.hill||a.x==T.hill.x&&a.y==T.hill.y),done:()=>!T.hill||(T.arch.x==T.hill.x&&T.arch.y==T.hill.y),hl:()=>T.hill?[{x:T.arch.x,y:T.arch.y},T.hill]:[],after:`${w.Hover} any hex during a match to see what it does.`},
+  {k:'gold',t:'Gold and the market',d:`You earn gold every turn (+2, more from mines, farms and interest) and from kills and towers. Spend it in the <b>market</b>: ${w.click} <b>Hire</b>, then pick a hero. Hired heroes join your Reserve.`,
+   hint:`${w.Click} Hire in the market, then one of the heroes it offers.`,pre:()=>{S.gold.p=Math.max(S.gold.p,12);T.pl=S.pool.p.length},ok:a=>a.t=='buy'&&a.item=='hire',done:()=>S.pool.p.length>T.pl,hl:()=>['.mkt [data-m=hire]','.hchip'],after:'The market can also bring back fallen heroes, repair towers, build and buy upgrades.'},
+  {k:'ability',t:'Abilities and mana',d:`Some heroes have abilities. Your <b>Cleric</b> heals an ally for 5 HP, paid from your shared <b>mana</b> pool (✦ at the top). ${w.Click} the Cleric, then the hurt Knight (green hex) to heal it.`,
+   hint:`Heal with the Cleric: ${w.click} it, then the Knight.`,pre:()=>{if(T.kn.hp>=H.knight.hp)T.kn.hp=Math.max(1,H.knight.hp-4);S.mana.p=Math.max(S.mana.p,2);if(dist(T.cl,T.kn)>((H.cleric.rng||[1,2])[1])){const nb=NB[T.kn.y&1].map(([dx,dy])=>({x:T.kn.x+dx,y:T.kn.y+dy})).find(c=>free(c.x,c.y));if(nb){T.cl.x=nb.x;T.cl.y=nb.y}}},
+   ok:a=>a.t=='act'&&a.fx==T.cl.x&&a.fy==T.cl.y,done:()=>T.cl.used,hl:()=>[{x:T.cl.x,y:T.cl.y},{x:T.kn.x,y:T.kn.y}],after:'You gain +1 mana each turn (max 10). Unspent mana is saved.'},
+  {k:'towers',t:'Towers and how to win',d:(()=>{const sd=sdText();return `Destroy all 3 enemy <b>towers</b> (top of the board) to win, or be the last player with units. You can only spawn next to your own living towers. From round <b>${sd.c}</b> (${sd.b} on larger maps) <b>sudden death</b> starts: every tower crumbles each round and cannot be repaired.`})(),
+   hint:'',info:1,hl:()=>S.tw.e.filter(t=>t.hp>0).map(t=>({x:t.x,y:t.y})).concat(['#turn']),after:''},
+  {k:'end',t:'End your turn',d:`When your heroes are done, press <b>End turn</b> at the top${touch()?'':' (or press E)'}. Then the other player moves.`,hint:'Press End turn to finish the tutorial.',ok:a=>a.t=='end',done:()=>S.turn!=='p'||T.ended,hl:()=>['#end'],after:''}]},
+ card(){const T=this,st=T.steps(),s=st[T.i];if(!T.ui){T.ui=document.createElement('div');T.ui.id='hvtut';T.ui.setAttribute('role','region');T.ui.setAttribute('aria-label','Tutorial');document.body.appendChild(T.ui);
+   T.ui.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a;if(a=='skip')T.next(true);else if(a=='exit')T.exit();else if(a=='next')T.next();else if(a=='camp')T.finish('camp');else if(a=='ai')T.finish('ai');else if(a=='menu')T.finish('menu')})}
+  T.ui.className=(s.k=='towers'||s.k=='end')?'bot':'';T.ui.hidden=false;if(s.pre&&!s._pre){try{s.pre()}catch(e){}}T._pre=T.i;
+  T.ui.innerHTML=`<div class="tc"><div class="th"><p class="tk">Tutorial · Step ${T.i+1} of ${st.length}</p><span class="pips" aria-hidden="true">${st.map((x,j)=>`<i class="${j<T.i?'on':j==T.i?'now':''}"></i>`).join('')}</span></div>
+  <h3>${s.t}</h3><p>${s.d}</p><p class="hint" hidden></p><div class="tb">${s.info?'<button type="button" class="pri" data-a="next">Got it</button>':''}<button type="button" data-a="skip">Skip step</button><span class="sp"></span><button type="button" data-a="exit">Exit tutorial</button></div></div>`;T.paint()},
+ hint(){const s=this.steps()[this.i];const h=this.ui&&this.ui.querySelector('.hint');if(!h||!s.hint)return;h.textContent=s.hint;h.hidden=false;clearTimeout(this.ht);this.ht=setTimeout(()=>{h.hidden=true},4500)},
+ paint(){$a('.hvt-hl').forEach(e=>e.classList.remove('hvt-hl'));$a('#board .hvt-hc').forEach(e=>e.classList.remove('hvt-hc'));$a('#board .hvt-ring').forEach(e=>e.remove());if(!this.on)return;const s=this.steps()[this.i];if(!s||!s.hl)return;let L=[];try{L=s.hl()}catch(e){}
+  L.forEach(x=>{if(typeof x=='string')$a(x).forEach(e=>{if(e.offsetParent||e.getClientRects().length)e.classList.add('hvt-hl')});else{const c=$q(`#board .cell[data-x="${x.x}"][data-y="${x.y}"]`);if(c){c.classList.add('hvt-hc');c.insertAdjacentHTML('beforeend',RING)}}});
+  if(s.k=='spawn'&&typeof spSel!='undefined'&&spSel!=null)spawnHexes('p').forEach(c=>{const e=$q(`#board .cell[data-x="${c.x}"][data-y="${c.y}"]`);if(e&&!e.querySelector('.hvt-ring')){e.classList.add('hvt-hc');e.insertAdjacentHTML('beforeend',RING)}})},
+ after(){if(!this.on)return;const s=this.steps()[this.i];if(!s)return;let d=false;try{d=!s.info&&s.done()}catch(e){}if(d&&!this.adv){this.adv=1;const ok=s.after;setTimeout(()=>{if(!this.on){this.adv=0;return}if(ok&&this.ui){const p=document.createElement('p');p.className='ok';p.innerHTML='✓ '+ok;const tc=this.ui.querySelector('.tc');if(tc)tc.insertBefore(p,tc.querySelector('.tb'))}setTimeout(()=>this.next(),ok?1700:500)},250)}else requestAnimationFrame(()=>this.paint())},
+ next(skipped){this.adv=0;const st=this.steps();if(this.i>=st.length-1){this.end();return}this.i++;this.refresh();this.card();try{render()}catch(e){}},
+ allowed(a){if(!this.on)return true;if(a.s&&a.s!=='p')return true;const s=this.steps()[this.i];if(!s)return true;if(a.t=='end'&&s.k!=='end'){this.hint2('Not yet: ending the turn is the last step. Finish this one first, or press Skip step.');return false}if(s.info){this.hint2('Press “Got it” to continue.');return false}
+  if(s.ok&&s.ok(a))return true;this.hint();return false},
+ hint2(t){const h=this.ui&&this.ui.querySelector('.hint');if(h){h.textContent=t;h.hidden=false}},
+ end(){this.ended=1;$a('.hvt-hl').forEach(e=>e.classList.remove('hvt-hl'));$a('#board .hvt-hc').forEach(e=>e.classList.remove('hvt-hc'));$a('#board .hvt-ring').forEach(e=>e.remove());LS.set('hv-tut-done',1);menuBtn();
+  this.ui.className='end';this.ui.innerHTML=`<div class="tc"><p class="tk">Tutorial complete</p><h3>You’re ready</h3><p>You can spawn, move, attack, use terrain, hire, heal and end your turn. Press <b>?</b>${touch()?'':' or H'} in any battle for the full Help.</p>
+  <div class="tb"><button type="button" class="pri" data-a="camp">Campaign: battle 1</button><button type="button" data-a="ai">Play vs AI</button><button type="button" data-a="menu">Main menu</button></div></div>`;const b=this.ui.querySelector('.pri');if(b)b.focus()},
+ leave(){this.on=false;this.blockAI=false;this.ended=0;if(this.ui)this.ui.hidden=true;$a('.hvt-hl').forEach(e=>e.classList.remove('hvt-hl'));$a('#board .hvt-hc').forEach(e=>e.classList.remove('hvt-hc'));$a('#board .hvt-ring').forEach(e=>e.remove());try{aiRun++}catch(e){}const r=$q('#restart');if(r&&inGame())r.click();menuBtn()},
+ exit(){this.leave()},
+ finish(where){this.leave();setTimeout(()=>{try{if(where=='camp'){const c=(CAMPAIGN||[])[0];if(c)campStart(c.id);else $q('#m4').click()}else if(where=='ai'){const b=$q('#m1');if(b)b.click()}}catch(e){console.error(e)}},60)},
+ stop(){this.leave()}};
+window.hvTut=TUT;
+try{const sb=submit;submit=function(a){if(TUT.on&&!TUT.allowed(a))return false;const r=sb.apply(this,arguments);if(TUT.on&&r&&a&&a.t=='end'&&a.s=='p'){TUT.ended=1;setTimeout(()=>TUT.end(),300)}return r}}catch(e){}
+/* leaving the battle through the game's own Main menu button ends the tutorial */
+document.addEventListener('click',e=>{if(TUT.on&&e.target.closest&&e.target.closest('#restart')&&!TUT._leaving){TUT.on=false;TUT.blockAI=false;if(TUT.ui)TUT.ui.hidden=true;menuBtn()}},true);
+
+hookRender();
+setInterval(()=>{if(inGame()&&!TUT.on&&document.visibilityState!=='hidden')scanTips()},2000);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{boot();dispRow()});else{boot();dispRow()}
+setTimeout(()=>{boot();dispRow()},800);
+})();
+</script>
+<style id="hv-lobby-leave">
+#lobby .hvl-cf{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:10px auto 0;padding:10px 14px;max-width:560px;border-radius:8px;border:1px solid #c9a24a88;background:#1b1612e6;color:#f2e6c8;font-size:16px}
+#lobby .hvl-cf[hidden]{display:none}
+#lobby .hvl-cf span{flex:1 1 220px;min-width:0}
+#lobby .hvl-cf button{margin:0}
+</style>
+<script id="hv-lobby-leave-js">/* Lobby: "Main menu" while you sit in an online room now leaves the room (frees your seat) after an inline confirm.
+   Uses the lobby's own Leave room button (#rleave -> leaveRoom), so the server sees a normal leave. Inside a running match the
+   old behaviour stays (Main menu keeps the room so you can rejoin). */
+(function(){const q=s=>document.querySelector(s);let ok=false;
+function inRoom(){const r=q('#lroom #rleave'),b=q('#lback');return !!r&&(!b||b.hidden)}
+function bar(){let c=q('#lobby .hvl-cf');if(c)return c;const lb=q('#lobby .lbtns');if(!lb)return null;c=document.createElement('div');c.className='hvl-cf';c.hidden=true;c.setAttribute('role','alertdialog');
+ c.innerHTML='<span></span><button type="button" class="go" data-l="y">Leave room</button><button type="button" class="go sec" data-l="n">Stay</button>';lb.after(c);
+ c.addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(!b)return;c.hidden=true;if(b.dataset.l=='y'){const r=q('#lroom #rleave');if(r)r.click();ok=true;const m=q('#lmenu');if(m)m.click();ok=false}else{const m=q('#lmenu');if(m)m.focus()}});return c}
+document.addEventListener('click',e=>{const m=e.target.closest&&e.target.closest('#lmenu');if(!m||ok||!inRoom())return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const c=bar();if(!c)return;const code=(q('#lroom .rcode b')||{}).textContent||'';c.querySelector('span').textContent=`Leave room ${code} and go to the main menu? Your seat opens up for someone else.`;c.hidden=false;const y=c.querySelector('[data-l=y]');if(y)y.focus()},true);
+new MutationObserver(()=>{const c=q('#lobby .hvl-cf');if(c&&!c.hidden&&!inRoom())c.hidden=true}).observe(q('#lobby'),{childList:true,subtree:true,attributes:true,attributeFilter:['hidden']});
+})();
+</script>
 </body></html>
