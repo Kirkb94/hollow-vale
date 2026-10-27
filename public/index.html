@@ -1354,7 +1354,7 @@ seer:{n:'Aether Seer',e:'🔮',hp:8,mv:2,rng:[1,2],dmg:2,heal:4,cost:1,d:'Heals 
 const FAC={
 kingdom:{n:'Kingdom',c:'#e2b84a',p:'Formation',pd:'takes 1 less damage while next to another Kingdom unit.',sy:'every Kingdom unit gains +1 armor.'},
 vamp:{n:'Vampires',c:'#d23a58',p:'Bloodthirst',pd:'every attack drains blood, healing the attacker for 2 HP, but never more than the damage dealt.',sy:'every Vampire drains +2 more.'},
-undead:{n:'Undead',c:'#7fc46a',p:'Undying',pd:'the first time it would die, it rises again with 1 HP.',sy:'Undying returns units with 3 HP instead of 1.'},
+undead:{n:'Undead',c:'#7fc46a',p:'Undying',pd:'the first time it would die, it rises again with 1 HP.',sy:'Undying returns units with 2 HP instead of 1.'},
 infernal:{n:'Infernal',c:'#f2702a',p:'Burn',pd:'its attacks set units ablaze: 1 damage at the start of their owner\'s next 2 turns.',sy:'Burn deals 2 damage per turn.'},
 wilds:{n:'Wilds',c:'#5cc070',p:'Regrowth',pd:'heals 2 HP at the start of its owner\'s turn.',sy:'Regrowth heals 3 HP.'},
 iron:{n:'Iron Clan',c:'#a8b4c6',p:'Siegecraft',pd:'deals +1 damage to towers.',sy:'every Iron Clan unit deals +1 damage.'},
@@ -1774,7 +1774,7 @@ if(h.acost)r.push(['Mana '+h.acost,`each attack spends ${h.acost} of your shared
 if(h.heal)r.push(['Heal '+h.heal,`restores ${h.heal} HP to a hurt ally in range${h.cost?' (costs '+h.cost+' mana)':' (free)'}.`]);
 if(h.rng[0]>1)r.push(['Min range '+h.rng[0],`cannot hit anything closer than ${h.rng[0]} tiles.`]);
 if(h.rng[1]>1)r.push(['Range '+(h.rng[0]==h.rng[1]?h.rng[1]:h.rng[0]+'-'+h.rng[1]),'distance in hexes (steps in any of the 6 directions).']);
-if(h.fac)r.push([FAC[h.fac].p+' ('+FAC[h.fac].n+')',FAC[h.fac].pd]);const L=r.length?r:[['No specials','a straightforward fighter.']];return c===2?`<div class="kwc">${L.map(([a,b])=>`<span class="kch" data-tip="${String(b).replace(/"/g,'&quot;').replace(/<[^>]*>/g,'')}">${a}</span>`).join('')}</div>`:c?`<span class="kw kc">${L.map(([a,b])=>`<span class="ki"><b>${a}</b>: ${b}</span>`).join('')}</span>`:`<ul class="kw">${L.map(([a,b])=>`<li><b>${a}</b>: ${b}</li>`).join('')}</ul>`}
+if(h.fac)r.push([FAC[h.fac].p+' ('+FAC[h.fac].n+')',FAC[h.fac].pd]);if(typeof hvKw=='function')hvKw(k,r);const L=r.length?r:[['No specials','a straightforward fighter.']];return c===2?`<div class="kwc">${L.map(([a,b])=>`<span class="kch" data-tip="${String(b).replace(/"/g,'&quot;').replace(/<[^>]*>/g,'')}">${a}</span>`).join('')}</div>`:c?`<span class="kw kc">${L.map(([a,b])=>`<span class="ki"><b>${a}</b>: ${b}</span>`).join('')}</span>`:`<ul class="kw">${L.map(([a,b])=>`<li><b>${a}</b>: ${b}</li>`).join('')}</ul>`}
 function twS(s,r){r=r==null?1:r;const cr=r<.6?`<path d='M13 24L16 30L14 36M26 20L24 27L27 33' stroke='#2a1a10' stroke-width='.9' fill='none'/>`:'',cr2=r<.35?`<path d='M10 38L15 40M28 36L31 40M18 19L20 24' stroke='#2a1a10' stroke-width='1' fill='none'/><path d='M7 18L10 14L12 18Z' fill='#0008' stroke='none'/>`:'',sm=r<.35?`<g class='tsm'><circle cx='30' cy='9' r='3' fill='#555' opacity='.55'/><circle cx='27' cy='4' r='2.4' fill='#666' opacity='.4'/></g>`:'';
 return `<svg class='tws' viewBox='0 0 40 48' style='--tc:var(--${s})' aria-hidden='true'><defs><linearGradient id='tg${s}' x1='0' x2='1'><stop offset='0' stop-color='#c4ccd3'/><stop offset='.55' stop-color='#a3acb4'/><stop offset='1' stop-color='#7d8690'/></linearGradient></defs><ellipse cx='20' cy='45' rx='16' ry='3.2' fill='#0006'/><g stroke='#2a1a10' stroke-width='.9' stroke-linejoin='round'><path d='M8 44V19H32V44Z' fill='url(#tg${s})'/><path d='M25 19H32V44H25Z' fill='#0003' stroke='none'/><path d='M8 44H32V41H8Z' fill='#6b7078'/><path d='M6 19V9H11V13H15V9H25V13H29V9H34V19Z' fill='#c5cdd4'/><path d='M6 19H34' stroke='#2a1a10'/><path d='M9 23H31M9 28H31M9 33H31M9 38H31' stroke='#0003' fill='none' stroke-width='.6'/><path d='M14 23V28M22 23V28M18 28V33M26 28V33M12 33V38M20 33V38M28 33V38' stroke='#0003' fill='none' stroke-width='.6'/><path d='M16 41V34Q20 27 24 34V41Z' fill='#3a2a1e'/><path d='M16 34Q20 27 24 34' stroke='#7a5a3a' fill='none' stroke-width='1.2'/><rect x='18.5' y='20.5' width='3' height='5.5' rx='1.5' fill='#1b1b2a'/><rect x='11' y='28' width='2' height='4.5' rx='1' fill='#1b1b2a'/><rect x='27' y='28' width='2' height='4.5' rx='1' fill='#1b1b2a'/><path d='M3 44L8 38V44ZM37 44L32 38V44Z' fill='#7d8690'/>${cr}${cr2}<path d='M20 9V0.5' stroke='#2a1a10' stroke-width='1.2' fill='none'/><g class='flg2'><path d='M20.5 1H32L29 4.8L32 8.6H20.5Z' fill='var(--tc)'/><path d='M20.5 1H32L31 2.6H20.5Z' fill='#fff' fill-opacity='.35' stroke='none'/></g></g><g class='tfl'><ellipse cx='10' cy='36' rx='1.6' ry='2.6' fill='#ffb23a'/><ellipse cx='30' cy='36' rx='1.6' ry='2.6' fill='#ffb23a'/><ellipse cx='10' cy='36.6' rx='.7' ry='1.3' fill='#fff2b0'/><ellipse cx='30' cy='36.6' rx='.7' ry='1.3' fill='#fff2b0'/></g>${sm}</svg>`}
 function deco(x,y){const h=(x*17+y*31+x*y*7)%19,Z=({e:0,g:0,k:0,p:2,m:1})[ZN[x+','+y]],S=(a)=>`<svg class='dc' viewBox='0 0 20 20'>${a}</svg>`;
@@ -2344,7 +2344,7 @@ if(f=='kingdom'&&sy)o.armor+=1;
 if(f=='infernal')o.burn=sy?2:1;if(typeof u.hp=='number'&&o.dmg>=1){const mh=maxHp(u);if(u.hp<mh)o.dmg=Math.max(1,Math.round(o.dmg*(.5+.5*Math.max(0,u.hp)/mh)))}
 return o}
 function armOf(v){let a=eff(v).armor;if(S.units.some(w=>w.k=='kinglion'&&w!==v&&w.side==v.side&&dist(w,v)==1))a+=1;if(v.k=='cavebear'&&v.hp<maxHp(v)/2)a+=1;if(H[v.k].fac=='kingdom'&&S.units.some(w=>w!==v&&w.side==v.side&&H[w.k].fac=='kingdom'&&dist(v,w)==1))a+=1;return a}
-function revive(v){const h=H[v.k];if(v.k=='phoenix'&&!v.rez){v.rez=1;v.hp=maxHp(v);v.burn=0;return true}if(h.fac=='undead'&&!v.rez){v.rez=1;v.hp=Math.min(h.hp,hasSyn(v.side,'undead')?3:1);v.burn=0;return true}return false}
+function revive(v){const h=H[v.k];if(v.k=='phoenix'&&!v.rez){v.rez=1;v.hp=maxHp(v);v.burn=0;return true}if(h.fac=='undead'&&!v.rez){v.rez=1;v.hp=Math.min(h.hp,hasSyn(v.side,'undead')?2:1);v.burn=0;return true}return false}
 function turnStart(side){const ev=[];econStart(side);S.units.forEach(u=>{if(u.side!=side)return;const h=H[u.k];
 if(h.fac=='wilds'&&u.hp>0&&u.hp<maxHp(u)&&!(u.wither>0)){const a=Math.min(maxHp(u)-u.hp,hasSyn(side,'wilds')?3:2);u.hp+=a;ev.push({u,k:'heal',a})}
 if(u.burn>0){const a=u.bd||1;u.hp-=a;u.burn--;ev.push({u,k:'burn',a})}});
@@ -2352,10 +2352,10 @@ if(hasSyn(side,'arcane'))S.mana[side]=Math.min(10,S.mana[side]+1);
 return ev}
 /*FNS-END*/
 function reach(u,par){if(u.moved)return [];const h=H[u.k],seen={[u.x+','+u.y]:0},q=[[u.x,u.y]],r=[];
-const MV=mvOf(u);while(q.length){const[x,y]=q.shift(),d=seen[x+','+y];if(d>=MV)continue;if(d>0&&!h.fly&&MOPT.terrain&&S.ter&&S.ter[x+','+y]=='swamp')continue;
+const MV=mvOf(u);while(q.length){const[x,y]=q.shift(),d=seen[x+','+y];if(d>=MV)continue;if(d>0&&!h.fly&&!(typeof hvSw=='function'&&hvSw(u))&&MOPT.terrain&&S.ter&&S.ter[x+','+y]=='swamp')continue;
 for(const[dx,dy]of NB[y&1]){const nx=x+dx,ny=y+dy,k=nx+','+ny;const f=freeFor(nx,ny,u.side);if(seen[k]!==undefined||!(f||(h.fly&&VALID.has(nx+','+ny)&&!twAt(nx,ny))))continue;if(!h.fly&&window.hvStep&&!hvStep(x+','+y,k))continue;seen[k]=d+1;if(par)par[k]=x+','+y;q.push([nx,ny]);if(f)r.push({x:nx,y:ny})}}return r}
 function stepOK(u,from,to,i){const h=H[u.k],[fx,fy]=from.split(',').map(Number),[tx,ty]=to.split(',').map(Number);if(!VALID.has(to)||twAt(tx,ty)||dist({x:fx,y:fy},{x:tx,y:ty})!=1)return false;
-if(i>0&&!h.fly&&MOPT.terrain&&S.ter&&S.ter[from]=='swamp')return false;if(!h.fly&&window.hvStep&&!hvStep(from,to))return false;return freeFor(tx,ty,u.side)||!!h.fly}
+if(i>0&&!h.fly&&!(typeof hvSw=='function'&&hvSw(u))&&MOPT.terrain&&S.ter&&S.ter[from]=='swamp')return false;if(!h.fly&&window.hvStep&&!hvStep(from,to))return false;return freeFor(tx,ty,u.side)||!!h.fly}
 function prefixOK(u,keys){if(u.moved||keys.length>mvOf(u))return false;const st=u.x+','+u.y;if(keys.includes(st)||new Set(keys).size!=keys.length)return false;let p=st;for(let i=0;i<keys.length;i++){if(!stepOK(u,p,keys[i],i))return false;p=keys[i]}return true}
 function pathOK(u,keys){if(!keys.length||!prefixOK(u,keys))return false;const[ex,ey]=keys[keys.length-1].split(',').map(Number);return freeFor(ex,ey,u.side)}
 function encPath(u,keys){let p=[u.x,u.y],r='';for(const k of keys){const[x,y]=k.split(',').map(Number),d=NB[p[1]&1].findIndex(([dx,dy])=>p[0]+dx==x&&p[1]+dy==y);if(d<0)return null;r+=d;p=[x,y]}return r}
@@ -2408,18 +2408,18 @@ if(ts.length){let best=null,bs=0;ts.forEach(t=>{let s;
 const nf=p=>Math.min(99,...S.units.filter(v=>isFoe(v.side,me)).map(v=>dist(v,p)));
 if(t.ab=='trap')s=S.mana[me]>=H[u.k].tcost+1&&nf(t)>=1&&nf(t)<=3?1+(nf(t)==2?.5:0):0;
 else if(t.ab=='wall')s=S.mana[me]>=H[u.k].wcost+1&&nf(t)<=4&&nf(t)<nf(u)?1.2:0;
-else if(t.ab=='flare'){const n=S.units.filter(v=>isFoe(v.side,me)&&dist(v,t)<=2&&canSee(me,v)&&!v.markBy).length,tr=S.traps.filter(q=>isFoe(q.side,me)&&dist(q,t)<=2).length;s=S.mana[me]>=H[u.k].fcost+1?(n>=2?1.4+n*.6:0)+(tr?1.2:0):0}
+else if(t.ab=='flare'){const n=S.units.filter(v=>isFoe(v.side,me)&&dist(v,t)<=2&&canSee(me,v)&&!v.markBy).length,tr=S.traps.filter(q=>isFoe(q.side,me)&&dist(q,t)<=2).length;s=(S.mana[me]>=H[u.k].fcost+1?(n>=2?1.4+n*.6:0)+(tr?1.2:0):0)+(typeof hvAIfl=='function'?hvAIfl(u,t):0)}
 else if(t.ab=='sil'){const n=S.units.filter(v=>isFoe(v.side,me)&&dist(v,t)<=1&&!silenced(v));s=S.mana[me]>=H[u.k].slcost&&(n.length>=2||n.some(v=>H[v.k].elite||H[v.k].dmg>=5))?2+n.length:0}
 else if(t.summon)s=S.mana[me]>=H[u.k].scost+e.acost?1.6+(S.mana[me]>=7?0.6:0):0;
 else if(t.t=='w')s=(t.W.b?1.6:.4)-ctrAI(u,t,.3);
 else if(t.heal)s=(maxHp(t.v)-t.v.hp)>=2?2.5:0;
 else if(t.t=='t')s=(t.T.hp<=h.dmg?100:h.dmg*1.2)*(showCrown()&&leader()==t.T.side?1.25:1)-ctrAI(u,t);
 else{const dd=h.dmg+comboB(u,t)[0];s=Math.min(dd,t.v.hp)+(t.v.hp<=dd?3+(h.raise&&!t.v.sumBy?2:0):0)-ctrAI(u,t)+(MOPT.koth&&S.hill&&S.hill.includes(t.v.x+','+t.v.y)?3:0)+(t.v.k=='raidboss'?1.5:0);if(h.aoe||h.pierce)splashTargets(u,t).forEach(o=>{if(o.t=='u')s+=Math.min(splDmg(h.dmg,o.f),o.v.hp)})}
-s+=Math.random()*DN();if(s>bs){bs=s;best=t}});if(best&&DIFF==0&&!u.moved&&Math.random()<.2)best=null;if(best)return{act:best}}
+s+=Math.random()*DN()+(typeof hvAIt=='function'?hvAIt(u,t):0);if(s>bs){bs=s;best=t}});if(best&&DIFF==0&&!u.moved&&Math.random()<.2)best=null;if(best)return{act:best}}
 const foes=S.units.filter(v=>isFoe(v.side,me)&&canSee(me,v)).concat(foeTowers(me));
 const sup=h.heal&&h.dmg<=2;let goals=sup?S.units.filter(v=>v.side==me&&v!==u):foes;if(!goals.length)goals=foes;if(!goals.length)return{mv:{x:u.x,y:u.y}};
 const want=sup?1:(h.rng[0]>1||h.aoe?h.rng[1]:1);let bm=null,bsc=1e9;
-[{x:u.x,y:u.y}].concat(reach(u)).forEach(p=>{const d=Math.min(...goals.map(g=>wdist(p,g))),tk=p.x+','+p.y,sc=Math.abs(d-want)+Math.random()*DM()+(MOPT.shrines&&S.shr.includes(tk)?-1.3:0)+(MOPT.gold&&S.mines&&S.mines.some(m=>m.x==p.x&&m.y==p.y&&m.o!==me)?-1.8:0)+(chestAt(p.x,p.y)?-2.2:0)+(MOPT.fog&&S.cd[tk]>fogLimit()-1?2.5:0)+(MOPT.terrain&&S.ter[tk]=='hill'&&h.rng[1]>=2?-.6:0)+(MOPT.terrain&&S.ter[tk]=='swamp'?.4:0)+(MOPT.terrain&&S.ter[tk]=='forest'&&h.rng[0]>1?-.3:0)+(S.sil.some(z=>isFoe(z.side,me)&&(z.left[me]||0)>0&&z.cells.includes(tk))?1.5:0)+(MOPT.koth&&S.hill&&S.hill.includes(tk)?-3:0);if(sc<bsc){bsc=sc;bm=p}});
+[{x:u.x,y:u.y}].concat(reach(u)).forEach(p=>{const d=Math.min(...goals.map(g=>wdist(p,g))),tk=p.x+','+p.y,sc=Math.abs(d-want)+Math.random()*DM()+(MOPT.shrines&&S.shr.includes(tk)?-1.3:0)+(MOPT.gold&&S.mines&&S.mines.some(m=>m.x==p.x&&m.y==p.y&&m.o!==me)?-1.8:0)+(chestAt(p.x,p.y)?-2.2:0)+(MOPT.fog&&S.cd[tk]>fogLimit()-1?2.5:0)+(MOPT.terrain&&S.ter[tk]=='hill'&&h.rng[1]>=2?-.6:0)+(MOPT.terrain&&S.ter[tk]=='swamp'?.4:0)+(MOPT.terrain&&S.ter[tk]=='forest'&&h.rng[0]>1?-.3:0)+(S.sil.some(z=>isFoe(z.side,me)&&(z.left[me]||0)>0&&z.cells.includes(tk))?1.5:0)+(MOPT.koth&&S.hill&&S.hill.includes(tk)?-3:0)+(typeof hvAIc=='function'?hvAIc(u,p,d,want):0);if(sc<bsc){bsc=sc;bm=p}});
 return{mv:bm}}
 let aiRun=0;
 function aiDiplo(sd){if(!MOPT.truce||NPL<3)return;const L=leader(),al=SIDES.filter(o=>o!=sd&&!S.dead[o]);
@@ -4795,6 +4795,322 @@ const r0=render;render=function(){const o=r0.apply(this,arguments);try{all()}cat
 const re=()=>{try{if(meas())document.querySelectorAll('#board .hp.hpn').forEach(build)}catch(e){}};
 addEventListener('resize',re);setInterval(()=>{const G=document.getElementById('game');if(!document.hidden&&G&&!G.hidden)re()},700);
 window.HV_HPN={grp:N=>grp(N),meas:()=>({SC,WS})};
+})();
+</script>
+<style id="hv-facmech">
+/* HV_FACMECH: drawn markers for faction terrain (no image art), night tint, Heat meter, Day/Night chip, Risen eyes */
+#board .cell .hvm{position:absolute;pointer-events:none}
+#board .cell .hvm-fire{left:10%;right:10%;bottom:7%;width:80%;height:58%;z-index:1;filter:drop-shadow(0 0 4px #ff6a1aaa)}
+#board .cell .terb .hvm-fire{opacity:1;left:10%;right:10%;bottom:7%;width:80%;height:58%}
+#board .cell .hvm-fire .f1{transform-origin:50% 100%;animation:hvFl 1.1s ease-in-out infinite alternate}
+#board .cell .hvm-fire .f2{transform-origin:50% 100%;animation:hvFl 0.8s ease-in-out infinite alternate-reverse}
+@keyframes hvFl{from{transform:scaleY(.86) skewX(-3deg)}to{transform:scaleY(1.06) skewX(3deg)}}
+#board .cell.hvf-fire .tint{background:radial-gradient(circle at 50% 68%,#ff8a2a88,#b0300a66 55%,#3a0c0444 85%)}
+#board .cell .hvm-grave{left:27%;top:16%;width:46%;height:62%;z-index:1}
+#board .cell .terb .hvm-grave{opacity:.9;left:2%;top:auto;bottom:4%;width:36%;height:46%}
+#board .cell.hvf-grave .tint{background:radial-gradient(circle at 50% 60%,#9ad07a2a,#1a2a1a55 70%)}
+#board .cell .hvm-grow{right:12%;top:10%;width:24%;height:24%;z-index:3}
+#board .cell .terb .hvm-grow{opacity:1;right:6%;top:6%;width:22%;height:22%}
+#board .cell.tr-ash .tint{background:#2a24208a}
+#board .cell .terb .hvm-ash{opacity:.8}
+#board .cell.hvf-hid .u{opacity:.5;filter:saturate(.55) brightness(1.1)}
+#board .cell.hvf-hid .ring2{opacity:.45;border-style:dashed}
+#board .cell .hvm-hid{left:4%;top:30%;font-size:13px;line-height:1;z-index:4;font-style:normal;opacity:.9;filter:drop-shadow(0 0 2px #000)}
+#board .u .hvf-eyes{--fu:calc(1.7em / 160);position:absolute;left:calc(-.22em + (var(--ex) - var(--es) / 2) * var(--fu));top:calc(-.5em + var(--ey) * 2.55em / 240);width:calc(var(--es) * var(--fu));height:0;z-index:3;pointer-events:none;font-style:normal}
+#board .u .hvf-eyes b{position:absolute;top:0;display:block;width:max(2px,calc(var(--es) * .42 * var(--fu)));height:max(2px,calc(var(--es) * .42 * var(--fu)));border-radius:50%;transform:translate(-50%,-50%);background:#ff4a3a;box-shadow:0 0 1px 1px #ff2a1a,0 0 calc(var(--es) * .8 * var(--fu)) calc(var(--es) * .2 * var(--fu)) #ff0000bb;animation:hvEye 1.7s ease-in-out infinite}
+#board .u .hvf-eyes b:first-child{left:0}#board .u .hvf-eyes b:last-child{left:100%}
+@keyframes hvEye{50%{opacity:.6}}
+#board .cell .trt i.hvf-rt{display:inline-flex;align-items:center;justify-content:center;gap:3px;width:16px;padding:0 1px}
+#board .cell .trt i.hvf-rt b{display:block;width:3px;height:3px;border-radius:50%;background:#ff4a3a;box-shadow:0 0 2px 1px #ff2a1acc;animation:hvEye 1.7s ease-in-out infinite}
+body.mob #board .cell .trt i.hvf-rt{width:12px;gap:2px}
+.ust.risen{color:#ff8a7a}
+.annc .an-pack{color:#8ae07a}
+#board::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6;opacity:0;transition:opacity 1.2s ease;background:radial-gradient(ellipse at 50% 35%,rgba(70,80,170,.10),rgba(10,12,48,.52) 75%);mix-blend-mode:multiply}
+#board.hvnight::before{opacity:1}
+#board.hvnight.hvnchg::before{animation:hvNf 1.4s ease}
+@keyframes hvNf{0%{opacity:0}100%{opacity:1}}
+#seats .hvdn{display:inline-flex;align-items:center;gap:4px;padding:1px 8px;margin:0 4px;border-radius:999px;font-size:.85em;white-space:nowrap;cursor:help}
+#seats .hvdn.dy{background:#ffd27a22;color:#ffe2a0;border:1px solid #ffd27a55}
+#seats .hvdn.nt{background:#3a2a8a55;color:#cfc4ff;border:1px solid #8a7aff88}
+#seats .hvdn small{opacity:.8}
+#seats .hvht{color:#ffa060}
+#mana .hvheat{display:inline-flex;align-items:center;gap:3px;margin-left:8px;color:#ffb070;position:relative;cursor:help}
+#mana .hvheat i{display:inline-block;width:38px;height:6px;border-radius:3px;background:linear-gradient(90deg,#ff5a1a var(--h),#3a2014 var(--h));border:1px solid #6a3a1a}
+#mana .hvheat.rdy{color:#ffdc6a;text-shadow:0 0 6px #ff6a1a}
+#mana .hvheat small{font-size:.72em;font-weight:700;color:#ffdc6a}
+#mana .hvheat em{font-style:normal;opacity:.8}
+body.mob #mana .hvheat{margin-left:3px;gap:1px}
+body.mob #mana .hvheat i,body.mob #mana .hvheat small,body.mob #mana .hvheat em{display:none}
+/* Warlock Bat Form: button in the unit card, bat figure with a swirl, purple flight-range hexes, turn-back puff */
+.hvbatrow{margin:6px 0 2px}
+.hvbatbtn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:9px;border:1px solid #b46cff;background:linear-gradient(#3a2458,#24163a);color:#f0e2ff;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 0 8px #b46cff55}
+.hvbatbtn:hover{filter:brightness(1.15)}
+.hvbatbtn.on{background:linear-gradient(#6a3aa8,#3a2458);box-shadow:0 0 12px #c890ff99}
+.hvbatbtn kbd{font:11px/1 monospace;padding:2px 4px;border-radius:4px;background:#0006;border:1px solid #b46cff88}
+body.mob .hvbatbtn kbd{display:none}
+.ust.hvbatst{color:#d8b4ff}
+#board .cell .u.hvbat img.sp.pt{filter:drop-shadow(0 0 6px #b46cffaa)}
+#board .cell .u .hvswirl{position:absolute;left:50%;top:38%;width:1.5em;height:1.5em;margin:-.75em 0 0 -.75em;border-radius:50%;border:2px dashed #c890ffaa;border-left-color:transparent;border-right-color:transparent;pointer-events:none;z-index:3;animation:hvSw 1.6s linear infinite}
+@keyframes hvSw{to{transform:rotate(360deg)}}
+#board.hvbatsel .cell.mv{box-shadow:inset 0 0 0 3px #b46cff;background-image:linear-gradient(#8a4ad455,#8a4ad455)}
+#board.hvbatsel .cell.mv::after{background:#8a4ad470}
+#board .cell .hvpuff{position:absolute;left:50%;top:55%;width:0;height:0;pointer-events:none;z-index:7}
+#board .cell .hvpuff b{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,#e8d8ffcc,#8a5ad455 60%,transparent 70%);animation:hvPf .8s ease-out forwards}
+#board .cell .hvpuff b:nth-child(1){--dx:-16px;--dy:-10px}#board .cell .hvpuff b:nth-child(2){--dx:16px;--dy:-12px}#board .cell .hvpuff b:nth-child(3){--dx:-12px;--dy:10px}#board .cell .hvpuff b:nth-child(4){--dx:14px;--dy:10px}#board .cell .hvpuff b:nth-child(5){--dx:0px;--dy:-20px}
+@keyframes hvPf{from{transform:translate(0,0) scale(.5);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(1.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){#board .cell .hvm-fire .f1,#board .cell .hvm-fire .f2,#board .u .hvf-eyes b,#board .cell .trt i.hvf-rt b,#board.hvnight.hvnchg::before,#board .cell .u .hvswirl,#board .cell .hvpuff b{animation:none!important}#board .cell .hvpuff{display:none}#board::before{transition:none}}
+</style>
+<script>/* ===== HV_FACMECH: faction mechanics =====
+ Wilds: Hidden Paths, Overgrowth, Pack Bond. Infernal: Scorched Earth + Heat. Undead: Graves + Vengeful Dead (Risen).
+ Vampires: Night Falls. Trackers (the 7 flare scouts + Wolf Pack + Alpha Direwolf) reveal forest-hidden enemies within 2.
+ Every rule here reads and writes S only in fixed iteration order: no Math.random touches S (the AI helpers use it, as elsewhere).
+ State lives in S.fm (made lazily once the teams are known). Markers are drawn in code (SVG), no image art. */
+(function(){
+const K=(x,y)=>x+','+y;
+const HIDE=new Set(['rogue','trapper','archer','boarrider','wolves','falconer','druid']);
+const GROW=new Set(['treant','eldertreant']);
+const PACK=new Set(['wolves','direwolf']);
+const REVEAL=new Set(['lookout','nightwatch','wisp','fireeye','falconer','spotter','oracle','wolves','direwolf']);
+/* knobs. fireAll: every Infernal attack on a unit ignites its hex. Shipped false after the balance sims (mono Infernal 1.18 with it on):
+   single-target Infernal hits ignite only on a kill; splash attacks and Overheats always ignite; Infernal deaths always ignite. */
+const FC=window.HVFAC={fireAll:false,fireCap:8,fireDur:2,ashCap:4,graveCap:6,graveDur:4,growCap:6,heatMax:10,heatCost:5,ovhDmg:2,graveRange:3,graveTower:2};
+const EMPTY=Object.freeze({fire:Object.freeze([]),ash:Object.freeze([]),grow:Object.freeze([]),gr:Object.freeze([]),heat:Object.freeze({}),night:false,und:false,undS:{},infS:{}});
+function FM(){if(typeof S=='undefined'||!S)return EMPTY;if(S.fm)return S.fm;if(!S.teams||!SIDES.length||!SIDES.every(sd=>S.teams[sd]))return EMPTY;
+ const fs=f=>{const o={};SIDES.forEach(sd=>{if((S.teams[sd]||[]).some(k=>H[k]&&H[k].fac==f))o[sd]=1});return o};
+ const undS=fs('undead'),infS=fs('infernal'),vS=fs('vamp');
+ S.fm={fire:[],ash:[],grow:[],gr:[],heat:{},night:Object.keys(vS).length>0,und:Object.keys(undS).length>0,undS,infS,lr:S.round,ph:0,id:0,st:{ign:0,ash:0,gr:0,grs:0,cons:0,ovh:0,risen:0,grow:0,heat:0}};return S.fm}
+const live=()=>FM()!==EMPTY;
+const night=()=>{const F=FM();return !!F.night&&!!S&&Math.floor((S.round-1)/3)%2==1};
+const phLeft=()=>3-((S.round-1)%3);
+const fac=u=>u&&H[u.k]?H[u.k].fac:null;
+const isInf=u=>fac(u)=='infernal';
+const fireHurts=u=>!!u&&!!H[u.k]&&!H[u.k].fly&&!u.bat&&!isInf(u);
+const fireAt=(x,y)=>FM().fire.find(f=>f.x==x&&f.y==y);
+const graveAt=(x,y)=>FM().gr.find(g=>g.x==x&&g.y==y);
+const grownAt=(x,y)=>FM().grow.find(g=>g.x==x&&g.y==y);
+Object.assign(window,{hvFM:FM,hvNight:night,hvFireAt:fireAt,hvGraveAt:graveAt,hvGrownAt:grownAt});
+/* ---------- Wilds: Hidden Paths ---------- */
+const stealthy=v=>!!v&&HIDE.has(v.k)&&!v.exp&&v.hp>0&&MOPT.sight&&MOPT.terrain&&!!S.ter&&S.ter[K(v.x,v.y)]=='forest';
+function hiddenFrom(sd,v){if(!stealthy(v)||sameTeam(v.side,sd))return false;
+ if(v.markBy&&sameTeam(v.markBy,sd))return false;
+ if((S.flares||[]).some(f=>sameTeam(f.side,sd)&&dist(f,v)<=f.r))return false;
+ for(const w of S.units){if(w.hp>0&&sameTeam(w.side,sd)){const d=dist(w,v);if(d<=1||(d<=2&&REVEAL.has(w.k)))return false}}
+ for(const o of SIDES)if(sameTeam(o,sd)&&S.tw[o].some(T=>T.hp>0&&dist(T,v)<=1))return false;
+ if((S.walls||[]).some(w=>w.b&&sameTeam(w.side,sd)&&dist(w,v)<=1))return false;
+ return true}
+const stealthAny=u=>stealthy(u)&&SIDES.some(o=>!S.dead[o]&&isFoe(o,u.side)&&hiddenFrom(o,u));
+window.hvHiddenFrom=hiddenFrom;window.hvStealthAny=stealthAny;
+const cs0=canSee;canSee=function(sd,v){const r=cs0(sd,v);if(!r||!MOPT.sight||!sd||!v||!S)return r;return !hiddenFrom(sd,v)};
+window.hvSw=u=>!!u&&HIDE.has(u.k);/* Hidden Paths heroes ignore the swamp stop (used in reach/stepOK) */
+/* ---------- Vampires: Night Falls ---------- */
+const sg0=sightOf;sightOf=function(u){let v=sg0(u);if(night()&&fac(u)!='vamp')v=Math.max(1,v-2);return v};
+const mv0=mvOf;mvOf=function(u){let m=mv0(u);if(fac(u)=='vamp'&&night())m+=1;return m};
+/* ---------- damage / drain ---------- */
+const ef0=eff;eff=function(u){const o=ef0(u);if(!u||!H[u.k]||typeof S=='undefined'||!S)return o;const f=H[u.k].fac;
+ if(u.risen)o.dmg+=1;
+ if(f=='vamp'&&night())o.drain+=1;
+ if(f=='infernal'&&S.turn===u.side&&(FM().heat[u.side]||0)>=FC.heatCost)o.dmg+=FC.ovhDmg;
+ return o};
+const cb0=comboB;comboB=function(u,t){const r=cb0(u,t);if(!S||!u||!t||t.t!='u'||!t.v||!PACK.has(u.k)||H[u.k].rng[0]!=1||dist(u,t.v)!=1)return r;
+ let n=0;for(const w of S.units)if(w!==u&&w.side==u.side&&w.hp>0&&fac(w)=='wilds'&&dist(w,t.v)==1)n++;const b=Math.min(2,n);if(!b)return r;return[r[0]+b,r[1].concat('Pack')]};
+/* ---------- Undead: Vengeful Dead ---------- */
+const rv0=revive;revive=function(v){const r=rv0(v);if(r&&v&&fac(v)=='undead'&&!v.sumBy&&!v.risen){v.risen=1;if(S.fm)S.fm.st.risen++;pop(v,'Risen!',1)}return r};
+const tg0=targets;targets=function(u){const r=tg0(u);return r.some(t=>t.heal&&t.v&&t.v.risen)?r.filter(t=>!(t.heal&&t.v&&t.v.risen)):r};
+const ct0=cardTargets;cardTargets=function(sd,k){const r=ct0(sd,k);return CARDS[k]&&CARDS[k].tg=='ally'?r.filter(p=>!(p.o&&p.o.risen)):r};
+const hu0=healU;healU=function(v,a){if(v&&v.risen)return 0;return hu0(v,a)};
+/* ---------- Burn source tracking (for Heat) ---------- */
+const bSnap=()=>{const m=new Map();S.units.forEach(v=>m.set(v,(v.burn||0)+'/'+(v.bd||0)));return m};
+const bCredit=(m,sd)=>{if(!sd)return;S.units.forEach(v=>{if(v.burn>0&&m.get(v)!==(v.burn||0)+'/'+(v.bd||0)&&isFoe(sd,v.side))v.bsrc=sd})};
+const du0=doUlt;doUlt=function(sd){const sn=S.units.filter(u=>u.side==sd&&u.risen).map(u=>[u,u.hp]);const r=du0(sd);sn.forEach(([u,h])=>{if(u.hp>h)u.hp=h});return r};
+/* ---------- Infernal: Scorched Earth ---------- */
+function ignite(x,y,side){const F=FM();if(F===EMPTY||!VALID.has(K(x,y))||twAt(x,y)||wallAt(x,y))return false;const k=K(x,y);
+ if(S.ter&&(S.ter[k]=='water'||S.ter[k]=='shallow'||S.ter[k]=='deep'))return false;/* water never burns (lakes and rivers today are holes, which are not hexes at all) */
+ if(S.ter&&S.ter[k]=='forest'&&F.ash.length<FC.ashCap){S.ter[k]='ash';F.st.ash++;F.ash.push({x,y,r:S.round});F.grow=F.grow.filter(g=>!(g.x==x&&g.y==y));pop({x,y},'Ash',0)}
+ const g=graveAt(x,y);if(g)F.gr=F.gr.filter(q=>q!==g);
+ F.st.ign++;F.fire=F.fire.filter(f=>!(f.x==x&&f.y==y));F.fire.push({x,y,side,exp:S.round+FC.fireDur,id:++F.id});while(F.fire.length>FC.fireCap)F.fire.shift();return true}
+window.hvIgnite=ignite;
+/* ---------- Undead: Graves ---------- */
+function addGrave(x,y){const F=FM();if(F===EMPTY||!F.und||!VALID.has(K(x,y))||fireAt(x,y))return;F.gr=F.gr.filter(g=>!(g.x==x&&g.y==y));F.st.gr++;F.gr.push({x,y,exp:S.round+FC.graveDur,id:++F.id});while(F.gr.length>FC.graveCap)F.gr.shift()}
+/* hook for Raise the Slain: a raise on (or next to) a Grave consumes it. Returns true if a grave was taken. */
+window.hvGraveTake=(x,y)=>{const F=FM(),g=graveAt(x,y);if(!g)return false;F.gr=F.gr.filter(q=>q!==g);return true};
+/* Necromancer Raise the Slain: the raise consumes the Grave the slain hero just left on its hex (RZHOOK from the raise script; chained, deterministic) */
+if(typeof RZHOOK!=='undefined'){const rz0=RZHOOK;RZHOOK=function(ctx){const r=typeof rz0=='function'?rz0(ctx):undefined;if(r===false)return false;
+ if(ctx&&ctx.stage=='pre'&&ctx.v&&window.hvGraveTake(ctx.v.x,ctx.v.y)){ctx.grave=1;if(S.fm)S.fm.st.rzg=(S.fm.st.rzg||0)+1}return r}}
+const fa0=fall;fall=function(v){const r=fa0.apply(this,arguments);if(S&&v){if(!v.sumBy)addGrave(v.x,v.y);if(isInf(v))ignite(v.x,v.y,v.side)}return r};
+function graveHexes(s){const F=FM();if(!F.gr.length||!F.undS[s])return[];const und=S.units.filter(w=>w.side==s&&w.hp>0&&fac(w)=='undead');if(!und.length)return[];
+ const ft=foeTowers(s),near=p=>ft.some(T=>dist(T,p)<=FC.graveTower),r=[];
+ F.gr.forEach(g=>{if(near(g)||!und.some(w=>dist(w,g)<=FC.graveRange))return;NB[g.y&1].forEach(([dx,dy])=>{const x=g.x+dx,y=g.y+dy;if(free(x,y)&&!near({x,y})&&!r.some(p=>p.x==x&&p.y==y))r.push({x,y,grave:1})})});return r}
+window.hvGraveHexes=graveHexes;
+let SPK;/* which reserve hero the current spawn check is for */
+const sh0=spawnHexes;spawnHexes=function(s,k){const r=sh0(s);if(k===undefined)k=SPK!==undefined?SPK:(typeof spSel!='undefined'&&spSel!=null&&s===S.turn&&isMine(s)&&S.pool[s]?S.pool[s][spSel]:undefined);
+ if(!k||!H[k]||H[k].fac!='undead')return r;graveHexes(s).forEach(p=>{if(!r.some(q=>q.x==p.x&&q.y==p.y))r.push(p)});return r};
+const ds0=doSpawn;doSpawn=function(s,i,x,y){const o=SPK;SPK=S.pool[s]?S.pool[s][i]:undefined;if(SPK===undefined)SPK=null;try{const g=SPK&&H[SPK]&&H[SPK].fac=='undead'&&!sh0(s).some(p=>p.x==x&&p.y==y);const r=ds0(s,i,x,y);if(r&&g&&S.fm)S.fm.st.grs++;return r}finally{SPK=o}};
+const csp0=canSpawn;canSpawn=function(s){if(csp0(s))return true;const p=S.pool[s];return p.length>0&&spLeft(s)>0&&p.some(k=>H[k].fac=='undead'&&spawnHexes(s,k).length>=(H[k].group||1))};
+aiSpawnTurn=function(sd){let g=0;while(S.pool[sd].length&&spLeft(sd)>0&&g++<12){const op=S.pool[sd].map((k,i)=>({i,k,hx:spawnHexes(sd,k)})).filter(o=>(H[o.k].group||1)<=o.hx.length);if(!op.length)break;
+ const o=op[Math.random()*op.length|0],tp=foeTowers(sd),sc=h=>tp.length?Math.min(...tp.map(T=>dist(h,T))):0,best=o.hx.slice().sort((a,b)=>sc(a)-sc(b)+(Math.random()-.5)*.2)[0];
+ if(!best||!submit({t:'spawn',s:sd,i:o.i,x:best.x,y:best.y}))break}};
+/* ---------- Wilds: Overgrowth ---------- */
+function overgrow(n){const F=FM();if(F===EMPTY||!MOPT.terrain||!S.ter)return;S.units.forEach(u=>{if(u.side!=n||!GROW.has(u.k)||u.hp<=0)return;const k=K(u.x,u.y);if(u.ps!==k||S.ter[k]!=null)return;
+ if(S.shr.includes(k)||(S.hill||[]).includes(k)||mineAt(u.x,u.y)||chestAt(u.x,u.y)||fireAt(u.x,u.y))return;
+ S.ter[k]='forest';F.st.grow++;F.grow.push({x:u.x,y:u.y,side:n,id:++F.id});pop(u,'🌱 Overgrowth',1);
+ const mine=F.grow.filter(g=>g.side==n);if(mine.length>FC.growCap){const o=mine[0];F.grow=F.grow.filter(g=>g!==o);if(S.ter[K(o.x,o.y)]=='forest')S.ter[K(o.x,o.y)]=null}})}
+/* ---------- turn flow ---------- */
+function roundStart(){const F=FM();if(F===EMPTY||F.lr===S.round)return;F.lr=S.round;
+ F.fire=F.fire.filter(f=>f.exp>S.round);F.gr=F.gr.filter(g=>g.exp>S.round);
+ if(F.night){const ph=night()?1:0;if(ph!==F.ph){F.ph=ph;if(!RP){msg(ph?'Night falls. Vampires gain +1 move and +1 drain; everyone else sees 2 hexes less.':'Dawn breaks. Sight returns to normal.');
+  evCut({major:1,art:ICON(ph?'🌙':'☀️'),t:ph?'Night falls':'Dawn',s:'Round '+S.round,d:ph?'Vampires: +1 move, +1 drain · Others: -2 sight':'Day for 3 rounds: sight back to normal',c:ph?'#8a7aff':'#ffcf6a'});
+  const b=document.getElementById('board');if(b){b.classList.remove('hvnchg');void b.offsetWidth;b.classList.add('hvnchg')}}}}}
+const ph0=phaseStart;phaseStart=function(n){roundStart();const m=bSnap(),r=ph0(n);bCredit(m,n);return r};
+const ts0=turnStart;turnStart=function(side){roundStart();overgrow(side);const ev=ts0(side);const F=FM();if(F===EMPTY)return ev;
+ ev.forEach(x=>{const s2=x.u&&x.u.bsrc;if(x.k=='burn'&&s2&&isFoe(s2,x.u.side)&&!S.dead[s2]){F.heat[s2]=Math.min(FC.heatMax,(F.heat[s2]||0)+1);F.st.heat++}});
+ F.fire.forEach(f=>{const u=at(f.x,f.y);if(u&&u.side==side&&u.hp>0&&fireHurts(u)){u.hp-=1;u.burn=2;u.bd=Math.max(u.bd||0,1);u.bsrc=f.side;ev.push({u,k:'burn',a:1})}});
+ S.units.forEach(u=>{if(u.side==side)u.ps=K(u.x,u.y)});return ev};
+const et0=endTurn;endTurn=function(){if(S&&!S.over){const F=FM(),sd=S.turn;if(F!==EMPTY&&F.gr.length)S.units.forEach(u=>{if(u.side!=sd||u.hp<=0||fac(u)=='undead')return;const g=graveAt(u.x,u.y);if(g){F.gr=F.gr.filter(q=>q!==g);F.st.cons++;pop(u,'✝ Consecrated',1);if(!RP)msg(`${SHORT[sd]} ${H[u.k].n} consecrates a grave.`)}});
+ S.units.forEach(u=>{if(u.side==sd&&u.ps==null)u.ps=K(u.x,u.y)})}return et0.apply(this,arguments)};
+/* attacks: Overheat, ignition, Raise the Slain consumes graves */
+const ac0=act;act=function(u,t){if(!S||!u||!t||t.ab||t.summon||t.heal)return ac0(u,t);const F=FM(),h=H[u.k],inf=!!h&&h.fac=='infernal';
+ const ovh=inf&&F!==EMPTY&&S.turn===u.side&&(F.heat[u.side]||0)>=FC.heatCost,had=h.aoe,tmp=ovh&&!h.aoe&&!h.pierce;if(tmp)h.aoe=1;
+ const before=new Set(S.units),tv=t.t=='u'?t.v:null,tx=t.x,ty=t.y;
+ try{ac0(u,t)}finally{if(tmp){if(had===undefined)delete h.aoe;else h.aoe=had}}
+ if(ovh){F.heat[u.side]-=FC.heatCost;F.st.ovh++;pop(u,'♨ Overheat!',1);if(!RP)msg(`${SHORT[u.side]} ${h.n} overheats: +${FC.ovhDmg} damage and splash!`)}
+ if(inf&&tv&&F!==EMPTY){const died=!S.units.includes(tv)||tv.hp<=0;if(FC.fireAll||died||h.aoe||tmp)ignite(tx,ty,u.side)}
+};
+/* fire-aware path: same reach, but walk around burning hexes when there is a way */
+const pt0=pathTo;pathTo=function(u,tx,ty){const p=pt0(u,tx,ty);const F=FM();if(!F.fire.length||!fireHurts(u)||p.length<2)return p;
+ const bad=k=>F.fire.some(f=>K(f.x,f.y)===k);if(!p.slice(0,-1).some(bad))return p;
+ const st=K(u.x,u.y),goal=K(tx,ty),MV=mvOf(u),par={},q=[[st,0]];par[st]=null;let i=0;
+ while(i<q.length){const[k,d]=q[i++];if(k===goal)break;if(d>=MV)continue;const[x,y]=k.split(',').map(Number);
+  for(const[dx,dy]of NB[y&1]){const nx=x+dx,ny=y+dy,nk=K(nx,ny);if(nk in par)continue;if(!stepOK(u,k,nk,d))continue;if(nk!==goal&&bad(nk))continue;par[nk]=k;q.push([nk,d+1])}}
+ if(!(goal in par))return p;const r=[];let k=goal;while(k&&k!==st){r.unshift(k);k=par[k]}return r};
+const pf0=perform;perform=function(a){if(!a||typeof S=='undefined'||!S||S.over)return pf0(a);let u=null,keys=null;const F=FM();
+ if(a.t=='move'&&F.fire.length){u=at(a.fx,a.fy);if(u&&u.side==a.s&&!u.used&&fireHurts(u)&&!(a.x==u.x&&a.y==u.y))keys=a.p!=null?decPath(u,a.p):pathTo(u,a.x,a.y);else u=null}
+ const m=a.t=='end'?null:bSnap(),r=pf0(a);if(m)bCredit(m,a.s);
+ if(r&&u&&keys&&S.units.includes(u)&&u.hp>0){const idx=keys.indexOf(K(u.x,u.y));if(idx>=0){let f=null;for(const k of keys.slice(0,idx+1)){f=F.fire.find(q=>K(q.x,q.y)===k);if(f)break}
+  if(f){u.hp-=1;u.burn=2;u.bd=Math.max(u.bd||0,1);u.bsrc=f.side;fx(u,'hurt');pop(u,'-1🔥');if(!RP)msg(`${SHORT[u.side]} ${H[u.k].n} walks through burning ground.`);if(u.hp<=0)reapDead(isFoe(f.side,u.side)?f.side:null)}}}
+ return r};
+/* hidden movers leave no trail for enemies who cannot see them */
+const smv0=showMove;showMove=function(side,keys){try{const V=FOGV();if(V&&!sameTeam(side,V)&&keys&&keys.length>1){const[x0,y0]=keys[0].split(',').map(Number),u=at(x0,y0);
+ if(u&&HIDE.has(u.k))keys=keys.filter(k=>{const[x,y]=k.split(',').map(Number);return S.ter[k]!='forest'||S.units.some(w=>sameTeam(w.side,V)&&dist(w,{x,y})<=(REVEAL.has(w.k)?2:1))})}}catch(e){}return smv0(side,keys)};
+/* ---------- AI hooks ---------- */
+const foeUnd=me=>{const F=FM();return SIDES.some(o=>!S.dead[o]&&isFoe(o,me)&&F.undS[o])};
+window.hvAIc=function(u,p,d,want){const F=FM();if(F===EMPTY)return 0;const k=K(p.x,p.y),h=H[u.k];let s=0;
+ if(HIDE.has(u.k)&&S.ter[k]=='forest')s-=.8;/* Wilds weight forests */
+ if(GROW.has(u.k)&&p.x==u.x&&p.y==u.y&&S.ter[k]==null&&u.ps===k)s-=.3;
+ if(F.fire.length&&fireHurts(u)&&fireAt(p.x,p.y))s+=1.5;/* avoid fire */
+ if(F.gr.length&&h.fac!='undead'&&graveAt(p.x,p.y)&&foeUnd(u.side))s-=1;/* consecrate */
+ if(h.fac=='vamp'&&night()&&d<=Math.max(1,want))s-=.5;/* press the attack at night */
+ return s};
+window.hvAIt=function(u,t){if(!t||t.ab||t.summon||t.heal)return 0;const h=H[u.k];let s=0;
+ if(h.fac=='vamp'&&night()&&t.t=='u')s+=.6;
+ if(h.fac=='infernal'&&t.t=='u'&&S.ter&&S.ter[K(t.x,t.y)]=='forest'&&FM().ash.length<FC.ashCap)s+=.4;
+ return s};
+window.hvAIfl=function(u,t){const me=u.side;if(S.mana[me]<H[u.k].fcost+1)return 0;
+ if(!S.units.some(v=>v.hp>0&&isFoe(v.side,me)&&HIDE.has(v.k)&&!canSee(me,v)))return 0;
+ const mine=S.units.filter(w=>w.side==me).concat(S.tw[me].filter(T=>T.hp>0));let n=0;
+ for(const c of GEO.cells){if(dist(c,t)>2||S.ter[K(c.x,c.y)]!='forest')continue;if(!mine.some(w=>dist(w,c)<=3))continue;const v=at(c.x,c.y);if(v&&canSee(me,v))continue;n++}
+ return n>=2?1.2+.35*Math.min(5,n):0};
+/* ---------- drawing ---------- */
+const FLAME=`<svg class='hvm hvm-fire' viewBox='0 0 40 40' aria-hidden='true'><path class='f1' d='M8 34Q6 24 13 18Q12 25 16 26Q14 16 21 9Q21 18 26 21Q27 16 30 15Q35 23 32 34Z' fill='#ff6a1a' opacity='.92'/><path class='f2' d='M13 34Q12 27 17 24Q17 29 20 29Q20 22 24 18Q25 25 28 27Q30 30 28 34Z' fill='#ffc23a'/><path d='M6 35H34' stroke='#3a1206' stroke-width='2' stroke-linecap='round' opacity='.7'/></svg>`;
+const GRAVE=t=>`<svg class='hvm hvm-grave' viewBox='0 0 40 40' aria-hidden='true'><ellipse cx='20' cy='34' rx='13' ry='3.6' fill='#2a2018' opacity='.75'/><path d='M12 34V16Q12 8 20 8Q28 8 28 16V34Z' fill='#8d8a84' stroke='#2a2622' stroke-width='1.3'/><path d='M14 33V17Q14 11 20 11' stroke='#b9b5ac' stroke-width='1.2' fill='none'/><path d='M20 15V27M16 19H24' stroke='#3a3630' stroke-width='2' stroke-linecap='round'/><path d='M9 34Q14 31 20 33Q26 31 31 34' stroke='#4a6a2a' stroke-width='1.6' fill='none'/>${t>0?`<text x='33' y='12' font-size='9' font-weight='700' fill='#e8e2d0' stroke='#1a1410' stroke-width='2' paint-order='stroke' text-anchor='middle'>${t}</text>`:''}</svg>`;
+const SPROUT=`<svg class='hvm hvm-grow' viewBox='0 0 20 20' aria-hidden='true'><circle cx='10' cy='10' r='8.5' fill='#0e2a16cc' stroke='#7ad870' stroke-width='1.2'/><path d='M10 16V9' stroke='#9ae07a' stroke-width='1.6' stroke-linecap='round'/><path d='M10 10Q5 9 5 5Q9 5 10 9Z' fill='#7ad870'/><path d='M10 9Q15 7 15 4Q11 4 10 8Z' fill='#5cc070'/></svg>`;
+TART.ash=`<svg class='ter hvm-ash' viewBox='0 0 40 40' aria-hidden='true'><ellipse cx='20' cy='28' rx='16' ry='7' fill='#3a3532' opacity='.85'/><ellipse cx='17' cy='27' rx='9' ry='3.5' fill='#58514c' opacity='.8'/><path d='M12 27L14 18M24 28L27 19M19 26V21' stroke='#1e1a18' stroke-width='2' stroke-linecap='round'/><circle cx='13' cy='29' r='1' fill='#ff7a2a'/><circle cx='26' cy='26' r='.9' fill='#ffa54a'/><circle cx='21' cy='31' r='.8' fill='#ff6a1a'/></svg>`;
+const tc0=terCls;terCls=function(x,y){let c=tc0(x,y);if(!live())return c;if(fireAt(x,y))c+=' hvf-fire';if(graveAt(x,y))c+=' hvf-grave';if(grownAt(x,y))c+=' hvf-grow';
+ const u=atV(x,y);if(u){if(stealthAny(u))c+=' hvf-hid';if(u.risen)c+=' hvf-risen'}return c};
+/* hvFacMarkers(x,y): the faction markers for one hex as separate absolutely-positioned elements (class hvm hvm-<kind>), so a painted tile layer can draw them on top.
+   hvFacTer(x,y): which faction terrain a hex has right now: {fire,grave,grown,ash} (ash is also S.ter 'ash'). */
+const marks=(x,y)=>{if(!live())return '';let a='';if(grownAt(x,y))a+=SPROUT;const g=graveAt(x,y);if(g)a+=GRAVE(g.exp-S.round);if(fireAt(x,y))a+=FLAME;{const u=atV(x,y);if(u&&stealthAny(u))a+=`<i class='hvm hvm-hid' title='Hidden in the forest: enemies more than 1 hex away cannot see it'>🌲</i>`}return a};
+window.hvFacMarkers=marks;window.hvFacTer=(x,y)=>({fire:!!fireAt(x,y),grave:!!graveAt(x,y),grown:!!grownAt(x,y),ash:!!(S&&S.ter&&S.ter[K(x,y)]=='ash')});
+const ta0=terArt;terArt=function(x,y){const a=ta0(x,y)||'';return live()?a+marks(x,y):a};
+const tt0=terTip;terTip=function(x,y){const a=tt0(x,y)||'';if(!live())return a;const r=[],F=FM(),k=K(x,y);
+ const f=fireAt(x,y);if(f)r.push(`<b>🔥 Burning ground</b> (${esc0(NAMES[f.side]||'')}, until round ${f.exp})<br>Non-Infernal walking heroes that enter or start here take 1 damage and Burn. Fliers and Infernal are immune.`);
+ if(S.ter[k]=='ash')r.push('<b>Ash</b><br>Burned forest: plain ground, no cover, for the rest of the match.');
+ const g=graveAt(x,y);if(g)r.push(`<b>🪦 Grave</b> (crumbles at round ${g.exp})<br>Undead can spawn next to it while an Undead unit is within ${FC.graveRange} (not within ${FC.graveTower} of an enemy tower). A non-Undead hero that ends its turn here consecrates it.`);
+ if(grownAt(x,y))r.push('<b>🌱 Grown forest</b><br>Overgrowth from a Treant. Counts as forest.');
+ if(S.ter[k]=='forest'&&SIDES.some(sd=>(S.teams[sd]||[]).some(q=>HIDE.has(q))))r.push('<i>Wilds scouts and rangers hide in forests: only units next to them, flares, and trackers within 2 hexes reveal them.</i>');
+ return r.length?(a?a+'<br>':'')+r.join('<br>'):a};
+const uc0=ucard;ucard=function(u){let s=uc0(u);if(!S||!live()||!u)return s;const q=t=>String(t).replace(/"/g,'&quot;'),st=(ic,v,tip,cls)=>`<span class="ust${cls?' '+cls:''}" data-tip="${q(tip)}">${ic} ${v}</span>`,ex=[];
+ if(MOPT.sight&&stealthy(u))ex.push(st('🌲',stealthAny(u)?'Hidden':'Spotted','Hidden Paths: in a forest it is hidden from enemies more than 1 hex away, unless flared, it attacked last turn, or a tracker is within 2.'));
+ if(u.risen)ex.push(st('👁','Risen','Vengeful Dead: it rose with Undying. +1 damage, but allied heals cannot heal it (shrines still do).','risen'));
+ if(fireAt(u.x,u.y)&&fireHurts(u))ex.push(st('🔥','On fire','Burning ground: 1 damage and Burn at the start of its turn.','bad'));
+ if(graveAt(u.x,u.y))ex.push(st('🪦','Grave',fac(u)=='undead'?'Standing on a grave.':'Ends its turn here: consecrates the grave.'));
+ if(fac(u)=='infernal'&&(FM().heat[u.side]||0)>=FC.heatCost&&S.turn===u.side)ex.push(st('♨','Overheat ready','Your side has 5+ Heat: the next Infernal attack deals +'+FC.ovhDmg+' damage and splashes.'));
+ if(!ex.length)return s;return s.replace(/<\/div>(\s*)<div class="urole">/,ex.join('')+'</div>$1<div class="urole">')};
+/* Risen eyes: [centre x, centre y, eye spacing] in the 160x240 board-figure art (art/t/<k>.svg), measured on each undead figure's face */
+const EYES={wraith:[80,38,10],skeletons:[80,93.5,6.7],ghoul:[43.5,93,11],necromancer:[80,30,8],graveknight:[80,32,7],bonerider:[95.5,56,6.4],lich:[80,30,9],bonecolossus:[80,19,10],deathknight:[79.5,26,9],banshee:[79.7,28.3,6.7],plaguelord:[80,32.7,12],wisp:[80,108,10.5]};
+function decor(){if(!S)return;const F=FM(),b=document.getElementById('board');if(!b)return;b.classList.toggle('hvnight',night());try{batDecor(b)}catch(e){}if(F===EMPTY)return;
+ S.units.forEach(u=>{if(!u.risen||atV(u.x,u.y)!==u)return;const el=b.querySelector(`.cell[data-x="${u.x}"][data-y="${u.y}"] .u`);if(el&&!el.querySelector('.hvf-eyes')){const e=EYES[u.k]||[80,34,8];el.insertAdjacentHTML('beforeend',`<i class="hvf-eyes" style="--ex:${e[0]};--ey:${e[1]};--es:${e[2]}" aria-hidden="true"><b></b><b></b></i>`);const tr=el.parentNode&&el.parentNode.querySelector('.trt');if(tr&&!tr.querySelector('.hvf-rt'))tr.insertAdjacentHTML('afterbegin','<i class="hvf-rt" title="Risen: +1 damage, no allied heals"><b></b><b></b></i>')}});
+ const se=document.getElementById('seats');if(se){if(F.night&&!se.querySelector('.hvdn')){const n=night(),l=phLeft(),r=se.querySelector('.rnd'),h=`<span class="hvdn ${n?'nt':'dy'}" data-tip="${n?'Night':'Day'}: rounds 1-3 are Day, 4-6 Night, and so on. At Night vampires get +1 move and +1 drain, and every other faction sees 2 hexes less (min 1).">${n?'🌙 Night':'☀️ Day'} <small>${n?'dawn':'night'} in ${l}</small></span>`;if(r)r.insertAdjacentHTML('afterend',h);else se.insertAdjacentHTML('afterbegin',h)}
+  SIDES.forEach(sd=>{if(!F.infS[sd]||S.dead[sd])return;const em=se.querySelector('.seat.'+sd+' em');if(em&&!em.querySelector('.hvht'))em.insertAdjacentHTML('beforeend',`<span class="hvht"> · ♨${F.heat[sd]||0}</span>`)})}
+ const M=ME,mn=document.getElementById('mana');if(M&&mn&&F.infS[M]&&!mn.querySelector('.hvheat')){const h=F.heat[M]||0,rd=h>=FC.heatCost;mn.insertAdjacentHTML('beforeend',`<span class="hvheat${rd?' rdy':''}" data-tip="Heat: +1 each time Burn ticks on an enemy (max ${FC.heatMax}). At ${FC.heatCost}, your next Infernal attack Overheats: +${FC.ovhDmg} damage and splash, and spends ${FC.heatCost} Heat.">♨<b>${h}</b><em>/${FC.heatMax}</em><i style="--h:${(h/FC.heatMax*100).toFixed(0)}%"></i>${rd?' <small>OVERHEAT</small>':''}</span>`)}}
+const rn0=render;render=function(){const r=rn0.apply(this,arguments);try{decor()}catch(e){if(window.console)console.error(e)}return r};
+/* ---------- help text ---------- */
+FAC.wilds.x='<b>Hidden Paths</b> (Rogue, Trapper, Archer, Boar Rider, Wolf Pack, Falconer, Druid): in a forest they are hidden from enemies more than 1 hex away, even inside sight, unless flared or they attacked last turn; they also ignore the swamp stop. <b>Overgrowth</b> (Treant, Elder Treant): one that did not move last turn turns its plain hex into forest at the start of your turn (6 grown forests per side, the oldest reverts). <b>Pack Bond</b> (Wolf Pack, Alpha Direwolf): +1 melee damage per other Wilds unit next to the target (max +2).';
+FAC.infernal.x='<b>Scorched Earth</b>: Infernal splash attacks (and Overheats), Infernal killing blows and Infernal deaths ignite the hex: Burning Ground for 2 rounds (max 8, oldest out first). Non-Infernal walking heroes that enter or start there take 1 damage and Burn; fliers and Infernal are immune. Burned forest becomes Ash (no cover) for the match (max 4 Ash). Fire burns away Graves. <b>Heat</b>: every Burn tick on an enemy gives your side +1 Heat (max 10). At 5, your next Infernal attack Overheats: +2 damage and splash, spending 5 Heat.';
+FAC.undead.x='<b>Graves</b>: every non-summoned unit that dies leaves a Grave for 4 rounds (max 6, the oldest crumbles). Undead heroes may spawn next to a Grave within 3 hexes of an Undead unit, but not within 2 hexes of an enemy tower. A non-Undead hero that ends its turn on a Grave consecrates it, and a Necromancer&rsquo;s Raise the Slain uses up the Grave of the hero it raises. <b>Vengeful Dead</b>: a unit that has used Undying is Risen (glowing red eyes): +1 damage, but allied heals cannot heal it (shrines still do).';
+FAC.vamp.x='<b>Night Falls</b>: rounds 1-3 are Day, 4-6 Night, and so on (only in matches with Vampires). At Night vampires get +1 move and +1 drain, and every other faction has -2 sight (min 1). <b>Bat Form</b> (Warlock): before moving he can turn into a bat for free (🦇 button or B) and fly like a Bat; he turns back when he lands.';
+const TRK='Trackers: Royal Lookout, Night Watcher, Grave Wisp, Eye of Ruin, Falconer, Spotter, Star Oracle, Wolf Pack and Alpha Direwolf reveal enemies hidden in forests within 2 hexes.';
+window.hvKw=function(k,r){const h=H[k];if(!h)return;
+ if(HIDE.has(k))r.push(['Hidden Paths','in a forest it is hidden from enemies more than 1 hex away (even inside sight) unless flared, it attacked last turn, or a tracker is within 2. Ignores the swamp stop.']);
+ if(GROW.has(k))r.push(['Overgrowth','if it did not move last turn, its plain hex becomes forest at the start of your turn (6 per side; the oldest reverts).']);
+ if(PACK.has(k))r.push(['Pack Bond','melee hits deal +1 per other Wilds unit next to the target (max +2).']);
+ if(REVEAL.has(k))r.push(['Tracker','reveals enemies hidden in forests within 2 hexes.']);
+ if(h.fac=='infernal')r.push(['Scorched Earth',(h.aoe?'its splash attacks':'its killing blows (and Overheated attacks)')+', and its death, set the hex burning for 2 rounds. Burned forest turns to Ash.'],['Heat','Burn ticks on enemies build Heat; at 5 the next Infernal attack Overheats (+2 damage, splash).']);
+ if(h.fac=='undead')r.push(['Graves','Undead may spawn next to a Grave within 3 of an Undead unit (not within 2 of an enemy tower).'],['Vengeful Dead','after Undying it is Risen: +1 damage, no allied heals (shrines still work).']);
+ if(k===BATK)r.push(['Bat Form','before moving, toggle (free, button or B) to fly like a Bat: '+H.bats.mv+' hexes over walls, swamps and units. He turns back on landing; no attacks as a bat or after the move.']);
+ if(h.fac=='vamp')r.push(['Night Falls','at Night (rounds 4-6, 10-12...) +1 move and +1 drain; other factions get -2 sight.'])};
+{const fr0=factionRules;factionRules=function(){let r=fr0();
+ r=r.replace('<b>team bonus</b>.</p>','<b>team bonus</b>. Four factions also have a <b>faction rule</b> that changes the board.</p>');
+ Object.keys(FAC).forEach(f=>{if(!FAC[f].x)return;const a=`<i>Team bonus (${SYN}+):</i> ${FAC[f].sy}`;if(r.includes(a))r=r.replace(a,a+'<br><i>Faction rule:</i> '+FAC[f].x)});
+ const j=r.lastIndexOf('</details>');return r.slice(0,j)+`<p><b>Board markers</b>: 🔥 burning ground, grey Ash (burned forest), 🪦 graves (the number is rounds left), 🌱 grown forest, faded heroes are hidden in a forest (only you see them), red eyes mark Risen undead. ${TRK}</p>`+r.slice(j)}}
+/* Quick start card: one line about the board-changing faction rules */
+{const sc0=showCheat;showCheat=function(){const n=document.body.lastElementChild;const r=sc0.apply(this,arguments);const d=document.body.lastElementChild;
+ if(d&&d!==n){const ul=d.querySelector('ul');if(ul)ul.insertAdjacentHTML('beforeend','<li><b>Factions</b>: Wilds hide in forests, Infernal set the ground on fire, Undead rise from graves, and Vampires bring the Night (rounds 4-6, 10-12...). Hover a hex or hero to see what it does.</li>')}return r}}
+{const tr=CORE.find(o=>o.k=='terrain');if(tr&&!/Ash/.test(tr.d))tr.d+=' Factions add more: burning ground and Ash (Infernal), graves (Undead), grown forest and forest stealth (Wilds).';
+ const sg=CORE.find(o=>o.k=='sight');if(sg&&!/Trackers/.test(sg.d))sg.d+=' Wilds rangers hide inside forests from anyone more than 1 hex away. '+TRK+' At Night (with Vampires in the match) everyone but Vampires sees 2 less.'}
+/* ---------- Vampires: Blood Countess and Warlock attacks cost 1 mana; Warlock Bat Form ----------
+ Bat Form: a Warlock that has not moved may toggle it for free (action {t:'bat',s,fx,fy} through perform/submit, so replay and online see it).
+ As a bat he moves like H.bats (same move, flying: over units, walls, swamps and water fliers can cross) and turns back when he lands.
+ The move is his move for the turn; he cannot attack as a bat or after the move. Untoggled at the end of his turn if he never moved. */
+const BATK='warlock';
+H.countess.acost=1;H.countess.d='A noble sorceress. Crimson bolts from range 2-3 cost 1 mana and drain life.';
+H.warlock.acost=1;H.warlock.d='Costs 1 mana. Hits at exactly range 2 and heals 2. Bat Form (free, before moving): fly like a Bat this turn and turn back on landing.';
+if(ROLE.warlock)ROLE.warlock[1]='Drain caster. Chips from exactly 2 hexes and heals itself. Bat Form: flies like a Bat for one move.';
+const isBat=u=>!!u&&u.k===BATK&&!!u.bat;
+function inBat(u,fn){if(!isBat(u))return fn();const h=H[BATK],f=h.fly,m=h.mv;h.fly=1;h.mv=H.bats.mv;try{return fn()}finally{if(f===undefined)delete h.fly;else h.fly=f;h.mv=m}}
+const batOK=u=>!!u&&u.k===BATK&&u.hp>0&&!u.used&&!u.moved&&!u.root&&!u.stun;
+window.hvInBat=inBat;window.hvBatOK=batOK;
+{const r0=reach;reach=function(u,par){return inBat(u,()=>r0(u,par))};
+ const s0=stepOK;stepOK=function(u,a,b,i){return inBat(u,()=>s0(u,a,b,i))};
+ const x0=prefixOK;prefixOK=function(u,k){return inBat(u,()=>x0(u,k))};
+ const o0=pathOK;pathOK=function(u,k){return inBat(u,()=>o0(u,k))};
+ const p0=pathTo;pathTo=function(u,x,y){return inBat(u,()=>p0(u,x,y))};
+ const m0=mvOf;mvOf=function(u){return inBat(u,()=>m0(u))};
+ const t0=targets;targets=function(u){return isBat(u)?[]:t0(u)};
+ const u0=ucard;ucard=function(u){let c=inBat(u,()=>u0(u));if(!u||u.k!==BATK||!S)return c;
+  const mine=isMine(u.side)&&S.turn===u.side&&!busy&&!S.over,can=mine&&batOK(u)&&sel===u;
+  const b=can?`<button class="hvbatbtn${u.bat?' on':''}" data-hvbat="1" data-tip="${u.bat?'Turn back into the Warlock (free).':'Bat Form (free): fly like a Bat ('+mvOf(Object.assign({},u,{bat:1}))+' hexes, over walls, swamps and units). He turns back when he lands, and cannot attack this turn.'}">🦇 ${u.bat?'Turn back':'Bat form'} <kbd>B</kbd></button>`:'';
+  const tag=u.bat?`<span class="ust hvbatst" data-tip="Bat Form: flies like a Bat until he lands. No attacks as a bat.">🦇 Bat form</span>`:'';
+  if(!b&&!tag)return c;return c.replace(/<\/div>(\s*)<div class="urole">/,tag+'</div>$1'+(b?'<div class="hvbatrow">'+b+'</div>':'')+'<div class="urole">')}}
+let PUFF=null;
+const pfB=perform;perform=function(a){if(!a||typeof S=='undefined'||!S||S.over)return pfB(a);
+ if(a.t=='bat'){if(S.turn!==a.s)return false;const u=at(a.fx,a.fy);if(!u||u.side!==a.s||!batOK(u))return false;u.bat=u.bat?0:1;if(u.bat&&S.fm&&S.fm.st)S.fm.st.bat=(S.fm.st.bat||0)+1;
+  if(!RP){msg(`${SHORT[a.s]} ${H[u.k].n} ${u.bat?'turns into a bat':'turns back'}.`);try{sfx('move')}catch(e){}}return true}
+ if(a.t=='move'){const u=at(a.fx,a.fy);if(isBat(u)&&u.side===a.s){const r=inBat(u,()=>pfB(a));if(r&&S.units.includes(u)){u.bat=0;if(!RP){PUFF={x:u.x,y:u.y,t:performance.now(),id:(PUFF?PUFF.id:0)+1};pop(u,'🦇 Lands',1)}}return r}}
+ return pfB(a)};
+{const e0=endTurn;endTurn=function(){if(S&&!S.over)S.units.forEach(u=>{if(u.side===S.turn&&u.bat)u.bat=0});return e0.apply(this,arguments)}}
+window.hvBatToggle=function(){if(!S||S.over||busy||(typeof cutting=='function'&&cutting())||!sel||!isMine(S.turn)||sel.side!==S.turn||!batOK(sel))return false;const ok=submit({t:'bat',s:S.turn,fx:sel.x,fy:sel.y});if(ok){PATH=[];render()}return ok};
+document.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-hvbat]');if(b){e.preventDefault();e.stopPropagation();hvBatToggle()}},true);
+addEventListener('keydown',e=>{if((e.key=='b'||e.key=='B')&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))&&S&&!$('#game').hidden){if(hvBatToggle())e.preventDefault()}});
+/* AI: take Bat Form when the flight reaches a hex it can shoot from next turn, or gets 2+ hexes closer (over water, walls or a crowd) */
+{const ch0=choose;choose=function(u){const r=ch0(u);if(!u||u.k!==BATK||!batOK(u)||u.bat||!r||r.act||!r.mv)return r;
+ u.bat=1;let rb;try{rb=ch0(u)}catch(e){rb=null}finally{u.bat=0}if(!rb||rb.act||!rb.mv)return r;
+ const me=u.side,fo=S.units.filter(v=>v.hp>0&&isFoe(v.side,me)&&canSee(me,v)).concat(foeTowers(me));if(!fo.length)return r;
+ const nd=p=>Math.min(...fo.map(f=>dist(f,p))),sh=p=>fo.some(f=>dist(f,p)==H[BATK].rng[1]);
+ if(((sh(rb.mv)&&!sh(r.mv))||nd(rb.mv)<=nd(r.mv)-2)&&submit({t:'bat',s:me,fx:u.x,fy:u.y}))return rb;return r}}
+function batDecor(b){const s=sel&&isBat(sel)&&S.turn===sel.side;b.classList.toggle('hvbatsel',!!s);
+ S.units.forEach(u=>{if(!isBat(u)||atV(u.x,u.y)!==u)return;const el=b.querySelector(`.cell[data-x="${u.x}"][data-y="${u.y}"] .u`);if(!el||el.classList.contains('hvbat'))return;el.classList.add('hvbat');const im=el.querySelector('img.sp');if(im&&HVART.has('bats'))im.src='art/t/bats.svg?v=1';el.insertAdjacentHTML('beforeend','<i class="hvswirl" aria-hidden="true"></i>')});
+ if(PUFF&&performance.now()-PUFF.t<900){const c=b.querySelector(`.cell[data-x="${PUFF.x}"][data-y="${PUFF.y}"]`);if(c&&!c.querySelector('.hvpuff'))c.insertAdjacentHTML('beforeend','<i class="hvpuff" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></i>')}}
+try{drawRules()}catch(e){}
 })();
 </script>
 </body></html>

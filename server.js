@@ -187,7 +187,7 @@ function handle(r, cid, m) {
     }
     case 'act': {
       const a = m.a;
-      if (r.phase !== 'play' || !r.game || !a || typeof a !== 'object' || !sidesOf(r).includes(a.s) || !['spawn', 'move', 'act', 'end', 'ult', 'buy', 'card', 'ally', 'accept', 'decline', 'betray'].includes(a.t)) break;
+      if (r.phase !== 'play' || !r.game || !a || typeof a !== 'object' || !sidesOf(r).includes(a.s) || !['spawn', 'move', 'act', 'end', 'ult', 'buy', 'card', 'ally', 'accept', 'decline', 'betray', 'bat'].includes(a.t)) break;
       if (r.game.log.length > 5000) break;
       const t = r.seats[a.s];
       const ok = (t.kind === 'human' && t.cid === cid) || (t.kind === 'ai' && isHost);

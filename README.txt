@@ -58,6 +58,50 @@ ALWAYS ON
 - Combos: Flank (+1 melee damage when an ally is also next to the target),
   Shatter (+2 damage to stunned heroes), Rally (+1 damage next to your boss).
 
+FACTION RULES (change the board; drawn markers until painted tiles land)
+- Wilds, Hidden Paths (Rogue, Trapper, Archer, Boar Rider, Wolf Pack,
+  Falconer, Druid): in a forest they are hidden from enemies more than 1 hex
+  away, even inside sight, unless flared or they attacked last turn. They
+  ignore the swamp stop. Hidden heroes look faded (🌲) to their owner and are
+  not drawn for enemies (in hotseat only on their owner's turn).
+- Trackers reveal forest-hidden enemies within 2 hexes: Royal Lookout, Night
+  Watcher, Grave Wisp, Eye of Ruin, Falconer, Spotter, Star Oracle, Wolf Pack
+  and Alpha Direwolf.
+- Wilds, Overgrowth (Treant, Elder Treant): one that did not move last turn
+  turns its plain hex into forest at the start of your turn (🌱, 6 per side,
+  the oldest reverts).
+- Wilds, Pack Bond (Wolf Pack, Alpha Direwolf): +1 melee damage per other
+  Wilds unit next to the target (max +2).
+- Infernal, Scorched Earth: Infernal splash attacks (and Overheats),
+  Infernal killing blows and Infernal deaths set the hex burning (🔥) for 2
+  rounds (max 8 hexes, oldest out first).
+  Non-Infernal walking heroes that enter or start there take 1 damage and
+  Burn; fliers and Infernal are immune. A burned forest turns to Ash (plain,
+  no cover) for the match, max 4 Ash. Fire burns away Graves. Lakes and
+  rivers never burn.
+- Infernal, Heat: each Burn tick on an enemy gives your side +1 Heat (max
+  10, shown next to your mana). At 5, your next Infernal attack Overheats:
+  +2 damage and splash, and spends 5 Heat.
+- Undead, Graves: every non-summoned unit that dies leaves a Grave (🪦) for 4
+  rounds (max 6, the oldest crumbles). Undead heroes may spawn next to a
+  Grave within 3 hexes of an Undead unit, but not within 2 hexes of an enemy
+  tower. A non-Undead hero that ends its turn on a Grave consecrates it,
+  and a Necromancer's Raise the Slain uses up the slain hero's Grave.
+- Undead, Vengeful Dead: a unit that has used Undying is Risen (glowing red
+  eyes): +1 damage, and allied heals cannot heal it (shrines still do).
+- Undead team bonus (3+ Undead): Undying now returns units with 2 HP
+  instead of 3 (balance, with Graves and Risen added).
+- Vampires, Bat Form (Warlock): before he moves, the Warlock can turn into
+  a bat for free (🦇 button on his card, or B). As a bat he moves like the
+  Bats (3 hexes, flying over units, walls and swamps) and turns back when he
+  lands. That is his move for the turn: no attack as a bat or after it. If he
+  does not move he can turn back, or he turns back at the end of the turn.
+- Blood Countess and Warlock attacks cost 1 mana.
+- Vampires, Night Falls (matches with Vampires): rounds 1-3 Day, 4-6 Night,
+  and so on. At Night vampires get +1 move and +1 drain, and every other
+  faction has -2 sight (min 1). The board darkens and the top bar counts down
+  to the next dawn or nightfall.
+
 MATCH OPTIONS (lobby host / local setup screen)
 - Shrines (on): a hero on a shrine at the start of your turn gives +1 mana
   and heals 2.
