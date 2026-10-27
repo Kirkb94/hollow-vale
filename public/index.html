@@ -3303,4 +3303,59 @@ if(keys.ArrowLeft)vx=-1;if(keys.ArrowRight)vx=1;if(keys.ArrowUp)vy=-1;if(keys.Ar
 if(vx||vy){const sp=.9*dt;V.scrollLeft+=vx*sp*(.4+.6*Math.abs(vx));V.scrollTop+=vy*sp*(.4+.6*Math.abs(vy))}}requestAnimationFrame(loop)})(last);
 })();</script>
 <style>/* HV_CAP */.capro{cursor:help;border-bottom:1px dotted currentColor;margin-left:.3em}.capro.over{color:#ff7a6a;font-weight:700}</style>
+<style id="hv-heroframe">
+/* hero portrait framing: the painted portraits are 160x240 full-body scenes. Instead of cropping them into wide/short frames (heads cut off),
+   each frame shows the portrait's scenery (cover) with the hero figure fitted by its real content bounds (head to feet, centred). */
+.hvf{position:absolute;inset:0;overflow:hidden;container-type:size;pointer-events:none;border-radius:inherit;z-index:0;--pt:.05;--pb:.03;--px:.05;background:#0c0d12}
+.hvf img{position:absolute;display:block;max-width:none;max-height:none;margin:0;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hvf .hvsc{left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:50% 64%}
+.hvf .hvfg{--s:min(calc(100cqw * (1 - 2 * var(--px)) / var(--bw)),calc(100cqh * (1 - var(--pt) - var(--pb)) / var(--bh)));
+ width:calc(var(--s) * 160);height:calc(var(--s) * 240);
+ left:calc(50cqw - var(--s) * (var(--x0) + var(--bw) / 2));
+ top:calc(100cqh * var(--pt) + (100cqh * (1 - var(--pt) - var(--pb)) - var(--s) * var(--bh)) / 2 - var(--s) * var(--y0))}
+.hvf::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 14px 2px #000b;border-radius:inherit}
+/* until the figure/scene split is ready (first moments after load): the whole portrait, uncropped */
+.hvf:not(.rdy) .hvsc{object-fit:contain;object-position:50% 50%}
+.hvf:not(.rdy) .hvfg{display:none}
+/* tiny frames (team slots): more of the figure, less margin */
+.slot .hvf{--pt:.04;--pb:.02;--px:.02}
+.slot .hvf::after{box-shadow:inset 0 0 6px #000a}
+.slot>i{z-index:2}
+/* a little more art height on the draft cards so full figures read well */
+body.pc .card .cs{height:100px}
+body.mob .card .cs{height:78px}
+</style>
+<script>/* hero portrait framing (see #hv-heroframe). FB = figure bounds [x0,y0,x1,y1] in the 160x240 portrait, measured from each SVG's figure layer. */
+(function(){
+const FB={brute:[34,24,139,230],rogue:[44,12,116,226],archer:[30,28,116,226],knight:[22,0,120,228],mage:[43,4,136,226],cleric:[40,14,120,226],colossus:[11,22,148,230],blade:[48,28,138,228],lancer:[44,0,118,228],guard:[24,32,137,230],sapper:[35,36,140,230],wraith:[31,10,127,201],bomber:[47,4,122,228],witch:[44,6,118,236],storm:[44,0,120,226],druid:[43,14,120,226],paladin:[41,12,130,228],warlock:[42,23,118,226],assassin:[34,23,128,228],ballista:[22,42,148,228],footmen:[18,68,135,229],bowmen:[20,86,133,229],imps:[10,40,142,217],raiders:[24,72,138,229],sprites:[11,26,142,191],dragon:[7,12,146,232],titan:[6,26,154,232],archmage:[42,0,121,226],bats:[25,59,138,170],thrall:[30,38,132,230],countess:[46,14,118,226],skeletons:[8,18,150,222],ghoul:[32,76,128,214],necromancer:[40,4,120,226],graveknight:[14,10,119,226],hellhound:[20,72,146,226],magmagolem:[18,50,141,224],wolves:[34,110,132,227],treant:[31,0,129,230],gunner:[28,24,139,230],sentinel:[25,22,134,230],spellblade:[34,2,130,228],seer:[44,32,115,226],outrider:[18,6,138,228],boarrider:[12,63,135,226],bonerider:[18,44,136,220],bloodhunter:[19,17,146,224],kinglion:[38,9,122,232],vlord:[11,8,148,190],lich:[30,6,126,228],mammoth:[13,42,156,228],trapper:[37,16,123,232],wallwright:[5,32,138,239],hexweaver:[44,30,115,226],seraph:[9,0,150,204],warlord:[8,8,124,228],templar:[25,8,121,228],marshal:[40,2,126,228],bloodqueen:[36,12,124,232],nosferatu:[21,20,138,210],matriarch:[38,10,118,228],batking:[3,6,156,198],bonecolossus:[16,0,144,226],deathknight:[33,0,128,228],banshee:[23,2,136,202],plaguelord:[26,8,132,226],pitlord:[15,4,152,232],infernowitch:[33,4,128,226],demonprince:[18,25,141,202],phoenix:[23,4,138,218],eldertreant:[29,0,139,230],direwolf:[7,116,152,240],stormroc:[8,26,152,200],cavebear:[23,20,137,228],warengine:[13,28,148,219],forgemaster:[15,12,153,230],juggernaut:[14,2,144,230],thunderking:[32,0,148,230],chronomancer:[42,0,122,232],voidlord:[33,0,120,226],mirrormage:[15,0,146,226],runekeeper:[12,8,124,228],raidboss:[20,2,150,230],lookout:[35,3,116,228],nightwatch:[45,20,128,228],wisp:[46,58,111,201],fireeye:[32,48,127,209],falconer:[21,18,118,226],spotter:[24,36,140,230],oracle:[34,6,118,226]};
+const L={},Q=[],HQ=[];let act=0;
+const src=k=>'art/p/'+k+'.svg?v=1';
+function box(k){const b=FB[k]||L[k]&&L[k].b||[24,8,136,230];return '--x0:'+b[0]+';--y0:'+b[1]+';--bw:'+Math.max(8,b[2]-b[0])+';--bh:'+Math.max(8,b[3]-b[1])}
+function html(k){const r=L[k]&&L[k].fg?L[k]:null;if(!r)want(k,1);
+ return `<span class="hvf${r?' rdy':''}" data-hvk="${k}" style="${box(k)}" aria-hidden="true"><img class="hvsc" src="${r?r.sc:src(k)}" alt="" draggable="false"><img class="hvfg"${r?' src="'+r.fg+'"':''} alt="" draggable="false"></span>`}
+window.port=function(k){return HVART.has(k)?html(k):''};
+// HQ: heroes on screen right now (in the order they were drawn) go before the background warm-up queue
+function want(k,hot){if(L[k]){const i=hot?Q.indexOf(k):-1;if(i>=0){Q.splice(i,1);HQ.push(k)}return}L[k]={};(hot?HQ:Q).push(k);pump()}
+function pump(){while(act<6&&(HQ.length||Q.length)){const k=HQ.length?HQ.shift():Q.shift();act++;split(k).catch(()=>{L[k].fail=1}).finally(()=>{act--;pump()})}}
+// split the portrait into scene (background) and figure (the top-level <g> plus the ground shadows right before it)
+async function split(k){const t=await (await fetch(src(k))).text();const doc=new DOMParser().parseFromString(t,'image/svg+xml'),root=doc.documentElement;
+ if(!root||root.localName!='svg')throw 0;[...root.querySelectorAll('metadata')].forEach(e=>e.remove());
+ const kids=[...root.children],gi=kids.map(e=>e.localName).lastIndexOf('g');if(gi<0)throw 0;
+ let si=gi;while(si>0&&kids[si-1].localName=='ellipse'&&/^#0{3,6}$/.test(kids[si-1].getAttribute('fill')||''))si--;
+ const fig=new Set(kids.slice(si,gi+1)),mk=keep=>{const r=root.cloneNode(false);kids.forEach(e=>{if(e.localName=='defs'||keep(e))r.appendChild(e.cloneNode(true))});
+  return URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(r)],{type:'image/svg+xml'}))};
+ const sc=mk(e=>!fig.has(e)),fg=mk(e=>fig.has(e));
+ if(!FB[k])L[k].b=await measure(fg);
+ L[k].sc=sc;L[k].fg=fg;
+ document.querySelectorAll('.hvf[data-hvk="'+k+'"]').forEach(s=>{const i=s.querySelectorAll('img');if(i[0])i[0].src=sc;if(i[1])i[1].src=fg;s.setAttribute('style',box(k));s.classList.add('rdy')})}
+// heroes added later without a measured entry: measure the figure's opaque pixels
+async function measure(u){const im=new Image();im.src=u;await im.decode();const W=160,Hh=240,c=document.createElement('canvas');c.width=W;c.height=Hh;const x=c.getContext('2d');x.drawImage(im,0,0,W,Hh);
+ const a=x.getImageData(0,0,W,Hh).data;let x0=W,y0=Hh,x1=0,y1=0;for(let y=0;y<Hh;y++)for(let i=0;i<W;i++)if(a[(y*W+i)*4+3]>64){if(i<x0)x0=i;if(i>x1)x1=i;if(y<y0)y0=y;if(y>y1)y1=y}
+ return x1>x0?[x0,y0,x1+1,y1+1]:null}
+// portraits already on screen from before this script ran
+document.querySelectorAll('img.pp').forEach(i=>{const m=/art\/p\/([a-z0-9_]+)\.svg/.exec(i.getAttribute('src')||'');if(m&&HVART.has(m[1]))i.outerHTML=html(m[1])});
+// warm the split for every hero shortly after load so the draft opens with finished frames
+const warm=()=>{try{[...HVART].forEach(k=>want(k))}catch(e){}};setTimeout(()=>window.requestIdleCallback?requestIdleCallback(warm,{timeout:3000}):warm(),1500);
+})();
+</script>
 </body></html>
