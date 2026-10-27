@@ -6912,4 +6912,362 @@ HVSP.sfx=sfxK;HVSP.vfx=vfx;
 try{drawRules()}catch(e){}try{if(!$('#draft').hidden)drawCards()}catch(e){}
 })();
 </script>
+<style id="hv-hud">
+/* ===== HV_HUD: readable in-game UI (cosmetic only, built after every render by #hv-hud-js; never touches game state).
+   1 Day/Night chip + Nightfall/Dawn card, 2 Mana/Gold/Heat meters with +/- deltas, 3 whose turn + ready/done heroes + End turn,
+   4 status badges on the board (two rails beside the figure, never over the HP bar), 5 tower HP per side + objectives strip.
+   Text is >= 4.5:1 on its panel, icons >= 3:1, and every colour cue also has an icon or a word (colourblind-safe). ===== */
+:root{--hvpan:#15100bf2;--hvln:#8a6a40;--hvtx:#f6ecd6;--hvmu:#d9ccb0;--hvmn:#8fd2ff;--hvgd:#ffd45e;--hvht:#ffa25a;--hvok:#9ff0a0;--hvbad:#ff7a66}
+/* ---------- 3. whose turn ---------- */
+:is(#turn,#hvtp) .hvturn{display:inline-flex;align-items:center;gap:8px;padding:3px 12px 3px 4px;border-radius:999px;background:#0008;border:2px solid var(--sc);box-shadow:inset 0 0 0 1px #0008;line-height:1.1;max-width:100%;min-width:0}
+:is(#turn,#hvtp) .hvturn .hvsd{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 4px;box-sizing:border-box;border-radius:999px;background:var(--sc);color:#140e06;font:800 13px/1 system-ui,sans-serif;font-style:normal;border:2px solid #0009;box-shadow:0 0 0 1px #fff6}
+:is(#turn,#hvtp) .hvturn .hvtx{display:flex;flex-direction:column;min-width:0}
+:is(#turn,#hvtp) .hvturn b{font-size:1em;color:var(--hvtx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:is(#turn,#hvtp) .hvturn small{font:600 12px/1.15 system-ui,sans-serif;color:var(--hvmu);white-space:nowrap;letter-spacing:.2px}
+:is(#turn,#hvtp) .hvturn.me{background:linear-gradient(90deg,color-mix(in srgb,var(--sc) 34%,#120c06),#120c06e6);box-shadow:0 0 0 1px #000,0 0 14px color-mix(in srgb,var(--sc) 70%,transparent)}
+:is(#turn,#hvtp) .hvturn.me b{text-transform:uppercase;letter-spacing:1.5px;font-weight:900;color:#fff;text-shadow:0 1px 0 #000,0 0 8px color-mix(in srgb,var(--sc) 80%,transparent)}
+:is(#turn,#hvtp) .hvturn.me .hvsd::after{content:'▶';font-size:9px;margin-left:2px}
+:is(#turn,#hvtp) .hvturn.ov{border-color:#9a8c7a}
+.bar #turn .tdot{display:none}
+/* ---------- 2. meters (mana, heat in the bar; gold in the market row) ---------- */
+#mana{display:inline-flex;align-items:center;gap:8px;flex-wrap:nowrap}
+.hvmt{position:relative;display:inline-grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:5px;align-items:center;padding:2px 9px 3px 6px;border-radius:10px;background:#0b0806e0;border:1.5px solid var(--mc,#8a6a40);line-height:1;cursor:help;color:var(--hvtx);min-height:34px;box-sizing:border-box}
+.hvmt .hvi{grid-row:1 / span 2;font-style:normal;font-size:20px;line-height:1;color:var(--mc);text-shadow:0 0 6px color-mix(in srgb,var(--mc) 60%,transparent);filter:drop-shadow(0 1px 0 #000)}
+.hvmt .hvl{font:700 10px/1 system-ui,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:var(--hvmu);align-self:end}
+.hvmt .hvv{display:flex;align-items:baseline;gap:2px;white-space:nowrap}
+.hvmt .hvv b{font:800 21px/1 system-ui,sans-serif;color:#fff;text-shadow:0 1px 0 #000}
+.hvmt .hvv small{font:700 12px/1 system-ui,sans-serif;color:var(--hvmu)}
+.hvmt .hvpp{grid-column:1 / span 2;display:flex;gap:2px;margin-top:3px;height:5px}
+.hvmt .hvpp i{flex:1;min-width:4px;border-radius:2px;background:#3a3026;box-shadow:inset 0 0 0 1px #000a}
+.hvmt .hvpp i.on{background:var(--mc);box-shadow:0 0 3px color-mix(in srgb,var(--mc) 70%,transparent)}
+.hvmt .hvpp i.th{margin-left:4px;position:relative}
+.hvmt .hvpp i.th::before{content:'';position:absolute;left:-4px;top:-3px;bottom:-3px;width:2px;background:#fff;border-radius:1px;box-shadow:0 0 0 1px #000}
+.hvmt.mn{--mc:var(--hvmn)}
+.hvmt.gd{--mc:var(--hvgd)}
+.hvmt.ht{--mc:var(--hvht)}
+.hvmt.hvpip{grid-template-rows:auto auto auto}
+.hvmt.hvpip .hvi{grid-row:1 / span 2}
+.hvmt.ht.rdy{background:linear-gradient(#3a1606,#1a0a04);border-color:#ffcf5a;box-shadow:0 0 0 1px #000,0 0 12px #ff7a2acc}
+.hvmt .hvov{grid-column:3;grid-row:1 / span 3;margin-left:4px;padding:3px 6px;border-radius:6px;font:800 10px/1.1 system-ui,sans-serif;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap;text-align:center}
+.hvmt .hvov.hvgo{background:#ffcf5a;color:#2a1000;border:1px solid #000;animation:hvOvr 1.1s ease-in-out infinite alternate}
+.hvmt .hvov.hvno{color:var(--hvmu);border:1px dashed #8a6a40;font-weight:700}
+@keyframes hvOvr{to{background:#ff9a3a}}
+.hvmt .hvdl{position:absolute;right:-6px;top:-11px;z-index:3;padding:1px 5px;border-radius:999px;font:800 12px/1.2 system-ui,sans-serif;font-style:normal;border:1.5px solid #000;pointer-events:none;white-space:nowrap;animation:hvDl 1.9s ease-out both;animation-delay:var(--ad,0ms)}
+.hvmt .hvdl.up{background:#bff5c0;color:#0a2a0c}
+.hvmt .hvdl.dn{background:#ffc0b4;color:#3a0a04}
+@keyframes hvDl{0%{opacity:0;transform:translateY(5px) scale(.8)}12%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
+#hand .gold.hvmt{display:inline-grid;align-self:center;padding:2px 10px 3px 6px;font-size:inherit;color:var(--hvtx)}
+#hand .gold.hvmt small{margin:0;opacity:1;font-size:12px}
+#hand .gold.hvmt .hvv small{color:#ffe7a8}
+#mana .hvheat{display:none}
+/* ---------- 3. End turn + ready count ---------- */
+#end .hvet{display:flex;flex-direction:column;align-items:center;line-height:1.05}
+#end .hvet small{font:700 11px/1.1 system-ui,sans-serif;letter-spacing:.3px;opacity:.95;white-space:nowrap}
+#end .hvet kbd{font:700 10px/1 monospace;padding:1px 4px;border-radius:4px;background:#0006;border:1px solid #fff6;margin-left:3px}
+#end.hvall:not(:disabled){background:linear-gradient(#ffe08a,#e0a43a)!important;color:#241400!important;border-color:#fff3!important;box-shadow:0 0 0 2px #000,0 0 14px #ffd24acc!important;animation:hvEnd 1.2s ease-in-out infinite alternate}
+@keyframes hvEnd{to{box-shadow:0 0 0 2px #000,0 0 24px #ffd24a!important;filter:brightness(1.08)}}
+#end:disabled .hvet small{opacity:.9}
+/* ---------- 1. Day / Night chip ---------- */
+#hvph{display:none}
+#hvph.on{display:flex;align-items:center;gap:9px;margin:6px auto 0;width:max-content;max-width:100%;box-sizing:border-box;padding:4px 14px 4px 6px;border-radius:999px;border:2px solid;cursor:help;line-height:1.1;position:relative}
+#hvph .hvpi{flex:none;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;font-style:normal;font-size:21px;border:2px solid #000a}
+#hvph .hvpt{display:flex;flex-direction:column;min-width:0}
+#hvph .hvpt b{font:900 16px/1 system-ui,sans-serif;letter-spacing:2px;text-transform:uppercase}
+#hvph .hvpt small{font:700 12.5px/1.2 system-ui,sans-serif;white-space:nowrap}
+#hvph .hvp3{display:flex;gap:3px}
+#hvph .hvp3 i{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;box-sizing:border-box}
+#hvph .hvp3 i.on{background:currentColor}
+#hvph .hvpe{font:700 12px/1.25 system-ui,sans-serif;padding-left:9px;border-left:1px solid currentColor;max-width:330px}
+#hvph .hvpe span{display:block;white-space:nowrap}
+#hvph.dy{background:linear-gradient(90deg,#ffe7a6,#f7c95c);color:#2a1a02;border-color:#fff3c8;box-shadow:0 0 0 1px #000,0 0 14px #ffcf6a88}
+#hvph.dy .hvpi{background:#fff4cc}
+#hvph.nt{background:linear-gradient(90deg,#1b1650,#2c2276);color:#ece6ff;border-color:#a99aff;box-shadow:0 0 0 1px #000,0 0 16px #7a6aff99}
+#hvph.nt .hvpi{background:#0c0a2a;color:#fff6c0}
+#hvph.chg .hvpt b::after{content:attr(data-new);margin-left:8px;padding:1px 6px;border-radius:6px;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.5px;vertical-align:2px;background:#000;color:#fff}
+#hvph.chg{animation:hvPh 1.4s ease-in-out 3}
+@keyframes hvPh{50%{box-shadow:0 0 0 1px #000,0 0 30px currentColor}}
+/* night: the whole screen reads as night (frame + HUD tint), not only the board */
+body.hvnt #bw{box-shadow:0 0 0 3px #8a7aff,0 0 34px #5a4aff88!important}
+body.hvdy #bw{box-shadow:0 0 0 2px #ffcf6a66,0 0 22px #ffcf6a26}
+body.pcv.ingame.hvnt #pctop{background:linear-gradient(#0b0a24f4,#0b0a24c8 70%,#0b0a2400)}
+body.pcv.ingame.hvnt #pcbot{background:linear-gradient(#0b0a2400,#0b0a24c8 30%,#0b0a24f4)}
+/* the Nightfall / Dawn card (existing event cut-in) gets its own theme and clear effect lines */
+#evc.hvnf .evbg{background:radial-gradient(ellipse at 50% 45%,#3a2aa855 0,#05041ef2 72%)!important}
+#evc.hvdw .evbg{background:radial-gradient(ellipse at 50% 45%,#ffcf6a55 0,#1a1004e6 72%)!important}
+#evc .hvfx{display:flex;flex-direction:column;gap:4px;margin-top:6px;font:700 clamp(13px,2.6vw,18px)/1.3 system-ui,sans-serif;font-style:normal;color:#fff}
+#evc .hvfx span{display:inline-block;padding:3px 10px;border-radius:8px;background:#000b;border:1px solid #fff4;width:max-content;max-width:80vw}
+#evc .hvfx span.v{border-color:#ff8aa0}
+#evc .hvfx span.o{border-color:#a99aff}
+/* ---------- 5. tower HP per side + objectives ---------- */
+.seat .hvtws{display:flex;gap:3px;margin-top:3px}
+.seat .hvtw{position:relative;display:flex;align-items:center;justify-content:center;min-width:28px;height:17px;padding:0 3px;box-sizing:border-box;border-radius:4px;background:#2a2219;border:1px solid #000;overflow:hidden;font-style:normal}
+.seat .hvtw::before{content:'';position:absolute;left:0;top:0;bottom:0;width:calc(var(--r,1) * 100%);background:linear-gradient(color-mix(in srgb,var(--sc) 80%,#fff),var(--sc));opacity:.85}
+.seat .hvtw.lo::before{background:linear-gradient(#ff9a8a,#c8402a)}
+.seat .hvtw b{position:relative;font:800 12px/1 system-ui,sans-serif;color:#fff;text-shadow:0 0 2px #000,0 1px 0 #000,0 0 4px #000}
+.seat .hvtw.dn{background:#1a1612;border-style:dashed;border-color:#6a5a48}
+.seat .hvtw.dn::before{display:none}
+.seat .hvtw.dn b{color:#b8aa94;text-shadow:none}
+.seat .hvtws .hvtt{font:700 11px/17px system-ui,sans-serif;color:var(--hvmu);margin-left:2px;white-space:nowrap}
+.seat.on{box-shadow:0 0 0 2px var(--sc,#ffe066),0 0 16px color-mix(in srgb,var(--sc,#ffe066) 60%,transparent)!important;background:color-mix(in srgb,var(--sc,#ffe066) 16%,#0009)!important}
+.seat.on>b::after{content:' · playing';font-weight:700;font-size:.85em;color:var(--hvtx)}
+#seats .hvdn{display:none!important}
+#hvobj{display:none}
+#hvobj.on{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:4px 0 2px}
+body.pcv.ingame #pctop .pcc #hvobj.on{justify-content:center;margin:5px auto 0;max-width:100%}
+#hvobj .hvo{display:inline-flex;align-items:center;gap:5px;padding:3px 9px 3px 6px;border-radius:8px;background:#0b0806e6;border:1px solid #6a5034;font:700 12.5px/1.2 system-ui,sans-serif;color:var(--hvtx);white-space:nowrap;cursor:help}
+#hvobj .hvo i{font-style:normal;font-size:14px}
+#hvobj .hvo b{color:#fff}
+#hvobj .hvo.warn{border-color:#ff9a6a;background:#2a0e06e6}
+#hvobj .hvo.warn b{color:#ffc8a8}
+#hvobj .hvo.sd{border-color:#ff5a4a;background:linear-gradient(#5a0e08,#2a0604);box-shadow:0 0 10px #ff4a3a88}
+#hvobj .hvo.over{border-color:#ff7a6a}
+#hvobj .hvo.over b{color:#ffb0a4}
+#hvobj .hvo.goal{border-color:#c8a060}
+/* ---------- 4. status badges on the board ---------- */
+#board{--hvbs:17px}
+#board .cell .hvsb{position:absolute;top:19%;display:flex;flex-direction:column;gap:2px;z-index:7;pointer-events:none}
+#board .cell .hvsb.l{left:-3%}
+#board .cell .hvsb.r{right:-3%;top:23%}
+#board .cell .hvsb>i{pointer-events:auto;position:relative;display:flex;align-items:center;justify-content:center;width:var(--hvbs);height:var(--hvbs);box-sizing:border-box;border-radius:50%;
+ background:#0c0e12f0;border:max(1.5px,calc(var(--hvbs) * .11)) solid var(--bc,#e8dcc0);box-shadow:0 0 0 1px #000,0 1px 2px #000c;font-style:normal;font-size:calc(var(--hvbs) * .64);line-height:1;cursor:help}
+#board .cell .hvsb>i b{position:absolute;right:calc(var(--hvbs) * -.3);bottom:calc(var(--hvbs) * -.12);min-width:calc(var(--hvbs) * .56);height:calc(var(--hvbs) * .56);padding:0 1px;box-sizing:border-box;border-radius:999px;background:#fff;color:#000;font:800 calc(var(--hvbs) * .44)/calc(var(--hvbs) * .56) system-ui,sans-serif;text-align:center;box-shadow:0 0 0 1px #000}
+#board .cell .hvsb>i.t-bad{--bc:#ff7060}
+#board .cell .hvsb>i.t-fire{--bc:#ff9a3a}
+#board .cell .hvsb>i.t-shield{--bc:#7cc8ff}
+#board .cell .hvsb>i.t-undead{--bc:#9ee07a}
+#board .cell .hvsb>i.t-warn{--bc:#ffcf5a;background:#3a1a04f0}
+#board .cell .hvsb>i.t-good{--bc:#c8b4ff}
+#board .cell .hvsb>i.t-heat{--bc:#ffcf5a;background:#4a1a04f0}
+#board .cell .hvsb>i.more{font:800 calc(var(--hvbs) * .5)/1 system-ui,sans-serif;color:#fff;--bc:#fff}
+/* old one-off icons that the badges replace (the effect art at the feet / over the head stays) */
+#board .cell :is(.smark,.rzb,.hvm-hid){display:none!important}
+#board .cell .trt i.hvf-rt{display:none}
+#board .cell .lvst{top:3%!important}
+/* ready / done heroes on your turn */
+#board .cell .done{pointer-events:auto;cursor:help;right:2%!important;top:5%!important;width:calc(var(--hvbs) * 1.05);height:calc(var(--hvbs) * 1.05);line-height:calc(var(--hvbs) * .95);font-size:calc(var(--hvbs) * .66);background:#e8ffe4;color:#0a3a10;border:2px solid #0a3a10;box-shadow:0 0 0 1px #fff8,0 1px 3px #000;z-index:8;font-weight:900}
+/* spent heroes stay crisp (light desaturation only); "done" is the ✓ badge + a dimmed base ring, "ready" is a bright pulsing ring */
+#board .cell:not(.hvf-hid) .u.used{opacity:1!important;filter:saturate(.82)!important}
+html.cb #board .cell:not(.hvf-hid) .u.used.p{filter:saturate(.82) drop-shadow(0 2px 0 var(--p)) drop-shadow(0 0 3px var(--p))!important}
+html.cb #board .cell:not(.hvf-hid) .u.used.e{filter:saturate(.82) drop-shadow(0 0 0 var(--e)) drop-shadow(0 -2px 2px var(--e)) drop-shadow(0 0 4px var(--e))!important}
+#board .cell .ring2.used{opacity:.5;filter:grayscale(.7) brightness(.8);border-style:dotted}
+/* every figure gets a thin dark outline + contact shadow so it reads on bright grass, cobble, sand and water */
+#board .cell .u .sp{filter:drop-shadow(0 0 .7px #000) drop-shadow(0 0 1.2px #000c) drop-shadow(0 2px 2px #000b)}
+#board .cell.hvrdy .ring2{border-width:3px;opacity:1;box-shadow:0 0 0 1px #000a,0 0 10px var(--rc,#ffe066),0 0 3px #fff;animation:hvRdy 1.3s ease-in-out infinite alternate}
+#board .cell.hvmv1 .ring2{border-style:dashed}
+@keyframes hvRdy{from{filter:brightness(1)}to{filter:brightness(1.6)}}
+html.tvon #board .cell .hvsb{scale:1 var(--tk,1.5);translate:0 calc(var(--tvch,.12) * var(--tvw,1000px) * (1 - var(--tk,1.5)) * var(--tD,0));transform-origin:50% 100%;--tD:.2;z-index:11}
+/* screen-reader announcements */
+#hvsr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* ---------- PC floating HUD ---------- */
+body.pcv.ingame #pctop .pcc{flex:0 0 auto;min-width:0;max-width:60vw}
+body.pcv.ingame #pctop .pcl,body.pcv.ingame #pctop .pcr{flex:1 1 0;min-width:0}
+body.pcv.ingame #pctop .bar{gap:10px}
+body.pcv.ingame #turn{font-size:19px;min-width:178px;flex:1 1 auto}
+body.pcv.ingame #mana{flex:none}
+body.pcv.ingame #seats .rnd{display:none}
+body.pcv .seat .hvtw{min-width:32px;height:19px}
+body.pcv .seat .hvtw b{font-size:13.5px}
+@media (max-width:1500px){.seat.on>b::after{content:''}body.pcv .seat .hvtw{min-width:26px}body.pcv .hvmt .hvov{font-size:9px;padding:2px 4px}body.pcv.ingame #turn{min-width:160px}body.pcv .hvmt .hvpp{display:none}body.pcv .hvmt{min-height:32px}#hvph .hvpe{max-width:340px}}
+@media (max-width:1400px){body.pcv.ingame #turn small{font-size:11px}body.pcv.ingame #turn{font-size:16px}#hvph{padding-right:10px}}
+/* ---------- phone ---------- */
+body.mob .hvmt{min-height:30px;padding:1px 6px 2px 4px;column-gap:3px}
+body.mob .hvmt .hvi{font-size:16px}
+body.mob .hvmt .hvl{font-size:8.5px;letter-spacing:.6px}
+body.mob .hvmt .hvv b{font-size:17px}
+body.mob .hvmt .hvv small{font-size:10px}
+body.mob .hvmt .hvpp{display:none}
+body.mob .hvmt .hvov{padding:2px 4px;font-size:9.5px;margin-left:2px}
+body.mob .hvmt .hvv small{display:none}
+body.mob .hvmt.gd .hvv{flex-direction:column;align-items:center}
+body.mob .hvmt.gd .hvv small{display:block;font-size:9.5px}
+body.mob .hvmt .hvov.hvno{display:none}
+body.mob #mana{gap:4px}
+body.mob .hvturn{gap:5px;padding:2px 8px 2px 3px;border-width:1.5px}
+body.mob .hvturn .hvsd{min-width:24px;height:24px;font-size:11px}
+body.mob .hvturn small{font-size:10.5px}
+body.mob .hvturn.me b{letter-spacing:.8px}
+body.mob .hvturn b{font-size:14px}
+body.mob #end .hvet small{font-size:9.5px}
+body.mob #end .hvet kbd{display:none}
+#hvmrow{display:none}
+body.mob.ingame #hvmrow{display:flex;gap:5px;align-items:stretch;margin:0 0 4px;min-width:0}
+body.mob.ingame #turn{display:none!important}
+body.mob #hvtp{flex:1 1 auto;min-width:0;display:flex}
+body.mob #hvtp .hvturn{flex:1;min-width:0}
+body.mob #hvph.on{margin:0;padding:2px 8px 2px 3px;gap:5px;flex:0 1 auto;width:auto;min-width:0}
+body.mob #hvph .hvpi{width:26px;height:26px;font-size:16px}
+body.mob #hvph .hvpt b{font-size:13px;letter-spacing:1px}
+body.mob #hvph .hvpt small{font-size:10.5px}
+body.mob #hvph .hvp3 i{width:7px;height:7px}
+body.mob #hvph .hvpe{display:none}
+body.mob #hvph.chg .hvpt b::after{display:none}
+.hvsh{display:none}
+body.mob .hvsh{display:inline}
+body.mob .hvlg{display:none}
+body.mob #hvobj.on{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 0 4px}
+body.mob #hvobj::-webkit-scrollbar{display:none}
+body.mob #hvobj .hvo{font-size:11.5px;padding:2px 7px 2px 5px;flex:none}
+body.mob #hvobj.on{justify-content:space-between}
+body.mob #hvobj .hvo i{font-size:13px}
+body.mob .seat .hvtws{margin-top:2px;gap:2px}
+body.mob .seat .hvtw{min-width:22px;height:14px;padding:0 2px}
+body.mob .seat .hvtw b{font-size:10.5px}
+body.mob .seat.on>b::after{content:''}
+/* ---------- Display settings ---------- */
+html.bigtext .hvmt .hvl,html.bigtext :is(#turn,#hvtp) .hvturn small,html.bigtext #hvph .hvpt small,html.bigtext #hvph .hvpe,html.bigtext #hvobj .hvo,html.bigtext #end .hvet small{font-size:13.5px}
+html.bigtext .hvmt .hvv b{font-size:24px}
+html.bigtext .seat .hvtw b{font-size:14px}
+html.bigtext #board{--hvbsk:1.15}
+html.hc .hvmt,html.hc #hvobj .hvo,html.hc :is(#turn,#hvtp) .hvturn{background:#000;border-color:#fff}
+html.hc .hvmt .hvl,html.hc .hvmt .hvv small,html.hc :is(#turn,#hvtp) .hvturn small,html.hc .seat .hvtws .hvtt{color:#fff}
+html.hc #board .cell .hvsb>i{background:#000;box-shadow:0 0 0 1.5px #fff}
+html.hc #hvph.nt{background:#000;color:#fff;border-color:#fff}
+html.hc #hvph.dy{background:#fff;color:#000;border-color:#000}
+html.cb .seat .hvtw::before{background:repeating-linear-gradient(90deg,var(--sc) 0 5px,color-mix(in srgb,var(--sc) 70%,#000) 5px 6px)}
+@media (prefers-reduced-motion:reduce){.hvmt .hvov.hvgo,#end.hvall:not(:disabled),#hvph.chg,#board .cell.hvrdy .ring2{animation:none!important}.hvmt .hvdl{animation:none}}
+</style>
+<script id="hv-hud-js">/* ===== HV_HUD (see #hv-hud): readable in-game UI. Runs after every render(): reads S, writes only HUD/board DOM.
+   Never changes game state, never calls srand()/Math.random for anything that matters, so online games stay in sync.
+   Other features can add their own unit statuses to the board badges with the shared style:
+     window.hvStatus.push(u => [{ic:'🛡', t:'Aegis', tip:'Absorbs the next 3 damage.', tone:'shield', n:3, rail:'r'}])
+   tone: bad | fire | shield | undead | warn | good | heat;  rail: 'l' (debuffs, left of the figure) or 'r' (states, right). ===== */
+(function(){
+if(typeof render!='function'||!document.getElementById('board')||!document.getElementById('mana')||!document.getElementById('turn')||!document.getElementById('end'))return;
+const D=document,B=D.getElementById('board');
+const q=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const nm=s=>q((typeof NAMES!='undefined'&&NAMES[s])||SIDEN[s]||s);
+const CF=()=>Object.assign({heatMax:10,heatCost:5,ovhDmg:2},window.HVFAC||{});
+const FMx=()=>{try{return S&&typeof window.hvFM=='function'?window.hvFM():null}catch(e){return null}};
+const nightOn=()=>{const F=FMx();return !!(F&&F.night)};
+const isNight=()=>{try{return typeof window.hvNight=='function'&&!!window.hvNight()}catch(e){return false}};
+const phLeft=()=>3-((S.round-1)%3);
+const inGame=()=>!!S&&!!D.getElementById('game')&&!D.getElementById('game').hidden;
+const plural=(n,w)=>n+' '+(n==1?w:w=='hero'?'heroes':w+'s');
+const sr=D.createElement('div');sr.id='hvsr';sr.setAttribute('aria-live','polite');sr.setAttribute('role','status');D.body.appendChild(sr);
+const say=t=>{if(sr.textContent!==t)sr.textContent=t};
+
+/* ---------- 4. status badges ---------- */
+const PROV=window.hvStatus=Array.isArray(window.hvStatus)?window.hvStatus:[];
+function stList(u,cell){const r=[],C=CF(),F=FMx();const add=(rail,ic,t,tip,tone,n)=>r.push({rail,ic,t,tip,tone,n});
+ if(u.burn>0)add('l','🔥','Burning',`Burning: ${u.bd||1} damage at the start of each of its next ${plural(u.burn,'turn')}.`,'fire',u.burn);
+ if(u.stun)add('l','💫','Stunned','Stunned: loses its next turn.','bad');
+ try{if(typeof silenced=='function'&&silenced(u))add('l','🔇','Silenced','Silenced: cannot attack or use abilities while it stands in the zone.','bad')}catch(e){}
+ if(u.root)add('l','🪤','Snared','Snared: cannot move on its next turn.','bad');
+ if(u.markBy)add('l','🎯','Marked',`Marked by a flare: takes +1 damage from ${nm(u.markBy)}'s attacks until their next turn.`,'bad');
+ if(u.wither>0)add('l','🥀','Withered',`Withered: cannot be healed for ${plural(u.wither,'more turn')}.`,'bad',u.wither);
+ if(u.ward)add('r','🛡','Ward','Rune Ward: the next hit on it deals no damage.','shield');
+ if(typeof u.aegis=='number'&&u.aegis>0)add('r','🛡','Aegis',`Aegis: a shield that absorbs the next ${u.aegis} damage.`,'shield',u.aegis);
+ if(u.mist)add('r','🌫','Mist','Mist form: takes 2 less damage until its next turn.','good');
+ if(u.rzL>0)add('r','⌛','Raised',`Raised by a Necromancer: crumbles to dust after ${plural(u.rzL,'more turn')}.`,u.rzL==1?'warn':'undead',u.rzL);
+ if(u.risen)add('r','💀','Risen','Vengeful Dead: it rose with Undying. +1 damage, but allied heals cannot heal it (shrines still do).','undead');
+ if(cell&&cell.classList.contains('hvf-hid'))add('r','🌲','Hidden','Hidden in the forest: enemies more than 1 hex away cannot see or target it (flares, trackers within 2 and attacking reveal it).','good');
+ if(u.bat)add('r','🦇','Bat form','Bat Form: flies like a Bat until it lands. No attacks as a bat.','good');
+ if(F&&H[u.k]&&H[u.k].fac=='infernal'&&(F.heat&&F.heat[u.side]||0)>=C.heatCost)add('r','♨','Overheat',`Overheat ready: its side has ${F.heat[u.side]} Heat. On its turn the next Infernal attack deals +${C.ovhDmg} damage and splashes.`,'heat');
+ for(const f of PROV){try{const x=f(u,cell);if(x)(Array.isArray(x)?x:[x]).forEach(o=>o&&o.ic&&r.push(Object.assign({rail:'r',tone:'good'},o)))}catch(e){}}
+ return r}
+const badge=o=>`<i class="t-${q(o.tone||'good')}" data-tip="${q(o.tip||o.t)}" aria-label="${q(o.t)}">${o.ic}${o.n>0?'<b>'+(o.n>9?'9+':o.n)+'</b>':''}</i>`;
+let BS={k:'',n:3};
+function sizeBadges(){const c=B.querySelector('.cell[data-x]');if(!c||!c.offsetWidth)return;const w=c.getBoundingClientRect().width,sc=w/c.offsetWidth||1,k=parseFloat(getComputedStyle(B).getPropertyValue('--hvbsk'))||1;
+ const bs=Math.max(MOB?13:15,Math.min(22,w*.23))*k,n=Math.max(2,Math.min(3,Math.floor((w*(MOB?1:.8))/(bs+2))));const key=(bs/sc).toFixed(2)+'/'+n;if(key===BS.k)return;BS={k:key,n};B.style.setProperty('--hvbs',(bs/sc).toFixed(2)+'px')}
+function badges(){sizeBadges();const mine=!S.over&&isMine(S.turn);
+ B.querySelectorAll('.cell[data-x]').forEach(cell=>{const x=+cell.dataset.x,y=+cell.dataset.y,uel=cell.querySelector(':scope>.u');if(!uel)return;
+  let u=null;try{u=typeof atV=='function'?atV(x,y):at(x,y)}catch(e){}if(!u||u.hp<=0)return;
+  if(mine&&u.side==S.turn){if(!u.used){cell.classList.add('hvrdy');if(u.moved)cell.classList.add('hvmv1')}cell.style.setProperty('--rc',SCOL[u.side])}
+  {const dn=cell.querySelector(':scope>.done');if(dn){dn.removeAttribute('title');dn.dataset.tip='Done: this hero has moved or acted this turn. It is ready again next turn.'}}
+  const L=stList(u,cell);if(!L.length)return;let h='';
+  for(const rail of ['l','r']){const R=L.filter(o=>o.rail==rail);if(!R.length)continue;const n=BS.n,show=R.length>n?R.slice(0,n-1):R,rest=R.length>n?R.slice(n-1):[];
+   h+=`<span class="hvsb ${rail}">${show.map(badge).join('')}${rest.length?`<i class="more" data-tip="${q(rest.map(o=>o.t+': '+(o.tip||'')).join(' • '))}" aria-label="${rest.length} more">+${rest.length}</i>`:''}</span>`}
+  cell.insertAdjacentHTML('beforeend',h)})}
+/* a click or tap on a badge belongs to its hex (the Tilted view hit-tests the ground under the pointer otherwise) */
+if(typeof cellAt=='function'){const ca=cellAt;cellAt=function(e){const t=e&&e.target&&e.target.closest?e.target.closest('#board .cell[data-x] :is(.hvsb,.done)'):null;if(t){const c=t.closest('.cell[data-x]');return{x:+c.dataset.x,y:+c.dataset.y}}return ca.apply(this,arguments)}}
+
+/* ---------- 2. meters ---------- */
+const LV={S:null,M:null,v:{}},DL={};
+function track(k,v){if(LV.v[k]!==undefined&&v!==LV.v[k]&&!RP)DL[k]={d:v-LV.v[k],t:performance.now()};LV.v[k]=v}
+function dl(k){const o=DL[k];if(!o)return '';const a=performance.now()-o.t;if(a>1900){delete DL[k];return ''}return `<em class="hvdl ${o.d>0?'up':'dn'}" style="--ad:-${a.toFixed(0)}ms" aria-hidden="true">${o.d>0?'+':'−'}${Math.abs(o.d)}</em>`}
+let dlT=0;const dlTick=()=>{clearTimeout(dlT);if(Object.keys(DL).length)dlT=setTimeout(()=>{try{meters()}catch(e){}},2000)};
+const pips=(v,mx,th,cls)=>{let h='';for(let i=1;i<=mx;i++)h+=`<i class="${i<=v?'on':''}${th&&i==th+1?' th':''}"></i>`;return `<span class="hvpp${cls?' '+cls:''}" aria-hidden="true">${h}</span>`};
+function meters(){const M=ME,mn=D.getElementById('mana');if(!S||!mn)return;
+ if(LV.S!==S||LV.M!==M){LV.S=S;LV.M=M;LV.v={};for(const k in DL)delete DL[k]}
+ if(!M){mn.innerHTML='';return}
+ const m=S.mana[M]||0,F=FMx(),C=CF(),inf=!!(F&&F.infS&&F.infS[M]),h=inf?(F.heat[M]||0):0;track('m',m);if(inf)track('h',h);
+ let html=`<span class="hvmt mn hvpip" data-tip="Mana: shared by all your heroes. +1 at the start of each of your turns (max 10). Spells, abilities and some attacks cost mana." aria-label="Mana ${m} of 10"><i class="hvi" aria-hidden="true">✦</i><span class="hvl">Mana</span><span class="hvv"><b>${m}</b><small>/10</small></span>${pips(m,10)}${dl('m')}</span>`;
+ if(inf){const rd=h>=C.heatCost;html+=`<span class="hvmt ht hvpip${rd?' rdy':''}" data-tip="Heat: +1 each time Burn ticks on an enemy (max ${C.heatMax}). At ${C.heatCost}, your next Infernal attack Overheats: +${C.ovhDmg} damage and splash, and spends ${C.heatCost} Heat." aria-label="Heat ${h} of ${C.heatMax}${rd?', Overheat ready':''}"><i class="hvi" aria-hidden="true">♨</i><span class="hvl">Heat</span><span class="hvv"><b>${h}</b><small>/${C.heatMax}</small></span>${pips(h,C.heatMax,C.heatCost)}<span class="hvov ${rd?'hvgo':'hvno'}">${rd?'<span class="hvlg">Overheat<br></span>Ready':'Overheat<br>at '+C.heatCost}</span>${dl('h')}</span>`}
+ mn.innerHTML=html;
+ const g=D.querySelector('#hand .gold');if(g&&S.gold&&S.gold[M]!=null){const v=S.gold[M];track('g',v);let inc='';try{inc=typeof income=='function'?'+'+income(M)+'/turn':''}catch(e){}
+  g.className='gold hvmt gd';g.setAttribute('aria-label','Gold '+v+(inc?', '+inc:''));g.innerHTML=`<i class="hvi" aria-hidden="true">🪙</i><span class="hvl">Gold</span><span class="hvv"><b>${v}</b><small>${inc}</small></span>${dl('g')}`}
+ dlTick()}
+/* the meters show every + and - change in place, so the old flying "+N" for mana and gold is not needed */
+if(typeof floatAt=='function'){const fa=floatAt;floatAt=function(sel,txt,cls){if(cls=='fmana'||cls=='fgold')return;return fa.apply(this,arguments)}}
+
+/* ---------- 3. whose turn, End turn ---------- */
+let ENDK='';
+function turnEnd(){const t=D.getElementById('turn'),e=D.getElementById('end');if(!t||!e)return;
+ let th;if(S.over){th='<span class="hvturn ov" style="--sc:#9a8c7a"><span class="hvtx"><b>Battle over</b></span></span>'}
+ else{const sd=S.turn,mine=isMine(sd),L=rOrder(S.round).filter(s=>!S.dead[s]),i=L.indexOf(sd)+1;
+  th=`<span class="hvturn${mine?' me':''}" style="--sc:${SCOL[sd]}"><i class="hvsd" aria-hidden="true">${SHORT[sd]}</i><span class="hvtx"><b>${mine?'Your turn':nm(sd)+(isAI(sd)?' (AI)':'')}</b><small>${mine?'':'<span class="hvlg">is playing · </span>'}Round ${S.round} · Turn ${i}/${L.length}</small></span></span>`}
+ if(t.dataset.k!==th||!t.querySelector('.hvturn')){t.dataset.k=th;t.innerHTML=th}if(MOB&&tp.dataset.k!==th){tp.dataset.k=th;tp.innerHTML=th}
+ let k='',all=false;
+ if(!S.over&&isMine(S.turn)){const U=S.units.filter(u=>u.side==S.turn&&u.hp>0),rd=U.filter(u=>!u.used).length;let sp=0;try{sp=(S.pool[S.turn]||[]).length&&typeof spLeft=='function'?spLeft(S.turn):0}catch(e){}
+  all=rd==0&&!sp;k=rd?`<span class="hvlg">${plural(rd,'hero')} ready</span><span class="hvsh">${rd} ready</span>`:sp?`<span class="hvlg">${plural(sp,'spawn')} left</span><span class="hvsh">${sp} to spawn</span>`:'All done';
+  e.title=rd?`${plural(rd,'hero')} can still move or act. End turn: button, E or Space.`:'Every hero has acted. End turn: button, E or Space.'}
+ else e.title=S.over?'':'Waiting for '+(S.turn?nm(S.turn):'the other player');
+ const lab=!S.over&&!isMine(S.turn)?'Waiting…':'End turn',key=lab+'|'+k+'|'+MOB;
+ if(key!==ENDK){ENDK=key;e.innerHTML=`<span class="hvet"><span>${lab}</span>${k?`<small>${k}${MOB?'':'<kbd>E</kbd>'}</small>`:''}</span>`}
+ e.classList.toggle('hvall',all)}
+
+/* ---------- 5. towers per side ---------- */
+function seats(){const se=D.getElementById('seats');if(!se)return;
+ SIDES.forEach(sd=>{const el=se.querySelector('.seat.'+sd);if(!el)return;el.style.setProperty('--sc',SCOL[sd]);if(S.dead[sd]||el.querySelector('.hvtws'))return;
+  const T=S.tw[sd]||[],tot=T.reduce((a,t)=>a+Math.max(0,t.hp),0);
+  el.insertAdjacentHTML('beforeend',`<span class="hvtws" data-tip="${q(nm(sd))} towers: ${T.map(t=>t.hp>0?t.hp+'/'+t.max+' HP':'destroyed').join(', ')}" aria-label="Towers ${T.map(t=>t.hp>0?t.hp:'destroyed').join(', ')}">${T.map(t=>`<i class="hvtw${t.hp<=0?' dn':t.hp/t.max<.35?' lo':''}" style="--r:${Math.max(0,Math.min(1,t.hp/t.max)).toFixed(3)}"><b>${t.hp>0?t.hp:'✕'}</b></i>`).join('')}<span class="hvtt">${tot} HP</span></span>`)})}
+
+/* ---------- 1. Day / Night chip, 5. objectives ---------- */
+const ph=D.createElement('div');ph.id='hvph';ph.setAttribute('role','status');
+const ob=D.createElement('div');ob.id='hvobj';
+/* phone: one status row above the bar (whose turn + Day/Night), since the bar itself has no room left */
+const mrow=D.createElement('div');mrow.id='hvmrow';const tp=D.createElement('span');tp.id='hvtp';mrow.appendChild(tp);
+function place(){const se=D.getElementById('seats');if(!se)return;
+ const pcc=D.querySelector('#pctop .pcc'),bar=D.querySelector('#game .bar');
+ if(pcc&&bar&&bar.parentNode===pcc){if(ph.parentNode!==pcc||ph.previousElementSibling!==bar)bar.after(ph)}else if(bar&&bar.parentNode){if(mrow.nextElementSibling!==bar)bar.before(mrow);if(ph.parentNode!==mrow)mrow.appendChild(ph)}
+ if(pcc&&ph.parentNode===pcc){if(ph.nextElementSibling!==ob)ph.after(ob)}else if(ob.parentNode!==se.parentNode||ob.previousElementSibling!==se)se.after(ob)}
+let LPH={S:null,n:null};
+function phase(){const on=nightOn()&&!S.over;D.body.classList.toggle('hvnt',on&&isNight());D.body.classList.toggle('hvdy',on&&!isNight());
+ if(!on){ph.className='';ph.innerHTML='';return}
+ const n=isNight(),l=phLeft(),chg=l==3&&S.round>1,C=n?'nt':'dy',at=S.round+l,
+  eff=n?'<span>🧛 Vampires: +1 move, +1 drain</span><span>👁 Everyone else: −2 sight</span>':`<span>🌙 Night from round ${at}</span><span>🧛 Vampires +1 move &amp; drain · 👁 others −2 sight</span>`,
+  tip=(n?'Night':'Day')+': rounds 1-3 are Day, 4-6 Night, 7-9 Day, and so on (only in matches with Vampires). At Night Vampires get +1 move and +1 drain, and every other faction sees 2 hexes less (min 1).';
+ let p3='';const done=3-l;for(let i=0;i<3;i++)p3+=`<i class="${i<=done?'on':''}"></i>`;
+ const h=`<i class="hvpi" aria-hidden="true">${n?'🌙':'☀️'}</i><span class="hvpt"><b data-new="${n?'Nightfall':'Dawn'}">${n?'Night':'Day'}</b><small>${n?'Dawn':'Night'} in ${plural(l,'round')}</small></span><span class="hvp3" aria-hidden="true">${p3}</span><span class="hvpe">${eff}</span>`;
+ const cls='on '+C+(chg?' chg':'');if(ph.className!==cls)ph.className=cls;if(ph.dataset.k!==h){ph.dataset.k=h;ph.innerHTML=h;ph.dataset.tip=tip;ph.setAttribute('aria-label',(n?'Night':'Day')+', '+(n?'dawn':'night')+' in '+plural(l,'round'))}
+ if(LPH.S===S&&LPH.n!==null&&LPH.n!==n)say(n?'Night falls. Vampires gain 1 move and 1 drain; everyone else sees 2 hexes less.':'Dawn. Sight returns to normal.');LPH={S,n}}
+/* sudden death round: the game's SDR() (later on larger maps); falls back to SD_ROUND */
+const sdR=()=>{try{if(typeof SDR=='function')return SDR()}catch(e){}return typeof SD_ROUND=='number'?SD_ROUND:14};
+function objectives(){if(S.over){ob.className='';ob.innerHTML='';return}const M=ME||S.turn,it=[];
+ const ally=SIDES.filter(s=>!S.dead[s]).length;
+ if(MOPT.raid)it.push(['goal','🏆','<b>Defeat the raid boss</b>','Everyone teams up: kill the raid boss or destroy its towers to win.','<b>Boss</b>']);
+ else it.push(['goal','🏆',ally>2?'<b>Last side standing</b>':'<b>Destroy all enemy towers</b>','A side is out when all of its towers fall. The last side standing wins.'+(MOPT.koth?' Or hold the hill for 3 of your turns in a row.':''),'<b>Towers</b>']);
+ const sd=sdR(),r=S.round;if(r<sd){const k=sd-r;it.push([k<=3?'warn':'','💀',`Sudden death in <b>${k}</b>`,`From round ${sd} every tower crumbles at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired.`,`SD in <b>${k}</b>`])}
+ else{let a=2;try{a=typeof drainAmt=='function'?drainAmt():a}catch(e){}it.push(['sd','💀',`<b>Sudden death</b>: towers −${a}/round`,'Every tower crumbles at the start of each round and cannot be repaired or fortified.',`<b>SD</b> −${a}/rd`])}
+ if(MOPT.koth&&S.koth){const hs=SIDES.filter(s=>!S.dead[s]&&(S.koth[s]||0)>0);it.push([hs.some(s=>S.koth[s]>=2)?'warn':'','⛰',hs.length?'Hill: '+hs.map(s=>`<b>${q(SHORT[s])} ${S.koth[s]}/3</b>`).join(' '):'Hill: <b>nobody</b>','King of the Hill: start 3 of your turns in a row with a hero on the hill (and no enemy on it) to win on the spot.',hs.length?hs.map(s=>`<b>${q(SHORT[s])} ${S.koth[s]}/3</b>`).join(' '):'<b>—</b>'])}
+ if(MOPT.gold){const c=(S.chests||[]).length,nx=Math.ceil((r+1)/3)*3;it.push(['','📦',c?`<b>${plural(c,'chest')}</b> on the map`:`Chest: <b>round ${nx}</b>`,'Treasure chests appear in the middle every 3 rounds (round 3, 6, 9...). Step on one for 4 gold.',c?`<b>${c}</b> on map`:`<b>r${nx}</b>`])
+  if(ME&&typeof armySize=='function'&&typeof armyCap=='function'){const a=Math.ceil(armySize(ME)-.01),cp=armyCap(ME);let src='';try{src=capSrc(ME)}catch(e){}it.push([a>cp?'over':'','👥',`Army <b>${a}/${cp}</b>`,`Army slots used / cap${src?' ('+src+')':''}. Build Cottages and a Great Hall to raise the cap.`,`<b>${a}/${cp}</b>`])}}
+ const h=it.map(([c,i,t,tip,sh])=>`<span class="hvo${c?' '+c:''}" data-tip="${q(tip)}"><i aria-hidden="true">${i}</i><span class="hvlg">${t}</span><span class="hvsh">${sh||t}</span></span>`).join('');
+ if(ob.dataset.k!==h){ob.dataset.k=h;ob.innerHTML=h}ob.className='on'}
+
+/* the Nightfall / Dawn cut-in: themed, with one clear line per effect */
+if(typeof evCut=='function'){const ec=evCut;evCut=function(o){try{if(o&&(o.t=='Night falls'||o.t=='Dawn')){const n=o.t=='Night falls';o=Object.assign({},o,{t:n?'Nightfall':'Dawn',d:n?'<span class="hvfx"><span class="v">🧛 Vampires: +1 move, +1 drain</span><span class="o">👁 Everyone else: −2 sight (min 1)</span><span>🌙 Lasts 3 rounds</span></span>':'<span class="hvfx"><span>☀️ Sight back to normal for 3 rounds</span><span class="v">🧛 Vampire night bonuses end</span></span>'});
+   }}catch(e){}return ec.call(this,o)}}
+/* theme the card itself (showEv rewrites its class list, and clears it when the card ends) */
+if(typeof showEv=='function'){const se0=showEv;showEv=function(o,dur){const r=se0.apply(this,arguments);try{const el=D.getElementById('evc');if(el&&o&&(o.t=='Nightfall'||o.t=='Dawn'))el.classList.add(o.t=='Nightfall'?'hvnf':'hvdw')}catch(e){}return r}}
+
+/* ---------- run after every render ---------- */
+let LT=null;
+function post(){if(!S||!inGame())return;place();
+ try{badges()}catch(e){console.error(e)}try{meters()}catch(e){console.error(e)}try{turnEnd()}catch(e){console.error(e)}try{seats()}catch(e){console.error(e)}try{phase()}catch(e){console.error(e)}try{objectives()}catch(e){console.error(e)}
+ const tk=S.over?'over':S.turn+'/'+S.round;if(tk!==LT){LT=tk;if(!S.over)say((isMine(S.turn)?'Your turn':nm(S.turn)+"'s turn")+', round '+S.round+'.')}}
+const rn=render;render=function(){const r=rn.apply(this,arguments);try{post()}catch(e){if(window.console)console.error(e)}return r};
+addEventListener('resize',()=>{BS.k='';try{if(S&&inGame())sizeBadges()}catch(e){}});
+})();
+</script>
 </body></html>
