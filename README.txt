@@ -8,8 +8,8 @@ GAME MODES (main menu)
 - Play local (this device): pick the number of players and set each seat to
   Human or AI. Humans take turns on the same device; a "pass the device"
   screen appears between turns. One human + AIs = solo play.
-- Heroes: Choose (draft 5 picks) or Random (everyone is dealt a random
-  5-pick team; a rematch deals new teams). Set it in the lobby or local setup.
+- Heroes: Choose (draft a 10-slot team) or Random (everyone is dealt a random
+  10-slot team; a rematch deals new teams). Set it in the lobby or local setup.
 
 BOARDS
 - 1v1: small hexagon, Player 1 bottom vs Player 2 top.
@@ -31,7 +31,7 @@ ALWAYS ON
 - Gold: +2 a turn, +2 per gold mine, +1 per farm, +1 interest per 10 saved
   (max 2). Also 1 per kill (2 for a boss), 2 per enemy building, 3 per tower,
   4 per treasure chest (one appears in the middle every 3 rounds).
-- Market: Hire any unit from your main faction (3-7 gold, bosses 14, army of
+- Market: Hire any unit from your main faction (3-8 gold, bosses 14, army of
   up to 20 slots, more with Cottages and a Great Hall; the draft is still
   10 slots). Recruit a fallen starting hero (5, bosses 8, +2 each time).
   Repair a tower by 4 (3, +1 each time). Upgrades: Forge Weapons, Forge
@@ -45,6 +45,9 @@ ALWAYS ON
 - Towers never lose HP on their own before sudden death. From round 14 every
   tower crumbles each round (2 HP, +1 every 3 rounds) and can no longer be
   repaired or fortified.
+- Splash hits enemies next to the target for half damage. Melee splash is a
+  cleave: the 2 hexes beside the target, in front of the attacker. The
+  Lancer's spear pierces 2 hexes in a straight line for full damage.
 - Combos: Flank (+1 melee damage when an ally is also next to the target),
   Shatter (+2 damage to stunned heroes), Rally (+1 damage next to your boss).
 
@@ -73,12 +76,13 @@ NEW HEROES
   walking onto one stops and cannot move on its next turn. Flyers are immune.
 - Stonewright (Iron Clan): builds 6 HP walls (2 mana, up to 3) that block
   movement and ranged shots. Enemies can knock them down.
-- Hexweaver (Arcane Order): Silence (3 mana) on a 3-hex-wide area up to 3
+- Hexweaver (Arcane Order): Silence (2 mana) on a 3-hex-wide area up to 3
   away. Enemies there cannot attack or use abilities on their next turn.
 
 READING THE BOARD
 - Icons above heroes: 🏇 charge, 🏹 ranged / ⚔️ melee, 🩸 lifesteal, 🔥 fire,
-  💫 stun. A grey hero with a ✓ has already acted this turn.
+  💫 stun, 👁 scout, ⚰️ raise the slain. A grey hero with a ✓ has already
+  acted this turn.
 - Tap or click an enemy to see where it can move (blue) and hit (red).
 - The 👁 button shades every hex an enemy can hit next turn.
 - Hover (or tap) anything on the hero card for an explanation.
@@ -96,7 +100,7 @@ CAMPAIGN (main menu)
   boss fights; the skull keep is the final raid against the Dread Colossus.
   Progress is saved in the browser on that device.
 
-BOSSES (2 picks each, 5 per faction, each with a signature mechanic)
+BOSSES (5 team slots each, 5 per faction, each with a signature mechanic)
 - Kingdom: Lionheart King (Royal Command), High Seraph (Holy Aura), Warlord
   Gideon (War Banner), Grand Templar (Tower Shield), Lord Marshal (Momentum)
 - Vampires: Vampire Lord (Blood Feast), Blood Queen (Exsanguinate),
@@ -160,7 +164,7 @@ IN THE GAME
   tower crumbles at the start of each round. Last player standing wins.
 - Cavalry units (Outrider, Boar Rider, Bone Rider, Blood Hunter) have Charge:
   they can move AND attack in the same turn, but are fragile and hit softly.
-- Every faction has an Elite boss (2 picks) with its own attack cutscene.
+- Every faction has 5 bosses (5 team slots each) with attack cutscenes.
   The Lich King can also spend 2 mana to raise skeletons next to him
   (select him, tap "Raise skeleton", then a green hex).
 - Necromancer (Raise the Slain): when its attack, counterattack or splash
