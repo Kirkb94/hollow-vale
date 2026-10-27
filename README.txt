@@ -85,8 +85,9 @@ FACTION RULES (change the board; drawn markers until painted tiles land)
 - Undead, Graves: every non-summoned unit that dies leaves a Grave (🪦) for 4
   rounds (max 6, the oldest crumbles). Undead heroes may spawn next to a
   Grave within 3 hexes of an Undead unit, but not within 2 hexes of an enemy
-  tower. A non-Undead hero that ends its turn on a Grave consecrates it,
-  and a Necromancer's Raise the Slain uses up the slain hero's Grave.
+  tower. A non-Undead hero that ends its turn on a Grave consecrates it.
+  Graves and a Necromancer's Raise the Slain are separate: a raise never
+  uses up a Grave, and Graves never change where a raise lands.
 - Undead, Vengeful Dead: a unit that has used Undying is Risen (glowing red
   eyes): +1 damage, and allied heals cannot heal it (shrines still do).
 - Undead team bonus (3+ Undead): Undying now returns units with 2 HP
@@ -227,7 +228,7 @@ IN THE GAME
   raise. Raised units start used, show a countdown and crumble after 3 of
   their owner's turns. They have no Undying or on-death effects, do not
   count toward the army cap and cannot be recruited. No free hex means
-  nothing rises.
+  nothing rises. Raising never uses up a Grave.
 - Towers have 12, 14 and 15 HP.
 - Dropped out or refreshed? Open the link again: your seat and the battle come
   back. The host can also hand a missing player's seat to the AI.
