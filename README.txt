@@ -22,8 +22,15 @@ ALWAYS ON
   game but mirrored so every seat gets the same ground.
 - Crits & counters: attacks on heroes can crit for +50% damage (10%, +10%
   when flanking, +5% per star). A melee hero that survives a melee hit
-  strikes back for half its damage unless stunned or silenced. Red target
-  hexes preview the damage, crit chance and counter.
+  strikes back for half its damage times its HP% (rounded, min 1) unless
+  stunned or silenced. Towers strike back at heroes that hit them from the
+  next hex: 3 at full HP times the tower's HP% (min 1); Farms, Watchtowers,
+  Barracks, Mana Wells, Cottages, the Great Hall and walls strike back for
+  1. Ranged attacks from 2+ hexes are never struck back. Red target hexes
+  preview the damage, crit chance, counter and "Tower strikes back for X".
+- Movement: heroes walk their route hex by hex (about 0.12 s a hex, fliers
+  glide in an arc). It is only animation: instant in replays and with
+  reduced motion, and the AI never waits more than 0.6 s for a walk.
 - Fog of war: you only see enemies within sight of your heroes, towers and
   buildings (most heroes 3 hexes, fliers and long-range 4, heavies 2, scouts
   5-6, watchtowers 4). Walking into a hidden enemy is an ambush. Each faction
