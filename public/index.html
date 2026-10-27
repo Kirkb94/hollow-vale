@@ -5892,4 +5892,332 @@ const scr=()=>{const g=Q('#game');document.documentElement.classList.toggle('hvp
 try{drawRules()}catch(e){}try{if(!Q('#draft').hidden)drawCards()}catch(e){}
 })();
 </script>
+<style id="hv-anim">
+/* ===== hv-anim: animation pass (cosmetic only). Attacks + hit reactions, idle + deaths, spell wind-ups + element impacts, UI motion.
+   Transforms and opacity only (plus a short white flash filter on the struck sprite). Everything sits inside prefers-reduced-motion:no-preference,
+   so reduced motion keeps today's still board. --hvsp shortens every animation in Fast pace. Keyframes for attacks are generated in #hv-anim-js. ===== */
+:root{--hvsp:1}
+html.hvfp{--hvsp:.65}
+@media (prefers-reduced-motion:no-preference){
+/* ---------- idle: subtle breathing and bob, per body type; duration, phase and depth vary per figure (--idur, --id, --ia) ---------- */
+@keyframes hvi_br{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(calc(var(--ia,1) * -1px)) scale(calc(1 - var(--ia,1) * .008),calc(1 + var(--ia,1) * .022))}}
+@keyframes hvi_heavy{0%,100%{transform:translateY(0) scale(1,1)}45%{transform:translateY(calc(var(--ia,1) * .6px)) scale(calc(1 + var(--ia,1) * .012),calc(1 - var(--ia,1) * .012))}75%{transform:translateY(calc(var(--ia,1) * -.4px)) scale(1,calc(1 + var(--ia,1) * .008))}}
+@keyframes hvi_ready{0%,100%{transform:translate(0,0) rotate(0)}30%{transform:translate(calc(var(--ia,1) * .6px),calc(var(--ia,1) * -1.4px)) rotate(calc(var(--ia,1) * .8deg))}60%{transform:translate(0,calc(var(--ia,1) * -.4px)) scale(1,1.012)}80%{transform:translate(calc(var(--ia,1) * -.5px),calc(var(--ia,1) * -1px)) rotate(calc(var(--ia,1) * -.6deg))}}
+@keyframes hvi_hover{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(calc(var(--ia,1) * -2.4px)) rotate(calc(var(--ia,1) * .7deg)) scale(1,1.012)}}
+@keyframes hvi_float{0%,100%{transform:translateY(0) rotate(calc(var(--ia,1) * -1.2deg))}50%{transform:translateY(calc(var(--ia,1) * -4px)) rotate(calc(var(--ia,1) * 1.2deg))}}
+@keyframes hvi_trot{0%,100%{transform:translateY(0) scale(1,1)}40%{transform:translateY(calc(var(--ia,1) * -1.2px)) scale(.992,1.016)}70%{transform:translateY(calc(var(--ia,1) * .3px)) scale(1.01,.99)}}
+#board .cell .u:is(.i-hvbr,.i-hvheavy,.i-hvready,.i-hvhover,.i-hvfloat,.i-hvtrot):not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){
+ animation-duration:var(--idur,2.6s);animation-delay:var(--id,0s);animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-fill-mode:none}
+#board .cell .u.i-hvbr:not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){animation-name:hvi_br}
+#board .cell .u.i-hvheavy:not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){animation-name:hvi_heavy}
+#board .cell .u.i-hvready:not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){animation-name:hvi_ready}
+#board .cell .u.i-hvhover:not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){animation-name:hvi_hover}
+#board .cell .u.i-hvfloat:not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){animation-name:hvi_float}
+#board .cell .u.i-hvtrot:not(.hurt):not(.dead):not(.atk):not(.spawn):not(.undying){animation-name:hvi_trot}
+/* ---------- hit reaction: flinch + knockback nudge away from the attacker (--kx/--ky/--kr), white flash on the sprite ---------- */
+@keyframes hvhurt{0%{transform:translate(0,0) rotate(0) scale(1,1)}
+ 10%{transform:translate(var(--kx,0px),var(--ky,0px)) rotate(var(--kr,0deg)) scale(.93,1.05)}
+ 26%{transform:translate(calc(var(--kx,0px) * .8),calc(var(--ky,0px) * .8)) rotate(calc(var(--kr,0deg) * .6)) scale(1.04,.96)}
+ 48%{transform:translate(calc(var(--kx,0px) * .25),calc(var(--ky,0px) * .25)) rotate(calc(var(--kr,0deg) * -.35)) scale(1,1)}
+ 72%{transform:translate(calc(var(--kx,0px) * -.06),calc(var(--ky,0px) * -.06)) rotate(calc(var(--kr,0deg) * .1))}
+ 100%{transform:translate(0,0) rotate(0) scale(1,1)}}
+@keyframes hvflash{0%,20%{filter:brightness(0) invert(1) drop-shadow(0 2px 1.5px #000a) drop-shadow(0 0 1px #fff4)}48%,100%{filter:brightness(1) invert(0) drop-shadow(0 2px 1.5px #000a) drop-shadow(0 0 1px #fff4)}}
+@keyframes hvkof{0%,20%{filter:brightness(0) invert(1) drop-shadow(0 2px 1.5px #000a) drop-shadow(0 0 1px #fff4)}45%,100%{filter:brightness(1) invert(0) drop-shadow(0 2px 1.5px #000a) drop-shadow(0 0 1px #fff4)}}
+html #board .cell .u.hurt{animation-name:hvhurt!important;animation-duration:calc(.42s * var(--hvsp))!important;animation-delay:var(--d,0s)!important;animation-timing-function:ease-out!important;animation-fill-mode:both!important;animation-iteration-count:1!important}
+html #board .cell .u.hurt.hvbig{animation-duration:calc(.5s * var(--hvsp))!important}
+html #board .cell .u.hurt>.sp{animation:hvflash calc(.34s * var(--hvsp)) ease-out var(--d,0s) forwards}
+html #board .cell .u.atk.hvh2>.sp{animation:hvflash calc(.34s * var(--hvsp)) ease-out var(--hd,0s) forwards}
+html #board .cell .u.dead>.sp{animation:hvkof calc(.42s * var(--hvsp)) ease-out var(--d,0s) forwards}
+/* an attacker that has already acted stays in full colour while its swing (and any counter it takes) plays */
+html #board .cell .u.used:is(.atk,.hurt){opacity:1!important;filter:none!important}
+/* towers and walls: a short white flash when struck */
+@keyframes hvtwf{0%,14%{filter:brightness(2.3) saturate(.2)}45%,100%{filter:none}}
+html #board .cell :is(.tw,.wall).hurt>svg{animation:hvtwf calc(.32s * var(--hvsp)) ease-out var(--d,0s) forwards}
+/* ---------- deaths / K.O.: a hit-stop (white flash + knock) then a body-type motion that reads before the figure is removed ---------- */
+@keyframes hvd_collapse{0%{transform:none;opacity:1}12%,20%{transform:translate(var(--kx,0px),var(--ky,0px)) rotate(calc(var(--kd,1) * 6deg)) scale(1.05,.95)}
+ 58%{transform:translate(calc(var(--kx,0px) * 1.5 + var(--kd,1) * 4px),calc(var(--ky,0px) * 1.5 + 5px)) rotate(calc(var(--kd,1) * 62deg)) scale(1,.97);opacity:1}
+ 74%{transform:translate(calc(var(--kx,0px) * 1.6 + var(--kd,1) * 6px),calc(var(--ky,0px) * 1.6 + 9px)) rotate(calc(var(--kd,1) * 84deg)) scale(1.02,.94);opacity:.95}
+ 100%{transform:translate(calc(var(--kx,0px) * 1.6 + var(--kd,1) * 7px),calc(var(--ky,0px) * 1.6 + 12px)) rotate(calc(var(--kd,1) * 90deg)) scale(.96,.9);opacity:0}}
+@keyframes hvd_crumble{0%{transform:none;opacity:1}10%,16%{transform:translate(var(--kx,0px),var(--ky,0px)) scale(1.04,.97)}24%{transform:translateX(-2px)}30%{transform:translateX(2px)}36%{transform:translateX(-1.5px) scale(1.02)}
+ 70%{transform:translateY(28%) scale(1.06,.5);opacity:1}100%{transform:translateY(62%) scale(1.22,.06);opacity:0}}
+@keyframes hvd_dissolve{0%{transform:none;opacity:1}12%,20%{transform:translate(var(--kx,0px),var(--ky,0px)) scale(1.05)}55%{transform:translateY(-8px) scale(.9,1.14);opacity:.8}100%{transform:translateY(-22px) scale(.6,1.4);opacity:0}}
+@keyframes hvd_smoke{0%{transform:none;opacity:1}12%,18%{transform:translate(var(--kx,0px),var(--ky,0px)) scale(1.06,.92)}40%{transform:scale(.88,1.12) rotate(calc(var(--kd,1) * 8deg));opacity:1}100%{transform:translateY(-6px) scale(.22) rotate(calc(var(--kd,1) * 140deg));opacity:0}}
+@keyframes hvd_spectral{0%{transform:none;opacity:1}12%,18%{transform:translate(var(--kx,0px),var(--ky,0px));opacity:.7}30%{transform:translateY(-3px);opacity:1}100%{transform:translateY(-30px) scale(.6,1.55);opacity:0}}
+@keyframes hvd_shatter{0%{transform:none;opacity:1}12%,18%{transform:translate(var(--kx,0px),var(--ky,0px))}26%{transform:translate(-2px,1px)}34%{transform:translate(2px,-1px) scale(1.06)}48%{transform:scale(1.16);opacity:.95}100%{transform:scale(1.5) translateY(4px);opacity:0}}
+@keyframes hvd_blast{0%{transform:none;opacity:1}12%,18%{transform:translate(var(--kx,0px),var(--ky,0px)) scale(1.04)}34%{transform:scale(1.22,.86)}48%{transform:scale(1.45);opacity:1}62%{transform:scale(1.8);opacity:.25}100%{transform:scale(2.1);opacity:0}}
+@keyframes hvd_flame{0%{transform:none;opacity:1}12%,18%{transform:translate(var(--kx,0px),var(--ky,0px))}40%{transform:rotate(calc(var(--kd,1) * -10deg)) scale(1.05,.95)}100%{transform:translateY(-14px) scale(.4,1.4);opacity:0}}
+@keyframes hvd_implode{0%{transform:none;opacity:1}12%,18%{transform:translate(var(--kx,0px),var(--ky,0px))}32%{transform:scale(1.14) rotate(-14deg)}100%{transform:scale(0) rotate(520deg);opacity:0}}
+html #board .cell .u.dead[class*=" dk-"]{animation-duration:calc(.82s * var(--hvsp));animation-delay:var(--d,0s);animation-fill-mode:both;animation-iteration-count:1;animation-timing-function:cubic-bezier(.35,0,.6,1)}
+html #board .cell .u.dead.dk-collapse{animation-name:hvd_collapse}
+html #board .cell .u.dead.dk-crumble{animation-name:hvd_crumble}
+html #board .cell .u.dead.dk-dissolve{animation-name:hvd_dissolve}
+html #board .cell .u.dead.dk-smoke{animation-name:hvd_smoke}
+html #board .cell .u.dead.dk-spectral{animation-name:hvd_spectral}
+html #board .cell .u.dead.dk-shatter{animation-name:hvd_shatter}
+html #board .cell .u.dead.dk-blast{animation-name:hvd_blast}
+html #board .cell .u.dead.dk-flame{animation-name:hvd_flame}
+html #board .cell .u.dead.dk-implode{animation-name:hvd_implode}
+/* delayed damage numbers: hidden until their blow lands, then pop in */
+@keyframes hvpopd{0%{transform:translateY(3px) scale(.55);opacity:0}10%{transform:translateY(0) scale(1.22);opacity:1}24%{transform:translateY(-2px) scale(1)}100%{transform:translateY(-12px);opacity:0}}
+#board .cell .pop.hvpd{animation-name:hvpopd;animation-fill-mode:both}
+/* ---------- screen shake: big hits only (translate, so it stacks with the kill cam zoom) ---------- */
+@keyframes hvshk{0%,100%{translate:0 0}15%{translate:-3px 2px}32%{translate:3px -2px}50%{translate:-2px 1px}70%{translate:2px -1px}85%{translate:-1px 0}}
+#bw.hvshk>:is(#board,#fxl,#hvbg){animation-name:hvshk;animation-duration:calc(.3s * var(--hvsp));animation-timing-function:linear}
+/* ---------- spells: wind-up glow on the caster (flat on the ground in Tilted), element tinted ---------- */
+#fxl .hvcg{position:absolute;aspect-ratio:1;border-radius:50%;pointer-events:none;translate:-50% -50%;z-index:3;
+ background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 55%,#fff) 0,color-mix(in srgb,var(--c) 60%,transparent) 38%,transparent 72%);
+ animation:hvcg calc(.52s * var(--hvsp)) ease-out both}
+#fxl .hvcg::after{content:'';position:absolute;inset:6%;border-radius:50%;border:2px solid var(--c);box-shadow:0 0 8px var(--c);animation:hvcgr calc(.5s * var(--hvsp)) ease-in both}
+@keyframes hvcg{0%{transform:scale(.35);opacity:0}38%{transform:scale(.95);opacity:.85}62%{transform:scale(1.05);opacity:.9}100%{transform:scale(1.3);opacity:0}}
+@keyframes hvcgr{0%{transform:scale(1.55);opacity:0}30%{opacity:.9}62%{transform:scale(.62);opacity:1}100%{transform:scale(.4);opacity:0}}
+#fxl .hvhr{position:absolute;aspect-ratio:1;border-radius:50%;pointer-events:none;translate:-50% -50%;border:2px solid var(--c);box-shadow:0 0 10px var(--c),inset 0 0 8px var(--c);animation:hvhr calc(.55s * var(--hvsp)) ease-out both}
+@keyframes hvhr{0%{transform:scale(.3);opacity:0}25%{opacity:1}100%{transform:scale(1.15);opacity:0}}
+/* ---------- UI motion ---------- */
+/* buttons, chips and cards: lift on hover, press on tap (individual transform properties, so they stack with any styling) */
+:is(.go,.ft,#end,.shop,.hcard,.chip,.bchip,.uchip,.hchip,.rchip,.card,#mpop button,#dspo button){transition:translate .14s ease,scale .1s ease}
+@media (hover:hover){:is(.go,.ft,#end,.shop,.hcard,.chip,.bchip,.uchip,.hchip,.rchip):not(:disabled):not(.dis):hover{translate:0 -1px}#cards .card:not(.ban):hover{translate:0 -3px}}
+:is(.go,.ft,#end,.shop,.hcard,.chip,.bchip,.uchip,.hchip,.rchip,.card,#mpop button,#dspo button):not(:disabled):active{scale:.96}
+/* a hero picked in the draft pops; a newly drawn spell card deals in */
+@keyframes hvpk{0%{scale:1}35%{scale:1.06}100%{scale:1}}
+#cards .card.hvpk{animation:hvpk .28s ease-out}
+@keyframes hvdeal{0%{translate:0 16px;rotate:-6deg;opacity:0}60%{translate:0 -2px;rotate:1deg;opacity:1}100%{translate:0 0;rotate:0deg;opacity:1}}
+#hand .hcard.hvdeal{animation:hvdeal calc(.4s * var(--hvsp)) cubic-bezier(.2,.8,.2,1) both}
+/* panels and sheets: fade + slide on open and close (the [hidden] attribute still flips at once for the game logic) */
+:is(#sheet,#mpop,#rsheet,#pass,#dspo,#hvm-rules){transition:opacity .2s ease,display .2s allow-discrete}
+:is(#sheet,#mpop,#rsheet,#pass,#dspo,#hvm-rules)[hidden]{opacity:0;pointer-events:none}
+:is(#sheet,#mpop,#rsheet,#dspo,#hvm-rules)>*{transition:translate .22s cubic-bezier(.2,.8,.2,1)}
+:is(#sheet,#mpop,#rsheet,#dspo,#hvm-rules)[hidden]>*{translate:0 18px}
+@starting-style{:is(#sheet,#mpop,#rsheet,#pass,#dspo,#hvm-rules){opacity:0}:is(#sheet,#mpop,#rsheet,#dspo,#hvm-rules)>*{translate:0 18px}}
+/* turn banner: a short version in Fast pace */
+html.hvfp #tbanner.play,html.hvfp #tbanner.play :is(.tbs,.tbt){animation-duration:.95s}
+/* the turn chip slides in when the turn changes */
+@keyframes hvtca{0%{translate:-14px 0;opacity:0}100%{translate:0 0;opacity:1}}
+@keyframes hvtcb{0%{translate:-14px 0;opacity:0}100%{translate:0 0;opacity:1}}
+#turn.hvtca{animation:hvtca .32s cubic-bezier(.2,.8,.2,1) both}#turn.hvtcb{animation:hvtcb .32s cubic-bezier(.2,.8,.2,1) both}
+/* counters ticking up: a little glow while the number climbs */
+.hvtk{text-shadow:0 0 8px currentColor}
+}
+</style>
+<script id="hv-anim-js">/* ===== hv-anim: animation pass + movement sounds. Cosmetic only: it never changes game state and never calls Math.random on S
+   (the few random numbers here pick idle phases and particle spread on this screen only). Skipped in replays (RP), ?fast and with
+   reduced motion; shortened in Fast pace. It adds no waits: AI pacing and cutUntil stay exactly as before (the kill cam is only drawn later). ===== */
+(function(){
+const need={fxA:typeof fxA,fx:typeof fx,hit:typeof hit,act:typeof act,render:typeof render,atkFx:typeof atkFx,killCam:typeof killCam,deathFx:typeof deathFx,popH:typeof popH,perform:typeof perform,sfx:typeof sfx,tone:typeof tone,noise:typeof noise,psCell:typeof psCell,psAdd:typeof psAdd,ctr:typeof ctr,dust:typeof dust,
+ ANIM:typeof ANIM,DEATH:typeof DEATH,AFX:typeof AFX,H:typeof H,PS:typeof PS,KCT:typeof KCT,cutUntil:typeof cutUntil};
+const miss=Object.keys(need).filter(k=>need[k]=='undefined');if(miss.length){console.warn('hv-anim: hooks missing',miss);return}
+const RT=document.documentElement,now=()=>performance.now();
+const RMQ=(()=>{try{return matchMedia('(prefers-reduced-motion: reduce)')}catch(e){return null}})();
+const rm=()=>!!(RMQ&&RMQ.matches);
+const fastP=()=>typeof PACEMODE!='undefined'&&PACEMODE=='fast';
+const off=()=>RP||RUNFAST||rm()||typeof document=='undefined';
+const SP=()=>fastP()?.65:1;
+const HVA=window.HVA={pr:{pre:0,post:0,n:0},act:0,actor:null,cut:false,tl:new Map(),cur:null,lin:new Map(),shook:0,st:{hits:0,shakes:0,casts:0,deaths:0,steps:0,glides:0}};
+/* ---------------- weapon / body classification (lazy, so units added later by other blocks are covered too) ---------------- */
+const WT={knight:'swing',blade:'spin',rogue:'swing',assassin:'swing',raiders:'swing',skeletons:'swing',spellblade:'swing',kinglion:'swing',warlord:'swing',templar:'swing',runekeeper:'smash',deathknight:'swing',nightwatch:'swing',bloodqueen:'swing',
+ brute:'smash',colossus:'smash',guard:'smash',paladin:'smash',thrall:'smash',graveknight:'smash',magmagolem:'smash',treant:'smash',sentinel:'smash',wallwright:'smash',titan:'smash',mammoth:'smash',eldertreant:'smash',bonecolossus:'smash',plaguelord:'smash',pitlord:'smash',raidboss:'smash',juggernaut:'smash',
+ lancer:'thrust',footmen:'thrust',trapper:'thrust',lookout:'thrust',wolves:'pounce',hellhound:'pounce',direwolf:'pounce',ghoul:'pounce',cavebear:'pounce',
+ outrider:'charge',boarrider:'charge',bonerider:'charge',bloodhunter:'charge',marshal:'charge',
+ bats:'swoop',imps:'swoop',wraith:'swoop',vlord:'swoop',nosferatu:'swoop',batking:'swoop',stormroc:'swoop',demonprince:'swoop',phoenix:'swoop',
+ archer:'shot',bowmen:'shot',falconer:'shot',bomber:'shot',gunner:'gun',spotter:'gun',ballista:'siege',warengine:'siege',sapper:'rear',dragon:'rear'};
+const BEAST=new Set(['wolves','hellhound','direwolf','ghoul','cavebear','mammoth','boarrider','thrall']);
+function wt(k){if(WT[k])return WT[k];const h=H[k]||{},a=(ANIM[k]||[])[1]||'',f=(AFX[k]||[])[0]||'',rg=h.rng?h.rng[1]:1;
+ if(a=='cast'||((f=='orb'||f=='bolt')&&rg>=2)||h.heal||h.silence)return 'cast';if(f=='bolt2')return 'siege';if(f=='proj'&&rg>=2)return h.fac=='iron'?'gun':'shot';
+ if(h.pierce||f=='pierce'||f=='proj')return 'thrust';if(h.charge)return 'charge';if(h.fly)return 'swoop';if(a=='smash')return 'smash';if(a=='rear')return 'rear';if(a=='spin')return 'spin';return 'swing'}
+function idl(k,w){const h=H[k]||{},a=(ANIM[k]||[])[0]||'';if(h.fly)return 'float';if(w=='cast')return 'hover';if(w=='pounce'||w=='charge'||BEAST.has(k))return 'trot';
+ if(w=='smash'||a=='stomp'||h.hp>=20)return 'heavy';if(a=='twitch'||a=='hop')return 'ready';return 'br'}
+function dkGuess(k){const h=H[k]||{},w=wt(k);if(w=='cast')return h.fac=='undead'?'spectral':h.fac=='infernal'?'blast':h.fac=='vamp'?'smoke':'dissolve';
+ return ({undead:h.fly?'spectral':'shatter',infernal:'blast',vamp:'smoke',arcane:'shatter',iron:'crumble',wilds:BEAST.has(k)?'collapse':'collapse',kingdom:'collapse'})[h.fac]||'collapse'}
+const MAP=new Set();
+function ensure(k){if(MAP.has(k)||!H[k])return;MAP.add(k);const w=wt(k);ANIM[k]=['hv'+idl(k,w),'hv'+w];if(!DEATH[k])DEATH[k]=dkGuess(k)}
+/* attack kinds: [duration s, contact (melee) / release (ranged) fraction, keyframes]; D = direction (--dx,--dy), A = facing sign (--ad) */
+const D=(f)=>`translate(calc(var(--dx,0px) * ${f}),calc(var(--dy,0px) * ${f}))`,A=d=>`rotate(calc(var(--ad,1) * ${d}deg))`;
+const AK={
+ swing:[.6,.32,`0%{transform:none}18%{transform:${D(-.22)} ${A(-12)} scale(1.03,1.02)}32%{transform:${D(.95)} ${A(14)} scale(1.12,.94)}44%{transform:${D(.8)} ${A(9)} scale(1.06,.97)}100%{transform:none}`],
+ smash:[.76,.4,`0%{transform:none}26%{transform:${D(-.18)} translateY(-12px) ${A(-7)} scale(1.06,1.1)}40%{transform:${D(1)} scale(1.22,.8)}54%{transform:${D(.85)} scale(1.08,.94)}100%{transform:none}`],
+ thrust:[.56,.34,`0%{transform:none}22%{transform:${D(-.4)} scale(.96,1.03)}34%{transform:${D(1.3)} scale(1.12,.94)}50%{transform:${D(1.1)}}100%{transform:none}`],
+ pounce:[.62,.38,`0%{transform:none}20%{transform:${D(-.2)} translateY(2px) scale(1.12,.86)}38%{transform:${D(1.2)} translateY(-8px) ${A(6)} scale(.94,1.08)}52%{transform:${D(1)} scale(1.08,.92)}100%{transform:none}`],
+ charge:[.68,.38,`0%{transform:none}16%{transform:${D(-.32)} ${A(-7)}}38%{transform:${D(1.55)} ${A(5)} scale(1.1)}56%{transform:${D(1.2)} ${A(2)}}100%{transform:none}`],
+ swoop:[.7,.4,`0%{transform:none}24%{transform:${D(-.25)} translateY(-12px) ${A(-9)}}40%{transform:${D(1.2)} translateY(3px) ${A(9)} scale(1.1)}58%{transform:${D(.7)} translateY(-6px)}100%{transform:none}`],
+ spin:[.7,.36,`0%{transform:none}36%{transform:${D(1)} ${A(300)} scale(1.15)}55%{transform:${D(.8)} ${A(360)}}100%{transform:${A(360)}}`],
+ rear:[.8,.42,`0%{transform:none}30%{transform:${D(-.2)} translateY(-8px) ${A(-12)} scale(1.12)}42%{transform:${D(1)} ${A(8)} scale(1.2)}100%{transform:none}`],
+ shot:[.55,.18,`0%{transform:none}14%{transform:${D(-.28)} ${A(-4)} scale(.97,1.03)}18%{transform:${D(-.3)} ${A(-4)}}24%{transform:${D(.12)} scale(1.04,.98)}40%{transform:${D(-.06)}}100%{transform:none}`],
+ gun:[.5,.16,`0%{transform:none}12%{transform:${D(-.12)}}16%{transform:${D(.04)} scale(1.03)}22%{transform:${D(-.5)} ${A(-7)} scale(.97,1.02)}50%{transform:${D(-.12)} ${A(-1)}}100%{transform:none}`],
+ siege:[.62,.18,`0%{transform:none}15%{transform:${D(-.1)} scale(1.03,.97)}20%{transform:${D(-.55)} scale(1.08,.9)}45%{transform:${D(-.2)} scale(.98,1.02)}100%{transform:none}`],
+ cast:[.72,.22,`0%{transform:none}14%{transform:translateY(2px) scale(1.05,.93)}22%{transform:translateY(-7px) scale(.95,1.1)}30%{transform:${D(.2)} translateY(-6px) scale(1.04,1)}60%{transform:translateY(-3px)}100%{transform:none}`]};
+const HURTMS=420,FLIGHT=320;
+{let css='@media (prefers-reduced-motion:no-preference){';for(const n in AK){const[d,,kf]=AK[n],dur=`calc(${d}s * var(--hvsp))`;
+ css+=`@keyframes hva_${n}{${kf}}html #board .cell .u.atk.at-hv${n}{animation-name:hva_${n}!important;animation-duration:${dur}!important;animation-delay:var(--d,0s)!important;animation-fill-mode:both!important;animation-iteration-count:1!important;animation-timing-function:cubic-bezier(.3,.1,.4,1)!important}`;
+ css+=`html #board .cell .u.atk.hvh2.at-hv${n}{animation-name:hva_${n},hvhurt!important;animation-duration:${dur},calc(.42s * var(--hvsp))!important;animation-delay:var(--d,0s),var(--hd,0s)!important;animation-fill-mode:both,none!important;animation-iteration-count:1,1!important;animation-timing-function:cubic-bezier(.3,.1,.4,1),ease-out!important}`}
+ const st=document.createElement('style');st.id='hv-anim-kf';st.textContent=css+'}';document.head.appendChild(st)}
+const kindOf=k=>{ensure(k);return ((ANIM[k]||[])[1]||'').replace(/^hv/,'')};
+const contact=k=>{const a=AK[kindOf(k)]||AK.swing;return a[0]*a[1]*1000*SP()};
+const ranged=k=>{const f=(AFX[k]||[])[0];return f=='proj'||f=='orb'||f=='bolt2'};
+/* when the blow of u lands on o (ms after the action starts) */
+function impact(u){const c=contact(u.k);return Math.min(460,ranged(u.k)?c+FLIGHT:c)}
+/* ---------------- per-figure idle variation (cosmetic, kept off the game state) ---------------- */
+const SEED=new WeakMap(),BASE={br:2.6,heavy:3.3,ready:1.9,hover:2.8,float:2.2,trot:2.1};
+function seed(o){let q=SEED.get(o);if(!q){const k=((ANIM[o.k]||[])[0]||'').replace(/^hv/,''),b=BASE[k]||2.6;q={dur:+(b*(.82+Math.random()*.4)).toFixed(3),ph:Math.random(),ia:+(.75+Math.random()*.5).toFixed(2)};SEED.set(o,q)}return q}
+/* ---------------- direction helpers ---------------- */
+function dir(a,b){const p=ctr(a),q=ctr(b);let x=(q[0]-p[0])*WF/100,y=(q[1]-p[1])*HF/100*1.1547;const l=Math.hypot(x,y)||1;return[x/l,y/l]}
+/* ---------------- fx(): timing of hits, counters and deaths inside one action ---------------- */
+const F0=fx;
+fx=function(o,n,dx,dy){if(!o||off()||!HVA.act||HVA.cut)return F0.apply(this,arguments);const t0=now();
+ if(n=='hurt'){const c=HVA.cur&&HVA.cur.o===o?HVA.cur:null,dl=c?c.dl:(HVA.tl.has(o)?HVA.tl.get(o):contact(HVA.actor.k)+120),T=t0+dl,kx=c?c.kx:0,ky=c?c.ky:0,big=c&&c.big;
+  HVA.tl.set(o,dl);const f=o.fx;
+  if(f&&f.n=='atk'&&(f.t>t0||t0-f.t<900)){f.hv2={t:T,kx,ky,kr:kx>0?6:kx<0?-6:0,big};return}
+  F0.call(this,o,n,dx,dy);Object.assign(o.fx,{t:T,kx,ky,kr:kx>0?6:kx<0?-6:0,big});return}
+ if(n=='atk'){const pv=o.fx;F0.call(this,o,n,dx,dy);const f=o.fx,tg=HVA.tgt;
+  if(o!==HVA.actor&&HVA.tl.has(o)){/* counter swing: after its own flinch */const st=HVA.tl.get(o)+340*SP();f.t=t0+st;HVA.cs.set(o,st);if(pv&&pv.n=='hurt'&&pv.t>=t0-50)f.hv2={t:pv.t,kx:pv.kx||0,ky:pv.ky||0,kr:pv.kr||0,big:pv.big};const v=HVA.actor?dir(o,HVA.actor):[Math.sign(dx||0),Math.sign(dy||0)];f.dx=+(v[0]*16).toFixed(1);f.dy=+(v[1]*16).toFixed(1);f.ad=v[0]<-.05?-1:1}
+  else if(o===HVA.actor&&tg){const v=dir(o,tg);f.dx=+(v[0]*18).toFixed(1);f.dy=+(v[1]*18).toFixed(1);f.ad=v[0]<-.05?-1:1}
+  return}
+ if(n=='dead'&&HVA.tl.has(o)){const pv=o.fx;F0.call(this,o,n,dx,dy);const d=HVA.tl.get(o),f=o.fx;f.t=t0+d;if(pv){f.kx=pv.hv2?pv.hv2.kx:pv.kx||0;f.ky=pv.hv2?pv.hv2.ky:pv.ky||0}f.kd=(f.kx||0)<0?-1:1;
+  HVA.lin.set(o,Math.max(t0+1100,f.t+(820*SP())+60));HVA.dsnd={until:t0+40,d};HVA.st.deaths++;return}
+ if(n=='undying'&&HVA.tl.has(o)){F0.call(this,o,n,dx,dy);o.fx.t=t0+HVA.tl.get(o);return}
+ return F0.apply(this,arguments)};
+/* hit(): remember who struck whom and when the blow lands */
+const H0=hit;
+hit=function(t,d){if(off()||!HVA.act||HVA.cut||!t)return H0.apply(this,arguments);const o=t.t=='u'?t.v:t.t=='t'?t.T:t.W;if(!o)return H0.apply(this,arguments);
+ const a=curAtk;let dl;
+ if(a&&a!==o){const cs=HVA.cs.get(a);dl=(cs!=null?cs:(a===HVA.actor?0:(HVA.tl.get(a)||0)+340*SP()))+impact(a)}else dl=Math.max(fxOff||0,impact(HVA.actor))+200;/* structure strike back */
+ const v=a&&a!==o?dir(a,o):[0,0],hp0=o.hp,pp=new Set(S.pops||[]);
+ HVA.cur={o,dl,kx:0,ky:0,big:false};let r;
+ try{const big=d>=5;HVA.cur.big=big;HVA.cur.kx=+(v[0]*(big?8:5)).toFixed(1);HVA.cur.ky=+(v[1]*(big?8:5)).toFixed(1);r=H0.apply(this,arguments)}finally{HVA.cur=null}
+ /* the damage number appears when the blow lands */
+ const T=now()+dl;for(const p of S.pops||[])if(!pp.has(p)&&p.x==o.x&&p.y==o.y)p.t=Math.max(p.t,T);
+ HVA.st.hits++;const dd=Math.max(0,hp0-o.hp);
+ if((dd>=5||(t.t=='t'&&o.hp<=0))&&!HVA.shook){HVA.shook=1;const V=typeof FOGV=='function'?FOGV():null;if(!V||seesCell(V,o.x,o.y))setTimeout(shake,dl)}
+ return r};
+/* act(): one action = one timeline; the caster wind-up and heal effects are drawn here too */
+const A0=act;
+act=function(u,t){if(off()||!u||!t||HVA.act)return A0.apply(this,arguments);
+ HVA.act=1;HVA.actor=u;HVA.tgt=t;HVA.tl=new Map();HVA.cs=new Map();HVA.shook=0;HVA.cut=!t.heal&&!t.summon&&!t.ab&&!!(typeof CUT=='object'&&CUT[u.k]);
+ const vis=!(typeof FOGV=='function'&&FOGV())||visU(u);
+ try{if(!HVA.cut&&vis){if(t.heal){castGlow(u,EL[elOf(u.k)][0]||'#fff0a0');const v=t.v;setTimeout(()=>healFx(v),Math.round(260*SP()))}else if(t.ab)castGlow(u,({trap:'#b8d07a',wall:'#d9b98a',flare:'#ffe58a',sil:'#b08aff'})[t.ab]||'#fff')}}catch(e){}
+ const pp0=new Set(S&&S.pops||[]);
+ try{return A0.apply(this,arguments)}finally{try{/* damage and CRIT numbers wait for their blow */const t0=now();for(const p of S.pops||[]){if(pp0.has(p)||typeof p.txt!='string')continue;for(const[o,d]of HVA.tl)if(o.x==p.x&&o.y==p.y&&(o!==u||/^(-|CRIT)/.test(p.txt))){p.t=Math.max(p.t,t0+d);break}}}catch(e){}
+  HVA.act=0;HVA.actor=null;HVA.tgt=null;HVA.cut=false;if(HVA.lin.size)lingerTimer()}};
+/* death extras follow the blow: kill cam zoom and particles start when it lands (cutUntil / AI pacing unchanged) */
+const K0=killCam;
+killCam=function(v,delay,boss){const d=!off()&&HVA.act&&HVA.tl.has(v)?HVA.tl.get(v):0;if(!d)return K0.apply(this,arguments);
+ const cu=cutUntil,k0=KCT;K0.call(this,v,(delay||0)+d,boss);if(KCT!==k0){KCT=now()+(delay||0)+900;cutUntil=Math.max(cu,KCT)}};
+const DF0=deathFx;deathFx=function(v,delay){const d=!off()&&HVA.act&&HVA.tl.has(v)?HVA.tl.get(v):0;return DF0.call(this,v,(delay||0)+d)};
+const SF0=sfx;sfx=function(n){if(n=='death'&&HVA.dsnd&&now()<HVA.dsnd.until){const d=HVA.dsnd.d;setTimeout(()=>SF0('death'),d);return}return SF0.apply(this,arguments)};
+/* ---------------- fxA(): classes + timing variables for the board render ---------------- */
+const FA0=fxA;
+fxA=function(o,i){const r=FA0(o,i);if(!o)return r;let c=r.c,s=r.s;const f=o.fx,t=now();
+ if(f&&!f.sv){if(c){if(f.t>t)s=s.replace(/--d:-[^;]*/,'--d:'+((f.t-t)/1000).toFixed(3)+'s');if(f.kx!=null)s+=`;--kx:${f.kx}px;--ky:${f.ky}px;--kr:${f.kr||0}deg;--kd:${f.kd||1}`;if(f.ad)s+=';--ad:'+f.ad;
+   if(f.n=='atk'&&f.hv2){c+=' hvh2';s+=`;--hd:${((f.hv2.t-t)/1000).toFixed(3)}s;--kx:${f.hv2.kx}px;--ky:${f.hv2.ky}px;--kr:${f.hv2.kr}deg`}if(f.big||(f.hv2&&f.hv2.big))c+=' hvbig'}
+  else if(f.n=='atk'&&f.hv2&&t<f.hv2.t+HURTMS*SP()){c=' hurt'+(f.hv2.big?' hvbig':'');s=`--d:${((f.hv2.t-t)/1000).toFixed(3)}s;--kx:${f.hv2.kx}px;--ky:${f.hv2.ky}px;--kr:${f.hv2.kr}deg`}}
+ if(o.k&&H[o.k]){const q=seed(o);s+=`;--id:-${(((t/1000)+q.ph*q.dur)%q.dur).toFixed(3)}s;--idur:${q.dur}s;--ia:${q.ia}`}
+ return{c,s}};
+/* damage numbers that wait for their blow get a positive delay (hidden until then) */
+const P0=popH;popH=function(x,y){const h=P0.apply(this,arguments);return h&&h.indexOf('--d:--')>=0?h.replace(/class="pop([^"]*)" style="--d:--([0-9.]+)s"/g,'class="pop$1 hvpd" style="--d:$2s"'):h};
+/* ---------------- render: classify units, keep K.O.'d figures until their animation ends, tidy finished states ---------------- */
+let LTM=0;
+function lingerTimer(){let mx=0;for(const v of HVA.lin.values())mx=Math.max(mx,v);clearTimeout(LTM);if(mx)LTM=setTimeout(()=>{LTM=0;if(S&&!S.over||S)try{render()}catch(e){}},Math.max(0,mx-now())+30)}
+const R0=render;
+render=function(){const ta=now();RT.classList.toggle('hvfp',fastP());let tmp=null;
+ if(S&&S.units){for(const u of S.units)if(!MAP.has(u.k))ensure(u.k);
+  if(HVA.lin.size){const t=now();tmp=[];for(const[v,until]of HVA.lin){if(t>until||S.units.includes(v)){HVA.lin.delete(v);continue}if(S.ghosts&&!S.ghosts.includes(v)){S.ghosts.push(v);tmp.push(v)}}}}
+ const tb=now();let r;try{r=R0.apply(this,arguments)}finally{if(tmp&&tmp.length&&S&&S.ghosts)S.ghosts=S.ghosts.filter(g=>!tmp.includes(g))}
+ const tc=now();try{post()}catch(e){}const pr=HVA.pr;pr.pre+=tb-ta;pr.post+=now()-tc;pr.n++;return r};
+let CTM=0,CEND=0;
+function endOf(f){if(!f||f.sv)return 0;const sp=SP();if(f.n=='atk')return Math.max(f.t+((AK[(f.k0||'swing')]||AK.swing)[0]*1000+80)*sp,f.hv2?f.hv2.t+(HURTMS+40)*sp:0,f.t+950);if(f.n=='hurt')return f.t+(HURTMS+40)*sp;return 0}
+function tidy(){CTM=0;CEND=0;if(!S||!S.units)return;const B=document.getElementById('board');if(!B)return;const t=now();let next=0;
+ B.querySelectorAll('.cell>.u.atk,.cell>.u.hurt').forEach(el=>{const c=el.parentNode,x=+c.dataset.x,y=+c.dataset.y,u=S.units.find(q=>q.x==x&&q.y==y);if(!u)return;const e=endOf(u.fx);if(e>t){next=next?Math.min(next,e):e;return}el.classList.remove('atk','hurt','hvh2','hvbig')});
+ if(next)sched(next)}
+function sched(e){if(CTM&&CEND<=e)return;clearTimeout(CTM);CEND=e;CTM=setTimeout(tidy,Math.max(16,e-now()+20))}
+function post(){if(!S||!S.units||off())return;const t=now();let e=0;for(const u of S.units){if(u.fx&&u.fx.n=='atk'&&!u.fx.k0)u.fx.k0=kindOf(u.k);const q=endOf(u.fx);if(q>t)e=e?Math.min(e,q):q}if(e)sched(e);ui()}
+/* ---------------- screen shake (big hits only) ---------------- */
+let SHT=0;
+function shake(){if(off()||!S)return;const b=document.getElementById('bw');if(!b)return;HVA.st.shakes++;const n=b.classList.contains('hvshk');b.classList.remove('hvshk');if(n){requestAnimationFrame(()=>b.classList.add('hvshk'))}else b.classList.add('hvshk');clearTimeout(SHT);SHT=setTimeout(()=>b.classList.remove('hvshk'),Math.round(340*SP())+40)}
+/* ---------------- spells: element of each caster, wind-up glow, element impact ---------------- */
+const EL={fire:['#ff8a3a','#ffd27a'],frost:['#9fe3ff','#e9fbff'],storm:['#ffe45a','#fffbe0'],nature:['#7ad66a','#d7ffb8'],holy:['#ffe9a0','#ffffff'],blood:['#e0304e','#ff9aa8'],necro:['#6aff7a','#d4ffd8'],arcane:['#b08aff','#dfe6ff'],earth:['#d9b98a','#8a7a60']};
+const ELK={mage:'fire',infernowitch:'fire',fireeye:'fire',phoenix:'fire',dragon:'fire',bomber:'fire',witch:'frost',storm:'storm',thunderking:'storm',stormroc:'storm',druid:'nature',sprites:'holy',cleric:'holy',seraph:'holy',paladin:'holy',
+ warlock:'blood',countess:'blood',matriarch:'blood',necromancer:'necro',lich:'necro',wisp:'necro',banshee:'necro',hexweaver:'arcane',seer:'arcane',oracle:'arcane',voidlord:'arcane',mirrormage:'arcane',archmage:'arcane',chronomancer:'frost',spellblade:'arcane',forgemaster:'earth',warengine:'earth'};
+const FACEL={infernal:'fire',vamp:'blood',undead:'necro',wilds:'nature',iron:'earth',arcane:'arcane',kingdom:'holy'};
+function elOf(k){if(ELK[k])return ELK[k];const h=H[k]||{};if(h.burn)return 'fire';if(h.stun&&h.fac=='arcane')return 'frost';return FACEL[h.fac]||'arcane'}
+function fxPos(o){const c=ctr(o);return c}
+function castGlow(u,col){if(off())return;const L=document.getElementById('fxl');if(!L)return;const c=fxPos(u),e=document.createElement('i');e.className='hvcg';e.style.cssText=`--c:${col};left:${c[0]}%;top:${c[1]}%;width:${(100/WF*1.25).toFixed(3)}%`;L.appendChild(e);HVA.st.casts++;setTimeout(()=>e.remove(),Math.round(560*SP())+60)}
+function ringAt(o,col,sz){const L=document.getElementById('fxl');if(!L)return;const c=fxPos(o),e=document.createElement('i');e.className='hvhr';e.style.cssText=`--c:${col};left:${c[0]}%;top:${c[1]}%;width:${(100/WF*(sz||1)).toFixed(3)}%`;L.appendChild(e);setTimeout(()=>e.remove(),Math.round(600*SP())+60)}
+const rr=(a,b)=>a+Math.random()*(b-a);
+function seen(o){const V=typeof FOGV=='function'?FOGV():null;return !V||seesCell(V,o.x,o.y)}
+function elemFx(o,el,big){if(off()||!o||!seen(o))return;const C=EL[el]||EL.arcane,m=big?1.6:1;ringAt(o,C[0],big?1.4:.95);
+ psCell(o,(x,y,cell)=>{const k=cell/64,n=Math.round(12*m);
+  if(el=='fire'){PS.d.push({kind:'flash',x,y,r:cell*.45*m,life:.3,age:0,a:.85,add:1,col:C[0]});PS.d.push({kind:'scorch',x,y:y+cell*.08,r:cell*.38*m,life:.9,age:0,a:.7,add:1});for(let i=0;i<n;i++){const an=rr(0,7),sp=rr(30,110)*k;psAdd({x,y,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp*.6-rr(30,90)*k,g:-50*k,dr:.95,life:rr(.45,.9),s:rr(2,4)*k,s1:.4,col:i%2?C[0]:C[1],glow:1})}}
+  else if(el=='frost'){PS.d.push({kind:'flash',x,y,r:cell*.35*m,life:.25,age:0,a:.7,add:1,col:'#ffffff'});for(let i=0;i<n;i++){const an=i/n*6.28,sp=rr(60,140)*k;psAdd({x,y,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp*.65-20*k,g:260*k,dr:.95,life:rr(.4,.7),s:rr(2.5,4.5)*k,s1:1,col:i%2?C[0]:C[1],sh:i%3?'line':'star',rot:an,vr:rr(-4,4),add:1})}}
+  else if(el=='storm'){PS.d.push({kind:'flash',x,y,r:cell*.5*m,life:.2,age:0,a:1,add:1,col:C[1]});for(let i=0;i<n;i++){const an=rr(0,7),sp=rr(120,240)*k;psAdd({x,y,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp*.7,dr:.88,life:rr(.18,.35),s:rr(3,6)*k,s1:1,col:i%2?C[0]:C[1],sh:'line',rot:an,add:1})}}
+  else if(el=='nature'){for(let i=0;i<n;i++){const an=rr(0,7),sp=rr(30,90)*k;psAdd({x:x+Math.cos(an)*6*k,y,vx:Math.cos(an)*sp,vy:-rr(40,110)*k,g:120*k,dr:.96,life:rr(.6,1),s:rr(2,3.5)*k,s1:1.5,col:['#7ad66a','#4fa83a','#b8e07a'][i%3],sh:'r',rot:rr(0,6),vr:rr(-8,8),add:0})}}
+  else if(el=='holy'){PS.d.push({kind:'ringin',x,y,r:cell*.6*m,w:3,col:C[0],life:.35,age:0,a:.9,add:1});for(let i=0;i<n;i++)psAdd({x:x+rr(-cell*.3,cell*.3),y:y+rr(-4,8)*k,vx:rr(-10,10)*k,vy:-rr(40,100)*k,g:-20*k,dr:.97,life:rr(.5,.9),s:rr(2,3.5)*k,s1:.4,col:i%2?C[0]:C[1],sh:i%3?'c':'star',rot:rr(0,6),glow:1})}
+  else if(el=='blood'){for(let i=0;i<n;i++){const an=rr(0,7),sp=rr(40,120)*k;psAdd({x,y,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp*.5-rr(60,130)*k,g:520*k,dr:.98,life:rr(.5,.85),s:rr(1.8,3.6)*k,s1:1,col:['#e0304e','#a01830','#ff6a80'][i%3],add:0,floor:y+rr(4,12)*k})}}
+  else if(el=='necro'){PS.d.push({kind:'rune',x,y,r:cell*.45*m,life:.8,age:0,a:.8,add:1});for(let i=0;i<n;i++)psAdd({x:x+rr(-cell*.3,cell*.3),y:y+rr(-4,8)*k,vx:rr(-12,12)*k,vy:-rr(40,100)*k,g:-25*k,dr:.97,life:rr(.5,1),s:rr(2,4)*k,s1:.5,col:i%2?C[0]:C[1],glow:1})}
+  else if(el=='earth'){dust(x,y,Math.round(8*m),'rgba(170,150,120,.42)',9*k);for(let i=0;i<Math.round(8*m);i++){const an=rr(0,7);psAdd({x,y,vx:Math.cos(an)*rr(30,100)*k,vy:-rr(60,150)*k,g:600*k,dr:.99,life:rr(.5,.9),s:rr(2,4)*k,s1:1.5,col:['#9c8664','#7a6a50','#c2ab82'][i%3],sh:'r',rot:rr(0,6),vr:rr(-9,9),add:0,floor:y+rr(4,12)*k})}}
+  else{PS.d.push({kind:'ringin',x,y,r:cell*.7*m,w:4,col:C[0],life:.4,age:0,a:1,add:1});for(let i=0;i<n;i++){const an=rr(0,7),sp=rr(50,140)*k;psAdd({x,y,vx:Math.cos(an)*sp,vy:Math.sin(an)*sp*.7,dr:.93,life:rr(.4,.8),s:rr(2,4)*k,s1:.4,col:i%2?C[0]:C[1],sh:i%2?'star':'c',rot:rr(0,6),glow:1})}}})}
+function healFx(v){if(!v||off()||!seen(v))return;ringAt(v,'#7ef08a',1);psCell(v,(x,y,cell)=>{const k=cell/64;for(let i=0;i<12;i++)psAdd({x:x+rr(-cell*.28,cell*.28),y:y+rr(0,10)*k,vx:rr(-6,6)*k,vy:-rr(35,80)*k,g:-15*k,dr:.97,life:rr(.6,1),s:rr(2,3.4)*k,s1:.6,col:i%3?'#9dffa8':'#fff6c0',sh:i%4?'c':'star',rot:rr(0,6),glow:1})})}
+/* atkFx: projectiles leave on the release frame, melee effects land on the contact frame; casters glow first and hit with their element */
+const AF0=atkFx;
+atkFx=function(u,t){if(off()||!u||!t)return AF0.apply(this,arguments);const k=kindOf(u.k),c=contact(u.k),vis=!(typeof FOGV=='function'&&FOGV())||visU(u);
+ if(k=='cast'){const el=elOf(u.k);if(vis)castGlow(u,EL[el][0]);setTimeout(()=>{if(S)try{AF0(u,t)}catch(e){}},Math.round(c));setTimeout(()=>{if(S)elemFx(t,el,!!(H[u.k].aoe||H[u.k].elite))},Math.round(c+(ranged(u.k)?FLIGHT:60)));return}
+ const L=ranged(u.k)?c:Math.max(0,c-60);if(L<15)return AF0.apply(this,arguments);setTimeout(()=>{if(S)try{AF0(u,t)}catch(e){}},Math.round(L))};
+/* abilities glow on the caster (wired in act); spell cards get an element impact on their target */
+if(typeof playCard=='function'){const PC0=playCard;playCard=function(sd,i,x,y){const k=S&&S.hand&&S.hand[sd]?S.hand[sd][i]:null,r=PC0.apply(this,arguments);
+ if(r&&k&&!off()){const o={x,y},E={fireball:['fire',0],bolt:['frost',0],meteor:['fire',1],mend:['holy',0],haste:['storm',0],mason:['earth',0]}[k];
+  if(E&&x!=null){elemFx(o,E[0],!!E[1]);if(k=='meteor'&&typeof NB!='undefined')NB[y&1].forEach(([dx,dy],j)=>setTimeout(()=>elemFx({x:x+dx,y:y+dy},'fire',0),90+j*40))}}return r}}
+/* ---------------- UI motion ---------------- */
+const CNT={};let TKEY='',HANDN=null,HANDS=null,TCB=0;
+function numNode(el,val){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n;const re=new RegExp('(^|[^0-9])'+val+'(?![0-9])');while((n=w.nextNode()))if(re.test(n.data))return n;return null}
+function counter(id,sel,val){const st=CNT[id]||(CNT[id]={S:null,to:null,from:0,t0:0,raf:0});const el=document.querySelector(sel);
+ if(val==null||!el){st.to=val;st.S=S;return}
+ if(st.S!==S||st.to==null||val<st.to||fastP()){st.S=S;st.to=val;st.from=val;st.t0=0;el.classList.remove('hvtk');return}
+ if(val>st.to){const t=now(),cur=st.t0?shown(st,t):st.to;st.from=cur;st.to=val;st.t0=t}
+ if(st.t0){draw(id,sel);if(!st.raf)st.raf=requestAnimationFrame(function L(){st.raf=0;if(draw(id,sel))st.raf=requestAnimationFrame(L)})}}
+const DUR=480;
+function shown(st,t){const k=Math.min(1,(t-st.t0)/DUR),e=1-Math.pow(1-k,3);return Math.round(st.from+(st.to-st.from)*e)}
+function draw(id,sel){const st=CNT[id],el=document.querySelector(sel);if(!st||!el||!st.t0)return false;const t=now(),v=shown(st,t),done=t-st.t0>=DUR;
+ if(!st.node||!st.node.isConnected||st.el!==el){st.node=numNode(el,st.to);st.el=el}const n=st.node;
+ if(n){const re=new RegExp('(^|[^0-9])('+(st.last!=null&&n.data.indexOf(String(st.last))>=0?st.last:st.to)+')(?![0-9])');n.data=n.data.replace(re,'$1'+(done?st.to:v));st.last=done?st.to:v}
+ el.classList.toggle('hvtk',!done);if(done){st.t0=0;st.last=null;st.node=null}return !done}
+function ui(){if(!S||S.over||!document.body.classList.contains('ingame')&&!(document.getElementById('game')&&!document.getElementById('game').hidden))return;
+ const M=typeof me=='function'?me():null;
+ counter('mana','#mana b',typeof ME!='undefined'&&ME&&S.mana?S.mana[ME]:null);
+ counter('gold','#hand .gold',S.gold&&M?S.gold[M]:null);
+ /* the turn chip slides in */
+ const tk=S.turn+'/'+S.round;if(tk!==TKEY){const first=!TKEY;TKEY=tk;const el=document.getElementById('turn');if(el&&!first){TCB^=1;el.classList.remove('hvtca','hvtcb');el.classList.add(TCB?'hvtcb':'hvtca')}}
+ /* a new spell card deals in */
+ const hn=S.hand&&M&&S.hand[M]?S.hand[M].length:0;if(HANDS===S&&HANDN!=null&&hn>HANDN){const cs=document.querySelectorAll('#hand .hcard');for(let i=Math.max(0,cs.length-(hn-HANDN));i<cs.length;i++)cs[i].classList.add('hvdeal')}HANDS=S;HANDN=hn}
+if(typeof drawCards=='function'){const DC0=drawCards;drawCards=function(){const pv=typeof picks!='undefined'?picks.slice():[];const r=DC0.apply(this,arguments);
+ try{if(!rm()&&typeof picks!='undefined'&&picks.length>pv.length){const add=picks.filter((k,i)=>pv[i]!==k);add.slice(-1).forEach(k=>{const el=document.querySelector(`#cards .card[data-k="${k}"]`);if(el)el.classList.add('hvpk')})}}catch(e){}return r}}
+if(typeof turnBanner=='function'){const TB0=turnBanner;turnBanner=function(){if(RP||RUNFAST)return;return TB0.apply(this,arguments)}}
+/* ---------------- movement sounds: fliers glide, tanks stomp (synced to hvWalk); tone()/noise() honour mute and volume ---------------- */
+const BIGW=new Set(['dragon','phoenix','stormroc','demonprince']),SHIM=new Set(['wisp','sprites','wraith','banshee','oracle']);
+const CLANK=new Set(['guard','graveknight','templar','warlord','deathknight','kinglion','juggernaut','forgemaster','paladin','knight']),THUD=new Set(['colossus','titan','sentinel','magmagolem','runekeeper','bonecolossus','treant','eldertreant','raidboss','wallwright']),PAW=new Set(['mammoth','cavebear','thrall','pitlord','direwolf']);
+function flyKind(u){const h=H[u.k]||{};if(u.bat||u.k=='bats'||h.fac=='vamp')return 'flutter';if(BIGW.has(u.k)||(h.elite&&!SHIM.has(u.k)))return 'big';if(SHIM.has(u.k)||(h.fac=='undead')||(h.fac=='arcane'))return 'shimmer';return 'whoosh'}
+function tankKind(u){const k=u.k,h=H[k]||{};if(CLANK.has(k)&&(ROLE[k]&&ROLE[k][0]=='Tank'||h.elite||h.hp>=20))return 'clank';if(THUD.has(k))return 'thud';if(PAW.has(k))return 'paw';
+ const tank=ROLE[k]&&ROLE[k][0]=='Tank',heavy=h.elite&&!h.fly&&h.hp>=20&&(h.rng?h.rng[1]:1)<=1;if(!tank&&!heavy)return null;
+ if(h.fac=='iron'||h.fac=='arcane')return 'thud';if(h.fac=='undead'||h.fac=='kingdom')return 'clank';return 'paw'}
+const GLIDE={
+ flutter(d){const n=Math.max(3,Math.min(8,Math.round(d/70)));for(let i=0;i<n;i++){const t=i*d/1000/n;noise(.035,.05,2600,t);tone(190-i*6,.03,'triangle',.018,t,120)}},
+ big(d){const n=Math.max(2,Math.min(4,Math.round(d/230)));noise(Math.max(.3,d/1000),.035,900);for(let i=0;i<n;i++){const t=i*d/1000/n;noise(.16,.08,480,t);tone(72,.18,'sine',.07,t,42)}},
+ shimmer(d){const P=[1568,1976,2349,2637];const n=Math.max(2,Math.min(4,Math.round(d/120)));for(let i=0;i<n;i++)tone(P[i%4],.28,'sine',.022,i*d/1000/n,P[i%4]*1.5)},
+ whoosh(d){noise(Math.max(.22,d/1000*.8),.06,1400);tone(230,.25,'sine',.02,0,140)}};
+const STEP={clank(){tone(92,.08,'sine',.08,0,60);tone(1150,.05,'square',.022,0,700);tone(1720,.04,'square',.013,.012,1100);noise(.05,.06,3200)},
+ thud(){tone(55,.18,'sine',.15,0,32);noise(.12,.09,320)},paw(){tone(76,.14,'sine',.11,0,46);noise(.08,.06,700)}};
+let LSTEP=0,LGLIDE=0;const WATCH=new Map();let WRAF=0;
+function step(kind){const t=now();if(t-LSTEP<120)return;LSTEP=t;HVA.st.steps++;try{STEP[kind]()}catch(e){}}
+function watch(){WRAF=0;const t=now();for(const[u,q]of WATCH){const w=window.hvWalk?hvWalk.get(u):null;
+ if(!w){if(q.si<q.n)step(q.kind);WATCH.delete(u);continue}const si=w.si||0;if(si>q.si){q.si=si;step(q.kind)}if(t-q.t0>3000)WATCH.delete(u)}
+ if(WATCH.size)WRAF=requestAnimationFrame(watch)}
+const MS0=typeof moveSfx=='function'?moveSfx:null;let MV=null;
+if(MS0)moveSfx=function(k){if(MV&&MV.u&&MV.u.k===k&&(MV.fly||MV.tank)){MV.mine=1;return}return MS0.apply(this,arguments)};
+const PF0=perform;
+perform=function(a){if(!a||a.t!='move'||RP||!S||S.over)return PF0.apply(this,arguments);const u=typeof at=='function'?at(a.fx,a.fy):null;
+ MV=u?{u,fly:!!((H[u.k]||{}).fly||u.bat),tank:!((H[u.k]||{}).fly||u.bat)&&!!tankKind(u),mine:0}:null;const ox=u&&u.x,oy=u&&u.y;let r;
+ try{r=PF0.apply(this,arguments)}finally{const m=MV;MV=null;try{if(r&&m&&m.mine&&!RUNFAST&&(u.x!=ox||u.y!=oy)&&S.units.includes(u)&&(!(typeof FOGV=='function'&&FOGV())||visU(u)))moveSound(u,m)}catch(e){}}
+ return r};
+function moveSound(u,m){const w=window.hvWalk?hvWalk.get(u):null;
+ if(m.fly){const t=now();if(t-LGLIDE<180)return;LGLIDE=t;HVA.st.glides++;try{GLIDE[flyKind(u)](w?w.dur:300)}catch(e){}return}
+ const kind=tankKind(u);if(!kind)return;if(!w){step(kind);return}step(kind);WATCH.set(u,{kind,si:0,n:w.n,t0:now()});if(!WRAF)WRAF=requestAnimationFrame(watch)}
+window.hvAnim={wt,idl,elOf,flyKind,tankKind,impact,contact,shake,elemFx,castGlow,_orig:{fxA:FA0,popH:P0,render:R0,fx:F0}};
+})();
+</script>
 </body></html>
