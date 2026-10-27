@@ -91,6 +91,14 @@ const inC=p=>cells?cells.some(c=>c.x==p.x&&c.y==p.y):dist(p,t)==1;
 S.units.filter(v=>isFoe(v.side,u.side)&&v!==t.v&&inC(v)).forEach(v=>out.push({t:'u',v,f}));foeTowers(u.side).filter(T=>!(t.t=='t'&&t.T===T)&&inC(T)).forEach(T=>out.push({t:'t',T,f}));return out}
 const splDmg=(d,f)=>f>=1?d:Math.max(1,Math.round(d*f));
 </script>
+<script>/* build check: a page loaded before a deploy must not join a match with newer clients (it could load a different map) */
+const HV_BUILD='__HV_BUILD__';
+function hvUpdate(){let last=0;try{last=+sessionStorage.getItem('hv-upd')||0}catch(e){}
+const ov=document.getElementById('hvupd')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'hvupd'}));
+ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(10,12,20,.94);color:#f4ead0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;font:17px sans-serif;text-align:center;padding:20px';
+if(Date.now()-last>60000){try{sessionStorage.setItem('hv-upd',String(Date.now()))}catch(e){}ov.innerHTML='<b style="font-size:21px">Hollow Vale was updated</b><div>Loading the new version so you and your friends play the same game…</div>';setTimeout(()=>location.reload(),900)}
+else{ov.innerHTML='<b style="font-size:21px">Hollow Vale was updated</b><div>Your page is an older version than the server. Refresh to keep playing together.</div><button style="padding:9px 20px;font-size:16px;cursor:pointer" onclick="location.reload()">Refresh</button>'}}
+</script>
 <script>var HVTS=1.45;var HVART=new Set(["brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
 <script>(function(){try{var d=JSON.parse(localStorage.getItem('hv-display')||'null')||{};var h=document.documentElement;if(d.big)h.classList.add('bigtext');var hc=d.hc;if(hc==null)hc=matchMedia('(prefers-contrast: more)').matches;if(hc)h.classList.add('hc');if(d.cb)h.classList.add('cb')}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=MedievalSharp&family=Cinzel:wght@700&family=Pirata+One&family=Grenze+Gotisch:wght@600&family=Metal+Mania&family=Uncial+Antiqua&family=Germania+One&display=swap">
@@ -2780,7 +2788,7 @@ if(!CID){CID='c'+Math.random().toString(36).slice(2,10)+Date.now().toString(36);
 let LOB=null,es=null,INFO=null,inGame=false,inDraft=false,myName='',ND=null,ROOM=null,NOTE='';
 try{myName=localStorage.getItem('hv-name')||''}catch(e){}
 const esc=t=>String(t==null?'':t).replace(/[<>&"'`\\]/g,'');
-const q=()=>'cid='+encodeURIComponent(CID)+'&room='+encodeURIComponent(ROOM||'');
+const q=()=>'cid='+encodeURIComponent(CID)+'&room='+encodeURIComponent(ROOM||'')+'&v='+encodeURIComponent(HV_BUILD);
 let SEQ=Date.now()*1000,QUEUE=Promise.resolve();
 let PENDING=0,LASTMSG=Date.now();
 const post=m=>{if(!ROOM)return QUEUE;m.seq=++SEQ;PENDING++;const body=JSON.stringify(m),qs=q();QUEUE=QUEUE.then(async()=>{try{for(let i=0;i<8;i++){try{const r=await fetch('/send?'+qs,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body});if(r.ok||r.status==404)return}catch(e){}await new Promise(z=>setTimeout(z,300*(i+1)))}}finally{PENDING--}});return QUEUE};
@@ -2843,7 +2851,7 @@ openDraft('Ready',()=>{if(ND.ready){post({type:'unready'});ND.ready=false}else{N
 function setLabel(){const b=$('#start');if(!ND||$('#draft').hidden)return;const L=LOB,waiting=L?act(L).filter(sd=>L.seats[sd].kind=='human'&&!L.seats[sd].ready).map(sd=>esc(L.seats[sd].name||SIDEN[sd])):[];
 if(ND.ready){b.disabled=false;b.textContent=waiting.length?'Ready ✔  waiting for '+waiting.join(', ')+' (click to edit)':'Ready ✔  starting...'}}
 const _dc2=drawCards;drawCards=function(){_dc2();if(ND&&ND.ready&&picks.join()!=ND.sig){ND.ready=false;post({type:'unready'})}setLabel()};
-function begin(cfg,replay){NLOG=replay?replay.length:0;GID=cfg.gid||null;HOTSEAT=false;inGame=true;inDraft=false;ND=null;const me=mySeat();SEAT=Object.assign({},cfg.seat);
+function begin(cfg,replay){if(cfg&&cfg.opts&&cfg.opts.map&&!mapInfo(cfg.opts.map)){hvUpdate();return}NLOG=replay?replay.length:0;GID=cfg.gid||null;HOTSEAT=false;inGame=true;inDraft=false;ND=null;const me=mySeat();SEAT=Object.assign({},cfg.seat);
 const names={},pk={},nG=MODES[cfg.n]?cfg.n:3;ALLS.slice(0,nG).forEach(sd=>{if(cfg.names&&cfg.names[sd])names[sd]=esc(cfg.names[sd]).slice(0,16);pk[sd]=(cfg.picks[sd]||[]).filter(k=>H[k])});
 if(replay){RP=true;const r0=render,m0=muted;render=()=>{};muted=true;try{startGame({picks:pk,seat:SEAT,me,names,n:nG,opts:cfg.opts,seed:cfg.seed});replay.forEach(a=>{try{perform(a)}catch(e){}})}finally{render=r0;muted=m0;RP=false}
 busy=!(isMine(S.turn)&&!isAI(S.turn))||S.over;render();$('#tolobby').hidden=false;if(!S.over&&HOST&&isAI(S.turn))runAI(S.turn);else if(!S.over&&isMine(S.turn))autoEnd()}
@@ -2854,7 +2862,7 @@ else if(L.phase=='draft'){if(!inDraft&&!inGame){enterDraft()}else if(inGame){inG
 setLabel();renderLobby();
 if(HOST&&allReady(L)){const ai={};act(L).forEach(sd=>{if(L.seats[sd].kind!='human')ai[sd]=aiPick()});post({type:'start',ai})}}
 else if(L.phase=='play'){if(inGame&&S){SEAT=seatMap(L);if(HOST&&!S.over&&isAI(S.turn)&&(!wasHost||(was&&was.seats[S.turn].kind!='ai')))runAI(S.turn);render()}renderLobby()}}
-function onMsg(m){LASTMSG=Date.now();if(m.type=='ka')return;
+function onMsg(m){LASTMSG=Date.now();if(m.type=='ka')return;if(m.type=='update'||(m.lobby&&m.lobby.build&&m.lobby.build!==HV_BUILD)){closeES();hvUpdate();return}
 if(m.type=='noroom'||m.type=='full'){NOTE=m.type=='full'?(m.why=='ip'?'Too many connections from your network are already in this game.':'That game is full (12 people connected). Try again in a minute.'):'That game no longer exists (the server may have restarted). Create a new one.';closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;show('#lobby');return}
 if(m.type=='state'){LOB=m.lobby;HOST=LOB.host==CID;NOTE='';
 if(LOB.phase=='play'&&m.game){if(inGame&&S&&GID&&m.game.cfg.gid===GID&&m.game.log.length===NLOG){SEAT=seatMap(LOB);render()}else begin(m.game.cfg,m.game.log);renderLobby()}

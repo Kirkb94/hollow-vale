@@ -12,6 +12,13 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
 const TEXT_EXT = new Set(['.html', '.js', '.css', '.svg', '.json', '.webmanifest']);
 const assetCache = new Map(); // file path -> { etag, raw, gz }
+// build id = hash of index.html; served pages carry it and must match to join a room (stops old pages joining newer games)
+const crypto = require('crypto');
+const INDEX = path.join(__dirname, 'public', 'index.html');
+let CUR_BUILD = 'dev';
+const hashBuild = buf => crypto.createHash('sha1').update(buf).digest('hex').slice(0, 10);
+try { CUR_BUILD = hashBuild(fs.readFileSync(INDEX)); } catch (e) { }
+const buildOk = u => u.searchParams.get('v') === CUR_BUILD;
 
 const rooms = new Map(); // code -> room
 const cleanName = n => String(n || '').replace(/[<>&"'`\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
@@ -43,7 +50,7 @@ function evictOne(r) {
   return !!best;
 }
 const lobbyView = (r, v) => ({
-  code: r.code, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r) === v ? v : (hostCid(r) ? 'x' : null),
+  code: r.code, build: CUR_BUILD, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r) === v ? v : (hostCid(r) ? 'x' : null),
   seats: Object.fromEntries(ALL_SIDES.map(s => {
     const x = r.seats[s], c = x.cid && r.clients.get(x.cid);
     return [s, { kind: x.kind, cid: x.cid ? (x.cid === v ? v : 'x') : null, name: x.name || '', ready: !!x.ready, ban: x.ban || null, connected: x.kind === 'human' ? !!(c && c.connected) : true }];
@@ -226,7 +233,7 @@ const server = http.createServer((req, res) => {
   const room = () => rooms.get(cleanCode(u.searchParams.get('room')));
   if (u.pathname === '/healthz') return json(res, shuttingDown ? 503 : 200, { ok: !shuttingDown, rooms: rooms.size, uptime: Math.round(process.uptime()) });
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
-  if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs() });
+  if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs(), build: CUR_BUILD });
   if (u.pathname === '/api/create' && req.method === 'POST') { if (!allow(clientIp(req), 'create')) { res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '10' }); return res.end(JSON.stringify({ error: 'Too many games created, wait a few seconds and try again.' })); } const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
   if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } return r ? json(res, 200, { lobby: lobbyView(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40)), game: r.game }) : json(res, 404, { error: 'no room' }); }
   if (u.pathname === '/events') {
@@ -235,6 +242,10 @@ const server = http.createServer((req, res) => {
     const r = room(), cid = (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40);
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform', 'Connection': 'keep-alive', 'X-Accel-Buffering': 'no' });
     if (!r || !cid) { res.write('retry: 600000\n\ndata: {"type":"noroom"}\n\n'); return res.end(); }
+    if (!buildOk(u)) {
+      // pages from before the build check send no v: they only understand noroom; newer pages get 'update' and reload
+      res.write('retry: 600000\n\ndata: ' + JSON.stringify(u.searchParams.get('v') ? { type: 'update', build: CUR_BUILD } : { type: 'noroom' }) + '\n\n'); return res.end();
+    }
     let c = r.clients.get(cid);
     if (!c) {
       if (r.clients.size >= MAX_CLIENTS) { pruneClients(r, 0); if (r.clients.size >= MAX_CLIENTS) evictOne(r); }
@@ -260,7 +271,7 @@ const server = http.createServer((req, res) => {
     const reject413 = () => { tooBig = true; body = ''; if (!res.headersSent) { res.writeHead(413, { 'Connection': 'close' }); res.end(); } };
     if ((+req.headers['content-length'] || 0) > MAX_BODY) reject413();
     req.on('data', d => { got += d.length; if (tooBig) { if (got > MAX_BODY * 10) req.destroy(); return; } body += d; if (got > MAX_BODY) reject413(); });
-    req.on('end', () => { if (tooBig) return; const r = room(); try { if (r) handle(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40), JSON.parse(body)); } catch (e) { } res.writeHead(r ? 204 : 404); res.end(); });
+    req.on('end', () => { if (tooBig) return; const r = buildOk(u) ? room() : null; try { if (r) handle(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40), JSON.parse(body)); } catch (e) { } res.writeHead(r ? 204 : 404); res.end(); });
     return;
   }
   let p;
@@ -300,6 +311,7 @@ const server = http.createServer((req, res) => {
     if (ent && ent.etag === etag) return send(ent);
     fs.readFile(f, (err2, raw) => {
       if (err2) { res.writeHead(404); return res.end('Not found'); }
+      if (f === INDEX) { CUR_BUILD = hashBuild(raw); raw = Buffer.from(raw.toString('utf8').split('__HV_BUILD__').join(CUR_BUILD)); }
       ent = { etag, raw, gz: zlib.gzipSync(raw, { level: 9 }) };
       assetCache.set(f, ent); send(ent);
     });
