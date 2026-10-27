@@ -142,6 +142,34 @@ CONTROLS AND SETTINGS (playtest fixes)
   optional terrain icon on the hovered hex.
 - Online: new rooms start as 1v1 with the host already in Player 1's seat.
 
+NEW SPELLCASTERS (21, three per faction)
+- Select one, press its spell button under the board, then tap a highlighted
+  hex (violet = enemy targets, green = allies or ground). Casting is the
+  hero's action. Hover a hex to preview the area. "Cooldown 2" = the spell
+  cannot be cast on your next 2 turns. Silence and stun stop spells.
+- Kingdom: Sunspeaker (Noon Verdict: delayed 7-hex strike, 5 centre / 3
+  ring), Aegis Chaplain (Aegis: 4-6 shield on an ally, 3 on a tower), Royal
+  Herald (Rally: pull an ally to his side from 4 hexes).
+- Vampires: Hemomancer (Crimson Tether: 3-turn drain, breaks past 4 hexes),
+  Mesmerist (Sweet Command: an enemy hero attacks a unit of your choice),
+  Duskweaver (Veil of Night: 7 hexes enemies cannot see or shoot into).
+- Undead: Ossomancer (Bone Shrapnel: detonate a summon or spent undead for 4
+  around it), Bone Witch (Ossify: an enemy becomes a weak skeleton for a
+  turn, keeping its HP), Gravedigger (Open Grave: forward spawn point;
+  +1 gold when enemies fall near him).
+- Infernal: Cinder Warden (Wall of Flame: 3 burning hexes), Hellbinder
+  (Hellhook: drag an enemy 2 hexes toward him), Pactbroker (Devil's Bargain:
+  3 HP for 1 mana and 1 gold).
+- Wilds: Beastcaller (Thundering Herd: 4-hex line, 3 damage and a push),
+  Grove Shaper (Sinking Mire: 7 hexes of swamp for 2 rounds), Skinchanger
+  (Mimic Shape: copy a non-boss hero's body for 2 turns).
+- Iron Clan: Rune Forger (Runeforged Edge: an ally's next hit +3, ignores
+  armor), Cagewright (Iron Cage: a hero can neither act nor be hurt),
+  Prospector (Strike the Vein: a mine pays +1 for 2 turns; guards mines).
+- Arcane Order: Aetherlancer (Overflow Lance: pay X mana, 2+X then X down a
+  line), Phasewright (Transposition: swap two units), Hourglass Adept
+  (Rewind: an ally returns to last turn's hex and HP).
+
 READING THE BOARD
 - Icons above heroes: 🏇 charge, 🏹 ranged / ⚔️ melee, 🩸 lifesteal, 🔥 fire,
   💫 stun, 👁 scout, ⚰️ raise the slain. A grey hero with a ✓ has already

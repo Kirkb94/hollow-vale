@@ -99,7 +99,7 @@ ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(10,12,20,
 if(Date.now()-last>60000){try{sessionStorage.setItem('hv-upd',String(Date.now()))}catch(e){}ov.innerHTML='<b style="font-size:21px">Hollow Vale was updated</b><div>Loading the new version so you and your friends play the same game…</div>';setTimeout(()=>location.reload(),900)}
 else{ov.innerHTML='<b style="font-size:21px">Hollow Vale was updated</b><div>Your page is an older version than the server. Refresh to keep playing together.</div><button style="padding:9px 20px;font-size:16px;cursor:pointer" onclick="location.reload()">Refresh</button>'}}
 </script>
-<script>var HVTS=1.45;var HVART=new Set(["brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
+<script>var HVTS=1.45;var HVART=new Set(["sunspeaker", "aegis", "herald", "hemomancer", "mesmerist", "duskweaver", "ossomancer", "bonewitch", "gravedigger", "cinderwarden", "hellbinder", "pactbroker", "beastcaller", "groveshaper", "skinchanger", "runeforger", "cagewright", "prospector", "aetherlancer", "phasewright", "hourglass", "brute", "rogue", "archer", "knight", "mage", "cleric", "colossus", "blade", "lancer", "guard", "sapper", "wraith", "bomber", "witch", "storm", "druid", "paladin", "warlock", "assassin", "ballista", "footmen", "bowmen", "imps", "raiders", "sprites", "dragon", "titan", "archmage", "bats", "thrall", "countess", "skeletons", "ghoul", "necromancer", "graveknight", "hellhound", "magmagolem", "wolves", "treant", "gunner", "sentinel", "spellblade", "seer", "outrider", "boarrider", "bonerider", "bloodhunter", "kinglion", "vlord", "lich", "mammoth", "trapper", "wallwright", "hexweaver", "seraph", "warlord", "templar", "marshal", "bloodqueen", "nosferatu", "matriarch", "batking", "bonecolossus", "deathknight", "banshee", "plaguelord", "pitlord", "infernowitch", "demonprince", "phoenix", "eldertreant", "direwolf", "stormroc", "cavebear", "warengine", "forgemaster", "juggernaut", "thunderking", "chronomancer", "voidlord", "mirrormage", "runekeeper", "raidboss", "lookout", "nightwatch", "wisp", "fireeye", "falconer", "spotter", "oracle"]);</script>
 <script>(function(){try{var d=JSON.parse(localStorage.getItem('hv-display')||'null')||{};var h=document.documentElement;if(d.big)h.classList.add('bigtext');var hc=d.hc;if(hc==null)hc=matchMedia('(prefers-contrast: more)').matches;if(hc)h.classList.add('hc');if(d.cb)h.classList.add('cb')}catch(e){}})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400&family=MedievalSharp&family=Cinzel:wght@700&family=Pirata+One&family=Grenze+Gotisch:wght@600&family=Metal+Mania&family=Uncial+Antiqua&family=Germania+One&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <style>
@@ -1500,7 +1500,7 @@ const repCost=sd=>SHOP.repair.c+((S&&S.repN&&S.repN[sd])||0);
 function repTower(sd){return S.tw[sd].filter(T=>T.hp>0&&T.hp<T.max).sort((a,b)=>a.hp/a.max-b.hp/b.max)[0]}
 const recOpts=sd=>[...new Set(S.teams[sd]||[])].filter(k=>!H[k].hidden),recCost=(k,sd)=>(H[k]&&H[k].elite?8:5)+2*((S&&S.recN&&sd&&S.recN[sd])||0);
 const hireOpts=sd=>{const f=ultFac(sd);return Object.keys(H).filter(k=>H[k].fac==f&&!H[k].hidden)};
-const hireCost=k=>{const h=H[k];if(h.elite)return 14;const g=h.group||1,v=Math.sqrt(h.hp*g*h.dmg*g)*(1+(h.armor||0)*.25)*(h.rng[1]>=2?1.15:1)*(h.mv>=3?1.1:1)*(h.heal?1.6:1)*(h.summon||h.trap||h.wall||h.silence||h.flare?1.3:1);const r=h.rng[1],pr=(h.stun?(r>=2?4:1):0)+(h.aoe?2:0)+(h.silence?2:0)+(r>=4&&h.dmg>=4?1:0)+((h.drain||0)>=2?1:0)+(!h.elite&&ROLE[k]&&ROLE[k][0]=='Tank'?2:0);/* ability premium: freeze, splash, silence, long range, drain */return Math.min(10,Math.max(3,Math.min(7,Math.round(v/2)))+pr)};
+const hireCost=k=>{const h=H[k];if(h.elite)return 14;const g=h.group||1,v=Math.sqrt(h.hp*g*h.dmg*g)*(1+(h.armor||0)*.25)*(h.rng[1]>=2?1.15:1)*(h.mv>=3?1.1:1)*(h.heal?1.6:1)*(h.summon||h.trap||h.wall||h.silence||h.flare||h.sp?1.3:1);const r=h.rng[1],pr=(h.stun?(r>=2?4:1):0)+(h.aoe?2:0)+(h.silence?2:0)+(r>=4&&h.dmg>=4?1:0)+((h.drain||0)>=2?1:0)+(h.spp||0)+(!h.elite&&ROLE[k]&&ROLE[k][0]=='Tank'?2:0);/* ability premium: freeze, splash, silence, long range, drain */return Math.min(10,Math.max(3,Math.min(7,Math.round(v/2)))+pr)};
 const ARMY_BASE=20;/* HV_CAP: draft is still 10 slots; the cap is room to hire more during the match */
 const capBonus=(sd,k)=>bldOf(sd,k).length*(BLD[k].cap||0),armyCap=sd=>ARMY_BASE+Object.keys(BLD).reduce((a,k)=>a+(BLD[k].cap?capBonus(sd,k):0),0);
 const capSrc=sd=>['Base '+ARMY_BASE].concat(Object.keys(BLD).filter(k=>BLD[k].cap&&bldOf(sd,k).length).map(k=>{const n=bldOf(sd,k).length;return (n>1?BLD[k].n+'s':BLD[k].n)+' +'+capBonus(sd,k)})).join(' · ');
@@ -3356,7 +3356,7 @@ body.mob .card .cs{height:78px}
 </style>
 <script>/* hero portrait framing (see #hv-heroframe). FB = figure bounds [x0,y0,x1,y1] in the 160x240 portrait, measured from each SVG's figure layer. */
 (function(){
-const FB={brute:[34,24,139,230],rogue:[44,12,116,226],archer:[30,28,116,226],knight:[22,0,120,228],mage:[43,4,136,226],cleric:[40,14,120,226],colossus:[11,22,148,230],blade:[48,28,138,228],lancer:[44,0,118,228],guard:[24,32,137,230],sapper:[35,36,140,230],wraith:[31,10,127,201],bomber:[47,4,122,228],witch:[44,6,118,236],storm:[44,0,120,226],druid:[43,14,120,226],paladin:[41,12,130,228],warlock:[42,23,118,226],assassin:[34,23,128,228],ballista:[22,42,148,228],footmen:[18,68,135,229],bowmen:[20,86,133,229],imps:[10,40,142,217],raiders:[24,72,138,229],sprites:[11,26,142,191],dragon:[7,12,146,232],titan:[6,26,154,232],archmage:[42,0,121,226],bats:[25,59,138,170],thrall:[30,38,132,230],countess:[46,14,118,226],skeletons:[8,18,150,222],ghoul:[32,76,128,214],necromancer:[40,4,120,226],graveknight:[14,10,119,226],hellhound:[20,72,146,226],magmagolem:[18,50,141,224],wolves:[34,110,132,227],treant:[31,0,129,230],gunner:[28,24,139,230],sentinel:[25,22,134,230],spellblade:[34,2,130,228],seer:[44,32,115,226],outrider:[18,6,138,228],boarrider:[12,63,135,226],bonerider:[18,44,136,220],bloodhunter:[19,17,146,224],kinglion:[38,9,122,232],vlord:[11,8,148,190],lich:[30,6,126,228],mammoth:[13,42,156,228],trapper:[37,16,123,232],wallwright:[5,32,138,239],hexweaver:[44,30,115,226],seraph:[9,0,150,204],warlord:[8,8,124,228],templar:[25,8,121,228],marshal:[40,2,126,228],bloodqueen:[36,12,124,232],nosferatu:[21,20,138,210],matriarch:[38,10,118,228],batking:[3,6,156,198],bonecolossus:[16,0,144,226],deathknight:[33,0,128,228],banshee:[23,2,136,202],plaguelord:[26,8,132,226],pitlord:[15,4,152,232],infernowitch:[33,4,128,226],demonprince:[18,25,141,202],phoenix:[23,4,138,218],eldertreant:[29,0,139,230],direwolf:[7,116,152,240],stormroc:[8,26,152,200],cavebear:[23,20,137,228],warengine:[13,28,148,219],forgemaster:[15,12,153,230],juggernaut:[14,2,144,230],thunderking:[32,0,148,230],chronomancer:[42,0,122,232],voidlord:[33,0,120,226],mirrormage:[15,0,146,226],runekeeper:[12,8,124,228],raidboss:[20,2,150,230],lookout:[35,3,116,228],nightwatch:[45,20,128,228],wisp:[46,58,111,201],fireeye:[32,48,127,209],falconer:[21,18,118,226],spotter:[24,36,140,230],oracle:[34,6,118,226]};
+const FB={sunspeaker:[39,11,120,226],aegis:[14,18,128,228],herald:[17,4,137,228],hemomancer:[36,25,134,228],mesmerist:[26,16,129,228],duskweaver:[28,19,132,229],ossomancer:[44,23,139,226],bonewitch:[15,44,120,228],gravedigger:[39,30,130,228],cinderwarden:[21,15,143,228],hellbinder:[36,14,146,228],pactbroker:[32,12,140,228],beastcaller:[46,12,136,226],groveshaper:[28,8,130,233],skinchanger:[40,8,128,230],runeforger:[20,18,136,230],cagewright:[35,24,150,230],prospector:[25,31,130,230],aetherlancer:[16,31,131,228],phasewright:[45,30,130,232],hourglass:[44,34,116,226],brute:[34,24,139,230],rogue:[44,12,116,226],archer:[30,28,116,226],knight:[22,0,120,228],mage:[43,4,136,226],cleric:[40,14,120,226],colossus:[11,22,148,230],blade:[48,28,138,228],lancer:[44,0,118,228],guard:[24,32,137,230],sapper:[35,36,140,230],wraith:[31,10,127,201],bomber:[47,4,122,228],witch:[44,6,118,236],storm:[44,0,120,226],druid:[43,14,120,226],paladin:[41,12,130,228],warlock:[42,23,118,226],assassin:[34,23,128,228],ballista:[22,42,148,228],footmen:[18,68,135,229],bowmen:[20,86,133,229],imps:[10,40,142,217],raiders:[24,72,138,229],sprites:[11,26,142,191],dragon:[7,12,146,232],titan:[6,26,154,232],archmage:[42,0,121,226],bats:[25,59,138,170],thrall:[30,38,132,230],countess:[46,14,118,226],skeletons:[8,18,150,222],ghoul:[32,76,128,214],necromancer:[40,4,120,226],graveknight:[14,10,119,226],hellhound:[20,72,146,226],magmagolem:[18,50,141,224],wolves:[34,110,132,227],treant:[31,0,129,230],gunner:[28,24,139,230],sentinel:[25,22,134,230],spellblade:[34,2,130,228],seer:[44,32,115,226],outrider:[18,6,138,228],boarrider:[12,63,135,226],bonerider:[18,44,136,220],bloodhunter:[19,17,146,224],kinglion:[38,9,122,232],vlord:[11,8,148,190],lich:[30,6,126,228],mammoth:[13,42,156,228],trapper:[37,16,123,232],wallwright:[5,32,138,239],hexweaver:[44,30,115,226],seraph:[9,0,150,204],warlord:[8,8,124,228],templar:[25,8,121,228],marshal:[40,2,126,228],bloodqueen:[36,12,124,232],nosferatu:[21,20,138,210],matriarch:[38,10,118,228],batking:[3,6,156,198],bonecolossus:[16,0,144,226],deathknight:[33,0,128,228],banshee:[23,2,136,202],plaguelord:[26,8,132,226],pitlord:[15,4,152,232],infernowitch:[33,4,128,226],demonprince:[18,25,141,202],phoenix:[23,4,138,218],eldertreant:[29,0,139,230],direwolf:[7,116,152,240],stormroc:[8,26,152,200],cavebear:[23,20,137,228],warengine:[13,28,148,219],forgemaster:[15,12,153,230],juggernaut:[14,2,144,230],thunderking:[32,0,148,230],chronomancer:[42,0,122,232],voidlord:[33,0,120,226],mirrormage:[15,0,146,226],runekeeper:[12,8,124,228],raidboss:[20,2,150,230],lookout:[35,3,116,228],nightwatch:[45,20,128,228],wisp:[46,58,111,201],fireeye:[32,48,127,209],falconer:[21,18,118,226],spotter:[24,36,140,230],oracle:[34,6,118,226]};
 const L={},Q=[],HQ=[];let act=0;
 const src=k=>'art/p/'+k+'.svg?v=1';
 function box(k){const b=FB[k]||L[k]&&L[k].b||[24,8,136,230];return '--x0:'+b[0]+';--y0:'+b[1]+';--bw:'+Math.max(8,b[2]-b[0])+';--bh:'+Math.max(8,b[3]-b[1])}
@@ -6218,6 +6218,683 @@ function moveSound(u,m){const w=window.hvWalk?hvWalk.get(u):null;
  if(m.fly){const t=now();if(t-LGLIDE<180)return;LGLIDE=t;HVA.st.glides++;try{GLIDE[flyKind(u)](w?w.dur:300)}catch(e){}return}
  const kind=tankKind(u);if(!kind)return;if(!w){step(kind);return}step(kind);WATCH.set(u,{kind,si:0,n:w.n,t0:now()});if(!WRAF)WRAF=requestAnimationFrame(watch)}
 window.hvAnim={wt,idl,elOf,flyKind,tankKind,impact,contact,shake,elemFx,castGlow,_orig:{fxA:FA0,popH:P0,render:R0,fx:F0}};
+})();
+</script>
+<style id="hv-casters">
+/* HV_CASTERS: spell targeting, zones, statuses and spell VFX */
+#board .cell.spl::after{background:radial-gradient(circle,#e2c4ffb8,#b06aff96 70%);z-index:1;animation:tgp 1.2s ease-in-out infinite}
+#board .cell.spl{cursor:pointer}
+#board .cell.spl2::after{background:radial-gradient(circle,#c8f4ffc0,#6ad0ffa0 70%);z-index:1;animation:spl2p .7s ease-in-out infinite alternate}
+#board .cell.spl2{cursor:pointer}
+#board .cell.spsel::after{background:radial-gradient(circle,#ffffff60,#b06aff80 70%);box-shadow:inset 0 0 0 3px #fff;z-index:1}
+@keyframes spl2p{from{opacity:.55}to{opacity:1}}
+#board .cell.spz::before{content:'';position:absolute;inset:3px;z-index:3;pointer-events:none;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:repeating-linear-gradient(60deg,var(--spc,#fff) 0 3px,#0000 3px 8px);opacity:.55}
+/* zones */
+.cell .spzo{position:absolute;inset:0;pointer-events:none;z-index:1;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.cell .spzo.z-verdict{background:radial-gradient(circle at 50% 50%,#ffe58a70,#ffd24a48 60%,#ffd24a20 80%);box-shadow:inset 0 0 0 4px #ffd36acc,inset 0 0 18px #ffd24a99}
+.cell .spzo.z-verdict.zc{background:radial-gradient(circle,#fff6c070,#ffd24a40 55%,#ffb02a10 75%);animation:vdp 1.6s ease-in-out infinite}
+.cell .spzo.z-verdict.zc::after{content:attr(data-n);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:34px;color:#fff6c0;text-shadow:0 0 8px #ffb02a,0 0 2px #000;filter:drop-shadow(0 0 6px #ffd24a)}
+@keyframes vdp{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5)}}
+.cell .spzo.z-fire{background:radial-gradient(ellipse at 50% 80%,#ff8a2ab0,#ff3c1a50 55%,#0000 75%);animation:fzp .5s steps(2) infinite alternate}
+.cell .spzo.z-fire::after{content:'';position:absolute;left:20%;right:20%;bottom:18%;height:46%;background:radial-gradient(ellipse at 50% 100%,#ffe07a,#ff6a1a 55%,#0000 70%);filter:blur(1px);animation:fzf .35s ease-in-out infinite alternate}
+@keyframes fzp{from{opacity:.8}to{opacity:1}}@keyframes fzf{from{transform:scaleY(.8)}to{transform:scaleY(1.15)}}
+.cell .spzo.z-veil{background:radial-gradient(circle at 50% 45%,#2a1640c8,#120820e6 70%);z-index:4;box-shadow:inset 0 0 12px #8a6ab8}
+.cell .spzo.z-veil.own{background:radial-gradient(circle at 50% 45%,#2a164055,#12082070 70%);z-index:1;box-shadow:inset 0 0 0 2px #8a6ab8aa,inset 0 0 10px #8a6ab8}
+.cell .spzo.z-veil::after{content:'';position:absolute;inset:18%;background:radial-gradient(circle at 30% 30%,#c8b0ff40 0 6%,#0000 7%),radial-gradient(circle at 70% 60%,#c8b0ff30 0 5%,#0000 6%);animation:vlb 3s linear infinite}
+@keyframes vlb{to{transform:rotate(360deg)}}
+.cell .spzo.z-mire{background:radial-gradient(circle,#4a6a2a60,#2e4e2070 70%);box-shadow:inset 0 0 0 2px #7ab04a80}
+/* statuses */
+.cell .sps{position:absolute;z-index:7;pointer-events:none;font-style:normal;font-weight:800;line-height:1;border-radius:9px;padding:1px 5px;font-size:11px;box-shadow:0 1px 3px #000a}
+.cell .sshd{right:14%;top:14%;background:linear-gradient(#fff2b0,#d8a830);color:#3a2a00;border:1px solid #fff6c0}
+.cell .sshd.tws{right:10%;top:6%}
+.cell .sedge{left:12%;top:14%;background:linear-gradient(#cfe0ff,#6f98ff);color:#0a1a40;border:1px solid #e6eeff}
+.cell .soss{left:12%;bottom:18%;background:#1a2a14;border:1px solid #7fc46a;font-size:10px}
+.cell .spcage{position:absolute;inset:6% 18% 12%;z-index:6;pointer-events:none;background:repeating-linear-gradient(90deg,#0000 0 18%,#9aa2acdd 18% 24%),linear-gradient(#5a5a64 0 6%,#0000 6% 94%,#5a5a64 94%);border-radius:4px;filter:drop-shadow(0 0 2px #000)}
+#board .sp.shp-oss{filter:sepia(.6) hue-rotate(50deg) saturate(1.6) brightness(1.05) drop-shadow(0 0 3px #7fc46a)}
+#board .sp.shp-mim{filter:drop-shadow(0 0 2px #5cc070) drop-shadow(0 0 5px #5cc070)}
+#board .wall.bldg.ograve svg{filter:drop-shadow(0 2px 2px #000a)}
+#board .wall.bldg.ograve .ogf{animation:ogf 2.4s ease-in-out infinite}
+@keyframes ogf{0%,100%{opacity:.6;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+#spsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:8;overflow:visible}
+#spsvg .tth0{fill:none;stroke:#000a;stroke-width:6;stroke-linecap:round}
+#spsvg .tth{fill:none;stroke:#e0304e;stroke-width:3.5;stroke-linecap:round;stroke-dasharray:10 6;animation:tthd .9s linear infinite;filter:drop-shadow(0 0 4px #ff2a3a)}
+@keyframes tthd{to{stroke-dashoffset:-32}}
+/* ability panel */
+.spbtn.on{outline:2px solid #b06aff}
+.use.spoff{opacity:.85}
+.spx{display:flex;align-items:center;gap:8px;margin:6px 0}
+.spx button{width:30px;height:30px;border-radius:50%;border:2px solid #8fb4ff;background:#1a2440;color:#d6e4ff;font-size:18px;font-weight:800;cursor:pointer}
+.spx b{color:#d6e4ff;min-width:52px;text-align:center}.spx small{color:#9ab0d8}
+.kch.ksp,.ki.ksp b,li.ksp b{color:#c8a8ff}
+.ust.good{color:#9fe08a}
+/* VFX */
+#fxl .spfx{position:absolute;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none}
+#fxl .spfx svg{width:100%;height:100%;overflow:visible}
+#fxl .sunring{border-radius:50%;background:radial-gradient(circle,#fff6c0 0 8%,#ffd24a88 9% 30%,#0000 31%),radial-gradient(circle,#0000 0 60%,#ffd36a 61% 64%,#0000 65%);animation:sunr 1.4s ease-out forwards}
+@keyframes sunr{0%{transform:translate(-50%,-50%) scale(.5);opacity:0}40%{opacity:1}100%{transform:translate(-50%,-50%) scale(2.7);opacity:0}}
+#fxl .sunlance{width:auto;height:auto;aspect-ratio:auto}
+#fxl .sunlance::before{content:'';position:absolute;left:50%;bottom:0;width:30px;height:900px;transform:translateX(-50%);background:linear-gradient(#fff0,#fff6c0 40%,#ffffff);filter:blur(2px);box-shadow:0 0 30px #ffd24a;animation:sunl 1.1s ease-out forwards}
+@keyframes sunl{0%{opacity:0;transform:translateX(-50%) scaleX(.2)}25%{opacity:1;transform:translateX(-50%) scaleX(1.4)}100%{opacity:0;transform:translateX(-50%) scaleX(.6)}}
+#fxl .aegfx{animation:aegp 1.3s ease-out forwards}
+@keyframes aegp{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}30%{transform:translate(-50%,-50%) scale(1.15);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+#fxl .banner{animation:bnr 1.2s ease-out forwards}#fxl .banner .flg{transform-origin:11px 5px;animation:flg .3s ease-in-out infinite alternate}
+@keyframes bnr{0%{transform:translate(-50%,-80%) scale(.6);opacity:0}25%{opacity:1;transform:translate(-50%,-90%) scale(1)}100%{opacity:0;transform:translate(-50%,-110%) scale(1)}}@keyframes flg{to{transform:skewY(6deg)}}
+#fxl .motes{border-radius:50%;background:radial-gradient(circle,#fff6c0,#ffd24a66 40%,#0000 70%);animation:aegp .9s ease-out forwards}
+#fxl .eyesig{animation:eye 1.3s ease-out forwards}@keyframes eye{0%{transform:translate(-50%,-120%) scale(.2);opacity:0}30%{transform:translate(-50%,-120%) scale(1.1);opacity:1}100%{transform:translate(-50%,-140%) scale(1);opacity:0}}
+#fxl .veilfx{border-radius:50%;background:radial-gradient(circle,#120820f0 0 45%,#3a1a5a80 60%,#0000 70%);animation:sunr 1.5s ease-out forwards}
+#fxl .bonecage{animation:bcg 1.3s ease-out forwards}@keyframes bcg{0%{transform:translate(-50%,-50%) scale(1.8);opacity:0}35%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+#fxl .contract{animation:eye 1.3s ease-out forwards}#fxl .contract .sig{stroke-dasharray:30;stroke-dashoffset:30;animation:sig .5s .3s ease-out forwards}@keyframes sig{to{stroke-dashoffset:0}}
+#fxl .stag{animation:stag .9s cubic-bezier(.3,.1,.4,1) forwards;opacity:.9}
+@keyframes stag{0%{opacity:0}15%{opacity:.95}100%{margin-left:var(--tx);margin-top:var(--ty);opacity:0}}
+#fxl .runes{animation:aegp 1.3s ease-out forwards}
+#fxl .cagedrop{animation:cgd 1.3s ease-out forwards}@keyframes cgd{0%{transform:translate(-50%,-160%);opacity:0}30%{transform:translate(-50%,-50%);opacity:1}40%{transform:translate(-50%,-56%)}50%{transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(-50%,-50%)}}
+#fxl .hglass{animation:hgl 1.2s ease-out forwards}@keyframes hgl{0%{transform:translate(-50%,-60%) rotate(0) scale(.5);opacity:0}30%{opacity:1;transform:translate(-50%,-60%) rotate(180deg) scale(1)}100%{opacity:0;transform:translate(-50%,-70%) rotate(180deg)}}
+#fxl .ovs.spb line{filter:drop-shadow(0 0 6px currentColor)}
+#fxl .ovs.spb.chain line:nth-child(2){stroke-dasharray:6 4}
+#fxl .ovs.spb.tth1 line:nth-child(2){stroke-dasharray:12 6}
+#fxl .ovs.spb.hrt line:nth-child(2){stroke-dasharray:2 7}
+#fxl .ovs.spb.sand line:nth-child(2){stroke-dasharray:3 5}
+@media (prefers-reduced-motion:reduce){#fxl .spfx{animation-duration:.3s!important}#spsvg .tth,.cell .spzo{animation:none!important}}
+/* Tilted view (html.tvon, #hv-tilt): badges and the cage stand up with their figure, spell icons and the noon beam stand up on the plane,
+   ground effects (zones, rings, particles, tethers, beams) stay flat on the tilted board */
+html.tvon #board .cell .sps{scale:1 var(--tk,1.5);translate:0 calc(var(--tvch,.12) * var(--tvw,1000px) * (1 - var(--tk,1.5)) * var(--tD,0));transform-origin:50% 100%;--tD:.3;z-index:11}
+html.tvon #board .cell .sps.soss{--tD:.05}
+html.tvon #board .cell .spcage{scale:1 var(--tk,1.5);transform-origin:50% 100%;z-index:9}
+html.tvon #board .cell .spzo.z-fire::after{scale:1 var(--tk,1.5);transform-origin:50% 100%}
+html.tvon #board .cell .spzo.z-verdict.zc::after{scale:1 var(--tk,1.5)}
+html.tvon #fxl .spfx>svg{transform:scaleY(var(--tvk0,1.6));transform-origin:50% 100%}
+html.tvon #fxl .sunlance::before{scale:1 var(--tvk0,1.6);transform-origin:50% 100%}
+#fxl .spring>i,#fxl .spscorch>i{position:absolute;inset:0;border-radius:50%;pointer-events:none}
+#fxl .spring>i{border:4px solid var(--rc);box-shadow:0 0 10px var(--rc),inset 0 0 8px var(--rc);--rs:1.36;animation:sprg .65s ease-out forwards}
+#fxl .spring.big>i{--rs:2.2}
+#fxl .spring.fl>i{border:0;background:radial-gradient(circle,#fff 0,var(--rc) 35%,#0000 70%);mix-blend-mode:screen;animation:sprf .45s ease-out forwards}
+@keyframes sprg{from{transform:scale(.55);opacity:.95}to{transform:scale(var(--rs));opacity:0}}
+@keyframes sprf{from{transform:scale(.6);opacity:.9}to{transform:scale(var(--rs));opacity:0}}
+#fxl .spscorch>i{background:radial-gradient(circle,#ffb04a88 0,#ff6a1a55 35%,#2a100066 60%,#0000 72%);animation:spsc 1.4s ease-out forwards}
+@keyframes spsc{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+</style>
+<script>
+/* ===== HV_CASTERS: 21 spellcasters, 3 per faction (Kingdom, Vampires, Undead, Infernal, Wilds, Iron Clan, Arcane Order) =====
+ One shared spell framework: SPELL registry, spell targets (green ally/cell hexes, violet enemy hexes), cooldowns (u.spcd = round it is ready),
+ two-step and X-cost targeting, zones (S.zones), tethers (S.tethers), shields and cages (an hp accessor on the shielded/caged object),
+ shapes (Ossify, Mimic: a hidden H entry, the real key is restored before any death handling), forced moves (never claim mines or chests).
+ Game state is only changed inside perform() and the turn hooks, in fixed iteration order, never with Math.random (AI choices and VFX may).
+ Online: extra spell input travels in fields the server already relays: i:1 marks a spell, item:'sp'+x2+y2+X letters. */
+(function(){
+if(typeof H=='undefined'||H.sunspeaker)return;
+const K=(x,y)=>x+','+y,KP=k=>{const[x,y]=k.split(',').map(Number);return{x,y}};
+const HVSP=window.HVSP={st:{},ver:1};
+const stat=(k,n)=>{HVSP.st[k]=(HVSP.st[k]||0)+(n==null?1:n)};
+const hvW=(x,y)=>typeof window.hvIsWater=='function'&&!!window.hvIsWater(x,y);
+const hvDeep=(x,y)=>typeof window.hvWB=='function'&&!!window.hvWB(x,y);
+const LIVE=v=>!!v&&v.hp>0&&S.units.includes(v);
+const isElite=v=>!!(v&&H[v.k]&&H[v.k].elite);
+const ring1=c=>GEO.cells.filter(q=>dist(q,c)<=1).map(q=>({x:q.x,y:q.y}));
+const DIRS=[[1,0],[1,-1],[0,-1],[-1,0],[-1,1],[0,1]];
+function dirOf(a,b){const A=cube(a.x,a.y),B=cube(b.x,b.y),d=dist(a,b);if(!d)return null;const dq=B[0]-A[0],dr=B[1]-A[1];if(dq%d||dr%d)return null;const q=dq/d,r=dr/d;return DIRS.find(D=>D[0]==q&&D[1]==r)||null}
+function lineFrom(o,D,n){const A=cube(o.x,o.y),r=[];for(let i=1;i<=n;i++){const c=fromCube(A[0]+D[0]*i,A[1]+D[1]*i);if(!VALID.has(K(c.x,c.y)))break;r.push(c)}return r}
+function lineCells(u,n){const r=[];DIRS.forEach(D=>lineFrom(u,D,n).forEach(c=>r.push(c)));return r}
+/* ---------------- state ---------------- */
+function Z(){if(!S)return null;if(!S.zones){S.zones=[];S.tethers=[];S.veins={};S.terBase={};S.spTB={};S.spid=0}return S}
+const zonesOf=k=>(S&&S.zones?S.zones.filter(z=>z.k==k):[]);
+const inZone=(z,x,y)=>z.cells.includes(K(x,y));
+/* ---------------- hp accessor: shields (Aegis) and cages share one choke point ---------------- */
+let NOABS=0;
+function guard(o){if(!o||o._spg)return;let val=o.hp;o._spg=1;
+ Object.defineProperty(o,'hp',{configurable:true,enumerable:true,get(){return val},set(nv){
+  if(typeof nv!='number'||isNaN(nv)||NOABS||typeof val!='number'){val=nv;return}
+  if(o.cage){if(nv!==val&&!RP&&S&&S.units&&S.units.includes(o))spPop(o,'Caged');return}
+  if(nv<val&&o.shield>0){const d=val-nv,ab=Math.min(o.shield,d);o.shield-=ab;nv=val-(d-ab);stat('shieldAbs',ab);
+   if(o.shield<=0){o.shield=0;o.shS=null;if(!RP){try{pop(o,'Shield broken',1);sfxK('shbreak')}catch(e){}}}}
+  val=nv}})}
+let POPQ=0;function spPop(o,t){if(POPQ>performance.now())return;POPQ=performance.now()+120;try{pop(o,t,1)}catch(e){}}
+/* ---------------- shapes (Ossify, Mimic Shape) ---------------- */
+function mkShape(kind,k0){const key=(kind=='oss'?'oss_':'mim_')+k0;if(H[key])return key;const b=H[k0];let h;
+ if(kind=='oss')h={n:'Ossified '+b.n,e:'💀',hp:b.hp,mv:2,rng:[1,1],dmg:2,armor:b.armor||0,fac:b.fac,hidden:1,shapeOf:k0,shapeK:'oss',d:'Ossified by a Bone Witch: a slow, weak skeleton until the end of its next turn. It keeps its own HP.'};
+ else{h={n:'Skinchanger',e:'🐾',hp:b.hp,mv:b.mv,rng:b.rng.slice(),dmg:b.dmg,fac:'wilds',hidden:1,shapeOf:'skinchanger',shapeLook:k0,shapeK:'mim',d:'A Skinchanger wearing the body of a '+b.n+'. It reverts at the end of its 2nd turn, or as an action.'};
+  ['armor','fly','charge','pierce','aoe','siege','acost','sight'].forEach(f=>{if(b[f])h[f]=Array.isArray(b[f])?b[f].slice():b[f]})}
+ H[key]=h;ROLE[key]=ROLE[kind=='oss'?k0:'skinchanger']||['Support',''];return key}
+function shapeOn(v,kind,look,n){const base=v.k,m0=maxHp(v),key=mkShape(kind,kind=='oss'?base:look);v.shape={kind,k0:base,look,n};v.k=key;
+ if(kind=='mim'){const m1=maxHp(v);NOABS++;try{v.hp=Math.max(1,Math.floor(v.hp/m0*m1))}finally{NOABS--}}}
+function shapeOff(v,quiet){if(!v||!v.shape)return;const kind=v.shape.kind,m0=maxHp(v);v.k=v.shape.k0;v.shape=null;
+ if(kind=='mim'){if(v.hp>0){const m1=maxHp(v);NOABS++;try{v.hp=Math.max(1,Math.min(m1,Math.floor(v.hp/m0*m1)))}finally{NOABS--}}v.spcd=S.round+3}
+ if(!quiet&&!RP&&LIVE(v)){try{pop(v,kind=='oss'?'Bones fall away':'Reverts',1);fx(v,'spawn');vfx('shapeoff',v)}catch(e){}}}
+/* ---------------- forced moves: snares and fire trigger, mines and chests are never claimed ---------------- */
+function standable(v,x,y,ign){if(!VALID.has(K(x,y))||twAt(x,y)||wallAt(x,y))return false;const o=at(x,y);if(o&&o!==ign)return false;if(hvDeep(x,y))return false;if(!H[v.k].fly&&hvW(x,y))return false;return true}
+function landOn(v,x,y){v.x=x;v.y=y;let snared=0;
+ if(!H[v.k].fly&&!IMM(v)){const tp=trapAt(x,y);if(tp&&isFoe(tp.side,v.side)){S.traps=S.traps.filter(q=>q!==tp);v.root=1;snared=1;stat('forcedSnares');if(!RP){pop(v,'Snared!');msg(`${SHORT[v.side]} ${H[v.k].n} is caught in a snare!`)}}}
+ const fz=fireAt(x,y,v.side);if(fz&&!H[v.k].fly)fireBurn(v,fz);return snared}
+function fireAt(x,y,side){return zonesOf('fire').find(z=>isFoe(z.side,side)&&inZone(z,x,y))}
+function fireBurn(v,z){if(!LIVE(v))return;spHit(z.src||{side:z.side,x:v.x,y:v.y,k:'cinderwarden'},v,3,{burn:1,side:z.side});stat('fireHits');if(!RP)pop(v,'🔥',0)}
+/* ---------------- damage helpers (route through hit() so armor, ward, shields, stats and tower gold behave as usual) ---------------- */
+function srcAt(side,o,k){return{side,x:o.x,y:o.y,k:k||'',hp:0}}
+function spHit(src,v,d,o){if(!LIVE(v))return 0;const pc=curAtk,b=v.hp;curAtk=src;try{hit({t:'u',v,x:v.x,y:v.y},d)}finally{curAtk=pc}
+ if(o&&o.burn&&v.hp>0&&!(v.cage)){v.burn=2;v.bd=Math.max(v.bd||0,hasSyn(o.side||src.side,'infernal')?2:1)}const r=Math.max(0,b-v.hp);stat('spDmg',r);return r}
+function spHitT(src,T,d){if(!T||T.hp<=0)return;const pc=curAtk;curAtk=src;try{hit({t:'t',T,x:T.x,y:T.y},d)}finally{curAtk=pc}}
+function spHitW(src,W,d){if(!W||!S.walls.includes(W))return;const pc=curAtk;curAtk=src;try{hit({t:'w',W,x:W.x,y:W.y},d)}finally{curAtk=pc}}
+function loseHp(v,a,src){if(!LIVE(v))return 0;if(v.ward){v.ward=0;pop(v,'Warded!',1);return 0}const b=v.hp;v.hp-=a;const r=Math.max(0,b-v.hp);if(r){fx(v,'hurt');pop(v,'-'+r)}
+ if(src&&G&&G[src])G[src].dmg+=r;if(MOPT.ults&&src&&S.ult)S.ult[src]=Math.min(ULT_MAX,(S.ult[src]||0)+r);return r}
+/* own unit removed by a spell (Bone Shrapnel): no Undying, no enemy gold, a spent real hero still goes to the recruit list */
+function destroyOwn(w){w.rez=1;G[w.side].lost++;NOABS++;try{w.hp=0}finally{NOABS--}fall(w);fx(w,'dead');deathFx(w,0);S.ghosts.push(w);S.units=S.units.filter(x=>x!==w);setTimeout(()=>{if(!S)return;S.ghosts=S.ghosts.filter(g=>g!==w);render()},1100)}
+/* ---------------- spells ---------------- */
+const foeH=(u,v)=>LIVE(v)&&isFoe(v.side,u.side)&&canSee(u.side,v)&&!v.cage;
+const allyH=(u,v)=>LIVE(v)&&v.side==u.side&&!v.cage;
+const U2=v=>({t:'s',summon:1,ab:'sp',x:v.x,y:v.y,v});
+const C2=c=>({t:'s',summon:1,ab:'sp',x:c.x,y:c.y});
+const inR=(u,o,a,b)=>{const d=dist(u,o);return d>=a&&d<=b};
+const SPELL={
+verdict:{n:'Noon Verdict',e:'☀️',c:3,cd:1,foe:1,h:'up to 4 hexes away (fog is fine): it lands at the start of your next turn.',
+ d:'mark a hex 2-4 away (fog is fine). At the start of your next turn enemies on it take 5 and enemies around it take 3; enemy towers and buildings there take 3. Everyone sees the golden ring. Allies are safe, and it lands even if the Sunspeaker falls.',
+ tg(u){return GEO.cells.filter(c=>inR(u,c,2,4)).map(C2)},prev:(u,t)=>ring1(t),
+ cast(u,t){Z();S.zones.push({k:'verdict',id:++S.spid,x:t.x,y:t.y,cells:ring1(t).map(c=>K(c.x,c.y)),side:u.side,n:1});msg(`${SHORT[u.side]} ${H[u.k].n} calls down a Noon Verdict.`)}},
+aegis:{n:'Aegis',e:'🛡️',c:2,cd:0,h:'(an ally, yourself, or your tower or building within 3) to shield it.',
+ d:'shield an ally (or yourself) within 3 for 4, or 6 if it stands next to another Kingdom unit. The shield soaks damage after armor until it breaks or your 2nd turn after casting; recasting refreshes it. Your own buildings get 4; your towers get 3 (then cooldown 2, at most 3 tower shield per side per round, never in sudden death).',
+ tg(u){const r=S.units.filter(v=>allyH(u,v)&&dist(u,v)<=3).map(U2);S.walls.filter(w=>w.side==u.side&&w.b&&dist(u,w)<=3).forEach(w=>r.push({t:'s',summon:1,ab:'sp',x:w.x,y:w.y,o:w}));
+  if(S.round<SDR()&&towerBudget(u.side)>0)S.tw[u.side].filter(T=>T.hp>0&&dist(u,T)<=3).forEach(T=>r.push({t:'s',summon:1,ab:'sp',x:T.x,y:T.y,o:T,tw:1}));return r},
+ cast(u,t){const o=t.v||t.o;let a=4;if(t.v&&S.units.some(w=>w!==t.v&&w.side==t.v.side&&H[w.k].fac=='kingdom'&&dist(w,t.v)==1))a=6;
+  if(t.tw){a=Math.min(3,towerBudget(u.side));Z();const k=u.side+':'+S.round;S.spTB[k]=(S.spTB[k]||0)+a;u.spcd=S.round+3}
+  guard(o);o.shield=a;o.shS=u.side;o.shL=2;stat('shieldGiven',a);pop(o,'🛡 '+a,1);msg(`${SHORT[u.side]} ${H[u.k].n} raises an Aegis (${a}).`)}},
+rally:{n:'Rally to the Banner',e:'🎺',c:2,cd:1,two:1,h:'(a friendly hero within 4), then a free hex next to the Herald.',p2:'Now tap a free hex next to the Herald for it to land on.',
+ d:'pull a friendly non-boss hero within 4 to a free hex next to the Herald. It counts as moved, but can still attack if it has not acted. Rooted, caged and Juggernaut units cannot answer.',
+ tg(u){return S.units.filter(v=>allyH(u,v)&&v!==u&&!isElite(v)&&!IMM(v)&&!v.root&&dist(u,v)<=4&&this.s2(u,v).length).map(U2)},
+ s2(u,v){return NB[u.y&1].map(([dx,dy])=>({x:u.x+dx,y:u.y+dy})).filter(p=>standable(v,p.x,p.y))},
+ cast(u,t,a){const v=t.v,p=this.s2(u,v).find(q=>q.x==a.x2&&q.y==a.y2);if(!p)return false;const from={x:v.x,y:v.y};landOn(v,p.x,p.y);v.moved=1;stat('rallies');
+  if(!RP)vfx('rally',v,from);msg(`${SHORT[u.side]} ${H[u.k].n} rallies ${H[v.k].n} to the banner.`)}},
+tether:{n:'Crimson Tether',e:'🩸',c:2,cd:0,foe:1,h:'(an enemy hero 2-3 away) to bind it.',
+ d:'bind an enemy hero 2-3 away. At the start of your next 3 turns it loses 2 HP and the Hemomancer heals 2 (3 and 3 with the Vampire team bonus). It breaks if they end a turn more than 4 apart, a wall blocks the line, or she is silenced, caged or slain. Her move is 1 while it holds and the target stays revealed. One tether at a time.',
+ tg(u){Z();if(S.tethers.some(q=>q.a===u))return[];return S.units.filter(v=>foeH(u,v)&&inR(u,v,2,3)&&los(u,v)).map(U2)},
+ cast(u,t){S.tethers.push({a:u,b:t.v,side:u.side,n:3,id:++S.spid});t.v.exp=1;msg(`${SHORT[u.side]} ${H[u.k].n} binds ${H[t.v.k].n} with a Crimson Tether.`)}},
+command:{n:'Sweet Command',e:'🎭',c:3,cd:2,foe:1,two:1,h:'(an enemy hero within 2), then a unit it can hit that is not yours.',p2:'Now tap the unit it must attack (violet).',
+ d:'charm a non-boss enemy hero within 2, then pick a unit it could hit right now that is not yours: it attacks at once, with its own splash, stun, burn and drain, and its mana cost is waived. Kills pay you. It cannot counterattack until its next turn.',
+ tg(u){return S.units.filter(v=>foeH(u,v)&&dist(u,v)<=2&&!isElite(v)&&!IMM(v)&&this.s2(u,v).length).map(U2)},
+ s2(u,v){const h=H[v.k],a=h.rng[0],b=h.rng[1]+(MOPT.terrain&&h.rng[1]>=2&&terAt(v)=='hill'?1:0);
+  return S.units.filter(w=>w!==v&&LIVE(w)&&!w.cage&&!sameTeam(w.side,u.side)&&canSee(u.side,w)&&inR(v,w,a,b)&&(!h.pierce||dist(v,w)<2||!!pierceDir(v,w))&&(v.k=='warengine'||los(v,w))).map(w=>({x:w.x,y:w.y,v:w}))},
+ cast(u,t,a){const v=t.v,p=this.s2(u,v).find(q=>q.x==a.x2&&q.y==a.y2);if(!p)return false;msg(`${SHORT[u.side]} ${H[u.k].n} charms ${H[v.k].n}!`);if(!RP)vfx('command',v,p.v);forceAtk(u,v,p.v);stat('charms')}},
+veil:{n:'Veil of Night',e:'🌑',c:2,cd:2,h:'within 4 to darken it and its 6 neighbours.',
+ d:'darken a hex within 4 and its 6 neighbours until your 2nd turn after casting. Enemies cannot see into it, and only enemies next to your units there can target them; splash still lands. An enemy flare on it blows it away. Each Duskweaver keeps one Veil.',
+ tg(u){return GEO.cells.filter(c=>dist(u,c)<=4).map(C2)},prev:(u,t)=>ring1(t),
+ cast(u,t){Z();S.zones=S.zones.filter(z=>!(z.k=='veil'&&z.by===u));S.zones.push({k:'veil',id:++S.spid,x:t.x,y:t.y,cells:ring1(t).map(c=>K(c.x,c.y)),side:u.side,n:2,by:u});vcache=null;msg(`${SHORT[u.side]} ${H[u.k].n} weaves a Veil of Night.`)}},
+shrapnel:{n:'Bone Shrapnel',e:'🦴',c:1,cd:0,h:'(your summon, or an Undead whose Undying is spent, within 3) to blow it apart.',
+ d:'detonate a friendly summoned or raised unit, or an Undead whose Undying is spent, within 3 (not bosses): every enemy next to it takes 4 (it burns if the bones were Infernal), enemy towers, walls and buildings next to it take 2. It is destroyed: no Undying, and the enemy gets no gold.',
+ tg(u){return S.units.filter(w=>w!==u&&LIVE(w)&&w.side==u.side&&!w.cage&&!isElite(w)&&dist(u,w)<=3&&(w.sumBy||(H[w.k].fac=='undead'&&w.rez))).map(U2)},prev:(u,t)=>ring1(t),
+ cast(u,t){const w=t.v,src=srcAt(u.side,w,'ossomancer'),inf=H[w.k].fac=='infernal';msg(`${SHORT[u.side]} ${H[u.k].n} detonates ${H[w.k].n}!`);if(!RP)vfx('shrapnel',w);
+  S.units.filter(v=>v!==w&&isFoe(v.side,u.side)&&dist(v,w)==1).forEach(v=>spHit(src,v,4,{burn:inf,side:u.side}));
+  foeTowers(u.side).filter(T=>dist(T,w)==1).forEach(T=>spHitT(src,T,2));S.walls.filter(W=>isFoe(W.side,u.side)&&dist(W,w)==1).forEach(W=>spHitW(src,W,2));
+  destroyOwn(w);stat('shrapnel')}},
+ossify:{n:'Ossify',e:'💀',c:3,cd:2,foe:1,h:'(a non-boss enemy hero 2-3 away) to turn it to bone.',
+ d:'curse a non-boss enemy hero 2-3 away: until the end of its next turn it becomes a skeleton with 2 damage, move 2 and melee reach, and loses flying, abilities, spells and heals. It keeps its own HP, so it does not die any easier.',
+ tg(u){return S.units.filter(v=>foeH(u,v)&&inR(u,v,2,3)&&!isElite(v)&&!IMM(v)&&!v.shape).map(U2)},
+ cast(u,t){const v=t.v;shapeOn(v,'oss',null,1);stat('ossify');if(!RP)vfx('ossify',v);msg(`${SHORT[u.side]} ${H[u.k].n} ossifies ${H[v.shape.k0].n}.`)}},
+grave:{n:'Open Grave',e:'⚰️',c:2,cd:0,h:'next to the Gravedigger to dig a grave you can spawn next to.',
+ d:'dig a 4 HP Open Grave on an empty hex next to him (not a shrine, mine or water, and not within 2 of an enemy tower). For 3 of your turns you can spawn heroes next to it, like a Barracks; it blocks movement but not sight. One grave per Gravedigger. Grave Tax: +1 gold whenever an enemy hero falls within 2 of him.',
+ tg(u){if(S.walls.some(w=>w.b=='ograve'&&w.og&&w.og.by===u))return[];return NB[u.y&1].map(([dx,dy])=>({x:u.x+dx,y:u.y+dy})).filter(p=>free(p.x,p.y)&&!trapAt(p.x,p.y)&&!mineAt(p.x,p.y)&&!chestAt(p.x,p.y)&&!S.shr.includes(K(p.x,p.y))&&!hvW(p.x,p.y)&&!foeTowers(u.side).some(T=>dist(T,p)<=2)).map(C2)},
+ cast(u,t){const W={x:t.x,y:t.y,side:u.side,hp:4,max:4,b:'ograve',og:{by:u,n:3}};S.walls.push(W);fx(W,'spawn');stat('graves');msg(`${SHORT[u.side]} ${H[u.k].n} opens a grave.`)}},
+flamewall:{n:'Wall of Flame',e:'🔥',c:2,cd:1,foe:1,h:'1-3 hexes away in a straight line: that hex and the next 2 behind it catch fire.',
+ d:'set 3 hexes in a straight line alight, starting 1-3 hexes away, until your 2nd turn after casting (a round longer if any of it is forest). Enemies that walk in or start their turn there take 3 and burn. Fliers are safe; towers and water do not burn.',
+ tg(u){return lineCells(u,3).map(C2)},prev(u,t){return fwCells(u,t).map(KP)},
+ cast(u,t){Z();const cells=fwCells(u,t);if(!cells.length)return false;const fo=cells.some(k=>S.ter&&S.ter[k]=='forest');S.zones.push({k:'fire',id:++S.spid,x:t.x,y:t.y,cells,side:u.side,n:fo?3:2,src:srcAt(u.side,u,'cinderwarden')});stat('flamewalls');msg(`${SHORT[u.side]} ${H[u.k].n} raises a Wall of Flame.`)}},
+hook:{n:'Hellhook',e:'⛓️',c:2,cd:1,foe:1,h:'(an enemy hero 2-4 away) to drag it toward the Hellbinder.',
+ d:'hook an enemy hero 2-4 away and drag it up to 2 hexes toward the Hellbinder (bosses only 1; Juggernaut is immune). It takes 2 and burns, or 4 if it could not be moved at all. Snares and fire along the way trigger; it never claims mines.',
+ tg(u){return S.units.filter(v=>foeH(u,v)&&inR(u,v,2,4)&&!IMM(v)).map(U2)},prev:(u,t)=>{const p=pullPath(u,t.v);return [{x:t.x,y:t.y}].concat(p)},
+ cast(u,t){const v=t.v,from={x:v.x,y:v.y},p=pullPath(u,v);let moved=0;for(const c of p){const sn=landOn(v,c.x,c.y);moved++;if(sn||!LIVE(v))break}
+  if(!RP)vfx('hook',u,from,v);if(LIVE(v))spHit(srcAt(u.side,u,'hellbinder'),v,moved?2:4,{burn:1,side:u.side});stat('hooks');stat('hookMoved',moved);msg(`${SHORT[u.side]} ${H[u.k].n} hooks ${H[v.k].n}${moved?'':' (it does not budge)'}.`)}},
+bargain:{n:"Devil's Bargain",e:'📜',c:0,cd:2,h:'(a friendly hero within 2 with 4+ HP, or yourself): 3 HP for 1 mana and 1 gold.',
+ d:'a friendly hero within 2 (or the Pactbroker) with 4+ HP loses 3 HP (armor and shields do not help; never below 1). You gain 1 mana and 1 gold.',
+ tg(u){return S.units.filter(v=>allyH(u,v)&&dist(u,v)<=2&&v.hp>=4).map(U2)},
+ cast(u,t){const v=t.v;NOABS++;try{const b=v.hp;v.hp=Math.max(1,v.hp-3);pop(v,'-'+(b-v.hp));fx(v,'hurt')}finally{NOABS--}S.mana[u.side]=Math.min(10,S.mana[u.side]+1);gainGold(u.side,1,u);stat('bargains');if(!RP)vfx('bargain',v);msg(`${SHORT[u.side]} ${H[u.k].n} strikes a Devil's Bargain (+1 mana, +1 gold).`)}},
+herd:{n:'Thundering Herd',e:'🦌',c:3,cd:1,foe:1,h:'in any straight line: a spirit herd runs 4 hexes that way.',
+ d:'a spirit herd runs 4 hexes in a straight line. Every enemy in it takes 3 and is pushed 1 hex on, or takes 5 if the push is blocked. It stops at the first wall, building or tower: 3 damage to walls and buildings, 2 to a tower. It hits and reveals hidden units.',
+ tg(u){return lineCells(u,4).map(C2)},prev(u,t){const D=dirOf(u,t);return D?herdCells(u,D).cells:[]},
+ cast(u,t){const D=dirOf(u,t);if(!D)return false;const {cells,stop}=herdCells(u,D),src=srcAt(u.side,u,'beastcaller');if(!RP)vfx('herd',u,cells,D);
+  const hitU=cells.map(c=>at(c.x,c.y)).filter(v=>v&&isFoe(v.side,u.side)&&LIVE(v)).reverse();
+  hitU.forEach(v=>{v.exp=1;spHit(src,v,3);if(!LIVE(v))return;const A=cube(v.x,v.y),n=fromCube(A[0]+D[0],A[1]+D[1]);if(!IMM(v)&&standable(v,n.x,n.y))landOn(v,n.x,n.y);else{spHit(src,v,2);stat('herdBlocked')}});
+  if(stop){if(stop.T&&isFoe(stop.T.side,u.side))spHitT(src,stop.T,2);if(stop.W&&isFoe(stop.W.side,u.side))spHitW(src,stop.W,3)}stat('herds');stat('herdHits',hitU.length);msg(`${SHORT[u.side]} ${H[u.k].n} sends a Thundering Herd.`)}},
+mire:{n:'Sinking Mire',e:'🌱',c:2,cd:3,h:'2-3 hexes away: it and its 6 neighbours turn to swamp for 2 rounds.',
+ d:'turn a hex 2-3 away and its 6 neighbours into swamp for 2 rounds: walking units stop when they enter. Fliers and your own Wilds heroes ignore it. Towers, shrines and water stay as they are, and it cannot overlap your previous Mire.',
+ tg(u){Z();const own=new Set(zonesOf('mire').filter(z=>z.side==u.side).flatMap(z=>z.cells));return GEO.cells.filter(c=>inR(u,c,2,3)&&!mireCells(c).some(k=>own.has(k))).map(C2)},prev:(u,t)=>mireCells(t).map(KP),
+ cast(u,t){Z();const cells=mireCells(t);cells.forEach(k=>{if(!(k in S.terBase))S.terBase[k]=S.ter[k]===undefined?null:S.ter[k];S.ter[k]='swamp'});S.zones.push({k:'mire',id:++S.spid,x:t.x,y:t.y,cells,side:u.side,n:2});stat('mires');msg(`${SHORT[u.side]} ${H[u.k].n} sinks the ground into a Mire.`)}},
+mimic:{n:'Mimic Shape',e:'🐾',c:2,cd:0,h:'(a non-boss, non-squad hero within 2, ally or enemy) to take its body.',
+ d:'take the body of a non-boss, non-squad hero within 2, ally or enemy: its HP (as a share), move, range, damage, armor, flying, charge, pierce, splash and siege, but none of its spells, abilities, heals, stun or drain. It keeps its own side, sight and Regrowth. Lasts until the end of your 2nd turn after casting, or revert as an action. Cooldown 2 after it reverts.',
+ tg(u){return S.units.filter(v=>v!==u&&LIVE(v)&&!v.cage&&dist(u,v)<=2&&canSee(u.side,v)&&!isElite(v)&&!H[v.k].group&&!v.shape&&!H[v.k].hidden).map(U2)},
+ cast(u,t){const k0=t.v.k;shapeOn(u,'mim',k0,2);stat('mimics');if(!RP)vfx('mimic',u);msg(`${SHORT[u.side]} Skinchanger takes the shape of a ${H[k0].n}.`)}},
+revert:{n:'Revert',e:'🐾',c:0,cd:0,h:'(the Skinchanger) to return to its own body.',d:'return to its own body.',
+ tg(u){return u.shape&&u.shape.kind=='mim'?[U2(u)]:[]},cast(u){shapeOff(u)}},
+edge:{n:'Runeforged Edge',e:'🔨',c:2,cd:0,h:'(an ally within 2, or himself): its next attack deals +3 and ignores armor.',
+ d:'an ally within 2 (or himself): its next attack before the end of your next turn deals +3 to its main target and ignores armor, towers and walls included (splash and pierce get no bonus; ward, mist and Templar still apply).',
+ tg(u){return S.units.filter(v=>allyH(u,v)&&dist(u,v)<=2&&!H[v.k].heal&&!(v.edge)).map(U2)},
+ cast(u,t){t.v.edge={n:2,by:u.side};stat('edges');pop(t.v,'+3 Edge',1);msg(`${SHORT[u.side]} ${H[u.k].n} runeforges ${H[t.v.k].n}'s weapon.`)}},
+cage:{n:'Iron Cage',e:'⛓',c:3,cd:2,h:'(a non-boss hero 2-3 away, any side) to lock it in.',
+ d:'lock a non-boss hero 2-3 away, ally or enemy, until the end of its next turn: it cannot move, attack, cast or heal, and nothing can target, damage or heal it. Its burn and wither pause. It still blocks its hex.',
+ tg(u){return S.units.filter(v=>LIVE(v)&&!v.cage&&inR(u,v,2,3)&&canSee(u.side,v)&&!isElite(v)&&!IMM(v)).map(U2)},
+ cast(u,t){const v=t.v;guard(v);v.cage={n:1,by:u.side};if(v.side==S.turn)v.used=true;stat(v.side==u.side?'cageAlly':'cageFoe');pop(v,'Caged!',v.side==u.side);msg(`${SHORT[u.side]} ${H[u.k].n} cages ${H[v.k].n}.`)}},
+vein:{n:'Strike the Vein',e:'⛏️',c:2,cd:3,h:'(a gold mine you hold within 3) to make it pay +1 gold on your next 2 turns.',
+ d:'a gold mine you hold within 3 pays +1 gold on your next 2 turns (one vein per side). Assayer: enemies cannot claim a mine while he stands on it or next to it.',
+ tg(u){Z();if(!MOPT.gold||S.veins[u.side])return[];return (S.mines||[]).filter(m=>m.o===u.side&&dist(u,m)<=3).map(C2)},
+ cast(u,t){Z();S.veins[u.side]={x:t.x,y:t.y,n:2};stat('veins');if(!RP)vfx('vein',t);msg(`${SHORT[u.side]} ${H[u.k].n} strikes a rich vein.`)}},
+lance:{n:'Overflow Lance',e:'🔱',c:'X',cd:0,foe:1,h:'in any straight line (choose X with − and +).',
+ d:'spend X mana (1-5; Arcane Flow does not reduce it) to fire a line up to 4 hexes: the first enemy takes 2+X and every other enemy in the line X. A wall, building or tower stops it and takes 2+X. It passes over water and hits hidden units. Refunds 1 mana if it kills.',
+ tg(u){return lineCells(u,4).map(C2)},prev(u,t){const D=dirOf(u,t);return D?lanceCells(u,D).cells:[]},
+ cast(u,t,a){const D=dirOf(u,t),X=Math.max(1,Math.min(5,a.X||1,S.mana[u.side]));if(!D)return false;S.mana[u.side]-=X;G[u.side].mana+=X;const {cells,stop}=lanceCells(u,D),src=srcAt(u.side,u,'aetherlancer');
+  if(!RP)vfx('lance',u,cells,X,stop);let first=1;const n0=S.units.filter(v=>isFoe(v.side,u.side)).length;
+  cells.forEach(c=>{const v=at(c.x,c.y);if(v&&isFoe(v.side,u.side)&&LIVE(v)){v.exp=1;spHit(src,v,first?2+X:X);first=0}});
+  if(stop){if(stop.T&&isFoe(stop.T.side,u.side))spHitT(src,stop.T,2+X);if(stop.W&&isFoe(stop.W.side,u.side))spHitW(src,stop.W,2+X)}
+  u._lk=S.units.filter(v=>isFoe(v.side,u.side)&&v.hp<=0).length>0;stat('lances');stat('lanceX',X);msg(`${SHORT[u.side]} ${H[u.k].n} fires an Overflow Lance (X=${X}).`)}},
+swap:{n:'Transposition',e:'🌀',c:3,cd:1,two:1,h:'(a unit within 3), then a second unit to swap it with.',p2:'Now tap the unit to swap places with (within 3 of her and 4 of the first).',
+ d:'pick a unit within 3, then a second within 3 of the Phasewright and within 4 of the first: they swap hexes. Any side, herself too, but not enemy bosses or Juggernaut. Snares and fire trigger at both ends; mines are not claimed.',
+ ok(u,v){return LIVE(v)&&!v.cage&&canSee(u.side,v)&&!IMM(v)&&!(isElite(v)&&isFoe(v.side,u.side))},
+ tg(u){return S.units.filter(v=>this.ok(u,v)&&dist(u,v)<=3&&this.s2(u,v).length).map(U2)},
+ s2(u,v){return S.units.filter(w=>w!==v&&this.ok(u,w)&&dist(u,w)<=3&&dist(v,w)<=4&&standable(v,w.x,w.y,w)&&standable(w,v.x,v.y,v)).map(w=>({x:w.x,y:w.y,v:w}))},
+ cast(u,t,a){const v=t.v,p=this.s2(u,v).find(q=>q.x==a.x2&&q.y==a.y2);if(!p)return false;const w=p.v,A={x:v.x,y:v.y},B={x:w.x,y:w.y};v.x=-99;w.x=-98;if(!RP)vfx('swap',A,B);landOn(v,B.x,B.y);landOn(w,A.x,A.y);stat('swaps');msg(`${SHORT[u.side]} ${H[u.k].n} swaps ${H[v.k].n} and ${H[w.k].n}.`)}},
+rewind:{n:'Rewind',e:'⏳',c:3,cd:2,h:'(a friendly hero within 3) to send it back to the start of your previous turn.',
+ d:'a friendly non-boss hero within 3 returns to the hex and HP it had at the start of your previous turn (only the HP if that hex is taken), and loses burn, root, wither and stun gained since. Spent Undying is not restored. Towers cannot be rewound.',
+ tg(u){return S.units.filter(v=>allyH(u,v)&&dist(u,v)<=3&&!isElite(v)&&!v.shape&&v.snap0&&(v.snap0.hp>v.hp||v.snap0.x!=v.x||v.snap0.y!=v.y||v.burn>0||v.root||v.wither>0)).map(U2)},
+ cast(u,t){const v=t.v,s=v.snap0,from={x:v.x,y:v.y};if(!(s.x==v.x&&s.y==v.y)&&standable(v,s.x,s.y)){v.x=s.x;v.y=s.y}NOABS++;try{v.hp=Math.min(maxHp(v),Math.max(1,s.hp))}finally{NOABS--}
+  v.burn=s.burn;v.bd=s.bd;v.root=s.root;v.wither=s.wither;v.stun=0;stat('rewinds');if(!RP)vfx('rewind',v,from);msg(`${SHORT[u.side]} ${H[u.k].n} rewinds ${H[v.k].n}.`)}}};
+HVSP.SPELL=SPELL;
+/* the Open Grave is a building (b:'ograve') that is never sold: a hidden BLD entry so building lookups (destroyed message, hex tooltip) work,
+   while every Object.keys(BLD) list (build menu, army cap) still skips it */
+if(typeof BLD=='object'&&BLD&&!BLD.ograve)Object.defineProperty(BLD,'ograve',{value:{n:'Open Grave',e:'⚰️',c:0,hp:4,mx:0,d:"A Gravedigger's grave: its side can spawn heroes next to it, like a Barracks, until it closes."},enumerable:false,configurable:true,writable:true});
+/* spell geometry helpers */
+function fwCells(u,t){const D=dirOf(u,t);if(!D||dist(u,t)>3)return[];const r=[];const A=cube(t.x,t.y);for(let i=0;i<3;i++){const c=fromCube(A[0]+D[0]*i,A[1]+D[1]*i),k=K(c.x,c.y);if(!VALID.has(k))break;if(twAt(c.x,c.y)||hvW(c.x,c.y))continue;r.push(k)}return r}
+function mireCells(t){return ring1(t).filter(c=>!twAt(c.x,c.y)&&!S.shr.includes(K(c.x,c.y))&&!hvW(c.x,c.y)&&!(S.tw&&SIDES.some(sd=>S.tw[sd].some(T=>T.x==c.x&&T.y==c.y)))).map(c=>K(c.x,c.y))}
+function herdCells(u,D){const r=[];let stop=null;for(const c of lineFrom(u,D,4)){const T=SIDES.flatMap(sd=>S.tw[sd]).find(q=>q.hp>0&&q.x==c.x&&q.y==c.y),W=wallAt(c.x,c.y);if(T){stop={T,x:c.x,y:c.y};r.push(c);break}if(W){stop={W,x:c.x,y:c.y};r.push(c);break}r.push(c)}return{cells:r,stop}}
+const lanceCells=herdCells;
+function pullPath(u,v){const n=isElite(v)?1:2,r=[];let cur={x:v.x,y:v.y};const A=cube(u.x,u.y);
+ for(let i=0;i<n;i++){const d0=dist(cur,u);if(d0<=1)break;const C=cube(cur.x,cur.y);let best=null,bs=1e9;
+  NB[cur.y&1].forEach(([dx,dy])=>{const p={x:cur.x+dx,y:cur.y+dy};if(dist(p,u)!=d0-1||!standable(v,p.x,p.y))return;const P=cube(p.x,p.y),t=1-(d0-1)/d0,dev=Math.abs(P[0]-(C[0]+(A[0]-C[0])/d0))+Math.abs(P[1]-(C[1]+(A[1]-C[1])/d0));if(dev<bs-1e-9){bs=dev;best=p}});
+  if(!best)break;r.push(best);cur=best}return r}
+function towerBudget(sd){if(!S)return 0;Z();return Math.max(0,3-((S.spTB||{})[sd+':'+S.round]||0))}
+/* forced attack (Sweet Command): the charmed hero fights for the caster's side for one blow */
+let FORCED=null;
+function forceAtk(c,v,w){const s0=v.side,u0=v.used,m0=S.mana[c.side];FORCED={c,v};v.side=c.side;try{act(v,{t:'u',v:w,x:w.x,y:w.y})}finally{v.side=s0;v.used=u0;S.mana[c.side]=m0;FORCED=null}
+ if(LIVE(v))v.nocnt=1;check()}
+/* ---------------- spell availability ---------------- */
+function spKey(u){if(!u||!H[u.k])return null;if(u.shape&&u.shape.kind=='mim')return 'revert';return H[u.k].sp||null}
+function spCost(u,k){const c=SPELL[k].c;if(c=='X')return 1;return c>=2&&H[u.k].fac=='arcane'?c-1:c}
+function spReady(u,k){return k=='revert'||!u.spcd||S.round>=u.spcd}
+function spWhy(u,k){if(u.used)return 'already acted';if(silenced(u))return 'silenced';if(u.cage)return 'caged';if(!spReady(u,k)){const n=u.spcd-S.round;return 'ready in '+n+' turn'+(n>1?'s':'')}if(S.mana[u.side]<spCost(u,k))return 'needs '+spCost(u,k)+' mana';return ''}
+function spTargets(u,k){if(!k||!SPELL[k]||spWhy(u,k))return[];try{return SPELL[k].tg(u).map(t=>Object.assign(t,{sp:k}))}catch(e){console.warn('spTargets',k,e);return[]}}
+HVSP.spKey=spKey;HVSP.spTargets=spTargets;HVSP.spWhy=spWhy;
+/* item code: 'sp' + x2 (2 letters) + y2 (2 letters) + X (1 letter); 'zz' = none */
+const L2=n=>n==null?'zz':String.fromCharCode(97+Math.floor(n/26))+String.fromCharCode(97+n%26);
+const enc=o=>'sp'+L2(o&&o.x2)+L2(o&&o.y2)+String.fromCharCode(97+((o&&o.X)||0));
+function dec(s){const o={};if(typeof s!='string'||!/^sp[a-z]{5}$/.test(s))return o;const n=i=>s.slice(i,i+2)=='zz'?null:(s.charCodeAt(i)-97)*26+(s.charCodeAt(i+1)-97);o.x2=n(2);o.y2=n(4);o.X=s.charCodeAt(6)-97;return o}
+HVSP.enc=enc;HVSP.dec=dec;
+/* cast: called from perform on every client */
+function spPerform(u,a){const k=spKey(u);if(!k||u.side!=a.s||u.used)return false;const t=spTargets(u,k).find(q=>q.x==a.x&&q.y==a.y);if(!t)return false;const o=dec(a.item),sp=SPELL[k];
+ if(sp.two&&(o.x2==null||o.y2==null))return false;if(sp.c=='X'&&!(o.X>=1&&o.X<=5&&o.X<=S.mana[u.side]))return false;
+ const cost=sp.c=='X'?0:spCost(u,k),uk=u.k,vis=!RP&&(visU(u)||seen(t));curAtk=u;
+ if(vis){try{actorRing(u,sideCol(u.side));if(t.v!==u)strikeLine(u,t,sp.foe?'#b06aff':'#6ad0ff');reticle(t,sp.foe?'#b06aff':'#6ad0ff',0,sp.e)}catch(e){}}
+ const r=sp.cast(u,t,o);if(r===false)return false;
+ S.mana[u.side]-=cost;G[u.side].mana+=cost;if(sp.cd&&k!='revert'&&!(k=='aegis'&&t.tw))u.spcd=S.round+sp.cd+1;
+ if(k!='revert'||true)u.used=true;if(MOPT.sight&&sp.foe)u.exp=1;
+ fx(u,'atk',Math.sign(t.x-u.x)*10,Math.sign(t.y-u.y)*10);stat('cast:'+k);stat('castBy:'+uk);
+ if(vis){try{vfx('cast:'+k,u,t,o);sfxK(k)}catch(e){}}
+ reapDead(u.side);
+ if(k=='lance'&&u._lk&&LIVE(u)){S.mana[u.side]=Math.min(10,S.mana[u.side]+1);pop(u,'+1✦',1);stat('lanceRefund')}delete u._lk;
+ return true}
+/* ---------------- wrappers ---------------- */
+const W={};
+function wrap(name,f){const o=window[name];if(typeof o!='function'){console.warn('HV_CASTERS: no',name);return}W[name]=o;window[name]=f(o)}
+let NOSP=0;
+wrap('targets',o=>function(u){if(u&&u.cage)return[];let r=o.apply(this,arguments);if(S&&S.units&&S.units.some(v=>v.cage))r=r.filter(t=>!(t.v&&t.v.cage));
+ if(!NOSP&&u&&!u.used){const k=spKey(u);if(k){const st=spTargets(u,k);if(st.length)r=r.concat(st)}}return r});
+wrap('reach',o=>function(u){if(u&&u.cage)return[];const M=Z()&&S.zones.filter(z=>z.k=='mire'&&sameTeam(z.side,u.side)&&H[u.k]&&H[u.k].fac=='wilds');if(!M||!M.length)return o.apply(this,arguments);
+ const sv=[];M.forEach(z=>z.cells.forEach(k=>{if(!zonesOf('mire').some(z2=>z2!==z&&!M.includes(z2)&&z2.cells.includes(k))){sv.push([k,S.ter[k]]);S.ter[k]=S.terBase[k]}}));try{return o.apply(this,arguments)}finally{sv.forEach(([k,v])=>S.ter[k]=v)}});
+wrap('stepOK',o=>function(u){const M=S&&S.zones&&S.zones.filter(z=>z.k=='mire'&&sameTeam(z.side,u.side)&&H[u.k]&&H[u.k].fac=='wilds');if(!M||!M.length)return o.apply(this,arguments);
+ const sv=[];M.forEach(z=>z.cells.forEach(k=>{if(!zonesOf('mire').some(z2=>!M.includes(z2)&&z2.cells.includes(k))){sv.push([k,S.ter[k]]);S.ter[k]=S.terBase[k]}}));try{return o.apply(this,arguments)}finally{sv.forEach(([k,v])=>S.ter[k]=v)}});
+wrap('mvOf',o=>function(u){let m=o.apply(this,arguments);if(S&&S.tethers&&S.tethers.some(q=>q.a===u))m=Math.min(m,1);return m});
+wrap('sightOf',o=>function(u){if(u&&u.shape&&u.shape.kind=='mim'){const k=u.k;u.k=u.shape.k0;try{return o.apply(this,arguments)}finally{u.k=k}}return o.apply(this,arguments)});
+wrap('slotCost',o=>function(k){const h=H[k];if(h&&h.shapeOf)return o(h.shapeOf);return o.apply(this,arguments)});
+wrap('revive',o=>function(v){if(v&&v.shape&&v.hp<=0){v.k=v.shape.k0;v.shape=null}return o.apply(this,arguments)});
+wrap('cardTargets',o=>function(){return o.apply(this,arguments).filter(p=>!(p.o&&p.o.cage))});
+wrap('check',o=>function(){if(FORCED)return;return o.apply(this,arguments)});
+wrap('levelUp',o=>function(){if(FORCED)return;return o.apply(this,arguments)});
+wrap('drainAll',o=>function(){NOABS++;try{return o.apply(this,arguments)}finally{NOABS--}});
+/* HP-scaled counters preview a hit by setting hp to the predicted value and restoring it (AI and damage badges, host only):
+   that must never spend a shield, or the host's shields drift from the guests'. */
+if(typeof window.cntrBase=='function')wrap('cntrBase',o=>function(){NOABS++;try{return o.apply(this,arguments)}finally{NOABS--}});
+/* Grave Tax */
+wrap('fall',o=>function(v){try{if(v&&!v.sumBy&&S&&S.units)S.units.forEach(g=>{if(g.k=='gravedigger'&&g.hp>0&&g!==v&&isFoe(g.side,v.side)&&dist(g,v)<=2){gainGold(g.side,1,g);stat('graveTax')}})}catch(e){}return o.apply(this,arguments)});
+/* Open Grave spawn points */
+wrap('spawnHexes',o=>function(s){const r=o.apply(this,arguments);if(!S||!S.walls)return r;const seen=new Set(r.map(p=>K(p.x,p.y)));
+ S.walls.filter(w=>w.b=='ograve'&&w.side==s&&w.hp>0).forEach(w=>NB[w.y&1].forEach(([dx,dy])=>{const x=w.x+dx,y=w.y+dy,k=K(x,y);if(!seen.has(k)&&free(x,y)&&!hvW(x,y)){seen.add(k);r.push({x,y})}}));return r});
+/* Assayer: enemies cannot claim a mine the Prospector stands on or next to */
+const guarded=(m,sd)=>S.units.some(p=>p.k=='prospector'&&p.hp>0&&isFoe(p.side,sd)&&dist(p,m)<=1);
+wrap('capMine',o=>function(u){if(u&&MOPT.gold){const m=mineAt(u.x,u.y);if(m&&m.o!==u.side&&guarded(m,u.side)){takeChest(u);if(!RP)pop(u,'Assayer guards it');stat('assayerBlocks');return}}return o.apply(this,arguments)});
+wrap('econStart',o=>function(sd){if(!S||!S.mines||!S.units)return o.apply(this,arguments);const all=S.mines,keep=all.filter(m=>m.o===sd||!guarded(m,sd));S.mines=keep;let r;try{r=o.apply(this,arguments)}finally{S.mines=all}
+ try{Z();const V=S.veins&&S.veins[sd];if(V&&MOPT.gold&&S.gold&&S.gold[sd]!=null){const m=mineAt(V.x,V.y);if(m&&m.o===sd){S.gold[sd]+=1;stat('veinGold');if(!RP)pop(m,'+1🪙',1)}V.n--;if(V.n<=0||!m||m.o!==sd)delete S.veins[sd]}}catch(e){console.warn(e)}return r});
+/* Rune Forger: +3 and no armor on the main target of the next attack */
+let EDGE_T=null,NOARM=null;
+wrap('armOf',o=>function(v){if(NOARM&&v===NOARM)return 0;return o.apply(this,arguments)});
+wrap('hit',o=>function(t,d){if(EDGE_T&&t===EDGE_T){EDGE_T=null;d+=3;stat('edgeBonus');if(t.t=='u'){NOARM=t.v;try{return o.call(this,t,d)}finally{NOARM=null}}}return o.apply(this,arguments)});
+wrap('predHit',o=>function(u,t){if(u&&u.edge&&t&&!t.heal&&!t.summon){if(t.t=='u'){if(t.v.ward)return 0;NOARM=t.v;try{return o.apply(this,arguments)+3}finally{NOARM=null}}return o.apply(this,arguments)+3}return o.apply(this,arguments)});
+wrap('act',o=>function(u,t){const atk=u&&t&&!t.heal&&!t.summon&&!t.ab;let r,ns=null;const v=t&&t.v;
+ if(atk&&u.edge){EDGE_T=t;delete u.edge}
+ /* a charmed hero cannot counterattack until its next turn: a one-hex silence for the length of this attack (canCounter respects silence) */
+ if(atk&&v&&v.nocnt&&S.sil&&isFoe(u.side,v.side)){ns={cells:[K(v.x,v.y)],side:u.side,left:{[v.side]:1},_sp:1};S.sil.push(ns)}
+ try{r=o.apply(this,arguments)}finally{EDGE_T=null;if(ns)S.sil=S.sil.filter(z=>z!==ns)}return r});
+/* Veil: enemies cannot see in, and only enemies next to a veiled unit can target it */
+let vcache=null,vkey='';
+function veilMap(){if(!S||!S.zones)return null;const vz=S.zones.filter(z=>z.k=='veil');if(!vz.length)return null;const key=vz.map(z=>z.id).join(',')+'|'+S.round;if(vcache&&vkey===key&&vcache.S===S)return vcache;
+ const m={};vz.forEach(z=>z.cells.forEach(k=>(m[k]=m[k]||[]).push(z)));vcache={S,m};vkey=key;return vcache}
+function veiledFrom(sd,x,y){const V=veilMap();if(!V)return false;const zs=V.m[K(x,y)];if(!zs)return false;const p={x,y};
+ return zs.some(z=>isFoe(z.side,sd)&&!S.units.some(w=>w.hp>0&&sameTeam(w.side,sd)&&(dist(w,p)<=1||z.cells.includes(K(w.x,w.y)))))}
+HVSP.veiledFrom=veiledFrom;
+wrap('seesCell',o=>function(sd,x,y){if(veiledFrom(sd,x,y))return false;return o.apply(this,arguments)});
+wrap('canSee',o=>function(sd,v){if(sd&&v&&S&&S.zones&&S.zones.length&&!sameTeam(v.side,sd)&&veiledFrom(sd,v.x,v.y))return false;return o.apply(this,arguments)});
+wrap('abil',o=>function(u,t){const r=o.apply(this,arguments);try{if(t&&t.ab=='flare'&&S.zones){const n0=S.zones.length;S.zones=S.zones.filter(z=>!(z.k=='veil'&&isFoe(z.side,u.side)&&z.cells.some(k=>dist(KP(k),t)<=2)));if(S.zones.length<n0){vcache=null;stat('veilDispels');pop(t,'Veil dispelled',1);msg(`${SHORT[u.side]}'s flare burns away a Veil of Night.`)}}}catch(e){}return r});
+/* an eliminated side's zones, tethers, veins and shields go with it (they only tick on its own turns) */
+wrap('eliminate',o=>function(sd){try{if(S&&S.zones&&!S.dead[sd]){S.zones.filter(z=>z.side==sd&&z.k=='mire').forEach(z=>{S.zones=S.zones.filter(q=>q!==z);mireEnd(z)});S.zones=S.zones.filter(z=>z.side!=sd);vcache=null;
+ S.tethers=S.tethers.filter(q=>q.side!=sd&&q.a.side!=sd);delete S.veins[sd];const cl=o2=>{if(o2&&o2.shS==sd){o2.shield=0;o2.shS=null}};S.units.forEach(cl);SIDES.forEach(x=>S.tw[x].forEach(cl));S.walls.forEach(cl)}}catch(e){}return o.apply(this,arguments)});
+/* ---------------- turn hooks ---------------- */
+wrap('phaseStart',o=>function(n){if(!S||S.over)return o.apply(this,arguments);Z();
+ S.units.forEach(u=>{if(u.side==n)u.snap0=u.snap1,u.snap1={x:u.x,y:u.y,hp:u.hp,burn:u.burn||0,bd:u.bd||0,root:u.root||0,wither:u.wither||0}});
+ const cw=S.units.filter(u=>u.cage&&u.side==n).map(u=>[u,u.wither]);
+ let r;try{r=o.apply(this,arguments)}finally{cw.forEach(([u,w])=>u.wither=w)}
+ try{spStart(n)}catch(e){console.warn('HV_CASTERS start',e)}return r});
+wrap('turnStart',o=>function(side){const cb=S?S.units.filter(u=>u.cage&&u.side==side&&u.burn>0).map(u=>[u,u.burn]):[];cb.forEach(([u])=>u.burn=0);try{return o.apply(this,arguments)}finally{cb.forEach(([u,b])=>u.burn=b)}});
+wrap('endTurn',o=>function(){try{if(S&&!S.over){Z();const sd=S.turn;
+  S.tethers=S.tethers.filter(q=>{if(LIVE(q.a)&&LIVE(q.b)&&dist(q.a,q.b)<=4)return true;if(LIVE(q.a)&&LIVE(q.b)){pop(q.b,'Tether snaps');stat('tetherBreak')}return false});
+  S.units.forEach(u=>{if(u.side!=sd)return;if(u.shape&&u.shape.n<=0)shapeOff(u);if(u.cage&&u.cage.n<=0){u.cage=null;if(!RP)pop(u,'Cage opens',1)}})}}catch(e){console.warn('HV_CASTERS end',e)}return o.apply(this,arguments)});
+function spStart(n){
+ /* statuses on side n's units */
+ S.units.forEach(u=>{if(u.side!=n)return;if(u.shape&&u.shape.n>0)u.shape.n--;if(u.cage){if(u.cage.n>0)u.cage.n--;u.used=true}delete u.nocnt});
+ S.units.forEach(u=>{if(u.edge&&u.edge.by==n){u.edge.n--;if(u.edge.n<=0)delete u.edge}});
+ const sh=o=>{if(o&&o.shield>0&&o.shS==n){o.shL--;if(o.shL<=0){o.shield=0;o.shS=null}}};S.units.forEach(sh);SIDES.forEach(sd=>S.tw[sd].forEach(sh));S.walls.forEach(sh);
+ /* fire: side n's units standing in enemy fire */
+ const fz=S.zones.filter(z=>z.k=='fire'&&isFoe(z.side,n));if(fz.length){const hit=new Set();fz.forEach(z=>S.units.forEach(v=>{if(v.side==n&&!hit.has(v)&&!H[v.k].fly&&inZone(z,v.x,v.y)){hit.add(v);fireBurn(v,z);if(v.hp<=0)reapDead(z.side)}}))}
+ /* tethers */
+ S.tethers=S.tethers.filter(q=>{if(q.side!=n)return true;const a=q.a,b=q.b;if(!LIVE(a)||!LIVE(b)||silenced(a)||a.cage||b.cage||!los(a,b)||dist(a,b)>4){if(LIVE(b))pop(b,'Tether snaps');stat('tetherBreak');return false}
+  const amt=hasSyn(n,'vamp')?3:2;const got=loseHp(b,amt,n);if(got){healU(a,amt);stat('tetherDmg',got)}if(!RP)vfx('tetherTick',a,b);b.exp=1;q.n--;return q.n>0&&b.hp>0});
+ S.tethers.forEach(q=>{if(LIVE(q.b))q.b.exp=1});
+ /* zones owned by n */
+ S.zones=S.zones.filter(z=>{if(z.side!=n)return true;z.n--;if(z.k=='verdict'){if(z.n<=0){verdictLand(z);return false}return true}
+  if(z.n<=0){if(z.k=='mire')mireEnd(z);if(z.k=='veil')vcache=null;return false}return true});
+ /* graves */
+ S.walls=S.walls.filter(w=>{if(w.b!='ograve'||w.side!=n)return true;w.og.n--;return w.og.n>=0});
+ reapDead(n)}
+function verdictLand(z){const src=srcAt(z.side,{x:z.x,y:z.y},'sunspeaker');if(!RP)vfx('verdict',z);stat('verdicts');
+ S.units.filter(v=>isFoe(v.side,z.side)&&inZone(z,v.x,v.y)).forEach(v=>{const c=v.x==z.x&&v.y==z.y;spHit(src,v,c?5:3);stat('verdictHits')});
+ foeTowers(z.side).filter(T=>inZone(z,T.x,T.y)).forEach(T=>spHitT(src,T,3));S.walls.filter(W=>isFoe(W.side,z.side)&&inZone(z,W.x,W.y)).forEach(W=>spHitW(src,W,3));
+ msg(`${SHORT[z.side]}'s Noon Verdict strikes!`)}
+function mireEnd(z){z.cells.forEach(k=>{if(S.zones.some(q=>q!==z&&q.k=='mire'&&q.cells.includes(k)))return;if(k in S.terBase){S.ter[k]=S.terBase[k];delete S.terBase[k]}})}
+/* ---------------- perform: spells + walking into fire ---------------- */
+wrap('perform',o=>function(a){if(!a||!S||S.over)return o.apply(this,arguments);
+ if(a.t=='act'&&a.i&&S.turn===a.s){const u=at(a.fx,a.fy);if(u&&u.side==a.s&&spKey(u)&&!u.used&&!H[u.k].summon&&!H[u.k].trap&&!H[u.k].wall&&!H[u.k].flare&&!H[u.k].silence){try{return spPerform(u,a)}catch(e){console.error('HV_CASTERS cast',e);return false}}}
+ if(a.t=='move'&&S.zones&&S.zones.some(z=>z.k=='fire')&&S.turn===a.s){const u=at(a.fx,a.fy);let keys=null;if(u&&!u.moved&&!H[u.k].fly){try{keys=a.p!=null?decPath(u,a.p):pathTo(u,a.x,a.y)}catch(e){}}
+  const r=o.apply(this,arguments);if(r&&keys&&LIVE(u)){const end=K(u.x,u.y),i=keys.indexOf(end);if(i>=0){const z=keys.slice(0,i+1).map(KP).map(p=>fireAt(p.x,p.y,u.side)).find(Boolean);if(z){fireBurn(u,z);reapDead(z.side)}}}return r}
+ return o.apply(this,arguments)});
+/* ---------------- AI ---------------- */
+let AIPLAN=null;
+wrap('submit',o=>function(a){if(a&&a.t=='act'&&a.i&&a.item==null&&AIPLAN&&AIPLAN.fx==a.fx&&AIPLAN.fy==a.fy&&AIPLAN.x==a.x&&AIPLAN.y==a.y){a.item=AIPLAN.item;AIPLAN=null}return o.apply(this,arguments)});
+const myFoes=me=>S.units.filter(v=>isFoe(v.side,me)&&canSee(me,v)&&v.hp>0);
+const threatOn=(v,me)=>myFoes(me).filter(w=>!w.cage&&dist(w,v)<=mvOf(w)+H[w.k].rng[1]).reduce((a,w)=>a+eff(w).dmg,0);
+const myAtk=(me,v)=>S.units.filter(w=>w.side==me&&!w.used&&!w.cage&&dist(w,v)<=(w.moved?0:mvOf(w))+H[w.k].rng[1]&&!H[w.k].heal).reduce((a,w)=>a+eff(w).dmg,0);
+const capV=(d,v)=>Math.min(d,v.hp)+(v.hp<=d?3:0);
+const AIS={
+verdict(u,ts){let best=null;ts.forEach(t=>{const c=ring1(t);let s=0;c.forEach(p=>{const v=at(p.x,p.y);if(v&&isFoe(v.side,u.side)&&canSee(u.side,v)&&!v.cage){const d=(p.x==t.x&&p.y==t.y)?5:3,m=(v.root||v.stun||mvOf(v)<=1)?1.5:mvOf(v)>=3?.5:1;s+=Math.min(d,v.hp)*m}
+  const T=twAt(p.x,p.y);if(T&&isFoe(T.side,u.side))s+=3});if(!best||s>best.s)best={t,s}});return best&&best.s>=6?{t:best.t,s:best.s}:null},
+aegis(u,ts){let best=null;ts.forEach(t=>{let s;if(t.v){const th=threatOn(t.v,u.side);s=th>=3?Math.min(th,6)*.8+1:(myFoes(u.side).some(w=>dist(w,t.v)<=3)?1.6:0)}else{const n=myFoes(u.side).filter(w=>dist(w,t)<=1).length;s=n?2+n:0}if(!best||s>best.s)best={t,s}});return best&&best.s>=2.5?best:null},
+rally(u,ts){let best=null;ts.forEach(t=>{const v=t.v,sp=SPELL.rally.s2(u,v);if(!sp.length)return;const fd=p=>Math.min(99,...myFoes(u.side).map(w=>dist(w,p)));
+  if(v.hp<=maxHp(v)*.4&&fd(v)<=2){const p=sp.slice().sort((a,b)=>fd(b)-fd(a))[0];if(fd(p)>fd(v)){const s=4+fd(p)-fd(v);if(!best||s>best.s)best={t,s,x2:p.x,y2:p.y}}}
+  else if(!v.used&&H[v.k].rng[1]<=1&&fd(v)>1){const p=sp.find(q=>fd(q)==1);if(p){const s=3+eff(v).dmg*.3;if(!best||s>best.s)best={t,s,x2:p.x,y2:p.y}}}});return best},
+tether(u,ts){let best=null;ts.forEach(t=>{const v=t.v;if(mvOf(v)>2&&!v.root)return;const s=Math.min(6,v.hp)*.7+(H[v.k].armor?1:0)+(ROLE[v.k]&&ROLE[v.k][0]=='Tank'?1:0);if(!best||s>best.s)best={t,s}});return best&&best.s>=3?best:null},
+command(u,ts){let best=null;ts.forEach(t=>{const v=t.v;SPELL.command.s2(u,v).forEach(p=>{const w=p.v;let d;try{const s0=v.side;v.side=u.side;try{d=predHit(v,{t:'u',v:w})}finally{v.side=s0}}catch(e){d=eff(v).dmg}if(!(d>0))return;
+  const kill=w.hp<=d,s=Math.min(d,w.hp)+(kill?3+Math.min(3,hireCost(w.k)*.2):0)+(H[w.k].elite?1.5:0)+(isFoe(w.side,u.side)?0:-2)+(myAtk(u.side,v)>0?1:0);if(!best||s>best.s)best={t,s,x2:w.x,y2:w.y}})});return best&&best.s>=3.5?best:null},
+veil(u,ts){const mine=S.units.filter(w=>w.side==u.side&&w.hp>0),rng=myFoes(u.side).filter(w=>H[w.k].rng[1]>=2);if(!rng.length)return null;let best=null;
+ ts.forEach(t=>{const c=ring1(t).map(p=>K(p.x,p.y));let s=0;mine.forEach(w=>{if(c.includes(K(w.x,w.y))&&rng.some(f=>dist(f,w)<=mvOf(f)+H[f.k].rng[1]&&dist(f,w)>1))s+=1.5});if(c.some(k=>S.shr.includes(k)&&mine.some(w=>K(w.x,w.y)==k)))s+=2;if(!best||s>best.s)best={t,s}});return best&&best.s>=3?best:null},
+shrapnel(u,ts){let best=null;ts.forEach(t=>{const w=t.v;let s=0,n=0;myFoes(u.side).forEach(v=>{if(dist(v,w)==1&&!v.cage){const d=Math.max(1,4-armOf(v));n++;s+=Math.min(d,v.hp)+(v.hp<=d?3:0)}});
+  foeTowers(u.side).forEach(T=>{if(dist(T,w)==1)s+=2+(T.hp<=2?8:0)});(S.walls||[]).forEach(W=>{if(isFoe(W.side,u.side)&&dist(W,w)==1)s+=W.b?1:.3});if(!s)return;
+  const keep=w.rzL==1?0:(w.used?.3:.6)*Math.min(4,eff(w).dmg)*(w.hp/maxHp(w))+(w.sumBy?0:.8);s-=keep;if(!best||s>best.s)best={t,s}});return best&&best.s>=2.5?best:null},
+ossify(u,ts){let best=null;ts.forEach(t=>{const v=t.v,e=eff(v);const s=(e.dmg>=4?e.dmg*.8:e.dmg*.4)*(v.hp/maxHp(v))+(H[v.k].fly?1:0)+(H[v.k].rng[1]>=2?1:0)+(myAtk(u.side,v)>=v.hp?1:0);if(!best||s>best.s)best={t,s}});return best&&best.s>=4?best:null},
+grave(u,ts){const own=S.tw[u.side].filter(T=>T.hp>0);if(own.length&&Math.min(...own.map(T=>dist(T,u)))<5)return null;if(!S.pool[u.side].length&&!(MOPT.gold&&S.gold[u.side]>=5))return null;
+ const ok=ts.filter(t=>!myFoes(u.side).some(w=>dist(w,t)<=2));if(!ok.length)return null;const ft=foeTowers(u.side),t=ok.slice().sort((a,b)=>Math.min(99,...ft.map(T=>dist(T,a)))-Math.min(99,...ft.map(T=>dist(T,b))))[0];return{t,s:4}},
+flamewall(u,ts){const F=myFoes(u.side).filter(v=>!H[v.k].fly);if(!F.length)return null;let best=null;const ownT=S.tw[u.side].filter(T=>T.hp>0);
+ ts.forEach(t=>{const cs=fwCells(u,t);if(!cs.length)return;let s=0;F.forEach(v=>{if(cs.includes(K(v.x,v.y)))s+=3;else if(cs.some(k=>dist(KP(k),v)<=Math.min(2,mvOf(v))))s+=1});if(ownT.some(T=>cs.some(k=>dist(KP(k),T)<=3))&&F.some(v=>ownT.some(T=>dist(v,T)<=5)))s+=2;if(!best||s>best.s)best={t,s}});return best&&best.s>=4?best:null},
+hook(u,ts){let best=null;ts.forEach(t=>{const v=t.v,p=pullPath(u,v),land=p.length?p[p.length-1]:v;const al=S.units.filter(w=>w.side==u.side&&w!==u&&!w.used&&!w.cage&&dist(w,land)<=(mvOf(w))+H[w.k].rng[1]).reduce((a,w)=>a+eff(w).dmg,0);
+  const dm=p.length?2:4;let s=dm+(al+dm>=v.hp?5:al*.3)+(isShrine(v)?3:0)+(S.tw[u.side].some(T=>T.hp>0&&dist(T,v)<=2)?3:0);if(!best||s>best.s)best={t,s}});return best&&best.s>=4?best:null},
+bargain(u,ts){if(S.mana[u.side]>4)return null;let best=null;ts.forEach(t=>{const v=t.v;if(v.hp<maxHp(v)*.6||myFoes(u.side).some(w=>dist(w,v)<=3))return;const s=2+v.hp/maxHp(v);if(!best||s>best.s)best={t,s}});return best&&best.s>=2.5?best:null},
+herd(u,ts){let best=null;const seen=new Set();ts.forEach(t=>{const D=dirOf(u,t);if(!D)return;const dk=D.join();if(seen.has(dk))return;seen.add(dk);const {cells}=herdCells(u,D);let s=0;
+  cells.forEach(c=>{const v=at(c.x,c.y);if(v&&isFoe(v.side,u.side)&&v.hp>0){const A=cube(v.x,v.y),n=fromCube(A[0]+D[0],A[1]+D[1]),bl=!standable(v,n.x,n.y);const d=3+(bl?2:0);s+=Math.min(d,v.hp)+(v.hp<=d?3:0)+(bl?2:0)}});if(!best||s>best.s)best={t,s}});return best&&best.s>=6?best:null},
+mire(u,ts){const F=myFoes(u.side).filter(v=>!H[v.k].fly);if(F.length<2)return null;const ownT=S.tw[u.side].filter(T=>T.hp>0);let best=null;
+ ts.forEach(t=>{const cs=mireCells(t);let n=0;F.forEach(v=>{if(cs.some(k=>dist(KP(k),v)<=1))n++});let s=n*2;if(ownT.some(T=>dist(T,t)<=4))s+=2;if(!best||s>best.s)best={t,s}});return best&&best.s>=5?best:null},
+mimic(u,ts){const val=k=>{const h=H[k];return h.dmg*Math.sqrt(h.hp)*(h.rng[1]>=2?1.2:1)*(h.mv>=3?1.1:1)*(1+.25*(h.armor||0))};const own=val('skinchanger');let best=null;
+ ts.forEach(t=>{const v=t.v,s0=val(v.k);if(s0<own*1.3)return;const s=3+(s0/own-1)*3;if(!best||s>best.s)best={t,s}});return best&&best.s>=3.5?best:null},
+revert(u,ts){return null},
+edge(u,ts){let best=null;ts.forEach(t=>{const v=t.v;if(v.used&&v!==u)return;const d=eff(v).dmg+3;let s=0;myFoes(u.side).forEach(f=>{if(dist(v,f)<=(v.moved?0:mvOf(v))+H[v.k].rng[1]){const ar=armOf(f);s=Math.max(s,(f.hp<=d&&f.hp>eff(v).dmg-ar?5:0)+ar*1.2+1.5)}});
+  if(foeTowers(u.side).some(T=>dist(T,v)<=1+H[v.k].rng[1]))s=Math.max(s,3.5);if(v===u)s-=1.5;if(!best||s>best.s)best={t,s}});return best&&best.s>=3?best:null},
+cage(u,ts){let best=null;const mine=S.units.filter(w=>w.side==u.side&&w.hp>0&&!w.cage),ownT=S.tw[u.side].filter(T=>T.hp>0);ts.forEach(t=>{const v=t.v;let s=0;
+  if(v.side==u.side){const th=threatOn(v,u.side);if(th>=v.hp&&v.hp<maxHp(v)*.6)s=3.5+Math.min(3,hireCost(v.k)*.3)}
+  else if(isFoe(v.side,u.side)){const ma=myAtk(u.side,v),e=eff(v),R=mvOf(v)+H[v.k].rng[1];if(e.dmg<=0)return;
+   const vic=mine.filter(w=>dist(w,v)<=R),kills=vic.filter(w=>w.hp<=e.dmg).length,tw=ownT.filter(T=>dist(T,v)<=R);if(!vic.length&&!tw.length)return;
+   s=e.dmg*.8+(kills?3:0)+(tw.length?2+(tw.some(T=>T.hp<=e.dmg+(e.siege||0))?4:0):0)+(e.aoe?1:0)+(e.stun?1:0)-Math.min(1,ma/v.hp)*3}
+  if(!best||s>best.s)best={t,s}});return best&&best.s>=3?best:null},
+vein(u,ts){return ts.length&&S.mana[u.side]>=3?{t:ts[0],s:3.5}:null},
+lance(u,ts){let best=null;const seen=new Set(),mx=Math.min(5,S.mana[u.side]);ts.forEach(t=>{const D=dirOf(u,t);if(!D)return;const dk=D.join();if(seen.has(dk))return;seen.add(dk);const {cells,stop}=lanceCells(u,D);
+  for(let X=1;X<=mx;X++){let s=0,first=1;cells.forEach(c=>{const v=at(c.x,c.y);if(v&&isFoe(v.side,u.side)&&v.hp>0){const d=Math.max(1,(first?2+X:X)-armOf(v));s+=Math.min(d,v.hp)+(v.hp<=d?3:0);first=0}});
+   if(stop&&stop.T&&isFoe(stop.T.side,u.side))s+=Math.min(2+X,stop.T.hp)*1.2+(stop.T.hp<=2+X?8:0);if(stop&&stop.W&&isFoe(stop.W.side,u.side)&&stop.W.b)s+=Math.min(2+X,stop.W.hp)*.6;
+   const sc=s-1.2*X;if(s>=1.5*X&&(!best||sc>best.s))best={t,s:sc+X,X}}});return best},
+swap(u,ts){let best=null;const fd=p=>Math.min(99,...myFoes(u.side).map(w=>dist(w,p)));const ownT=S.tw[u.side].filter(T=>T.hp>0);
+ ts.forEach(t=>{const v=t.v;SPELL.swap.s2(u,v).forEach(p=>{const w=p.v;let s=0;
+  if(v.side==u.side&&w.side==u.side){if(v.hp<=maxHp(v)*.4&&fd(v)<=1&&w.hp>=maxHp(w)*.8&&fd(w)>1)s=3+H[w.k].hp*.1}
+  if(isFoe(v.side,u.side)&&w.side==u.side&&ownT.some(T=>dist(T,v)<=1)&&!ownT.some(T=>dist(T,w)<=1))s=4.5;
+  if(isFoe(v.side,u.side)&&w.side==u.side){const n=S.units.filter(a=>a.side==u.side&&a!==w&&!a.used&&dist(a,w)<=H[a.k].rng[1]).length;if(n>=2)s=Math.max(s,2+n)}
+  if(!best||s>best.s)best={t,s,x2:w.x,y2:w.y}})});return best&&best.s>=4?best:null},
+rewind(u,ts){let best=null;ts.forEach(t=>{const v=t.v,b=v.snap0;if(!b)return;const hp1=Math.min(maxHp(v),Math.max(1,b.hp)),g=hp1-v.hp,mv=(b.x!=v.x||b.y!=v.y)&&standable(v,b.x,b.y),th=threatOn(v,u.side),thB=mv?threatOn({x:b.x,y:b.y},u.side):th;
+  let s=g;if(th>=v.hp&&hp1>thB)s+=3.5;else if(th>=v.hp&&hp1>v.hp)s+=1.5;if(v.burn>0&&!b.burn)s+=1.5;if(v.root&&!b.root)s+=1.5;if(v.wither>0&&!(b.wither>0))s+=1;if(v.stun)s+=2;
+  if(mv)s+=v.used&&thB<th?Math.min(2,(th-thB)*.4):-(H[v.k].rng[1]<=1&&!v.used?1.5:.8);if(!best||s>best.s)best={t,s}});return best&&best.s>=2?best:null}};
+/* setup moves (not into more threat than 1.5x the caster's HP): Mesmerist ends within 2 of an enemy hero with someone near it to hit, Ossomancer within 3 of its bones near the enemy */
+function setupHex(u,dest,good){if(good(dest))return null;const me=u.side,c=reach(u).filter(p=>good(p)&&threatOn(p,me)<u.hp*1.5);if(!c.length)return null;
+ return c.map(p=>({p,s:threatOn(p,me)+dist(p,dest)*.5})).sort((a,b)=>a.s-b.s||a.p.y-b.p.y||a.p.x-b.p.x)[0].p}
+const AIMV={
+command(u,dest){const me=u.side,C=S.units.filter(v=>foeH(u,v)&&!isElite(v)&&!IMM(v)&&S.units.some(w=>w!==v&&LIVE(w)&&!w.cage&&!sameTeam(w.side,me)&&dist(v,w)<=H[v.k].rng[1]+1));
+ if(!C.length)return null;return setupHex(u,dest,p=>C.some(v=>dist(p,v)<=2))},
+shrapnel(u,dest){const me=u.side,F=myFoes(me),B=S.units.filter(w=>w!==u&&LIVE(w)&&w.side==me&&!w.cage&&!isElite(w)&&(w.sumBy||(H[w.k].fac=='undead'&&w.rez))&&F.some(v=>dist(v,w)<=3));
+ if(!B.length)return null;return setupHex(u,dest,p=>B.some(w=>dist(p,w)<=3))}};
+function estAct(u,r){if(!r||!r.act)return 0;const t=r.act;if(t.heal)return 2.5;if(t.summon||t.ab)return 1.5;const e=eff(u);if(t.t=='t')return t.T.hp<=e.dmg+e.siege?100:e.dmg*1.2;if(t.t=='w')return t.W.b?1.6:.4;if(t.v)return capV(e.dmg,t.v);return 0}
+HVSP.AIS=AIS;HVSP.estAct=estAct;
+wrap('choose',o=>function(u){
+ /* scouts burn enemy veils */
+ try{if(H[u.k].flare&&S.zones&&S.mana[u.side]>=H[u.k].fcost+1&&!silenced(u)){const z=S.zones.find(z=>z.k=='veil'&&isFoe(z.side,u.side)&&dist(z,u)>=1&&dist(z,u)<=5);if(z&&Math.random()<.85){const t=targets(u).find(q=>q.ab=='flare'&&q.x==z.x&&q.y==z.y);if(t)return{act:t}}}}catch(e){}
+ const k=spKey(u);if(!k||u.used){NOSP++;try{return o.apply(this,arguments)}finally{NOSP--}}
+ let r;NOSP++;try{r=o.apply(this,arguments)}finally{NOSP--}
+ try{const ts=spTargets(u,k),p=ts.length&&AIS[k]?AIS[k](u,ts):null,ea=p?estAct(u,r):0;
+  if(p&&p.s>=ea*.9+(DIFF==0?1:0)){AIPLAN={fx:u.x,fy:u.y,x:p.t.x,y:p.t.y,item:enc({x2:p.x2,y2:p.y2,X:p.X})};stat('aiCast:'+k);return{act:Object.assign({},p.t,{summon:1})}}}catch(e){console.warn('HV_CASTERS ai',k,e)}
+ /* no cast now: a hero that was only going to walk may walk to a hex where its spell has a target next turn */
+ try{if(r&&r.mv&&!r.act&&!u.moved&&AIMV[k]&&!(u.spcd>S.round+1)){const m=AIMV[k](u,r.mv);if(m){stat('aiSetup:'+k);return{mv:m}}}}catch(e){console.warn('HV_CASTERS ai move',k,e)}return r});
+/* ---------------- UI: cast button, X stepper, two-step clicks, previews ---------------- */
+let SPX=2,SPST=null,HOV=null;
+wrap('abBtn',o=>function(u){const k=spKey(u);if(!k||!isMine(u.side)||u.used)return o.apply(this,arguments);const sp=SPELL[k],why=spWhy(u,k);
+ if(why){return `<div class="use spoff">${sp.e} <b>${sp.n}</b>: ${why}.</div>`}const n=spTargets(u,k).length;if(!n)return `<div class="use spoff">${sp.e} <b>${sp.n}</b>: no target in range.</div>`;
+ const cost=sp.c=='X'?'X':spCost(u,k),X=Math.max(1,Math.min(SPX,5,S.mana[u.side]));
+ let h=`<button class="go sec rbtn sumbtn spbtn${sumMode?' on':''}" id="sumbtn">${sumMode?'Cancel '+sp.n:sp.e+' '+sp.n+' ('+(cost===0?'free':cost+' mana')+')'}</button>`;
+ if(sp.c=='X')h+=`<div class="spx"><button id="spxm" aria-label="Less mana">−</button><b>X = ${X}</b><button id="spxp" aria-label="More mana">+</button><small>first enemy ${2+X}, others ${X}</small></div>`;
+ if(sumMode)h+=`<div class="use"><b>${SPST?SPELL[k].p2:'Tap a '+(sp.foe?'violet':'green')+' hex'}</b> ${SPST?'':sp.h}</div>`;return h});
+document.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('#spxm,#spxp');if(!b||!sel||!S)return;SPX=Math.max(1,Math.min(5,(Math.max(1,Math.min(SPX,5,S.mana[sel.side])))+(b.id=='spxp'?1:-1)));SPX=Math.min(SPX,Math.max(1,S.mana[sel.side]));render()});
+function spDo(u,t,o){const a={t:'act',s:S.turn,fx:u.x,fy:u.y,x:t.x,y:t.y,i:1,item:enc(o)};SPST=null;HOV=null;const ok=submit(a);sel=null;sumMode=false;render();autoEnd();return ok}
+document.addEventListener('click',e=>{if(!S||S.over||!e.target||!e.target.closest)return;const B=e.target.closest('#board');if(!B)return;const V=document.getElementById('bscroll');if(V&&V._sup&&Date.now()-V._sup<350)return;
+ if(!(sel&&sumMode&&spKey(sel))){SPST=null;return}if(busy||cutting()||!isMine(S.turn))return;const c=cellAt(e);if(!c)return;const k=spKey(sel),sp=SPELL[k];
+ if(SPST){const cand=sp.s2(sel,SPST.t.v).find(q=>q.x==c.x&&q.y==c.y);e.stopPropagation();e.preventDefault();if(cand){spDo(sel,SPST.t,{x2:cand.x,y2:cand.y});return}SPST=null;render();return}
+ const t=spTargets(sel,k).find(q=>q.x==c.x&&q.y==c.y);if(!t)return;e.stopPropagation();e.preventDefault();
+ if(sp.two){SPST={t};msg(sp.p2);render();return}spDo(sel,t,{X:Math.max(1,Math.min(SPX,5,S.mana[sel.side]))})},true);
+/* hover preview: the same hex a click would pick (cellAt also knows the Tilted view, where a standing figure overlaps the hexes behind it) */
+document.addEventListener('mousemove',e=>{if(!S||!sel||!sumMode||!e.target||!e.target.closest)return;const c=e.target.closest('#board')?cellAt(e):null;const k=c?c.x+','+c.y:null;if(k===HOV)return;HOV=k;try{paintPrev()}catch(x){}},{passive:true});
+function cellEl(x,y){return document.querySelector(`#board .cell[data-x="${x}"][data-y="${y}"]`)}
+function paintPrev(){document.querySelectorAll('#board .cell.spz').forEach(c=>c.classList.remove('spz'));if(!sel||!sumMode||!HOV||SPST)return;const k=spKey(sel);if(!k)return;const sp=SPELL[k];if(!sp.prev)return;
+ const p=KP(HOV),t=spTargets(sel,k).find(q=>q.x==p.x&&q.y==p.y);if(!t)return;(sp.prev(sel,t)||[]).forEach(c=>{const el=cellEl(c.x,c.y);if(el){el.classList.add('spz');el.style.setProperty('--spc',sideCol(sel.side))}})}
+/* ---------------- render overlays ---------------- */
+const OGRAVE=`<svg viewBox='0 0 60 52' aria-hidden='true'><ellipse cx='30' cy='42' rx='21' ry='7' fill='#2a1f16'/><ellipse cx='30' cy='41' rx='16' ry='5' fill='#0b0806'/><path d='M14 40Q18 30 24 34Q28 26 34 32Q40 28 46 40' fill='#5a4632' stroke='#2a1f16' stroke-width='1.2'/><path d='M38 16L41 38' stroke='#6b4a2f' stroke-width='2.4'/><path d='M36 10H46L45 18H37Z' fill='#9aa2ac' stroke='#2a2a30' stroke-width='1'/><g class='ogf'><ellipse cx='26' cy='34' rx='9' ry='4' fill='#7fc46a' opacity='.35'/><ellipse cx='22' cy='28' rx='6' ry='3' fill='#9fe08a' opacity='.25'/></g><rect x='8' y='44' width='44' height='3' rx='1.5' fill='var(--sc)'/></svg>`;
+wrap('render',o=>function(){const r=o.apply(this,arguments);try{paintOver()}catch(e){console.warn('HV_CASTERS render',e)}return r});
+function paintOver(){if(!S||!S.units||$('#game').hidden)return;const B=$('#board');if(!B)return;
+ if(!sel||!sumMode)SPST=null;
+ /* graves */
+ (S.walls||[]).forEach(w=>{if(w.b!='ograve')return;const el=cellEl(w.x,w.y),b=el&&el.querySelector('.wall.bldg');if(b&&!b.dataset.og){b.dataset.og=1;b.innerHTML=OGRAVE;b.style.setProperty('--sc',`var(--${w.side})`);b.classList.add('ograve')}});
+ /* zones */
+ (S.zones||[]).forEach(z=>z.cells.forEach(k=>{const p=KP(k),el=cellEl(p.x,p.y);if(!el)return;const i=document.createElement('i'),own=z.k=='veil'&&(!FOGV()||sameTeam(z.side,FOGV()));i.className='spzo z-'+z.k+(p.x==z.x&&p.y==z.y?' zc':'')+(own?' own':'');i.style.setProperty('--zc',sideCol(z.side));
+  if(z.k=='verdict'&&p.x==z.x&&p.y==z.y)i.dataset.n='☀';el.insertBefore(i,el.children[1]||null);if(z.k=='veil')el.classList.add('veilc');if(z.k=='mire')el.classList.add('mirec')}));
+ /* unit statuses */
+ S.units.forEach(u=>{if(!visU(u))return;const el=cellEl(u.x,u.y);if(!el)return;let h='';if(u.shield>0)h+=`<i class="sps sshd" title="Aegis shield">${u.shield}</i>`;if(u.cage)h+=`<i class="spcage"></i>`;if(u.edge)h+=`<i class="sps sedge" title="Runeforged Edge">+3</i>`;if(u.shape&&u.shape.kind=='oss')h+=`<i class="sps soss" title="Ossified">💀</i>`;
+  if(h)el.insertAdjacentHTML('beforeend',h)});
+ SIDES.forEach(sd=>S.tw[sd].forEach(T=>{if(T.hp>0&&T.shield>0){const el=cellEl(T.x,T.y);if(el)el.insertAdjacentHTML('beforeend',`<i class="sps sshd tws" title="Aegis shield">${T.shield}</i>`)}}));
+ (S.walls||[]).forEach(w=>{if(w.shield>0){const el=cellEl(w.x,w.y);if(el)el.insertAdjacentHTML('beforeend',`<i class="sps sshd tws">${w.shield}</i>`)}});
+ /* tethers */
+ let sv=document.getElementById('spsvg');if(!sv){B.insertAdjacentHTML('beforeend','<svg id="spsvg" aria-hidden="true"></svg>');sv=document.getElementById('spsvg')}
+ const W_=B.clientWidth,Hh=B.clientHeight;sv.setAttribute('viewBox',`0 0 ${W_} ${Hh}`);
+ sv.innerHTML=(S.tethers||[]).filter(q=>LIVE(q.a)&&LIVE(q.b)&&(visU(q.a)||visU(q.b))).map(q=>{const a=ctr(q.a),b=ctr(q.b),ax=a[0]*W_/100,ay=a[1]*Hh/100,bx=b[0]*W_/100,by=b[1]*Hh/100,mx=(ax+bx)/2,my=(ay+by)/2-Math.hypot(bx-ax,by-ay)*.18;
+  return `<path d="M${ax} ${ay}Q${mx} ${my} ${bx} ${by}" class="tth0"/><path d="M${ax} ${ay}Q${mx} ${my} ${bx} ${by}" class="tth"/>`}).join('');
+ /* spell targeting highlights */
+ if(sel&&sumMode&&spKey(sel)&&isMine(sel.side)){const k=spKey(sel),sp=SPELL[k];
+  if(SPST){document.querySelectorAll('#board .cell.smn').forEach(c=>c.classList.remove('smn'));const f=cellEl(SPST.t.x,SPST.t.y);if(f)f.classList.add('spsel');(sp.s2(sel,SPST.t.v)||[]).forEach(p=>{const el=cellEl(p.x,p.y);if(el)el.classList.add('spl2')})}
+  else if(sp.foe)spTargets(sel,k).forEach(t=>{const el=cellEl(t.x,t.y);if(el){el.classList.remove('smn');el.classList.add('spl')}});paintPrev()}}
+/* ---------------- tooltips, cards and help ---------------- */
+const costTxt=k=>{const sp=SPELL[k];const c=sp.c=='X'?'X mana':sp.c===0?'free':sp.c+' mana'+(sp.c>=2&&H[SPOWN[k]]&&H[SPOWN[k]].fac=='arcane'?' (1 less with Arcane Flow)':'');return c+(sp.cd?', cooldown '+sp.cd:'')};
+wrap('kwH',o=>function(k,c){let r=o.apply(this,arguments);const h=H[k];if(!h||!h.sp||!SPELL[h.sp])return r;const sp=SPELL[h.sp],a=`✦ ${sp.n}`,b=`${costTxt(h.sp)}: ${sp.d}`,q=s=>String(s).replace(/"/g,'&quot;');
+ if(c===2)return r.replace('<div class="kwc">',`<div class="kwc"><span class="kch ksp" data-tip="${q(b)}">${a}</span>`);
+ if(c)return r.replace('<span class="kw kc">',`<span class="kw kc"><span class="ki ksp"><b>${a}</b>: ${b}</span>`);return r.replace('<ul class="kw">',`<ul class="kw"><li class="ksp"><b>${a}</b>: ${b}</li>`)});
+wrap('ucard',o=>function(u){let r=o.apply(this,arguments);try{const st=[],q=s=>String(s).replace(/"/g,'&quot;'),ch=(i,t,tip,c)=>`<span class="ust${c?' '+c:''}" data-tip="${q(tip)}">${i} ${t}</span>`,k=spKey(u);
+ if(k&&SPELL[k]&&k!='revert'){const w=spWhy(u,k);st.push(ch(SPELL[k].e,w&&w!='already acted'?w:'ready',SPELL[k].n+': '+SPELL[k].d,w&&w!='already acted'?'':'good'))}
+ if(u.shape&&u.shape.kind=='mim')st.push(ch('🐾','Shape: '+H[u.shape.look].n,'Mimic Shape: reverts at the end of its turn '+(u.shape.n>0?'after next':'this turn')+', or as an action.'));
+ if(u.shape&&u.shape.kind=='oss')st.push(ch('💀','Ossified','Ossified: 2 damage, move 2, melee, no abilities until the end of its next turn. It keeps its own HP.','bad'));
+ if(u.shield>0)st.push(ch('🛡',u.shield,'Aegis shield: soaks this much damage after armor.'));if(u.cage)st.push(ch('⛓','Caged','Iron Cage: cannot move, act or be targeted, damaged or healed until the end of its next turn.','bad'));
+ if(u.edge)st.push(ch('🔨','+3 Edge','Runeforged Edge: its next attack deals +3 and ignores armor.'));
+ if(S.tethers){if(S.tethers.some(t=>t.a===u))st.push(ch('🩸','Tethering','Crimson Tether: drains its target each turn. Move 1 while it holds.'));if(S.tethers.some(t=>t.b===u))st.push(ch('🩸','Tethered','Crimson Tether: loses HP at the start of the Hemomancer\'s turns. Get more than 4 hexes away or behind a wall to break it.','bad'))}
+ if(st.length)r=r.replace(/<\/div>\s*$/,`<div class="usts usp">${st.join('')}</div></div>`)}catch(e){}return r});
+wrap('terTip',o=>function(x,y){let r=o.apply(this,arguments)||'';try{const add=[];(S.zones||[]).forEach(z=>{if(!inZone(z,x,y))return;const who=esc0(NAMES[z.side]||SHORT[z.side]);
+ if(z.k=='verdict')add.push(`<b>☀️ Noon Verdict</b> (${who})<br>At the start of ${who}'s next turn: 5 damage in the centre, 3 on the ring, 3 to towers and buildings.`);
+ if(z.k=='fire')add.push(`<b>🔥 Wall of Flame</b> (${who})<br>Enemies that walk in or start their turn here take 3 and burn. Fliers are safe.`);
+ if(z.k=='veil')add.push(`<b>🌑 Veil of Night</b> (${who})<br>Its enemies cannot see in, and only enemies next to a unit here can target it. A flare blows it away.`);
+ if(z.k=='mire')add.push(`<b>🌱 Sinking Mire</b> (${who})<br>Swamp for now: walking units stop here. ${who}'s Wilds heroes and fliers ignore it.`)});
+ const W=wallAt(x,y);if(W&&W.b=='ograve')add.push(`Spawn heroes next to it for ${W.og.n+1} more of ${esc0(NAMES[W.side])}'s turns.`);
+ if(add.length)r=(r?r+'<br>':'')+add.join('<br>')}catch(e){}return r});
+/* ---------------- hero data (final stats; added after the balance passes, so no multipliers apply) ---------------- */
+const NEW={
+sunspeaker:{n:'Sunspeaker',e:'☀️',hp:7,mv:2,rng:[2,3],dmg:3,sp:'verdict',spp:2,fac:'kingdom',d:'A herald of noon. Marks a hex for a delayed 5-damage Noon Verdict (3 mana).'},
+aegis:{n:'Aegis Chaplain',e:'🛡️',hp:10,mv:2,rng:[1,2],dmg:3,sp:'aegis',spp:1,fac:'kingdom',d:'A war chaplain. Shields an ally or tower before the blow lands (2 mana).'},
+herald:{n:'Royal Herald',e:'🎺',hp:9,mv:3,rng:[1,1],dmg:3,sp:'rally',spp:1,fac:'kingdom',d:'Sounds the rally: pulls a friendly hero to his side from 4 hexes away (2 mana).'},
+hemomancer:{n:'Hemomancer',e:'🩸',hp:8,mv:2,rng:[2,3],dmg:3,sp:'tether',spp:1,fac:'vamp',d:'Binds an enemy with a Crimson Tether that drains it for 3 turns (2 mana).'},
+mesmerist:{n:'Mesmerist',e:'🎭',hp:7,mv:2,rng:[1,2],dmg:3,sp:'command',spp:4,fac:'vamp',d:'Charms an enemy hero into striking one of its own allies (3 mana).'},
+duskweaver:{n:'Duskweaver',e:'🌑',hp:9,mv:3,rng:[1,2],dmg:3,sp:'veil',spp:0,fac:'vamp',d:'Weaves a Veil of Night that hides your units from enemy eyes and arrows (2 mana).'},
+ossomancer:{n:'Ossomancer',e:'🦴',hp:6,mv:2,rng:[2,3],dmg:3,sp:'shrapnel',spp:2,fac:'undead',d:'Detonates spent or summoned undead as a 4-damage burst of Bone Shrapnel (1 mana).'},
+bonewitch:{n:'Bone Witch',e:'💀',hp:6,mv:2,rng:[2,3],dmg:2,sp:'ossify',spp:3,fac:'undead',d:'Ossifies an enemy hero into a weak skeleton for a turn (3 mana).'},
+gravedigger:{n:'Gravedigger',e:'⚰️',hp:12,mv:2,rng:[1,1],dmg:4,sp:'grave',spp:0,fac:'undead',d:'Digs Open Graves you can spawn next to, and earns gold from enemy deaths nearby (2 mana).'},
+cinderwarden:{n:'Cinder Warden',e:'🔥',hp:7,mv:2,rng:[2,3],dmg:3,sp:'flamewall',spp:2,fac:'infernal',d:'Raises a 3-hex Wall of Flame that burns enemies who cross it (2 mana).'},
+hellbinder:{n:'Hellbinder',e:'⛓️',hp:10,mv:2,rng:[1,2],dmg:3,sp:'hook',spp:2,fac:'infernal',d:'Hooks an enemy from 4 hexes away and drags it into your lines (2 mana).'},
+pactbroker:{n:'Pactbroker',e:'📜',hp:8,mv:2,rng:[2,3],dmg:2,sp:'bargain',spp:2,fac:'infernal',d:"Trades an ally's blood for mana and gold with a Devil's Bargain (free)."},
+beastcaller:{n:'Beastcaller',e:'🦌',hp:9,mv:2,rng:[1,2],dmg:4,sp:'herd',spp:2,fac:'wilds',d:'Sends a Thundering Herd down a line, hitting and pushing every enemy in it (3 mana).'},
+groveshaper:{n:'Grove Shaper',e:'🌱',hp:9,mv:2,rng:[2,3],dmg:2,sp:'mire',spp:1,fac:'wilds',d:'Sinks 7 hexes into a swamp that stops walking enemies (2 mana).'},
+skinchanger:{n:'Skinchanger',e:'🐾',hp:10,mv:3,rng:[1,1],dmg:4,sp:'mimic',spp:1,fac:'wilds',d:'Takes the body of any non-boss hero within 2, ally or enemy (2 mana).'},
+runeforger:{n:'Rune Forger',e:'🔨',hp:11,mv:2,rng:[1,1],dmg:4,armor:1,sp:'edge',spp:1,fac:'iron',d:"Runeforges an ally's weapon: its next hit deals +3 and ignores armor (2 mana)."},
+cagewright:{n:'Cagewright',e:'⛓',hp:10,mv:2,rng:[2,3],dmg:2,sp:'cage',spp:4,fac:'iron',d:'Drops an Iron Cage on any non-boss hero: it can neither act nor be hurt (3 mana).'},
+prospector:{n:'Prospector',e:'⛏️',hp:10,mv:2,rng:[1,1],dmg:3,sp:'vein',spp:2,fac:'iron',d:'Strikes a rich vein in your mine and guards mines from enemy claims (2 mana).'},
+aetherlancer:{n:'Aetherlancer',e:'🔱',hp:5,mv:2,rng:[2,3],dmg:3,sp:'lance',spp:1,fac:'arcane',d:'Pours X mana into an Overflow Lance that pierces a whole line (X mana).'},
+phasewright:{n:'Phasewright',e:'🌀',hp:7,mv:2,rng:[2,3],dmg:2,sp:'swap',spp:2,fac:'arcane',d:'Swaps the places of any two units near her with Transposition (2 mana).'},
+hourglass:{n:'Hourglass Adept',e:'⏳',hp:8,mv:2,rng:[1,2],dmg:2,sp:'rewind',spp:1,fac:'arcane',d:'Rewinds an ally to where and how it stood at the start of your last turn (2 mana).'}};
+Object.assign(H,NEW);const SPOWN={};Object.keys(NEW).forEach(k=>{SPOWN[NEW[k].sp]=k});SPOWN.revert='skinchanger';HVSP.NEW=Object.keys(NEW);
+Object.assign(ROLE,{
+sunspeaker:['Mage','Zone striker. Mark choke points, towers and stunned enemies with a delayed Noon Verdict.'],
+aegis:['Support','Bodyguard caster. Shield the ally about to be hit, or a tower under siege.'],
+herald:['Support','Rescuer and flanker. Pull a wounded ally out, or a fresh fighter into the fight.'],
+hemomancer:['Mage','Drain caster. Tether a slow, tough target and stay within 4 hexes of it.'],
+mesmerist:['Controller','Turncoat maker. Charm a big hitter into its own backline.'],
+duskweaver:['Support','Night cover. Veil your shooters or a shrine from enemy fire.'],
+ossomancer:['Mage','Bone bomber. Detonate risen or summoned undead next to enemy clusters.'],
+bonewitch:['Controller','Curse caster. Ossify the enemy carry for a turn and pile in.'],
+gravedigger:['Economist','Forward spawner. Dig a grave near the front and grow rich on nearby deaths.'],
+cinderwarden:['Mage','Zone burner. Wall off lanes and towers with fire.'],
+hellbinder:['Controller','Hooker. Drag a backline caster into your melee.'],
+pactbroker:['Economist','Mana dealer. Trade spare HP for mana and gold.'],
+beastcaller:['Mage','Line clearer. Stampede through squads and push them off shrines.'],
+groveshaper:['Controller','Terrain shaper. Bog down a lane in front of your towers.'],
+skinchanger:['Support','Shapeshifter. Borrow the best body on the field.'],
+runeforger:['Support','Armor breaker. Runeforge a big hitter before it strikes.'],
+cagewright:['Controller','Jailer. Cage the enemy threat, or save your own dying hero.'],
+prospector:['Economist','Mine boss. Hold the mines and strike veins for extra gold.'],
+aetherlancer:['Mage','Mana gun. Bank mana, then pour it into one big line shot.'],
+phasewright:['Controller','Swapper. Trade places to rescue allies or drop enemies into traps.'],
+hourglass:['Support','Time mender. Undo the damage your ally took since your last turn.']});
+Object.assign(CLS,{Support:'#3fa8b8',Controller:'#9a5ad8',Economist:'#d0a030'});
+Object.assign(CLASSDESC,{Support:'Spellcasters that protect, move and empower allies.',Controller:'Spellcasters that charm, cage, curse, pull or swap enemies.',Economist:'Spellcasters that turn mana, HP and mines into gold and spawn points.'});
+['Support','Controller','Economist'].forEach(c=>{if(!CORDER.includes(c))CORDER.splice(CORDER.indexOf('Healer')+1,0,c)});CART.Support=CART.Healer;CART.Controller=CART.Mage;CART.Economist=CART.Siege;
+try{const f=$('#dfilter'),q=$('#dq');if(f&&q&&!f.querySelector('[data-c="Support"]'))['Support','Controller','Economist'].forEach(c=>{const b=document.createElement('button');b.className='ft';b.dataset.c=c;b.textContent=c;f.insertBefore(b,q)})}catch(e){}
+Object.assign(SPAWN,{sunspeaker:'kng-holy',aegis:'kng-holy',herald:'kng-banner',hemomancer:'vam-mist',mesmerist:'vam-mist',duskweaver:'vam-bats',cinderwarden:'inf-flame',hellbinder:'inf-portal',pactbroker:'inf-portal',beastcaller:'wld-leap',groveshaper:'wld-grow',skinchanger:'wld-roots',runeforger:'irn-drop',cagewright:'irn-build',prospector:'irn-drop',aetherlancer:'arc-bolt',phasewright:'arc-void',hourglass:'arc-star'});
+Object.assign(UND,{ossomancer:'rune',bonewitch:'rune',gravedigger:'mound'});['ossomancer','bonewitch','gravedigger'].forEach(k=>SPAWN[k]='u-'+UND[k]);
+Object.assign(MOVEOF,{sunspeaker:'magic',aegis:'armor',herald:'step',hemomancer:'magic',mesmerist:'step',duskweaver:'flutter',ossomancer:'rattle',bonewitch:'ghost',gravedigger:'slither',cinderwarden:'fire',hellbinder:'heavy',pactbroker:'step',beastcaller:'hooves',groveshaper:'wood',skinchanger:'paws',runeforger:'armor',cagewright:'heavy',prospector:'step',aetherlancer:'magic',phasewright:'magic',hourglass:'magic'});
+Object.assign(ANIM,{sunspeaker:['float','cast'],aegis:['breathe','lunge'],herald:['sway','lunge'],hemomancer:['float','cast'],mesmerist:['sway','cast'],duskweaver:['float','dash'],ossomancer:['float','cast'],bonewitch:['float','cast'],gravedigger:['breathe','smash'],cinderwarden:['float','cast'],hellbinder:['stomp','smash'],pactbroker:['sway','cast'],beastcaller:['sway','recoil'],groveshaper:['sway','cast'],skinchanger:['hop','dash'],runeforger:['stomp','smash'],cagewright:['stomp','recoil'],prospector:['breathe','smash'],aetherlancer:['float','cast'],phasewright:['float','cast'],hourglass:['float','cast']});
+Object.assign(AFX,{sunspeaker:['orb','#ffe58a'],aegis:['slash','#ffd24a'],herald:['slash','#ffd24a'],hemomancer:['orb','#d23a58'],mesmerist:['orb','#c08aff'],duskweaver:['slash','#8a6ab8'],ossomancer:['orb','#c8f0b0'],bonewitch:['orb','#7fc46a'],gravedigger:['slash','#b8a878'],cinderwarden:['orb','#ff8a3a'],hellbinder:['slash','#ff6a2a'],pactbroker:['orb','#ffb04a'],beastcaller:['proj','#8be08a'],groveshaper:['orb','#8be08a'],skinchanger:['slash','#5cc070'],runeforger:['slash','#8fb4ff'],cagewright:['proj','#cfd6de'],prospector:['slash','#ffd24a'],aetherlancer:['orb','#8fb4ff'],phasewright:['orb','#c8a8ff'],hourglass:['orb','#ffe0a0']});
+Object.assign(DEATH,{sunspeaker:'dissolve',aegis:'crumble',herald:'collapse',hemomancer:'smoke',mesmerist:'smoke',duskweaver:'smoke',ossomancer:'dissolve',bonewitch:'dissolve',gravedigger:'collapse',cinderwarden:'flame',hellbinder:'blast',pactbroker:'flame',beastcaller:'collapse',groveshaper:'dissolve',skinchanger:'collapse',runeforger:'crumble',cagewright:'crumble',prospector:'collapse',aetherlancer:'implode',phasewright:'implode',hourglass:'dissolve'});
+[['sunspeaker','mage'],['aegis','paladin'],['herald','knight'],['hemomancer','warlock'],['mesmerist','warlock'],['duskweaver','blade'],['ossomancer','warlock'],['bonewitch','witch'],['gravedigger','brute'],['cinderwarden','mage'],['hellbinder','blade'],['pactbroker','mage'],['beastcaller','archer'],['groveshaper','druid'],['skinchanger','rogue'],['runeforger','guard'],['cagewright','ballista'],['prospector','brute'],['aetherlancer','storm'],['phasewright','witch'],['hourglass','seer']].forEach(([a,b])=>{if(ATK[b]&&!ATK[a])ATK[a]=ATK[b]});
+/* shapes: board figure of the borrowed body (Mimic) or a tinted skeleton (Ossify) */
+wrap('spr',o=>function(k,s){const h=H[k];if(h&&h.shapeK){const base=h.shapeK=='oss'?'skeletons':h.shapeLook;return o.call(this,base,s).replace(/class=(['"])sp/,'class=$1sp shp-'+h.shapeK)}return o.apply(this,arguments)});
+/* How to Play */
+wrap('drawRules',o=>function(){const r=o.apply(this,arguments);try{const el=$('#rules');if(el&&!el.querySelector('.hvsp-rules')){const byF={};Object.keys(NEW).forEach(k=>(byF[NEW[k].fac]=byF[NEW[k].fac]||[]).push(k));
+ const d=document.createElement('details');d.className='hvsp-rules';d.innerHTML=`<summary>Spellcasters (21 new heroes)</summary><p>Each faction has three spellcasters. Select one and press its <b>✦ spell button</b> (under the board), then tap a highlighted hex: <b style="color:#b06aff">violet</b> hexes are enemies or enemy ground, <b style="color:#2ad04a">green</b> hexes are allies, your own units or empty ground. Hovering a hex previews the area. Casting is the hero's action for the turn. Some spells need a second tap (Rally, Sweet Command, Transposition), and the Overflow Lance lets you pick how much mana to pour in (X).</p><p><b>Cooldowns:</b> "cooldown 2" means the spell cannot be cast again on your next 2 turns. Mana is still the main limit. Silence and stun stop spells, like any ability. Arcane Flow makes Arcane spells that cost 2+ cost 1 less.</p><p><b>Zones</b> (Noon Verdict, Wall of Flame, Veil of Night, Sinking Mire) are drawn on the board for everyone. Hover a hex to see who made it and what it does.</p>`+
+ Object.keys(FAC).map(f=>`<p><b style="color:${FAC[f].c}">${FAC[f].n}</b></p><ul>`+(byF[f]||[]).map(k=>`<li><b>${NEW[k].n}</b> (${hireCost(k)} gold, ${slotCost(k)} slot${slotCost(k)>1?'s':''}): <i>${SPELL[NEW[k].sp].n}</i>, ${costTxt(NEW[k].sp)}: ${SPELL[NEW[k].sp].d}</li>`).join('')+'</ul>').join('');
+ const anchor=[...el.querySelectorAll('details')].find(x=>/Classes/.test(x.querySelector('summary')&&x.querySelector('summary').textContent||''));if(anchor)el.insertBefore(d,anchor);else el.appendChild(d)}}catch(e){console.warn(e)}return r});
+/* ---------------- VFX + synth SFX (cosmetic only: Math.random is fine here) ---------------- */
+const seen=o=>{const V=FOGV();return !V||!o||seesCell(V,o.x,o.y)};
+function beam(a,b,col,w,ms,cls){const sv=ovSvg('spb '+(cls||''),ms||900);if(!sv)return null;const A=cpx(a),B=cpx(b);sv.innerHTML=`<line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="${col}" stroke-width="${w*2.2}" stroke-linecap="round" opacity=".28"/><line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="#fff" stroke-width="${Math.max(1,w*.3)}" stroke-linecap="round"/>`;return sv}
+function burst(o,cols,n,sp,up,dl){psCell(o,(x,y,c)=>{for(let i=0;i<n;i++){const an=rr(0,7),v=rr(sp*.4,sp);psAdd({x:x+rr(-6,6),y:y+rr(-6,6),vx:Math.cos(an)*v,vy:Math.sin(an)*v*.7-rr(0,up||0),g:up?-20:180,dr:.95,life:rr(.5,1.2),s:rr(2,4.5),s1:.4,col:cols[i%cols.length],glow:1})}},dl||0)}
+/* Tilted view: the particle canvas is sized in screen space, so round decals (rings, flashes, scorch) are drawn as DOM circles on the tilted plane instead */
+const TVON=()=>document.documentElement.classList.contains('tvon');
+function ringFx(o,col,big,dl,kind){if(TVON()){domEl(o,'spring'+(kind=='flash'?' fl':'')+(big?' big':''),`<i style="--rc:${col}"></i>`,750,dl);return}psCell(o,(x,y,c)=>{PS.d.push({kind:kind||'ring',x,y,r:c*(big?1.2:.75),w:5,col,life:.65,age:0,a:.95,add:1})},dl||0)}
+function domEl(o,cls,html,ms,dl){setTimeout(()=>{const L=fxLayer();if(!L)return;const c=ctr(o),e=document.createElement('div');e.className='spfx '+cls;e.style.cssText=`left:${c[0]}%;top:${c[1]}%;width:${100/WF*1.1}%`;e.innerHTML=html||'';L.appendChild(e);setTimeout(()=>e.remove(),ms||1200)},dl||0)}
+function vfx(k,a,b,c,d){if(RP||RUNFAST)return;if(a&&a.x!=null&&!seen(a)&&!(b&&b.x!=null&&seen(b)))return;try{switch(k){
+ case 'cast:verdict':domEl(b,'sunring','',1400);burst(b,['#fff6c0','#ffd24a','#ffb02a'],18,90,60);break;
+ case 'verdict':{const z=a;domEl(z,'sunlance','',1300);setTimeout(()=>{ring1(z).forEach((p,i)=>ringFx(p,'#ffe58a',i==0,0,i==0?'flash':'ring'));burst(z,['#ffffff','#fff6c0','#ffd24a'],40,180,80,0)},380);break}
+ case 'cast:aegis':{const o=b.v||b.o||b;domEl(o,'aegfx','<svg viewBox="0 0 40 40"><path d="M20 3L35 11V22Q35 32 20 38Q5 32 5 22V11Z" fill="#ffd24a33" stroke="#ffe58a" stroke-width="2"/></svg>',1300);burst(o,['#fff6c0','#ffe58a'],16,70,40);break}
+ case 'rally':domEl(b,'motes','',900);burst(b,['#ffe58a','#fff'],18,60,40);burst(a,['#ffe58a','#fff6c0'],22,80,30,250);ringFx(a,'#ffd24a',0,250);break;
+ case 'cast:rally':domEl(a,'banner','<svg viewBox="0 0 40 40"><path d="M10 38V4" stroke="#6b4a2f" stroke-width="2.4"/><path class="flg" d="M11 5H33L28 12L33 19H11Z" fill="#c03030" stroke="#ffd24a" stroke-width="1.2"/></svg>',1200);break;
+ case 'cast:tether':beam(a,b,'#d23a58',5,1100,'tth1');burst(b,['#ff2a3a','#a01830'],14,60,0);break;
+ case 'tetherTick':if(seen(a)||seen(b)){beam(b,a,'#ff4a64',4,700,'tth1');burst(b,['#ff2a3a','#e0304e'],10,50,10);burst(a,['#ffb0b8','#ff4a64'],8,40,30,300)}break;
+ case 'command':domEl(a,'eyesig','<svg viewBox="0 0 40 40"><path d="M4 20Q20 4 36 20Q20 36 4 20Z" fill="#b06aff33" stroke="#d8b0ff" stroke-width="2"/><circle cx="20" cy="20" r="6" fill="#b06aff"/><circle cx="20" cy="20" r="2.4" fill="#fff"/></svg>',1300);setTimeout(()=>{beam(a,b,'#ff7ac0',4,800,'hrt')},420);break;
+ case 'cast:veil':domEl(b,'veilfx','',1500);burst(b,['#1a0a2a','#3a1a5a','#8a6ab8'],22,70,20);break;
+ case 'shrapnel':ringFx(a,'#9fe08a',1);burst(a,['#f0ead8','#d8d0b8','#9fe08a','#ffffff'],46,240,40);psCell(a,(x,y,cl)=>{for(let i=0;i<14;i++){const an=i/14*6.283;psAdd({x,y,vx:Math.cos(an)*260,vy:Math.sin(an)*180,g:300,dr:.97,life:.7,s:3.5,s1:1.5,col:'#efe6cc',sh:'line',rot:an,add:0})}});break;
+ case 'ossify':domEl(a,'bonecage','<svg viewBox="0 0 40 40"><g stroke="#e8e2cc" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M8 36Q6 18 20 4Q34 18 32 36"/><path d="M14 36Q12 20 20 10Q28 20 26 36"/><path d="M6 26H34M8 16H32"/></g></svg>',1300);burst(a,['#7fc46a','#c8ffd0'],16,60,20);break;
+ case 'cast:grave':burst(b,['#5a4632','#7a6040','#9fe08a'],24,90,40);ringFx(b,'#7fc46a',0);break;
+ case 'cast:flamewall':(fwCells(a,b)||[]).forEach((k,i)=>{const p=KP(k);if(TVON())domEl(p,'spscorch','<i></i>',1450,i*120);psCell(p,(x,y,c)=>{if(!TVON())PS.d.push({kind:'scorch',x,y,r:c*.55,life:1.4,age:0,a:.9,add:1});for(let j=0;j<16;j++)psAdd({x:x+rr(-c*.3,c*.3),y:y+rr(-4,6),vx:rr(-10,10),vy:-rr(40,130),g:-30,dr:.96,life:rr(.6,1.3),s:rr(2.5,5.5),s1:.5,col:['#ffe9b0','#ffb04a','#ff6a1a'][j%3],glow:1})},i*120)});break;
+ case 'hook':{beam(a,b,'#9aa2ac',3,1000,'chain');burst(c,['#ff6a1a','#ffb04a'],16,80,20,500);break}
+ case 'bargain':domEl(a,'contract','<svg viewBox="0 0 40 40"><rect x="9" y="5" width="22" height="30" rx="2" fill="#efe0b8" stroke="#6a3010"/><path d="M13 12H27M13 17H27M13 22H23" stroke="#8a5a3a"/><path class="sig" d="M13 29Q17 24 20 29T27 28" stroke="#c02010" stroke-width="1.6" fill="none"/></svg>',1300);burst(a,['#ffd24a','#ffe07a','#ff6a1a'],14,60,40,500);break;
+ case 'herd':{const pts=b;if(!pts.length)break;const last=pts[pts.length-1];const L=fxLayer();if(!L)break;for(let i=0;i<3;i++){const e=document.createElement('div');e.className='spfx stag';const c0=ctr(a),c1=ctr(last);e.style.cssText=`left:${c0[0]}%;top:${c0[1]}%;width:${100/WF*.9}%;--tx:${c1[0]-c0[0]}%;--ty:${c1[1]-c0[1]}%;animation-delay:${i*.09}s;transform:translate(-50%,-50%) scaleX(${c1[0]<c0[0]?-1:1})`;
+  e.innerHTML='<svg viewBox="0 0 40 30"><path d="M6 20Q10 12 22 12L28 6L27 2M28 6L33 3M28 6L30 11Q34 13 32 16L27 15L25 22L23 28M22 12L20 22L18 28M10 16L8 26" stroke="#b8ffc8" stroke-width="2.2" fill="#5cc07055" stroke-linecap="round" stroke-linejoin="round"/></svg>';L.appendChild(e);setTimeout(()=>e.remove(),1100)}pts.forEach((p,i)=>burst(p,['#8be08a','#c8ffd0','#7a6a50'],10,70,10,i*110));break}
+ case 'cast:mire':ring1(b).forEach((p,i)=>psCell(p,(x,y,c)=>{for(let j=0;j<8;j++)psAdd({x:x+rr(-c*.3,c*.3),y:y+rr(-3,6),vx:rr(-6,6),vy:-rr(10,40),g:20,dr:.97,life:rr(.6,1.2),s:rr(2,4),s1:rr(4,7),col:['#5a7a3a','#3a5a2a','#9ab870'][j%3],add:0})},i*60));break;
+ case 'mimic':burst(a,['#5cc070','#c8ffd0','#7a5a3a'],30,90,40);ringFx(a,'#5cc070',1);break;
+ case 'shapeoff':burst(a,['#e8e2cc','#7fc46a','#5cc070'],18,70,30);break;
+ case 'cast:edge':{const o=b.v||b;domEl(o,'runes','<svg viewBox="0 0 40 40"><g fill="none" stroke="#8fb4ff" stroke-width="1.6"><path d="M10 30L14 22L10 14M20 32V8M26 12L30 20L26 28"/></g></svg>',1300);burst(o,['#8fb4ff','#d6e4ff','#ffffff'],14,50,50);break}
+ case 'cast:cage':{const o=b.v||b;domEl(o,'cagedrop','<svg viewBox="0 0 40 46"><g stroke="#9aa2ac" stroke-width="2.6"><path d="M7 4V42M15 4V42M25 4V42M33 4V42"/></g><path d="M4 4H36M4 42H36" stroke="#5a5a64" stroke-width="4"/></svg>',1300);ringFx(o,'#cfd6de',0,380);break}
+ case 'vein':burst(a,['#ffd24a','#ffe07a','#ffffff'],24,90,60);ringFx(a,'#ffd24a',0);break;
+ case 'lance':{const cs=b,X=c,end=d&&d.T?d.T:d&&d.W?d.W:cs[cs.length-1]||a;beam(a,end,'#8fb4ff',2+X*1.6,800,'lnc');cs.forEach((p,i)=>burst(p,['#d6e4ff','#8fb4ff','#ffffff'],6+X*2,80,10,i*50));break}
+ case 'swap':ringFx(a,'#c8a8ff',1);ringFx(b,'#c8a8ff',1);beam(a,b,'#c8a8ff',3,700,'swp');burst(a,['#b99bff','#ffffff'],14,60,20,200);burst(b,['#b99bff','#ffffff'],14,60,20,200);break;
+ case 'rewind':{if(b&&(b.x!=a.x||b.y!=a.y))beam(b,a,'#ffe0a0',3,900,'sand');burst(a,['#ffe0a0','#d8b870','#ffffff'],22,60,50);domEl(a,'hglass','<svg viewBox="0 0 40 40"><path d="M12 5H28M12 35H28M13 5Q13 16 20 20Q13 24 13 35M27 5Q27 16 20 20Q27 24 27 35" stroke="#ffe0a0" stroke-width="2" fill="none"/><path d="M16 31Q20 26 24 31Z" fill="#d8b870"/></svg>',1200);break}
+}}catch(e){}}
+const SPSFX={
+verdict(){[392,494,587,784].forEach((f,i)=>tone(f,.22,'sawtooth',.035,i*.08,f*1.01));noise(.25,.05,5000,.35)},
+aegis(){tone(523,.6,'sine',.04);tone(659,.6,'sine',.03,.04);tone(784,.7,'sine',.03,.08);tone(1568,.15,'triangle',.02,.2)},
+rally(){tone(392,.25,'square',.04);tone(587,.35,'square',.04,.18);noise(.3,.04,2500,.1)},
+tether(){tone(60,.25,'sine',.12);tone(60,.25,'sine',.1,.32);noise(.15,.04,900,.15)},
+command(){[1047,988,1175,932].forEach((f,i)=>tone(f,.18,'triangle',.03,i*.11,f*.97))},
+veil(){tone(110,.9,'sine',.05,0,70);noise(.8,.05,500);tone(880,.5,'sine',.015,.2,330)},
+shrapnel(){noise(.22,.16,3500);[1800,2400,2100,2900,2600].forEach((f,i)=>tone(f,.05,'square',.025,.04+i*.03))},
+ossify(){tone(700,.5,'sawtooth',.04,0,120);[0,.06,.12,.18].forEach(t=>tone(1200+t*900,.03,'square',.02,.3+t))},
+grave(){tone(70,.25,'sine',.15,0,40);noise(.12,.1,400);tone(300,.6,'sawtooth',.02,.15,120)},
+flamewall(){noise(.7,.09,1300);tone(80,.6,'sawtooth',.05,0,45)},
+hook(){tone(220,.3,'square',.05,0,880);tone(880,.12,'triangle',.04,.3,300);[0,.05,.1,.15].forEach(t=>noise(.03,.08,3000,.45+t))},
+bargain(){tone(110,.3,'sawtooth',.08);tone(165,.3,'sawtooth',.05);tone(1320,.15,'sine',.04,.35);tone(1760,.2,'sine',.04,.45)},
+herd(){[0,.12,.24,.36,.48,.6].forEach(t=>{noise(.06,.12,700,t);tone(90,.08,'sine',.08,t,60)})},
+mire(){[0,.15,.3,.45].forEach(t=>tone(200+Math.random()*120,.08,'sine',.05,t,90));tone(120,.2,'square',.03,.6,80)},
+mimic(){tone(150,.5,'sawtooth',.06,0,320);tone(300,.5,'sawtooth',.03,.05,140);noise(.4,.04,1200)},
+revert(){tone(320,.4,'sawtooth',.05,0,150)},
+edge(){[2093,2637,3136].forEach((f,i)=>tone(f,.4,'sine',.03,i*.02,f*.995));tone(1046,.5,'triangle',.02)},
+cage(){tone(80,.5,'square',.08,0,50);noise(.15,.12,900);tone(110,.9,'sine',.06,.1,105)},
+vein(){[523,587,659,784,880].forEach((f,i)=>tone(f,.15,'sine',.04,i*.07))},
+lance(){tone(500,.35,'sine',.05,0,1600);noise(.1,.06,6000,.3);tone(2400,.06,'square',.03,.32)},
+swap(){tone(880,.08,'square',.04);tone(660,.08,'square',.04,.1);tone(880,.08,'square',.04,.2);tone(660,.08,'square',.04,.3)},
+rewind(){tone(1500,.6,'sine',.04,0,300);noise(.5,.03,4000)},
+shbreak(){tone(2600,.15,'triangle',.05,0,1800);noise(.1,.06,7000)}};
+function sfxK(k){if(RP||muted)return;try{SPSFX[k]&&SPSFX[k]()}catch(e){}}
+HVSP.sfx=sfxK;HVSP.vfx=vfx;
+/* draft screen and rules pick up the new heroes */
+try{drawRules()}catch(e){}try{if(!$('#draft').hidden)drawCards()}catch(e){}
 })();
 </script>
 </body></html>
