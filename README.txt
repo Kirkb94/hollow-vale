@@ -127,7 +127,7 @@ NEW HEROES
   walking onto one stops and cannot move on its next turn. Flyers are immune.
 - Stonewright (Iron Clan): builds 6 HP walls (2 mana, up to 3) that block
   movement and ranged shots. Enemies can knock them down.
-- Hexweaver (Arcane Order): Silence (2 mana) on a 3-hex-wide area up to 3
+- Hexweaver (Arcane Order): Silence (1 mana) on a 3-hex-wide area up to 3
   away. Enemies there cannot attack or use abilities on their next turn.
 
 READING THE BOARD
