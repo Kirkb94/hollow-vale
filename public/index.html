@@ -2682,7 +2682,7 @@ ${cl}<details><summary>Building your team</summary><ul><li>You have <b>10 slots<
 <details><summary>Moving and fighting</summary><ul><li>The board is a hex grid, so every hex has 6 neighbors. Movement and range are counted in hexes.</li><li>Units cannot walk through other units. Flying units can pass over them but must end on an empty hex. Heroes walk their route hex by hex and fliers glide (instant with reduced motion).</li><li>A hero that counters deals less the more hurt it is: half its damage times the share of HP it has left (at least 1).</li><li>Attacks hit enemy units and enemy towers. A unit at 0 HP is defeated. Some heroes have a minimum range and cannot hit anything closer.</li><li>Casters, healers, squads and others have extra abilities. Select a hero, or look at its card, to see its keywords.</li></ul></details>
 <details><summary>Towers</summary><ul><li>Each player has 3 towers with <b>12, 14 and 15 HP</b>, counted left to right as you face your own edge of the board.</li><li>The board is a hexagon. In <b>1v1</b> it is smaller: Player 1 holds the bottom edge and Player 2 the top. In a <b>3-player</b> game Player 1 holds the bottom edge, Player 2 the upper-left and Player 3 the upper-right. With <b>4 players</b> the board is a square field: Player 1 bottom, Player 2 left, Player 3 top and Player 4 (red) right. Turns always go in seat order: 1, 2, 3, 4. To even out turn order in 3-player games, on their very first turn Player 2 may spawn at most <b>4</b> heroes and Player 3 at most <b>3</b>. After that there is no limit.</li><li>Towers do not lose HP on their own until <b>sudden death</b>. From round 14 <b>every tower crumbles</b> at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired or fortified, so stalling is dangerous. All players crumble at the same moment, so turn order does not matter.</li><li>Towers <b>strike back</b> at a hero that hits them from the next hex: 3 damage at full HP, less as the tower is damaged (at least 1). Farms, Watchtowers, Barracks, Mana Wells, Cottages, the Great Hall and walls strike back for 1. Ranged attacks from 2 or more hexes away are never struck back, and the preview on a red hex shows it ("Tower strikes back for 3").</li><li>If the last players standing all lose their final tower at the same moment, the one with the most total unit HP left on the board wins.</li><li>Destroyed towers disappear from the board.</li></ul></details>
 <details><summary>Keywords</summary><ul><li><b>Armor N</b>: takes N less damage from each hit (minimum 1).</li><li><b>Drain N</b>: heals itself N HP when its hit damages a unit.</li><li><b>Stun</b>: the unit it hits skips its next turn.</li><li><b>Siege +N</b>: deals N extra damage to towers and walls (Iron Clan units add +1 more).</li><li><b>Flying</b>: moves over units, walls and water (never stops over deep water).</li><li><b>Splash</b>: also hits enemies next to the target for half damage.</li><li><b>Cleave</b> (melee splash): also hits the 2 hexes beside the target, in front of the attacker, for half damage.</li><li><b>Pierce</b> (Lancer): its spear hits both hexes in a straight line for full damage.</li><li><b>Squad xN</b>: spawns as N separate units.</li><li><b>Heal N</b>: restores N HP to a hurt ally in range.</li><li><b>Raise the Slain</b> (Necromancer): an enemy hero it kills (attack, counterattack or splash) rises as a random Undead hero of the same gold cost, or the nearest cheaper one, on that hex or next to it. A slain boss raises an Undead boss. An enemy squad raises once, when its last member falls; if the risen hero is a squad, the whole squad rises. Summoned and raised units never rise, and a raised Necromancer cannot raise. The raised unit fights for the Necromancer's side, starts used, shows a ⌛ countdown and crumbles after 3 of its owner's turns. It has no Undying or on-death effects, does not count toward the army cap and cannot be recruited. If no hex is free, nothing rises.</li><li><b>Wounds</b>: units deal less damage as they lose HP (50% at near-zero HP, full damage at full HP). Healing restores it.</li></ul></details>
-<details><summary>Playing on iPhone or iPad</summary><ul><li>Open the game's web address in Safari, choose <b>Play with friends</b>, then create a game or join one with its 4-letter room code. Friends can scan the QR code in the lobby.</li><li>In Safari tap Share, then <b>Add to Home Screen</b> to install Hollow Vale as an app with its own icon.</li><li>Tap to select and act. Tap an enemy or tower to see its stats. Turn the phone sideways for a bigger board.</li></ul></details><details><summary>Controls and tips</summary><ul><li>On a computer, hover a unit or tower to see its stats. The Size slider and the sound button are at the top of the battle screen.</li><li>Use hexes next to your towers carefully, since they are your only spawn points.</li></ul></details>`}
+<details><summary>Playing on iPhone or iPad</summary><ul><li>Open the game's web address in Safari, choose <b>Play with friends</b>, then create a game or join one with its 4-letter room code. Friends can scan the QR code in the lobby.</li><li>In Safari tap Share, then <b>Add to Home Screen</b> to install Hollow Vale as an app with its own icon.</li><li>Tap to select and act. Tap an enemy or tower to see its stats. Turn the phone sideways for a bigger board.</li></ul></details><details><summary>Controls and tips</summary><ul><li>On a computer, hover a unit or tower to see its stats. The Size slider and the sound button are at the top of the battle screen.</li><li>Use hexes next to your towers carefully, since they are your only spawn points.</li><li><b>View: Classic / Tilted</b>: Tilted lays the board back like a diorama with the heroes standing up. Switch it with the View button in a battle (V on a computer) or in ⚙ Display, where you can also set the tilt. It only changes your own screen, so friends can each pick their own.</li></ul></details>`}
 
 /* Phase 3: artwork */
 const CART={
@@ -5112,6 +5112,186 @@ function batDecor(b){const s=sel&&isBat(sel)&&S.turn===sel.side;b.classList.togg
  S.units.forEach(u=>{if(!isBat(u)||atV(u.x,u.y)!==u)return;const el=b.querySelector(`.cell[data-x="${u.x}"][data-y="${u.y}"] .u`);if(!el||el.classList.contains('hvbat'))return;el.classList.add('hvbat');const im=el.querySelector('img.sp');if(im&&HVART.has('bats'))im.src='art/t/bats.svg?v=1';el.insertAdjacentHTML('beforeend','<i class="hvswirl" aria-hidden="true"></i>')});
  if(PUFF&&performance.now()-PUFF.t<900){const c=b.querySelector(`.cell[data-x="${PUFF.x}"][data-y="${PUFF.y}"]`);if(c&&!c.querySelector('.hvpuff'))c.insertAdjacentHTML('beforeend','<i class="hvpuff" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></i>')}}
 try{drawRules()}catch(e){}
+})();
+</script>
+<style id="hv-tilt">
+/* ===== View: Classic / Tilted (2.5D). Client-only and cosmetic: the board plane (#bw: board, tile layers, #fxl) is laid back with one
+   CSS 3D transform (flattened, so the board still rasterises as one layer). #tvo wraps #bw and takes its place in the layout with the
+   tilted (shorter) height; in Classic it is display:contents, so nothing changes. Figures, towers and walls are counter-scaled per row so
+   they stand upright on their hex, anchored at their feet. Everything flat (tiles, highlights, fog, auras, markers) stays on the plane. ===== */
+#tvo{display:contents}
+html.tvon body.ingame #tvo{display:block;position:relative;flex:0 0 auto;aspect-ratio:var(--tvar,1.4);box-sizing:border-box}
+html.tvon body:not(.mob) #bw{--tvw:var(--bwpx)}
+html.tvon body.mob #bw{--tvw:var(--mw)}
+html.tvon body:not(.mob).ingame #tvo{width:var(--bwpx);margin:auto}
+html.tvon body.mob.ingame #tvo{width:calc(var(--mw) * var(--bk,.5));margin:0 auto auto}
+html.tvon body.ingame #bw{position:absolute!important;left:0;top:0;margin:0!important;transform-origin:50% 100%;
+ transform:translateY(calc((var(--tvhr,.5) - 1) * 100%)) perspective(calc(var(--tvpk,2.4) * var(--tvw,1000px))) rotateX(var(--tvT,50deg))}
+html.tvon body.ingame #tvo>#ticker{z-index:8}
+/* text drawn on the plane (K.O., combo announcer, ultimate flash) is stood up so it stays readable */
+html.tvon #bw :is(.kot,.annc){scale:1 var(--tvk0,1.6);transform-origin:50% 100%}
+html.tvon #board.ultfl::after{scale:1 var(--tvk0,1.6)}
+/* figures: upright, feet on the hex, drawn above every flat layer; DOM order (row by row) sorts back to front */
+html.tvon #board .cell :is(.u,.tw,.wall),html.tvon #board .cell.tr-forest .ter,html.tvon #board .cell .shr-s,html.tvon #board .cell .chesti,html.tvon #board .cell .minei{
+ scale:1 var(--tk,1.5);transform-origin:50% 100%!important;z-index:8}
+html.tvon #board .cell .u img{pointer-events:none}
+html.tvon #board .cell :is(.tw,.wall){pointer-events:auto}
+html.tvon #board .cell.tr-forest .ter{z-index:8}
+/* hidden by the fog of war: figures there are darkened instead of being covered by the (flat) fog */
+html.tvon #board .cell.fogw :is(.u,.tw,.wall,.ter,.chesti,.minei){filter:brightness(.36) saturate(.45)}
+/* overlays (HP bars, numbers, icons, damage previews): upright and lifted with the figure they belong to; always readable on top */
+html.tvon #board .cell :is(.hp,.tn,.trt,.done,.lvst,.stf,.stf2,.stf3,.ssp,.pop,.dmgp){scale:1 var(--tk,1.5);
+ translate:0 calc(var(--tvch,.12) * var(--tvw,1000px) * (1 - var(--tk,1.5)) * var(--tD,0));transform-origin:50% 100%}
+html.tvon #board .cell .hp{--tD:0;z-index:10}
+html.tvon #board .cell .tn{--tD:.5;z-index:10}
+html.tvon #board .cell .trt{--tD:.34;z-index:11}
+html.tvon #board .cell .done{--tD:.3;z-index:11}
+html.tvon #board .cell .lvst{--tD:.3;z-index:11}
+html.tvon #board .cell :is(.stf,.stf2,.stf3){--tD:.3;z-index:11}
+html.tvon #board .cell .ssp{--tD:.3;z-index:11}
+html.tvon #board .cell :is(.sburn,.sroot,.sward){--tD:.05;z-index:9}
+html.tvon #board .cell .smark{--tD:.28}
+html.tvon #board .cell .pop{--tD:.32;z-index:12}
+html.tvon #board .cell .dmgp{--tD:.4;z-index:14}
+/* board-wide tints (e.g. the Night tint on #board::before) must also cover the standing figures */
+html.tvon #board::before{z-index:9}
+/* effects (projectiles, impacts, spawn overlays, particles) stay in board coordinates on the plane, drawn above the figures */
+html.tvon #fxl{z-index:13}
+/* soft contact shadow under each figure (flat on the ground) */
+#board .tvsh{display:none}
+html.tvon #board .cell .tvsh{display:block;position:absolute;left:14%;right:14%;bottom:5%;height:24%;border-radius:50%;z-index:1;pointer-events:none;
+ background:radial-gradient(closest-side,#000000b0,#00000066 55%,#0000)}
+html.tvon #board .cell .tvsh.tw{left:8%;right:8%;bottom:1%;height:26%}
+/* look: gentle grade + far-edge haze on the plane, vignette over the view */
+.tvfx,.tvvig{display:none}
+html.tvon body.ingame .tvfx{display:block;position:absolute;inset:0;z-index:9;pointer-events:none;overflow:hidden;border-radius:14px}
+.tvfx i{position:absolute;display:block;pointer-events:none}
+.tvfx .tvgr{inset:0;background:radial-gradient(70% 60% at 50% 70%,#ffc4780f,#0000 70%),linear-gradient(#0a121c66,#0a121c1a 34%,#0000 60%,#1a10080d)}
+.tvfx .tvfog{left:-12%;right:-12%;top:-6%;height:30%;background:radial-gradient(40% 70% at 30% 30%,#c8d4d455,#0000 70%),radial-gradient(45% 80% at 72% 20%,#c8d4d444,#0000 70%),linear-gradient(#b8c6ca40,#0000);
+ animation:tvdrift 46s ease-in-out infinite alternate;will-change:transform}
+@keyframes tvdrift{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+html.tvon body.ingame .tvvig{display:block;position:absolute;inset:0;z-index:2;pointer-events:none;
+ background:radial-gradient(120% 95% at 50% 58%,#0000 55%,#05080cb0 100%),linear-gradient(#070a10a0,#0000 18%)}
+html.tvon body.mob.ingame .tvvig{border-radius:14px}
+@media (prefers-reduced-motion:reduce){.tvfx .tvfog{animation:none}}
+/* lighter phone variant: no drifting haze layer */
+html.tvon body.mob .tvfx .tvfog{display:none}
+/* controls */
+#tvb{white-space:nowrap}
+#tvr{width:90px;vertical-align:middle;accent-color:#e2b84a}
+#tvr[hidden]{display:none}
+body.mob #tvbm{width:auto!important;padding:0 10px;font-size:13px!important;white-space:nowrap}
+/* the zoom/view button strip floats over the board: only the buttons take taps, not the gaps between them */
+body.mob #bz{pointer-events:none}body.mob #bz>*{pointer-events:auto}
+#dspo .tvset{margin:12px 0 4px;padding-top:10px;border-top:1px solid #7a5a3466}
+#dspo .tvset b{display:block;margin-bottom:6px}
+#dspo .tvseg{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+#dspo .tvseg button{width:auto;flex:1;margin:0;padding:7px 8px;font-size:15px;background:#2a221a;color:#f0e6d0}
+#dspo .tvseg button[aria-pressed="true"]{background:linear-gradient(#e9c06c,#b9853a);color:#24170a}
+#dspo .tvseg.tvp2 button{flex:0 0 auto;padding:5px 10px;font-size:14px}
+#dspo .tvseg input[type=range]{width:auto;flex:1;min-width:90px;height:22px}
+#dspo .tvseg span{font-size:14px;opacity:.85}
+#dspo .tvset[data-on="0"] .tvp2{opacity:.45}
+</style>
+<script id="hv-tilt-js">/* View: Classic / Tilted — see #hv-tilt. Saved per player in localStorage ('hv-tilt'); never touches game state, so online sync is unaffected. */
+(function(){
+const KEY='hv-tilt',RT=document.documentElement,KP=2.2/* perspective distance in board heights */,MIN=25,MAX=62,PRE=[['Low',38],['Medium',50],['High',58]];
+let st={on:false,deg:50};
+try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(j&&typeof j=='object'){st.on=!!j.on;if(isFinite(+j.deg))st.deg=Math.max(MIN,Math.min(MAX,Math.round(+j.deg)))}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const act=()=>st.on&&document.body.classList.contains('ingame');
+const bw=$('#bw'),B=$('#board');if(!bw||!B)return;
+/* #tvo: layout box for the tilted plane (display:contents in Classic, so #bw keeps its place, size and flex rules) */
+const tvo=document.createElement('div');tvo.id='tvo';bw.parentNode.insertBefore(tvo,bw);tvo.appendChild(bw);
+bw.insertAdjacentHTML('beforeend','<div class="tvfx" aria-hidden="true"><i class="tvgr"></i><i class="tvfog"></i></div>');
+/* the phone keeps its ticker inside #bw: lift it out of the plane while tilted so it stays flat on screen */
+const tick=()=>{const t=$('#ticker');if(!t)return;if(act()&&t.parentNode===bw)tvo.appendChild(t);else if(!act()&&t.parentNode===tvo)bw.appendChild(t)};
+const vig=document.createElement('div');vig.className='tvvig';vig.setAttribute('aria-hidden','true');
+const placeVig=()=>{const w=$('#bscroll')&&$('#bscroll').parentNode;if(w&&vig.parentNode!==w){w.appendChild(vig);if(getComputedStyle(w).position=='static')w.style.position='relative'}};
+const rowsEl=document.createElement('style');rowsEl.id='hv-tilt-rows';document.head.appendChild(rowsEl);
+/* geometry (all ratios, so zoom never needs a recompute) */
+const rad=()=>st.deg*Math.PI/180;
+const ratio=()=>{const w=B.offsetWidth,h=B.offsetHeight;if(w>20&&h>20)return h/w;return (HF&&WF)?HF*1.1547/WF:1.08};
+const hr=()=>{const t=rad();return Math.cos(t)*KP/(KP+Math.sin(t))};/* visual height / board height */
+let R=1,lastHF=-1,lastDeg=-1;
+function rows(){const t=rad(),c=Math.cos(t),s=Math.sin(t),n=GEO?GEO.BH:0;let css='';
+ for(let y=0;y<n;y++){const yf=Math.min(1,(y*.75+.9)/HF),f=KP/(KP+(1-yf)*s);css+=`html.tvon #board .cell[data-y="${y}"]{--tk:${(1/(c*f)).toFixed(4)}}`}
+ rowsEl.textContent=css;lastHF=HF;lastDeg=st.deg}
+function vars(){R=ratio();const h=hr(),t=rad();bw.style.setProperty('--tvT',st.deg+'deg');bw.style.setProperty('--tvhr',h.toFixed(5));RT.style.setProperty('--tvar',(1/(R*h)).toFixed(5));
+ bw.style.setProperty('--tvpk',(KP*R).toFixed(5));bw.style.setProperty('--tvch',(HF?R/HF:.12).toFixed(5));bw.style.setProperty('--tvk0',(1/Math.cos(t)).toFixed(4));if(HF&&(HF!==lastHF||st.deg!==lastDeg))rows()}
+/* screen -> board fraction: homography from four probe points measured by the browser (exact for any zoom, scroll or tilt) */
+const prb=[[0,0],[1,0],[1,1],[0,1]].map(([x,y])=>{const i=document.createElement('i');i.style.cssText=`position:absolute;left:${x*100}%;top:${y*100}%;width:0;height:0;pointer-events:none`;i.className='tvpr';return i});
+const pr=document.createElement('div');pr.style.cssText='position:absolute;inset:0;pointer-events:none;visibility:hidden';prb.forEach(i=>pr.appendChild(i));bw.appendChild(pr);
+function sq2q(q){const[[x0,y0],[x1,y1],[x2,y2],[x3,y3]]=q,dx1=x1-x2,dx2=x3-x2,dy1=y1-y2,dy2=y3-y2,sx=x0-x1+x2-x3,sy=y0-y1+y2-y3,d=dx1*dy2-dx2*dy1;
+ const g=(sx*dy2-dx2*sy)/d,h=(dx1*sy-sx*dy1)/d;return [x1-x0+g*x1,x3-x0+h*x3,x0,y1-y0+g*y1,y3-y0+h*y3,y0,g,h,1]}
+function inv(m){const[a,b,c,d,e,f,g,h,i]=m,A=e*i-f*h,Bq=-(d*i-f*g),C=d*h-e*g,det=a*A+b*Bq+c*C;if(!det)return null;
+ return [A/det,-(b*i-c*h)/det,(b*f-c*e)/det,Bq/det,(a*i-c*g)/det,-(a*f-c*d)/det,C/det,-(a*h-b*g)/det,(a*e-b*d)/det]}
+function toBoard(cx,cy){const q=prb.map(i=>{const r=i.getBoundingClientRect();return [r.left,r.top]}),m=inv(sq2q(q));if(!m)return null;
+ const w=m[6]*cx+m[7]*cy+m[8];return [(m[0]*cx+m[1]*cy+m[2])/w,(m[3]*cx+m[4]*cy+m[5])/w]}
+/* exact pointy-top hex under a board point */
+function hexAt(u,v){if(!GEO||!WF||!HF)return null;const X=u*WF,Y=v*HF,yc=Math.floor(Y/.75);let best=null;
+ for(let y=yc-1;y<=yc;y++){const off=y&1?.5:0,x=Math.floor(X-off);for(let xx=x-1;xx<=x+1;xx++){const dx=X-(xx+off),dy=Y-y*.75;
+  if(dx<0||dx>1||dy<0||dy>1)continue;if(Math.abs(dy-.5)<=.5-.5*Math.abs(dx-.5)+1e-9&&VALID.has(xx+','+y)){best={x:xx,y};}}}return best}
+window.tvHex=(cx,cy)=>{const p=toBoard(cx,cy);return p?hexAt(p[0],p[1]):null};
+/* hit-testing: a click on a standing figure picks its hex; anything else picks the exact hex on the tilted ground */
+const BODY='.u,.tw,.wall';
+const ca0=cellAt;
+cellAt=function(e){if(!act()||!e||e.clientX==null)return ca0.apply(this,arguments);
+ const t=e.target&&e.target.closest?e.target.closest(BODY):null,c=t&&t.closest('#board .cell[data-x]');if(c)return{x:+c.dataset.x,y:+c.dataset.y};
+ return window.tvHex(e.clientX,e.clientY)};
+/* after every board render: shadows under figures; refresh row factors when the map changes */
+function post(){if(!act())return;if(HF!==lastHF)vars();
+ B.querySelectorAll('.cell>.u,.cell>.tw,.cell>.wall').forEach(el=>{const c=el.parentNode;if(c.querySelector(':scope>.tvsh'))return;const s=document.createElement('i');s.className='tvsh'+(el.classList.contains('u')?'':' tw');c.insertBefore(s,c.firstChild)})}
+new MutationObserver(post).observe(B,{childList:true});
+/* kill cam: its vignette and K.O. text live inside #bw, so they follow the plane (the text is stood up with --tvk0) */
+/* camera: fit the tilted (shorter) board to the screen */
+const PCF=()=>!MOB&&document.body.classList.contains('ingame');
+if(typeof window.applyBZD=='function'){const a0=window.applyBZD;window.applyBZD=function(){if(!act()||!PCF()||typeof window.hudH!='function')return a0.apply(this,arguments);
+ const h0=window.hudH,V=$('#bscroll'),Vh=V?V.clientHeight:innerHeight,k=hr();window.hudH=()=>{const h=h0();return Vh-30-(Vh-h-30)/k};try{return a0.apply(this,arguments)}finally{window.hudH=h0}}}
+const FH={k:'',h:0};
+if(typeof applyBZ=='function'){const z0=applyBZ;applyBZ=function(focus){if(!act()||!MOB)return z0.apply(this,arguments);
+ const sc=$('#bscroll');if(!sc)return;let fit=(sc.clientWidth||innerWidth-16)/BASE;
+ /* a tilted board is wide: fill the frame's height (up to 2x the width fit) and pan sideways. The height is sampled once per screen size,
+    so the tray growing or shrinking (tapping a hero) never re-zooms the board under the finger */
+ if(document.body.classList.contains('ingame')&&sc.clientHeight>60){const key=innerWidth+'x'+innerHeight+'/'+st.deg+'/'+HF+'/'+BASE;if(FH.k!==key){FH.k=key;FH.h=sc.clientHeight}fit=Math.min(fit*2,(FH.h-4)/(BASE*R*hr()))}fit=Math.max(.2,fit);
+ const k=Math.min(1.25,fit*BZ),cx=sc.scrollLeft+sc.clientWidth/2,cy=sc.scrollTop+sc.clientHeight/2,old=parseFloat(RT.style.getPropertyValue('--bk'))||k;
+ RT.style.setProperty('--bk',k.toFixed(4));sc.style.maxHeight=BZ>1?Math.round(innerHeight*.62)+'px':'';
+ requestAnimationFrame(()=>{if(focus){const el=document.querySelector(`#board .cell[data-x="${focus.x}"][data-y="${focus.y}"]`);if(el){const r=el.getBoundingClientRect(),s=sc.getBoundingClientRect();sc.scrollLeft+=r.left+r.width/2-(s.left+s.width/2);sc.scrollTop+=r.top+r.height/2-(s.top+s.height/2);return}}
+  sc.scrollLeft=cx*k/old-sc.clientWidth/2;sc.scrollTop=cy*k/old-sc.clientHeight/2})}}
+function refit(keep){try{if(MOB){applyBZ(keep)}else if(typeof window.applyBZD=='function'&&document.body.classList.contains('ingame')){BZD=HVMAP&&HVMAP.big?BZD:0;window.applyBZD();if(keep&&window.camTo)setTimeout(()=>camTo(keep.x,keep.y),30)}}catch(e){}}
+/* the hex in the middle of the view, so switching view keeps you looking at the same place */
+function midHex(){const V=$('#bscroll');if(!V||!S)return null;const r=V.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+ if(act())return window.tvHex(x,y);const el=document.elementsFromPoint(x,y).map(e=>e.closest&&e.closest('#board .cell[data-x]')).find(Boolean);return el?{x:+el.dataset.x,y:+el.dataset.y}:null}
+/* controls */
+const ui=[];
+function sync(){RT.classList.toggle('tvon',st.on);tick();if(st.on){placeVig();vars();post()}ui.forEach(f=>{try{f()}catch(e){}})}
+function set(o){const keep=document.body.classList.contains('ingame')?midHex():null;const was=st.on;Object.assign(st,o);st.deg=Math.max(MIN,Math.min(MAX,Math.round(st.deg)));save();sync();if(st.on!==was||o.deg!=null)refit(keep)}
+window.hvTilt={get:()=>Object.assign({},st),set,toBoard,hexAt};
+/* PC: in the floating HUD next to the zoom buttons; V toggles */
+const bar=$('#bzbar');
+if(bar){const b=document.createElement('button');b.className='ft';b.id='tvb';b.type='button';b.title='Board view: Classic (flat) or Tilted (2.5D diorama). Shortcut: V';
+ const r=document.createElement('input');r.type='range';r.id='tvr';r.min=MIN;r.max=MAX;r.step=1;r.title='Tilt angle';r.setAttribute('aria-label','Tilt angle');
+ b.onclick=()=>set({on:!st.on});r.oninput=()=>set({deg:+r.value});const fs=$('#pcfs');bar.insertBefore(b,fs||null);bar.insertBefore(r,fs||null);
+ ui.push(()=>{b.textContent='View: '+(st.on?'Tilted':'Classic');b.setAttribute('aria-pressed',st.on?'true':'false');r.hidden=!st.on;r.value=st.deg})}
+addEventListener('keydown',e=>{if(MOB||!document.body.classList.contains('ingame')||e.ctrlKey||e.metaKey||e.altKey||(e.target&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)))return;if(e.key=='v'||e.key=='V'){set({on:!st.on});e.preventDefault()}});
+/* phone: next to the + / - zoom buttons */
+const bz=$('#bz');
+if(bz&&MOB){const b=document.createElement('button');b.id='tvbm';b.type='button';b.onclick=()=>set({on:!st.on});bz.insertBefore(b,bz.firstChild);
+ ui.push(()=>{b.textContent=st.on?'View: Tilted':'View: Classic';b.setAttribute('aria-label','Board view: '+(st.on?'Tilted':'Classic')+'. Tap to switch.');b.setAttribute('aria-pressed',st.on?'true':'false')})}
+/* Display settings */
+const dx=$('#dspx');
+if(dx){const d=document.createElement('div');d.className='tvset';
+ d.innerHTML='<b>Board view</b><div class="tvseg" role="group" aria-label="Board view"><button type="button" data-tv="0">Classic</button><button type="button" data-tv="1">Tilted</button></div>'
+ +'<div class="tvseg tvp2" role="group" aria-label="Tilt" style="margin-top:8px"><span>Tilt</span>'+PRE.map(p=>`<button type="button" data-tp="${p[1]}">${p[0]}</button>`).join('')+`<input type="range" min="${MIN}" max="${MAX}" step="1" aria-label="Tilt angle"></div>`
+ +'<small>Tilted lays the board back like a diorama, with heroes standing up on their hexes. It only changes your screen, not the game.</small>';
+ dx.parentNode.insertBefore(d,dx);const rg=d.querySelector('input');
+ d.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.tv!=null)set({on:b.dataset.tv=='1'});if(b.dataset.tp)set({on:true,deg:+b.dataset.tp})};rg.oninput=()=>set({on:true,deg:+rg.value});
+ ui.push(()=>{d.dataset.on=st.on?'1':'0';d.querySelectorAll('[data-tv]').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.tv=='1')==st.on)));
+  d.querySelectorAll('[data-tp]').forEach(b=>b.setAttribute('aria-pressed',String(st.on&&Math.abs(+b.dataset.tp-st.deg)<=2)));rg.value=st.deg})}
+/* (re)fit when a battle starts or the window changes */
+new MutationObserver(()=>{tick();if(act()){placeVig();vars();post()}}).observe(document.body,{attributes:true,attributeFilter:['class']});
+addEventListener('resize',()=>{if(st.on)vars()});
+sync();
 })();
 </script>
 </body></html>
