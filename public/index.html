@@ -7270,4 +7270,162 @@ const rn=render;render=function(){const r=rn.apply(this,arguments);try{post()}ca
 addEventListener('resize',()=>{BS.k='';try{if(S&&inGame())sizeBadges()}catch(e){}});
 })();
 </script>
+<style id="hv-mobpop">
+/* ===== HV_MOBPOP: on phones nothing pops up over the board. Cosmetic only (see #hv-mobpop-js).
+   The board area already ends where the bottom tray starts (#game pads by --trayh), so every card docks to that bottom zone:
+   - unit / tower / hex info (#tip), tooltips (#htip), event cards (#evc: night, sudden death, boss...), the turn banner and the
+     log toasts (#ticker) are shown as a sheet over the tray, never over the hexes;
+   - the turn log and the AI-turn toast dock there as well (the market rows already open inside the tray);
+   - the selected hero stays in view when the board area changes size. Every card closes with a tap (or by itself). ===== */
+/* the unit card lives in the tray: keep the board area above the tray while it is open (a desktop rule for the floating card used to win here) */
+html body.mob.ingame:has(#udock:not([hidden])) #game{padding-bottom:calc(var(--trayh,180px) + 4px)}
+body.mob.ingame #tip:not([hidden]){position:fixed!important;left:6px!important;right:6px!important;top:auto!important;bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;
+ width:auto!important;max-width:none!important;max-height:calc(var(--trayh,180px) - 12px);overflow:auto;overscroll-behavior:contain;transform:none!important;z-index:9000;box-sizing:border-box;
+ padding:8px 34px 8px 10px!important;border-radius:14px!important;box-shadow:0 -6px 18px #000a!important;font-size:13px}
+body.mob.ingame #tip:not([hidden])::after{content:'✕';position:absolute;right:8px;top:6px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 12px/1 system-ui,sans-serif;background:#000a;border:1.5px solid #c9a24a;color:#f2d69a}
+body.mob.ingame #tip .tph{max-height:72px}
+body.mob.ingame #htip{left:6px!important;right:6px!important;top:auto!important;bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;max-width:none!important;max-height:calc(var(--trayh,180px) - 12px);overflow:auto;box-sizing:border-box;z-index:9600!important}
+/* event cards and the turn banner: a sheet over the tray */
+body.mob.ingame #evc{inset:auto 0 0 0!important;height:var(--trayh,180px);min-height:110px}
+body.mob.ingame #evc .evbg{background:linear-gradient(#1a140ef7,#0b0907fa)!important;border-top:2px solid var(--ec,#c9a24a);box-shadow:0 -8px 20px #000a}
+body.mob.ingame #evc.hvnf .evbg{background:linear-gradient(#17124af7,#06051efa)!important}
+body.mob.ingame #evc.hvdw .evbg{background:linear-gradient(#3a2a0cf7,#140c02fa)!important}
+body.mob.ingame #evc .evb{top:50%;height:auto;max-height:100%;padding:6px 12px;gap:10px;box-sizing:border-box;justify-content:flex-start}
+body.mob.ingame #evc .eva{width:clamp(52px,15vw,84px)}
+body.mob.ingame #evc .evi{font-size:clamp(36px,10vw,60px)}
+body.mob.ingame #evc .evt{max-width:none;flex:1}
+body.mob.ingame #evc .evt b,body.mob.ingame #evc.major .evt b{font-size:clamp(20px,6vw,30px)}
+body.mob.ingame #evc .evt em{font-size:12.5px}
+body.mob.ingame #evc .evt small{font-size:10.5px;letter-spacing:2px}
+body.mob.ingame #evc .hvfx{font-size:12px;gap:3px;margin-top:3px}
+body.mob.ingame #evc .hvfx span{padding:2px 7px}
+body.mob.ingame #evc .evskip{right:10px;bottom:6px;font-size:10.5px}
+body.mob.ingame #evc .evp{display:none}
+body.mob.ingame #tbanner{inset:auto 0 0 0!important;height:var(--trayh,180px)}
+body.mob.ingame #tbanner .tbs{height:64px;margin-top:-32px}
+body.mob.ingame #tbanner .tbt b{font-size:clamp(22px,6vw,32px)}
+/* log toasts: over the top of the tray instead of the board corner */
+body.mob #tray>#ticker{position:absolute!important;left:8px;right:8px;top:6px;bottom:auto!important;max-width:none;z-index:6;flex-direction:column!important}
+body.mob #tray>#ticker .tk{font-size:12.5px!important;max-width:100%;box-sizing:border-box}
+/* the turn log (when opened) and the AI-turn toast: docked over the tray too */
+body.mob.ingame #hvlog{top:auto!important;bottom:calc(6px + env(safe-area-inset-bottom,0px))!important;max-height:calc(var(--trayh,180px) - 12px);overflow:auto;z-index:9000}
+body.mob.ingame #hvlog .hvll{max-height:calc(var(--trayh,180px) - 64px)!important}
+body.mob.ingame #hvtoast,body.mob.ingame #hvtoast.on{top:calc(100dvh - var(--trayh,180px) + 6px)!important;bottom:auto!important;max-height:calc(var(--trayh,180px) - 12px);overflow:hidden;box-sizing:border-box;left:8px!important;right:8px!important;max-width:none!important;transform:none!important}
+/* while a market row is open, the tray drops the help line so the board keeps more room */
+html body.mob.ingame #tray:has(.recrow.mkrow) .info{display:none!important}
+/* ---- phone held sideways: the board fills the left, every panel (HUD, tray, cards) lives in a column on the right ---- */
+@media (orientation:landscape) and (max-height:520px){
+ :root{--hvlw:min(380px,46vw)}
+ html body.mob.ingame #hvmrow{flex-wrap:wrap}html body.mob.ingame #hvtp{flex:1 1 160px}html body.mob.ingame #game>.bar{flex-wrap:wrap;row-gap:4px}
+ html body.mob.ingame main{max-width:none!important;width:100vw!important;margin:0!important;padding:0!important}
+ html body.mob.ingame #hvmrow{order:1}html body.mob.ingame #game>.bar{order:2}html body.mob.ingame #tray{order:3}html body.mob.ingame #seats{order:4}html body.mob.ingame #hvobj{order:5}html body.mob.ingame #mods{order:6}
+ html body.mob.ingame #game,html body.mob.ingame:has(#udock:not([hidden])) #game{height:100dvh;max-height:100dvh;box-sizing:border-box;overflow-y:auto;overscroll-behavior:contain;
+  padding:calc(4px + env(safe-area-inset-top,0px)) calc(4px + env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) calc(100vw - var(--hvlw))!important}
+ html body.mob.ingame #game>.bwrap{position:fixed!important;left:calc(4px + env(safe-area-inset-left,0px));top:4px;bottom:4px;width:calc(100vw - var(--hvlw) - 10px - env(safe-area-inset-left,0px));height:auto;margin:0!important;z-index:2}
+ html body.mob.ingame #tray{position:static!important;margin-top:4px;border:2px solid #6b5238;border-radius:12px;box-shadow:none;padding:6px!important;z-index:auto}
+ html body.mob.ingame #tray::before{display:none}
+ html body.mob #tray .recrow.mkrow{max-height:none}
+ html body.mob.ingame #seats{flex-wrap:wrap}
+ body.mob.ingame #tip:not([hidden]),body.mob.ingame #htip{left:auto!important;right:4px!important;width:calc(var(--hvlw) - 12px)!important;max-height:calc(100dvh - 12px)}
+ body.mob.ingame #evc,body.mob.ingame #tbanner{inset:0 0 0 auto!important;width:var(--hvlw);height:auto}
+ body.mob.ingame #hvlog{left:auto!important;right:4px!important;width:calc(var(--hvlw) - 12px);max-height:calc(100dvh - 12px)}
+ body.mob.ingame #hvlog .hvll{max-height:calc(100dvh - 70px)!important}
+ body.mob.ingame #hvtoast,body.mob.ingame #hvtoast.on{left:auto!important;right:6px!important;width:calc(var(--hvlw) - 16px);top:auto!important;bottom:6px!important;max-height:50dvh}
+ body.mob.ingame #evc .evb{flex-direction:column;align-items:flex-start;padding:10px}
+ body.mob.ingame #evc .eva{width:56px}
+ body.mob.ingame #tbanner .tbt b{font-size:24px}
+}
+</style>
+<script id="hv-mobpop-js">/* HV_MOBPOP (see #hv-mobpop): phone only, cosmetic only (never touches game state). */
+(function(){
+if(typeof MOB=='undefined'||!MOB||!document.getElementById('tray')||!document.getElementById('bscroll'))return;
+const D=document,inGame=()=>D.body.classList.contains('ingame');
+/* log toasts live in the tray while a match runs (the Tilted view only moves the ticker between #bw and #tvo, so it leaves it here) */
+function placeTicker(){const t=D.getElementById('ticker'),tr=D.getElementById('tray');if(!t||!tr)return;if(inGame()){if(t.parentNode!==tr)tr.appendChild(t)}else{const bw=D.getElementById('bw');if(bw&&t.parentNode===tr)bw.appendChild(t)}}
+new MutationObserver(placeTicker).observe(D.body,{attributes:true,attributeFilter:['class']});placeTicker();
+/* a tap on a docked card closes it */
+const tip=D.getElementById('tip');if(tip)tip.addEventListener('pointerdown',()=>{if(inGame()){tip.hidden=true;tip.dataset.k=''}});
+D.addEventListener('pointerdown',e=>{const h=D.getElementById('htip');if(h&&e.target.closest&&e.target.closest('#htip'))h.style.display='none'},true);
+/* keep the selected (or inspected) hero in view when the board area changes size (unit card, market rows) */
+let kt=0;function keep(){clearTimeout(kt);kt=setTimeout(()=>{try{if(!S||!inGame())return;const u=(typeof sel!='undefined'&&sel)||(typeof insp!='undefined'&&insp);if(!u)return;
+ const V=D.getElementById('bscroll'),c=D.querySelector(`#board .cell[data-x="${u.x}"][data-y="${u.y}"]`);if(!V||!c)return;const r=c.getBoundingClientRect(),v=V.getBoundingClientRect(),m=6;
+ if(r.top>=v.top+m&&r.bottom<=v.bottom-m&&r.left>=v.left+m&&r.right<=v.right-m)return;V.scrollLeft+=r.left+r.width/2-(v.left+v.width/2);V.scrollTop+=r.top+r.height/2-(v.top+v.height/2)}catch(e){}},160)}
+try{new ResizeObserver(keep).observe(D.getElementById('bscroll'))}catch(e){}
+if(typeof render=='function'){let ls=null;const rn=render;render=function(){const r=rn.apply(this,arguments);try{const u=(typeof sel!='undefined'&&sel)||null;if(u!==ls){ls=u;if(u)keep()}}catch(e){}return r}}
+})();
+</script>
+<style id="hv-mobslim">
+/* ===== HV_MOBSLIM: decluttered phone battle screen (Uno: "the mobile screen is too cluttered"). Phone only, cosmetic only.
+   Always visible: one seats row (tower HP of both sides), one slim bar (menu, whose turn, mana, Day/Night chip, End turn),
+   the board, the reserve + market row. Folded into the ☰ menu: modifiers, objectives, sound, threat view, board view, help, main menu.
+   The tray hint text is a one-line note that fades after a few seconds instead of a box. ===== */
+html body.mob.ingame #mods,html body.mob.ingame #hvobj,html body.mob.ingame #syn,html body.mob.ingame #hvtp,html body.mob.ingame #restart,html body.mob.ingame #tolobby,html body.mob.ingame #pckeys{display:none!important}
+/* seats: one compact row, tower HP kept */
+html body.mob.ingame #seats{gap:4px!important;margin:0 0 3px!important;flex-wrap:nowrap!important}
+html body.mob.ingame #seats .seat{display:flex!important;align-items:center;gap:5px;flex:1 1 0;min-width:0;padding:3px 7px!important;min-height:0!important;border-radius:9px!important;font-size:12px!important;line-height:1.1!important}
+html body.mob.ingame #seats .seat>em{display:none!important}
+html body.mob.ingame #seats .seat{flex-wrap:nowrap!important;flex-direction:row!important;justify-content:flex-start!important;text-align:left!important}
+html body.mob.ingame #seats .seat>b{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px!important}
+html body.mob.ingame #seats .seat>b u{text-decoration:none}
+html body.mob.ingame #seats .seat .hvtws{margin:0 0 0 auto!important;flex:none;gap:2px!important}
+html body.mob.ingame #seats .seat .hvtt{display:none!important}
+html body.mob.ingame #seats .seat.on{box-shadow:0 0 0 2px var(--sc,#f2b84b),0 0 10px var(--sc,#f2b84b)!important}
+html body.mob.ingame #seats .seat>b::after{content:''}
+html body.mob.ingame #seats .seat.on>b::before{content:'▶ ';color:var(--sc,#f2b84b)}
+/* the slim bar */
+html body.mob.ingame #game>.bar{gap:5px!important;padding:4px 6px!important;min-height:0!important;margin:0 0 3px!important;flex-wrap:nowrap!important}
+html body.mob.ingame #game>.bar #mute,html body.mob.ingame #game>.bar #thrb,html body.mob.ingame #game>.bar #hvh-b{display:none!important}
+html body.mob.ingame #game>.bar #mmenu{width:34px!important;height:34px!important;flex:none}
+html body.mob.ingame #game>.bar{position:relative}
+html body.mob.ingame #game>.bar #mana{transform:scale(.88);transform-origin:left center;margin-right:-10px}
+html body.mob.ingame #game>.bar #end{margin-left:auto!important;padding:4px 10px!important;min-height:38px!important;font-size:15px!important;line-height:1.05!important}
+html body.mob.ingame #game>.bar #end small,html body.mob.ingame #game>.bar #end .er{font-size:11px!important}
+html body.mob.ingame #hvmrow{height:0!important;min-height:0!important;margin:0!important;padding:0!important;position:relative;z-index:40;overflow:visible!important;border:0!important;background:none!important}
+html body.mob.ingame #hvmrow #hvph{position:absolute!important;right:108px;top:8px;height:32px;display:flex!important;align-items:center;gap:4px;width:auto!important;min-width:0!important;padding:0 9px!important;margin:0!important;border-radius:16px!important;font-size:12px!important;line-height:1!important}
+html body.mob.ingame #hvmrow #hvph:not(.on){display:none!important}
+html body.mob.ingame #hvmrow #hvph .hvp3,html body.mob.ingame #hvmrow #hvph .hvpe,html body.mob.ingame #hvmrow #hvph .hvpt small{display:none!important}
+html body.mob.ingame #hvmrow #hvph .hvpi{font-size:17px!important;width:auto!important;height:auto!important;font-style:normal}
+html body.mob.ingame #hvmrow #hvph .hvpt b{font-size:13px!important;letter-spacing:0!important}
+html body.mob.ingame #hvmrow #hvph::after{content:attr(data-short);font-weight:800;font-size:13px;opacity:.85}
+@media (orientation:landscape) and (max-height:520px){html body.mob.ingame #hvmrow{height:auto!important}html body.mob.ingame #hvmrow #hvph{position:static!important}}
+/* on-board controls: small, out of the way */
+html body.mob.ingame #bz{gap:5px!important;right:4px!important;opacity:.82}
+html body.mob.ingame #bz #tvbm{display:none!important}
+html body.mob.ingame #bz button{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;font-size:16px!important;padding:0!important}
+/* the hint text: one line that fades, not a box */
+html body.mob.ingame #tray #info{min-height:0!important;padding:3px 8px!important;margin:0 0 3px!important;border:0!important;background:transparent!important;box-shadow:none!important;font-size:12.5px!important;line-height:1.3!important;color:#d9cdb0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-height:22px;transition:opacity .5s,max-height .5s,padding .5s,margin .5s}
+html body.mob.ingame #tray #info *{display:inline!important;font-size:inherit!important;white-space:nowrap}
+html body.mob.ingame #tray:has(#ticker .tk) #info{opacity:0}
+html body.mob.ingame #tray #info.hvq{opacity:0;max-height:0;padding-block:0!important;margin:0!important}
+/* the ☰ menu: the folded-away controls */
+#mpop .mpb .hvs-row{display:flex;gap:6px;flex-wrap:wrap}
+#mpop .mpb .hvs-row button{flex:1 1 40%;margin:0}
+#mpop .mpb .hvs-info{max-height:34dvh;overflow:auto;padding:6px 8px;border-radius:8px;background:#0006;font-size:13px;line-height:1.35;text-align:left}
+#mpop .mpb .hvs-info h4{margin:4px 0 3px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#e9c46a}
+#mpop .mpb .hvs-info .hvo,#mpop .mpb .hvs-info .hvpill,#mpop .mpb .hvs-info .mod{display:inline-flex!important;margin:2px!important}
+@media (orientation:landscape) and (max-height:520px){
+ html body.mob.ingame #game>.bar #mana{transform:none;margin-right:0}
+ html body.mob.ingame #tray{position:relative!important}
+}
+</style>
+<script id="hv-mobslim-js">/* HV_MOBSLIM (see #hv-mobslim): phone only, cosmetic only. Moves the Day/Night chip into the bar, adds the folded controls
+   (sound, threat view, board view, help, objectives, modifiers) to the ☰ menu, and fades the tray hint after a few seconds. */
+(function(){if(typeof MOB=='undefined'||!MOB)return;const D=document,q=s=>D.querySelector(s);
+function chip(){const ph=q('#hvph');if(!ph)return;try{const sm=ph.querySelector('.hvpt small'),t=sm&&sm.textContent.match(/(\d+)/);const v=t?'·'+t[1]:'';if(ph.dataset.short!==v)ph.dataset.short=v}catch(e){}}
+let lastInfo='',it=0;function info(){const i=q('#tray #info');if(!i)return;const t=i.textContent.trim();if(t!==lastInfo){lastInfo=t;i.classList.remove('hvq');clearTimeout(it);if(t)it=setTimeout(()=>i.classList.add('hvq'),4500)}}
+function menu(){const mb=q('#mpop .mpb');if(!mb||mb.querySelector('.hvs-row'))return;const x=q('#mp_x');
+ const row=D.createElement('div');row.className='hvs-row';
+ const mk=(id,txt,fn)=>{const b=D.createElement('button');b.type='button';b.className='go sec';b.id=id;b.textContent=txt;b.onclick=()=>{q('#mpop').hidden=true;fn()};return b};
+ row.append(mk('mp_snd','🔊 Sound',()=>{const m=q('#mute');if(m)m.click()}),mk('mp_thr','👁 Threats',()=>{const t=q('#thrb');if(t)t.click()}),mk('mp_view','🗺 View',()=>{const v=q('#tvbm')||q('#tvb');if(v)v.click()}),mk('mp_help','? Help',()=>{try{hvHelp.open()}catch(e){const r=q('#mp_rules');if(r)r.click()}}));
+ const inf=D.createElement('div');inf.className='hvs-info';
+ mb.insertBefore(row,mb.querySelector('#mp_rules')||x);mb.insertBefore(inf,row);
+ const mmb=q('#mmenu');if(mmb)mmb.addEventListener('click',()=>{const o=q('#hvobj'),m=q('#mods');let h='';if(o&&o.textContent.trim())h+='<h4>Objectives</h4>'+o.innerHTML;if(m&&m.textContent.replace(/Modifiers:?/,'').trim())h+='<h4>Modifiers</h4>'+m.innerHTML;inf.innerHTML=h;inf.hidden=!h;
+  const s=q('#mp_snd'),mu=q('#mute');if(s&&mu)s.textContent=(/🔇/.test(mu.textContent)?'🔇':'🔊')+' Sound';const v=q('#mp_view'),tv=q('#tvbm');if(v&&tv)v.textContent='🗺 '+tv.textContent})}
+function bz(){const z=q('#bz'),b=q('#bscroll');if(!z||!b||!z.offsetParent)return;const want=b.getBoundingClientRect().top+6,now=z.getBoundingClientRect().top;if(Math.abs(want-now)<1.5)return;const cur=parseFloat(getComputedStyle(z).top)||0;z.style.setProperty('top',(cur+want-now).toFixed(1)+'px','important')}
+function tick(){if(!D.body.classList.contains('ingame'))return;chip();info();menu();bz()}
+try{const r0=render;render=function(){const r=r0.apply(this,arguments);try{tick()}catch(e){}return r}}catch(e){}
+new MutationObserver(()=>{try{info()}catch(e){}}).observe(q('#info')||D.body,{childList:true,subtree:true,characterData:true});
+setInterval(()=>{try{tick()}catch(e){}},1500);
+})();
+</script>
 </body></html>
