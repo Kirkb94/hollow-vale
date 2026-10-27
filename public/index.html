@@ -4752,4 +4752,49 @@ window.wkPace=function(u,nx){const base=pz('move');if(RUNFAST)return base;const 
 window.hvWalk={active:()=>WK.size,get:u=>WK.get(u),snap:wkSnap,apply,pos,fx:{arrows:scArrows,thump:scThump}};
 })();
 </script>
+<style id="hv-hpnotch">
+/* ===== HP bars: one notch per HP point (cosmetic). Built by the script below after every render. ===== */
+#board .hp.hpn{display:flex;gap:var(--hpg,1px);padding:0;background:#000d}
+#board .hp.hpn::after{display:none}
+#board .hp.hpn>i{flex:1 1 0;min-width:0;width:auto;height:100%;transition:none;border-radius:1px}
+#board .hp.hpn>i.d5{margin-left:var(--hpg,1px)}
+#board .hp.hpn>i.x{background:#2c2a28!important;box-shadow:inset 0 1px 0 #ffffff12}
+#board .hp.hpn>i.pt::after{content:'';position:absolute;top:0;bottom:0;right:0;width:calc((1 - var(--pf,1))*100%);background:#2c2a28}
+#board .hp.hpn>i.ov{background:linear-gradient(#fff,#fff2c4 50%,#d8b45a)!important;box-shadow:0 0 3px #fffa}
+</style>
+<script>/* HP notches: every board HP bar (units, heroes, bosses, towers, buildings, walls) shows one notch per HP point.
+   Lit = current HP, dark = missing HP, white-gold = HP above max. Notches stay at least ~1.5 screen px wide: when
+   max HP is too big for the bar, each notch stands for 2, 5, 10... HP (a part-filled notch shows the remainder),
+   and from 10 notches on every 5th gap is doubled (when it fits). Gaps are 1 screen px at any zoom. Cosmetic only. */
+(function(){
+if(typeof render!='function')return;
+const GS=[1,2,5,10,20,50,100],MINW=1.5;
+let SC=0,WS=0;// screen px per CSS px, bar inner width in screen px
+const meas=()=>{const b=document.querySelector('#board .hp');if(!b||!b.offsetWidth)return false;const r=b.getBoundingClientRect(),cw=b.clientWidth;if(!r.width)return false;
+ const sc=r.width/b.offsetWidth,ws=cw*sc;const ch=Math.abs(sc-SC)>SC*.02||Math.abs(ws-WS)>.5;SC=sc;WS=ws;if(ch){const B=document.getElementById('board');if(B)B.style.setProperty('--hpg',(1/sc).toFixed(3)+'px')}return ch};
+// smallest HP-per-notch that keeps notches >= MINW; the doubled gap every 5 notches (10+ notches) is dropped first if it is what does not fit
+const grp=N=>{for(const g of GS){const k=Math.ceil(N/g),d=k>=10?Math.floor((k-1)/5):0;if((WS-(k-1)-d)/k>=MINW)return [g,d>0];if(d&&(WS-(k-1))/k>=MINW)return [g,false]}return [GS[GS.length-1],false]};
+function build(el){const c=+el.dataset.hc,m=+el.dataset.hm;if(!(m>0))return;const N=Math.max(m,c),[g,D]=grp(N),k=Math.ceil(N/g),d5=i=>D&&i&&i%5==0?' d5':'';let h='';
+ for(let i=0;i<k;i++){const lo=i*g,hi=Math.min(N,lo+g),cap=hi-lo;let cl;
+  if(lo>=m)cl='ov';// notch wholly above max HP
+  else{const f=Math.max(0,Math.min(c,hi)-lo)/cap;cl=f>=1?'':f<=0?'x':'pt';if(cl=='pt')h+=`<i class="pt${d5(i)}" style="--pf:${Math.max(.3,f).toFixed(3)}"></i>`}
+  if(cl!='pt')h+=`<i class="${cl}${d5(i)}"></i>`}
+ el.innerHTML=h;el.classList.add('hpn');el.dataset.hg=g}
+// the HP of the thing a bar belongs to, looked up the same way render() picks what to draw in a cell
+function vals(el){const c=el.closest('.cell[data-x]');if(!c||!S)return null;const x=+c.dataset.x,y=+c.dataset.y;
+ const u=atV(x,y);if(u)return [u.side,dh(u),maxHp(u)];
+ const W=wallAt(x,y);if(W)return [W.side,W.hp,W.max];
+ const T=twAt(x,y);if(T)return [T.side,dh(T),T.max];
+ const gh=(S.ghosts||[]).find(q=>q.x==x&&q.y==y);if(gh)return [gh.side,dh(gh),maxHp(gh)];
+ const TT=Object.keys(S.tw||{}).flatMap(k=>S.tw[k]||[]).find(q=>q.x==x&&q.y==y);if(TT)return [TT.side,dh(TT),TT.max];
+ return null}
+function all(){const bars=document.querySelectorAll('#board .hp:not(.hpn)');if(!bars.length)return;meas();
+ for(const el of bars){try{const v=vals(el);if(!v||!el.classList.contains(v[0]))continue;const cur=Math.max(0,+v[1]||0),mx=Math.max(1,+v[2]||0);el.dataset.hc=cur;el.dataset.hm=mx;build(el)}catch(e){}}}
+const r0=render;render=function(){const o=r0.apply(this,arguments);try{all()}catch(e){}return o};
+// zoom / resize without a re-render: regroup when the bar's on-screen width changes
+const re=()=>{try{if(meas())document.querySelectorAll('#board .hp.hpn').forEach(build)}catch(e){}};
+addEventListener('resize',re);setInterval(()=>{const G=document.getElementById('game');if(!document.hidden&&G&&!G.hidden)re()},700);
+window.HV_HPN={grp:N=>grp(N),meas:()=>({SC,WS})};
+})();
+</script>
 </body></html>
