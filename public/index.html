@@ -4753,6 +4753,140 @@ window.wkPace=function(u,nx){const base=pz('move');if(RUNFAST)return base;const 
 window.hvWalk={active:()=>WK.size,get:u=>WK.get(u),snap:wkSnap,apply,pos,fx:{arrows:scArrows,thump:scThump}};
 })();
 </script>
+<style id="hv-news-css">
+/* ===== What's new: update notes from public/changelog.json (written at push time by tools/changelog.mjs). Shown once per new version
+   over the main menu; reopened from the menu's "What's new" pill. Painted panel in the Hex Rose look. ===== */
+#hv-news{position:fixed;inset:0;z-index:73;display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));background:radial-gradient(70% 60% at 50% 42%,rgba(18,26,24,.62),rgba(3,5,6,.9));color:#efe8d6;font-family:'Alegreya Sans','Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent;text-align:left}
+#hv-news[hidden]{display:none}
+#hv-news *{box-sizing:border-box}
+#hv-news .hvn-card{position:relative;width:min(640px,100%);max-height:min(860px,100%);display:flex;flex-direction:column;padding:7px;border-radius:6px;overflow:hidden;
+ background:radial-gradient(120% 70% at 50% 0%,rgba(233,196,106,.12),transparent 62%),radial-gradient(90% 60% at 100% 100%,rgba(70,96,92,.18),transparent 70%),linear-gradient(180deg,#1c1913,#0f0d0a);
+ box-shadow:0 30px 80px rgba(0,0,0,.72),inset 0 0 0 1px rgba(233,196,106,.42),inset 0 0 0 6px #0b0a07,inset 0 0 0 7px rgba(233,196,106,.16);animation:hvnIn .24s ease-out}
+#hv-news .hvn-head{display:flex;align-items:center;gap:16px;padding:15px 19px 12px;border-bottom:1px solid rgba(233,196,106,.2)}
+#hv-news .hvn-hex{flex:none;position:relative;width:62px;height:72px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:#e9c46a}
+#hv-news .hvn-hex img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);object-fit:cover;filter:brightness(.92) saturate(.9);display:block}
+#hv-news .hvn-hex svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#1a1206;filter:drop-shadow(0 0 3px rgba(241,210,131,.9))}
+#hv-news .hvn-ht{min-width:0}
+#hv-news .hvn-k{margin:0;font:700 15px/1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.16em;color:#e9c46a}
+#hv-news h2{margin:6px 0 0;font:700 28px/1.1 'Alegreya Sans',system-ui,sans-serif;color:#f4eddc;text-wrap:balance}
+#hv-news .hvn-meta{margin:6px 0 0;font:500 15px/1.3 'Alegreya Sans',system-ui,sans-serif;color:#b9b19e}
+#hv-news .hvn-meta code{font:500 13px ui-monospace,Menlo,Consolas,monospace;color:#cfc7b3;background:rgba(239,232,214,.08);padding:1px 6px;border-radius:3px}
+#hv-news .hvn-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px 19px 14px;scrollbar-color:#6b5238 transparent;outline:0;
+ background:linear-gradient(#16130f 30%,rgba(22,19,15,0)) center top,linear-gradient(rgba(22,19,15,0),#16130f 70%) center bottom,radial-gradient(farthest-side at 50% 0,rgba(0,0,0,.55),transparent) center top,radial-gradient(farthest-side at 50% 100%,rgba(0,0,0,.55),transparent) center bottom;
+ background-repeat:no-repeat;background-size:100% 36px,100% 36px,100% 14px,100% 14px;background-attachment:local,local,scroll,scroll}
+#hv-news .hvn-g{margin:16px 0 0}
+#hv-news .hvn-g h3{display:flex;align-items:center;gap:9px;margin:0 0 6px;font:700 18px/1.1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.08em;color:var(--gc,#e9c46a)}
+#hv-news .hvn-g h3::before{content:"";flex:none;width:13px;height:15px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:currentColor}
+#hv-news .hvn-g ul{margin:0;padding:0;list-style:none}
+#hv-news .hvn-g li{position:relative;margin:0;padding:5px 0 5px 22px;font:400 18px/1.38 'Alegreya Sans',system-ui,sans-serif;color:#e8e0cc}
+#hv-news .hvn-g li::before{content:"";position:absolute;left:5px;top:.72em;width:6px;height:7px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:rgba(233,196,106,.55)}
+#hv-news .hvn-g.g-new{--gc:#f1d283}#hv-news .hvn-g.g-balance{--gc:#8fcdb9}#hv-news .hvn-g.g-fixes{--gc:#e59a78}#hv-news .hvn-g.g-visuals{--gc:#b7a7f0}
+#hv-news details{margin:18px 0 0;border-top:1px solid rgba(233,196,106,.16);padding-top:10px}
+#hv-news summary{display:inline-flex;align-items:center;gap:8px;min-height:36px;cursor:pointer;list-style:none;font:500 16px 'Alegreya Sans',system-ui,sans-serif;color:#cfc7b3;border-radius:4px;padding:2px 6px 2px 2px}
+#hv-news summary::-webkit-details-marker{display:none}
+#hv-news summary::before{content:"";width:0;height:0;border-left:6px solid #e9c46a;border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s}
+#hv-news details[open]>summary::before{transform:rotate(90deg)}
+#hv-news summary:hover{color:#fff}
+#hv-news summary:focus-visible,#hv-news .hvn-x:focus-visible,#hv-news .hvn-ok:focus-visible{outline:2px solid #fff;outline-offset:3px}
+#hv-news .hvn-cm{margin:6px 0 0;padding:0 0 0 20px;font:400 15px/1.4 'Alegreya Sans',system-ui,sans-serif;color:#b9b19e}
+#hv-news .hvn-cm li{margin:3px 0;overflow-wrap:anywhere}
+#hv-news .hvn-old .hvn-ov{margin:4px 0 0 18px;padding:0 0 4px}
+#hv-news .hvn-old .hvn-ov>details{margin-top:12px}
+#hv-news .hvn-old summary small{color:#8f8877;font-size:14px}
+#hv-news .hvn-old .hvn-g{margin-top:10px}#hv-news .hvn-old .hvn-g h3{font-size:16px}#hv-news .hvn-old .hvn-g li{font-size:16px;padding:3px 0 3px 22px}
+#hv-news .hvn-foot{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:10px 19px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(233,196,106,.2);background:rgba(5,8,10,.35)}
+#hv-news .hvn-hint{margin:0 auto 0 0;font:500 15px 'Alegreya Sans',system-ui,sans-serif;color:#8f8877}
+#hv-news .hvn-hint kbd{display:inline-grid;place-items:center;min-width:28px;height:24px;padding:0 6px;margin:0 2px;font:700 13px 'Alegreya Sans SC',system-ui,sans-serif;color:#efe8d6;box-shadow:inset 0 0 0 1px rgba(239,232,214,.35);border-radius:4px}
+#hv-news .hvn-ok{all:unset;box-sizing:border-box;cursor:pointer;min-width:170px;height:48px;padding:0 30px;display:flex;align-items:center;justify-content:center;font:700 20px/1 'Alegreya Sans SC','Alegreya Sans',system-ui,sans-serif;letter-spacing:.05em;color:#1a1206;background:linear-gradient(180deg,#f1d283,#c99a45);clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,16px 100%,0 50%)}
+#hv-news .hvn-ok:hover{filter:brightness(1.08)}
+#hv-news .hvn-x{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;top:14px;right:14px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:#cfc7b3;box-shadow:inset 0 0 0 1px rgba(239,232,214,.25)}
+#hv-news .hvn-x:hover{color:#fff;box-shadow:inset 0 0 0 1px rgba(239,232,214,.7)}
+#hv-news .hvn-head{padding-right:63px}
+#menu.hvm #hvm-news{position:relative}
+#menu.hvm #hvm-news.hvn-unseen::after{content:"";position:absolute;top:7px;right:7px;width:9px;height:9px;border-radius:50%;background:#f1d283;box-shadow:0 0 0 2px #05080a}
+@keyframes hvnIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:719px){
+ #hv-news{align-items:flex-end;padding:calc(12px + env(safe-area-inset-top,0px)) 0 0}
+ #hv-news .hvn-card{width:100%;max-height:100%;border-radius:14px 14px 0 0;animation-name:hvnUp}
+ #hv-news .hvn-head{gap:12px;padding:11px 57px 8px 11px}
+ #hv-news .hvn-hex{width:46px;height:53px}
+ #hv-news h2{font-size:23px}
+ #hv-news .hvn-body{padding:0 11px 10px}
+ #hv-news .hvn-g li{font-size:17px}
+ #hv-news .hvn-foot{padding:8px 11px calc(8px + env(safe-area-inset-bottom,0px))}
+ #hv-news .hvn-hint{display:none}
+ #hv-news .hvn-ok{flex:1;min-width:0}
+}
+@media (hover:none){#hv-news .hvn-hint{display:none}}
+@keyframes hvnUp{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (max-height:520px){#hv-news{padding-top:8px;padding-bottom:8px}#hv-news .hvn-head{padding-top:12px;padding-bottom:10px}#hv-news .hvn-hex{display:none}#hv-news .hvn-foot{padding-top:8px;padding-bottom:8px}}
+html.bigtext #hv-news .hvn-g li{font-size:20px}html.bigtext #hv-news h2{font-size:31px}
+html.hc #hv-news .hvn-card{background:#000;box-shadow:inset 0 0 0 2px #fff}html.hc #hv-news .hvn-g li,html.hc #hv-news .hvn-cm{color:#fff}
+@media (prefers-reduced-motion:reduce){#hv-news .hvn-card,#hv-news summary::before{animation:none!important;transition:none!important}}
+</style>
+<script id="hv-news-js">/* What's new (see #hv-news). Reads the static public/changelog.json, never GitHub. Last seen version id is kept in localStorage
+   ('hv-news-seen'); if storage is blocked it falls back to sessionStorage / memory, so the screen shows at most once per session.
+   Skipped (button only) for room links, ?lobby, ?fast and the post-deploy auto-reload. Missing or invalid file: no screen, no button notes. */
+(function(){
+const menu=document.getElementById('menu');if(!menu)return;
+const KEY='hv-news-seen';let mem=null,DATA=null,back=null;
+const seen=id=>{let a=null,b=null;try{a=localStorage.getItem(KEY)}catch(e){}try{b=sessionStorage.getItem(KEY)}catch(e){}return id===a||id===b||id===mem};
+const mark=id=>{mem=id;try{localStorage.setItem(KEY,id)}catch(e){}try{sessionStorage.setItem(KEY,id)}catch(e){}};
+const deep=()=>{let s='';try{s=location.search||''}catch(e){}if(/[?&](room=|lobby|fast|join=|code=|replay)/i.test(s))return true;
+ try{return Date.now()-(+sessionStorage.getItem('hv-upd')||0)<120000}catch(e){return false}};
+const str=(v,n)=>typeof v==='string'&&v.trim()?v.trim().slice(0,n||300):'';
+function clean(j){if(!j||!Array.isArray(j.versions))return null;const out=[];
+ for(const v of j.versions){if(!v||typeof v!=='object')continue;const id=str(v.id,64);if(!id)continue;
+  const groups=(Array.isArray(v.groups)?v.groups:[]).map(g=>g&&{name:str(g.name,40),items:(Array.isArray(g.items)?g.items:[]).map(x=>str(x)).filter(Boolean).slice(0,40)}).filter(g=>g&&g.name&&g.items.length).slice(0,12);
+  const commits=(Array.isArray(v.commits)?v.commits:[]).map(x=>str(x,400)).filter(Boolean).slice(0,200);
+  if(!groups.length&&!commits.length)continue;
+  out.push({id,date:/^\d{4}-\d{2}-\d{2}$/.test(v.date)?v.date:'',title:str(v.title,120),groups,commits});if(out.length>=10)break}
+ return out.length?out:null}
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fmt=d=>{if(!d)return'';const[y,m,dd]=d.split('-').map(Number);return MON[m-1]?MON[m-1]+' '+dd+', '+y:d};
+const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e};
+const gcls=n=>'g-'+n.toLowerCase().replace(/[^a-z]+/g,'');
+function groupsEl(v,host){v.groups.forEach(g=>{const s=el('section','hvn-g '+gcls(g.name));s.append(el('h3','',g.name));const ul=el('ul');g.items.forEach(i=>ul.append(el('li','',i)));s.append(ul);host.append(s)})}
+function commitsEl(v,label){const d=el('details','hvn-full');d.append(el('summary','',label+' ('+v.commits.length+')'));const ol=el('ul','hvn-cm');v.commits.forEach(c=>ol.append(el('li','',c)));d.append(ol);return d}
+/* dialog */
+const dlg=el('div');dlg.id='hv-news';dlg.hidden=true;dlg.setAttribute('role','dialog');dlg.setAttribute('aria-modal','true');dlg.setAttribute('aria-labelledby','hvn-h');
+document.body.appendChild(dlg);
+const SPARK='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M18.5 15.5l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6z"/></svg>';
+function build(){const v=DATA&&DATA[0];dlg.textContent='';const card=el('div','hvn-card');dlg.append(card);
+ const head=el('header','hvn-head'),hex=el('div','hvn-hex'),img=el('img');img.alt='';img.src='art/tiles/shrine_0.webp';img.onerror=()=>img.remove();hex.append(img);hex.insertAdjacentHTML('beforeend',SPARK);
+ const ht=el('div','hvn-ht');ht.append(el('p','hvn-k',"What's new"));const h=el('h2','',v?(v.title||'New update'):'No update notes yet');h.id='hvn-h';ht.append(h);
+ if(v){const m=el('p','hvn-meta');m.append((v.date?fmt(v.date)+' · ':'')+'version ');m.append(el('code','',v.id.slice(0,7)));ht.append(m)}
+ head.append(hex,ht);card.append(head);
+ const x=el('button','hvn-x');x.type='button';x.setAttribute('aria-label','Close');x.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';x.onclick=close;card.append(x);
+ const body=el('div','hvn-body');body.tabIndex=-1;body.dataset.nocue='';card.append(body);
+ if(!v)body.append(el('p','hvn-meta','Update notes are not available right now.'));
+ else{groupsEl(v,body);if(v.commits.length)body.append(commitsEl(v,'Full details'));
+  const old=DATA.slice(1,5);if(old.length){const od=el('details','hvn-old');od.append(el('summary','','Earlier updates'));const ov=el('div','hvn-ov');
+   old.forEach(o=>{const d=el('details');const s=el('summary','',o.title||'Update');if(o.date){s.append(' ');s.append(el('small','','· '+fmt(o.date)))}d.append(s);groupsEl(o,d);if(o.commits.length)d.append(commitsEl(o,'Full details'));ov.append(d)});
+   od.append(ov);body.append(od)}}
+ const foot=el('footer','hvn-foot');const hint=el('p','hvn-hint');hint.innerHTML='<kbd>Esc</kbd> or <kbd>Enter</kbd> to close';
+ const ok=el('button','hvn-ok','Continue');ok.type='button';ok.onclick=close;foot.append(hint,ok);card.append(foot)}
+function open(){if(!dlg.hidden)return;build();back=document.activeElement;dlg.hidden=false;const ok=dlg.querySelector('.hvn-ok');try{ok.focus({preventScroll:true})}catch(e){ok.focus()}
+ const v=DATA&&DATA[0];if(v)mark(v.id);syncDot()}
+function close(){if(dlg.hidden)return;dlg.hidden=true;const t=back&&back.isConnected&&back.offsetParent?back:(!menu.hidden&&pill.offsetParent?pill:null);back=null;if(t)try{t.focus({preventScroll:true})}catch(e){}}
+dlg.addEventListener('pointerdown',e=>{if(e.target===dlg)close()});
+addEventListener('keydown',e=>{if(dlg.hidden)return;const k=e.key,t=e.target;
+ if(k==='Escape'){e.preventDefault();e.stopImmediatePropagation();close();return}
+ if(k==='Enter'&&!(t&&t.closest&&dlg.contains(t)&&(t.tagName==='SUMMARY'||t.tagName==='BUTTON'))){e.preventDefault();e.stopImmediatePropagation();close();return}
+ if(k==='Tab'){const f=[...dlg.querySelectorAll('button,summary')].filter(x=>x.offsetParent);if(f.length){const a=f[0],z=f[f.length-1];if(!dlg.contains(t)){e.preventDefault();a.focus()}else if(e.shiftKey&&t===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&t===z){e.preventDefault();a.focus()}}}
+ e.stopImmediatePropagation()},true);
+/* menu pill */
+const nav=menu.querySelector('.hvm-util');
+const pill=el('button','hvm-pill');pill.type='button';pill.id='hvm-news';pill.setAttribute('aria-haspopup','dialog');pill.title="What's new";
+pill.innerHTML=SPARK.replace('width="24" height="24"','width="20" height="20"')+'<span class="t">What’s new</span>';pill.onclick=open;
+if(nav)nav.insertBefore(pill,nav.firstChild);else{pill.className='go sec';menu.appendChild(pill)}
+function syncDot(){const v=DATA&&DATA[0];pill.classList.toggle('hvn-unseen',!!v&&!seen(v.id))}
+const busy=()=>{const r=document.getElementById('hvm-rules'),d=document.getElementById('dspo');return menu.hidden||(r&&!r.hidden)||(d&&!d.hidden)||!!document.getElementById('hvupd')};
+try{fetch('changelog.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(j=>{DATA=clean(j);syncDot();const v=DATA&&DATA[0];
+ if(v&&!seen(v.id)&&!deep()&&!busy())open()}).catch(()=>{})}catch(e){}
+window.HVNEWS={open,close,get data(){return DATA}};
+})();
+</script>
 <style id="hv-hpnotch">
 /* ===== HP bars: one notch per HP point (cosmetic). Built by the script below after every render. ===== */
 #board .hp.hpn{display:flex;gap:var(--hpg,1px);padding:0;background:#000d}

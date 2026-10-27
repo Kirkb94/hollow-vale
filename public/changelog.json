@@ -1,0 +1,197 @@
+{
+  "versions": [
+    {
+      "id": "65350b1e84b0",
+      "date": "2026-10-27",
+      "title": "Faction powers, a tilted board and a new main menu",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "Each faction now has its own powers: Wilds hide in forests, Infernal set the ground on fire, Undead leave Graves, Vampires grow stronger at night",
+            "Necromancer's Raise the Slain: when he kills an enemy hero, an Undead hero of the same cost rises on your side",
+            "Warlock can turn into a bat and fly before moving",
+            "Towers strike back at melee attackers, and other buildings and walls hit back too. Ranged attacks are safe",
+            "Tilted view lays the board back like a diorama. Turn it on in Display, with V on PC or from the phone zoom bar",
+            "New Hex Rose main menu. Living Map and Hall of Heroes styles are in Display"
+          ]
+        },
+        {
+          "name": "Balance",
+          "items": [
+            "Counterattacks get weaker as the defender loses HP",
+            "Nightstalker is a true glass cannon: 4 HP and 8 damage (was 7 HP and 10 damage)",
+            "Rogue 9 → 8 HP and Wraith 7 → 6 HP",
+            "War Engine damage 2 → 4",
+            "Arcane Flow also lowers Hexweaver's Silence cost from 2 to 1 mana",
+            "Countess and Warlock attacks cost 1 mana. Undying now brings Undead back with 2 HP (was 3)"
+          ]
+        },
+        {
+          "name": "Fixes",
+          "items": [
+            "Hero cards and tooltips now match the real stats (splash, cleave, ranges, heal pokes and hire prices)",
+            "Raise the Slain and Graves now work separately, so a raise never uses up a Grave"
+          ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "HP bars show one notch per HP point, so you can count health at a glance",
+            "Heroes walk their path hex by hex, and fliers glide"
+          ]
+        }
+      ],
+      "commits": [
+        "Assassins: Nightstalker becomes a true glass cannon (7 HP/10 dmg -> 4 HP/8 dmg); Rogue 9->8 HP, Wraith 7->6 HP",
+        "Raise the Slain no longer uses Graves: raises and Graves are independent (a raise never needs, uses, moves or removes a Grave; Graves never change where a raise lands). Drops the RZHOOK grave hook and hvGraveTake; tooltip, How to Play and README text updated",
+        "View: Classic / Tilted 2.5D board (client-only, default Classic)",
+        "Arcane Flow also lowers Hexweaver's Silence cost (2 -> 1): eff() carries slcost; cast, target check, AI, button, card keyword, How to Play and README use it",
+        "Faction mechanics: Wilds Hidden Paths/Overgrowth/Pack Bond, Infernal Scorched Earth + Heat, Undead Graves + Vengeful Dead, Vampire Night Falls, forest trackers; Warlock Bat Form and 1-mana Countess/Warlock attacks",
+        "HP bars: one notch per HP point on units, heroes, bosses, towers, buildings and walls",
+        "Counters scale with HP, structures strike back, heroes walk their path",
+        "Unit text: match live stats (half-damage splash and melee cleave, Arcane Flow mana for Stormcaller/Starweaver, ranges, heal pokes, boss roles, squads list, hire prices, README slots)",
+        "Necromancer: revert damage to 3 (keeps Raise the Slain)",
+        "Necromancer: +1 damage (3 -> 4) and Raise the Slain",
+        "War Engine: +2 damage (2 -> 4)",
+        "Main menu redesign: Hex Rose menu by default, with Living Map and Hall of Heroes styles in Display settings"
+      ]
+    },
+    {
+      "id": "73761d0976ea",
+      "date": "2026-10-27",
+      "title": "Painted tiles and water",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "Big maps now have deep and shallow water with beaches and docks. Walk through shallows; only fliers cross deep water"
+          ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "Every map is painted with new hex tiles, shorelines and fog"
+          ]
+        }
+      ],
+      "commits": [
+        "Painted hex tiles and water: holes on big maps become deep and shallow water with mirrored beaches and docks"
+      ]
+    },
+    {
+      "id": "6fb3b24ce991",
+      "date": "2026-10-27",
+      "title": "Spawn animations",
+      "groups": [
+        {
+          "name": "Visuals",
+          "items": [
+            "Units now arrive with a spawn animation in their faction's style, with a variation for each unit",
+            "Hero portraits are framed around the whole figure, so no more cut-off heads"
+          ]
+        }
+      ],
+      "commits": [
+        "Spawn animations: one style per faction with per-unit variants",
+        "Hero select: frame painted portraits by their real figure bounds"
+      ]
+    },
+    {
+      "id": "3bb8459ebab0",
+      "date": "2026-10-27",
+      "title": "Smoother online games",
+      "groups": [
+        {
+          "name": "Balance",
+          "items": [
+            "Wounded heroes hit softer: their damage drops toward half as they lose HP"
+          ]
+        },
+        {
+          "name": "Fixes",
+          "items": [
+            "A page opened before an update can no longer join a game running the newer version (this is what made a friend load the wrong map)",
+            "Out-of-date pages now reload by themselves and put you back in your seat"
+          ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "Undead with Undying collapse into a bone pile and rise again"
+          ]
+        }
+      ],
+      "commits": [
+        "Update from Renegade Dev Console",
+        "Online: build check so pages loaded before a deploy can't join newer games (fixes friend loading Classic while host is on another map); stale pages auto-reload into their seat, pre-check pages are refused; unknown map in game start forces a reload"
+      ]
+    },
+    {
+      "id": "77d060eecd11",
+      "date": "2026-10-26",
+      "title": "Cottages, Great Halls and steadier towers",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "Build a Cottage (+2 army slots, up to 3) or a Great Hall (+5 slots) to grow your army up to 31"
+          ]
+        },
+        {
+          "name": "Balance",
+          "items": [
+            "Your base army cap is now 20",
+            "Towers no longer lose HP every round before sudden death"
+          ]
+        }
+      ],
+      "commits": [
+        "Army cap 20 with Cottage/Great Hall, no tower decay before sudden death"
+      ]
+    },
+    {
+      "id": "100a1ba5615f",
+      "date": "2026-10-26",
+      "title": "Big maps and PC fullscreen",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "Map picker: Classic, 5 hand-made big maps, or a mirrored random map in one of 6 shapes",
+            "Big maps have extra shrines, mines and chests to fight over",
+            "Drag to pan and zoom the camera on every map",
+            "PC fullscreen: the board fills the screen with a floating HUD. Press F to toggle it",
+            "Edge scrolling, arrow keys and Ctrl + mouse wheel zoom on PC",
+            "The draft now has 10 team slots: heroes take 1 to 4 slots by price, bosses take 5"
+          ]
+        },
+        {
+          "name": "Balance",
+          "items": [
+            "Splash hits deal half damage, and melee splash is now a 3-hex cleave in front of the attacker",
+            "Lancer's reach is now a 2-hex pierce",
+            "Tanks get +50% HP and -25% damage and cost 2 more gold. Bosses get +40% HP",
+            "Freeze, stun, splash, silence, long range and drain now cost more to hire (Frost Witch 3 → 7 gold)"
+          ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "Lancer has a new thrust animation",
+            "Bigger board tiles, so every painted hero fits inside its hex"
+          ]
+        }
+      ],
+      "commits": [
+        "PC fullscreen: menus use the whole window; in-game board fills the screen with floating HUD; edge scrolling, arrow keys, drag and Ctrl+wheel zoom on every map; Fullscreen button (F) that turns on when a match starts",
+        "Combat: splash deals half damage; melee splash is a 3-hex frontal cleave; Lancer reach becomes a 2-tile pierce with thrust animation",
+        "Wider health gap: tanks +50% HP, -25% damage, +2 gold; bosses +40% HP",
+        "Hire/recruit: army limit counts team slots (10); multiple bosses allowed when there are 5 free slots; clear 'not enough slots' messages",
+        "Draft: 10 team slots; heroes take 1-4 slots by gold price, bosses take 5; army cap raised to 10; slot badges on hero cards",
+        "Hire prices: add gold premiums for freeze/stun, splash, silence, long range and drain (Frost Witch 3 -> 7); bosses unchanged",
+        "Map overhaul: map picker with Classic, 5 pre-built big maps and mirrored random maps (4x tiles, 6 shapes); extra shrines/mines/chests on big maps; drag-to-pan and zoom camera; online map choice synced by the host"
+      ]
+    }
+  ]
+}
