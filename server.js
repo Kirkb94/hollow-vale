@@ -23,13 +23,46 @@ const buildOk = u => u.searchParams.get('v') === CUR_BUILD;
 const rooms = new Map(); // code -> room
 const cleanName = n => String(n || '').replace(/[<>&"'`\\]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16);
 const cleanCode = c => String(c || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4);
+const cleanCid = c => String(c || '').replace(/[^\w-]/g, '').slice(0, 40);
+// ---- lobby browser: room names and optional passwords ----
+const ROOM_NAME_MAX = 24, PASS_MAX = 24, OK_MAX = 64;
+const cleanRoom = s => String(s == null ? '' : s).replace(/[^\w '\-.!?]/g, '').replace(/\s+/g, ' ').trim().slice(0, ROOM_NAME_MAX).trim();
+const hashPass = (pw, salt) => crypto.createHash('sha256').update(salt).update(String(pw)).digest();   // salted hash; the password itself is never stored or sent back
+function setPass(r, pw) {
+  pw = typeof pw === 'string' ? pw.slice(0, PASS_MAX) : '';
+  if (!pw) { r.pass = null; return; }
+  const salt = crypto.randomBytes(16); r.pass = { salt, hash: hashPass(pw, salt) };
+}
+const passOk = (r, pw) => !r.pass || (typeof pw === 'string' && pw.length > 0 && crypto.timingSafeEqual(hashPass(pw.slice(0, PASS_MAX), r.pass.salt), r.pass.hash));
+// cids that got past the password (or joined while the room was open): they can reconnect without typing it again
+function allowCid(r, cid) { if (!cid) return; r.ok.delete(cid); r.ok.add(cid); while (r.ok.size > OK_MAX) r.ok.delete(r.ok.values().next().value); }
+const isMember = (r, cid) => !!cid && (r.clients.has(cid) || r.ok.has(cid) || ALL_SIDES.some(s => r.seats[s].cid === cid));
+const canEnter = (r, cid) => !r.pass || isMember(r, cid);
+const passFails = new Map();   // ip|code -> times of wrong passwords (slows guessing)
+function passLimited(ip, code) { const k = ip + '|' + code, now = Date.now(), a = (passFails.get(k) || []).filter(t => now - t < 10 * 60000); if (a.length) passFails.set(k, a); else passFails.delete(k); return a.length >= 8; }
+function notePassFail(ip, code) { const k = ip + '|' + code, a = passFails.get(k) || []; a.push(Date.now()); passFails.set(k, a); }
+setInterval(() => { const now = Date.now(); for (const [k, a] of passFails) if (!a.some(t => now - t < 10 * 60000)) passFails.delete(k); }, 60000).unref();
+function hostName(r) { const h = hostCid(r); if (!h) return ''; const sd = seatOf(r, h), c = r.clients.get(h); return cleanName((sd && r.seats[sd].name) || (c && c.name) || ''); }
+const roomName = r => r.name || (hostName(r) ? hostName(r) + "'s game" : '');
+// what the lobby browser may see: no passwords, client ids or game state
+function roomInfo(r) {
+  const act = sidesOf(r), n = act.filter(s => r.seats[s].kind === 'human').length, cap = act.filter(s => r.seats[s].kind !== 'ai').length;
+  const map = r.opts && typeof r.opts.map === 'string' ? r.opts.map : 'classic';
+  return { code: r.code, name: roomName(r), host: hostName(r), n, cap, mode: r.n || 3, map, started: r.phase !== 'lobby', locked: !!r.pass };
+}
+function roomList() {
+  const out = [];
+  for (const r of rooms.values()) if ([...r.clients.values()].some(c => c.connected)) out.push(roomInfo(r));
+  out.sort((a, b) => (a.started - b.started) || ((a.n >= a.cap) - (b.n >= b.cap)) || (b.n - a.n));
+  return out.slice(0, 60);
+}
 const blankSeats = () => ({ p: { kind: 'open' }, e: { kind: 'open' }, g: { kind: 'open' }, k: { kind: 'open' } });
 const sidesOf = r => ALL_SIDES.slice(0, r.n || 3);
 
 function makeRoom() {
   if (rooms.size >= MAX_ROOMS) return null;
   let code; do { code = Array.from({ length: 4 }, () => CODE_CHARS[Math.random() * CODE_CHARS.length | 0]).join(''); } while (rooms.has(code));
-  const r = { code, n: 2, phase: 'lobby', seats: blankSeats(), game: null, clients: new Map(), order: 0, touched: Date.now() };
+  const r = { code, n: 2, phase: 'lobby', seats: blankSeats(), game: null, clients: new Map(), order: 0, touched: Date.now(), name: '', pass: null, ok: new Set() };
   rooms.set(code, r); return r;
 }
 const hostCid = r => { let best = null; for (const [cid, c] of r.clients) if (c.connected && (!best || c.order < r.clients.get(best).order)) best = cid; return best; };
@@ -51,6 +84,7 @@ function evictOne(r) {
 }
 const lobbyView = (r, v) => ({
   code: r.code, build: CUR_BUILD, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r) === v ? v : (hostCid(r) ? 'x' : null),
+  room: { name: roomName(r), locked: !!r.pass },
   seats: Object.fromEntries(ALL_SIDES.map(s => {
     const x = r.seats[s], c = x.cid && r.clients.get(x.cid);
     return [s, { kind: x.kind, cid: x.cid ? (x.cid === v ? v : 'x') : null, name: x.name || '', ready: !!x.ready, ban: x.ban || null, connected: x.kind === 'human' ? !!(c && c.connected) : true }];
@@ -75,6 +109,12 @@ function handle(r, cid, m) {
       if (!isHost || r.phase !== 'lobby' || !m.opts || typeof m.opts !== 'object') break;
       const o = {}; Object.keys(m.opts).slice(0, 30).forEach(k => { if (k === 'map') { if (typeof m.opts.map === 'string' && /^(classic|[pr]:[a-z]{1,16})$/.test(m.opts.map)) o.map = m.opts.map; } else if (/^[a-z]{1,16}$/.test(k)) o[k] = !!m.opts[k]; });
       r.opts = o; pushLobby(r); break;
+    }
+    case 'roomset': {
+      if (!isHost) break;
+      if (typeof m.name === 'string') r.name = cleanRoom(m.name);   // empty = back to "<host>'s game"
+      if (typeof m.pass === 'string') setPass(r, m.pass);           // empty = remove the password
+      pushLobby(r); break;
     }
     case 'random': {
       if (!isHost || r.phase !== 'lobby') break;
@@ -211,7 +251,7 @@ const json = (res, code, obj) => { res.writeHead(code, { 'Content-Type': 'applic
 
 // ---- abuse protection: per-IP token buckets, body size cap ----
 const MAX_BODY = 100000, MAX_PER_IP = 6;
-const LIMITS = { create: { cap: 10, rate: 0.1 }, send: { cap: 100, rate: 40 }, events: { cap: 40, rate: 3 } }; // rate = tokens per second
+const LIMITS = { create: { cap: 10, rate: 0.1 }, send: { cap: 100, rate: 40 }, events: { cap: 40, rate: 3 }, rooms: { cap: 20, rate: 1 }, join: { cap: 20, rate: 1 } }; // rate = tokens per second
 const buckets = new Map(); // 'kind|ip' -> { t, at }
 function allow(ip, kind) {
   const L = LIMITS[kind], now = Date.now(), key = kind + '|' + ip;
@@ -225,6 +265,13 @@ const clientIp = req => {
   return req.socket.remoteAddress || '?';
 };
 setInterval(() => { const now = Date.now(); for (const [k, b] of buckets) if (now - b.at > 10 * 60 * 1000) buckets.delete(k); }, 5 * 60 * 1000).unref();
+// small JSON request bodies (create / join); cb(null) when too big
+function readJson(req, max, cb) {
+  let body = '', got = 0, big = (+req.headers['content-length'] || 0) > max;
+  req.setEncoding('utf8');
+  req.on('data', d => { got += d.length; if (got > max) big = true; if (got > max * 10) return req.destroy(); if (!big) body += d; });
+  req.on('end', () => { if (big) return cb(null); let o = {}; try { o = body ? JSON.parse(body) : {}; } catch (e) { o = {}; } cb(o && typeof o === 'object' && !Array.isArray(o) ? o : {}); });
+}
 
 let shuttingDown = false;
 const server = http.createServer((req, res) => {
@@ -234,8 +281,43 @@ const server = http.createServer((req, res) => {
   if (u.pathname === '/healthz') return json(res, shuttingDown ? 503 : 200, { ok: !shuttingDown, rooms: rooms.size, uptime: Math.round(process.uptime()) });
   if (u.pathname === '/api/ping') { res.writeHead(200, { 'Content-Type': 'text/plain' }); return res.end('hv-lan'); }
   if (u.pathname === '/api/info') return json(res, 200, { port: PORT, ips: lanIPs(), build: CUR_BUILD });
-  if (u.pathname === '/api/create' && req.method === 'POST') { if (!allow(clientIp(req), 'create')) { res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '10' }); return res.end(JSON.stringify({ error: 'Too many games created, wait a few seconds and try again.' })); } const r = makeRoom(); return r ? json(res, 200, { room: r.code }) : json(res, 503, { error: 'Server is full, try again later.' }); }
-  if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } return r ? json(res, 200, { lobby: lobbyView(r, (u.searchParams.get('cid') || '').replace(/[^\w-]/g, '').slice(0, 40)), game: r.game }) : json(res, 404, { error: 'no room' }); }
+  if (u.pathname === '/api/create' && req.method === 'POST') {
+    if (!allow(clientIp(req), 'create')) { res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '10' }); req.resume(); return res.end(JSON.stringify({ error: 'Too many games created, wait a few seconds and try again.' })); }
+    return readJson(req, 2048, b => {   // old clients send no body: an open room with the default name
+      if (!b) { res.writeHead(413, { 'Connection': 'close' }); return res.end(); }
+      const r = makeRoom(); if (!r) return json(res, 503, { error: 'Server is full, try again later.' });
+      r.name = cleanRoom(b.room); if (typeof b.pass === 'string' && b.pass) setPass(r, b.pass);
+      allowCid(r, cleanCid(b.cid));
+      return json(res, 200, { room: r.code, locked: !!r.pass });
+    });
+  }
+  if (u.pathname === '/api/rooms') {
+    if (!allow(clientIp(req), 'rooms')) { res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '3' }); return res.end(JSON.stringify({ error: 'Too many requests, slow down.' })); }
+    return json(res, 200, { rooms: shuttingDown ? [] : roomList(), max: MAX_ROOMS });
+  }
+  if (u.pathname === '/api/join' && req.method === 'POST') {   // checks a password (and, from the browser, that the room is joinable) before /events
+    const ip = clientIp(req);
+    if (!allow(ip, 'join')) { res.writeHead(429, { 'Content-Type': 'application/json', 'Retry-After': '5' }); req.resume(); return res.end(JSON.stringify({ ok: false, why: 'busy', error: 'Too many join attempts, wait a few seconds.' })); }
+    return readJson(req, 2048, b => {
+      if (!b) { res.writeHead(413, { 'Connection': 'close' }); return res.end(); }
+      const r = rooms.get(cleanCode(b.room)), cid = cleanCid(b.cid);
+      if (!r) return json(res, 200, { ok: false, why: 'noroom', error: 'No game with that code. It may have ended.' });
+      if (!cid) return json(res, 200, { ok: false, why: 'bad', error: 'Bad request.' });
+      const info = roomInfo(r), member = isMember(r, cid);
+      if (b.browse && !member) {
+        if (info.started) return json(res, 200, { ok: false, why: 'started', error: 'That game has already started.' });
+        if (info.n >= info.cap) return json(res, 200, { ok: false, why: 'full', error: 'That game is full.' });
+      }
+      if (r.pass && !member) {
+        if (passLimited(ip, r.code)) return json(res, 200, { ok: false, why: 'limited', locked: true, name: info.name, error: 'Too many wrong passwords for that game. Try again in a few minutes.' });
+        if (!passOk(r, b.pass)) { if (b.pass) notePassFail(ip, r.code); return json(res, 200, { ok: false, why: 'pass', locked: true, name: info.name, error: b.pass ? 'Wrong password.' : 'This game needs a password.' }); }
+        allowCid(r, cid);
+      }
+      r.touched = Date.now();
+      return json(res, 200, { ok: true, room: r.code, name: info.name, locked: !!r.pass });
+    });
+  }
+  if (u.pathname === '/api/state') { const r = room(); if (r && u.searchParams.has('lite')) { r.touched = Date.now(); return json(res, 200, { phase: r.phase, n: r.game ? r.game.log.length : 0, gid: r.game ? r.game.cfg.gid : null }); } const vc = cleanCid(u.searchParams.get('cid')); if (r && !canEnter(r, vc)) return json(res, 403, { error: 'locked', locked: true }); return r ? json(res, 200, { lobby: lobbyView(r, vc), game: r.game }) : json(res, 404, { error: 'no room' }); }
   if (u.pathname === '/events') {
     const ip = clientIp(req);
     if (!allow(ip, 'events')) { res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform' }); res.write('retry: 5000\n\ndata: {"type":"ratelimited"}\n\n'); return res.end(); }
@@ -246,12 +328,13 @@ const server = http.createServer((req, res) => {
       // pages from before the build check send no v: they only understand noroom; newer pages get 'update' and reload
       res.write('retry: 600000\n\ndata: ' + JSON.stringify(u.searchParams.get('v') ? { type: 'update', build: CUR_BUILD } : { type: 'noroom' }) + '\n\n'); return res.end();
     }
+    if (!canEnter(r, cid)) { res.write('retry: 600000\n\ndata: ' + JSON.stringify({ type: 'full', why: 'pass', room: r.code, name: roomName(r) }) + '\n\n'); return res.end(); }   // locked: new clients ask for the password, old ones see "full"
     let c = r.clients.get(cid);
     if (!c) {
       if (r.clients.size >= MAX_CLIENTS) { pruneClients(r, 0); if (r.clients.size >= MAX_CLIENTS) evictOne(r); }
       if (r.clients.size >= MAX_CLIENTS) { res.write('retry: 600000\n\ndata: {"type":"full","why":"room"}\n\n'); return res.end(); }
       if ([...r.clients.values()].filter(x => x.ip === ip).length >= MAX_PER_IP) { res.write('retry: 600000\n\ndata: {"type":"full","why":"ip"}\n\n'); return res.end(); }
-      c = { name: '', order: ++r.order, ip }; r.clients.set(cid, c);
+      c = { name: '', order: ++r.order, ip }; r.clients.set(cid, c); allowCid(r, cid);
     }
     res.write('retry: 1500\n\n');
     if (c.res) { try { c.res.end(); } catch (e) { } }

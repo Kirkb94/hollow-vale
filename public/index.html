@@ -565,6 +565,32 @@ html body #board .cell.zg::before{background-color:#2a4f58}html body #board .cel
 .rcode b{letter-spacing:.25em;color:#ffe39a;font-size:24px}
 .rcode .rbtn{width:auto;margin:0;padding:6px 14px;font-size:14px}
 .warn{color:#ffb08a}
+/* HV_LOBBY: lobby browser, password prompt, room name */
+.rpick .rset input{text-transform:none;letter-spacing:normal;font-weight:400;max-width:none}
+#lobby details.rset{margin:4px 0}#lobby details.rset summary{cursor:pointer}
+.rset .lrow label{min-width:92px}.rset .rbtn{width:auto;margin:0;padding:8px 16px;font-size:15px}
+.rtitle{text-align:center;font-size:19px;font-weight:700;color:#f2e6c8;margin:2px 0 6px;overflow-wrap:anywhere}
+.rbrowse,.rpass{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.rbh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:MedievalSharp,Georgia,serif;color:#e8c27a;font-size:22px;text-shadow:0 2px 0 #000a}
+.rbh span{font-family:Almendra,Georgia,serif;font-size:15px;color:#d8c9a8;text-shadow:none}
+.rlist{display:flex;flex-direction:column;gap:8px;max-height:min(58vh,560px);overflow-y:auto;padding:3px 2px 6px;overscroll-behavior:contain}
+.rlist>.sub{margin:10px 0}
+.rrow{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;min-height:58px;text-align:left;padding:10px 12px;border-radius:10px;border:2px solid #6b5238;background:linear-gradient(#352e27,#241f1a);box-shadow:inset 0 0 0 1px #0007,0 3px 0 #120c07;color:#f0e6d0;font:inherit;cursor:pointer}
+.rrow:hover:not(:disabled){border-color:#f2b84b;box-shadow:0 0 0 1px #f2b84b,0 0 16px #ffb04a44,0 3px 0 #120c07}
+.rrow:disabled{opacity:.5;cursor:default;filter:saturate(.6)}
+.rrow .rlk{font-size:20px;text-align:center}
+.rrow .rnm{min-width:0}.rrow .rnm b{display:block;font-family:MedievalSharp,Georgia,serif;font-size:18px;color:#ffe39a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rrow small{display:block;font-size:13px;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rrow .rct{text-align:right;font-weight:700;font-size:19px;white-space:nowrap;font-variant-numeric:tabular-nums}.rrow .rct small{color:#ffb08a;opacity:1}
+.rbtns{justify-content:center}.rbtns .go{flex:1 1 130px;width:auto;margin:0}
+.rpass h3{margin:0;text-align:center;font-family:MedievalSharp,Georgia,serif;color:#e8c27a;font-size:22px;overflow-wrap:anywhere}
+.rpass .lrow .go{width:auto;margin:0;padding:10px 24px}
+body.pcv .rbh{font-size:28px}body.pcv .rbh span{font-size:18px}
+body.pcv .rrow{min-height:70px;padding:12px 16px;grid-template-columns:36px minmax(0,1fr) auto}body.pcv .rrow .rlk{font-size:24px}
+body.pcv .rrow .rnm b{font-size:23px}body.pcv .rrow small{font-size:16px}body.pcv .rrow .rct{font-size:24px}
+body.pcv .rpass h3{font-size:30px!important}body.pcv .rtitle{font-size:23px}body.pcv .rset .rbtn{font-size:18px!important}
+body.mob .rrow{min-height:62px}body.mob .rlist{max-height:none}
+@media (max-width:440px){.rrow{grid-template-columns:22px minmax(0,1fr) auto;gap:8px;padding:9px 10px}.rset .lrow label{min-width:0;width:100%}}
 
 html{-webkit-text-size-adjust:100%}
 body{touch-action:manipulation}
@@ -2841,6 +2867,11 @@ const any=SIDES.some(sd=>Object.keys(S.syn[sd]||{}).length);el.innerHTML=any?SID
 let CID=null;try{CID=localStorage.getItem('hv-cid')}catch(e){}
 if(!CID){CID='c'+Math.random().toString(36).slice(2,10)+Date.now().toString(36);try{localStorage.setItem('hv-cid',CID)}catch(e){}}
 let LOB=null,es=null,INFO=null,inGame=false,inDraft=false,myName='',ND=null,ROOM=null,NOTE='';
+/* HV_LOBBY: lobby browser state. LVIEW is what #lroom shows while not in a room: 'pick' | 'browse' | 'pass' */
+let LVIEW='pick',ROOMS=null,PASSFOR=null,PASSERR='',BRT=null,BRSIG='';
+const escH=t=>String(t==null?'':t).replace(/[&<>"'`]/g,c=>'&#'+c.charCodeAt(0)+';');
+const cleanRN=t=>String(t==null?'':t).replace(/[^\w '\-.!?]/g,'').replace(/\s+/g,' ').trim().slice(0,24).trim();
+const defRoomName=()=>myName?myName+"'s game":'Your game';
 try{myName=localStorage.getItem('hv-name')||''}catch(e){}
 const esc=t=>String(t==null?'':t).replace(/[<>&"'`\\]/g,'');
 const q=()=>'cid='+encodeURIComponent(CID)+'&room='+encodeURIComponent(ROOM||'')+'&v='+encodeURIComponent(HV_BUILD);
@@ -2859,12 +2890,16 @@ function setURL(){try{const u=new URL(location.href);if(ROOM)u.searchParams.set(
 function renderLobby(){if($('#lobby').hidden)return;
 const inRoom=!!(ROOM&&LOB);
 ['#lurl','#lseats','#lmsg','#lgo','#lback','#lmode','#lopts','#loptsh','#lmaps','#lmapsh'].forEach(x=>{if(!inRoom)$(x).hidden=true});if(inRoom){['#lurl','#lseats','#lmsg','#lmode','#lopts','#loptsh','#lmaps','#lmapsh'].forEach(x=>$(x).hidden=false)}
-if(!inRoom){const lr=$('#lroom');if(lr.dataset.m=='pick'){const w=lr.querySelector('.warn');if(w)w.textContent=NOTE;if(w)w.hidden=!NOTE;return}lr.dataset.m='pick';lr.innerHTML=`<div class="rpick"><button class="go" id="rcreate">Create a new game</button><div class="lrow"><input id="rcode" maxlength="4" placeholder="Room code" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="go sec" id="rjoin">Join</button></div><p class="sub warn"${NOTE?'':' hidden'}>${NOTE}</p><p class="sub">Create a game, then send your friends the link or let them scan the QR code. Anyone with the link can join from a phone or computer.</p></div>`;
-$('#rcreate').onclick=createRoom;$('#rjoin').onclick=()=>{const c=$('#rcode').value.toUpperCase().replace(/[^A-Z]/g,'');if(c.length==4)joinRoom(c);else{NOTE='Room codes are 4 letters.';renderLobby()}};
+if(!inRoom){const lr=$('#lroom');if(LVIEW=='browse'){renderBrowse(lr);return}if(LVIEW=='pass'&&PASSFOR){renderPass(lr);return}if(lr.dataset.m=='pick'){const w=lr.querySelector('.warn');if(w)w.textContent=NOTE;if(w)w.hidden=!NOTE;const pn=lr.querySelector('#rnname');if(pn)pn.placeholder=defRoomName();return}lr.dataset.m='pick';lr.innerHTML=`<div class="rpick"><button class="go" id="rcreate">Create a new game</button><details class="rset" id="rnew"><summary>Name or lock your new game (optional)</summary><div class="lrow"><label for="rnname">Game name</label><input id="rnname" maxlength="24" placeholder="${escH(defRoomName())}" autocomplete="off" spellcheck="false"></div><div class="lrow"><label for="rnpass">Password</label><input id="rnpass" type="password" maxlength="24" placeholder="Leave empty for an open game" autocomplete="new-password"></div><p class="sub">Every game is listed in Browse lobbies. Games with a password show a 🔒 and players must type it to get in.</p></details><button class="go sec" id="rbrowse">Browse lobbies</button><div class="lrow"><input id="rcode" maxlength="4" placeholder="Room code" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="go sec" id="rjoin">Join</button></div><p class="sub warn"${NOTE?'':' hidden'}>${NOTE}</p><p class="sub">Create a game, then send your friends the link or let them scan the QR code. Anyone with the link can join from a phone or computer.</p></div>`;
+$('#rcreate').onclick=createRoom;$('#rbrowse').onclick=openBrowse;$('#rjoin').onclick=()=>{const c=$('#rcode').value.toUpperCase().replace(/[^A-Z]/g,'');if(c.length==4)joinRoom(c);else{NOTE='Room codes are 4 letters.';renderLobby()}};
 $('#rcode').onkeydown=e=>{if(e.key=='Enter')$('#rjoin').click()};if(!$('#iphelp'))$('#lmsg').insertAdjacentHTML('afterend',IPHONE_HELP);return}
-const L=LOB,url=joinURL();const lr=$('#lroom');if(lr.dataset.m!='room:'+ROOM+url){lr.dataset.m='room:'+ROOM+url;lr.innerHTML=`<div class="rcode">Room <b>${esc(ROOM)}</b> <button class="go sec rbtn" id="rshare">Share link</button> <button class="go sec rbtn" id="rleave">Leave room</button></div>`;
+const L=LOB,url=joinURL();const lr=$('#lroom');if(lr.dataset.m!='room:'+ROOM+url){lr.dataset.m='room:'+ROOM+url;lr.innerHTML=`<div class="rcode">Room <b>${esc(ROOM)}</b> <button class="go sec rbtn" id="rshare">Share link</button> <button class="go sec rbtn" id="rleave">Leave room</button></div><div class="rtitle" id="rtitle" hidden></div><details class="rset" id="rset" hidden><summary>Room name &amp; password</summary><div class="lrow"><label for="rsname">Room name</label><input id="rsname" maxlength="24" autocomplete="off" spellcheck="false"></div><div class="lrow"><label for="rspass">Password</label><input id="rspass" type="password" maxlength="24" autocomplete="new-password"></div><div class="lrow"><button class="go sec rbtn" id="rssave">Save</button><button class="go sec rbtn" id="rsunlock" hidden>Remove password</button><span class="sub" id="rsmsg"></span></div></details>`;
 $('#rshare').onclick=()=>{const d={title:'Hollow Vale',text:'Join my Hollow Vale game (room '+ROOM+')',url};if(navigator.share)navigator.share(d).catch(()=>{});else{try{navigator.clipboard.writeText(url);$('#rshare').textContent='Link copied'}catch(e){prompt('Copy this link',url)}}};
-$('#rleave').onclick=leaveRoom}
+$('#rleave').onclick=leaveRoom;
+$('#rsname').oninput=e=>{e.target.dataset.dirty='1'};
+$('#rssave').onclick=()=>{const n=$('#rsname'),p=$('#rspass'),m={type:'roomset',name:cleanRN(n.value)};if(p.value)m.pass=p.value.slice(0,24);post(m);p.value='';n.dataset.dirty='';$('#rsmsg').textContent=m.pass?'Saved. New players need the password.':'Saved.'};
+$('#rsunlock').onclick=()=>{post({type:'roomset',pass:''});$('#rsmsg').textContent='Password removed. Anyone can join.'}}
+roomBits(L);
 $('#lurl').innerHTML=`<div class="qrw"><div class="hvqr">${qrSVG(url,150)}</div><div class="qt"><b>Friends join here:</b><br>Scan this code with a phone camera, or open<br><b>${esc(url)}</b><br>Room code: <b>${esc(ROOM)}</b></div></div>`;
 const me=mySeat(),host=L.host==CID,nP=L.n||3;
 $('#lmode').innerHTML=`<span>Mode:</span>`+(host&&L.phase=='lobby'?[['pick','Choose heroes'],['rnd','Random heroes']].map(([v,l])=>`<button class="ft${(L.rnd?'rnd':'pick')==v?' on':''}" data-h="${v}">${l}</button>`).join('')+'<span style="width:10px"></span>'+[2,3,4].map(k=>`<button class="ft${nP==k?' on':''}" data-n="${k}">${k==2?'1v1':k+' players'}</button>`).join(''):`<b>${nP==2?'1v1':nP+'-player free-for-all'}${L.rnd?' · random heroes':''}</b>`);
@@ -2918,6 +2953,7 @@ setLabel();renderLobby();
 if(HOST&&allReady(L)){const ai={};act(L).forEach(sd=>{if(L.seats[sd].kind!='human')ai[sd]=aiPick()});post({type:'start',ai})}}
 else if(L.phase=='play'){if(inGame&&S){SEAT=seatMap(L);if(HOST&&!S.over&&isAI(S.turn)&&(!wasHost||(was&&was.seats[S.turn].kind!='ai')))runAI(S.turn);render()}renderLobby()}}
 function onMsg(m){LASTMSG=Date.now();if(m.type=='ka')return;if(m.type=='update'||(m.lobby&&m.lobby.build&&m.lobby.build!==HV_BUILD)){closeES();hvUpdate();return}
+if(m.type=='full'&&m.why=='pass'){const rc=m.room||ROOM;closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;openPass(rc,m.name,false);return}
 if(m.type=='noroom'||m.type=='full'){NOTE=m.type=='full'?(m.why=='ip'?'Too many connections from your network are already in this game.':'That game is full (12 people connected). Try again in a minute.'):'That game no longer exists (the server may have restarted). Create a new one.';closeES();ROOM=null;LOB=null;setURL();try{localStorage.removeItem('hv-room')}catch(e){}inGame=false;inDraft=false;show('#lobby');return}
 if(m.type=='state'){LOB=m.lobby;HOST=LOB.host==CID;NOTE='';
 if(LOB.phase=='play'&&m.game){if(inGame&&S&&GID&&m.game.cfg.gid===GID&&m.game.log.length===NLOG){SEAT=seatMap(LOB);render()}else begin(m.game.cfg,m.game.log);renderLobby()}
@@ -2941,8 +2977,42 @@ fetch('/api/state?lite=1&'+q(),{cache:'no-store'}).then(r=>r.status==404?{gone:1
 if(PENDING>0||resyncing)return;if(j.phase=='play'&&(j.n!==NLOG||(j.gid&&GID&&j.gid!==GID))){if(++MISS>=2){MISS=0;console.warn('desync: server',j.n,'local',NLOG);resync()}}else MISS=0}).catch(()=>{CHECKING=false})}
 setInterval(()=>{if(!ROOM)return;syncCheck();if(!document.hidden&&Date.now()-LASTMSG>40000){LASTMSG=Date.now();closeES();connect()}},3000);
 setInterval(()=>{if(ROOM&&!document.hidden)post({type:'ping'})},4*60*1000);
-function joinRoom(code){closeES();ROOM=code;LOB=null;NOTE='';inGame=false;inDraft=false;setURL();try{localStorage.setItem('hv-room',code)}catch(e){}show('#lobby');$('#lroom').dataset.m='';$('#lroom').innerHTML='<p class="sub">Connecting... (a sleeping server can take up to a minute to wake up)</p>';connect()}
-function createRoom(){$('#lroom').dataset.m='';$('#lroom').innerHTML='<p class="sub">Creating a game... (a sleeping server can take up to a minute to wake up)</p>';fetch('/api/create',{method:'POST'}).then(r=>r.json()).then(j=>{if(j.room)joinRoom(j.room);else{NOTE=esc(j.error||'Could not create a game.');$('#lroom').dataset.m='';renderLobby()}}).catch(()=>{NOTE='Could not reach the server.';$('#lroom').dataset.m='';renderLobby()})}
+/* HV_LOBBY: lobby browser */
+function roomBits(L){const R0=L.room||null,t=$('#rtitle'),d=$('#rset');if(t){t.innerHTML=R0&&R0.name?(R0.locked?'<span title="Password protected">🔒</span> ':'')+escH(R0.name):'';t.hidden=!(R0&&R0.name)}
+if(d){d.hidden=!(L.host==CID&&R0);if(R0){const u=$('#rsunlock'),p=$('#rspass'),n=$('#rsname');if(u)u.hidden=!R0.locked;if(p)p.placeholder=R0.locked?'Leave empty to keep the current one':'Leave empty for an open game';if(n&&document.activeElement!==n&&!n.dataset.dirty)n.value=R0.name||''}}}
+function stopBrowse(){clearInterval(BRT);BRT=null}
+const modeName=n=>n==2?'1v1':(n||3)+' players';
+const mapName=k=>{try{const I=mapInfo(k);return I?I.n:'Classic'}catch(e){return 'Classic'}};
+function openBrowse(){LVIEW='browse';NOTE='';ROOMS=null;BRSIG='';PASSFOR=null;$('#lroom').dataset.m='';show('#lobby');loadRooms();stopBrowse();
+BRT=setInterval(()=>{if(LVIEW!='browse'||ROOM||$('#lobby').hidden){stopBrowse();return}if(!document.hidden)loadRooms()},4000)}
+function loadRooms(){fetch('/api/rooms',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{if(!j||LVIEW!='browse')return;ROOMS=Array.isArray(j.rooms)?j.rooms:[];drawRooms()}).catch(()=>{if(LVIEW=='browse'){NOTE='Could not reach the server.';if(!ROOMS)ROOMS=[];drawRooms()}})}
+function renderBrowse(lr){if(lr.dataset.m!='browse'){lr.dataset.m='browse';BRSIG='';
+lr.innerHTML=`<div class="rbrowse"><div class="rbh"><b>Browse lobbies</b><span id="rbn"></span></div><div class="rlist" id="rlist" aria-live="polite"><p class="sub">Loading games...</p></div><p class="sub warn" id="rbwarn" hidden></p>`
++`<div class="lrow rbtns"><button class="go sec" id="rbref">Refresh</button><button class="go sec" id="rbnew">Create a new game</button><button class="go sec" id="rbback">Back</button></div></div>`;
+const back=open=>{stopBrowse();LVIEW='pick';NOTE='';lr.dataset.m='';renderLobby();const d=$('#rnew');if(d&&open)d.open=true};
+$('#rbref').onclick=()=>{NOTE='';loadRooms()};$('#rbnew').onclick=()=>back(true);$('#rbback').onclick=()=>back(false);
+$('#rlist').onclick=e=>{const b=e.target.closest('button.rrow');if(b&&!b.disabled)pickRoom(b.dataset.code)}}
+drawRooms()}
+function drawRooms(){const el=$('#rlist');if(!el)return;const w=$('#rbwarn');if(w){w.textContent=NOTE;w.hidden=!NOTE}if(!ROOMS)return;
+const L=ROOMS,sig=JSON.stringify(L),c=$('#rbn');if(c)c.textContent=L.length+(L.length==1?' game':' games');if(sig===BRSIG)return;BRSIG=sig;
+el.innerHTML=!L.length?'<p class="sub">No games right now. Create one and your friends will see it here.</p>':L.map(r=>{const n=+r.n||0,cap=+r.cap||0,full=n>=cap,off=!!r.started||full,why=r.started?'In battle':full?'Full':'';
+return `<button class="rrow" data-code="${escH(r.code)}"${off?' disabled aria-disabled="true"':''} title="${off?why:r.locked?'Needs a password':'Join this game'}"><span class="rlk"${r.locked?' aria-label="Password protected"':''}>${r.locked?'🔒':''}</span>`
++`<span class="rnm"><b>${escH(r.name||'Game '+r.code)}</b><small>${r.host?'Host '+escH(r.host)+' · ':''}${escH(modeName(r.mode))} · ${escH(mapName(r.map))}</small></span><span class="rct">${n}/${cap}${why?'<small>'+why+'</small>':''}</span></button>`}).join('')}
+function pickRoom(code){const r=(ROOMS||[]).find(x=>x.code==code);if(!r||r.started||(+r.n||0)>=(+r.cap||0))return;NOTE='';if(r.locked){openPass(r.code,r.name,true);return}tryJoin(r.code,'',true)}
+function openPass(code,name,browse,err){stopBrowse();LVIEW='pass';PASSFOR={code,name:name||'',browse:!!browse};PASSERR=err||'';NOTE='';$('#lroom').dataset.m='';show('#lobby')}
+function renderPass(lr){const P=PASSFOR;if(lr.dataset.m!='pass:'+P.code){lr.dataset.m='pass:'+P.code;
+lr.innerHTML=`<div class="rpass"><h3><span aria-hidden="true">🔒</span> ${escH(P.name||'Game '+P.code)}</h3><p class="sub">Room <b>${escH(P.code)}</b> has a password. Ask the host for it.</p><p class="sub warn" id="rpwarn" hidden></p>`
++`<div class="lrow"><input id="rpw" type="password" maxlength="24" autocomplete="off" placeholder="Password" aria-label="Password"><button class="go" id="rpwgo">Join</button></div><button class="go sec" id="rpwback">Back</button></div>`;
+const go=()=>{const i=$('#rpw'),v=i?i.value:'';if(!v){PASSERR='Type the password first.';renderPass(lr);return}$('#rpwgo').disabled=true;tryJoin(P.code,v.slice(0,24),P.browse)};
+$('#rpwgo').onclick=go;$('#rpw').onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();go()}};
+$('#rpwback').onclick=()=>{const b=P.browse;PASSFOR=null;PASSERR='';if(b)openBrowse();else{LVIEW='pick';lr.dataset.m='';renderLobby()}};setTimeout(()=>{const i=$('#rpw');if(i&&!$('#lobby').hidden)i.focus()},30)}
+const w=$('#rpwarn');if(w){w.textContent=PASSERR;w.hidden=!PASSERR}}
+function tryJoin(code,pass,browse){const fail=t=>{const b=$('#rpwgo');if(b)b.disabled=false;if(LVIEW=='pass'){PASSERR=t;renderLobby();return}NOTE=t;$('#lroom').dataset.m='';renderLobby()};
+return fetch('/api/join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({room:code,cid:CID,pass:pass||'',browse:!!browse})}).then(r=>r.json()).then(j=>{if(j&&j.ok){PASSFOR=null;PASSERR='';joinRoom(code);return}
+const t=(j&&j.error)||'Could not join that game.';if(j&&(j.why=='pass'||j.why=='limited')){if(LVIEW=='pass'&&PASSFOR&&PASSFOR.code==code)return fail(t);openPass(code,j.name,browse,t);return}
+if(LVIEW=='pass'){PASSFOR=null;PASSERR='';LVIEW=browse?'browse':'pick'}NOTE=t;$('#lroom').dataset.m='';renderLobby();if(LVIEW=='browse'){BRSIG='';loadRooms()}}).catch(()=>fail('Could not reach the server.'))}
+function joinRoom(code){stopBrowse();LVIEW='pick';closeES();ROOM=code;LOB=null;NOTE='';inGame=false;inDraft=false;setURL();try{localStorage.setItem('hv-room',code)}catch(e){}show('#lobby');$('#lroom').dataset.m='';$('#lroom').innerHTML='<p class="sub">Connecting... (a sleeping server can take up to a minute to wake up)</p>';connect()}
+function createRoom(){const rn=$('#rnname'),rp=$('#rnpass'),ro={cid:CID,room:rn?cleanRN(rn.value):'',pass:rp?rp.value.slice(0,24):''};stopBrowse();LVIEW='pick';$('#lroom').dataset.m='';$('#lroom').innerHTML='<p class="sub">Creating a game... (a sleeping server can take up to a minute to wake up)</p>';fetch('/api/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ro)}).then(r=>r.json()).then(j=>{if(j.room)joinRoom(j.room);else{NOTE=esc(j.error||'Could not create a game.');$('#lroom').dataset.m='';renderLobby()}}).catch(()=>{NOTE='Could not reach the server.';$('#lroom').dataset.m='';renderLobby()})}
 function leaveRoom(){if(HOST&&LOB&&LOB.phase!='lobby')post({type:'reset'});if(mySeat()&&LOB&&LOB.phase=='lobby')post({type:'leave'});QUEUE.then(()=>{});closeES();ROOM=null;LOB=null;inGame=false;inDraft=false;aiRun++;setURL();try{localStorage.removeItem('hv-room')}catch(e){}renderLobby()}
 NET={send:post,lob:()=>LOB,rematch:()=>{const m={type:'rematch'};if(LOB&&LOB.rnd){m.picks={};act(LOB).forEach(sd=>m.picks[sd]=randomTeam())}post(m)},leaveGame:()=>{if(HOST&&LOB&&LOB.phase!='lobby')post({type:'reset'});else show('#lobby')}};
 const IPHONE_HELP=`<details id="iphelp"><summary><b>Playing on iPhone or iPad</b></summary><ul>
@@ -2953,7 +3023,7 @@ const IPHONE_HELP=`<details id="iphelp"><summary><b>Playing on iPhone or iPad</b
 <li><b>Sound:</b> flip the side switch off silent mode and tap the speaker button if you hear nothing.</li>
 <li><b>Screen lock:</b> the game reconnects by itself when you unlock, and your seat is kept.</li>
 </ul></details>`;
-const NETON={start(){fetch('/api/info').then(r=>r.json()).then(i=>{INFO=i;renderLobby()}).catch(()=>{});
+const NETON={start(){stopBrowse();LVIEW='pick';PASSFOR=null;fetch('/api/info').then(r=>r.json()).then(i=>{INFO=i;renderLobby()}).catch(()=>{});
 let want=null;try{want=new URL(location.href).searchParams.get('room')}catch(e){}if(!want&&/[?&]lobby/.test(location.search)){try{want=localStorage.getItem('hv-room')}catch(e){}}
 want=want?want.toUpperCase().replace(/[^A-Z]/g,'').slice(0,4):null;if(want&&want.length==4)joinRoom(want);else show('#lobby')}};
 fetch('/api/ping').then(r=>r.text()).then(t=>{if(t!='hv-lan')return;const b=$('#m2');b.hidden=false;b.onclick=()=>{mode='lan';HOTSEAT=false;NETON.start()};
