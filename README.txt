@@ -163,6 +163,16 @@ IN THE GAME
 - Every faction has an Elite boss (2 picks) with its own attack cutscene.
   The Lich King can also spend 2 mana to raise skeletons next to him
   (select him, tap "Raise skeleton", then a green hex).
+- Necromancer (Raise the Slain): when its attack, counterattack or splash
+  kills an enemy hero, a random Undead hero of the same gold cost (or the
+  nearest cheaper one) rises on that hex or next to it and fights for the
+  Necromancer's side. A slain boss raises an Undead boss. An enemy squad
+  raises once, when its last member falls; a risen squad rises whole.
+  Summoned and raised units never rise, and a raised Necromancer cannot
+  raise. Raised units start used, show a countdown and crumble after 3 of
+  their owner's turns. They have no Undying or on-death effects, do not
+  count toward the army cap and cannot be recruited. No free hex means
+  nothing rises.
 - Towers have 12, 14 and 15 HP.
 - Dropped out or refreshed? Open the link again: your seat and the battle come
   back. The host can also hand a missing player's seat to the AI.
