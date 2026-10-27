@@ -8,7 +8,7 @@ const PORT = +process.env.PORT || 3000;
 const PUB = path.join(__dirname, 'public');
 const ALL_SIDES = ['p', 'e', 'g', 'k'];
 const MAX_ROOMS = 300, MAX_CLIENTS = 12, ROOM_IDLE_MS = 2 * 60 * 60 * 1000, CLIENT_GRACE_MS = 2 * 60 * 1000;
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4', '.ogg': 'audio/ogg' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4', '.ogg': 'audio/ogg', '.webp': 'image/webp' };
 const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
 const TEXT_EXT = new Set(['.html', '.js', '.css', '.svg', '.json', '.webmanifest']);
 const assetCache = new Map(); // file path -> { etag, raw, gz }

@@ -1,0 +1,588 @@
+{
+ "name": "Hollow Vale painted hex tiles",
+ "version": 1,
+ "status": "approved (Sprite Forge, projects/hollow-vale/tiles) - in the game",
+ "tile": {
+  "w": 224,
+  "h": 259,
+  "format": "webp (lossy colour, lossless alpha)",
+  "orientation": "pointy-top",
+  "layout": "odd-r: odd rows shift right by half a hex; cell box W x H with H = W * 2/sqrt(3)",
+  "clip": "polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)",
+  "gameCell": "#board .cell box (width --cwp, height --chp); the game paints ::before inset 2px",
+  "dirs": [
+   "ne",
+   "e",
+   "se",
+   "sw",
+   "w",
+   "nw"
+  ],
+  "neighbour": {
+   "even": {
+    "ne": [
+     0,
+     -1
+    ],
+    "e": [
+     1,
+     0
+    ],
+    "se": [
+     0,
+     1
+    ],
+    "sw": [
+     -1,
+     1
+    ],
+    "w": [
+     -1,
+     0
+    ],
+    "nw": [
+     -1,
+     -1
+    ]
+   },
+   "odd": {
+    "ne": [
+     1,
+     -1
+    ],
+    "e": [
+     1,
+     0
+    ],
+    "se": [
+     1,
+     1
+    ],
+    "sw": [
+     0,
+     1
+    ],
+    "w": [
+     -1,
+     0
+    ],
+    "nw": [
+     0,
+     -1
+    ]
+   }
+  },
+  "light": "top-down, non-directional: base tiles may be rotated in 60 degree steps and mirrored; overlays may not (one file per direction)"
+ },
+ "types": {
+  "grass": {
+   "variants": [
+    "tiles/grass_0.webp",
+    "tiles/grass_1.webp",
+    "tiles/grass_2.webp",
+    "tiles/grass_3.webp"
+   ],
+   "weights": [
+    4,
+    1,
+    2,
+    3
+   ],
+   "game": "plain cell (no S.ter)",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#43602f",
+   "description": "Meadow: tufted grass, clover, wildflowers, moss, pebbles; v1 has a worn dirt path, v2 is rocky, v3 is clover."
+  },
+  "forest": {
+   "variants": [
+    "tiles/forest_0.webp",
+    "tiles/forest_1.webp",
+    "tiles/forest_2.webp",
+    "tiles/forest_3.webp"
+   ],
+   "weights": [
+    3,
+    3,
+    1,
+    2
+   ],
+   "game": "S.ter = 'forest'",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#2a381d",
+   "description": "Woodland: broadleaf and pine crowns over leaf litter, roots, ferns; v2 has a mossy log, v3 mushrooms."
+  },
+  "hill": {
+   "variants": [
+    "tiles/hill_0.webp",
+    "tiles/hill_1.webp",
+    "tiles/hill_2.webp",
+    "tiles/hill_3.webp"
+   ],
+   "weights": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "game": "S.ter = 'hill'",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#363f25",
+   "description": "Hill: grassy foot, ochre slopes, banded rock strata, boulders and scree."
+  },
+  "swamp": {
+   "variants": [
+    "tiles/swamp_0.webp",
+    "tiles/swamp_1.webp",
+    "tiles/swamp_2.webp",
+    "tiles/swamp_3.webp"
+   ],
+   "weights": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "game": "S.ter = 'swamp'",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#303d26",
+   "description": "Swamp: dark pools with algae and lily pads, mud, mossy hummocks, reeds and cattails."
+  },
+  "shrine": {
+   "variants": [
+    "tiles/shrine_0.webp",
+    "tiles/shrine_1.webp",
+    "tiles/shrine_2.webp"
+   ],
+   "weights": [
+    1,
+    1,
+    1
+   ],
+   "game": "S.shr cell",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#455e33",
+   "description": "Shrine: ringed stone plaza with a glowing gold rune; v1 has broken stones, v2 sits on clover."
+  },
+  "keep": {
+   "variants": [
+    "tiles/keep_0.webp",
+    "tiles/keep_1.webp",
+    "tiles/keep_2.webp",
+    "tiles/keep_3.webp"
+   ],
+   "weights": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "game": "team zone (z<side>); game tints it per team",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#59564d",
+   "description": "Neutral flagstone paving for team zones; the game keeps its per-team tint on top."
+  },
+  "mine": {
+   "variants": [
+    "tiles/mine_0.webp",
+    "tiles/mine_1.webp",
+    "tiles/mine_2.webp",
+    "tiles/mine_3.webp"
+   ],
+   "weights": [
+    2,
+    1,
+    2,
+    1
+   ],
+   "game": "S.mines cell (mine icon drawn on top)",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#3b3730",
+   "description": "Mine ground: dark rubble with gold veins; v1 and v3 have a cart track with spilled ore."
+  },
+  "sand": {
+   "variants": [
+    "tiles/sand_0.webp",
+    "tiles/sand_1.webp",
+    "tiles/sand_2.webp",
+    "tiles/sand_3.webp"
+   ],
+   "weights": [
+    3,
+    2,
+    1,
+    1
+   ],
+   "game": "NEW: beach",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#af9869",
+   "description": "Beach sand: wind ripples, pebbles, shells; v1 dune grass, v2 driftwood, v3 washed-up weed."
+  },
+  "shallow": {
+   "variants": [
+    "tiles/shallow_0.webp",
+    "tiles/shallow_1.webp",
+    "tiles/shallow_2.webp",
+    "tiles/shallow_3.webp"
+   ],
+   "weights": [
+    3,
+    2,
+    2,
+    2
+   ],
+   "game": "NEW: shallow water",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#7aa083",
+   "description": "Shallow water: light turquoise over a visible sandy bottom, stones, caustics and ripples."
+  },
+  "deep": {
+   "variants": [
+    "tiles/deep_0.webp",
+    "tiles/deep_1.webp",
+    "tiles/deep_2.webp",
+    "tiles/deep_3.webp"
+   ],
+   "weights": [
+    3,
+    3,
+    2,
+    2
+   ],
+   "game": "NEW: deep water (or lake holes)",
+   "rotate": true,
+   "mirror": true,
+   "bled": true,
+   "edgeTone": "#122d4f",
+   "description": "Deep water: dark blue with swell, wave crests and a little foam."
+  }
+ },
+ "overlays": {
+  "shore_foam": {
+   "on": [
+    "sand"
+   ],
+   "toward": [
+    "shallow",
+    "deep"
+   ],
+   "dirs": {
+    "ne": "overlays/shore_foam_ne.webp",
+    "e": "overlays/shore_foam_e.webp",
+    "se": "overlays/shore_foam_se.webp",
+    "sw": "overlays/shore_foam_sw.webp",
+    "w": "overlays/shore_foam_w.webp",
+    "nw": "overlays/shore_foam_nw.webp"
+   },
+   "optional": false,
+   "description": "On a beach, toward water: wet sand, a thin sheet of water and foam lace."
+  },
+  "shore_grass": {
+   "on": [
+    "sand"
+   ],
+   "toward": [
+    "grass",
+    "forest",
+    "hill",
+    "swamp",
+    "shrine",
+    "keep",
+    "mine"
+   ],
+   "dirs": {
+    "ne": "overlays/shore_grass_ne.webp",
+    "e": "overlays/shore_grass_e.webp",
+    "se": "overlays/shore_grass_se.webp",
+    "sw": "overlays/shore_grass_sw.webp",
+    "w": "overlays/shore_grass_w.webp",
+    "nw": "overlays/shore_grass_nw.webp"
+   },
+   "optional": false,
+   "description": "On a beach, toward land: the meadow creeps onto the sand."
+  },
+  "shore_lap": {
+   "on": [
+    "shallow",
+    "deep"
+   ],
+   "toward": [
+    "sand"
+   ],
+   "dirs": {
+    "ne": "overlays/shore_lap_ne.webp",
+    "e": "overlays/shore_lap_e.webp",
+    "se": "overlays/shore_lap_se.webp",
+    "sw": "overlays/shore_lap_sw.webp",
+    "w": "overlays/shore_lap_w.webp",
+    "nw": "overlays/shore_lap_nw.webp"
+   },
+   "optional": false,
+   "description": "On water, toward a beach: brighter shallows and a foam line at the shore."
+  },
+  "bank": {
+   "on": [
+    "grass",
+    "forest",
+    "hill",
+    "swamp",
+    "shrine",
+    "keep",
+    "mine"
+   ],
+   "toward": [
+    "shallow",
+    "deep"
+   ],
+   "dirs": {
+    "ne": "overlays/bank_ne.webp",
+    "e": "overlays/bank_e.webp",
+    "se": "overlays/bank_se.webp",
+    "sw": "overlays/bank_sw.webp",
+    "w": "overlays/bank_w.webp",
+    "nw": "overlays/bank_nw.webp"
+   },
+   "optional": false,
+   "description": "On land, toward water with no beach: earthen lip, roots and overhanging grass (no crossing)."
+  },
+  "bank_shade": {
+   "on": [
+    "shallow",
+    "deep"
+   ],
+   "toward": [
+    "grass",
+    "forest",
+    "hill",
+    "swamp",
+    "shrine",
+    "keep",
+    "mine"
+   ],
+   "dirs": {
+    "ne": "overlays/bank_shade_ne.webp",
+    "e": "overlays/bank_shade_e.webp",
+    "se": "overlays/bank_shade_se.webp",
+    "sw": "overlays/bank_shade_sw.webp",
+    "w": "overlays/bank_shade_w.webp",
+    "nw": "overlays/bank_shade_nw.webp"
+   },
+   "optional": false,
+   "description": "On water, toward a land bank: shade under the bank."
+  },
+  "deep_edge": {
+   "on": [
+    "shallow"
+   ],
+   "toward": [
+    "deep"
+   ],
+   "dirs": {
+    "ne": "overlays/deep_edge_ne.webp",
+    "e": "overlays/deep_edge_e.webp",
+    "se": "overlays/deep_edge_se.webp",
+    "sw": "overlays/deep_edge_sw.webp",
+    "w": "overlays/deep_edge_w.webp",
+    "nw": "overlays/deep_edge_nw.webp"
+   },
+   "optional": false,
+   "description": "On shallow water, toward deep: the bottom drops away and the water darkens."
+  },
+  "shallow_edge": {
+   "on": [
+    "deep"
+   ],
+   "toward": [
+    "shallow"
+   ],
+   "dirs": {
+    "ne": "overlays/shallow_edge_ne.webp",
+    "e": "overlays/shallow_edge_e.webp",
+    "se": "overlays/shallow_edge_se.webp",
+    "sw": "overlays/shallow_edge_sw.webp",
+    "w": "overlays/shallow_edge_w.webp",
+    "nw": "overlays/shallow_edge_nw.webp"
+   },
+   "optional": false,
+   "description": "On deep water, toward shallow: a lighter shelf."
+  },
+  "dock": {
+   "on": [
+    "sand"
+   ],
+   "toward": [
+    "shallow",
+    "deep"
+   ],
+   "dirs": {
+    "ne": "overlays/dock_ne.webp",
+    "e": "overlays/dock_e.webp",
+    "se": "overlays/dock_se.webp",
+    "sw": "overlays/dock_sw.webp",
+    "w": "overlays/dock_w.webp",
+    "nw": "overlays/dock_nw.webp"
+   },
+   "optional": true,
+   "description": "Optional dock marker, beach half: plank pier from the sand out to the water edge."
+  },
+  "dock_end": {
+   "on": [
+    "shallow",
+    "deep"
+   ],
+   "toward": [
+    "sand"
+   ],
+   "dirs": {
+    "ne": "overlays/dock_end_ne.webp",
+    "e": "overlays/dock_end_e.webp",
+    "se": "overlays/dock_end_se.webp",
+    "sw": "overlays/dock_end_sw.webp",
+    "w": "overlays/dock_end_w.webp",
+    "nw": "overlays/dock_end_nw.webp"
+   },
+   "optional": true,
+   "description": "Optional dock marker, water half: the pier runs on to its end posts and mooring rope. Place it on the water cell across the docked edge, pointing back at the beach."
+  },
+  "fog": {
+   "on": "any",
+   "toward": null,
+   "variants": [
+    "overlays/fog_0.webp",
+    "overlays/fog_1.webp"
+   ],
+   "rotate": true,
+   "mirror": true,
+   "description": "Full-hex drifting fog for fog cells (S.cd beyond fogLimit, or unseen cells)."
+  }
+ },
+ "rules": [
+  "Pick a base variant per cell from a stable hash of (x, y), weighted by \"weights\"; rotate by (hash % 6) * 60 deg and mirror on (hash >> 3) & 1.",
+  "Tiles of one type share an edge colour (\"edgeTone\"), so neighbours meet without seams; drawing them with no gap looks best for water.",
+  "For every edge d of a cell, look at the neighbour across d and add the overlay whose \"on\" matches this cell and \"toward\" matches the neighbour.",
+  "sand next to water gets shore_foam; the water side gets shore_lap. These are the crossing points (and dock spots).",
+  "land next to water gets bank and the water side gets bank_shade: a visual \"no crossing\" edge.",
+  "shallow next to deep gets deep_edge; the deep side gets shallow_edge.",
+  "dock is optional and comes in two halves: dock_<d> on the beach for the edge d facing water, and dock_end_<opposite(d)> on that water neighbour.",
+  "fog_<v> is a full-hex overlay for fog cells; keep the game's own fog animation on top or replace it.",
+  "Draw order: base tile, edge overlays (any order), dock, then the game's tints, highlights, units."
+ ],
+ "files": {
+  "count": 95,
+  "totalBytes": 672136
+ },
+ "bytes": {
+  "tiles/grass_0.webp": 15792,
+  "tiles/grass_1.webp": 15282,
+  "tiles/grass_2.webp": 16184,
+  "tiles/grass_3.webp": 18770,
+  "tiles/forest_0.webp": 11746,
+  "tiles/forest_1.webp": 8514,
+  "tiles/forest_2.webp": 12524,
+  "tiles/forest_3.webp": 10648,
+  "tiles/hill_0.webp": 11746,
+  "tiles/hill_1.webp": 13052,
+  "tiles/hill_2.webp": 12730,
+  "tiles/hill_3.webp": 12486,
+  "tiles/swamp_0.webp": 8618,
+  "tiles/swamp_1.webp": 9756,
+  "tiles/swamp_2.webp": 8632,
+  "tiles/swamp_3.webp": 10354,
+  "tiles/shrine_0.webp": 12924,
+  "tiles/shrine_1.webp": 13294,
+  "tiles/shrine_2.webp": 15772,
+  "tiles/keep_0.webp": 8388,
+  "tiles/keep_1.webp": 8566,
+  "tiles/keep_2.webp": 7722,
+  "tiles/keep_3.webp": 9158,
+  "tiles/mine_0.webp": 7990,
+  "tiles/mine_1.webp": 9558,
+  "tiles/mine_2.webp": 8516,
+  "tiles/mine_3.webp": 9930,
+  "tiles/sand_0.webp": 10444,
+  "tiles/sand_1.webp": 10330,
+  "tiles/sand_2.webp": 10036,
+  "tiles/sand_3.webp": 10458,
+  "tiles/shallow_0.webp": 10002,
+  "tiles/shallow_1.webp": 10322,
+  "tiles/shallow_2.webp": 10316,
+  "tiles/shallow_3.webp": 10070,
+  "tiles/deep_0.webp": 5436,
+  "tiles/deep_1.webp": 5546,
+  "tiles/deep_2.webp": 5222,
+  "tiles/deep_3.webp": 5964,
+  "overlays/shore_foam_ne.webp": 5522,
+  "overlays/shore_foam_e.webp": 5384,
+  "overlays/shore_foam_se.webp": 5600,
+  "overlays/shore_foam_sw.webp": 5336,
+  "overlays/shore_foam_w.webp": 5150,
+  "overlays/shore_foam_nw.webp": 5870,
+  "overlays/shore_grass_ne.webp": 5172,
+  "overlays/shore_grass_e.webp": 4442,
+  "overlays/shore_grass_se.webp": 4988,
+  "overlays/shore_grass_sw.webp": 5086,
+  "overlays/shore_grass_w.webp": 4236,
+  "overlays/shore_grass_nw.webp": 4390,
+  "overlays/shore_lap_ne.webp": 4564,
+  "overlays/shore_lap_e.webp": 4104,
+  "overlays/shore_lap_se.webp": 4648,
+  "overlays/shore_lap_sw.webp": 4592,
+  "overlays/shore_lap_w.webp": 4312,
+  "overlays/shore_lap_nw.webp": 4800,
+  "overlays/bank_ne.webp": 3358,
+  "overlays/bank_e.webp": 2732,
+  "overlays/bank_se.webp": 2982,
+  "overlays/bank_sw.webp": 3004,
+  "overlays/bank_w.webp": 2760,
+  "overlays/bank_nw.webp": 3312,
+  "overlays/bank_shade_ne.webp": 2910,
+  "overlays/bank_shade_e.webp": 2564,
+  "overlays/bank_shade_se.webp": 2842,
+  "overlays/bank_shade_sw.webp": 3002,
+  "overlays/bank_shade_w.webp": 2772,
+  "overlays/bank_shade_nw.webp": 3004,
+  "overlays/deep_edge_ne.webp": 6014,
+  "overlays/deep_edge_e.webp": 5756,
+  "overlays/deep_edge_se.webp": 6114,
+  "overlays/deep_edge_sw.webp": 6050,
+  "overlays/deep_edge_w.webp": 5484,
+  "overlays/deep_edge_nw.webp": 5930,
+  "overlays/shallow_edge_ne.webp": 4308,
+  "overlays/shallow_edge_e.webp": 3574,
+  "overlays/shallow_edge_se.webp": 4162,
+  "overlays/shallow_edge_sw.webp": 4272,
+  "overlays/shallow_edge_w.webp": 3834,
+  "overlays/shallow_edge_nw.webp": 4178,
+  "overlays/dock_ne.webp": 3264,
+  "overlays/dock_e.webp": 1786,
+  "overlays/dock_se.webp": 3330,
+  "overlays/dock_sw.webp": 3288,
+  "overlays/dock_w.webp": 1828,
+  "overlays/dock_nw.webp": 3338,
+  "overlays/dock_end_ne.webp": 3332,
+  "overlays/dock_end_e.webp": 2340,
+  "overlays/dock_end_se.webp": 3412,
+  "overlays/dock_end_sw.webp": 3410,
+  "overlays/dock_end_w.webp": 2332,
+  "overlays/dock_end_nw.webp": 3422,
+  "overlays/fog_0.webp": 20612,
+  "overlays/fog_1.webp": 20530
+ }
+}

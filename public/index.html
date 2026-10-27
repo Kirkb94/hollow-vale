@@ -55,7 +55,7 @@ const live=new Set(cells.map(key)),seen=new Set(),q=cells.filter(c=>D[edges[side
 while(q.length){const kk=q.pop(),c=byXY[kk];NB(c).forEach(nk=>{if(live.has(nk)&&!seen.has(nk)){seen.add(nk);q.push(nk)}})}
 const cmin=all.reduce((m,c)=>c.rr<m.rr?c:m,all[0]);const ok=seen.has(key(cmin))&&all.filter(c=>c.rr<.16).every(c=>seen.has(key(c)))&&sides.every(sd=>cells.filter(c=>D[edges[sd]](c)==0&&seen.has(key(c))).length>=5);
 if(!ok){shape='open';cells=all.slice()}else cells=cells.filter(c=>seen.has(key(c)));
-return{rect,R,W,H:Hh,cells,BW,BH,shape,holes:cells.length<all.length,big:true,full:all.length}}
+return{rect,R,W,H:Hh,cells,BW,BH,shape,holes:cells.length<all.length,big:true,full:all.length,all}}
 function mapPreview(n,id){const g=hvGeo(n,id,4242);if(!g)return '';const PX=c=>c.x+(c.y&1?.5:0)+.5,PY=c=>c.y*.75+.5,live=new Set(g.cells.map(c=>c.x+','+c.y));
 const s=Math.min(100/(g.BW+.5),100/(g.BH*.75+.25)),hx=(cx,cy)=>{const p=[];for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6;p.push(((cx+Math.cos(a)*.577)*s).toFixed(1)+','+((cy+Math.sin(a)*.577)*s).toFixed(1))}return p.join(' ')};
 const cells=g.cells.map(c=>{const z=c.dep<=1?'#6b5a3a':c.rr<.16?'#c9a24a':'#3f6a4a';return `<polygon points="${hx(PX(c),PY(c))}" fill="${z}"/>`}).join('');
@@ -1683,8 +1683,8 @@ setupMode(3);
 const twAt=(x,y)=>SIDES.flatMap(k=>S.tw[k]).find(t=>t.hp>0&&t.x==x&&t.y==y);
 const wallAt=(x,y)=>S&&S.walls?S.walls.find(w=>w.x==x&&w.y==y):null;
 const trapAt=(x,y)=>S&&S.traps?S.traps.find(t=>t.x==x&&t.y==y):null;
-const free=(x,y)=>VALID.has(x+','+y)&&!at(x,y)&&!twAt(x,y)&&!wallAt(x,y);
-const freeFor=(x,y,sd)=>{if(!VALID.has(x+','+y)||twAt(x,y)||wallAt(x,y))return false;const v=at(x,y);return !v||(MOPT.sight&&!canSee(sd,v))};
+const free=(x,y)=>VALID.has(x+','+y)&&!at(x,y)&&!twAt(x,y)&&!wallAt(x,y)&&!(window.hvWB&&hvWB(x,y));
+const freeFor=(x,y,sd)=>{if(!VALID.has(x+','+y)||twAt(x,y)||wallAt(x,y)||(window.hvWB&&hvWB(x,y)))return false;const v=at(x,y);return !v||(MOPT.sight&&!canSee(sd,v))};
 const ucube=(q,r)=>({x:q+((r-(r&1))>>1),y:r});
 function los(a,b){if(!S||!S.walls||!S.walls.length)return true;const N=dist(a,b);if(N<2)return true;const A=cube(a.x,a.y),B=cube(b.x,b.y);
 for(let i=1;i<N;i++){const t=i/N,f=[0,1,2].map(j=>A[j]+(B[j]-A[j])*t+(j==0?1e-6:j==1?2e-6:-3e-6));let rq=Math.round(f[0]),rr2=Math.round(f[1]),rs=Math.round(f[2]);const dq=Math.abs(rq-f[0]),dr=Math.abs(rr2-f[1]),ds=Math.abs(rs-f[2]);if(dq>dr&&dq>ds)rq=-rr2-rs;else if(dr>ds)rr2=-rq-rs;const c=ucube(rq,rr2),w0=wallAt(c.x,c.y);if(w0&&!w0.b)return false}return true}
@@ -2339,9 +2339,9 @@ return ev}
 /*FNS-END*/
 function reach(u,par){if(u.moved)return [];const h=H[u.k],seen={[u.x+','+u.y]:0},q=[[u.x,u.y]],r=[];
 const MV=mvOf(u);while(q.length){const[x,y]=q.shift(),d=seen[x+','+y];if(d>=MV)continue;if(d>0&&!h.fly&&MOPT.terrain&&S.ter&&S.ter[x+','+y]=='swamp')continue;
-for(const[dx,dy]of NB[y&1]){const nx=x+dx,ny=y+dy,k=nx+','+ny;const f=freeFor(nx,ny,u.side);if(seen[k]!==undefined||!(f||(h.fly&&VALID.has(nx+','+ny)&&!twAt(nx,ny))))continue;seen[k]=d+1;if(par)par[k]=x+','+y;q.push([nx,ny]);if(f)r.push({x:nx,y:ny})}}return r}
+for(const[dx,dy]of NB[y&1]){const nx=x+dx,ny=y+dy,k=nx+','+ny;const f=freeFor(nx,ny,u.side);if(seen[k]!==undefined||!(f||(h.fly&&VALID.has(nx+','+ny)&&!twAt(nx,ny))))continue;if(!h.fly&&window.hvStep&&!hvStep(x+','+y,k))continue;seen[k]=d+1;if(par)par[k]=x+','+y;q.push([nx,ny]);if(f)r.push({x:nx,y:ny})}}return r}
 function stepOK(u,from,to,i){const h=H[u.k],[fx,fy]=from.split(',').map(Number),[tx,ty]=to.split(',').map(Number);if(!VALID.has(to)||twAt(tx,ty)||dist({x:fx,y:fy},{x:tx,y:ty})!=1)return false;
-if(i>0&&!h.fly&&MOPT.terrain&&S.ter&&S.ter[from]=='swamp')return false;return freeFor(tx,ty,u.side)||!!h.fly}
+if(i>0&&!h.fly&&MOPT.terrain&&S.ter&&S.ter[from]=='swamp')return false;if(!h.fly&&window.hvStep&&!hvStep(from,to))return false;return freeFor(tx,ty,u.side)||!!h.fly}
 function prefixOK(u,keys){if(u.moved||keys.length>mvOf(u))return false;const st=u.x+','+u.y;if(keys.includes(st)||new Set(keys).size!=keys.length)return false;let p=st;for(let i=0;i<keys.length;i++){if(!stepOK(u,p,keys[i],i))return false;p=keys[i]}return true}
 function pathOK(u,keys){if(!keys.length||!prefixOK(u,keys))return false;const[ex,ey]=keys[keys.length-1].split(',').map(Number);return freeFor(ex,ey,u.side)}
 function encPath(u,keys){let p=[u.x,u.y],r='';for(const k of keys){const[x,y]=k.split(',').map(Number),d=NB[p[1]&1].findIndex(([dx,dy])=>p[0]+dx==x&&p[1]+dy==y);if(d<0)return null;r+=d;p=[x,y]}return r}
@@ -3610,5 +3610,181 @@ const SPSOF=v=>{const f=v.split('-')[0],t=v.slice(v.indexOf('-')+1);if(f=='u')re
 if(f=='vam')return t=='bats'?'bats':'mist';if(f=='wld')return t=='leap'?'leap':t=='grow'?'grow':t=='swoop'?'swoop':'roots';if(f=='irn')return t=='build'?'clank':'thud';if(f=='arc')return t=='bolt'?'zap':'chime';
 if(f=='kng')return t=='holy'?'holy':t=='cav'?'gallop':'fanfare';return 'chime'};
 function spawnSnd(v,boss,k){if(RP||muted)return;const n=performance.now(),sk=SPSOF(v);if(n-(SPLS[sk]||0)<180)return;SPLS[sk]=n;const c=boss?1.4:1;try{SPSND[SPSOF(v)](c);if(boss)SPSND.boss(c)}catch(e){}}
+</script>
+<style id="hv-water">
+/* ===== HV_WATER: painted hex tiles (see the HV_WATER script) ===== */
+/* the static tile layer sits right under the board; tiles touch (each drawn 4% oversized) and a faint grid line sits on top */
+#hvbg{position:absolute;left:0;top:0;width:100%;aspect-ratio:var(--ar);z-index:0;pointer-events:none;border-radius:14px;background:#1b2523;contain:layout paint style}
+#hvbg>i{position:absolute;display:block;width:var(--cwp);height:var(--chp);background-repeat:no-repeat;background-position:center;background-size:100% 100%;transform:scale(1.04);pointer-events:none}
+#hvbg>i.t.r1{transform:rotate(60deg) scale(1.04)}#hvbg>i.t.r2{transform:rotate(120deg) scale(1.04)}#hvbg>i.t.r3{transform:rotate(180deg) scale(1.04)}#hvbg>i.t.r4{transform:rotate(240deg) scale(1.04)}#hvbg>i.t.r5{transform:rotate(300deg) scale(1.04)}
+#hvbg>i.t.m{transform:scale(-1.04,1.04)}#hvbg>i.t.m.r1{transform:rotate(60deg) scale(-1.04,1.04)}#hvbg>i.t.m.r2{transform:rotate(120deg) scale(-1.04,1.04)}#hvbg>i.t.m.r3{transform:rotate(180deg) scale(-1.04,1.04)}#hvbg>i.t.m.r4{transform:rotate(240deg) scale(-1.04,1.04)}#hvbg>i.t.m.r5{transform:rotate(300deg) scale(-1.04,1.04)}
+#hvbg>i.t.ash{filter:grayscale(.75) sepia(.45) brightness(.62) contrast(1.05)}
+#hvbg .hvg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+#hvbg .hvg path{fill:none;stroke:#0c1008;stroke-opacity:.34;stroke-width:1;vector-effect:non-scaling-stroke}
+#bw.kcam #hvbg{transform-origin:var(--kx) var(--ky);animation:kcam .85s cubic-bezier(.2,.8,.2,1) both}
+@media (prefers-reduced-motion:reduce){#bw.kcam #hvbg{animation-duration:.01s}}
+/* the board itself goes see-through: cells keep their highlights, tints, units and markers on top of the paint */
+#bw.hvt #board,body.holes #bw.hvt #board{background:transparent}
+html body #bw.hvt #board .cell::before{background:none!important}
+#bw.hvt #board .cell.tr-forest .tint,#bw.hvt #board .cell.tr-hill .tint,#bw.hvt #board .cell.tr-swamp .tint{background:none}
+/* team zones keep their tint over the keep paving */
+#bw.hvt #board .cell.zp .tint{background:#e09a2224}
+#bw.hvt #board .cell.ze .tint{background:#9a5ad82a}
+#bw.hvt #board .cell.zg .tint{background:#3fd0b022}
+#bw.hvt #board .cell.zk .tint{background:#ef5b5b26}
+/* highlights: a touch stronger on painted ground, plus a crisp rim */
+#bw.hvt #board .cell.mv::after{background:#3b8ae07a;box-shadow:inset 0 0 0 2px #9fd0ffb0}
+#bw.hvt #board .cell.tg::after{background:radial-gradient(circle,#ff5a4aa8,#d4493d94 60%,#d4493d66);box-shadow:inset 0 0 0 2px #ffb0a0c0}
+#bw.hvt #board .cell.sel::after{background:#ffe0668c;box-shadow:inset 0 0 0 2px #fff4b0}
+html body #bw.hvt #board .cell.smn::after{box-shadow:inset 0 0 0 2px #d8ffe0c0}
+/* painted fog: unseen hexes (dark + drifting mist) and the closing poison mist (sickly green) */
+#bw.hvt #board .cell .fogo{background:radial-gradient(circle at 35% 30%,#2a3142c4,#06080ee3)}
+#bw.hvt #board .cell .fogo::after{background:var(--fgi) center/100% 100% no-repeat;opacity:.5}
+#bw.hvt #board .cell.fogc .tint{background:radial-gradient(circle,#9ab04a3a,#56682c80);animation:fogp 3s ease-in-out infinite alternate}
+#bw.hvt #board .cell.fogc .tint::before{content:'';position:absolute;inset:0;background:var(--fgi) center/100% 100% no-repeat;opacity:.45}
+#bw.hvt #board .cell.hq1 .fogo,#bw.hvt #board .cell.fogc.hq1 .tint{transform:rotate(60deg)}
+#bw.hvt #board .cell.hq2 .fogo,#bw.hvt #board .cell.fogc.hq2 .tint{transform:rotate(120deg)}
+#bw.hvt #board .cell.hq3 .fogo,#bw.hvt #board .cell.fogc.hq3 .tint{transform:rotate(180deg)}
+#bw.hvt #board .cell.hq4 .fogo,#bw.hvt #board .cell.fogc.hq4 .tint{transform:rotate(240deg)}
+#bw.hvt #board .cell.hq5 .fogo,#bw.hvt #board .cell.fogc.hq5 .tint{transform:rotate(300deg)}
+</style>
+<script>/* ===== HV_WATER: painted hex tiles + water (deep, shallow, beaches, docks) =====
+ Big maps: the old holes are real cells now. Deep water inside, a shallow ring next to land, mirrored beaches (sand)
+ where crossing is allowed, and a few cosmetic docks. Rules: shallow is walkable; deep blocks every walking unit;
+ a walking unit steps land<->shallow only from or onto sand; fliers cross freely (they cannot stop over deep water);
+ nothing spawns, is built or appears in water. Map water is made in hvGeo with its own seeded RNG (never Math.random).
+ Tiles: art/tiles/<type>_<v>.webp and art/overlays/<name>_<dir>.webp (see art/tiles/manifest.json), loaded when the
+ first match starts. They are painted on one static layer (#hvbg) under the board, so board re-renders never touch them. */
+(function(){
+const K=(x,y)=>x+','+y;
+const NBO=[[[1,0],[-1,0],[0,-1],[-1,-1],[0,1],[-1,1]],[[1,0],[-1,0],[0,-1],[1,-1],[0,1],[1,1]]];
+const DIRS=['ne','e','se','sw','w','nw'];
+const DOFF=[{ne:[0,-1],e:[1,0],se:[0,1],sw:[-1,1],w:[-1,0],nw:[-1,-1]},{ne:[1,-1],e:[1,0],se:[1,1],sw:[0,1],w:[-1,0],nw:[0,-1]}];
+const OPP={ne:'sw',e:'w',se:'nw',sw:'ne',w:'e',nw:'se'};
+const nbOf=(x,y,d)=>{const o=DOFF[y&1][d];return[x+o[0],y+o[1]]};
+const dirTo=(a,b)=>DIRS.find(d=>{const o=DOFF[a.y&1][d];return a.x+o[0]==b.x&&a.y+o[1]==b.y});
+const cubeD=(a,b)=>{const q1=a.x-((a.y-(a.y&1))>>1),q2=b.x-((b.y-(b.y&1))>>1),r1=a.y,r2=b.y;return Math.max(Math.abs(q1-q2),Math.abs(r1-r2),Math.abs(q1+r1-q2-r2))};
+const HVW=window.HVW={on:false,ns:0,cu:null,last:null,ready:false};
+const WT=t=>t=='deep'||t=='shallow';
+/* ---------- rules ---------- */
+/* blocked for standing/placing: deep always; shallow too while a spawn/build/summon/chest check runs (HVW.ns) */
+window.hvWB=function(x,y){if(!HVW.on||!S||!S.ter)return false;const t=S.ter[K(x,y)];return t=='deep'||(HVW.ns>0&&t=='shallow')};
+/* one walking step a->b (keys of adjacent cells): never into deep; land<->water only through a beach */
+const hvStep=window.hvStep=function(a,b){if(!HVW.on||!S||!S.ter)return true;const ta=S.ter[a],tb=S.ter[b];if(tb=='deep')return false;const wa=WT(ta),wb=WT(tb);if(wa===wb)return true;return(wa?tb:ta)=='sand'};
+window.hvIsWater=(x,y)=>!!(HVW.on&&S&&S.ter&&WT(S.ter[K(x,y)]));
+const NS=f=>function(){HVW.ns++;try{return f.apply(this,arguments)}finally{HVW.ns--}};
+spawnHexes=NS(spawnHexes);bldHexes=NS(bldHexes);targets=NS(targets);summonNear=NS(summonNear);bossDeath=NS(bossDeath);
+{const sc0=spawnChest;spawnChest=function(){if(!GEO||!GEO.wat)return sc0.apply(this,arguments);const all=GEO.cells;GEO.cells=all.filter(c=>!WT(GEO.wat[K(c.x,c.y)]));HVW.ns++;try{return sc0.apply(this,arguments)}finally{HVW.ns--;GEO.cells=all}}}
+/* walking distance for the AI: water rules on water maps, straight distance for fliers */
+let WD={k:null,m:{}};
+const wd0=wdist;wdist=function(a,b){if(!HVW.on||!GEO||!GEO.wat)return wd0(a,b);if(HVW.cu&&H[HVW.cu.k]&&H[HVW.cu.k].fly)return dist(a,b);
+ if(WD.k!==HVMAP.key){WD={k:HVMAP.key,m:{}}}const tk=K(b.x,b.y);let m=WD.m[tk];
+ if(!m){m={};m[tk]=0;const q=[[b.x,b.y]];let i=0;while(i<q.length){const[x,y]=q[i++],ck=K(x,y),d=m[ck];for(const[dx,dy]of NBO[y&1]){const nx=x+dx,ny=y+dy,nk=K(nx,ny);if(m[nk]!==undefined||!VALID.has(nk)||S.ter[nk]=='deep'||!hvStep(nk,ck))continue;m[nk]=d+1;q.push([nx,ny])}}WD.m[tk]=m}
+ const v=m[K(a.x,a.y)];return v===undefined?dist(a,b)+20:v};
+{const ch0=choose;choose=function(u){const o=HVW.cu;HVW.cu=u;try{return ch0.apply(this,arguments)}finally{HVW.cu=o}}}
+/* ---------- map: holes become water ---------- */
+function waterGeo(g,n,id,seed){const info=mapInfo(id)||{},all=g.all,rect=g.rect,byQR={},byXY={};all.forEach(c=>{byQR[c.q+','+c.r]=c;byXY[K(c.x,c.y)]=c});
+ const orbit=c=>(rect?[c,byXY[K(g.W-1-c.x,g.H-1-c.y)]]:n==2?[c,byQR[(-c.q)+','+(-c.r)]]:(()=>{const a=byQR[c.r+','+c.s],b=a&&byQR[a.r+','+a.s];return[c,a,b]})());
+ const OL=rect||n==2?2:3;
+ const land=new Set(g.cells.map(c=>K(c.x,c.y)));
+ all.forEach(c=>{if(land.has(K(c.x,c.y)))return;orbit(c).forEach(d=>{if(d)land.delete(K(d.x,d.y))})});/* keep the water exactly mirrored */
+ const nbs=c=>NBO[c.y&1].map(([a,b])=>byXY[K(c.x+a,c.y+b)]).filter(Boolean);
+ const W={};all.forEach(c=>{const k=K(c.x,c.y);if(!land.has(k))W[k]=nbs(c).some(d=>land.has(K(d.x,d.y)))?'shallow':'deep'});
+ const r=hvRng((((info.seed!=null?info.seed:seed)|0)^0x51ed27)|0);
+ const shore=(c,dep,rr)=>land.has(K(c.x,c.y))&&c.dep>=dep&&c.rr>=rr&&nbs(c).some(d=>W[K(d.x,d.y)]=='shallow');
+ const orbs=(dep,rr)=>{const out=[],seen=new Set();all.forEach(c=>{const k=K(c.x,c.y);if(seen.has(k))return;const o=orbit(c);o.forEach(d=>d&&seen.add(K(d.x,d.y)));
+  if(o.length!==OL||o.some(d=>!d)||new Set(o.map(d=>K(d.x,d.y))).size!==OL||!o.every(d=>shore(d,dep,rr)))return;out.push(o)});out.forEach(o=>o.key=r());return out.sort((a,b)=>a.key-b.key)};
+ const sand=new Set(),isS=d=>sand.has(K(d.x,d.y));
+ const farFrom=(o,m)=>o.every(d=>{for(const sk of sand)if(cubeD(byXY[sk],d)<m)return false;return true});
+ const add=o=>o.forEach(d=>{sand.add(K(d.x,d.y));W[K(d.x,d.y)]='sand'});
+ const cand=orbs(3,.18),want=Math.max(1,Math.min(6,Math.round(cand.length/5)));let got=0;
+ for(const o of cand){if(got>=want)break;if(o.some(isS)||!farFrom(o,4))continue;add(o);got++;
+  if(r()<.6){const p=nbs(o[0]).filter(d=>!isS(d)&&shore(d,3,.18)).map(d=>orbit(d)).find(q=>q.length==OL&&q.every(e=>e&&!isS(e)&&shore(e,3,.18))&&new Set(q.map(e=>K(e.x,e.y))).size==OL);if(p)add(p)}}
+ /* every pool of shallow water gets a beach (else a pushed hero could never get out); pools with no room for one turn deep */
+ const comps=[],cid={};all.forEach(c=>{const k=K(c.x,c.y);if(W[k]!='shallow'||cid[k]!=null)return;const id=comps.length,cs=[c];cid[k]=id;for(let i=0;i<cs.length;i++)nbs(cs[i]).forEach(d=>{const dk=K(d.x,d.y);if(W[dk]=='shallow'&&cid[dk]==null){cid[dk]=id;cs.push(d)}});comps.push(cs)});
+ const touches=cs=>cs.some(c=>nbs(c).some(isS));
+ const loose=orbs(2,.16);
+ comps.forEach(cs=>{if(touches(cs))return;const ids=new Set(cs.map(c=>K(c.x,c.y)));const adj=o=>o.some(d=>nbs(d).some(e=>ids.has(K(e.x,e.y))));
+  const o=loose.find(o=>!o.some(isS)&&adj(o)&&farFrom(o,3))||loose.find(o=>!o.some(isS)&&adj(o));if(o)add(o);else cs.forEach(c=>W[K(c.x,c.y)]='deep')});
+ /* docks: a few beaches get a pier out to the water, mirrored */
+ const docks=[],dc=orbs(0,0).filter(o=>o.every(isS));
+ for(const o of dc){if(docks.length>=2*OL)break;if(docks.some(q=>o.some(d=>cubeD(q,d)<6)))continue;
+  const ws=nbs(o[0]).filter(w=>W[K(w.x,w.y)]=='shallow').sort((a,b)=>nbs(b).filter(e=>W[K(e.x,e.y)]=='deep').length-nbs(a).filter(e=>W[K(e.x,e.y)]=='deep').length||K(a.x,a.y).localeCompare(K(b.x,b.y)));
+  const w0=ws[0];if(!w0)continue;const wo=orbit(w0);if(wo.length!==OL||wo.some(e=>!e))continue;
+  const ds=o.map((d,i)=>({x:d.x,y:d.y,d:dirTo(d,wo[i]),wx:wo[i].x,wy:wo[i].y}));if(ds.some(q=>!q.d))continue;ds.forEach(q=>docks.push(q))}
+ return Object.assign({},g,{cells:all,holes:false,water:W,docks,wat:true})}
+HVW.waterGeo=waterGeo;
+const hg0=hvGeo;hvGeo=function(n,id,seed){const g=hg0.apply(this,arguments);if(!g||!g.big||!g.holes||!g.all)return g;const w=waterGeo(g,n,id,seed);HVW.last=w;return w};
+const sm0=setupMode;setupMode=function(){HVW.last=null;const r=sm0.apply(this,arguments);const L=HVW.last;GEO.wat=L&&L.cells===GEO.cells?L.water:null;GEO.docks=GEO.wat?L.docks:[];HVW.on=!!GEO.wat;WD={k:null,m:{}};HVW.last=null;return r};
+/* terrain, mines and shrines are rolled on land only; then the water and beaches are stamped on */
+const gb0=genBoard;genBoard=function(){const W=GEO&&GEO.wat;if(!W)return gb0.apply(this,arguments);const all=GEO.cells;GEO.cells=all.filter(c=>!W[K(c.x,c.y)]);
+ try{gb0.apply(this,arguments)}finally{GEO.cells=all}
+ const ctr=GEO.cells.filter(c=>S.cd[K(c.x,c.y)]===0);
+ all.forEach(c=>{const k=K(c.x,c.y);if(!W[k])return;S.ter[k]=W[k];if(S.cd[k]==null)S.cd[k]=ctr.length?Math.min(...ctr.map(z=>dist(c,z))):0});
+ S.mines=(S.mines||[]).filter(m=>!W[K(m.x,m.y)]);S.shr=(S.shr||[]).filter(k=>!W[k])};
+/* map picker previews show the water */
+mapPreview=function(n,id){const g=hvGeo(n,id,4242);if(!g)return '';const PX=c=>c.x+(c.y&1?.5:0)+.5,PY=c=>c.y*.75+.5,W=g.water||{};
+ const s=Math.min(100/(g.BW+.5),100/(g.BH*.75+.25)),hx=(cx,cy)=>{const p=[];for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6;p.push(((cx+Math.cos(a)*.577)*s).toFixed(1)+','+((cy+Math.sin(a)*.577)*s).toFixed(1))}return p.join(' ')};
+ const cells=g.cells.map(c=>{const w=W[c.x+','+c.y],z=w=='deep'?'#1d4a78':w=='shallow'?'#5fa6a0':w=='sand'?'#cdb27a':c.dep<=1?'#6b5a3a':c.rr<.16?'#c9a24a':'#3f6a4a';return `<polygon points="${hx(PX(c),PY(c))}" fill="${z}"/>`}).join('');
+ return `<svg viewBox="0 0 ${((g.BW+.5)*s).toFixed(0)} ${((g.BH*.75+.25)*s).toFixed(0)}" class="mpv" aria-hidden="true">${cells}</svg>`};
+{const tw=MAPS_PRE.find(m=>m.id=='p:twinlakes');if(tw)tw.d='Lakes split the field into lanes. Wade in only at the beaches.';
+ const mk2=MAPS_PRE.find(m=>m.id=='p:moatkeep');if(mk2)mk2.d='A moated island holds the centre. Land bridges and beaches lead in.';
+ const hg=MAPS_PRE.find(m=>m.id=='p:hourglass');if(hg)hg.d='Deep lakes squeeze every army into three passes.';
+ const rv=MAPS_PRE.find(m=>m.id=='p:riverlands');if(rv)rv.d='A river circles the field. Fight for the fords and beaches.'}
+{const tr=CORE.find(o=>o.k=='terrain');if(tr&&!/Shallow water/.test(tr.d))tr.d+=' Water (big maps): shallow water can be waded, but you only step in or out of it on a beach (sand); deep water blocks walking heroes. Fliers cross both but cannot stop over deep water. Ranged attacks and sight pass over water.'}
+const tt0=terTip;terTip=function(x,y){const a=tt0(x,y)||'';if(!S||!S.ter)return a;const t=S.ter[K(x,y)],L={deep:'<b>Deep water</b><br>Walking heroes cannot enter. Fliers pass over it but cannot stop here. Shots and sight pass over it.',shallow:'<b>Shallow water</b><br>Walkable. Walking heroes step in or out only on a beach (sand). Nothing can be spawned or built here.',sand:'<b>Beach</b><br>The way into and out of the water.'+((GEO.docks||[]).some(d=>d.x==x&&d.y==y)?' A dock stands here.':'')}[t];return L?(a?L+'<br>'+a:L):a};
+
+/* ---------- painted tiles ---------- */
+const TT={grass:[4,1,2,3],forest:[3,3,1,2],hill:[1,1,1,1],swamp:[1,1,1,1],shrine:[1,1,1],keep:[1,1,1,1],mine:[2,1,2,1],sand:[3,2,1,1],shallow:[3,2,2,2],deep:[3,3,2,2]};
+const OVN=['shore_foam','shore_grass','shore_lap','bank','bank_shade','deep_edge','shallow_edge','dock','dock_end'];
+const TB='art/tiles/',OB='art/overlays/',V='?v=1';
+const hsh=(x,y)=>{let h=Math.imul(x+1013,0x27d4eb2d)^Math.imul(y+7919,0x165667b1);h=Math.imul(h^h>>>15,0x85ebca6b);h=Math.imul(h^h>>>13,0xc2b2ae35);return(h^h>>>16)>>>0};
+const pickV=(t,h)=>{const w=TT[t];let s=0;w.forEach(a=>s+=a);let q=(h>>>12)%s;for(let i=0;i<w.length;i++){q-=w[i];if(q<0)return i}return 0};
+/* what a cell looks like: water and beach, shrine, mine, team keep, terrain, else grass (ash = burnt grass) */
+function typeAt(x,y,k){const t=S.ter?S.ter[k]:null;if(t=='deep'||t=='shallow'||t=='sand')return t;if(S.shr&&S.shr.includes(k))return'shrine';if(mineAt(x,y))return'mine';if(ZN[k]&&ZN[k]!='m')return'keep';
+ if(t=='forest'||t=='hill'||t=='swamp')return t;if(t=='ash')return'ash';return'grass'}
+const grp=t=>t=='deep'||t=='shallow'?t:t=='sand'?'sand':'land';
+/* edge overlays per cell, in the manifest's rules (static per map: only water / beach / land matter) */
+function overlays(){const m={},W=GEO.wat;if(!W)return m;const add=(k,n)=>{(m[k]=m[k]||[]).push(n)};
+ GEO.cells.forEach(c=>{const k=K(c.x,c.y),a=grp(W[k]||'land');DIRS.forEach(d=>{const[nx,ny]=nbOf(c.x,c.y,d),nk=K(nx,ny);if(!VALID.has(nk))return;const b=grp(W[nk]||'land');if(a===b)return;
+  let n=null;if(a=='sand')n=b=='land'?'shore_grass':'shore_foam';else if(a=='land')n=b=='sand'?null:'bank';else if(b=='sand')n='shore_lap';else if(b=='land')n='bank_shade';else if(a=='shallow')n='deep_edge';else n='shallow_edge';
+  if(n)add(k,n+'_'+d)})});
+ /* docks go on top of the edge art (first background = top) */
+ (GEO.docks||[]).forEach(q=>{const k=K(q.x,q.y),wk=K(q.wx,q.wy);(m[k]=m[k]||[]).unshift('dock_'+q.d);(m[wk]=m[wk]||[]).unshift('dock_end_'+OPP[q.d])});
+ return m}
+HVW.docks=()=>GEO&&GEO.docks||[];
+/* the static layer: one tile per cell, overlays, then a faint hex grid */
+let LY=null;
+function build(){const cells=GEO.cells,ov=overlays(),P=c=>`left:${((c.x+(c.y&1?.5:0))/WF*100).toFixed(3)}%;top:${(c.y*.75/HF*100).toFixed(3)}%`;
+ let t='',o='',seen=new Set(),p='';const pt=(a,b)=>(+a.toFixed(3))+','+(+b.toFixed(3));
+ const hs=cells.map(c=>hsh(c.x,c.y));
+ cells.forEach((c,i)=>{const h=hs[i];t+=`<i class="t r${h%6}${(h>>3)&1?' m':''}" style="${P(c)}"></i>`;const L=ov[K(c.x,c.y)];if(L)o+=`<i class="o" style="${P(c)};background-image:${L.map(n=>`url(${OB}${n}.webp${V})`).join(',')}"></i>`;
+  const l=c.x+(c.y&1?.5:0),tp=c.y*.75,Q=[[l+.5,tp],[l+1,tp+.25],[l+1,tp+.75],[l+.5,tp+1],[l,tp+.75],[l,tp+.25]];for(let j=0;j<6;j++){const a=pt(...Q[j]),b=pt(...Q[(j+1)%6]),e=a<b?a+'|'+b:b+'|'+a;if(seen.has(e))continue;seen.add(e);p+='M'+a+'L'+b}});
+ const el=document.createElement('div');el.id='hvbg';el.setAttribute('aria-hidden','true');
+ el.innerHTML=t+o+`<svg class="hvg" viewBox="0 0 ${WF} ${HF}" preserveAspectRatio="none"><path d="${p}"/></svg>`;
+ LY={key:HVMAP.key+'|'+cells.length+'|'+WF,el,tiles:[...el.querySelectorAll('i.t')],hs,ty:new Array(cells.length).fill(null),fc:{}}}
+function sync(){const bw=document.getElementById('bw'),b=document.getElementById('board');if(!bw||!b)return;
+ if(!HVW.ready||!S||!GEO){bw.classList.remove('hvt');if(LY&&LY.el.parentNode)LY.el.remove();return}
+ if(!LY||LY.key!==HVMAP.key+'|'+GEO.cells.length+'|'+WF)build();
+ if(LY.el.parentNode!==bw||LY.el.nextSibling!==b)bw.insertBefore(LY.el,b);
+ const C=GEO.cells;for(let i=0;i<C.length;i++){const c=C[i],k=K(c.x,c.y),ty=typeAt(c.x,c.y,k);if(ty===LY.ty[i])continue;LY.ty[i]=ty;const h=LY.hs[i],base=ty=='ash'?'grass':ty;
+  LY.tiles[i].className=`t r${h%6}${(h>>3)&1?' m':''} tt-${base}_${pickV(base,h)}${ty=='ash'?' ash':''}`}
+ bw.classList.add('hvt')}
+HVW.sync=sync;
+/* fog variant + turn per cell (painted fog for the closing mist and for unseen hexes) */
+const tc0=terCls;terCls=function(x,y){const c=tc0(x,y);if(!HVW.ready||!S||!S.ter)return c;const h=hsh(x,y);return c+' hf'+((h>>5)&1)+' hq'+((h>>>7)%6)+((h>>9)&1?' hfm':'')};
+const de0=deco;deco=function(x,y){return HVW.ready?'':de0(x,y)};
+const r0=render0;render0=function(){const r=r0.apply(this,arguments);try{sync();if(!HVW.ready&&!HVW.loading&&S)load()}catch(e){if(window.console)console.error(e)}return r};
+/* ---------- lazy load ---------- */
+function css(){const r=[];Object.keys(TT).forEach(t=>TT[t].forEach((_,i)=>r.push(`#hvbg i.tt-${t}_${i}{background-image:url(${TB}${t}_${i}.webp${V})}`)));
+ [0,1].forEach(i=>r.push(`#bw.hvt #board .cell.hf${i}{--fgi:url(${OB}fog_${i}.webp${V})}`));
+ const st=document.createElement('style');st.id='hv-tiles-dyn';st.textContent=r.join('\n');document.head.appendChild(st)}
+function load(){HVW.loading=true;const go=()=>{const urls=[];Object.keys(TT).forEach(t=>TT[t].forEach((_,i)=>urls.push(TB+t+'_'+i+'.webp'+V)));const ov=[];OVN.forEach(n=>DIRS.forEach(d=>ov.push(OB+n+'_'+d+'.webp'+V)));ov.push(OB+'fog_0.webp'+V,OB+'fog_1.webp'+V);
+ let left=urls.length+ov.length,bad=0;const done=()=>{if(--left>0)return;if(bad>0){HVW.loading=false;HVW.fail=(HVW.fail||0)+1;HVW.imgs=[];if(HVW.fail<3)setTimeout(()=>{if(!HVW.ready&&!HVW.loading)load()},4000);return}
+  css();HVW.ready=true;HVW.loading=false;HVW.keep=HVW.keep||{forest:TART.forest,hill:TART.hill,swamp:TART.swamp,shrine:TART.shrine};TART.forest=TART.hill=TART.swamp=TART.shrine='';try{if(S)render()}catch(e){}};
+ const one=u=>{const im=new Image();im.decoding='async';im.onload=done;im.onerror=()=>{bad++;done()};im.src=u;(HVW.imgs=HVW.imgs||[]).push(im)};urls.forEach(one);ov.forEach(one)};
+ /* variant weights come from the approved manifest (built-in copy if it cannot be read) */
+ try{fetch(TB+'manifest.json'+V).then(r=>r.ok?r.json():null).then(m=>{try{if(m&&m.types)Object.keys(TT).forEach(t=>{const w=m.types[t]&&m.types[t].weights;if(Array.isArray(w)&&w.length==TT[t].length&&w.every(n=>n>0))TT[t]=w.slice()})}catch(e){}go()},go)}catch(e){go()}}
+})();
 </script>
 </body></html>
