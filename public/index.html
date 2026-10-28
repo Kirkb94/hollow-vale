@@ -1338,7 +1338,7 @@ guard:{n:'Guardian',e:'🧱',hp:9,mv:1,rng:[1,1],dmg:2,armor:2,stun:1,d:'Takes 2
 sapper:{n:'Sapper',e:'🧨',hp:5,mv:2,rng:[1,1],dmg:2,siege:4,d:'Weak in a fight, deals +6 to towers.'},
 wraith:{n:'Wraith',e:'👻',hp:5,mv:3,rng:[1,1],dmg:3,fly:1,d:'Moves through units and slips past blockers.'},
 bomber:{n:'Bombardier',e:'💣',hp:4,mv:2,rng:[2,3],dmg:2,aoe:1,d:'Free splash: hits target and its neighbors for 3.'},
-witch:{n:'Frost Witch',e:'❄️',hp:4,mv:2,rng:[2,3],dmg:1,acost:1,stun:1,d:'Costs 1 mana. Freezes a unit out of its next turn.'},
+witch:{n:'Frost Witch',e:'❄️',hp:4,mv:2,rng:[2,3],dmg:1,acost:1,stun:1,d:'Free with Arcane Flow. Freezes a unit out of its next turn.'},
 storm:{n:'Stormcaller',e:'⚡',hp:4,mv:2,rng:[2,4],dmg:4,acost:3,d:'Costs 3 mana. Huge damage from range 2-4.'},
 druid:{n:'Druid',e:'🌿',hp:6,mv:2,rng:[1,2],dmg:1,heal:2,cost:0,d:'Free heal of 4 on an ally, or pokes for 5.'},
 paladin:{n:'Paladin',e:'⚜️',hp:8,mv:2,rng:[1,1],dmg:3,heal:2,cost:1,d:'Fights in melee. Heals an ally for 3 (1 mana).'},
@@ -1374,7 +1374,7 @@ wolves:{n:'Wolf Pack',e:'🐺',hp:3,mv:4,rng:[1,1],dmg:2,group:3,slots:2,d:'A pa
 treant:{n:'Treant',e:'🌳',hp:18,mv:1,rng:[1,1],dmg:4,d:'An ancient tree-guardian. Huge health pool that slowly regrows.'},
 gunner:{n:'Dwarf Gunner',e:'🔫',hp:7,mv:2,rng:[2,3],dmg:5,d:'A dwarven marksman. Powder blasts from range 2-3, and they wreck towers.'},
 sentinel:{n:'Arcane Sentinel',e:'🗿',hp:13,mv:1,rng:[1,1],dmg:3,armor:1,d:'A rune-etched construct that guards the order\'s casters.'},
-spellblade:{n:'Spellblade',e:'⚔️',hp:9,mv:2,rng:[1,1],dmg:6,acost:1,d:'A mage-warrior. Each enchanted strike costs 1 mana.'},
+spellblade:{n:'Spellblade',e:'⚔️',hp:9,mv:2,rng:[1,1],dmg:6,acost:1,d:'A mage-warrior. Enchanted strikes are free with Arcane Flow.'},
 seer:{n:'Aether Seer',e:'🔮',hp:8,mv:2,rng:[1,2],dmg:2,heal:4,cost:1,d:'Heals an ally for 4 (1 mana).'}
 });
 const FAC={
@@ -1384,7 +1384,7 @@ undead:{n:'Undead',c:'#7fc46a',p:'Undying',pd:'the first time it would die, it r
 infernal:{n:'Infernal',c:'#f2702a',p:'Burn',pd:'its attacks set units ablaze: 1 damage at the start of their owner\'s next 2 turns.',sy:'Burn deals 2 damage per turn.'},
 wilds:{n:'Wilds',c:'#5cc070',p:'Regrowth',pd:'heals 2 HP at the start of its owner\'s turn.',sy:'Regrowth heals 3 HP.'},
 iron:{n:'Iron Clan',c:'#a8b4c6',p:'Siegecraft',pd:'deals +1 damage to towers.',sy:'every Iron Clan unit deals +1 damage.'},
-arcane:{n:'Arcane Order',c:'#6a96ff',p:'Arcane Flow',pd:'spells and heals that cost 2+ mana cost 1 less (never below 1).',sy:'your side gains +1 mana at the start of every turn.'}};
+arcane:{n:'Arcane Order',c:'#6a96ff',p:'Arcane Flow',pd:'attacks cost 1 less mana (1-mana attacks are free); spells and heals that cost 2+ mana cost 1 less.',sy:'your side gains +2 mana at the start of every turn.'}};
 const SYN=3;
 const FACOF={knight:'kingdom',paladin:'kingdom',cleric:'kingdom',footmen:'kingdom',lancer:'kingdom',bowmen:'kingdom',raiders:'kingdom',
 blade:'vamp',assassin:'vamp',warlock:'vamp',bats:'vamp',thrall:'vamp',countess:'vamp',
@@ -1804,7 +1804,7 @@ if(h.stun)r.push(['Stun','a unit it hits cannot move or act on its next turn.'])
 if(h.siege)r.push(['Siege +'+h.siege,`deals ${h.siege} extra damage to towers and walls${h.fac=='iron'?' (+1 more from Siegecraft)':''}.`]);
 if(h.fly)r.push(['Flying','flies over units, walls and water but must end on an empty tile (never over deep water).']);
 if(h.aoe)r.push(h.rng[1]<=1?['Cleave','also hits the 2 hexes beside its target, in front of it, for half damage.']:['Splash','also hits enemies next to the target for half damage.']);if(h.pierce)r.push(['Pierce','its spear thrusts through 2 hexes in a straight line and hits every enemy on both for full damage.']);
-if(h.acost)r.push(['Mana '+h.acost,`each attack spends ${h.acost} of your shared mana${h.fac=='arcane'&&h.acost>1?` (${h.acost-1} with Arcane Flow)`:''}.`]);
+if(h.acost)r.push(['Mana '+h.acost,`each attack spends ${h.acost} of your shared mana${h.fac=='arcane'?(h.acost>1?` (${h.acost-1} with Arcane Flow)`:' (free with Arcane Flow)'):''}.`]);
 if(h.heal)r.push(['Heal '+h.heal,`restores ${h.heal} HP to a hurt ally in range${h.cost?' (costs '+h.cost+' mana)':' (free)'}.`]);
 if(h.rng[0]>1)r.push(['Min range '+h.rng[0],`cannot hit anything closer than ${h.rng[0]} tiles.`]);
 if(h.rng[1]>1)r.push(['Range '+(h.rng[0]==h.rng[1]?h.rng[1]:h.rng[0]+'-'+h.rng[1]),'distance in hexes (steps in any of the 6 directions).']);
@@ -2378,7 +2378,7 @@ function eff(u){const h=H[u.k],f=h.fac,sy=hasSyn(u.side,f),o={dmg:h.dmg+(u.star|
 if(S&&S.upg&&S.upg[u.side]){o.dmg+=S.upg[u.side].w||0;o.armor+=S.upg[u.side].a||0}
 if(f=='vamp')o.drain=Math.max(2,o.drain)+(sy?2:0);
 if(f=='iron'){o.siege+=1;if(sy)o.dmg+=1}
-if(f=='arcane'){if(o.acost>1)o.acost-=1;if(o.slcost>1)o.slcost-=1;if(o.heal&&o.cost>1)o.cost-=1}
+if(f=='arcane'){if(o.acost>0)o.acost-=1;if(o.slcost>1)o.slcost-=1;if(o.heal&&o.cost>1)o.cost-=1}
 if(f=='kingdom'&&sy)o.armor+=1;
 if(f=='infernal')o.burn=sy?2:1;if(typeof u.hp=='number'&&o.dmg>=1){const mh=maxHp(u);if(u.hp<mh)o.dmg=Math.max(1,Math.round(o.dmg*(.5+.5*Math.max(0,u.hp)/mh)))}
 return o}
@@ -2387,7 +2387,7 @@ function revive(v){const h=H[v.k];if(v.k=='phoenix'&&!v.rez){v.rez=1;v.hp=Math.c
 function turnStart(side){const ev=[];econStart(side);S.units.forEach(u=>{if(u.side!=side)return;const h=H[u.k];
 if(h.fac=='wilds'&&u.hp>0&&u.hp<maxHp(u)&&!(u.wither>0)){const a=Math.min(maxHp(u)-u.hp,hasSyn(side,'wilds')?3:2);u.hp+=a;ev.push({u,k:'heal',a})}
 if(u.burn>0){const a=u.bd||1;if(u.hp>0){u.kbU=u.brU||null;u.kbS=u.bsrc||null}u.hp-=a;u.burn--;if(u.burn<=0)u.brU=null;ev.push({u,k:'burn',a})}});
-if(hasSyn(side,'arcane'))S.mana[side]=Math.min(10,S.mana[side]+1);
+if(hasSyn(side,'arcane'))S.mana[side]=Math.min(10,S.mana[side]+2);
 return ev}
 /*FNS-END*/
 function reach(u,par){if(u.moved)return [];const h=H[u.k],seen={[u.x+','+u.y]:0},q=[[u.x,u.y]],r=[];
@@ -2708,7 +2708,7 @@ $('#size').oninput=e=>setK(e.target.value/100,true);
 $('#fit').onclick=()=>{try{localStorage.removeItem('hv-k')}catch(e){}setK(fitK())};
 addEventListener('resize',()=>setK(parseFloat(document.documentElement.style.getPropertyValue('--zk'))||1));
 function drawRules(){const cl=`<details open><summary>Battlefield &amp; economy (always on)</summary><ul>${CORE.map(o=>`<li><b>${o.n}</b>: ${o.d}</li>`).join('')}</ul><p>Terrain is mirrored so every seat gets the same ground. Hover a hex (or tap it on a phone) to see what it does.</p><p><b>Market</b> (next to your reserve): <b>Hire</b> any unit from your main faction (${(()=>{const c=Object.keys(H).filter(k=>!H[k].hidden&&!H[k].elite).map(hireCost);return Math.min(...c)+'-'+Math.max(...c)})()} gold, bosses 14 and only one of each boss at a time, as many as your army slots allow, army of up to ${ARMY_BASE} slots, more with Cottages and a Great Hall). <b>Recruit</b> brings back a fallen starting hero (5, bosses 8, +2 each time you recruit). <b>Repair</b> heals your most damaged tower by 4 (3, +1 each time). <b>Build</b> next to your heroes or towers (not within 2 hexes of an enemy tower): 🌾 Farm +1 gold a turn (6, up to 3), 🗼 Watchtower sees 4 hexes (5, up to 2), ⛺ Barracks lets you spawn next to it (10, 1), 🔮 Mana Well +1 mana a turn (9, 1), 🏠 Cottage +2 army slots (5, up to 3), 🏛️ Great Hall +5 army slots (12, 1). Enemies can knock buildings down for 2 gold; if a Cottage or Great Hall falls your cap drops, your units stay, but you cannot hire or recruit until you are back under it. <b>Upgrades</b>: Forge Weapons (+1 damage, 8 then 14), Forge Armor (+1 armor, 12), Fortify Towers (+3 max HP, 5 then 8), Scout's Lens (+1 sight, 4), Deep Shafts (mines pay +1, 6).</p><p><b>⛏ Gold mines</b> sit between the bases. Move a hero onto one to claim it; it pays its owner +2 gold every turn until someone else claims it.</p><p><b>Fog of war</b> (match option): enemies outside your sight are hidden. Scouts (one per faction) see 5-6 hexes and fire <b>flares</b> that light up an area, mark enemies for +1 damage and burn snares.</p></details>`+`<details><summary>Hero icons</summary><p>Small icons above each hero on the board:</p><ul>${TRAITS.map(x=>`<li>${x[1]} ${x[2]}</li>`).join('')}<li>✓ already acted this turn</li><li>🪤 rooted by a snare · 🔇 silenced · ★ hero level</li></ul></details>`+`<details><summary>Match options</summary><p>Turn these on or off in the lobby (online) or the setup screen (local).</p><ul>${OPTDEF.map(o=>`<li><b>${o.n}</b>${o.def?' (on by default)':''}: ${o.d}</li>`).join('')}</ul><p><b>Ultimates</b> (your most common faction decides yours):</p><ul>${Object.keys(ULTS).map(f=>`<li><b>${FAC[f].n}, ${ULTS[f].n}</b>: ${ULTS[f].d}</li>`).join('')}</ul></details>`+factionRules()+classRules();
-const mc=Object.keys(H).filter(k=>H[k].acost||H[k].heal||H[k].slcost).map(k=>{const h=H[k],p=[];if(h.acost)p.push('attacks cost '+(h.fac=='arcane'&&h.acost>1?h.acost-1:h.acost)+' mana');if(h.slcost)p.push('Silence costs '+(h.fac=='arcane'&&h.slcost>1?h.slcost-1:h.slcost)+' mana');if(h.heal)p.push('heals '+h.heal+' HP, '+(h.cost?'costs '+h.cost+' mana':'free'));return `<li><b>${h.n}</b>: ${p.join('; ')}</li>`}).join('');
+const mc=Object.keys(H).filter(k=>H[k].acost||H[k].heal||H[k].slcost).map(k=>{const h=H[k],p=[];if(h.acost)p.push(h.fac=='arcane'&&h.acost<=1?'attacks are free':'attacks cost '+(h.fac=='arcane'?h.acost-1:h.acost)+' mana');if(h.slcost)p.push('Silence costs '+(h.fac=='arcane'&&h.slcost>1?h.slcost-1:h.slcost)+' mana');if(h.heal)p.push('heals '+h.heal+' HP, '+(h.cost?'costs '+h.cost+' mana':'free'));return `<li><b>${h.n}</b>: ${p.join('; ')}</li>`}).join('');
 $('#rules').innerHTML=`<h2>How to play</h2>
 <details open><summary>The goal</summary><p>Play <b>1v1</b>, or a <b>3- or 4-player free-for-all</b>, online or on one device. A player is <b>eliminated</b> when all 3 of their towers fall, or when they have no units on the board <i>and</i> nothing left in their Reserve. An eliminated player's units vanish. The <b>last player standing wins</b>. In bigger games every other player is your enemy.</p></details>
 <details open><summary>Mana: how spells are paid for</summary>
@@ -3179,7 +3179,7 @@ Object.keys(H).forEach(k=>{const h=H[k];if(h.hidden)return;if(h.elite){h.hp=Math
 /* HV_CHARGE2: more Charge heroes (move and attack in one turn). Fast ones trade 1 move for it. Prices follow from hireCost (chgF). */
 [['lancer',{charge:1}],['raiders',{charge:1}],['hellhound',{charge:1,mv:3}],['wolves',{charge:1,mv:3}],['deathknight',{charge:1}],['direwolf',{charge:1,mv:3}]].forEach(([k,o])=>{if(H[k])Object.assign(H[k],o)});
 /* HV_BOSSBAL: boss balance pass (sim-tested). Final boss stats, after the x1.4 boss HP layer, so nothing scales them again */
-[['seraph',{hp:12}],['bloodqueen',{mv:3}],['pitlord',{hp:33}],['forgemaster',{hp:30,dmg:7,armor:2,mv:3}],['juggernaut',{hp:26,dmg:6,mv:3}],['archmage',{hp:16,acost:2}],['titan',{hp:20,dmg:8,mv:2}],['chronomancer',{hp:26,dmg:7,rng:[2,4]}],['runekeeper',{hp:32,dmg:7,mv:3}]].forEach(([k,o])=>{if(H[k])Object.assign(H[k],o)});
+[['seraph',{hp:12}],['bloodqueen',{mv:3}],['pitlord',{hp:33}],['forgemaster',{hp:30,dmg:7,armor:2,mv:3}],['juggernaut',{hp:26,dmg:6,mv:3}],['archmage',{hp:16,acost:2}],['titan',{hp:20,dmg:8,mv:2}],['chronomancer',{hp:26,dmg:7,rng:[2,4]}],['runekeeper',{hp:32,dmg:7,mv:3}],['marshal',{hp:16,dmg:4}],['direwolf',{dmg:4,mv:2}],['deathknight',{dmg:5}],['warlord',{hp:19}],['storm',{hp:7}],['witch',{hp:9}],['hexweaver',{hp:7}],['oracle',{hp:11}]].forEach(([k,o])=>{if(H[k])Object.assign(H[k],o)});
 /* HV_BOSSBAL2: Starweaver attacks cost 2 (1 with Arcane Flow); HV_UTEXT only rewrites the old 4-mana text, so this text stays */
 if(H.archmage)H.archmage.d='Elite (5 slots). A fragile caster. Meteor Storm costs 1 mana and blasts an area.';</script>
 <script>
@@ -6878,9 +6878,9 @@ skinchanger:{n:'Skinchanger',e:'🐾',hp:10,mv:3,rng:[1,1],dmg:4,sp:'mimic',spp:
 runeforger:{n:'Rune Forger',e:'🔨',hp:11,mv:2,rng:[1,1],dmg:4,armor:1,sp:'edge',spp:1,fac:'iron',d:"Runeforges an ally's weapon: its next hit deals +3 and ignores armor (2 mana)."},
 cagewright:{n:'Cagewright',e:'⛓',hp:10,mv:2,rng:[2,3],dmg:2,sp:'cage',spp:4,fac:'iron',d:'Drops an Iron Cage on any non-boss hero: it can neither act nor be hurt (3 mana).'},
 prospector:{n:'Prospector',e:'⛏️',hp:10,mv:2,rng:[1,1],dmg:3,sp:'vein',spp:2,fac:'iron',d:'Strikes a rich vein in your mine and guards mines from enemy claims (2 mana).'},
-aetherlancer:{n:'Aetherlancer',e:'🔱',hp:5,mv:2,rng:[2,3],dmg:3,sp:'lance',spp:1,fac:'arcane',d:'Pours X mana into an Overflow Lance that pierces a whole line (X mana).'},
-phasewright:{n:'Phasewright',e:'🌀',hp:7,mv:2,rng:[2,3],dmg:2,sp:'swap',spp:2,fac:'arcane',d:'Swaps the places of any two units near her with Transposition (2 mana).'},
-hourglass:{n:'Hourglass Adept',e:'⏳',hp:8,mv:2,rng:[1,2],dmg:2,sp:'rewind',spp:1,fac:'arcane',d:'Rewinds an ally to where and how it stood at the start of your last turn (2 mana).'}};
+aetherlancer:{n:'Aetherlancer',e:'🔱',hp:7,mv:2,rng:[2,3],dmg:3,sp:'lance',spp:1,fac:'arcane',d:'Pours X mana into an Overflow Lance that pierces a whole line (X mana).'},
+phasewright:{n:'Phasewright',e:'🌀',hp:9,mv:2,rng:[2,3],dmg:2,sp:'swap',spp:2,fac:'arcane',d:'Swaps the places of any two units near her with Transposition (2 mana).'},
+hourglass:{n:'Hourglass Adept',e:'⏳',hp:10,mv:2,rng:[1,2],dmg:2,sp:'rewind',spp:1,fac:'arcane',d:'Rewinds an ally to where and how it stood at the start of your last turn (2 mana).'}};
 Object.assign(H,NEW);const SPOWN={};Object.keys(NEW).forEach(k=>{SPOWN[NEW[k].sp]=k});SPOWN.revert='skinchanger';HVSP.NEW=Object.keys(NEW);
 Object.assign(ROLE,{
 sunspeaker:['Mage','Zone striker. Mark choke points, towers and stunned enemies with a delayed Noon Verdict.'],
