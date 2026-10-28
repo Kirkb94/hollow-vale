@@ -8531,6 +8531,8 @@ html:not(.tvon) body.mob #board .cell .fzf{scale:.8;transform-origin:50% 70%}
 /* painted structures: the container box is the art frame; its bottom edge is the base line */
 html.hvz #board .cell .tw{position:absolute;left:-2%;width:104%;top:-42%;height:140%}
 html.hvz #board .cell .wall{left:-8%;right:auto;width:116%;top:-30%;bottom:auto;height:126%}
+/* the painted art reaches up into the hex above: let taps there go through to that hex */
+html.hvz #board .cell :is(.tw,.wall){pointer-events:none}
 html.hvz #board .cell .minei.hvz{left:-6%;width:112%;top:-28%;height:92%;bottom:auto;z-index:1;filter:none}
 html.hvz #board .cell .chesti.hvz{left:14%;right:14%;top:22%;bottom:8%}
 #board .cell .hvz-shr{position:absolute;left:2%;width:96%;top:-50%;height:112%;z-index:1;pointer-events:none}
