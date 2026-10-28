@@ -1,13 +1,14 @@
 {
   "versions": [
     {
-      "id": "ecf148f",
+      "id": "8b4c8eb",
       "date": "2026-10-28",
-      "title": "Clearer spells and statuses",
+      "title": "Rock paper scissors and clearer spells",
       "groups": [
         {
           "name": "New",
           "items": [
+            "Rock paper scissors decides who goes first in online and Pass & play games: best of 3, and with 3-4 players everyone throws at once. The winner moves first (and in Pass & play also bans and picks first). Turn it off in Match options",
             "When anyone casts a spell you can see, a callout tells you who cast what on whom and what it does, with the real numbers",
             "Every status now shows on the board: Aegis shields, cages, Runeforged Edge, tethers, Ossify, Mimic shapes, charms, standing in flames, and a warning when you stand in a Noon Verdict ring"
           ]
@@ -22,6 +23,7 @@
         }
       ],
       "commits": [
+        "Rock paper scissors for who goes first (online and Pass & play)",
         "Spells and statuses read clearly in battle"
       ]
     },
