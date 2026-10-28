@@ -1383,7 +1383,7 @@ const FAC={
 kingdom:{n:'Kingdom',c:'#e2b84a',p:'Formation',pd:'takes 1 less damage while next to another Kingdom unit.',sy:'every Kingdom unit gains +1 armor.'},
 vamp:{n:'Vampires',c:'#d23a58',p:'Bloodthirst',pd:'every attack drains blood, healing the attacker for 2 HP, but never more than the damage dealt.',sy:'every Vampire drains +2 more.'},
 undead:{n:'Undead',c:'#7fc46a',p:'Undying',pd:'the first time it would die, it rises again with 1 HP.',sy:'Undying returns units with 2 HP instead of 1.'},
-infernal:{n:'Infernal',c:'#f2702a',p:'Burn',pd:'its attacks set units ablaze: 1 damage at the start of their owner\'s next 2 turns. Infernal heroes never burn.',sy:'Burn deals 2 damage per turn.'},
+infernal:{n:'Infernal',c:'#f2702a',p:'Burn',pd:'its attacks set units ablaze: 1 damage at the start of their owner\'s next 2 turns. Infernal heroes never burn and take no damage from fire abilities (Wall of Flame, Rain of Fire, Fireball cards, Immolation, a dragon\'s fly-over); normal attacks still hurt them.',sy:'Burn deals 2 damage per turn.'},
 wilds:{n:'Wilds',c:'#5cc070',p:'Regrowth',pd:'heals 2 HP at the start of its owner\'s turn.',sy:'Regrowth heals 3 HP.'},
 iron:{n:'Iron Clan',c:'#a8b4c6',p:'Siegecraft',pd:'deals +1 damage to towers.',sy:'every Iron Clan unit deals +1 damage.'},
 arcane:{n:'Arcane Order',c:'#6a96ff',p:'Arcane Flow',pd:'attacks cost 1 less mana (1-mana attacks are free); spells and heals that cost 2+ mana cost 1 less.',sy:'your side gains +2 mana at the start of every turn.'}};
@@ -1503,7 +1503,7 @@ if(f=='kingdom')mine.forEach(u=>heal(u,4));
 if(f=='wilds')mine.forEach(u=>heal(u,5));
 if(f=='vamp'){foes.forEach(v=>dmg(v,2));mine.forEach(u=>heal(u,2))}
 if(f=='undead')mine.forEach(u=>{heal(u,2);if(!u.sumBy)u.rez=0});
-if(f=='infernal')foes.forEach(v=>{dmg(v,2);v.burn=2;v.bd=Math.max(v.bd||0,1)});
+if(f=='infernal')foes.filter(v=>!(window.hvInfImmune&&hvInfImmune(v))).forEach(v=>{dmg(v,2);v.burn=2;v.bd=Math.max(v.bd||0,1)});/* HV_INFFIRE: Infernals take no Rain of Fire */
 if(f=='arcane')foes.filter(v=>mine.some(u=>dist(u,v)<=2)).forEach(v=>dmg(v,3));
 if(f=='iron')foeTowers(sd).forEach(T=>{const a=Math.min(3,T.hp);T.hp-=a;fx(T,'hurt');pop(T,'-3');G[sd].dmg+=a;if(T.hp<=0){G[sd].towers++;gainGold(sd,3);towerFall(T,0)}});
 if(!RP){evCut({major:1,art:ICON('⚡'),t:U.n,s:esc0(NAMES[sd])+' unleashes an ultimate',d:U.d,c:SCOL[sd]});msg(`${SHORT[sd]} unleashes ${U.n}!`);sfx('spawn');const b=$('#board');b.classList.remove('ultfl');void b.offsetWidth;b.classList.add('ultfl');b.dataset.ult=U.n}
@@ -1554,7 +1554,7 @@ else if(it=='recruit'){const op=recOpts(sd),k=ri!=null&&op[ri]?op[ri]:S.fallen[s
 else if(it=='repair'){S.gold[sd]-=repCost(sd);S.repN=S.repN||{};S.repN[sd]=(S.repN[sd]||0)+1;const T=repTower(sd),a=Math.min(4,T.max-T.hp);T.hp+=a;pop(T,'+'+a,1);fx(T,'spawn');if(!RP)msg(`${SHORT[sd]} repairs a tower.`)}
 else{const c=upgCost(sd,it);S.gold[sd]-=c;S.upg[sd][UPGK[it]]=upgLv(sd,it)+1;if(it=='fort')S.tw[sd].filter(T=>T.hp>0).forEach(T=>{T.max+=3;T.hp+=3;pop(T,'+3',1);fx(T,'spawn')});if(!RP)msg(`${SHORT[sd]} buys ${SHOP[it].n}${SHOP[it].cs.length>1?' '+['I','II'][upgLv(sd,it)-1]:''}.`)}
 if(!RP)sfx('spawn');return true}
-const CARDS={fireball:{n:'Fireball',e:'🔥',c:3,d:'Deal 3 damage to any enemy hero.',tg:'foe'},
+const CARDS={fireball:{n:'Fireball',e:'🔥',c:3,d:'Deal 3 damage to any enemy hero (Infernal heroes are fireproof).',tg:'foe'},
 bolt:{n:'Frost Bolt',e:'❄️',c:2,d:'Deal 1 damage to any enemy hero and stun it.',tg:'foe'},
 meteor:{n:'Meteor',e:'☄️',c:4,d:'Deal 3 damage to an enemy hero and every enemy hero next to it.',tg:'foe'},
 mend:{n:'Mend',e:'💚',c:1,d:'Heal one of your heroes for 4.',tg:'ally'},
@@ -1563,7 +1563,7 @@ mason:{n:'Stonemason',e:'🧱',c:1,d:'Repair one of your towers by 4.',tg:'tower
 tribute:{n:'Tribute',e:'💰',c:0,d:'Gain 2 mana.',tg:null}};
 const CKEYS=Object.keys(CARDS),drawCard=()=>CKEYS[Math.floor(srand()*CKEYS.length)];
 function cardTargets(sd,k){const C=CARDS[k],P=o=>({x:o.x,y:o.y,o});if(!C)return[];
-if(C.tg=='foe')return S.units.filter(v=>isFoe(v.side,sd)&&canSee(sd,v)).map(P);if(C.tg=='ally')return S.units.filter(v=>v.side==sd&&v.hp<maxHp(v)&&!(v.wither>0)).map(P);
+if(C.tg=='foe')return S.units.filter(v=>isFoe(v.side,sd)&&canSee(sd,v)&&!(k=='fireball'&&(window.hvInfImmune&&hvInfImmune(v)))).map(P);if(C.tg=='ally')return S.units.filter(v=>v.side==sd&&v.hp<maxHp(v)&&!(v.wither>0)).map(P);
 if(C.tg=='spent')return S.units.filter(v=>v.side==sd&&v.used).map(P);if(C.tg=='tower')return S.tw[sd].filter(T=>T.hp>0&&T.hp<T.max).map(P);return[]}
 const cardOK=(sd,k)=>MOPT.cards&&S.mana[sd]>=CARDS[k].c&&(!CARDS[k].tg||cardTargets(sd,k).length>0);
 function offWhy(M,my,b){const d=b.dataset,g=S.gold[M],need=c=>c>g?`Need ${c-g} more gold.`:'';
@@ -1651,7 +1651,7 @@ if(u.side==n){if(u.k=='seraph'){S.units.filter(w=>w.side==n&&w!==u&&near(w,u,1))
 if(u.k=='vlord'){const c=S.units.filter(v=>isFoe(v.side,n)&&near(v,u,1)).length;if(c)healU(u,2*c)}
 if(u.k=='cavebear')healU(u,3);
 if(u.k=='forgemaster'){S.units.filter(w=>w.side==n&&w!==u&&near(w,u,1)).forEach(w=>healU(w,2));const T=S.tw[n].filter(T=>T.hp>0&&T.hp<T.max).sort((a,b)=>a.hp-b.hp)[0];if(T){T.hp++;pop(T,'+1',1)}}
-if(u.k=='pitlord')S.units.filter(v=>isFoe(v.side,n)&&near(v,u,1)).forEach(v=>{if(v.hp>0)v.kbU=u;v.hp-=2;v.brU=u;v.burn=2;v.bd=Math.max(v.bd||0,1);fx(v,'hurt');pop(v,'-2🔥')});
+if(u.k=='pitlord')S.units.filter(v=>isFoe(v.side,n)&&near(v,u,1)&&!(window.hvInfImmune&&hvInfImmune(v))).forEach(v=>{if(v.hp>0)v.kbU=u;v.hp-=2;v.brU=u;v.burn=2;v.bd=Math.max(v.bd||0,1);fx(v,'hurt');pop(v,'-2🔥')});
 if(u.k=='demonprince')summonNear(u,'imps',n,'demonprince',2);
 u.mist=0;u.ward=u.k=='runekeeper'?1:0;u.mom=0;u.bk=0}
 else if(u.k=='plaguelord'&&isFoe(u.side,n))S.units.filter(v=>v.side==n&&near(v,u,1)).forEach(v=>{if(v.hp>0)v.kbU=u;v.hp-=2;fx(v,'hurt');pop(v,'-2 ☣')})});
@@ -2528,7 +2528,7 @@ if(a.t=='move'){const u=at(a.fx,a.fy);if(!u||u.side!=a.s||u.used)return false;if
 let ambU=null;if(MOPT.sight){const fl=!!H[u.k].fly,okk=k=>{const[px,py]=k.split(',').map(Number);return free(px,py)};let c=keys.length;if(!fl){for(let i=0;i<keys.length;i++)if(!okk(keys[i])){c=i;break}}else if(!okk(keys[keys.length-1])){c=keys.length-1;while(c>0&&!okk(keys[c-1]))c--}
 if(c<keys.length){const[bx,by]=keys[fl?keys.length-1:c].split(',').map(Number);ambU=at(bx,by)||{};keys=keys.slice(0,c);if(ambU.k){ambU.exp=1;pop(ambU,'Ambush!')}if(!keys.length){u.used=true;u.exp=1;pop(u,'Ambushed!');fx(u,'hurt');if(!RP){msg(`${SHORT[a.s]} ${H[u.k].n} runs into a hidden enemy!`);sfx('hit')}return true}}}
 let snare=null;if(!H[u.k].fly&&!IMM(u)&&S.traps.length){for(const k of keys){const[px,py]=k.split(',').map(Number),tp=trapAt(px,py);if(tp&&isFoe(tp.side,u.side)){snare={x:px,y:py,tp};break}}}
-const from=a.fx+','+a.fy;if(snare){showMove(a.s,[from].concat(keys.slice(0,keys.indexOf(snare.x+','+snare.y)+1)));u.x=snare.x;u.y=snare.y;S.traps=S.traps.filter(q=>q!==snare.tp);u.root=1;u.used=true;pop(u,'Snared!');fx(u,'hurt');if(!RP){msg(`${SHORT[a.s]} ${H[u.k].n} is caught in a snare!`);sfx('hit')}return true}if(u.k=='dragon')keys.forEach(k=>{const[px,py]=k.split(',').map(Number),v=at(px,py);if(v&&isFoe(v.side,u.side)){v.hp-=2;v.burn=2;v.brU=u;v.bd=Math.max(v.bd||0,1);fx(v,'hurt');pop(v,'-2🔥')}});
+const from=a.fx+','+a.fy;if(snare){showMove(a.s,[from].concat(keys.slice(0,keys.indexOf(snare.x+','+snare.y)+1)));u.x=snare.x;u.y=snare.y;S.traps=S.traps.filter(q=>q!==snare.tp);u.root=1;u.used=true;pop(u,'Snared!');fx(u,'hurt');if(!RP){msg(`${SHORT[a.s]} ${H[u.k].n} is caught in a snare!`);sfx('hit')}return true}if(u.k=='dragon')keys.forEach(k=>{const[px,py]=k.split(',').map(Number),v=at(px,py);if(v&&isFoe(v.side,u.side)&&!(window.hvInfImmune&&hvInfImmune(v))){v.hp-=2;v.burn=2;v.brU=u;v.bd=Math.max(v.bd||0,1);fx(v,'hurt');pop(v,'-2🔥')}});
 showMove(a.s,[from].concat(keys));{const[ex,ey]=keys[keys.length-1].split(',').map(Number);u.x=ex;u.y=ey}if(u.k=='mammoth')S.units.filter(v=>isFoe(v.side,u.side)&&dist(v,u)==1).forEach(v=>{v.hp-=2;fx(v,'hurt');pop(v,'-2')});if(S.units.some(v=>v.hp<=0))reapDead(u.side);if(H[u.k].charge){u.moved=1;if(!targets(u).some(t=>!t.heal))u.used=true}else u.used=true;if(ambU){u.used=true;u.exp=1;pop(u,'Ambushed!');if(!RP)msg(`${SHORT[a.s]} ${H[u.k].n} is ambushed and stops short!`)}capMine(u);if(!RP){msg(`${SHORT[a.s]} ${H[u.k].n} moves.`);moveSfx(u.k)}return true}
 if(a.t=='act'){const u=at(a.fx,a.fy);if(!u||u.side!=a.s||u.used)return false;const t=targets(u).find(q=>q.x==a.x&&q.y==a.y&&!!q.summon==!!a.i);if(!t)return false;act(u,t);return true}
 if(['ally','accept','decline','betray'].includes(a.t))return diplo(a);
@@ -6472,7 +6472,7 @@ function landOn(v,x,y){v.x=x;v.y=y;let snared=0;
  if(!H[v.k].fly&&!IMM(v)){const tp=trapAt(x,y);if(tp&&isFoe(tp.side,v.side)){S.traps=S.traps.filter(q=>q!==tp);v.root=1;snared=1;stat('forcedSnares');if(!RP){pop(v,'Snared!');msg(`${SHORT[v.side]} ${H[v.k].n} is caught in a snare!`)}}}
  const fz=fireAt(x,y,v.side);if(fz&&!H[v.k].fly)fireBurn(v,fz);return snared}
 function fireAt(x,y,side){return zonesOf('fire').find(z=>isFoe(z.side,side)&&inZone(z,x,y))}
-function fireBurn(v,z){if(!LIVE(v))return;spHit(z.src||{side:z.side,x:v.x,y:v.y,k:'cinderwarden'},v,3,{burn:1,side:z.side});stat('fireHits');if(!RP)pop(v,'🔥',0)}
+function fireBurn(v,z){if(!LIVE(v)||(window.hvInfImmune&&hvInfImmune(v)))return;spHit(z.src||{side:z.side,x:v.x,y:v.y,k:'cinderwarden'},v,3,{burn:1,side:z.side});stat('fireHits');if(!RP)pop(v,'🔥',0)}
 /* ---------------- damage helpers (route through hit() so armor, ward, shields, stats and tower gold behave as usual) ---------------- */
 function srcAt(side,o,k){return{side,x:o.x,y:o.y,k:k||'',hp:0}}
 function spHit(src,v,d,o){if(!LIVE(v))return 0;const pc=curAtk,b=v.hp;curAtk=src;try{hit({t:'u',v,x:v.x,y:v.y},d)}finally{curAtk=pc}
@@ -8176,7 +8176,7 @@ PROV.push(function(u){const r=[];if(!S)return r;
   if(T.b===u)r.push({rail:'l',ic:'🩸',t:'Tethered',tip:`Crimson Tether: loses ${a} HP and heals the Hemomancer ${a} at the start of ${whoN(T.side)} next ${plural(T.n,'turn')}. Get more than 4 hexes away or put a wall between them to break it.`,tone:'bad',n:T.n});
   if(T.a===u)r.push({rail:'r',ic:'🩸',t:'Tethering',tip:`Crimson Tether: drains ${a} HP a turn from its target for ${plural(T.n,'more turn')}. Its move is 1 while the tether holds.`,tone:'good',n:T.n})});
  zones().forEach(z=>{if(!inZ(z,u.x,u.y))return;const fly=H[u.k]&&H[u.k].fly;
-  if(z.k=='fire'&&foe(z.side,u.side)&&!fly)r.push({rail:'l',ic:'🔥',t:'In the flames',tip:'Wall of Flame: takes 3 and burns at the start of its turn while it stands here.',tone:'fire',n:z.n});
+  if(z.k=='fire'&&foe(z.side,u.side)&&!fly&&!(window.hvInfImmune&&hvInfImmune(u)))r.push({rail:'l',ic:'🔥',t:'In the flames',tip:'Wall of Flame: takes 3 and burns at the start of its turn while it stands here.',tone:'fire',n:z.n});
   if(z.k=='verdict'&&foe(z.side,u.side))r.push({rail:'l',ic:'☀️',t:'Noon Verdict!',tip:`Noon Verdict lands at the start of ${whoN(z.side)} next turn: ${z.x==u.x&&z.y==u.y?5:3} damage here. Move out of the ring!`,tone:'warn'});
   if(z.k=='veil'&&!foe(z.side,u.side))r.push({rail:'r',ic:'🌑',t:'Veiled',tip:'Veil of Night: enemies cannot see it, and only enemies next to it can target it.',tone:'good',n:z.n})});
  return r});
@@ -8495,8 +8495,8 @@ if(typeof startGame=='function'){const sg=startGame;startGame=function(){const r
 window.hvZoomStart=zoomStart;
 })();
 </script>
-<script id="hv-infburn-js">/* HV_INFBURN (Uno: "make it so all infernals are immune to burning"). Infernal heroes (including an Ossified or Mimic-shaped one whose body is Infernal) never burn:
-   any Burn put on them is removed at once, so they take no burn damage and show no Burning status. Hits that come with the burn (Wall of Flame's 3, Rain of Fire's 2) still land.
+<script id="hv-infburn-js">/* HV_INFBURN (Uno: "make it so all infernals are immune to burning", then "they arent damaged by fire abilities either"; fire abilities are filtered at their source, tagged HV_INFFIRE / hvInfImmune). Infernal heroes (including an Ossified or Mimic-shaped one whose body is Infernal) never burn:
+   any Burn put on them is removed at once, so they take no burn damage and show no Burning status. Fire abilities (Wall of Flame, Rain of Fire, Fireball cards, Pit Lord Immolation, dragon fly-over) skip them entirely; normal attacks still hurt.
    Game state: runs inside perform() and the turn hooks on every client, so online games stay in sync. */
 (function(){if(typeof perform!='function'||typeof turnStart!='function')return;
 const inf=u=>!!u&&!!H[u.k]&&H[u.k].fac=='infernal';
