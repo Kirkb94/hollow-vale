@@ -8452,4 +8452,20 @@ window.HVRPS={net,local,close,localWanted:wanted,isOpen:()=>!!(el&&!el.hidden)};
 try{const sg=startGame;startGame=function(){close();return sg.apply(this,arguments)}}catch(e){}
 })();
 </script>
+<script id="hv-autospawn-js">/* HV_AUTOSPAWN (Uno: "when you select your units to deploy it automatically selects the next unit of that kind, and if none are left selects another").
+   After you spawn a hero from your reserve, the next reserve hero is picked for you: another copy of the same hero if there is one, otherwise the next hero in the reserve.
+   Only while you still have spawns left this turn. Cosmetic/UI only: it sets the local selection, never game state, so online games stay in sync. */
+(function(){if(typeof submit!='function'||typeof render!='function'||typeof spLeft!='function')return;
+let PEND=null;
+const s0=submit;submit=function(a){let k=null,len=0;try{if(a&&a.t=='spawn'&&S&&S.pool&&S.pool[a.s]&&isMine(a.s)){k=S.pool[a.s][a.i];len=S.pool[a.s].length}}catch(e){}
+ const r=s0.apply(this,arguments);try{if(k&&r!==false)PEND={k,len,side:a.s,t:Date.now()}}catch(e){}return r};
+function apply(){if(!PEND||!S||!S.pool)return false;const P=PEND;
+ if(Date.now()-P.t>8000||S.over||S.turn!==P.side||!isMine(P.side)){PEND=null;return false}
+ const pool=S.pool[P.side]||[];if(pool.length>=P.len)return false;/* the spawn has not landed yet (online: waiting for the server) */
+ PEND=null;if(sel||spSel!=null||(typeof bldSel!='undefined'&&bldSel)||(typeof cardSel!='undefined'&&cardSel!=null))return false;/* you already picked something else */
+ if(!pool.length||spLeft(P.side)<=0)return false;
+ let i=pool.indexOf(P.k);if(i<0)i=0;spSel=i;return true}
+const r0=render;render=function(){const o=r0.apply(this,arguments);try{if(apply())r0.apply(this,arguments)}catch(e){}return o};
+})();
+</script>
 </body></html>
