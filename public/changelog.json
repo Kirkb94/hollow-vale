@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "id": "db01f07",
+      "date": "2026-10-28",
+      "title": "Price tune-up",
+      "groups": [
+        {
+          "name": "Balance",
+          "items": [
+            "Price changes to even out the factions: Royal Lookout, Stonewright, Royal Herald and Knight now cost 5 gold; Eye of Ruin, Boar Rider, Trapper and Cinder Warden 7; Stormcaller is cheaper at 4"
+          ]
+        }
+      ],
+      "commits": [
+        "Gold prices: faction re-check after the AI fixes and fireproof Infernals"
+      ]
+    },
+    {
       "id": "f21ff6a",
       "date": "2026-10-28",
       "title": "Phone fix",
@@ -298,29 +314,6 @@
       "commits": [
         "Update from Renegade Dev Console",
         "Online: build check so pages loaded before a deploy can't join newer games (fixes friend loading Classic while host is on another map); stale pages auto-reload into their seat, pre-check pages are refused; unknown map in game start forces a reload"
-      ]
-    },
-    {
-      "id": "77d060eecd11",
-      "date": "2026-10-26",
-      "title": "Cottages, Great Halls and steadier towers",
-      "groups": [
-        {
-          "name": "New",
-          "items": [
-            "Build a Cottage (+2 army slots, up to 3) or a Great Hall (+5 slots) to grow your army up to 31"
-          ]
-        },
-        {
-          "name": "Balance",
-          "items": [
-            "Your base army cap is now 20",
-            "Towers no longer lose HP every round before sudden death"
-          ]
-        }
-      ],
-      "commits": [
-        "Army cap 20 with Cottage/Great Hall, no tower decay before sudden death"
       ]
     }
   ]
