@@ -1,6 +1,23 @@
 {
   "versions": [
     {
+      "id": "55fa790",
+      "date": "2026-10-28",
+      "title": "Cheaper Bone Legion",
+      "groups": [
+        {
+          "name": "Balance",
+          "items": [
+            "Bone Legion costs 4 gold again and takes 1 slot (was 5 gold, 2 slots)",
+            "Your army can never grow past 50 slots, whatever you build"
+          ]
+        }
+      ],
+      "commits": [
+        "Bone Legion back to 4 gold (1 slot); army cap can never go above 50"
+      ]
+    },
+    {
       "id": "5ade3fb",
       "date": "2026-10-28",
       "title": "Undead bosses buffed",
@@ -296,24 +313,6 @@
       ],
       "commits": [
         "Painted hex tiles and water: holes on big maps become deep and shallow water with mirrored beaches and docks"
-      ]
-    },
-    {
-      "id": "6fb3b24ce991",
-      "date": "2026-10-27",
-      "title": "Spawn animations",
-      "groups": [
-        {
-          "name": "Visuals",
-          "items": [
-            "Units now arrive with a spawn animation in their faction's style, with a variation for each unit",
-            "Hero portraits are framed around the whole figure, so no more cut-off heads"
-          ]
-        }
-      ],
-      "commits": [
-        "Spawn animations: one style per faction with per-unit variants",
-        "Hero select: frame painted portraits by their real figure bounds"
       ]
     }
   ]
