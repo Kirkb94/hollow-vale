@@ -2465,6 +2465,7 @@ else if(t.t=='w')s=(t.W.b?1.6:.4)-ctrAI(u,t,.3);
 else if(t.heal)s=(maxHp(t.v)-t.v.hp)>=2?2.5:0;
 else if(t.t=='t')s=(t.T.hp<=h.dmg?100:h.dmg*1.2)*(showCrown()&&leader()==t.T.side?1.25:1)-ctrAI(u,t);
 else{const dd=h.dmg+comboB(u,t)[0];s=Math.min(dd,t.v.hp)+(t.v.hp<=dd?3+(h.raise&&!t.v.sumBy?2:0):0)-ctrAI(u,t)+(MOPT.koth&&S.hill&&S.hill.includes(t.v.x+','+t.v.y)?3:0)+(t.v.k=='raidboss'?1.5:0);if(h.aoe||h.pierce)splashTargets(u,t).forEach(o=>{if(o.t=='u')s+=Math.min(splDmg(h.dmg,o.f),o.v.hp)})}
+if((t.ab||t.summon)&&!(s>0))return;/* HV_AIABIL: an ability the AI scores as not worth it is dropped, not left at 0 for the random noise to pick */
 s+=Math.random()*DN()+(typeof hvAIt=='function'?hvAIt(u,t):0);if(s>bs){bs=s;best=t}});if(best&&DIFF==0&&!u.moved&&Math.random()<.2)best=null;if(best)return{act:best}}
 const foes=S.units.filter(v=>isFoe(v.side,me)&&canSee(me,v)).concat(foeTowers(me));
 const sup=h.heal&&h.dmg<=2;let goals=sup?S.units.filter(v=>v.side==me&&v!==u):foes;if(!goals.length)goals=foes;if(!goals.length)return{mv:{x:u.x,y:u.y}};
