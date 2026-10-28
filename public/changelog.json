@@ -1,6 +1,24 @@
 {
   "versions": [
     {
+      "id": "5ade3fb",
+      "date": "2026-10-28",
+      "title": "Undead bosses buffed",
+      "groups": [
+        {
+          "name": "Balance",
+          "items": [
+            "Bone Colossus: moves 3 (was 1) and deals 8 damage (was 7)",
+            "Plague Lord: moves 3 (was 2) and has 28 HP (was 25)",
+            "Death Knight: deals 6 damage (was 5) and has 25 HP (was 22)"
+          ]
+        }
+      ],
+      "commits": [
+        "Boss balance: buff the weak Undead bosses (Bone Colossus, Plague Lord, Death Knight)"
+      ]
+    },
+    {
       "id": "fe60ec7",
       "date": "2026-10-28",
       "title": "Standing forests and painted buildings",
@@ -296,36 +314,6 @@
       "commits": [
         "Spawn animations: one style per faction with per-unit variants",
         "Hero select: frame painted portraits by their real figure bounds"
-      ]
-    },
-    {
-      "id": "3bb8459ebab0",
-      "date": "2026-10-27",
-      "title": "Smoother online games",
-      "groups": [
-        {
-          "name": "Balance",
-          "items": [
-            "Wounded heroes hit softer: their damage drops toward half as they lose HP"
-          ]
-        },
-        {
-          "name": "Fixes",
-          "items": [
-            "A page opened before an update can no longer join a game running the newer version (this is what made a friend load the wrong map)",
-            "Out-of-date pages now reload by themselves and put you back in your seat"
-          ]
-        },
-        {
-          "name": "Visuals",
-          "items": [
-            "Undead with Undying collapse into a bone pile and rise again"
-          ]
-        }
-      ],
-      "commits": [
-        "Update from Renegade Dev Console",
-        "Online: build check so pages loaded before a deploy can't join newer games (fixes friend loading Classic while host is on another map); stale pages auto-reload into their seat, pre-check pages are refused; unknown map in game start forces a reload"
       ]
     }
   ]
