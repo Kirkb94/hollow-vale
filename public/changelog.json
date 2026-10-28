@@ -1,7 +1,7 @@
 {
   "versions": [
     {
-      "id": "ee05b41",
+      "id": "988bfbd",
       "date": "2026-10-28",
       "title": "Rock paper scissors and clearer spells",
       "groups": [
@@ -14,6 +14,13 @@
           ]
         },
         {
+          "name": "Balance",
+          "items": [
+            "Nightstalker (Assassin) now has Charge: it moves and attacks in the same turn. Damage 8 → 6, and it costs 4 gold",
+            "The AI's Stonewright no longer builds walls in useless spots or walls in its own team"
+          ]
+        },
+        {
           "name": "Visuals",
           "items": [
             "Status badges are bigger and filled with their colour",
@@ -23,6 +30,7 @@
         }
       ],
       "commits": [
+        "Assassin gets Charge; AI no longer builds the walls it meant to skip",
         "Rock paper scissors: points reset for each place, AI seats throw too",
         "Rock paper scissors for who goes first (online and Pass & play)",
         "Spells and statuses read clearly in battle"
