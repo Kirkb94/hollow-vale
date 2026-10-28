@@ -1,10 +1,21 @@
 {
   "versions": [
     {
-      "id": "db01f07",
+      "id": "fe60ec7",
       "date": "2026-10-28",
-      "title": "Price tune-up",
+      "title": "Standing forests and painted buildings",
       "groups": [
+        {
+          "name": "Visuals",
+          "items": [
+            "Forests are real woods now: every forest hex has standing oaks, pines, birches or an old hollow oak with bushes and ferns, on a new forest-floor tile",
+            "Heroes in a forest stand among the bushes: the front ones are drawn over their legs, in both Classic and Tilted view",
+            "While you pick a move or a target, the tree crowns turn see-through so the highlighted hexes stay easy to read",
+            "New painted towers with banners in your colour; they crack and then break and smoke as they lose HP",
+            "New painted buildings: Farm, Watchtower, Barracks, Mana Well, Cottage, Great Hall and the Open Grave, plus Stonewright walls and the Iron Cage",
+            "Gold mines, shrines and treasure chests have new painted art; a mine's flag shows who owns it"
+          ]
+        },
         {
           "name": "Balance",
           "items": [
@@ -13,6 +24,7 @@
         }
       ],
       "commits": [
+        "Painted forests and new structure art",
         "Gold prices: faction re-check after the AI fixes and fireproof Infernals"
       ]
     },
