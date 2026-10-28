@@ -8511,4 +8511,95 @@ const t0=turnStart;turnStart=function(){clr();try{return t0.apply(this,arguments
 if(typeof endTurn=='function'){const e0=endTurn;endTurn=function(){try{return e0.apply(this,arguments)}finally{clr()}}}
 })();
 </script>
+<style id="hv-woods">
+/* ===== HV_WOODS: standing forests and painted structures (Sprite Forge: hv-env-*, hv-struct-*, hv-feat-*) =====
+   Forest hexes get the forest-floor tile plus a grove: a back layer (trees, behind every figure) and a front layer
+   (low bushes drawn over the lower part of a unit standing there: woods cover). Towers, buildings, walls, the Open Grave,
+   gold mines, shrines, chests and the Iron Cage get painted art. Side colours are multiplied into neutral cloth through
+   a mask (--hzc), so colour-blind palettes keep working. Everything switches on only after the painted tiles and this
+   art have loaded (html.hvz); until then the old drawings stay. */
+#board .cell .fzb,#board .cell .fzf{position:absolute;left:-15%;width:130%;top:-125%;height:227%;background:no-repeat center/100% 100%;pointer-events:none;transition:opacity .18s}
+#board .cell .fzb{z-index:1}
+#board .cell .fzf{z-index:2;font-size:34px;left:50%;width:3.17em;margin-left:-1.585em;top:50%;height:1.606em;margin-top:-.141em}
+html:not(.tvon) body.mob #board .cell .fzf{scale:.8;transform-origin:50% 70%}
+/* the side ring at the feet stays readable over the bushes */
+#board .cell.tr-forest .ring2{z-index:3}
+/* while moves or targets are shown, the tree crowns go see-through so highlighted hexes stay readable */
+#board.hvz-hl .cell .fzb{opacity:.42}
+#board .cell:is(.mv,.tg,.smn,.sel) .fzf{opacity:.55}
+#board .cell.fogw :is(.fzb,.fzf,.hvz-shr,.hvz-cgb){filter:brightness(.4) saturate(.5)}
+/* painted structures: the container box is the art frame; its bottom edge is the base line */
+html.hvz #board .cell .tw{position:absolute;left:-2%;width:104%;top:-42%;height:140%}
+html.hvz #board .cell .wall{left:-8%;right:auto;width:116%;top:-30%;bottom:auto;height:126%}
+html.hvz #board .cell .minei.hvz{left:-6%;width:112%;top:-28%;height:92%;bottom:auto;z-index:1;filter:none}
+html.hvz #board .cell .chesti.hvz{left:14%;right:14%;top:22%;bottom:8%}
+#board .cell .hvz-shr{position:absolute;left:2%;width:96%;top:-50%;height:112%;z-index:1;pointer-events:none}
+#board .cell .hvz-cgb{position:absolute;z-index:1;pointer-events:none}
+/* the cage is anchored to the unit (units keep their size when the board zooms), like the front layer */
+#board .cell :is(.hvz-cgb,.spcage.hvz){font-size:34px;left:50%;width:2.3em;margin-left:-1.15em;top:50%;margin-top:-2.38em;height:3.63em}
+html:not(.tvon) body.mob #board .cell :is(.hvz-cgb,.spcage.hvz){scale:.8;transform-origin:50% 92%}
+html.hvz #board .cell .spcage.hvz{background:none;border-radius:0;filter:none}
+#board .cell .hvz-i{position:absolute;left:0;top:0;width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none;user-select:none}
+#board .cell .hvz-m{position:absolute;inset:0;pointer-events:none;background:var(--hzc,#b8b0a0);mix-blend-mode:multiply;
+ -webkit-mask:var(--hzm) center/100% 100% no-repeat;mask:var(--hzm) center/100% 100% no-repeat}
+#board .cell .hvz-og{position:absolute;left:22%;width:56%;top:58%;height:30%;border-radius:50%;pointer-events:none;
+ background:radial-gradient(closest-side,#9fe8b066,#9fe8b000);animation:hvzog 2.6s ease-in-out infinite alternate}
+@keyframes hvzog{from{opacity:.35;transform:translateY(0) scale(.9)}to{opacity:1;transform:translateY(-8%) scale(1.05)}}
+@media (prefers-reduced-motion:reduce){#board .cell .hvz-og{animation:none}}
+/* Tilted view: groves and features stand up like the figures (back layers just behind them, front layers in front) */
+html.tvon #board .cell :is(.fzb,.fzf,.hvz-shr,.hvz-cgb){scale:1 var(--tk,1.5)}
+html.tvon #board .cell .fzb{z-index:7;transform-origin:50% 68%}
+html.tvon #board .cell .fzf{z-index:8;transform-origin:50% 97%}
+html.tvon #board .cell.tr-forest .ring2{z-index:9}
+html.tvon #board .cell :is(.hvz-shr,.hvz-cgb){z-index:7;transform-origin:50% 100%}
+html.tvon.hvz #board .cell .minei.hvz{z-index:7}
+html.tvon #board .cell.fogw :is(.fzb,.fzf,.hvz-shr,.hvz-cgb){filter:brightness(.36) saturate(.45)}
+</style>
+<script id="hv-woods-js">/* ===== HV_WOODS (see the hv-woods style) ===== */
+(function(){
+if(typeof render0!='function'||typeof render!='function')return;
+const V='?v=1',E='art/env/',K=(x,y)=>x+','+y;
+const HVZ=window.HVZ={on:false,loading:false,fail:0};
+/* grove variant per forest hex: stable hash of (x, y), weighted (oak and pine, birch, old hollow oak, pines) */
+const GW=[3,2,2,3];
+const hsh=(x,y)=>{let h=Math.imul(x+2029,0x27d4eb2d)^Math.imul(y+6113,0x165667b1);h=Math.imul(h^h>>>15,0x85ebca6b);h=Math.imul(h^h>>>13,0xc2b2ae35);return(h^h>>>16)>>>0};
+const pickG=(x,y)=>{const h=hsh(x,y);let s=0;GW.forEach(a=>s+=a);let q=(h>>>11)%s;for(let i=0;i<GW.length;i++){q-=GW[i];if(q<0)return i}return 0};
+const BART={farm:1,tower:'watchtower',barracks:1,well:1,cottage:1,hall:1,ograve:1};
+const TINT=new Set(['tower_0','tower_1','tower_2','farm','watchtower','barracks','well','cottage','hall','ograve','wall','mine']);
+const FILES=[].concat([0,1,2,3].flatMap(i=>['env/grove_'+i+'_b','env/grove_'+i+'_f','tiles/forestfloor_'+i]),
+ ['tower_0','tower_1','tower_2','farm','watchtower','barracks','well','cottage','hall','ograve','wall','mine','shrine','chest','cage_b','cage_f'].map(n=>'env/'+n),
+ [...TINT].map(n=>'env/'+n+'_m'));
+const img=n=>`<img class="hvz-i" src="${E}${n}.webp${V}" alt="" draggable="false" decoding="async">`;
+const tint=(n,c)=>TINT.has(n)?`<i class="hvz-m" style="--hzm:url(${E}${n}_m.webp${V});--hzc:${c}"></i>`:'';
+const art=(n,c)=>img(n)+tint(n,c);
+/* towers: 3 states by HP (as the old drawing: cracks under 60%, broken and smoking under 35%) */
+const tw0=twS;twS=function(s,r){if(!HVZ.on)return tw0.apply(this,arguments);r=r==null?1:r;const n='tower_'+(r<.35?2:r<.6?1:0);return art(n,`var(--${s})`)};
+const wa0=wallS;wallS=function(sd){if(!HVZ.on)return wa0.apply(this,arguments);return art('wall',`var(--${sd})`)};
+function skipF(x,y,k,shr){return shr.has(k)||(typeof mineAt=='function'&&mineAt(x,y))||(typeof ZN=='object'&&ZN[k]&&ZN[k]!='m')}
+function deco(){if(!HVZ.on||!S||!GEO)return;const B=document.getElementById('board');if(!B)return;
+ const shr=new Set(S.shr||[]),cell=(x,y)=>B.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`),under=(c,h)=>{const t=c.querySelector(':scope>.tint');if(t)t.insertAdjacentHTML('afterend',h);else c.insertAdjacentHTML('afterbegin',h)};
+ B.classList.toggle('hvz-hl',!!B.querySelector('.cell.mv,.cell.tg,.cell.smn'));
+ /* forests: back layer under the figure, front layer over it */
+ B.querySelectorAll('.cell.tr-forest').forEach(c=>{if(c.querySelector(':scope>.fzb'))return;const x=+c.dataset.x,y=+c.dataset.y,k=K(x,y);if(skipF(x,y,k,shr))return;const g=pickG(x,y);
+  under(c,`<i class="fzb g${g}"></i>`);c.insertAdjacentHTML('beforeend',`<i class="fzf g${g}"></i>`)});
+ /* buildings (incl. the Open Grave) */
+ B.querySelectorAll('.cell>.wall.bldg:not(.hvz)').forEach(el=>{const c=el.parentNode,W=wallAt(+c.dataset.x,+c.dataset.y);if(!W||!W.b||!BART[W.b])return;
+  const n=BART[W.b]===1?W.b:BART[W.b];el.classList.add('hvz');el.classList.remove('ograve');el.dataset.og=1;el.innerHTML=art(n,`var(--${W.side})`)+(W.b=='ograve'?'<i class="hvz-og"></i>':'')});
+ /* gold mines (art at the back of the hex; the flag takes the owner's colour) */
+ B.querySelectorAll('.cell>.minei:not(.hvz)').forEach(el=>{el.classList.add('hvz');el.innerHTML=art('mine','var(--mc)')});
+ B.querySelectorAll('.cell>.chesti:not(.hvz)').forEach(el=>{el.classList.add('hvz');el.innerHTML=img('chest')});
+ shr.forEach(k=>{const[x,y]=k.split(',').map(Number),c=cell(x,y);if(c&&!c.querySelector(':scope>.hvz-shr'))under(c,`<i class="hvz-shr">${img('shrine')}</i>`)});
+ /* Iron Cage: back bars behind the unit, front bars over it */
+ B.querySelectorAll('.cell>.spcage:not(.hvz)').forEach(el=>{el.classList.add('hvz');el.innerHTML=img('cage_f');under(el.parentNode,`<i class="hvz-cgb">${img('cage_b')}</i>`)})}
+HVZ.deco=deco;
+function css(){const r=[];for(let i=0;i<4;i++)r.push(`#board .cell .fzb.g${i}{background-image:url(${E}grove_${i}_b.webp${V})}`,`#board .cell .fzf.g${i}{background-image:url(${E}grove_${i}_f.webp${V})}`,`#bw #hvbg i.tt-forest_${i}{background-image:url(art/tiles/forestfloor_${i}.webp${V})}`);
+ const st=document.createElement('style');st.id='hv-woods-dyn';st.textContent=r.join('\n');document.head.appendChild(st)}
+function load(){HVZ.loading=true;let left=FILES.length,bad=0;HVZ.imgs=[];
+ const done=()=>{if(--left>0)return;HVZ.loading=false;if(bad){HVZ.fail++;HVZ.imgs=[];if(HVZ.fail<3)setTimeout(()=>{if(!HVZ.on&&!HVZ.loading)load()},4000);return}
+  css();HVZ.on=true;document.documentElement.classList.add('hvz');try{if(S)render()}catch(e){}};
+ FILES.forEach(f=>{const im=new Image();im.decoding='async';im.onload=done;im.onerror=()=>{bad++;done()};im.src='art/'+f+'.webp'+V;HVZ.imgs.push(im)})}
+const r0=render0;render0=function(){const r=r0.apply(this,arguments);try{if(HVZ.on)deco();else if(window.HVW&&HVW.ready&&!HVZ.loading&&HVZ.fail<3)load()}catch(e){if(window.console)console.warn('HV_WOODS',e)}return r};
+const r1=render;render=function(){const r=r1.apply(this,arguments);try{deco()}catch(e){if(window.console)console.warn('HV_WOODS',e)}return r};
+})();
+</script>
 </body></html>

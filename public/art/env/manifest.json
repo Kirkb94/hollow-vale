@@ -1,0 +1,62 @@
+{
+ "name": "Hollow Vale painted forests and structures",
+ "version": 1,
+ "status": "review in Sprite Forge (projects/hollow-vale/sprites): only apply once every doc below is approved",
+ "scale": "cell width = 224 px (same as the tiles); every frame is given as a box in cell units, its bottom edge is the base line",
+ "sideColour": "files with a _m mask: the game multiplies the side colour (var(--p/e/g/k), owner colour for mines) into the neutral cloth through the mask",
+ "files": {
+  "env/grove_N_b.webp": {
+   "doc": "hv-env-groves (uses hv-env-tree-1..4, hv-env-bush-1..3)",
+   "use": "forest hex back layer, behind every figure",
+   "box": "x -15%..115%, y -125%..102% of the cell"
+  },
+  "env/grove_N_f.webp": {
+   "doc": "hv-env-groves",
+   "use": "forest hex front layer over the unit (woods cover); anchored to the unit's feet: 3.17em x 1.606em at 34px, bottom 1.465em below the cell centre"
+  },
+  "tiles/forestfloor_N.webp": {
+   "doc": "hv-env-forestfloor",
+   "use": "base tile for forest hexes (replaces forest_N.webp, which stays as fallback)"
+  },
+  "env/tower_N.webp + tower_N_m.webp": {
+   "doc": "hv-struct-tower",
+   "use": "side towers: N=0 intact, 1 under 60% HP, 2 under 35% HP",
+   "box": "x -2%..102%, y -42%..98%"
+  },
+  "env/farm|watchtower|barracks|well|cottage|hall|ograve.webp + _m": {
+   "doc": "hv-struct-farm, -watchtower, -barracks, -well, -cottage, -hall, -ograve",
+   "use": "BLD buildings and the Open Grave",
+   "box": "x -8%..108%, y -30%..96%"
+  },
+  "env/wall.webp + wall_m.webp": {
+   "doc": "hv-struct-wall",
+   "use": "Stonewright walls",
+   "box": "x -8%..108%, y -30%..96%"
+  },
+  "env/cage_b.webp, cage_f.webp": {
+   "doc": "hv-struct-cage",
+   "use": "Iron Cage: back behind the unit, front over it; anchored to the unit (2.3em x 3.63em)"
+  },
+  "env/mine.webp + mine_m.webp": {
+   "doc": "hv-feat-mine",
+   "use": "gold mine at the back of the hex, owner flag",
+   "box": "x -6%..106%, y -28%..64%"
+  },
+  "env/shrine.webp": {
+   "doc": "hv-feat-shrine",
+   "use": "standing rune stone at the back of shrine hexes",
+   "box": "x 2%..98%, y -50%..62%"
+  },
+  "env/chest.webp": {
+   "doc": "hv-feat-chest",
+   "use": "treasure chest",
+   "box": "x 14%..86%, y 22%..92%"
+  }
+ },
+ "groveWeights": [
+  3,
+  2,
+  2,
+  3
+ ]
+}
