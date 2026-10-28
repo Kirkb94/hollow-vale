@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#12131a"><link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" type="image/png" href="icon-192.png">
 <title>Hollow Vale</title>
+<style id="hv-cloak">/* Hide the plain pre-styled main menu while the page is still loading, so it does not flash before the new menu takes over. Cleared by #hv-cloak-js right after the menu script, or after 6s as a fallback. */html:not(.hv-ready) body>#amb,html:not(.hv-ready) main>h1,html:not(.hv-ready) main>.size,html:not(.hv-ready) #menu,html:not(.hv-ready) #mtog{visibility:hidden!important}</style>
+<script>setTimeout(function(){document.documentElement.classList.add("hv-ready")},6000)</script>
 <script>/* ===== Hollow Vale maps: Classic, 5 pre-built maps and mirrored random maps (4x the tiles) ===== */
 var HVMAP={id:'classic',key:'classic',big:false,holes:false,name:'Classic'};
 const MAPS_PRE=[
@@ -4669,6 +4671,7 @@ addEventListener('load',()=>layout());
 window.HVMENU={applyStyle,get style(){return style},openRules,closeRules,layout};
 })();
 </script>
+<script id="hv-cloak-js">document.documentElement.classList.add("hv-ready")</script>
 <style id="hv-raise">
 /* Necromancer Raise the Slain: countdown badge on raised units, dying body shown under the rising one */
 #board .cell i.rzb{position:absolute;left:6%;top:50%;z-index:7;font:700 10px/1 system-ui,sans-serif;font-style:normal;padding:2px 4px 2px 3px;border-radius:8px;background:#0b1a0ee6;border:1px solid #7fc46a;color:#d4ffcc;box-shadow:0 0 6px #7fc46a88;white-space:nowrap;pointer-events:auto}
