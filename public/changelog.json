@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "id": "5563b9f",
+      "date": "2026-10-28",
+      "title": "Fixes",
+      "groups": [
+        {
+          "name": "Fixes",
+          "items": [
+            "Phone: the ban confirm bar now goes away after you confirm a ban"
+          ]
+        }
+      ],
+      "commits": [
+        "Ban phase on phone: the ban confirm bar now closes after a ban is confirmed"
+      ]
+    },
+    {
       "id": "8fa74dd",
       "date": "2026-10-28",
       "title": "Spellcasters, a tutorial and a big balance pass",
