@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "id": "f21ff6a",
+      "date": "2026-10-28",
+      "title": "Phone fix",
+      "groups": [
+        {
+          "name": "Fixes",
+          "items": [
+            "Phone: tapping a glowing hex to spawn or move works again on the zoomed board"
+          ]
+        }
+      ],
+      "commits": [
+        "Phone: fix taps on the zoomed board doing nothing (spawning, moving)"
+      ]
+    },
+    {
       "id": "910b5b7",
       "date": "2026-10-28",
       "title": "Faster spawning, fireproof Infernals and a bigger phone board",
@@ -305,49 +321,6 @@
       ],
       "commits": [
         "Army cap 20 with Cottage/Great Hall, no tower decay before sudden death"
-      ]
-    },
-    {
-      "id": "100a1ba5615f",
-      "date": "2026-10-26",
-      "title": "Big maps and PC fullscreen",
-      "groups": [
-        {
-          "name": "New",
-          "items": [
-            "Map picker: Classic, 5 hand-made big maps, or a mirrored random map in one of 6 shapes",
-            "Big maps have extra shrines, mines and chests to fight over",
-            "Drag to pan and zoom the camera on every map",
-            "PC fullscreen: the board fills the screen with a floating HUD. Press F to toggle it",
-            "Edge scrolling, arrow keys and Ctrl + mouse wheel zoom on PC",
-            "The draft now has 10 team slots: heroes take 1 to 4 slots by price, bosses take 5"
-          ]
-        },
-        {
-          "name": "Balance",
-          "items": [
-            "Splash hits deal half damage, and melee splash is now a 3-hex cleave in front of the attacker",
-            "Lancer's reach is now a 2-hex pierce",
-            "Tanks get +50% HP and -25% damage and cost 2 more gold. Bosses get +40% HP",
-            "Freeze, stun, splash, silence, long range and drain now cost more to hire (Frost Witch 3 → 7 gold)"
-          ]
-        },
-        {
-          "name": "Visuals",
-          "items": [
-            "Lancer has a new thrust animation",
-            "Bigger board tiles, so every painted hero fits inside its hex"
-          ]
-        }
-      ],
-      "commits": [
-        "PC fullscreen: menus use the whole window; in-game board fills the screen with floating HUD; edge scrolling, arrow keys, drag and Ctrl+wheel zoom on every map; Fullscreen button (F) that turns on when a match starts",
-        "Combat: splash deals half damage; melee splash is a 3-hex frontal cleave; Lancer reach becomes a 2-tile pierce with thrust animation",
-        "Wider health gap: tanks +50% HP, -25% damage, +2 gold; bosses +40% HP",
-        "Hire/recruit: army limit counts team slots (10); multiple bosses allowed when there are 5 free slots; clear 'not enough slots' messages",
-        "Draft: 10 team slots; heroes take 1-4 slots by gold price, bosses take 5; army cap raised to 10; slot badges on hero cards",
-        "Hire prices: add gold premiums for freeze/stun, splash, silence, long range and drain (Frost Witch 3 -> 7); bosses unchanged",
-        "Map overhaul: map picker with Classic, 5 pre-built big maps and mirrored random maps (4x tiles, 6 shapes); extra shrines/mines/chests on big maps; drag-to-pan and zoom camera; online map choice synced by the host"
       ]
     }
   ]
