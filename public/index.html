@@ -1437,7 +1437,7 @@ const TB={},MANA0={},CAP0={};const TOWER_HP=[12,14,15];
 function towerRuleHTML(){const t=(n,sd)=>TOWER_HP.map((v,i)=>v+((MODES[n].tb[sd]||[])[i]||0)).join(' / '),row=n=>{const M=MODES[n],g=[];M.sides.forEach((sd,i)=>{const h=t(n,sd),l=g[g.length-1];if(l&&l.h===h)l.s.push(i+1);else g.push({h,s:[i+1]})});return g.length==1?'every player <b>'+g[0].h+'</b>':g.map(x=>hvTurnLbl(x.s)+' <b>'+x.h+'</b>').join(', ')};return 'Each player has 3 towers, counted left to right as you face your own edge of the board. A few towers get a little extra HP to even out the turn order: <b>1v1</b>: '+row(2)+'. <b>3 players</b>: '+row(3)+'. <b>4 players</b>: '+row(4)+'. Fortify Towers adds 3 to each.'}
 /* ---- match options (synced in cfg.opts) ---- */
 const OPTDEF=[
- {k:'rps',n:'Rock paper scissors for first turn',def:true,pre:1,d:'Online and Pass & play with 2 or more human players: before the draft, the humans play rock paper scissors (first to 2 points). The winner takes the first turn and, in Pass & play, bans and picks first. AI seats keep their place. Off: Player 1 always goes first.'},
+ {k:'rps',n:'Rock paper scissors for first turn',def:true,pre:1,d:'Online and Pass & play with 2 or more human players: before the draft, everyone plays rock paper scissors (first to 2 points; AI seats throw at random). The winner takes the first turn and, in Pass & play, bans and picks first. Off: Player 1 always goes first.'},
  {k:'shrines',n:'Shrines',def:true,d:'Hold a glowing shrine in the middle at the start of your turn: +1 mana and that hero heals 2.'},
  {k:'fog',n:'Poison mist',def:false,d:'From round 8 a poison fog creeps in from the edges. Heroes in the fog take 2 damage at the start of their turn.'},
  {k:'levels',n:'Hero levels',def:true,d:'A hero that scores 2 kills earns a star (+2 max HP, +1 damage). A second star comes at 5 kills.'},
@@ -2067,7 +2067,7 @@ try{if(CFG&&CFG.daily)dailyDone(w);else lossPrompt(w)}catch(e){}
 if(CAMP!=null&&!NET){const won=myWin(w);if(won)campSave(CAMP);const fin=won&&CAMP===14;
 $('#post .pb').insertAdjacentHTML('afterbegin',fin?`<span class='hint'>The Dread Colossus has fallen. The Vale is yours!</span>`:'')+'';$('#post .pb').insertAdjacentHTML('afterbegin',`<button class='go' id='pnext'>${won?'Back to the map':'Retreat to the map'}</button>`);const pr=$('#pr');if(pr)pr.textContent=won?'Replay battle':'Try again';const nx=$('#pnext');if(nx)nx.onclick=()=>{$('#post').className='';music(false);aiRun++;$('#game').hidden=true;CSEL=null;openCamp()}}
 $('#post').className='on';
-if($('#pr'))$('#pr').onclick=()=>{$('#post').className='';if(NET&&NET.rematch)NET.rematch();else{if(CFG.daily){startGame(CFG);return}if(mode=='local'&&LS.rnd)SIDES.forEach(sd=>CFG.picks[sd]=randomTeam());CFG.seed=Math.random()*2147483647|0;{const hs=SIDES.filter(sd=>CFG.seat&&CFG.seat[sd]=='h');if(mode=='local'&&CAMP==null&&window.HVRPS&&HVRPS.localWanted(hs,CFG.opts)){$('#game').hidden=true;HVRPS.local({base:SIDES.slice(),sides:hs,next:'random'},o=>{CFG.order=o;CFG.me=o.find(sd=>CFG.seat[sd]=='h')||CFG.me;startGame(CFG)},()=>{$('#restart').onclick()});return}}startGame(CFG)}};
+if($('#pr'))$('#pr').onclick=()=>{$('#post').className='';if(NET&&NET.rematch)NET.rematch();else{if(CFG.daily){startGame(CFG);return}if(mode=='local'&&LS.rnd)SIDES.forEach(sd=>CFG.picks[sd]=randomTeam());CFG.seed=Math.random()*2147483647|0;{const hs=SIDES.filter(sd=>CFG.seat&&CFG.seat[sd]=='h');if(mode=='local'&&CAMP==null&&window.HVRPS&&HVRPS.localWanted(hs,CFG.opts)){$('#game').hidden=true;HVRPS.local({base:SIDES.slice(),sides:SIDES.filter(sd=>!(CFG.opts&&CFG.opts.raid&&sd==SIDES[SIDES.length-1])),ai:SIDES.filter(sd=>CFG.seat[sd]!='h'),next:'random'},o=>{CFG.order=o;CFG.me=o.find(sd=>CFG.seat[sd]=='h')||CFG.me;startGame(CFG)},()=>{$('#restart').onclick()});return}}startGame(CFG)}};
 $('#pm').onclick=()=>{$('#post').className='';$('#restart').onclick()}}
 function openStats(){$('#menu').hidden=true;$('#draft').hidden=true;$('#game').hidden=true;drawStats();$('#stats').hidden=false}
 function drawStats(){const st=loadStats(),n=st.games,wr=n?Math.round(st.wins/n*100):0,fav=Object.keys(st.use).filter(k=>H[k]).sort((a,b)=>st.use[b]-st.use[a]).slice(0,3).map(k=>H[k].n+' ('+st.use[k]+')').join(', ')||'None yet',got=ACH.filter(a=>st.ach[a.id]).length,box=l=>l.map(([a,b])=>`<div><b>${b}</b><span>${a}</span></div>`).join('');
@@ -2348,7 +2348,7 @@ $('#clist').onclick=e=>{const b=e.target.closest('button[data-c]');if(b)campStar
 $('#cmapw').onclick=e=>{const n=e.target.closest('.cmn');if(!n)return;CSEL=+n.dataset.c;drawCamp();const l=$('#clist');if(l.scrollIntoView)l.scrollIntoView({behavior:'smooth',block:'nearest'})};
 function localStart(ord){const ORDER=Array.isArray(ord)?ord:null;mode='local';NET=null;HOST=true;CAMP=null;if(LS.opts.raid)LS.seat[ALLS[LS.n-1]]='a';const n=LS.n,L=ALLS.slice(0,n),seat={};L.forEach(sd=>seat[sd]=LS.seat[sd]);
 let humans=L.filter(sd=>seat[sd]=='h');
-if(!ORDER&&window.HVRPS&&HVRPS.localWanted(humans,LS.opts)){$('#lsetup').hidden=true;HVRPS.local({base:L,sides:humans,next:LS.rnd?'random':'draft'},o=>localStart(o),()=>{$('#lsetup').hidden=false;drawLocal()});return}
+if(!ORDER&&window.HVRPS&&HVRPS.localWanted(humans,LS.opts)){$('#lsetup').hidden=true;HVRPS.local({base:L,sides:L.filter(sd=>!(LS.opts.raid&&sd==L[L.length-1])),ai:L.filter(sd=>seat[sd]!='h'),next:LS.rnd?'random':'draft'},o=>localStart(o),()=>{$('#lsetup').hidden=false;drawLocal()});return}
 if(ORDER)humans=ORDER.filter(sd=>seat[sd]=='h');HOTSEAT=true;HUM=humans.length;SEAT=seat;const P={};let i=0;BANS=[];BANMODE=false;WAITBAN=null;
 const finish=()=>{L.forEach(sd=>{if(!P[sd])P[sd]=LS.rnd?randomTeam():aiPick()});$('#lsetup').hidden=true;startGame({picks:P,seat,me:humans[0]||null,n,opts:Object.assign({},LS.opts),seed:Math.random()*2147483647|0,order:ORDER})};
 if(LS.rnd){finish();return}
@@ -2727,7 +2727,7 @@ $('#rules').innerHTML=`<h2>How to play</h2>
 <ul><li>Players start with <b>${MANA0.p}</b>, <b>${MANA0.e}</b> and <b>${MANA0.g}</b> mana (1st, 2nd and 3rd to move) to even out turn order.</li><li>At the start of each of your turns you gain <b>+1 mana</b>, up to a maximum of <b>10</b>.</li><li>Unspent mana is kept for later turns, so you can save up for an expensive spell.</li><li>Only some abilities cost mana. Ordinary attacks are free, and heroes with free attacks never need mana.</li><li>If you do not have enough mana, that hero's costly ability is unavailable and shows no red targets. Its other options still work.</li><li>Because the pool is shared, one big spell can leave nothing for the next hero, so plan your order each turn.</li></ul>
 <p><b>What costs mana:</b></p><ul>${mc}</ul></details>
 ${cl}<details><summary>Building your team</summary><ul><li>You have <b>10 slots</b>. A hero takes 1 to 4 slots depending on its gold price (3-4 gold: 1, 5-6: 2, 7-8: 3, 9-10: 4). The <b>Elite</b> bosses (${Object.keys(H).filter(k=>H[k].elite).map(k=>H[k].n).join(', ')}) are much stronger and take 5 slots. Every faction has five. You may pick the same hero more than once.</li><li>Elite units play a short <b>cutscene</b> every time they attack.</li><li><b>Charge</b> heroes (all <b>Cavalry</b>, plus ${Object.keys(H).filter(k=>H[k].charge&&!H[k].hidden&&!(ROLE[k]&&ROLE[k][0]=='Cavalry')).map(k=>H[k].n).join(', ')}) can move and then attack in the same turn. Cavalry are fragile and hit softly to make up for it. After moving, tap a red target to strike.</li><li>The <b>squad</b> heroes (${Object.keys(H).filter(k=>H[k].group&&!H[k].hidden).map(k=>H[k].n).join(', ')}) count as one pick but spawn as <b>3 separate units</b>, each with its own health.</li><li>In an online game every player drafts on their own device at the same time. Teams are revealed when the battle starts.</li></ul></details>
-<details><summary>Who goes first</summary><p>Online and in Pass &amp; play, when 2 or more humans play, a quick game of <b>rock paper scissors</b> decides the turn order before the hero draft (match option <b>Rock paper scissors for first turn</b>, on by default; the host can turn it off).</p><ul><li>Everyone throws at once. Rock beats scissors, scissors beat paper, paper beats rock.</li><li>If exactly two shapes show, everyone who threw the winning one scores a point. All the same, or all three shapes: nobody scores, throw again.</li><li>First to <b>2 points</b> goes first (1v1 is best of 3). With 3-4 players the rest keep throwing for 2nd place, and so on. Players who reach 2 points in the same round settle it with tiebreak throws.</li><li>Online the throws stay hidden until everyone has thrown, and each throw has a 20 second clock: run out of time and you throw a random shape. In Pass &amp; play you throw one at a time and pass the device in between.</li><li>The winner moves first in battle and, in Pass &amp; play, bans and picks first in the draft. AI seats keep their place in the order. The start mana, first-turn spawn limits and tower bonuses go by turn position.</li></ul></details>
+<details><summary>Who goes first</summary><p>Online and in Pass &amp; play, when 2 or more humans play, a quick game of <b>rock paper scissors</b> decides the turn order before the hero draft. AI seats play too and throw at random (match option <b>Rock paper scissors for first turn</b>, on by default; the host can turn it off).</p><ul><li>Everyone throws at once. Rock beats scissors, scissors beat paper, paper beats rock.</li><li>If exactly two shapes show, everyone who threw the winning one scores a point. All the same, or all three shapes: nobody scores, throw again.</li><li>First to <b>2 points</b> goes first (1v1 is best of 3). With 3-4 players everyone left then starts again at 0 and plays for 2nd place, and so on. Players who reach 2 points in the same round settle it with tiebreak throws.</li><li>Online the throws stay hidden until everyone has thrown, and each throw has a 20 second clock: run out of time and you throw a random shape. In Pass &amp; play you throw one at a time and pass the device in between.</li><li>The winner moves first in battle and, in Pass &amp; play, bans and picks first in the draft. A Boss Raid boss sits out and always moves last. The start mana, first-turn spawn limits and tower bonuses go by turn position.</li></ul></details>
 <details><summary>Spawning heroes</summary><ul><li>Nobody starts on the board. Your picks wait in the <b>Reserve</b> under the board.</li><li>Tap a Reserve hero, then tap a highlighted hex <b>next to one of your living towers</b> to spawn it.</li><li>A hero cannot move or act on the turn it spawns.</li><li>A squad uses one spawn but needs 3 free hexes next to your towers.</li><li>Once a tower is destroyed you can no longer spawn next to it.</li></ul></details>
 <details><summary>Your turn</summary><ul><li>Each unit can <b>move or act once</b> per turn, never both, except <b>Charge</b> heroes, which can move and then attack.</li><li>Tap a unit: <b>blue hexes</b> are where it can move, <b>red hexes</b> are targets for its attack or heal.</li><li>Your turn ends automatically once every unit has acted and you cannot spawn. You can also press <b>End turn</b> at any time.</li><li>A stunned unit cannot move or act on its next turn.</li></ul></details>
 <details><summary>Moving and fighting</summary><ul><li>The board is a hex grid, so every hex has 6 neighbors. Movement and range are counted in hexes.</li><li>Units cannot walk through other units. Flying units can pass over them but must end on an empty hex. Heroes walk their route hex by hex and fliers glide (instant with reduced motion).</li><li>A hero that counters deals less the more hurt it is: half its damage times the share of HP it has left (at least 1).</li><li>Attacks hit enemy units and enemy towers. A unit at 0 HP is defeated. Some heroes have a minimum range and cannot hit anything closer.</li><li>Casters, healers, squads and others have extra abilities. Select a hero, or look at its card, to see its keywords.</li></ul></details>
@@ -8319,8 +8319,9 @@ body.mob #hvrps .rp-pick kbd{display:none}
    Online: throws go to the server (server.js rps*), which reveals them together, runs a 20 s clock per throw (random throw on time-out)
    and sends the final turn order in the game cfg (cfg.order). Pass & play: players throw one at a time behind a "Pass the device" cover.
    Scheme: every remaining player throws at once; when exactly two shapes show, everyone with the winning shape scores. First to 2
-   takes the next turn slot (1v1: best of 3). Players who reach 2 in the same round settle it with tiebreak throws. AI seats keep
-   their place. The winner moves first and, in Pass & play, bans and picks first. Not used vs AI (fewer than 2 human players). ===== */
+   takes the next turn slot (1v1: best of 3). Players who reach 2 in the same round settle it with tiebreak throws.
+   AI seats throw at random and take part too (online the server throws for them); a Boss Raid boss sits out and moves last. After a place
+   is won everyone left starts again at 0. The winner moves first and, in Pass & play, bans and picks first. Not used with fewer than 2 humans. ===== */
 (function(){
 const K=['r','p','s'],EMO={r:'✊',p:'✋',s:'✌️'},NM={r:'Rock',p:'Paper',s:'Scissors'};
 const VERB={rs:'Rock blunts scissors',sp:'Scissors cut paper',pr:'Paper covers rock'};
@@ -8360,6 +8361,7 @@ function lastText(L,names){if(!L)return '';if(!L.win){const sh=new Set(L.m.map(s
  let t=v+': '+(who.length>2?who.slice(0,-1).join(', ')+' and '+who[who.length-1]:who.join(' and '))+(L.tie?(who.length>1?' stay ahead':' wins the tiebreak'):(who.length>1?' score!':' scores!'));
  if(L.placed&&L.placed.length){const P=V.placed;t+=' '+L.placed.map(s=>names[s]+' takes '+PL[P.indexOf(s)]+' place').join(', ')+'.'}
  else if(!L.tie&&L.sc.filter(s=>(V.pts[s]||0)>=2).length>1)t+=' Tied at 2: tiebreak!';
+ if(L.reset>1)t+=' Everyone else starts again at 0.';
  else if(L.tie&&L.sc.length>1)t+=' Tiebreak again!';
  return t}
 function sig(o){return JSON.stringify(o)}
@@ -8407,36 +8409,39 @@ function draw(){if(!V||!el)return;if(ctx&&ctx.alive&&!ctx.alive()){close();retur
 function net(L,c){if(!L||L.phase!='rps'||!L.rps){if(ctx&&!V?.local)close();return}
  if(V&&V.local)return;
  ctx=c;const R=L.rps,t=now(),seats=L.seats||{},names={},all={};
- (R.sides||[]).forEach(sd=>names[sd]=(seats[sd]&&seats[sd].name)||sideName(sd));
- Object.keys(seats).forEach(sd=>{const x=seats[sd];all[sd]=x&&x.kind=='human'?((x.name)||sideName(sd)):'AI ('+sideName(sd)+')'});
+ Object.keys(seats).forEach(sd=>{const x=seats[sd];all[sd]=x&&x.kind=='human'?((x.name)||sideName(sd)):sideName(sd)+' (AI)'});
+ (R.sides||[]).forEach(sd=>names[sd]=all[sd]||sideName(sd));
  const first=!V;V={local:false,sides:R.sides||[],names,allNames:all,act:R.act||[],tie:!!R.tie,round:R.round,pts:R.pts||{},placed:R.placed||[],thrown:R.thrown||{},my:R.my||null,
   mine:c.me&&(R.sides||[]).includes(c.me)?c.me:null,me:c.me||null,openAt:t+(R.wait||0),deadline:R.done?0:t+(R.ms||0),limit:R.limit||20000,last:R.last||null,rev:R.rev||0,done:!!R.done,order:R.order||null,next:R.next||'draft'};
  open();
  if(first){shownRev=V.rev;if(V.last&&(R.wait>600||R.done)&&V.rev>0){shownPts=null;playAnim();return}}
- if(V.rev>shownRev){shownRev=V.rev;const prev=Object.assign({},V.pts);if(V.last&&V.last.sc&&!V.last.tie)V.last.sc.forEach(s=>{if(prev[s]>0)prev[s]--});shownPts=prev;pend=null;playAnim();return}
+ if(V.rev>shownRev){shownRev=V.rev;shownPts=V.last&&V.last.pts0?Object.assign({},V.last.pts0):null;pend=null;playAnim();return}
  if(!anim)shownPts=null;draw()}
 /* ---------- Pass & play ---------- */
 let LOC=null;
 function engine(sides){return{groups:[{m:sides.slice(),d:0}],pts:Object.fromEntries(sides.map(s=>[s,0])),placed:[],round:1}}
-function resolve(G,th){const g=G.groups[0],m=g.m,sh=[...new Set(m.map(s=>th[s]))];let win=null,sc=[];
+function resolve(G,th){const g=G.groups[0],m=g.m,sh=[...new Set(m.map(s=>th[s]))],pts0=Object.assign({},G.pts);let win=null,sc=[],reset=0;
  if(sh.length==2){win=beats(sh[0],sh[1])?sh[0]:sh[1];sc=m.filter(s=>th[s]==win)}const placedNow=[];
  if(win){if(g.d)G.groups.splice(0,1,{m:sc,d:1},{m:m.filter(s=>th[s]!=win),d:1});
-  else{sc.forEach(s=>G.pts[s]++);const top=m.filter(s=>G.pts[s]>=2);if(top.length)G.groups.splice(0,1,{m:top,d:1},{m:m.filter(s=>G.pts[s]<2),d:0})}
+  else{sc.forEach(s=>G.pts[s]++);const top=m.filter(s=>G.pts[s]>=2);if(top.length){const rest=m.filter(s=>G.pts[s]<2);rest.forEach(s=>G.pts[s]=0);reset=rest.length;G.groups.splice(0,1,{m:top,d:1},{m:rest,d:0})}}
   while(G.groups.length&&G.groups[0].m.length<=1){const x=G.groups.shift();if(x.m.length){G.placed.push(x.m[0]);placedNow.push(x.m[0])}}}
- const L={round:G.round,tie:!!g.d,m:m.slice(),throws:Object.assign({},th),auto:{},win,sc,placed:placedNow};G.round++;return L}
-function local(o,cb,back){close();const base=o.base.slice(),sides=o.sides.slice(),G=engine(sides),names={},all={};
- base.forEach(sd=>{let n=sideName(sd);try{n=NAMES[sd]||n}catch(e){}all[sd]=sides.includes(sd)?n:'AI ('+n+')';if(sides.includes(sd))names[sd]=n});
+ const L={round:G.round,tie:!!g.d,m:m.slice(),throws:Object.assign({},th),auto:{},win,sc,placed:placedNow,pts0,reset};G.round++;return L}
+// o: {base: all seats in seat order, sides: seats that play (humans and AI), ai: the AI seats among them, next}
+function local(o,cb,back){close();const base=o.base.slice(),sides=o.sides.slice(),ai=new Set(o.ai||[]),G=engine(sides),names={},all={};
+ base.forEach(sd=>{let n=sideName(sd);try{n=NAMES[sd]||n}catch(e){}const t=ai.has(sd)||!sides.includes(sd)?n+' (AI)':n;all[sd]=t;if(sides.includes(sd))names[sd]=t});
  let th={},idx=0;ctx={leave:()=>{if(back)back()}};
  V={local:true,sides,names,allNames:all,act:G.groups[0].m,tie:false,round:1,pts:G.pts,placed:G.placed,thrown:th,my:null,mine:null,me:null,openAt:0,deadline:0,last:null,rev:0,done:false,order:null,next:o.next||'draft'};
  const slotsIdx=sides.map(s=>base.indexOf(s)).sort((a,b)=>a-b);
  const coverFor=sd=>{cover=sd;const cv=$r('#rp-cover');cv.style.setProperty('--sc',col(sd));cv.innerHTML=`<div class="rp-pn">${E(names[sd])}</div><p>Pass the device to ${E(names[sd])}. Everyone else, look away.</p><button type="button" class="go">I'm ${E(names[sd])}, let me throw</button>`;cv.hidden=false;
   const b=cv.querySelector('.go');b.onclick=()=>{cv.hidden=true;cover=null;V.mine=sd;draw()};setTimeout(()=>{try{b.focus()}catch(e){}},50)};
- const nextThrow=()=>{const act=G.groups[0].m;V.act=act;V.tie=!!G.groups[0].d;V.round=G.round;V.thrown=th;V.mine=null;draw();if(idx<act.length)coverFor(act[idx])};
- LOC={throwK(k){const sd=V.mine;if(!sd||th[sd])return;th[sd]=k;idx++;V.mine=null;const act=G.groups[0].m;
-   if(idx<act.length){draw();coverFor(act[idx]);return}
-   const prev=Object.assign({},G.pts);V.last=resolve(G,th);V.rev++;shownRev=V.rev;shownPts=prev;V.pts=G.pts;V.placed=G.placed;th={};idx=0;V.thrown=th;
-   if(!G.groups.length){const ord=base.slice();G.placed.forEach((s,i)=>{ord[slotsIdx[i]]=s});V.order=ord;V.firstHuman=ord.find(s=>sides.includes(s));V.done=true}
-   playAnim()},
+ // AI seats throw at random by themselves; the device goes to each human in turn; once all have thrown, reveal
+ const advance=()=>{const act=G.groups[0].m;while(idx<act.length&&ai.has(act[idx])){th[act[idx]]=K[Math.random()*3|0];idx++}
+  if(idx<act.length){draw();coverFor(act[idx]);return}
+  V.last=resolve(G,th);V.rev++;shownRev=V.rev;shownPts=V.last.pts0;V.pts=G.pts;V.placed=G.placed;th={};idx=0;V.thrown=th;
+  if(!G.groups.length){const ord=base.slice();G.placed.forEach((s,i)=>{ord[slotsIdx[i]]=s});V.order=ord;V.firstHuman=ord.find(s=>sides.includes(s)&&!ai.has(s));V.done=true}
+  playAnim()};
+ const nextThrow=()=>{const act=G.groups[0].m;V.act=act;V.tie=!!G.groups[0].d;V.round=G.round;V.thrown=th;V.mine=null;draw();advance()};
+ LOC={throwK(k){const sd=V.mine;if(!sd||th[sd])return;th[sd]=k;idx++;V.mine=null;advance()},
   after(){if(!V||V.done){draw();return}setTimeout(()=>{if(LOC&&V&&V.local&&!V.done)nextThrow()},1100)},
   finish(){const ord=V.order;close();cb(ord)}};
  open();nextThrow()}

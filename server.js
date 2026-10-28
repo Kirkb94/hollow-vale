@@ -99,8 +99,9 @@ const cfgSeat = r => Object.fromEntries(sidesOf(r).map(s => [s, r.seats[s].kind 
 const cleanPicks = a => (Array.isArray(a) ? a : []).map(x => String(x).replace(/[^a-z]/g, '').slice(0, 20)).filter(Boolean).slice(0, 10);
 
 // ---- rock paper scissors for the first turn (match option 'rps', on unless the host turned it off) ----
-// Human seats play; AI seats keep their place in the turn order. First to 2 points takes the next turn slot; players who reach
-// 2 in the same round settle it with tiebreak throws among themselves. Throws stay on the server until everyone has thrown.
+// Runs when 2+ humans play. Every seat throws (the server throws at random for AI seats); a Boss Raid boss sits out and moves last.
+// First to 2 points takes the next turn slot, then everyone left starts again at 0; players who reach 2 in the same round settle it
+// with tiebreak throws among themselves. Throws stay on the server until everyone has thrown.
 const RPS_MS = 20000, RPS_GAP = 2600, RPS_DONE = 6000, RPS_K = ['r', 'p', 's'];
 const rpsBeats = (a, b) => (a === 'r' && b === 's') || (a === 's' && b === 'p') || (a === 'p' && b === 'r');
 const rpsOn = r => !(r.opts && r.opts.rps === false);
@@ -112,28 +113,31 @@ function rpsArm(r, delay) {
 // next: what happens once the order is known: { kind: 'draft' } | { kind: 'random', picks } | { kind: 'rematch', picks }
 function rpsStart(r, next) {
   rpsClear(r);
-  const base = sidesOf(r), hs = humans(r);
-  if (!rpsOn(r) || hs.length < 2) { r.order = null; return false; }
+  const base = sidesOf(r), boss = r.opts && r.opts.raid ? base[base.length - 1] : null, ps = base.filter(s => s !== boss);
+  if (!rpsOn(r) || ps.filter(s => r.seats[s].kind === 'human').length < 2) { r.order = null; return false; }
   const now = Date.now();
   r.rps = {
-    base, sides: hs.slice(), slots: hs.map(s => base.indexOf(s)).sort((a, b) => a - b),
-    groups: [{ m: hs.slice(), d: 0 }], pts: Object.fromEntries(hs.map(s => [s, 0])), placed: [],
+    base, sides: ps.slice(), slots: ps.map(s => base.indexOf(s)),
+    groups: [{ m: ps.slice(), d: 0 }], pts: Object.fromEntries(ps.map(s => [s, 0])), placed: [],
     round: 1, throws: {}, auto: {}, openAt: now + 800, deadline: now + 800 + RPS_MS, last: null, rev: 0, done: false, order: null, next
   };
   r.order = null; r.phase = 'rps';
   rpsArm(r, r.rps.deadline - now + 30);
+  const R0 = r.rps; setTimeout(() => { if (r.rps === R0) rpsCheck(r); }, 820);   // AI seats throw when the round opens
   return true;
 }
 const rpsAct = R => (R && R.groups.length ? R.groups[0].m : []);
 // throw for seats that cannot: AI seats right away, everyone else when the clock runs out
 function rpsFill(r, all) {
   const R = r.rps; if (!R || R.done) return;
-  rpsAct(R).forEach(s => { if (R.throws[s]) return; if (all || r.seats[s].kind !== 'human') { R.throws[s] = RPS_K[Math.random() * 3 | 0]; R.auto[s] = true; } });
+  rpsAct(R).forEach(s => { if (R.throws[s]) return; const ai = r.seats[s].kind !== 'human'; if (all || ai) { R.throws[s] = RPS_K[Math.random() * 3 | 0]; if (!ai) R.auto[s] = true; } });
 }
 function rpsCheck(r) {
   const R = r.rps; if (!R || R.done || r.phase !== 'rps') return;
+  const n0 = Object.keys(R.throws).length;
   rpsFill(r, false);
   if (rpsAct(R).every(s => R.throws[s])) rpsResolve(r);
+  else if (Object.keys(R.throws).length !== n0) pushLobby(r);   // show that the AI seats are ready
 }
 function rpsTick(r) {
   const R = r.rps; if (!R || r.phase !== 'rps') return;
@@ -142,8 +146,8 @@ function rpsTick(r) {
   rpsFill(r, true); rpsResolve(r);
 }
 function rpsResolve(r) {
-  const R = r.rps, g = R.groups[0], m = g.m, th = Object.assign({}, R.throws), shapes = [...new Set(m.map(s => th[s]))];
-  let win = null, sc = [];
+  const R = r.rps, g = R.groups[0], m = g.m, th = Object.assign({}, R.throws), shapes = [...new Set(m.map(s => th[s]))], pts0 = Object.assign({}, R.pts);
+  let win = null, sc = [], reset = 0;
   if (shapes.length === 2) { win = rpsBeats(shapes[0], shapes[1]) ? shapes[0] : shapes[1]; sc = m.filter(s => th[s] === win); }
   const placedNow = [];
   if (win) {
@@ -151,11 +155,11 @@ function rpsResolve(r) {
     else {
       sc.forEach(s => { R.pts[s]++; });
       const top = m.filter(s => R.pts[s] >= 2);
-      if (top.length) R.groups.splice(0, 1, { m: top, d: 1 }, { m: m.filter(s => R.pts[s] < 2), d: 0 });
+      if (top.length) { const rest = m.filter(s => R.pts[s] < 2); rest.forEach(s => { R.pts[s] = 0; }); reset = rest.length; R.groups.splice(0, 1, { m: top, d: 1 }, { m: rest, d: 0 }); }   // a place is won: the rest start again at 0
     }
     while (R.groups.length && R.groups[0].m.length <= 1) { const x = R.groups.shift(); if (x.m.length) { R.placed.push(x.m[0]); placedNow.push(x.m[0]); } }
   }
-  R.last = { round: R.round, tie: !!g.d, m: m.slice(), throws: th, auto: Object.assign({}, R.auto), win, sc, placed: placedNow };
+  R.last = { round: R.round, tie: !!g.d, m: m.slice(), throws: th, auto: Object.assign({}, R.auto), win, sc, placed: placedNow, pts0, reset };
   R.rev++; R.round++; R.throws = {}; R.auto = {};
   const now = Date.now();
   if (!R.groups.length) {
