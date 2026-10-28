@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "id": "7d0631b",
+      "date": "2026-10-28",
+      "title": "Tower tap fix",
+      "groups": [
+        {
+          "name": "Fixes",
+          "items": [
+            "Tapping or clicking the hex just above a tower or wall works again (the new tower art was catching the tap)"
+          ]
+        }
+      ],
+      "commits": [
+        "Towers and walls no longer block taps on the hex above them"
+      ]
+    },
+    {
       "id": "55fa790",
       "date": "2026-10-28",
       "title": "Cheaper Bone Legion",
@@ -291,28 +307,6 @@
         "Necromancer: +1 damage (3 -> 4) and Raise the Slain",
         "War Engine: +2 damage (2 -> 4)",
         "Main menu redesign: Hex Rose menu by default, with Living Map and Hall of Heroes styles in Display settings"
-      ]
-    },
-    {
-      "id": "73761d0976ea",
-      "date": "2026-10-27",
-      "title": "Painted tiles and water",
-      "groups": [
-        {
-          "name": "New",
-          "items": [
-            "Big maps now have deep and shallow water with beaches and docks. Walk through shallows; only fliers cross deep water"
-          ]
-        },
-        {
-          "name": "Visuals",
-          "items": [
-            "Every map is painted with new hex tiles, shorelines and fog"
-          ]
-        }
-      ],
-      "commits": [
-        "Painted hex tiles and water: holes on big maps become deep and shallow water with mirrored beaches and docks"
       ]
     }
   ]
