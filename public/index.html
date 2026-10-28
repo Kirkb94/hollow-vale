@@ -8480,10 +8480,14 @@ html body.mob.ingame #bw{flex:0 0 auto}
 (function(){if(typeof MOB=='undefined'||!MOB||typeof applyBZ!='function')return;const $q=s=>document.querySelector(s);
 /* 1. a tap counts for the hex whose centre is closest (figures and badges that overhang a neighbour no longer steal the tap) */
 if(typeof cellAt=='function'){const ca=cellAt;cellAt=function(e){try{if(e&&e.clientX!=null&&typeof S!='undefined'&&S&&GEO){
-  if(document.documentElement.classList.contains('tvon')&&typeof window.tvHex=='function'){const h=window.tvHex(e.clientX,e.clientY);if(h)return h}
+  if(document.documentElement.classList.contains('tvon'))return ca.apply(this,arguments);/* Tilted view: its own ground hit-test */
+  /* Some phone browsers (Safari) report rects inside the CSS-zoomed board in a different scale than the tap point. Snap only when the
+     tapped hex's own rect really contains the tap; otherwise use the hex the browser hit (the old behaviour), so a tap is never lost. */
+  const tc=e.target&&e.target.closest?e.target.closest('#board .cell[data-x]'):null;
+  if(tc){const c=tc.getBoundingClientRect(),m=2;if(!(e.clientX>=c.left-m&&e.clientX<=c.right+m&&e.clientY>=c.top-m&&e.clientY<=c.bottom+m))return ca.apply(this,arguments)}
   const b=$q('#board');if(b){const r=b.getBoundingClientRect(),cw=r.width/WF,ch=r.height/HF;let best=null,bd=1e18;
    for(let y=0;y<GEO.BH;y++)for(let x=0;x<GEO.BW;x++){if(!VALID.has(x+','+y))continue;const cx=r.left+(x+(y&1?.5:0)+.5)*cw,cy=r.top+(y*.75+.5)*ch,d=(e.clientX-cx)**2+(e.clientY-cy)**2;if(d<bd){bd=d;best={x,y}}}
-   if(best&&bd<(ch*.62)**2)return best;if(best)return null}}}catch(x){}return ca.apply(this,arguments)}}
+   if(best&&bd<(ch*.62)**2)return best}}}catch(x){}return ca.apply(this,arguments)}}
 /* 2. open each battle zoomed in, sized to the space the board has, and scrolled to your own towers */
 function zoomStart(){if(!document.body.classList.contains('ingame')||!S||(typeof HVMAP!='undefined'&&HVMAP.big))return;const sc=$q('#bscroll'),b=$q('#board');if(!sc||!b)return;
  BZ=1;applyBZ();const h1=b.getBoundingClientRect().height;if(!h1)return;
