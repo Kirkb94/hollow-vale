@@ -1,18 +1,27 @@
 {
   "versions": [
     {
-      "id": "92c41fd",
+      "id": "2f0b554",
       "date": "2026-10-28",
-      "title": "Faster spawning",
+      "title": "Faster spawning and a bigger phone board",
       "groups": [
         {
           "name": "New",
           "items": [
             "After you spawn a hero, the next one from your reserve is picked for you: another copy of the same hero if you have one, otherwise the next hero in line"
           ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "Phone: battles open zoomed in with bigger hexes, centred on your towers. Drag to look around, or use − for the whole map",
+            "Phone: heroes are drawn a little smaller so they sit inside their own hex",
+            "Phone: a tap always picks the hex closest to your finger, so it is much easier to pick where to move"
+          ]
         }
       ],
       "commits": [
+        "Phone board: bigger tiles, smaller figures, taps snap to the nearest hex",
         "Spawning: after a spawn, the next reserve hero is picked for you"
       ]
     },
