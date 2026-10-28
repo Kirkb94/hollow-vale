@@ -1,6 +1,31 @@
 {
   "versions": [
     {
+      "id": "ecf148f",
+      "date": "2026-10-28",
+      "title": "Clearer spells and statuses",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "When anyone casts a spell you can see, a callout tells you who cast what on whom and what it does, with the real numbers",
+            "Every status now shows on the board: Aegis shields, cages, Runeforged Edge, tethers, Ossify, Mimic shapes, charms, standing in flames, and a warning when you stand in a Noon Verdict ring"
+          ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "Status badges are bigger and filled with their colour",
+            "Tap a hero to see each of its statuses: what it does and how long it lasts",
+            "A coloured chip pops up over a hero when it gains or loses a status"
+          ]
+        }
+      ],
+      "commits": [
+        "Spells and statuses read clearly in battle"
+      ]
+    },
+    {
       "id": "5563b9f",
       "date": "2026-10-28",
       "title": "Fixes",
