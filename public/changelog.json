@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "id": "6fd9701",
+      "date": "2026-10-28",
+      "title": "Sudden death toggle",
+      "groups": [
+        {
+          "name": "Features",
+          "items": [
+            "Sudden death is now a match option, on by default. Turn it off and towers never crumble on their own, and you can repair and fortify them for the whole match"
+          ]
+        }
+      ],
+      "commits": [
+        "Sudden death is now a match option (on by default)"
+      ]
+    },
+    {
       "id": "7d0631b",
       "date": "2026-10-28",
       "title": "Tower tap fix",
@@ -250,63 +266,6 @@
         "Sudden death: round 56 on larger maps (14 on Classic)",
         "Fog of war: all units see 1 hex less (min 1)",
         "What's new screen: update notes from public/changelog.json once per new version, with a Hex Rose menu pill"
-      ]
-    },
-    {
-      "id": "65350b1e84b0",
-      "date": "2026-10-27",
-      "title": "Faction powers, a tilted board and a new main menu",
-      "groups": [
-        {
-          "name": "New",
-          "items": [
-            "Each faction now has its own powers: Wilds hide in forests, Infernal set the ground on fire, Undead leave Graves, Vampires grow stronger at night",
-            "Necromancer's Raise the Slain: when he kills an enemy hero, an Undead hero of the same cost rises on your side",
-            "Warlock can turn into a bat and fly before moving",
-            "Towers strike back at melee attackers, and other buildings and walls hit back too. Ranged attacks are safe",
-            "Tilted view lays the board back like a diorama. Turn it on in Display, with V on PC or from the phone zoom bar",
-            "New Hex Rose main menu. Living Map and Hall of Heroes styles are in Display"
-          ]
-        },
-        {
-          "name": "Balance",
-          "items": [
-            "Counterattacks get weaker as the defender loses HP",
-            "Nightstalker is a true glass cannon: 4 HP and 8 damage (was 7 HP and 10 damage)",
-            "Rogue 9 → 8 HP and Wraith 7 → 6 HP",
-            "War Engine damage 2 → 4",
-            "Arcane Flow also lowers Hexweaver's Silence cost from 2 to 1 mana",
-            "Countess and Warlock attacks cost 1 mana. Undying now brings Undead back with 2 HP (was 3)"
-          ]
-        },
-        {
-          "name": "Fixes",
-          "items": [
-            "Hero cards and tooltips now match the real stats (splash, cleave, ranges, heal pokes and hire prices)",
-            "Raise the Slain and Graves now work separately, so a raise never uses up a Grave"
-          ]
-        },
-        {
-          "name": "Visuals",
-          "items": [
-            "HP bars show one notch per HP point, so you can count health at a glance",
-            "Heroes walk their path hex by hex, and fliers glide"
-          ]
-        }
-      ],
-      "commits": [
-        "Assassins: Nightstalker becomes a true glass cannon (7 HP/10 dmg -> 4 HP/8 dmg); Rogue 9->8 HP, Wraith 7->6 HP",
-        "Raise the Slain no longer uses Graves: raises and Graves are independent (a raise never needs, uses, moves or removes a Grave; Graves never change where a raise lands). Drops the RZHOOK grave hook and hvGraveTake; tooltip, How to Play and README text updated",
-        "View: Classic / Tilted 2.5D board (client-only, default Classic)",
-        "Arcane Flow also lowers Hexweaver's Silence cost (2 -> 1): eff() carries slcost; cast, target check, AI, button, card keyword, How to Play and README use it",
-        "Faction mechanics: Wilds Hidden Paths/Overgrowth/Pack Bond, Infernal Scorched Earth + Heat, Undead Graves + Vengeful Dead, Vampire Night Falls, forest trackers; Warlock Bat Form and 1-mana Countess/Warlock attacks",
-        "HP bars: one notch per HP point on units, heroes, bosses, towers, buildings and walls",
-        "Counters scale with HP, structures strike back, heroes walk their path",
-        "Unit text: match live stats (half-damage splash and melee cleave, Arcane Flow mana for Stormcaller/Starweaver, ranges, heal pokes, boss roles, squads list, hire prices, README slots)",
-        "Necromancer: revert damage to 3 (keeps Raise the Slain)",
-        "Necromancer: +1 damage (3 -> 4) and Raise the Slain",
-        "War Engine: +2 damage (2 -> 4)",
-        "Main menu redesign: Hex Rose menu by default, with Living Map and Hall of Heroes styles in Display settings"
       ]
     }
   ]
