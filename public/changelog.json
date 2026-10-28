@@ -1,6 +1,22 @@
 {
   "versions": [
     {
+      "id": "92c41fd",
+      "date": "2026-10-28",
+      "title": "Faster spawning",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "After you spawn a hero, the next one from your reserve is picked for you: another copy of the same hero if you have one, otherwise the next hero in line"
+          ]
+        }
+      ],
+      "commits": [
+        "Spawning: after a spawn, the next reserve hero is picked for you"
+      ]
+    },
+    {
       "id": "3f7e42a",
       "date": "2026-10-28",
       "title": "Rock paper scissors and clearer spells",
