@@ -1383,7 +1383,7 @@ const FAC={
 kingdom:{n:'Kingdom',c:'#e2b84a',p:'Formation',pd:'takes 1 less damage while next to another Kingdom unit.',sy:'every Kingdom unit gains +1 armor.'},
 vamp:{n:'Vampires',c:'#d23a58',p:'Bloodthirst',pd:'every attack drains blood, healing the attacker for 2 HP, but never more than the damage dealt.',sy:'every Vampire drains +2 more.'},
 undead:{n:'Undead',c:'#7fc46a',p:'Undying',pd:'the first time it would die, it rises again with 1 HP.',sy:'Undying returns units with 2 HP instead of 1.'},
-infernal:{n:'Infernal',c:'#f2702a',p:'Burn',pd:'its attacks set units ablaze: 1 damage at the start of their owner\'s next 2 turns.',sy:'Burn deals 2 damage per turn.'},
+infernal:{n:'Infernal',c:'#f2702a',p:'Burn',pd:'its attacks set units ablaze: 1 damage at the start of their owner\'s next 2 turns. Infernal heroes never burn.',sy:'Burn deals 2 damage per turn.'},
 wilds:{n:'Wilds',c:'#5cc070',p:'Regrowth',pd:'heals 2 HP at the start of its owner\'s turn.',sy:'Regrowth heals 3 HP.'},
 iron:{n:'Iron Clan',c:'#a8b4c6',p:'Siegecraft',pd:'deals +1 damage to towers.',sy:'every Iron Clan unit deals +1 damage.'},
 arcane:{n:'Arcane Order',c:'#6a96ff',p:'Arcane Flow',pd:'attacks cost 1 less mana (1-mana attacks are free); spells and heals that cost 2+ mana cost 1 less.',sy:'your side gains +2 mana at the start of every turn.'}};
@@ -8493,6 +8493,18 @@ function zoomStart(){if(!document.body.classList.contains('ingame')||!S||(typeof
   sc.scrollLeft=br.left-sr.left+sc.scrollLeft+cx*br.width-sc.clientWidth/2;sc.scrollTop=br.top-sr.top+sc.scrollTop+cy*br.height-sc.clientHeight*.6}catch(e){}}))}
 if(typeof startGame=='function'){const sg=startGame;startGame=function(){const r=sg.apply(this,arguments);setTimeout(()=>{try{zoomStart()}catch(e){}},80);return r}}
 window.hvZoomStart=zoomStart;
+})();
+</script>
+<script id="hv-infburn-js">/* HV_INFBURN (Uno: "make it so all infernals are immune to burning"). Infernal heroes (including an Ossified or Mimic-shaped one whose body is Infernal) never burn:
+   any Burn put on them is removed at once, so they take no burn damage and show no Burning status. Hits that come with the burn (Wall of Flame's 3, Rain of Fire's 2) still land.
+   Game state: runs inside perform() and the turn hooks on every client, so online games stay in sync. */
+(function(){if(typeof perform!='function'||typeof turnStart!='function')return;
+const inf=u=>!!u&&!!H[u.k]&&H[u.k].fac=='infernal';
+function clr(){try{if(!S||!S.units)return;S.units.forEach(u=>{if(u.burn>0&&inf(u)){u.burn=0;u.brU=null}})}catch(e){}}
+window.hvInfImmune=inf;
+const p0=perform;perform=function(){clr();try{return p0.apply(this,arguments)}finally{clr()}};
+const t0=turnStart;turnStart=function(){clr();try{return t0.apply(this,arguments)}finally{clr()}};
+if(typeof endTurn=='function'){const e0=endTurn;endTurn=function(){try{return e0.apply(this,arguments)}finally{clr()}}}
 })();
 </script>
 </body></html>
