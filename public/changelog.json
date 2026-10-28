@@ -1,7 +1,7 @@
 {
   "versions": [
     {
-      "id": "988bfbd",
+      "id": "3f7e42a",
       "date": "2026-10-28",
       "title": "Rock paper scissors and clearer spells",
       "groups": [
@@ -17,7 +17,7 @@
           "name": "Balance",
           "items": [
             "Nightstalker (Assassin) now has Charge: it moves and attacks in the same turn. Damage 8 → 6, and it costs 4 gold",
-            "The AI's Stonewright no longer builds walls in useless spots or walls in its own team"
+            "The AI no longer wastes turns and mana on walls, snares, flares and silences it does not need, so AI Stonewrights, Trappers and scouts play much better"
           ]
         },
         {
@@ -30,6 +30,7 @@
         }
       ],
       "commits": [
+        "AI: skip abilities it scores as not worth it",
         "Assassin gets Charge; AI no longer builds the walls it meant to skip",
         "Rock paper scissors: points reset for each place, AI seats throw too",
         "Rock paper scissors for who goes first (online and Pass & play)",
