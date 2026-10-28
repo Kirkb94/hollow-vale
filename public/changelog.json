@@ -1,14 +1,20 @@
 {
   "versions": [
     {
-      "id": "2f0b554",
+      "id": "3d96d6a",
       "date": "2026-10-28",
-      "title": "Faster spawning and a bigger phone board",
+      "title": "Faster spawning, fireproof Infernals and a bigger phone board",
       "groups": [
         {
           "name": "New",
           "items": [
             "After you spawn a hero, the next one from your reserve is picked for you: another copy of the same hero if you have one, otherwise the next hero in line"
+          ]
+        },
+        {
+          "name": "Balance",
+          "items": [
+            "Infernal heroes are immune to burning: they never take burn damage"
           ]
         },
         {
@@ -21,6 +27,7 @@
         }
       ],
       "commits": [
+        "Infernal heroes are immune to burning",
         "Phone board: bigger tiles, smaller figures, taps snap to the nearest hex",
         "Spawning: after a spawn, the next reserve hero is picked for you"
       ]
