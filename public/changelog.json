@@ -1,7 +1,7 @@
 {
   "versions": [
     {
-      "id": "3d96d6a",
+      "id": "910b5b7",
       "date": "2026-10-28",
       "title": "Faster spawning, fireproof Infernals and a bigger phone board",
       "groups": [
@@ -14,7 +14,7 @@
         {
           "name": "Balance",
           "items": [
-            "Infernal heroes are immune to burning: they never take burn damage"
+            "Infernal heroes are fireproof: they never burn, and Wall of Flame, Rain of Fire, Fireball cards, Pit Lord's Immolation and a dragon's fly-over do not hurt them. Normal attacks still do"
           ]
         },
         {
@@ -27,6 +27,7 @@
         }
       ],
       "commits": [
+        "Infernal heroes take no damage from fire abilities",
         "Infernal heroes are immune to burning",
         "Phone board: bigger tiles, smaller figures, taps snap to the nearest hex",
         "Spawning: after a spawn, the next reserve hero is picked for you"
