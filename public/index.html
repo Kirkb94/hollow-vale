@@ -8011,4 +8011,20 @@ document.addEventListener('click',e=>{const m=e.target.closest&&e.target.closest
 new MutationObserver(()=>{const c=q('#lobby .hvl-cf');if(c&&!c.hidden&&!inRoom())c.hidden=true}).observe(q('#lobby'),{childList:true,subtree:true,attributes:true,attributeFilter:['hidden']});
 })();
 </script>
+<style id="hv-usecall">
+/* Hero selection: the "Use:" line on every card is a highlighted callout (gold edge, bold label); on phones it shows too, clamped to 2 lines. */
+#cards .card small.use{display:block!important;font-style:normal!important;opacity:1!important;margin:6px 0 3px!important;padding:5px 8px 5px 9px;border-left:3px solid #e9c46a;border-radius:0 6px 6px 0;background:linear-gradient(90deg,rgba(233,196,106,.22),rgba(233,196,106,.05));color:#fbefd0!important;font-size:12.5px;line-height:1.35;text-align:left}
+#cards .card small.use b.hvu{color:#f1c862;font-weight:800;letter-spacing:.07em;text-transform:uppercase;font-size:10.5px;margin-right:5px;font-style:normal}
+#cards .card:hover small.use,#cards .card:focus-visible small.use{background:linear-gradient(90deg,rgba(233,196,106,.32),rgba(233,196,106,.08))}
+html.hc #cards .card small.use{background:#000;color:#fff!important;border-left-color:#ffd23f}
+html.bigtext #cards .card small.use{font-size:14.5px}
+body.mob #cards .card small.use{display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:11.5px;line-height:1.3;padding:3px 6px 3px 7px;margin:4px 0 2px!important}
+body.mob #cards .card small.use b.hvu{font-size:9.5px;margin-right:3px}
+</style>
+<script id="hv-usecall-js">/* Wraps the leading "Use:" of each card's .use line in a bold label. Cosmetic only. */
+(function(){const C=document.getElementById('cards');if(!C)return;
+function fix(){C.querySelectorAll('.card small.use:not([data-hvu])').forEach(el=>{el.dataset.hvu='1';const f=el.firstChild;if(f&&f.nodeType===3&&/^\s*Use:\s*/.test(f.nodeValue)){f.nodeValue=f.nodeValue.replace(/^\s*Use:\s*/,'');const b=document.createElement('b');b.className='hvu';b.textContent='Use';el.insertBefore(b,f)}})}
+new MutationObserver(fix).observe(C,{childList:true,subtree:true});fix();
+})();
+</script>
 </body></html>
