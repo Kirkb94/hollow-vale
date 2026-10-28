@@ -1,6 +1,77 @@
 {
   "versions": [
     {
+      "id": "8fa74dd",
+      "date": "2026-10-28",
+      "title": "Spellcasters, a tutorial and a big balance pass",
+      "groups": [
+        {
+          "name": "New",
+          "items": [
+            "21 new spellcasters, 3 for every faction, with spell cooldowns",
+            "Lancer, Raiders, Hellhound, Wolf Pack, Death Knight and Alpha Direwolf can now Charge: move and attack in the same turn",
+            "Ambush: walking into a hidden enemy (in fog or a forest) stops your hero with a big \"!\", and only that hero's turn ends",
+            "Tutorial: learn to move, attack, spawn, use gold and abilities and hit towers in 8 short steps (main menu > Tutorial)",
+            "Searchable Help (press ? or H): rules, every hero, keywords and statuses, with links between them",
+            "First-time tips, which you can turn off or reset in Display",
+            "Browse lobbies: see open rooms with their host, players, mode and map, and join with an optional room password",
+            "Leave an online lobby from Main menu",
+            "What's new screen: see what changed after each update"
+          ]
+        },
+        {
+          "name": "Balance",
+          "items": [
+            "Hero prices reworked from thousands of test games. Cheap heroes that were too strong now cost 5 gold, Tanks no longer pay +2 gold, and builders, control and support heroes are cheaper",
+            "Arcane Order is stronger: 1-mana attacks are free, Arcane synergy gives +2 mana a turn, and 7 Arcane heroes have more HP",
+            "Four rounds of boss balance: the strongest bosses (including the Charge bosses) are weaker and the weakest are stronger",
+            "Fog of war: every unit sees 1 hex less",
+            "Sudden death starts at round 56 on larger maps (still round 14 on Classic)"
+          ]
+        },
+        {
+          "name": "Fixes",
+          "items": [
+            "Many fixes from playtesting: market pictures, ability targeting, the AI pushes towers, one copy per boss, turn log, bans",
+            "Fixed several boss bugs",
+            "The old main menu no longer flashes while the game loads"
+          ]
+        },
+        {
+          "name": "Visuals",
+          "items": [
+            "Animation pass: weapon attacks with hit reactions, idle breathing, knockouts, spell wind-ups, fliers glide",
+            "Lighter, faster-loading hero art",
+            "Clearer battle screen: Day/Night chip, whose turn it is, status badges, tower HP and objectives",
+            "Phone: nothing pops up over the board any more, and the battle screen is much less cluttered",
+            "Hero selection highlights what each hero is used for"
+          ]
+        }
+      ],
+      "commits": [
+        "Gold cost balance: reprice heroes from AI-vs-AI win-rate sims",
+        "Main menu: stop the old menu flashing while the page loads",
+        "Boss balance pass 4 (sim-tested): Marshal, Plague Lord, Thunder King, Forge Master",
+        "Boss balance pass 3 (sim-tested): trim the Charge bosses, lift the Arcane Order",
+        "Hero selection: highlight each card's \"Use\" line",
+        "Boss balance pass 2 (sim-tested): buff the bottom bosses, trim High Seraph",
+        "Lobby browser: Browse lobbies list (name, host, players n/cap, mode, map, Full / In battle), optional room passwords checked on the server, host room name & password editor",
+        "Tutorial, searchable Help, first-time tips, and leaving an online lobby",
+        "Boss balance pass + boss bug fixes (sim-tested)",
+        "Phone battle screen: nothing pops up over the board, and far less clutter",
+        "Readable in-game UI: Day/Night chip, meters, whose turn, status badges, tower HP + objectives, crisp spent heroes",
+        "Add Charge to Lancer, Raiders, Hellhound, Wolf Pack, Death Knight and Alpha Direwolf; price Charge in hireCost",
+        "21 new spellcasters (3 per faction) with spell cooldowns and spell-priced hiring; AI casts Rewind, Bone Shrapnel, Sweet Command and Iron Cage when they help; Tilted view support",
+        "Animation pass: weapon-type attacks with hit reactions (flinch, knockback, white flash, big-hit shake), varied idle breathing and body-type K.O. animations, element-tinted spell wind-ups and impacts, UI motion (turn chip, card deal, panel fades, gold/mana tick-up), flier glide and tank footstep sounds",
+        "Marlowe playtest fixes: market thumbnails, ability targets + Q, AI pushes towers, one copy per boss, turn log, ban confirm + AI bans, readable hexes, Display speed/volume, Hex Rose screens, 1v1 rooms",
+        "Lighter hero art: pre-rendered webp portraits (scene + figure) and board figures, and a draft pick rebuilds only the changed card",
+        "Ambush alert: big \"!\" over a unit stopped by a hidden enemy",
+        "Sudden death: round 56 on larger maps (14 on Classic)",
+        "Fog of war: all units see 1 hex less (min 1)",
+        "What's new screen: update notes from public/changelog.json once per new version, with a Hex Rose menu pill"
+      ]
+    },
+    {
       "id": "65350b1e84b0",
       "date": "2026-10-27",
       "title": "Faction powers, a tilted board and a new main menu",
