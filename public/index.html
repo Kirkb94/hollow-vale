@@ -6615,17 +6615,18 @@ HVSP.spKey=spKey;HVSP.spTargets=spTargets;HVSP.spWhy=spWhy;
 const L2=n=>n==null?'zz':String.fromCharCode(97+Math.floor(n/26))+String.fromCharCode(97+n%26);
 const enc=o=>'sp'+L2(o&&o.x2)+L2(o&&o.y2)+String.fromCharCode(97+((o&&o.X)||0));
 function dec(s){const o={};if(typeof s!='string'||!/^sp[a-z]{5}$/.test(s))return o;const n=i=>s.slice(i,i+2)=='zz'?null:(s.charCodeAt(i)-97)*26+(s.charCodeAt(i+1)-97);o.x2=n(2);o.y2=n(4);o.X=s.charCodeAt(6)-97;return o}
-HVSP.enc=enc;HVSP.dec=dec;
+HVSP.enc=enc;HVSP.dec=dec;HVSP.SPELL=SPELL;
 /* cast: called from perform on every client */
 function spPerform(u,a){const k=spKey(u);if(!k||u.side!=a.s||u.used)return false;const t=spTargets(u,k).find(q=>q.x==a.x&&q.y==a.y);if(!t)return false;const o=dec(a.item),sp=SPELL[k];
  if(sp.two&&(o.x2==null||o.y2==null))return false;if(sp.c=='X'&&!(o.X>=1&&o.X<=5&&o.X<=S.mana[u.side]))return false;
  const cost=sp.c=='X'?0:spCost(u,k),uk=u.k,vis=!RP&&(visU(u)||seen(t));curAtk=u;
  if(vis){try{actorRing(u,sideCol(u.side));if(t.v!==u)strikeLine(u,t,sp.foe?'#b06aff':'#6ad0ff');reticle(t,sp.foe?'#b06aff':'#6ad0ff',0,sp.e)}catch(e){}}
+ if(vis){try{window.hvPreCast&&window.hvPreCast(k,u,t,o)}catch(e){}}
  const r=sp.cast(u,t,o);if(r===false)return false;
  S.mana[u.side]-=cost;G[u.side].mana+=cost;if(sp.cd&&k!='revert'&&!(k=='aegis'&&t.tw))u.spcd=S.round+sp.cd+1;
  if(k!='revert'||true)u.used=true;if(MOPT.sight&&sp.foe)u.exp=1;
  fx(u,'atk',Math.sign(t.x-u.x)*10,Math.sign(t.y-u.y)*10);stat('cast:'+k);stat('castBy:'+uk);
- if(vis){try{vfx('cast:'+k,u,t,o);sfxK(k)}catch(e){}}
+ if(vis){try{vfx('cast:'+k,u,t,o);sfxK(k)}catch(e){}try{window.hvOnCast&&window.hvOnCast(k,u,t,o,uk)}catch(e){}}
  reapDead(u.side);
  if(k=='lance'&&u._lk&&LIVE(u)){S.mana[u.side]=Math.min(10,S.mana[u.side]+1);pop(u,'+1✦',1);stat('lanceRefund')}delete u._lk;
  return true}
@@ -6850,11 +6851,6 @@ wrap('kwH',o=>function(k,c){let r=o.apply(this,arguments);const h=H[k];if(!h||!h
  if(c)return r.replace('<span class="kw kc">',`<span class="kw kc"><span class="ki ksp"><b>${a}</b>: ${b}</span>`);return r.replace('<ul class="kw">',`<ul class="kw"><li class="ksp"><b>${a}</b>: ${b}</li>`)});
 wrap('ucard',o=>function(u){let r=o.apply(this,arguments);try{const st=[],q=s=>String(s).replace(/"/g,'&quot;'),ch=(i,t,tip,c)=>`<span class="ust${c?' '+c:''}" data-tip="${q(tip)}">${i} ${t}</span>`,k=spKey(u);
  if(k&&SPELL[k]&&k!='revert'){const w=spWhy(u,k);st.push(ch(SPELL[k].e,w&&w!='already acted'?w:'ready',SPELL[k].n+': '+SPELL[k].d,w&&w!='already acted'?'':'good'))}
- if(u.shape&&u.shape.kind=='mim')st.push(ch('🐾','Shape: '+H[u.shape.look].n,'Mimic Shape: reverts at the end of its turn '+(u.shape.n>0?'after next':'this turn')+', or as an action.'));
- if(u.shape&&u.shape.kind=='oss')st.push(ch('💀','Ossified','Ossified: 2 damage, move 2, melee, no abilities until the end of its next turn. It keeps its own HP.','bad'));
- if(u.shield>0)st.push(ch('🛡',u.shield,'Aegis shield: soaks this much damage after armor.'));if(u.cage)st.push(ch('⛓','Caged','Iron Cage: cannot move, act or be targeted, damaged or healed until the end of its next turn.','bad'));
- if(u.edge)st.push(ch('🔨','+3 Edge','Runeforged Edge: its next attack deals +3 and ignores armor.'));
- if(S.tethers){if(S.tethers.some(t=>t.a===u))st.push(ch('🩸','Tethering','Crimson Tether: drains its target each turn. Move 1 while it holds.'));if(S.tethers.some(t=>t.b===u))st.push(ch('🩸','Tethered','Crimson Tether: loses HP at the start of the Hemomancer\'s turns. Get more than 4 hexes away or behind a wall to break it.','bad'))}
  if(st.length)r=r.replace(/<\/div>\s*$/,`<div class="usts usp">${st.join('')}</div></div>`)}catch(e){}return r});
 wrap('terTip',o=>function(x,y){let r=o.apply(this,arguments)||'';try{const add=[];(S.zones||[]).forEach(z=>{if(!inZone(z,x,y))return;const who=esc0(NAMES[z.side]||SHORT[z.side]);
  if(z.k=='verdict')add.push(`<b>☀️ Noon Verdict</b> (${who})<br>At the start of ${who}'s next turn: 5 damage in the centre, 3 on the ring, 3 to towers and buildings.`);
@@ -7246,10 +7242,11 @@ function stList(u,cell){const r=[],C=CF(),F=FMx();const add=(rail,ic,t,tip,tone,
  if(F&&H[u.k]&&H[u.k].fac=='infernal'&&(F.heat&&F.heat[u.side]||0)>=C.heatCost)add('r','♨','Overheat',`Overheat ready: its side has ${F.heat[u.side]} Heat. On its turn the next Infernal attack deals +${C.ovhDmg} damage and splashes.`,'heat');
  for(const f of PROV){try{const x=f(u,cell);if(x)(Array.isArray(x)?x:[x]).forEach(o=>o&&o.ic&&r.push(Object.assign({rail:'r',tone:'good'},o)))}catch(e){}}
  return r}
+window.hvStList=stList;
 const badge=o=>`<i class="t-${q(o.tone||'good')}" data-tip="${q(o.tip||o.t)}" aria-label="${q(o.t)}">${o.ic}${o.n>0?'<b>'+(o.n>9?'9+':o.n)+'</b>':''}</i>`;
 let BS={k:'',n:3};
 function sizeBadges(){const c=B.querySelector('.cell[data-x]');if(!c||!c.offsetWidth)return;const w=c.getBoundingClientRect().width,sc=w/c.offsetWidth||1,k=parseFloat(getComputedStyle(B).getPropertyValue('--hvbsk'))||1;
- const bs=Math.max(MOB?13:15,Math.min(22,w*.23))*k,n=Math.max(2,Math.min(3,Math.floor((w*(MOB?1:.8))/(bs+2))));const key=(bs/sc).toFixed(2)+'/'+n;if(key===BS.k)return;BS={k:key,n};B.style.setProperty('--hvbs',(bs/sc).toFixed(2)+'px')}
+ const bs=Math.max(MOB?15:17,Math.min(26,w*.27))*k,n=Math.max(2,Math.min(3,Math.floor((w*(MOB?1:.8))/(bs+2))));const key=(bs/sc).toFixed(2)+'/'+n;if(key===BS.k)return;BS={k:key,n};B.style.setProperty('--hvbs',(bs/sc).toFixed(2)+'px')}
 function badges(){sizeBadges();const mine=!S.over&&isMine(S.turn);
  B.querySelectorAll('.cell[data-x]').forEach(cell=>{const x=+cell.dataset.x,y=+cell.dataset.y,uel=cell.querySelector(':scope>.u');if(!uel)return;
   let u=null;try{u=typeof atV=='function'?atV(x,y):at(x,y)}catch(e){}if(!u||u.hp<=0)return;
@@ -8030,6 +8027,179 @@ body.mob #cards .card small.use b.hvu{font-size:9.5px;margin-right:3px}
 (function(){const C=document.getElementById('cards');if(!C)return;
 function fix(){C.querySelectorAll('.card small.use:not([data-hvu])').forEach(el=>{el.dataset.hvu='1';const f=el.firstChild;if(f&&f.nodeType===3&&/^\s*Use:\s*/.test(f.nodeValue)){f.nodeValue=f.nodeValue.replace(/^\s*Use:\s*/,'');const b=document.createElement('b');b.className='hvu';b.textContent='Use';el.insertBefore(b,f)}})}
 new MutationObserver(fix).observe(C,{childList:true,subtree:true});fix();
+})();
+</script>
+<style id="hv-spread">
+/* ===== HV_SPREAD: spells and statuses read clearly in battle (Uno: "make it more apparent what is going on").
+   1. a callout for every spell you can see being cast: who casts what on whom, and what it does in plain words, with the real numbers
+   2. bigger, colour-filled status badges on the board, with every spell status included (shield, cage, edge, tether, bone, shape, charm, flames, verdict, veil)
+   3. the unit card lists each status: icon, name, what it does, how long it lasts
+   4. a colour-coded floating chip over a unit when it gains or loses a status
+   Cosmetic only: reads S, never changes game state, skipped in replays and ?fast. ===== */
+/* 1. cast callout (it is the shared #hvtoast, so on phones it docks under the board like every other toast) */
+#hvtoast.hvcast{border-color:var(--cc,#b06aff);box-shadow:0 0 0 1px #000,0 0 18px color-mix(in srgb,var(--cc,#b06aff) 45%,transparent),0 8px 24px #000c;padding:10px 16px 11px;gap:4px;min-width:min(380px,calc(100vw - 24px))}
+#hvtoast.hvcast .hvch{display:flex;align-items:center;gap:8px;font-size:15.5px;line-height:1.25}
+#hvtoast.hvcast .hvch .hvce{flex:none;display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#0c0e12;border:2px solid var(--cc,#b06aff);font-size:19px;line-height:1}
+#hvtoast.hvcast .hvch b.hvsn{color:var(--cc2,#e0c8ff)}
+#hvtoast.hvcast .hvcl{font-size:14.5px;line-height:1.38;color:#f4ead0;padding-left:42px}
+#hvtoast.hvcast .hvcl b{color:#fff}
+#hvtoast.hvcast .hvcl u{text-decoration:none;font-weight:700}
+#hvtoast.hvcast.foe{--cc:#ff7a6a;--cc2:#ffc0b4}
+#hvtoast.hvcast.ally{--cc:#6ad0ff;--cc2:#c4ecff}
+body.mob #hvtoast.hvcast{min-width:0}
+body.mob #hvtoast.hvcast .hvch{font-size:14px}
+body.mob #hvtoast.hvcast .hvcl{font-size:13px;padding-left:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+body.mob #hvtoast.hvcast .hvch .hvce{width:28px;height:28px;font-size:16px}
+/* 2. board badges: filled with their colour, a bit bigger (the size is set by the HUD script) */
+#board .cell .hvsb>i{background:var(--bf,#0c0e12f0)}
+#board .cell .hvsb>i.t-bad{--bf:#4a100cf2}
+#board .cell .hvsb>i.t-fire{--bf:#4c2206f2}
+#board .cell .hvsb>i.t-shield{--bf:#0c2a46f2}
+#board .cell .hvsb>i.t-undead{--bf:#13300ef2}
+#board .cell .hvsb>i.t-good{--bf:#261a4af2}
+#board .cell .hvsb>i.t-warn{--bf:#4a3204f2;animation:hvsbw 1.1s ease-in-out infinite alternate}
+@keyframes hvsbw{to{box-shadow:0 0 0 1px #000,0 0 8px #ffcf5a}}
+/* the old small spell chips on units are replaced by the badges (tower and wall shields stay) */
+#board .cell .sps:not(.tws){display:none!important}
+/* 3. unit card status list */
+.ucard .hvust{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.ucard .hvust .hvusr{display:grid;grid-template-columns:24px 1fr auto;align-items:start;column-gap:7px;padding:5px 8px;border-radius:8px;background:var(--bf,#ffffff0d);border-left:3px solid var(--bc,#c8b4ff);font:13px/1.32 'Alegreya Sans',system-ui,sans-serif;color:#efe4cc;text-align:left}
+.ucard .hvust .hvusr>i{font-style:normal;font-size:17px;line-height:1.1;text-align:center}
+.ucard .hvust .hvusr>span b{display:block;color:#fff;font-size:13.5px}
+.ucard .hvust .hvusr>em{font-style:normal;font-weight:800;font-size:11.5px;padding:1px 7px;border-radius:999px;background:#0008;color:#fff;white-space:nowrap}
+.ucard .hvust .t-bad{--bc:#ff7060;--bf:#ff70601a}
+.ucard .hvust .t-fire{--bc:#ff9a3a;--bf:#ff9a3a1a}
+.ucard .hvust .t-shield{--bc:#7cc8ff;--bf:#7cc8ff1a}
+.ucard .hvust .t-undead{--bc:#9ee07a;--bf:#9ee07a1a}
+.ucard .hvust .t-warn,.ucard .hvust .t-heat{--bc:#ffcf5a;--bf:#ffcf5a1f}
+.ucard .hvust .t-good{--bc:#c8b4ff;--bf:#c8b4ff1a}
+body.mob .ucard .hvust .hvusr{font-size:12px;padding:4px 7px}
+body.mob .ucard .hvust .hvusr>span b{font-size:12.5px}
+/* 4. floating status chips */
+#fxl .hvstf{position:absolute;width:0;height:0;pointer-events:none;z-index:10}
+#fxl .hvstf b{position:absolute;left:0;bottom:0;transform:translate(-50%,-60%);display:flex;align-items:center;gap:4px;white-space:nowrap;padding:3px 9px 3px 6px;border-radius:999px;background:var(--bf,#261a4af2);border:2px solid var(--bc,#c8b4ff);box-shadow:0 0 0 1px #000,0 3px 10px #000c;color:#fff;font:800 clamp(12px,1.25vw,16px)/1.1 'Alegreya Sans',system-ui,sans-serif;letter-spacing:.01em;animation:hvstf 1.9s cubic-bezier(.2,.9,.3,1) both;animation-delay:var(--dl,0s)}
+#fxl .hvstf b i{font-style:normal;font-size:1.15em}
+#fxl .hvstf.off b{opacity:.92;background:#16181ef0;color:#d8d2c4;font-weight:700}
+#fxl .hvstf.off b s{text-decoration:none;opacity:.75;font-weight:600}
+#fxl .hvstf.t-bad{--bc:#ff7060;--bf:#5a120ef2}
+#fxl .hvstf.t-fire{--bc:#ff9a3a;--bf:#5a2806f2}
+#fxl .hvstf.t-shield{--bc:#7cc8ff;--bf:#0c2e50f2}
+#fxl .hvstf.t-undead{--bc:#9ee07a;--bf:#14360ef2}
+#fxl .hvstf.t-warn,#fxl .hvstf.t-heat{--bc:#ffcf5a;--bf:#4e3404f2}
+#fxl .hvstf.t-good{--bc:#c8b4ff;--bf:#2a1c52f2}
+@keyframes hvstf{0%{opacity:0;transform:translate(-50%,-10%) scale(.6)}12%{opacity:1;transform:translate(-50%,-75%) scale(1.08)}22%{transform:translate(-50%,-70%) scale(1)}78%{opacity:1;transform:translate(-50%,-95%)}100%{opacity:0;transform:translate(-50%,-125%)}}
+body.mob #fxl .hvstf b{font-size:11px;padding:2px 7px 2px 5px;border-width:1.5px}
+/* the game's own status pop-ups ("Caged!", "Shield broken"...) get the same colour-coded chip look */
+.pop .hvsp{display:inline-flex;align-items:center;gap:3px;padding:2px 8px 2px 5px;border-radius:999px;background:var(--bf,#261a4af2);border:2px solid var(--bc,#c8b4ff);box-shadow:0 0 0 1px #000,0 2px 8px #000b;color:#fff;font-weight:800;font-style:normal;white-space:nowrap;text-shadow:none}
+.pop .hvsp.t-bad{--bc:#ff7060;--bf:#5a120ef2}.pop .hvsp.t-fire{--bc:#ff9a3a;--bf:#5a2806f2}.pop .hvsp.t-shield{--bc:#7cc8ff;--bf:#0c2e50f2}
+.pop .hvsp.t-undead{--bc:#9ee07a;--bf:#14360ef2}.pop .hvsp.t-warn{--bc:#ffcf5a;--bf:#4e3404f2}.pop .hvsp.t-good{--bc:#c8b4ff;--bf:#2a1c52f2}
+.pop .hvsp.off{background:#16181ef0;color:#d8d2c4}
+@media (prefers-reduced-motion:reduce){#fxl .hvstf b{animation:hvstfr 1.9s linear both}@keyframes hvstfr{0%,85%{opacity:1}100%{opacity:0}}#board .cell .hvsb>i.t-warn{animation:none}}
+</style>
+<script id="hv-spread-js">/* HV_SPREAD (see #hv-spread). Cosmetic only. */
+(function(){
+if(typeof render!='function'||typeof pop!='function'||!window.HVSP)return;
+const D=document,FAST=/[?&]fast\b/.test(location.search);
+const q=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const off=()=>FAST||(typeof RP!='undefined'&&RP)||(typeof RUNFAST!='undefined'&&RUNFAST);
+const inGame=()=>!!S&&D.body.classList.contains('ingame');
+const KK=(x,y)=>x+','+y;
+const plural=(n,w)=>n+' '+w+(n==1?'':'s');
+const live=v=>!!v&&v.hp>0&&S.units.includes(v);
+const nmK=k=>(H[k]&&H[k].n)||'a hero';
+const base=v=>v&&v.shape&&v.shape.kind=='oss'?v.shape.k0:v&&v.k;
+const owner=sd=>{try{if(isMine(sd))return 'Your'}catch(e){}return q((typeof NAMES!='undefined'&&NAMES[sd])||SIDEN[sd]||sd)+"'s"};
+const whoN=sd=>{try{if(isMine(sd))return 'your'}catch(e){}return q((typeof NAMES!='undefined'&&NAMES[sd])||SIDEN[sd]||sd)+"'s"};
+const U=(v,u)=>v&&u&&v===u?'The caster':v?`<u style="color:${SCOL[v.side]||'#fff'}">${q(nmK(base(v)))}</u>`:'a unit';
+const zones=()=>(S&&S.zones)||[];
+const inZ=(z,x,y)=>z.cells.includes(KK(x,y));
+const foe=(a,b)=>{try{return isFoe(a,b)}catch(e){return a!==b}};
+const syn=(sd,f)=>{try{return hasSyn(sd,f)}catch(e){return false}};
+
+/* ---------- 1. cast callouts ---------- */
+const SAY={
+ verdict:(u,t)=>`A golden ring lands at the start of ${whoN(u.side)} next turn: <b>5</b> damage on the centre hex, <b>3</b> around it. Enemies should get out!`,
+ aegis:(u,t)=>{const o=t.v||t.o;const a=o&&o.shield||0;return t.tw?`A tower gets a <b>${a}</b> shield.`:t.v?`${U(t.v,u)} gets a <b>${a}</b> shield: it soaks the next ${a} damage for 2 turns.`:`A building gets a <b>${a}</b> shield.`},
+ rally:(u,t)=>`${U(t.v,u)} is pulled to the Herald's side. It can still attack this turn if it has not acted.`,
+ tether:(u,t)=>{const a=syn(u.side,'vamp')?3:2;return `${U(t.v,u)} is bound: each turn for 3 turns it loses <b>${a}</b> HP and the Hemomancer heals <b>${a}</b>. Get more than 4 hexes away or behind a wall to break it.`},
+ command:(u,t,o,P)=>`${U(t.v,u)} is charmed and attacks ${P&&P.w?U(P.w):'a target'} for the caster! It cannot counterattack until its next turn.`,
+ veil:()=>`Darkness covers 7 hexes for 2 turns: enemies cannot see inside, and only enemies standing next to a unit in it can target it.`,
+ shrapnel:(u,t,o,P)=>`${P&&P.v?U(P.v):'A summon'} explodes: <b>4</b> damage to every enemy next to it.`,
+ ossify:(u,t)=>`${U(t.v,u)} turns to bone until the end of its next turn: <b>2</b> damage, move <b>2</b>, melee only, no abilities or spells.`,
+ grave:()=>`An Open Grave: heroes can spawn next to it for 3 turns.`,
+ flamewall:()=>`3 hexes burn for 2 turns: enemies that walk in or start their turn there take <b>3</b> and burn. Fliers are safe.`,
+ hook:(u,t)=>`${U(t.v,u)} is dragged toward the Hellbinder, takes damage and burns.`,
+ bargain:(u,t)=>`${U(t.v,u)} pays <b>3</b> HP: <b>+1</b> mana and <b>+1</b> gold.`,
+ herd:()=>`A spirit herd stampedes 4 hexes: <b>3</b> damage and a push to every enemy in its path (<b>5</b> if the push is blocked).`,
+ mire:()=>`7 hexes turn to swamp for 2 rounds: walking units stop when they step in.`,
+ mimic:(u,t,o,P)=>`The Skinchanger takes the body of ${P&&P.v?U(P.v):'a hero'}: its HP share, move, range and damage, but none of its spells or abilities.`,
+ revert:()=>`The Skinchanger returns to its own body.`,
+ edge:(u,t)=>`${U(t.v,u)}'s next attack deals <b>+3</b> and ignores armor.`,
+ cage:(u,t)=>`${U(t.v,u)} is locked in until the end of its next turn: it cannot act, and nothing can hit or heal it.`,
+ vein:()=>`This gold mine pays <b>+1</b> gold on the next 2 turns.`,
+ lance:(u,t,o)=>{const X=Math.max(1,Math.min(5,(o&&o.X)||1));return `X = ${X}: <b>${2+X}</b> damage to the first enemy in the line, <b>${X}</b> to every other enemy in it.`},
+ swap:(u,t,o,P)=>`${U(t.v,u)} and ${P&&P.w?U(P.w):'another unit'} swap places.`,
+ rewind:(u,t)=>`${U(t.v,u)} goes back to its hex and HP from the start of the last turn, and loses new burn, snares, wither and stun.`
+};
+let PRE=null;
+window.hvPreCast=function(k,u,t,o){try{PRE={k,v:t&&t.v||null,w:(o&&o.x2!=null)?at(o.x2,o.y2):null}}catch(e){PRE=null}};
+window.hvOnCast=function(k,u,t,o,uk){if(off()||!inGame())return;try{
+ const SP=HVSP.SPELL||{},sp=SP[k];if(!sp)return;const say=SAY[k];if(!say)return;
+ const P=PRE&&PRE.k===k?PRE:null;PRE=null;
+ const mine=isMine(u.side),tgtFoe=t&&t.v&&foe(t.v.side,u.side);
+ const cls='hvcast '+(mine?'me':'')+(!mine&&sp.foe?' foe':'')+(mine&&!sp.foe?' ally':'');
+ const col=SCOL[u.side]||'#fff';
+ const html=`<div class="hvch"><span class="hvce" style="--cc:${col}">${sp.e}</span><span><span class="tdot" style="background:${col}"></span>${owner(u.side)} <b>${q(nmK(uk||u.k))}</b> casts <b class="hvsn">${q(sp.n)}</b></span></div><div class="hvcl">${say(u,t||{},o||{},P)}</div>`;
+ const T=window.HVM&&HVM.toast;if(typeof T=='function')T(html,cls,(typeof MOB!='undefined'&&MOB)?(mine?3200:4500):(mine?4200:6000))}catch(e){}};
+
+/* ---------- 2. spell statuses on the board badges ---------- */
+const PROV=window.hvStatus=Array.isArray(window.hvStatus)?window.hvStatus:[];
+PROV.push(function(u){const r=[];if(!S)return r;
+ if(u.shield>0)r.push({rail:'r',ic:'🛡',t:'Aegis shield',tip:`Aegis shield: soaks the next ${u.shield} damage (after armor). Fades after ${plural(Math.max(1,u.shL||1),'more turn')} of its caster.`,tone:'shield',n:u.shield});
+ if(u.cage)r.push({rail:'l',ic:'⛓',t:'Caged',tip:'Iron Cage: cannot move, attack, cast or heal, and nothing can target, damage or heal it. Opens at the end of its next turn.',tone:'bad'});
+ if(u.edge)r.push({rail:'r',ic:'🔨',t:'Runeforged Edge',tip:'Runeforged Edge: its next attack deals +3 to its main target and ignores armor.',tone:'good'});
+ if(u.shape&&u.shape.kind=='oss')r.push({rail:'l',ic:'💀',t:'Ossified',tip:'Ossified: a skeleton with 2 damage, move 2 and melee reach, no abilities or spells, until the end of its next turn. It keeps its own HP.',tone:'bad'});
+ if(u.shape&&u.shape.kind=='mim')r.push({rail:'r',ic:'🐾',t:'Shape: '+nmK(u.shape.look),tip:`Mimic Shape: has the body of a ${nmK(u.shape.look)}. Reverts at the end of ${u.shape.n>0?'its turn after next':'this turn'}, or as an action.`,tone:'good'});
+ if(u.nocnt)r.push({rail:'l',ic:'🎭',t:'Charmed',tip:'Sweet Command: it was charmed and cannot counterattack until its next turn.',tone:'bad'});
+ (S.tethers||[]).forEach(T=>{const a=syn(T.side,'vamp')?3:2;
+  if(T.b===u)r.push({rail:'l',ic:'🩸',t:'Tethered',tip:`Crimson Tether: loses ${a} HP and heals the Hemomancer ${a} at the start of ${whoN(T.side)} next ${plural(T.n,'turn')}. Get more than 4 hexes away or put a wall between them to break it.`,tone:'bad',n:T.n});
+  if(T.a===u)r.push({rail:'r',ic:'🩸',t:'Tethering',tip:`Crimson Tether: drains ${a} HP a turn from its target for ${plural(T.n,'more turn')}. Its move is 1 while the tether holds.`,tone:'good',n:T.n})});
+ zones().forEach(z=>{if(!inZ(z,u.x,u.y))return;const fly=H[u.k]&&H[u.k].fly;
+  if(z.k=='fire'&&foe(z.side,u.side)&&!fly)r.push({rail:'l',ic:'🔥',t:'In the flames',tip:'Wall of Flame: takes 3 and burns at the start of its turn while it stands here.',tone:'fire',n:z.n});
+  if(z.k=='verdict'&&foe(z.side,u.side))r.push({rail:'l',ic:'☀️',t:'Noon Verdict!',tip:`Noon Verdict lands at the start of ${whoN(z.side)} next turn: ${z.x==u.x&&z.y==u.y?5:3} damage here. Move out of the ring!`,tone:'warn'});
+  if(z.k=='veil'&&!foe(z.side,u.side))r.push({rail:'r',ic:'🌑',t:'Veiled',tip:'Veil of Night: enemies cannot see it, and only enemies next to it can target it.',tone:'good',n:z.n})});
+ return r});
+
+/* make the HUD badges a little bigger (they scale with the hex) */
+/* the HUD reads --hvbs from sizeBadges(); this multiplies it */
+
+/* ---------- 3. unit card status list ---------- */
+if(typeof ucard=='function'){const uc=ucard;window.ucard=ucard=function(u){let r=uc.apply(this,arguments);try{const L=typeof window.hvStList=='function'?window.hvStList(u,typeof cellEl=='function'?cellEl(u.x,u.y):null):[];
+ if(L.length){const rows=L.map(o=>`<div class="hvusr t-${q(o.tone||'good')}"><i>${o.ic}</i><span><b>${q(o.t)}</b>${q((x=>x.charAt(0).toUpperCase()+x.slice(1))(String(o.tip||'').replace(/^[^:]{1,40}:\s*/,'')))}</span>${o.n>0?`<em>${o.n}</em>`:''}</div>`).join('');
+  r=r.replace(/<\/div>\s*$/,`<div class="hvust">${rows}</div></div>`)}}catch(e){}return r}}
+
+/* ---------- 4. floating chips when a status starts or ends ---------- */
+const TONE={};const SKIP=new Set(['Hidden','Overheat','Veiled','In the flames','Noon Verdict!']);
+/* the game's own status pop-ups: restyled, and they stand in for the matching chip so nothing shows twice */
+const LEG=[[/^Caged!?$/,'⛓','bad','Caged','+'],[/^Cage opens$/,'⛓','good','Caged','-'],[/^Silenced!$/,'🔇','bad','Silenced','+'],[/^Snared!$|^Rooted$/,'🪤','bad','Snared','+'],
+ [/^Withered$/,'🥀','bad','Withered','+'],[/^Marked!$/,'🎯','bad','Marked','+'],[/^Warded!$/,'🛡','shield','Ward','+'],[/^Tether snaps$/,'🩸','good','Tethered','-'],
+ [/^Shield broken$/,'🛡','bad','Aegis shield','-'],[/^Bones fall away$/,'💀','good','Ossified','-'],[/^Reverts$/,'🐾','good','Shape','-'],[/^\+3 Edge$/,'🔨','good','Runeforged Edge','+'],[/^🛡 \d+$/,'','shield','Aegis shield','+'],[/^Veil dispelled$/,'🌑','bad','','-'],[/^Risen!$/,'💀','undead','Risen','+']];
+const RECENT=[];
+const p0=pop;pop=function(o,txt,g){let t2=txt;try{if(typeof txt=='string'&&!/[<]/.test(txt)){for(const [re,ic,tone,nm,dir] of LEG){if(re.test(txt)){t2=`<i class="hvsp t-${tone}${dir=='-'?' off':''}">${ic?ic+' ':''}${txt}</i>`;if(nm&&o)RECENT.push({x:o.x,y:o.y,nm,dir,t:performance.now()});break}}}}catch(e){}return p0.call(this,o,t2,g)};
+function legHas(u,nm,dir){const n=performance.now();for(let i=RECENT.length-1;i>=0;i--){const r=RECENT[i];if(n-r.t>2500){RECENT.splice(i,1);continue}if(r.dir==dir&&r.x==u.x&&r.y==u.y&&(r.nm==nm||nm.indexOf(r.nm)==0))return true}return false}
+let PREV=new Map(),LS=null;
+function chip(u,o,on,i){const L=D.getElementById('fxl');if(!L||typeof ctr!='function')return;const c=ctr(u),z=D.createElement('i');z.className='hvstf t-'+(o.tone||'good')+(on?'':' off');z.style.left=c[0]+'%';z.style.top=c[1]+'%';z.style.setProperty('--dl',(i*.28).toFixed(2)+'s');
+ z.innerHTML=`<b><i>${o.ic}</i>${on?'':'<s>'}${q(o.t)}${on?'':' ends</s>'}</b>`;L.appendChild(z);setTimeout(()=>z.remove(),1900+i*280+200)}
+function floats(){if(!S||!S.units)return;if(LS!==S){LS=S;PREV=new Map();}
+ const quiet=off()||!inGame()||typeof window.hvStList!='function';const NOW=new Map();
+ S.units.forEach(u=>{if(!live(u))return;let vis=true;try{vis=visU(u)}catch(e){}if(!vis)return;
+  let L=[];try{L=window.hvStList(u,typeof cellEl=='function'?cellEl(u.x,u.y):null)}catch(e){}
+  const m=new Map();L.forEach(o=>{if(!SKIP.has(o.t))m.set(o.t.replace(/^Shape: .*/,'Shape'),o)});NOW.set(u,m);
+  const p=PREV.get(u);if(!p||quiet)return;let i=0;
+  m.forEach((o,k)=>{if(!p.has(k)&&!legHas(u,k,'+'))chip(u,o,true,i++)});
+  p.forEach((o,k)=>{if(!m.has(k)&&!legHas(u,k,'-'))chip(u,o,false,i++)})});
+ PREV=NOW}
+const r0=render;render=function(){const r=r0.apply(this,arguments);try{floats()}catch(e){}return r};
 })();
 </script>
 </body></html>
