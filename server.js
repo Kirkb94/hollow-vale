@@ -84,7 +84,7 @@ function evictOne(r) {
 }
 const lobbyView = (r, v) => ({
   code: r.code, build: CUR_BUILD, n: r.n, rnd: !!r.rnd, opts: r.opts || {}, phase: r.phase, host: hostCid(r) === v ? v : (hostCid(r) ? 'x' : null),
-  room: { name: roomName(r), locked: !!r.pass },
+  room: { name: roomName(r), locked: !!r.pass }, rps: rpsView(r, v),
   seats: Object.fromEntries(ALL_SIDES.map(s => {
     const x = r.seats[s], c = x.cid && r.clients.get(x.cid);
     return [s, { kind: x.kind, cid: x.cid ? (x.cid === v ? v : 'x') : null, name: x.name || '', ready: !!x.ready, ban: x.ban || null, connected: x.kind === 'human' ? !!(c && c.connected) : true }];
@@ -97,6 +97,112 @@ const seatOf = (r, cid) => sidesOf(r).find(s => r.seats[s].kind === 'human' && r
 const humans = r => sidesOf(r).filter(s => r.seats[s].kind === 'human');
 const cfgSeat = r => Object.fromEntries(sidesOf(r).map(s => [s, r.seats[s].kind === 'human' ? 'h' : 'a']));
 const cleanPicks = a => (Array.isArray(a) ? a : []).map(x => String(x).replace(/[^a-z]/g, '').slice(0, 20)).filter(Boolean).slice(0, 10);
+
+// ---- rock paper scissors for the first turn (match option 'rps', on unless the host turned it off) ----
+// Human seats play; AI seats keep their place in the turn order. First to 2 points takes the next turn slot; players who reach
+// 2 in the same round settle it with tiebreak throws among themselves. Throws stay on the server until everyone has thrown.
+const RPS_MS = 20000, RPS_GAP = 2600, RPS_DONE = 6000, RPS_K = ['r', 'p', 's'];
+const rpsBeats = (a, b) => (a === 'r' && b === 's') || (a === 's' && b === 'p') || (a === 'p' && b === 'r');
+const rpsOn = r => !(r.opts && r.opts.rps === false);
+function rpsClear(r) { if (r.rpsT) clearTimeout(r.rpsT); r.rpsT = null; r.rps = null; }
+function rpsArm(r, delay) {
+  if (r.rpsT) clearTimeout(r.rpsT);
+  r.rpsT = setTimeout(() => { r.rpsT = null; try { rpsTick(r); } catch (e) { console.error('rps', e); } }, Math.max(50, delay));
+}
+// next: what happens once the order is known: { kind: 'draft' } | { kind: 'random', picks } | { kind: 'rematch', picks }
+function rpsStart(r, next) {
+  rpsClear(r);
+  const base = sidesOf(r), hs = humans(r);
+  if (!rpsOn(r) || hs.length < 2) { r.order = null; return false; }
+  const now = Date.now();
+  r.rps = {
+    base, sides: hs.slice(), slots: hs.map(s => base.indexOf(s)).sort((a, b) => a - b),
+    groups: [{ m: hs.slice(), d: 0 }], pts: Object.fromEntries(hs.map(s => [s, 0])), placed: [],
+    round: 1, throws: {}, auto: {}, openAt: now + 800, deadline: now + 800 + RPS_MS, last: null, rev: 0, done: false, order: null, next
+  };
+  r.order = null; r.phase = 'rps';
+  rpsArm(r, r.rps.deadline - now + 30);
+  return true;
+}
+const rpsAct = R => (R && R.groups.length ? R.groups[0].m : []);
+// throw for seats that cannot: AI seats right away, everyone else when the clock runs out
+function rpsFill(r, all) {
+  const R = r.rps; if (!R || R.done) return;
+  rpsAct(R).forEach(s => { if (R.throws[s]) return; if (all || r.seats[s].kind !== 'human') { R.throws[s] = RPS_K[Math.random() * 3 | 0]; R.auto[s] = true; } });
+}
+function rpsCheck(r) {
+  const R = r.rps; if (!R || R.done || r.phase !== 'rps') return;
+  rpsFill(r, false);
+  if (rpsAct(R).every(s => R.throws[s])) rpsResolve(r);
+}
+function rpsTick(r) {
+  const R = r.rps; if (!R || r.phase !== 'rps') return;
+  if (R.done) { rpsFinish(r); return; }
+  if (Date.now() < R.deadline - 40) { rpsArm(r, R.deadline - Date.now() + 30); return; }
+  rpsFill(r, true); rpsResolve(r);
+}
+function rpsResolve(r) {
+  const R = r.rps, g = R.groups[0], m = g.m, th = Object.assign({}, R.throws), shapes = [...new Set(m.map(s => th[s]))];
+  let win = null, sc = [];
+  if (shapes.length === 2) { win = rpsBeats(shapes[0], shapes[1]) ? shapes[0] : shapes[1]; sc = m.filter(s => th[s] === win); }
+  const placedNow = [];
+  if (win) {
+    if (g.d) R.groups.splice(0, 1, { m: sc, d: 1 }, { m: m.filter(s => th[s] !== win), d: 1 });   // tiebreak: winners ahead of losers
+    else {
+      sc.forEach(s => { R.pts[s]++; });
+      const top = m.filter(s => R.pts[s] >= 2);
+      if (top.length) R.groups.splice(0, 1, { m: top, d: 1 }, { m: m.filter(s => R.pts[s] < 2), d: 0 });
+    }
+    while (R.groups.length && R.groups[0].m.length <= 1) { const x = R.groups.shift(); if (x.m.length) { R.placed.push(x.m[0]); placedNow.push(x.m[0]); } }
+  }
+  R.last = { round: R.round, tie: !!g.d, m: m.slice(), throws: th, auto: Object.assign({}, R.auto), win, sc, placed: placedNow };
+  R.rev++; R.round++; R.throws = {}; R.auto = {};
+  const now = Date.now();
+  if (!R.groups.length) {
+    const order = R.base.slice(); R.placed.forEach((s, i) => { order[R.slots[i]] = s; });
+    R.done = true; R.order = order; r.order = order;
+    rpsArm(r, RPS_DONE);
+  } else {
+    R.openAt = now + RPS_GAP; R.deadline = R.openAt + RPS_MS;
+    rpsArm(r, R.deadline - now + 30);
+    if (rpsAct(R).some(s => r.seats[s].kind !== 'human')) setTimeout(() => { if (r.rps === R) rpsCheck(r); }, RPS_GAP);
+  }
+  pushLobby(r);
+}
+function rpsFinish(r) {
+  const R = r.rps; if (!R || !R.done) return;
+  const nx = R.next || { kind: 'draft' };
+  r.rpsT = null; r.rps = null;
+  if (nx.kind === 'draft') { r.phase = 'draft'; pushLobby(r); return; }
+  if (nx.kind === 'random') { newGame(r, nx.picks); return; }
+  if (nx.kind === 'rematch' && r.game) { restartGame(r, nx.picks); return; }
+  r.phase = 'lobby'; pushLobby(r);
+}
+function newGame(r, picks) {
+  const names = {};
+  sidesOf(r).forEach(s => { const x = r.seats[s]; names[s] = x.kind === 'human' && x.name ? x.name : null; });
+  r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, order: r.order || null, seed: Math.random() * 2147483647 | 0, gid: Math.random().toString(36).slice(2, 10) }, log: [] };
+  r.phase = 'play';
+  broadcast(r, { type: 'start', cfg: r.game.cfg }); pushLobby(r);
+}
+function restartGame(r, picks) {
+  r.game.log = []; r.game.cfg.seat = cfgSeat(r); r.game.cfg.seed = Math.random() * 2147483647 | 0; r.game.cfg.gid = Math.random().toString(36).slice(2, 10); r.game.cfg.opts = r.opts || {};
+  r.game.cfg.order = r.order || null;
+  if (picks) sidesOf(r).forEach(s => { r.game.cfg.picks[s] = picks[s]; });
+  r.phase = 'play';
+  broadcast(r, { type: 'start', cfg: r.game.cfg }); pushLobby(r);
+}
+// what one viewer may see: everyone's score and who has thrown, but only the viewer's own unrevealed throw
+function rpsView(r, v) {
+  const R = r.rps; if (!R) return null;
+  const me = seatOf(r, v), now = Date.now(), act = rpsAct(R);
+  return {
+    rev: R.rev, round: R.round, sides: R.sides, act, tie: !!(R.groups[0] && R.groups[0].d), pts: R.pts, placed: R.placed,
+    thrown: Object.fromEntries(act.map(s => [s, !!R.throws[s]])), my: me && R.throws[me] ? R.throws[me] : null,
+    wait: R.done ? 0 : Math.max(0, R.openAt - now), ms: R.done ? 0 : Math.max(0, R.deadline - now), limit: RPS_MS,
+    last: R.last, done: R.done, order: R.order, next: (R.next && R.next.kind) || 'draft'
+  };
+}
 
 function handle(r, cid, m) {
   const c = r.clients.get(cid); if (!c || !m || typeof m.type !== 'string') return;
@@ -122,11 +228,10 @@ function handle(r, cid, m) {
     }
     case 'startRandom': {
       if (!isHost || r.phase !== 'lobby' || !r.rnd || !humans(r).length || !m.picks) break;
-      const picks = {}, names = {};
-      sidesOf(r).forEach(s => { if (r.seats[s].kind === 'open') r.seats[s] = { kind: 'ai' }; const x = r.seats[s]; picks[s] = cleanPicks(m.picks[s]); names[s] = x.kind === 'human' && x.name ? x.name : null; });
-      r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, seed: Math.random() * 2147483647 | 0, gid: Math.random().toString(36).slice(2, 10) }, log: [] };
-      r.phase = 'play';
-      broadcast(r, { type: 'start', cfg: r.game.cfg }); pushLobby(r); break;
+      const picks = {};
+      sidesOf(r).forEach(s => { if (r.seats[s].kind === 'open') r.seats[s] = { kind: 'ai' }; picks[s] = cleanPicks(m.picks[s]); });
+      if (rpsStart(r, { kind: 'random', picks })) { pushLobby(r); break; }
+      newGame(r, picks); break;
     }
     case 'mode': {
       const n = +m.n; if (!isHost || r.phase !== 'lobby' || ![2, 3, 4].includes(n)) break;
@@ -158,12 +263,21 @@ function handle(r, cid, m) {
         r.seats[m.seat] = { kind: 'ai' };
         if (r.game) r.game.cfg.seat[m.seat] = 'a';
       } else if (t.kind === 'ai' && r.phase === 'lobby') r.seats[m.seat] = { kind: 'open' };
-      pushLobby(r); break;
+      pushLobby(r); if (r.phase === 'rps') rpsCheck(r); break;
     }
     case 'draft': {
       if (!isHost || r.phase !== 'lobby' || !humans(r).length) break;
       sidesOf(r).forEach(s => { if (r.seats[s].kind === 'open') r.seats[s] = { kind: 'ai' }; r.seats[s].ready = false; delete r.seats[s].picks; delete r.seats[s].ban; });
-      r.phase = 'draft'; pushLobby(r); break;
+      if (!rpsStart(r, { kind: 'draft' })) r.phase = 'draft';
+      pushLobby(r); break;
+    }
+    case 'rps': {
+      const R = r.rps;
+      if (r.phase !== 'rps' || !R || R.done || !mine || !rpsAct(R).includes(mine) || R.throws[mine]) break;
+      const k = String(m.k || ''); if (!RPS_K.includes(k) || Date.now() < R.openAt - 400) break;
+      R.throws[mine] = k; delete R.auto[mine];
+      const rv = R.rev; rpsCheck(r); if (r.rps === R && R.rev === rv) pushLobby(r);
+      break;
     }
     case 'ready': {
       if (r.phase !== 'draft' || !mine) break;
@@ -188,21 +302,19 @@ function handle(r, cid, m) {
     case 'start': {
       if (!isHost || r.phase !== 'draft') break;
       if (!humans(r).every(s => r.seats[s].ready)) break;
-      const picks = {}, names = {};
-      sidesOf(r).forEach(s => { const x = r.seats[s]; picks[s] = x.kind === 'human' ? x.picks : cleanPicks(m.ai && m.ai[s]); names[s] = x.kind === 'human' && x.name ? x.name : null; });
-      r.game = { cfg: { n: r.n, picks, seat: cfgSeat(r), names, opts: r.opts || {}, seed: Math.random() * 2147483647 | 0, gid: Math.random().toString(36).slice(2, 10) }, log: [] };
-      r.phase = 'play';
-      broadcast(r, { type: 'start', cfg: r.game.cfg }); pushLobby(r); break;
+      const picks = {};
+      sidesOf(r).forEach(s => { const x = r.seats[s]; picks[s] = x.kind === 'human' ? x.picks : cleanPicks(m.ai && m.ai[s]); });
+      newGame(r, picks); break;
     }
     case 'rematch': {
       if (!isHost || r.phase !== 'play' || !r.game) break;
-      r.game.log = []; r.game.cfg.seat = cfgSeat(r); r.game.cfg.seed = Math.random() * 2147483647 | 0; r.game.cfg.gid = Math.random().toString(36).slice(2, 10); r.game.cfg.opts = r.opts || {};
-      if (r.rnd && m.picks) sidesOf(r).forEach(s => { r.game.cfg.picks[s] = cleanPicks(m.picks[s]); });
-      broadcast(r, { type: 'start', cfg: r.game.cfg }); break;
+      const rp = r.rnd && m.picks ? Object.fromEntries(sidesOf(r).map(s => [s, cleanPicks(m.picks[s])])) : null;
+      if (rpsStart(r, { kind: 'rematch', picks: rp })) { pushLobby(r); break; }
+      restartGame(r, rp); break;
     }
     case 'reset': {
       if (!isHost) break;
-      const keep = r.seats; r.seats = blankSeats(); r.phase = 'lobby'; r.game = null;
+      const keep = r.seats; r.seats = blankSeats(); r.phase = 'lobby'; r.game = null; rpsClear(r); r.order = null;
       ALL_SIDES.forEach(s => { if (keep[s].kind === 'human') r.seats[s] = { kind: 'human', cid: keep[s].cid, name: keep[s].name, ready: false }; else if (keep[s].kind === 'ai') r.seats[s] = { kind: 'ai' }; });
       pushLobby(r); break;
     }
@@ -218,7 +330,7 @@ function handle(r, cid, m) {
         heroes: cfg.picks,
         bans: sidesOf(r).map(s => r.seats[s].ban).filter(Boolean),
         opts: Object.keys(cfg.opts || {}).filter(k => k !== 'map' && cfg.opts[k]),
-        winner: m.winner, rounds: m.rounds,
+        order: cfg.order || null, winner: m.winner, rounds: m.rounds,
         suddenDeath: m.rounds >= SD_ROUND, suddenDeathRound: m.rounds >= SD_ROUND ? SD_ROUND : null,
         actions: r.game.log.length
       };
@@ -411,7 +523,7 @@ setInterval(() => {
 // forget rooms nobody has used for a while
 setInterval(() => {
   const now = Date.now();
-  for (const [code, r] of rooms) if (![...r.clients.values()].some(c => c.connected) && now - r.touched > ROOM_IDLE_MS) rooms.delete(code);
+  for (const [code, r] of rooms) if (![...r.clients.values()].some(c => c.connected) && now - r.touched > ROOM_IDLE_MS) { rpsClear(r); rooms.delete(code); }
 }, 10 * 60 * 1000).unref();
 
 server.listen(PORT, '0.0.0.0', () => {
