@@ -335,7 +335,7 @@ function handle(r, cid, m) {
         bans: sidesOf(r).map(s => r.seats[s].ban).filter(Boolean),
         opts: Object.keys(cfg.opts || {}).filter(k => k !== 'map' && cfg.opts[k]),
         order: cfg.order || null, winner: m.winner, rounds: m.rounds,
-        suddenDeath: m.rounds >= SD_ROUND, suddenDeathRound: m.rounds >= SD_ROUND ? SD_ROUND : null,
+        suddenDeath: !(cfg.opts && cfg.opts.sdeath === false) && m.rounds >= SD_ROUND, suddenDeathRound: !(cfg.opts && cfg.opts.sdeath === false) && m.rounds >= SD_ROUND ? SD_ROUND : null,
         actions: r.game.log.length
       };
       console.log('HV_MATCH ' + JSON.stringify(rec));

@@ -1439,6 +1439,7 @@ function towerRuleHTML(){const t=(n,sd)=>TOWER_HP.map((v,i)=>v+((MODES[n].tb[sd]
 const OPTDEF=[
  {k:'rps',n:'Rock paper scissors for first turn',def:true,pre:1,d:'Online and Pass & play with 2 or more human players: before the draft, everyone plays rock paper scissors (first to 2 points; AI seats throw at random). The winner takes the first turn and, in Pass & play, bans and picks first. Off: Player 1 always goes first.'},
  {k:'shrines',n:'Shrines',def:true,d:'Hold a glowing shrine in the middle at the start of your turn: +1 mana and that hero heals 2.'},
+ {k:'sdeath',n:'Sudden death',def:true,d:'From round 14 (56 on larger maps) every tower crumbles at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired or fortified. Off: towers never crumble on their own, so a match can run long.'},
  {k:'fog',n:'Poison mist',def:false,d:'From round 8 a poison fog creeps in from the edges. Heroes in the fog take 2 damage at the start of their turn.'},
  {k:'levels',n:'Hero levels',def:true,d:'A hero that scores 2 kills earns a star (+2 max HP, +1 damage). A second star comes at 5 kills.'},
  {k:'bans',n:'Ban phase',def:true,d:'Before the draft every human player bans one hero. Nobody can pick a banned hero.'},
@@ -2441,7 +2442,7 @@ const rOrder=r=>(S&&S.ord)||SIDES;
 /* HV_RPS: cfg.order (server's rock paper scissors result) sets the turn order; the turn-order compensation (start mana, first-turn spawn cap, tower bonus, start gold) follows the turn position, not the seat */
 function hvOrd(c){const o=c&&c.order;return Array.isArray(o)&&o.length==SIDES.length&&SIDES.every(s=>o.includes(s))?o.slice():SIDES.slice()}
 function hvTurnLbl(s){const P=['1st','2nd','3rd','4th'];return (s.length>1?P[s[0]-1]+'-'+P[s[s.length-1]-1]:P[s[0]-1])+' to move'}
-const SDR=()=>(typeof HVMAP!='undefined'&&HVMAP&&HVMAP.big)?56:14,drainAmt=()=>S.round>=SDR()?2+Math.floor((S.round-SDR())/3):0;/* HV_CAP: towers only crumble in sudden death */
+const SDR0=()=>(typeof HVMAP!='undefined'&&HVMAP&&HVMAP.big)?56:14,SDR=()=>MOPT.sdeath===false?Infinity:SDR0()/* HV_SDOPT: the Sudden death match option; off = never */,drainAmt=()=>S.round>=SDR()?2+Math.floor((S.round-SDR())/3):0;/* HV_CAP: towers only crumble in sudden death */
 function drainAll(){if(S.round==SDR()&&!RP){msg('Sudden death! From now on every tower crumbles each round (2 HP, rising) and can no longer be repaired.');evCut({major:1,art:ICON('💀'),t:'SUDDEN DEATH',s:'Round '+S.round,d:'Towers now crumble every round and can no longer be repaired',c:'#c0303a',sfx:'death'})}const d=drainAmt();if(d<=0)return;SIDES.forEach(sd=>{if(!S.dead[sd])S.tw[sd].forEach(T=>{if(T.hp>0){T.hp-=d;fx(T,'hurt');pop(T,'-'+d);if(T.hp<=0)towerFall(T,0)}})})}
 function nextSide(cur){const o=rOrder(S.round),i=o.indexOf(cur);for(let j=i+1;j<o.length;j++)if(!S.dead[o[j]])return o[j];S.round++;S.traps=S.traps.filter(t=>t.exp>=S.round);drainAll();if(S.round%3==0)spawnChest();return rOrder(S.round).find(sd=>!S.dead[sd])||cur}
 function endTurn(){if(S.over)return;sel=null;spSel=null;insp=null;S.sil.forEach(z=>{if(z.left[S.turn]>0)z.left[S.turn]--});S.sil=S.sil.filter(z=>Object.values(z.left).some(v=>v>0));S.cap[S.turn]=99;G[S.turn].turns++;rzTick(S.turn);const n=S.turn=nextSide(S.turn);S.sp[n]=0;
@@ -5937,7 +5938,7 @@ window.showCheat=showCheat=function(){if(lsGet('hv-cheat',null))return;lsSet('hv
 <li><b>Move or attack.</b> ${V} one of your heroes: <span class="k mv">blue</span> hexes move it, <span class="k tg">red</span> hexes attack, <span class="k ab">violet</span> hexes use its ability (or press ${touchy()?'its ✦ button':'<kbd>Q</kbd>'}). Each hero does one of these per turn.</li>
 <li><b>Gold.</b> You get +2 gold every turn. Step on a ⛏ gold mine to own it (+2 a turn) and grab the 🎁 chest that appears in the middle every 3 rounds.</li>
 <li><b>Market.</b> The buttons next to your gold: <b>Hire</b> new units of your faction, <b>Recruit</b> fallen heroes, <b>Upgrade</b> weapons and armour, <b>Repair</b> a tower.</li>
-<li><b>Build, then win.</b> <b>Build</b> farms (+gold), watchtowers (sight), a barracks (a forward spawn point) and cottages (more army slots) next to your heroes. Destroy all 3 enemy towers to win; from round ${typeof SDR=='function'?SDR():14} every tower crumbles.</li></ol>
+<li><b>Build, then win.</b> <b>Build</b> farms (+gold), watchtowers (sight), a barracks (a forward spawn point) and cottages (more army slots) next to your heroes. Destroy all 3 enemy towers to win; from round ${typeof SDR0=='function'?SDR0():14} every tower crumbles (unless Sudden death is turned off).</li></ol>
 <p class="hvfmc">${inCamp?'Tip: the campaign gets harder battle by battle.':`New to Hollow Vale? <b>Campaign battle 1</b> is a gentle first fight that teaches the basics.`}</p>
 <div class="hvfmx">${inCamp?'':'<button class="go sec" data-a="camp">Play Campaign battle 1 instead</button>'}<button class="go" data-a="ok">Got it, let's play</button></div>
 <p class="hvfms">Rules and tips: ☰ menu → How to play.${touchy()?'':' Keys: 1-5 reserve, Tab next hero, Q ability, L turn log, E end turn.'}</p></div>`;
@@ -7336,7 +7337,7 @@ function objectives(){if(S.over){ob.className='';ob.innerHTML='';return}const M=
  const ally=SIDES.filter(s=>!S.dead[s]).length;
  if(MOPT.raid)it.push(['goal','🏆','<b>Defeat the raid boss</b>','Everyone teams up: kill the raid boss or destroy its towers to win.','<b>Boss</b>']);
  else it.push(['goal','🏆',ally>2?'<b>Last side standing</b>':'<b>Destroy all enemy towers</b>','A side is out when all of its towers fall. The last side standing wins.'+(MOPT.koth?' Or hold the hill for 3 of your turns in a row.':''),'<b>Towers</b>']);
- const sd=sdR(),r=S.round;if(r<sd){const k=sd-r;it.push([k<=3?'warn':'','💀',`Sudden death in <b>${k}</b>`,`From round ${sd} every tower crumbles at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired.`,`SD in <b>${k}</b>`])}
+ const sd=sdR(),r=S.round;if(sd===Infinity){}else if(r<sd){const k=sd-r;it.push([k<=3?'warn':'','💀',`Sudden death in <b>${k}</b>`,`From round ${sd} every tower crumbles at the start of each round (2 HP, +1 every 3 rounds) and can no longer be repaired.`,`SD in <b>${k}</b>`])}
  else{let a=2;try{a=typeof drainAmt=='function'?drainAmt():a}catch(e){}it.push(['sd','💀',`<b>Sudden death</b>: towers −${a}/round`,'Every tower crumbles at the start of each round and cannot be repaired or fortified.',`<b>SD</b> −${a}/rd`])}
  if(MOPT.koth&&S.koth){const hs=SIDES.filter(s=>!S.dead[s]&&(S.koth[s]||0)>0);it.push([hs.some(s=>S.koth[s]>=2)?'warn':'','⛰',hs.length?'Hill: '+hs.map(s=>`<b>${q(SHORT[s])} ${S.koth[s]}/3</b>`).join(' '):'Hill: <b>nobody</b>','King of the Hill: start 3 of your turns in a row with a hero on the hill (and no enemy on it) to win on the spot.',hs.length?hs.map(s=>`<b>${q(SHORT[s])} ${S.koth[s]}/3</b>`).join(' '):'<b>—</b>'])}
  if(MOPT.gold){const c=(S.chests||[]).length,nx=Math.ceil((r+1)/3)*3;it.push(['','📦',c?`<b>${plural(c,'chest')}</b> on the map`:`Chest: <b>round ${nx}</b>`,'Treasure chests appear in the middle every 3 rounds (round 3, 6, 9...). Step on one for 4 gold.',c?`<b>${c}</b> on map`:`<b>r${nx}</b>`])
@@ -7716,10 +7717,10 @@ const ICS={search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" s
 const fmtList=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
 function rulesSec(title){const R=$q('#rules');if(!R)return '';const d=[...R.querySelectorAll('details')].find(x=>{const s=x.querySelector('summary');return s&&s.textContent.trim().toLowerCase().startsWith(title.toLowerCase())});if(!d)return '';const c=d.cloneNode(true);const s=c.querySelector('summary');if(s)s.remove();return c.innerHTML}
 function coreD(k){try{const o=(CORE||[]).concat(OPTDEF||[]).find(o=>o.k===k);return o?o.d:''}catch(e){return ''}}
-function sdText(){let c=14,b=56;try{const o=HVMAP;HVMAP={big:false};c=SDR();HVMAP={big:true};b=SDR();HVMAP=o}catch(e){}return{c,b}}
+function sdText(){let c=14,b=56;try{const o=HVMAP;HVMAP={big:false};c=SDR0();HVMAP={big:true};b=SDR0();HVMAP=o}catch(e){}return{c,b}}
 function towerText(){let base=[12,14,15];try{base=TOWER_HP.slice()}catch(e){}return base}
 function liveTowers(){if(!inGame())return '';try{const sd=ME||S.turn;const tw=(S.tw[sd]||[]);if(!tw.length)return '';const sdr=SDR();
- return `<div class="hh-live"><b>This match</b>: your towers have ${fmtList(tw.map(T=>T.hp+'/'+T.max+' HP'))}. Sudden death starts in <b>round ${sdr}</b> on this map${S.round>=sdr?' (it has started)':` (now round ${S.round})`}.</div>`}catch(e){return ''}}
+ return `<div class="hh-live"><b>This match</b>: your towers have ${fmtList(tw.map(T=>T.hp+'/'+T.max+' HP'))}. ${sdr===Infinity?'Sudden death is <b>off</b> in this match: towers never crumble on their own.':`Sudden death starts in <b>round ${sdr}</b> on this map${S.round>=sdr?' (it has started)':` (now round ${S.round})`}.`}</div>`}catch(e){return ''}}
 function fixText(h){const t=towerText(),sd=sdText();
  h=h.replace(/12, 14 and 15 HP/g,fmtList(t.map(String))+' HP');
  h=h.replace(/round 14 \(56 on larger maps\)/g,`round ${sd.c} (${sd.b} on larger maps)`).replace(/round 14 \(sudden death; round 56 on larger maps\)/g,`round ${sd.c} (sudden death; round ${sd.b} on larger maps)`);
