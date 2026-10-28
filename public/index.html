@@ -8468,4 +8468,31 @@ function apply(){if(!PEND||!S||!S.pool)return false;const P=PEND;
 const r0=render;render=function(){const o=r0.apply(this,arguments);try{if(apply())r0.apply(this,arguments)}catch(e){}return o};
 })();
 </script>
+<style id="hv-mobzoom">
+/* ===== HV_MOBZOOM (Uno: "units are too big on the phone, hard to tell where your finger lands; make the tiles bigger"). Phone only.
+   The board opens zoomed in (bigger hexes, drag to pan, − / + and Whole map still work), hero figures are drawn a bit smaller so they
+   sit inside their own hex, and a tap always picks the hex whose centre is nearest the finger. ===== */
+html body.mob #board .cell>.u{scale:.8;transform-origin:50% 92%}
+html body.mob.ingame #bscroll{scroll-behavior:auto}
+html body.mob.ingame #bw{flex:0 0 auto}
+</style>
+<script id="hv-mobzoom-js">/* HV_MOBZOOM (see #hv-mobzoom). UI only: never touches game state. */
+(function(){if(typeof MOB=='undefined'||!MOB||typeof applyBZ!='function')return;const $q=s=>document.querySelector(s);
+/* 1. a tap counts for the hex whose centre is closest (figures and badges that overhang a neighbour no longer steal the tap) */
+if(typeof cellAt=='function'){const ca=cellAt;cellAt=function(e){try{if(e&&e.clientX!=null&&typeof S!='undefined'&&S&&GEO){
+  if(document.documentElement.classList.contains('tvon')&&typeof window.tvHex=='function'){const h=window.tvHex(e.clientX,e.clientY);if(h)return h}
+  const b=$q('#board');if(b){const r=b.getBoundingClientRect(),cw=r.width/WF,ch=r.height/HF;let best=null,bd=1e18;
+   for(let y=0;y<GEO.BH;y++)for(let x=0;x<GEO.BW;x++){if(!VALID.has(x+','+y))continue;const cx=r.left+(x+(y&1?.5:0)+.5)*cw,cy=r.top+(y*.75+.5)*ch,d=(e.clientX-cx)**2+(e.clientY-cy)**2;if(d<bd){bd=d;best={x,y}}}
+   if(best&&bd<(ch*.62)**2)return best;if(best)return null}}}catch(x){}return ca.apply(this,arguments)}}
+/* 2. open each battle zoomed in, sized to the space the board has, and scrolled to your own towers */
+function zoomStart(){if(!document.body.classList.contains('ingame')||!S||(typeof HVMAP!='undefined'&&HVMAP.big))return;const sc=$q('#bscroll'),b=$q('#board');if(!sc||!b)return;
+ BZ=1;applyBZ();const h1=b.getBoundingClientRect().height;if(!h1)return;
+ BZ=Math.max(1.35,Math.min(1.7,(sc.clientHeight*.8)/h1));applyBZ();
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{try{const sd=(typeof ME!='undefined'&&ME)||S.turn,T=(S.tw&&S.tw[sd]||[]).filter(t=>t.hp>0);if(!T.length)return;
+  const cx=T.reduce((a,t)=>a+ctr(t)[0],0)/T.length/100,cy=T.reduce((a,t)=>a+ctr(t)[1],0)/T.length/100,br=b.getBoundingClientRect(),sr=sc.getBoundingClientRect();
+  sc.scrollLeft=br.left-sr.left+sc.scrollLeft+cx*br.width-sc.clientWidth/2;sc.scrollTop=br.top-sr.top+sc.scrollTop+cy*br.height-sc.clientHeight*.6}catch(e){}}))}
+if(typeof startGame=='function'){const sg=startGame;startGame=function(){const r=sg.apply(this,arguments);setTimeout(()=>{try{zoomStart()}catch(e){}},80);return r}}
+window.hvZoomStart=zoomStart;
+})();
+</script>
 </body></html>
