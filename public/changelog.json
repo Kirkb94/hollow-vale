@@ -1,6 +1,30 @@
 {
   "versions": [
     {
+      "id": "11e2b0974f89",
+      "date": "2026-10-30",
+      "title": "Iron Clan faction art complete",
+      "groups": [
+        {
+          "name": "Art and animation",
+          "items": [
+            "All 16 Iron Clan units have six-facing layered rigs, animated equipment and matching ability effects.",
+            "Siege engines have separate wheels and launcher recoil; firearms use aimed shooting poses."
+          ]
+        },
+        {
+          "name": "Verified gameplay",
+          "items": [
+            "Effects follow actual stuns, chains, retaliation, Edge, Cage, Vein, walls, flares and positive Forge Master repairs.",
+            "All 16 passed pose, bounds, gameplay, pause, fog visibility and zoom checks. Test with ?arttest=factions&faction=iron."
+          ]
+        }
+      ],
+      "commits": [
+        "Complete all 16 Iron Clan layered rigs and ability effects"
+      ]
+    },
+    {
       "id": "d09f97789fd7",
       "date": "2026-10-30",
       "title": "Wilds faction art complete",
@@ -195,24 +219,6 @@
       ],
       "commits": [
         "Bone Legion back to 4 gold (1 slot); army cap can never go above 50"
-      ]
-    },
-    {
-      "id": "5ade3fb",
-      "date": "2026-10-28",
-      "title": "Undead bosses buffed",
-      "groups": [
-        {
-          "name": "Balance",
-          "items": [
-            "Bone Colossus: moves 3 (was 1) and deals 8 damage (was 7)",
-            "Plague Lord: moves 3 (was 2) and has 28 HP (was 25)",
-            "Death Knight: deals 6 damage (was 5) and has 25 HP (was 22)"
-          ]
-        }
-      ],
-      "commits": [
-        "Boss balance: buff the weak Undead bosses (Bone Colossus, Plague Lord, Death Knight)"
       ]
     }
   ]

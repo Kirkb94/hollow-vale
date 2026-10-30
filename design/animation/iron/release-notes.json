@@ -1,0 +1,19 @@
+{
+  "title": "Iron Clan faction art complete",
+  "groups": [
+    {
+      "name": "Art and animation",
+      "items": [
+        "All 16 Iron Clan units have six-facing layered rigs, animated equipment and matching ability effects.",
+        "Siege engines have separate wheels and launcher recoil; firearms use aimed shooting poses."
+      ]
+    },
+    {
+      "name": "Verified gameplay",
+      "items": [
+        "Effects follow actual stuns, chains, retaliation, Edge, Cage, Vein, walls, flares and positive Forge Master repairs.",
+        "All 16 passed pose, bounds, gameplay, pause, fog visibility and zoom checks. Test with ?arttest=factions&faction=iron."
+      ]
+    }
+  ]
+}
