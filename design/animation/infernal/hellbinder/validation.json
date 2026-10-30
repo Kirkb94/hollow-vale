@@ -1,0 +1,47 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "effects": true,
+  "gameplay": true,
+  "unit": "hellbinder",
+  "method": "Headless Edge actual game runtime; independent assembly and FX screenshots visually inspected.",
+  "actualMechanics": {
+    "attackDamage": 3,
+    "attackFX": 2,
+    "spell": true,
+    "before": {
+      "x": 3,
+      "y": 0
+    },
+    "after": {
+      "x": 4,
+      "y": 2
+    },
+    "hookDamage": 2,
+    "hookFX": 1
+  },
+  "sourceRectsChecked": 72,
+  "poseSweep": {
+    "poses": 42,
+    "edgePixels": 0
+  },
+  "screenshots": [
+    "../bomber/batch-review.png",
+    "vfx-review.png"
+  ],
+  "pending": []
+}

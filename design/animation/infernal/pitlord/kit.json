@@ -1,0 +1,14 @@
+{
+  "n": "Pit Lord",
+  "e": "👑",
+  "hp": 33,
+  "mv": 2,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 5,
+  "elite": 1,
+  "fac": "infernal",
+  "d": "Boss (5 slots). Immolation: At the start of your turn enemies next to him take 2 damage and burn."
+}

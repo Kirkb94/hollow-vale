@@ -1,0 +1,41 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "effects": true,
+  "gameplay": true,
+  "unit": "pactbroker",
+  "method": "Headless Edge actual game runtime; independent assembly and FX screenshots visually inspected.",
+  "actualMechanics": {
+    "attackDamage": 2,
+    "attackFX": 2,
+    "spell": true,
+    "hpCost": 3,
+    "manaGain": 1,
+    "goldGain": 1,
+    "spellFX": 2
+  },
+  "sourceRectsChecked": 72,
+  "poseSweep": {
+    "poses": 42,
+    "edgePixels": 0
+  },
+  "screenshots": [
+    "../bomber/batch-review.png",
+    "vfx-review.png"
+  ],
+  "pending": []
+}

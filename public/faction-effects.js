@@ -93,15 +93,15 @@
     });
     if(effects.length)raf=requestAnimationFrame(frame);else last=0;
   }
-  function dispatch(u,t,binding){
+  function dispatch(u,t,binding,packKey=u?.k){
     if(!binding||!u||!t)return false;
-    const pack=assets.get(u.k);if(!pack)return false;
+    const pack=assets.get(packKey);if(!pack)return false;
     const names=['cast','projectile','impact'].filter(n=>binding[n]&&pack.clips[binding[n]]);if(!names.length)return false;
     const delay=Math.max(0,(u.fx?.t||performance.now())-performance.now());
     const release=binding.releaseMs??250,travel=binding.projectile?(binding.travelMs??300):0;
-    if(names.includes('cast'))add(u.k,binding.cast,u,u,{sourceUnit:u,targetUnit:u,delay,feet:true});
-    if(names.includes('projectile'))add(u.k,binding.projectile,u,t,{sourceUnit:u,targetUnit:t.v,delay:delay+release,travel:true,rotate:true,duration:travel});
-    if(names.includes('impact'))add(u.k,binding.impact,t,t,{targetUnit:t.v,delay:delay+release+travel});
+    if(names.includes('cast'))add(packKey,binding.cast,u,u,{sourceUnit:u,targetUnit:u,delay,feet:true});
+    if(names.includes('projectile'))add(packKey,binding.projectile,u,t,{sourceUnit:u,targetUnit:t.v,delay:delay+release,travel:true,rotate:true,duration:travel});
+    if(names.includes('impact'))add(packKey,binding.impact,t,t,{targetUnit:t.v,delay:delay+release+travel});
     return true;
   }
   function attack(u,t){
@@ -166,10 +166,11 @@
   if(typeof summonNear==='function'){
     const original=summonNear;summonNear=function(c,k,side,by){const result=original.apply(this,arguments);
       if(result&&by==='batking')window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:'batking',event:'swarm:spawn',target:result}}));
+      if(result&&by==='demonprince')window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:'demonprince',event:'hellgate:spawn',target:result}}));
       return result;
     };
   }
-  const onCast=window.hvOnCast;window.hvOnCast=function(key,u,t){const result=onCast?.apply(this,arguments);const effectTarget=(key==='rally'||key==='hook')&&t.v?Object.assign({},t,{x:t.v.x,y:t.v.y}):t;dispatch(u,effectTarget,assets.get(u.k)?.bindings.abilities?.[key]);return result;};
+  const onCast=window.hvOnCast;window.hvOnCast=function(key,u,t,o,originalKey){const result=onCast?.apply(this,arguments);const effectTarget=(key==='rally'||key==='hook')&&t.v?Object.assign({},t,{x:t.v.x,y:t.v.y}):t,packKey=assets.has(originalKey)?originalKey:u.k;dispatch(u,effectTarget,assets.get(packKey)?.bindings.abilities?.[key],packKey);return result;};
   window.addEventListener('hv-unit-effect',event=>{
     const {unitKey,key,target}=Object.assign({key:event.detail.event},event.detail),pack=assets.get(unitKey);
     if(key==='drain'){

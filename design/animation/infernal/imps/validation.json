@@ -1,0 +1,47 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 3,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 1.5,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "spawnFX": 1,
+  "burn": {
+    "damage": 1,
+    "events": 1,
+    "active": 1
+  },
+  "clipCoverage": {
+    "attack": true,
+    "impact": true,
+    "spawn": true,
+    "burn": true
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "tools/infernal-creatures.test.cjs",
+  "testedAt": "2026-10-30T11:42:15.198Z",
+  "pageErrors": []
+}

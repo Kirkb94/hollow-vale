@@ -1,0 +1,42 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "effects": true,
+  "gameplay": true,
+  "unit": "infernowitch",
+  "method": "Headless Edge actual game runtime; independent assembly and FX screenshots visually inspected.",
+  "actualMechanics": {
+    "attackDamage": 4,
+    "attackFX": 3,
+    "burnTurns": 2,
+    "burnStrength": 1,
+    "burnDamage": 1,
+    "burnFX": 1,
+    "burnEvent": true
+  },
+  "sourceRectsChecked": 72,
+  "poseSweep": {
+    "poses": 42,
+    "edgePixels": 0
+  },
+  "screenshots": [
+    "../bomber/batch-review.png",
+    "vfx-review.png"
+  ],
+  "pending": [],
+  "knownGameplayDiscrepancy": "Existing Hellfire bossHit 3 turns/2 damage overwritten by generic Infernal burn to 2 turns/1 damage; mechanics deliberately unchanged. Ground fire isolated in test."
+}

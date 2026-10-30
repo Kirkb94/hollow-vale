@@ -1,0 +1,334 @@
+{
+  "faction": "infernal",
+  "name": "Infernal",
+  "style": "Arcane Vanguard",
+  "units": [
+    {
+      "id": "mage",
+      "name": "Pyromancer",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Fireball hits the target, and its neighbors for half damage. Costs 2 mana.",
+      "stats": {
+        "n": "Pyromancer",
+        "e": "🔮",
+        "hp": 4,
+        "mv": 2,
+        "rng": [
+          2,
+          3
+        ],
+        "dmg": 3,
+        "acost": 2,
+        "aoe": 1,
+        "d": "Fireball hits the target, and its neighbors for half damage. Costs 2 mana.",
+        "fac": "infernal"
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "bomber",
+      "name": "Bombardier",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Free splash: hits the target, and its neighbors for half damage.",
+      "stats": {
+        "n": "Bombardier",
+        "e": "💣",
+        "hp": 3,
+        "mv": 2,
+        "rng": [
+          2,
+          3
+        ],
+        "dmg": 2,
+        "aoe": 1,
+        "d": "Free splash: hits the target, and its neighbors for half damage.",
+        "fac": "infernal"
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "imps",
+      "name": "Imps",
+      "faction": "infernal",
+      "group": 3,
+      "description": "A swarm of 3 flying imps.",
+      "stats": {
+        "n": "Imps",
+        "e": "😈",
+        "hp": 5.5,
+        "mv": 2,
+        "rng": [
+          1,
+          1
+        ],
+        "dmg": 2.5,
+        "fly": 1,
+        "group": 3,
+        "slots": 2,
+        "d": "A swarm of 3 flying imps.",
+        "fac": "infernal"
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "dragon",
+      "name": "Ember Dragon",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Elite (5 slots). A flying drake whose fire breath burns the target and splashes its neighbors for half damage. Costs 2 mana.",
+      "stats": {
+        "n": "Ember Dragon",
+        "e": "🐉",
+        "hp": 8,
+        "mv": 3,
+        "rng": [
+          2,
+          3
+        ],
+        "dmg": 6,
+        "fly": 1,
+        "aoe": 1,
+        "acost": 2,
+        "elite": 1,
+        "d": "Elite (5 slots). A flying drake whose fire breath burns the target and splashes its neighbors for half damage. Costs 2 mana.",
+        "fac": "infernal"
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "hellhound",
+      "name": "Hellhound",
+      "faction": "infernal",
+      "group": 1,
+      "description": "A blazing hound that charges in and sets targets alight in the same turn.",
+      "stats": {
+        "n": "Hellhound",
+        "e": "🐕",
+        "hp": 9,
+        "mv": 3,
+        "rng": [
+          1,
+          1
+        ],
+        "dmg": 6,
+        "d": "A blazing hound that charges in and sets targets alight in the same turn.",
+        "fac": "infernal",
+        "charge": 1
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "magmagolem",
+      "name": "Magma Golem",
+      "faction": "infernal",
+      "group": 1,
+      "description": "A walking furnace of molten rock. Slow, armored and burning.",
+      "stats": {
+        "n": "Magma Golem",
+        "e": "🌋",
+        "hp": 21,
+        "mv": 1,
+        "rng": [
+          1,
+          1
+        ],
+        "dmg": 4,
+        "armor": 1,
+        "d": "A walking furnace of molten rock. Slow, armored and burning.",
+        "fac": "infernal"
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "pitlord",
+      "name": "Pit Lord",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Boss (5 slots). Immolation: At the start of your turn enemies next to him take 2 damage and burn.",
+      "stats": {
+        "n": "Pit Lord",
+        "e": "👑",
+        "hp": 33,
+        "mv": 2,
+        "rng": [
+          1,
+          1
+        ],
+        "dmg": 5,
+        "elite": 1,
+        "fac": "infernal",
+        "d": "Boss (5 slots). Immolation: At the start of your turn enemies next to him take 2 damage and burn."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "infernowitch",
+      "name": "Inferno Witch",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Boss (5 slots). Hellfire: Her targets burn for 2 damage a turn for 3 turns.",
+      "stats": {
+        "n": "Inferno Witch",
+        "e": "👑",
+        "hp": 20,
+        "mv": 2,
+        "rng": [
+          2,
+          3
+        ],
+        "dmg": 4,
+        "elite": 1,
+        "fac": "infernal",
+        "d": "Boss (5 slots). Hellfire: Her targets burn for 2 damage a turn for 3 turns."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "demonprince",
+      "name": "Demon Prince",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Boss (5 slots). Hellgate: At the start of your turn an Imp crawls out next to him (up to 2 at a time).",
+      "stats": {
+        "n": "Demon Prince",
+        "e": "👑",
+        "hp": 21,
+        "mv": 2,
+        "rng": [
+          1,
+          1
+        ],
+        "dmg": 5,
+        "fly": 1,
+        "elite": 1,
+        "fac": "infernal",
+        "d": "Boss (5 slots). Hellgate: At the start of your turn an Imp crawls out next to him (up to 2 at a time)."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "phoenix",
+      "name": "Phoenix",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Boss (5 slots). Rebirth: The first time it falls it rises again with half HP.",
+      "stats": {
+        "n": "Phoenix",
+        "e": "👑",
+        "hp": 14,
+        "mv": 3,
+        "rng": [
+          1,
+          2
+        ],
+        "dmg": 5,
+        "fly": 1,
+        "elite": 1,
+        "fac": "infernal",
+        "d": "Boss (5 slots). Rebirth: The first time it falls it rises again with half HP."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "fireeye",
+      "name": "Eye of Ruin",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Flying. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn.",
+      "stats": {
+        "n": "Eye of Ruin",
+        "e": "👁️",
+        "hp": 13,
+        "mv": 3,
+        "rng": [
+          2,
+          2
+        ],
+        "dmg": 5,
+        "fly": 1,
+        "fac": "infernal",
+        "sight": 5,
+        "flare": 1,
+        "fcost": 1,
+        "d": "Flying. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "cinderwarden",
+      "name": "Cinder Warden",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Raises a 3-hex Wall of Flame that burns enemies who cross it (2 mana).",
+      "stats": {
+        "n": "Cinder Warden",
+        "e": "🔥",
+        "hp": 7,
+        "mv": 2,
+        "rng": [
+          2,
+          3
+        ],
+        "dmg": 3,
+        "sp": "flamewall",
+        "spp": 2,
+        "fac": "infernal",
+        "d": "Raises a 3-hex Wall of Flame that burns enemies who cross it (2 mana)."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "hellbinder",
+      "name": "Hellbinder",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Hooks an enemy from 4 hexes away and drags it into your lines (2 mana).",
+      "stats": {
+        "n": "Hellbinder",
+        "e": "⛓️",
+        "hp": 10,
+        "mv": 2,
+        "rng": [
+          1,
+          2
+        ],
+        "dmg": 3,
+        "sp": "hook",
+        "spp": 2,
+        "fac": "infernal",
+        "d": "Hooks an enemy from 4 hexes away and drags it into your lines (2 mana)."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    },
+    {
+      "id": "pactbroker",
+      "name": "Pactbroker",
+      "faction": "infernal",
+      "group": 1,
+      "description": "Trades an ally's blood for mana and gold with a Devil's Bargain (free).",
+      "stats": {
+        "n": "Pactbroker",
+        "e": "📜",
+        "hp": 8,
+        "mv": 2,
+        "rng": [
+          2,
+          3
+        ],
+        "dmg": 2,
+        "sp": "bargain",
+        "spp": 2,
+        "fac": "infernal",
+        "d": "Trades an ally's blood for mana and gold with a Devil's Bargain (free)."
+      },
+      "status": "integrated-six-direction-cutout-and-effects"
+    }
+  ],
+  "coverage": {
+    "total": 14,
+    "integrated": 14,
+    "validated": 14
+  }
+}

@@ -328,3 +328,5 @@ Kingdom and Vampires are complete; remaining factions are in production.
 
 Open /?arttest=factions&faction=undead to play all 15 updated Undead units.
 Undead is complete; Infernal and later factions remain in production.
+
+Open /?arttest=factions&faction=infernal to play all 14 updated Infernal units.

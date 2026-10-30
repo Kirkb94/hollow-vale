@@ -108,15 +108,15 @@
       const sheets=await Promise.all(directions.map(d=>assetImage(meta?.views?.[d]?.file||meta?.atlases?.[d]||d+'.png')));
       const body=await Promise.all(sheets.map(async(im,i)=>{
         const d=directions[i];
-        if(meta?.views?.[d]?.parts)return Promise.all((['bat','wisp'].includes(meta.skeleton)?meta.partOrder:partNames).map(async name=>{const p=meta.views[d].parts[name],s=source(p.file?await assetImage(p.file):im,p.renderRect||p.sourceRect,{pivot:p.pivot,flipX:!!p.flipX,displaySize:p.displaySize});return p.isolate?isolate(s):s;}));
+        if(meta?.views?.[d]?.parts)return Promise.all((['bat','wisp','quadruped','dragon','bird','imp'].includes(meta.skeleton)?meta.partOrder:partNames).map(async name=>{const p=meta.views[d].parts[name],s=source(p.file?await assetImage(p.file):im,p.renderRect||p.sourceRect,{pivot:p.pivot,flipX:!!p.flipX,displaySize:p.displaySize});return p.isolate?isolate(s):s;}));
         if(explicit?.rects?.[d])return explicit.rects[d].map((rect,n)=>source(im,rect,{pivot:meta.parts[n]?.pivot}));
         return pieces(im);
       }));
-      const equipment=directions.map(()=>[]),add=(di,im,rect,pivot,name,hand,w,h)=>equipment[di].push(Object.assign(source(im,rect),{pivot:pivot||[.5,.85],name,hand,dw:w,dh:h}));
+      const equipment=directions.map(()=>[]),add=(di,im,rect,pivot,name,hand,w,h,extra={})=>equipment[di].push(Object.assign(source(im,rect),{pivot:pivot||[.5,.85],name,hand,dw:w,dh:h,rotation:extra.rotation||0,offset:extra.offset||[0,0],motion:extra.motion,phase:extra.phase||0}));
       // Kingdom packs all directional weapons in one atlas; Undead has one directional staff atlas.
       if(meta?.equipment?.file&&meta.equipment.views){
         const im=await assetImage(meta.equipment.file);
-        directions.forEach((d,di)=>Object.entries(meta.equipment.views[d]).forEach(([name,p])=>add(di,im,p.renderRect||p.sourceRect,p.pivot,name,p.hand||(name==='shield'?'left':'right'),p.displaySize?.[0]||(name==='shield'?35:19),p.displaySize?.[1]||(name==='shield'?48:56))));
+        directions.forEach((d,di)=>Object.entries(meta.equipment.views[d]).forEach(([name,p])=>add(di,im,p.renderRect||p.sourceRect,p.pivot,name,p.hand||(name==='shield'?'left':'right'),p.displaySize?.[0]||(name==='shield'?35:19),p.displaySize?.[1]||(name==='shield'?48:56),p)));
       }else if(meta?.equipment){
         await Promise.all(Object.entries(meta.equipment).map(async([name,eq])=>{
           if(!eq.file||!eq.views)return;const im=await assetImage(eq.file);
@@ -144,13 +144,14 @@
     if(!pending.has(k))pending.set(k,load(k,registry[k]));
     return pending.get(k);
   }
-  function displayKey(k,u){return u?.bat&&registry[k+'_bat']?k+'_bat':k;}
+  function displayKey(k,u){if(u?.shape?.kind==='mim'&&registry[u.shape.look])return u.shape.look;return u?.bat&&registry[k+'_bat']?k+'_bat':k;}
   function part(ctx,a,n,x,y,w,h,angle=0,px=.5,py=.08){
     const s=a[n];if(s.displaySize){w=s.displaySize[0];h=s.displaySize[1];}ctx.save();ctx.translate(x,y);ctx.rotate(angle);if(s.flipX)ctx.scale(-1,1);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-w*px,-h*py,w,h);ctx.restore();
   }
   function draw(canvas,k,dir,state,t,single=false){
     const all=assets.get(k);if(!all)return;
     lastUse.set(k,++usageTick);
+    if(window.HVCreatureRig?.draw(canvas,models.get(k),all[clamp(Math.floor(dir),0,5)],dir,state,reduced.matches?0:t,pose(state,reduced.matches?0:t),single))return;
     if(models.get(k)?.meta?.skeleton==='wisp'){
       const a=all[clamp(Math.floor(dir),0,5)],ctx=canvas.getContext('2d'),p=pose(state,reduced.matches?0:t),sway=reduced.matches?0:Math.sin(t/240)*.16;
       ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.scale(canvas.width/320,canvas.height/240);ctx.translate(160,146+p.bob);ctx.globalAlpha=p.alpha;ctx.rotate(p.fall*1.2);
@@ -204,7 +205,7 @@
       ctx.save();ctx.translate(x,-119);ctx.rotate(angle);part(ctx,a,left?4:5,0,0,20,33);ctx.translate(0,27);ctx.rotate(-sign*(cast*.35+attack*.35));part(ctx,a,left?6:7,0,0,18,35);
       for(const eq of equipment)if(eq.hand===(left?'left':'right')){
         if(eq.name==='arrow'&&state==='shoot'&&t>330&&t<650)continue;
-        ctx.save();ctx.translate(0,27);
+        ctx.save();ctx.translate(eq.offset?.[0]||0,27+(eq.offset?.[1]||0));ctx.rotate((eq.rotation||0)+(eq.motion==='wing'&&!reduced.matches?Math.sin(t/180+eq.phase)*.25:0));
         if(['sword','mace','hammer','axe','dagger'].includes(eq.name))ctx.rotate(sign*(-.2+p.attack*3.2));
         if(['spear','lance'].includes(eq.name))ctx.rotate(sign*p.thrust*(Math.PI/2+1.5));
         if(eq.name==='staff')ctx.rotate(sign*cast*1.7);

@@ -1,0 +1,191 @@
+{
+  "report": {
+    "hellhound": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "group": 1,
+      "attackPose": "attack",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 5,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "burn": {
+        "damage": 1,
+        "events": 1,
+        "active": 1
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "burn": true
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "phoenix": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "group": 1,
+      "attackPose": "cast",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 4,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "burn": {
+        "damage": 1,
+        "events": 1,
+        "active": 1
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "burn": true,
+        "rebirth": true
+      },
+      "rebirth": {
+        "hp": 7,
+        "expected": 7,
+        "rez": 1,
+        "effect": {
+          "before": 2,
+          "after": 3
+        }
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "dragon": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "group": 1,
+      "attackPose": "cast",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 5,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "burn": {
+        "damage": 2,
+        "events": 1,
+        "active": 1
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "burn": true
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "imps": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "group": 3,
+      "attackPose": "attack",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 1.5,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "burn": {
+        "damage": 1,
+        "events": 1,
+        "active": 1
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "burn": true
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    }
+  },
+  "errors": []
+}

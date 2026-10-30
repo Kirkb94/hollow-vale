@@ -1,0 +1,1588 @@
+{
+  "version": 1,
+  "unit": "hellhound",
+  "faction": "infernal",
+  "style": "Arcane Vanguard",
+  "skeleton": "quadruped",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partOrder": [
+    "body",
+    "head",
+    "tail",
+    "flameMane",
+    "frontLeftLeg",
+    "frontRightLeg",
+    "hindLeftLeg",
+    "hindRightLeg"
+  ],
+  "views": {
+    "e": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            18,
+            74,
+            270,
+            174
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            311,
+            61,
+            214,
+            199
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            541,
+            10,
+            199,
+            252
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "flameMane": {
+          "file": "core.png",
+          "sourceRect": [
+            772,
+            84,
+            238,
+            174
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            97,
+            4,
+            162,
+            262
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            377,
+            4,
+            106,
+            262
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            559,
+            4,
+            142,
+            262
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            814,
+            4,
+            139,
+            262
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "se": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            17,
+            298,
+            272,
+            188
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            312,
+            283,
+            202,
+            216
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            545,
+            271,
+            203,
+            227
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "flameMane": {
+          "file": "core.png",
+          "sourceRect": [
+            778,
+            311,
+            231,
+            211
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            107,
+            269,
+            135,
+            250
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            372,
+            270,
+            100,
+            247
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            564,
+            271,
+            113,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            831,
+            270,
+            114,
+            247
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "sw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            42,
+            524,
+            247,
+            201
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            319,
+            523,
+            213,
+            208
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            543,
+            510,
+            205,
+            222
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "flameMane": {
+          "file": "core.png",
+          "sourceRect": [
+            780,
+            538,
+            235,
+            192
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            60,
+            520,
+            183,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            363,
+            520,
+            116,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            562,
+            522,
+            137,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            808,
+            521,
+            146,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "w": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            22,
+            784,
+            259,
+            178
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            296,
+            773,
+            219,
+            200
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            538,
+            737,
+            227,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "flameMane": {
+          "file": "core.png",
+          "sourceRect": [
+            752,
+            813,
+            265,
+            166
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            105,
+            765,
+            126,
+            257
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            380,
+            768,
+            141,
+            251
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            564,
+            770,
+            146,
+            253
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            809,
+            770,
+            131,
+            253
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "nw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            22,
+            1003,
+            254,
+            213
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            301,
+            999,
+            202,
+            219
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            531,
+            986,
+            232,
+            242
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "flameMane": {
+          "file": "core.png",
+          "sourceRect": [
+            782,
+            985,
+            224,
+            251
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            106,
+            1026,
+            139,
+            231
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            365,
+            1026,
+            120,
+            233
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            590,
+            1025,
+            126,
+            233
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            825,
+            1025,
+            105,
+            232
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "ne": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            23,
+            1262,
+            266,
+            214
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            313,
+            1260,
+            230,
+            229
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            543,
+            1234,
+            214,
+            254
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "flameMane": {
+          "file": "core.png",
+          "sourceRect": [
+            774,
+            1269,
+            234,
+            203
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            127,
+            1269,
+            127,
+            247
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            365,
+            1266,
+            116,
+            258
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            617,
+            1268,
+            108,
+            256
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            845,
+            1265,
+            120,
+            255
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    }
+  },
+  "creature": {
+    "views": {
+      "e": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -52
+            ],
+            "displaySize": [
+              110,
+              50
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              43,
+              -72
+            ],
+            "displaySize": [
+              58,
+              56
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              -40,
+              -47
+            ],
+            "displaySize": [
+              63,
+              55
+            ],
+            "pivot": [
+              0.12,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "tail",
+            "flipX": true
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              26,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              36,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              -38,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              -28,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "flameMane": {
+            "anchor": [
+              0,
+              -66
+            ],
+            "displaySize": [
+              110,
+              45
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "flame"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "body",
+          "flameMane",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head"
+        ]
+      },
+      "se": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -52
+            ],
+            "displaySize": [
+              91,
+              50
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              34,
+              -72
+            ],
+            "displaySize": [
+              58,
+              56
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              -40,
+              -47
+            ],
+            "displaySize": [
+              63,
+              55
+            ],
+            "pivot": [
+              0.12,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "tail",
+            "flipX": true
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              26,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              36,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              -38,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              -28,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "flameMane": {
+            "anchor": [
+              0,
+              -66
+            ],
+            "displaySize": [
+              90,
+              45
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "flame"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "body",
+          "flameMane",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head"
+        ]
+      },
+      "sw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -52
+            ],
+            "displaySize": [
+              91,
+              50
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -34,
+              -72
+            ],
+            "displaySize": [
+              58,
+              56
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              40,
+              -47
+            ],
+            "displaySize": [
+              63,
+              55
+            ],
+            "pivot": [
+              0.12,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "tail"
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              -36,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              -26,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              28,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              38,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "flameMane": {
+            "anchor": [
+              0,
+              -66
+            ],
+            "displaySize": [
+              90,
+              45
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "flame"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "body",
+          "flameMane",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head"
+        ]
+      },
+      "w": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -52
+            ],
+            "displaySize": [
+              110,
+              50
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -43,
+              -72
+            ],
+            "displaySize": [
+              58,
+              56
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              40,
+              -47
+            ],
+            "displaySize": [
+              63,
+              55
+            ],
+            "pivot": [
+              0.12,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "tail"
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              -36,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              -26,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              28,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              38,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "flameMane": {
+            "anchor": [
+              0,
+              -66
+            ],
+            "displaySize": [
+              110,
+              45
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "flame"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "body",
+          "flameMane",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head"
+        ]
+      },
+      "nw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -52
+            ],
+            "displaySize": [
+              91,
+              50
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -34,
+              -72
+            ],
+            "displaySize": [
+              58,
+              56
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              40,
+              -47
+            ],
+            "displaySize": [
+              63,
+              55
+            ],
+            "pivot": [
+              0.12,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "tail"
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              -36,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              -26,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              28,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              38,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "flameMane": {
+            "anchor": [
+              0,
+              -66
+            ],
+            "displaySize": [
+              90,
+              45
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "flame"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "body",
+          "flameMane",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head"
+        ]
+      },
+      "ne": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -52
+            ],
+            "displaySize": [
+              91,
+              50
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              34,
+              -72
+            ],
+            "displaySize": [
+              58,
+              56
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              -40,
+              -47
+            ],
+            "displaySize": [
+              63,
+              55
+            ],
+            "pivot": [
+              0.12,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "tail",
+            "flipX": true
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              26,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              36,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              -38,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              -28,
+              -40
+            ],
+            "displaySize": [
+              24,
+              43
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "flameMane": {
+            "anchor": [
+              0,
+              -66
+            ],
+            "displaySize": [
+              90,
+              45
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "flame"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "body",
+          "flameMane",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head"
+        ]
+      }
+    }
+  },
+  "attack": "attack",
+  "group": 1,
+  "notes": [
+    "Independent creature anatomy; whole leg and wing illustrations articulate at their attachment joints.",
+    "Six independently illustrated facings; minor texture variation between views."
+  ]
+}

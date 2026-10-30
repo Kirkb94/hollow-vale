@@ -325,6 +325,15 @@
       "attack": "cast",
       "revision": "99d34b64c6a1"
     },
+    "fireeye": {
+      "name": "Eye of Ruin",
+      "faction": "Infernal",
+      "folder": "infernal/fireeye",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "b74514065006"
+    },
     "wraith": {
       "name": "Wraith",
       "faction": "Undead",
@@ -405,6 +414,114 @@
       "effects": "vfx.json",
       "attack": "cast",
       "revision": "c8a7f4054108"
+    },
+    "bomber": {
+      "name": "Bombardier",
+      "faction": "Infernal",
+      "folder": "infernal/bomber",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "shoot",
+      "revision": "13d560fe5a99"
+    },
+    "infernowitch": {
+      "name": "Inferno Witch",
+      "faction": "Infernal",
+      "folder": "infernal/infernowitch",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "7c1141513cb2"
+    },
+    "cinderwarden": {
+      "name": "Cinder Warden",
+      "faction": "Infernal",
+      "folder": "infernal/cinderwarden",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "9311d935493c"
+    },
+    "hellbinder": {
+      "name": "Hellbinder",
+      "faction": "Infernal",
+      "folder": "infernal/hellbinder",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "6e6fc1161227"
+    },
+    "pactbroker": {
+      "name": "Pactbroker",
+      "faction": "Infernal",
+      "folder": "infernal/pactbroker",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "79125f71b54e"
+    },
+    "magmagolem": {
+      "name": "Magma Golem",
+      "faction": "Infernal",
+      "folder": "infernal/magmagolem",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "6f9de077fb74"
+    },
+    "pitlord": {
+      "name": "Pit Lord",
+      "faction": "Infernal",
+      "folder": "infernal/pitlord",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "9e8ddbfd5d04"
+    },
+    "demonprince": {
+      "name": "Demon Prince",
+      "faction": "Infernal",
+      "folder": "infernal/demonprince",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "a57d9c471436"
+    },
+    "hellhound": {
+      "name": "Hellhound",
+      "faction": "Infernal",
+      "folder": "infernal/hellhound",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "a5b98d3f343a"
+    },
+    "phoenix": {
+      "name": "Phoenix",
+      "faction": "Infernal",
+      "folder": "infernal/phoenix",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "781183d9656a"
+    },
+    "dragon": {
+      "name": "Ember Dragon",
+      "faction": "Infernal",
+      "folder": "infernal/dragon",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "18092c2746ec"
+    },
+    "imps": {
+      "name": "Imps",
+      "faction": "Infernal",
+      "folder": "infernal/imps",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "ecb14ecc9cdb"
     }
   }
 }

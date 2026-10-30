@@ -1,0 +1,14 @@
+{
+  "n": "Magma Golem",
+  "e": "🌋",
+  "hp": 21,
+  "mv": 1,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 4,
+  "armor": 1,
+  "d": "A walking furnace of molten rock. Slow, armored and burning.",
+  "fac": "infernal"
+}

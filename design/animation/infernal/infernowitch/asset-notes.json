@@ -1,0 +1,27 @@
+{
+  "unit": "infernowitch",
+  "status": "complete-art-and-dynamic-gameplay-QA",
+  "manifest": "manifest.json",
+  "body": "body.png",
+  "equipment": "equipment.png",
+  "effects": "vfx.png",
+  "effectMetadata": "vfx.json",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partsPerDirection": 12,
+  "gearPerDirection": 1,
+  "effectFrames": 32,
+  "validation": "validation.json",
+  "test": "tools/infernal-casters.test.cjs",
+  "mechanicsUnchanged": true,
+  "corrections": [
+    "Independent vertical wand views regenerated for consistent hand grip."
+  ],
+  "sourcePolicy": "Original generated PNG pixels and alpha preserved; extraction rects only."
+}

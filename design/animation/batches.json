@@ -101,7 +101,7 @@
     {
       "faction": "undead",
       "total": 15,
-      "status": "validated-release-ready",
+      "status": "pushed",
       "workers": {
         "hollow_kingdom": [
           "ossomancer",
@@ -140,12 +140,13 @@
         "ossomancer",
         "bonewitch",
         "gravedigger"
-      ]
+      ],
+      "commit": "d49c06a1071f"
     },
     {
       "faction": "infernal",
       "total": 14,
-      "status": "art-production",
+      "status": "validated-release-ready",
       "workers": {
         "hollow_kingdom": [
           "bomber",
@@ -172,18 +173,70 @@
       },
       "validated": [
         "mage",
-        "fireeye"
+        "bomber",
+        "imps",
+        "dragon",
+        "hellhound",
+        "magmagolem",
+        "pitlord",
+        "infernowitch",
+        "demonprince",
+        "phoenix",
+        "fireeye",
+        "cinderwarden",
+        "hellbinder",
+        "pactbroker"
       ]
     },
     {
       "faction": "wilds",
       "total": 17,
-      "status": "queued"
+      "status": "art-production",
+      "workers": {
+        "parent": [
+          "rogue",
+          "archer",
+          "trapper"
+        ],
+        "hollow_kingdom": [
+          "druid",
+          "beastcaller",
+          "groveshaper",
+          "skinchanger",
+          "falconer"
+        ],
+        "hollow_undead": [
+          "treant",
+          "eldertreant",
+          "sprites"
+        ],
+        "hollow_vampires": [
+          "wolves",
+          "boarrider",
+          "mammoth",
+          "direwolf",
+          "stormroc",
+          "cavebear"
+        ]
+      },
+      "validated": [
+        "rogue",
+        "archer",
+        "trapper"
+      ]
     },
     {
       "faction": "iron",
       "total": 16,
-      "status": "queued"
+      "status": "art-production",
+      "workers": {
+        "parent": [
+          "brute",
+          "sapper",
+          "gunner",
+          "spotter"
+        ]
+      }
     },
     {
       "faction": "arcane",
@@ -220,6 +273,13 @@
       "faction": "vamp",
       "artCommit": "231be06c5751",
       "head": "efee8d1",
+      "remote": "origin/main",
+      "verified": true
+    },
+    {
+      "faction": "undead",
+      "artCommit": "d49c06a1071f",
+      "head": "5cb2299",
       "remote": "origin/main",
       "verified": true
     }

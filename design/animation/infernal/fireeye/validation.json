@@ -1,0 +1,40 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "cast",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 4,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "flare": {
+    "manaSpent": 1,
+    "placed": true,
+    "effects": 2
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 774,
+      "rig": 145.375
+    },
+    "after": {
+      "board": 967,
+      "rig": 181.625
+    }
+  },
+  "test": "tools/infernal-fireeye.test.cjs",
+  "testedAt": "2026-10-30T11:21:41.227Z",
+  "pageErrors": []
+}

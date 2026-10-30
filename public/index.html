@@ -1653,7 +1653,7 @@ if(u.side==n){if(u.k=='seraph'){const bless=w=>{const healed=healU(w,1);if(heale
 if(u.k=='vlord'){const c=S.units.filter(v=>isFoe(v.side,n)&&near(v,u,1)).length;if(c)healU(u,2*c)}
 if(u.k=='cavebear')healU(u,3);
 if(u.k=='forgemaster'){S.units.filter(w=>w.side==n&&w!==u&&near(w,u,1)).forEach(w=>healU(w,2));const T=S.tw[n].filter(T=>T.hp>0&&T.hp<T.max).sort((a,b)=>a.hp-b.hp)[0];if(T){T.hp++;pop(T,'+1',1)}}
-if(u.k=='pitlord')S.units.filter(v=>isFoe(v.side,n)&&near(v,u,1)&&!(window.hvInfImmune&&hvInfImmune(v))).forEach(v=>{if(v.hp>0)v.kbU=u;v.hp-=2;v.brU=u;v.burn=2;v.bd=Math.max(v.bd||0,1);fx(v,'hurt');pop(v,'-2🔥')});
+if(u.k=='pitlord')S.units.filter(v=>isFoe(v.side,n)&&near(v,u,1)&&!(window.hvInfImmune&&hvInfImmune(v))).forEach(v=>{if(v.hp>0)v.kbU=u;const immolationAlive=v.hp>0;v.hp-=2;v.brU=u;v.burn=2;v.bd=Math.max(v.bd||0,1);fx(v,'hurt');pop(v,'-2🔥');if(!RP&&immolationAlive)window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:'pitlord',event:'immolation:tick',source:u,target:v}}))});
 if(u.k=='demonprince')summonNear(u,'imps',n,'demonprince',2);
 u.mist=0;u.ward=u.k=='runekeeper'?1:0;u.mom=0;u.bk=0}
 else if(u.k=='plaguelord'&&isFoe(u.side,n))S.units.filter(v=>v.side==n&&near(v,u,1)).forEach(v=>{if(v.hp>0)v.kbU=u;const plagueAlive=v.hp>0;v.hp-=2;fx(v,'hurt');pop(v,'-2 ☣');if(!RP&&plagueAlive)window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:'plaguelord',event:'plague:tick',target:v}}))})});
@@ -1664,7 +1664,7 @@ if(u.k=='voidlord'){const b=Math.min(2,S.mana[v.side]);S.mana[v.side]-=b;S.mana[
 if(u.k=='deathknight'&&v.hp>0){v.wither=2;pop(v,'Withered');if(!RP)window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:'deathknight',event:'wither:apply',target:v}}))}
 if(u.k=='banshee')S.units.filter(w=>isFoe(w.side,sd)&&w!==v&&near(w,u,1)).forEach(w=>{w.hp-=1;fx(w,'hurt');pop(w,'-1')});
 if(u.k=='infernowitch'&&v.hp>0){v.burn=3;v.bd=2;v.brU=u}
-if(u.k=='eldertreant'&&v.hp>0&&!IMM(v)){v.root=1;pop(v,'Rooted')}
+if(u.k=='eldertreant'&&v.hp>0&&!IMM(v)){v.root=1;pop(v,'Rooted');if(!RP)window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:'eldertreant',event:'root:apply',source:u,target:v}}))}
 if(u.k=='stormroc'&&v.hp>0){const A=cube(u.x,u.y),Bq=cube(v.x,v.y),d=dist(u,v),dir=[0,1,2].map(i=>Math.round((Bq[i]-A[i])/d)),c=ucube(Bq[0]+dir[0],Bq[1]+dir[1]);if(dir[0]+dir[1]+dir[2]==0&&free(c.x,c.y)&&!IMM(v)){v.x=c.x;v.y=c.y;fx(v,'hurt');pop(v,'Pushed')}else{v.hp-=1;pop(v,'-1')}}
 if(u.k=='thunderking'){S.units.filter(w=>isFoe(w.side,sd)&&w!==v&&near(w,v,2)).slice(0,2).forEach(w=>{w.hp-=2;fx(w,'hurt');pop(w,'-2⚡')})}
 if(u.k=='nosferatu')u.mist=1}
@@ -2395,7 +2395,7 @@ return o}
 function armOf(v){let a=eff(v).armor;if(S.units.some(w=>w.k=='kinglion'&&w!==v&&w.side==v.side&&dist(w,v)==1))a+=1;if(v.k=='cavebear'&&v.hp<maxHp(v)/2)a+=1;if(H[v.k].fac=='kingdom'&&S.units.some(w=>w!==v&&w.side==v.side&&H[w.k].fac=='kingdom'&&dist(v,w)==1))a+=1;return a}
 function revive(v){const h=H[v.k];if(v.k=='phoenix'&&!v.rez){v.rez=1;v.hp=Math.ceil(maxHp(v)/2);v.burn=0;return true}if(h.fac=='undead'&&!v.rez){v.rez=1;v.hp=Math.min(h.hp,hasSyn(v.side,'undead')?2:1);v.burn=0;return true}return false}
 function turnStart(side){const ev=[];econStart(side);S.units.forEach(u=>{if(u.side!=side)return;const h=H[u.k];
-if(h.fac=='wilds'&&u.hp>0&&u.hp<maxHp(u)&&!(u.wither>0)){const a=Math.min(maxHp(u)-u.hp,hasSyn(side,'wilds')?3:2);u.hp+=a;ev.push({u,k:'heal',a})}
+if(h.fac=='wilds'&&u.hp>0&&u.hp<maxHp(u)&&!(u.wither>0)){const a=Math.min(maxHp(u)-u.hp,hasSyn(side,'wilds')?3:2);u.hp+=a;ev.push({u,k:'heal',a});if(!RP&&a>0)window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:u.k,event:'regrowth:heal',source:u,target:u}}))}
 if(u.burn>0){const a=u.bd||1,burnSource=u.brU,burnHP=u.hp;if(u.hp>0){u.kbU=u.brU||null;u.kbS=u.bsrc||null}u.hp-=a;u.burn--;if(u.burn<=0)u.brU=null;ev.push({u,k:'burn',a});if(burnSource&&burnHP>0&&u.hp<burnHP&&typeof window!=='undefined')window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:burnSource.k,event:'burn:tick',target:u,source:burnSource,amount:Math.min(a,burnHP)}}))}});
 if(hasSyn(side,'arcane'))S.mana[side]=Math.min(10,S.mana[side]+2);
 return ev}
@@ -8612,6 +8612,7 @@ const r1=render;render=function(){const r=r1.apply(this,arguments);try{deco()}ca
 const t0=targets;targets=function(u){const r=t0(u);if(!MOPT.sight||!u)return r;return r.filter(t=>!((t.t=='w'||t.t=='t'||t.ab=='sil')&&!seesCell(u.side,t.x,t.y)))};
 })();
 </script>
+<script src="creature-rigs.js"></script>
 <script src="rig-animation.js"></script>
 <script src="faction-effects.js"></script>
 <script src="arcane-terrain.js"></script>

@@ -1,0 +1,15 @@
+{
+  "n": "Demon Prince",
+  "e": "👑",
+  "hp": 21,
+  "mv": 2,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 5,
+  "fly": 1,
+  "elite": 1,
+  "fac": "infernal",
+  "d": "Boss (5 slots). Hellgate: At the start of your turn an Imp crawls out next to him (up to 2 at a time)."
+}

@@ -15,7 +15,7 @@ function inspect(id,config){
   for(const d of directions){
     const view=m.views?.[d],file=view?.file||m.atlases?.[d];if(!file)throw Error('Missing facing '+d);
     const size=imageSize(resolveAsset(base,file));
-    for(const [i,n]of (['bat','wisp'].includes(m.skeleton)?m.partOrder:names).entries()){const part=view?.parts?.[n],r=part?.renderRect||part?.sourceRect||external?.rects?.[d]?.[i];if(!r)throw Error('Missing '+d+'/'+n);rect(r,part?.file?imageSize(resolveAsset(base,part.file)):size,d+'/'+n);}
+    for(const [i,n]of (['bat','wisp','quadruped','dragon','bird','imp'].includes(m.skeleton)?m.partOrder:names).entries()){const part=view?.parts?.[n],r=part?.renderRect||part?.sourceRect||external?.rects?.[d]?.[i];if(!r)throw Error('Missing '+d+'/'+n);rect(r,part?.file?imageSize(resolveAsset(base,part.file)):size,d+'/'+n);}
   }
   const fxFile=config.effects||'vfx.json',fx=read(resolveAsset(base,fxFile));
   imageSize(resolveAsset(path.dirname(resolveAsset(base,fxFile)),fx.file||fx.image));

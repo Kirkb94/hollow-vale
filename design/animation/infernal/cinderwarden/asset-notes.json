@@ -1,0 +1,27 @@
+{
+  "unit": "cinderwarden",
+  "status": "complete-art-and-dynamic-gameplay-QA",
+  "manifest": "manifest.json",
+  "body": "body.png",
+  "equipment": "equipment.png",
+  "effects": "vfx.png",
+  "effectMetadata": "vfx.json",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partsPerDirection": 12,
+  "gearPerDirection": 1,
+  "effectFrames": 32,
+  "validation": "validation.json",
+  "test": "tools/infernal-casters.test.cjs",
+  "mechanicsUnchanged": true,
+  "corrections": [
+    "Rear limb mapping corrected; rear left/right leg layers share the same appropriate source cutout with independent motion. NE cape crop excludes duplicated helmet. Existing persistent game flamewall zone visuals retained; generated spell cast/impact plays on real successful cast."
+  ],
+  "sourcePolicy": "Original generated PNG pixels and alpha preserved; extraction rects only."
+}

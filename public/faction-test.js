@@ -6,12 +6,12 @@
   let arena=null,subject=null,waiting=false,passTimer=null;
   const bar=document.createElement('details');bar.id='hv-faction-test';bar.open=true;
   bar.innerHTML=`<summary>New-art test match · 4 faction representatives</summary>
-    <p>Infernal, Kingdom, Vampires and Undead have new character art. Wilds, Iron and Arcane retain existing art.</p>
+    <p>The mixed test shows four original art pilots. Choose a completed faction below to test its full updated roster.</p>
     <div><label>Inspect <select id="faction-unit">${roster.map(k=>`<option value="${k}">${H[k].n}</option>`).join('')}</select></label>
     <label>Facing <select id="faction-facing">${HVRig.directions.map((d,i)=>`<option value="${i}">${d.toUpperCase()}</option>`).join('')}</select></label>
     <button data-review="ready">Refresh actions</button><button data-review="reset">Restart match</button>
     <label><input id="faction-dummy" type="checkbox"> Stationary opponents</label>
-    <a href="?arttest=factions&faction=kingdom">Full Kingdom roster</a><a href="animation-preview.html" target="_blank">Animation workshop</a><a href="/">Exit test</a></div>
+    <span id="faction-links"></span><a href="animation-preview.html" target="_blank">Animation workshop</a><a href="/">Exit test</a></div>
     <p id="faction-status" role="status">Loading new artwork…</p>`;
   document.body.appendChild(bar);
   const css=document.createElement('style');css.textContent=`#hv-faction-test{position:fixed;bottom:8px;left:50%;translate:-50% 0;width:min(920px,94vw);box-sizing:border-box;z-index:1200;padding:10px;background:#172a2af5;color:#f0dfbb;border:1px solid #b99a59;border-radius:8px;font:13px system-ui}#hv-faction-test summary{cursor:pointer;font-weight:bold}#hv-faction-test p{margin:6px 0}#hv-faction-test div{display:flex;gap:6px;flex-wrap:wrap;align-items:center}#hv-faction-test button,#hv-faction-test select{padding:7px;background:#354c48;color:white;border:1px solid #a59161;border-radius:5px}#hv-faction-test a{color:#efd28a;padding:7px}`;document.head.appendChild(css);
@@ -64,6 +64,7 @@
     waiting=true;
     try{
       await HVRig.ready;
+      bar.querySelector('#faction-links').innerHTML=Object.keys(FAC).filter(f=>{const keys=Object.keys(H).filter(k=>H[k].fac===f);return keys.length&&keys.every(k=>HVRig.registry[k]);}).map(f=>`<a href="?arttest=factions&faction=${encodeURIComponent(f)}">${FAC[f].n} roster</a>`).join('');
       if(requestedFaction){
         const keys=Object.keys(HVRig.registry).filter(k=>H[k]?.fac===requestedFaction);
         if(!keys.length)throw new Error('No completed kits are available for that faction yet.');

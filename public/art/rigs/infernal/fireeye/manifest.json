@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "unit": "fireeye",
+  "faction": "infernal",
+  "style": "Arcane Vanguard",
+  "skeleton": "bat",
+  "group": 1,
+  "attack": "cast",
+  "partOrder": [
+    "body",
+    "head",
+    "leftWing",
+    "rightWing"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            27,
+            28,
+            281,
+            279
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            323,
+            101,
+            148,
+            157
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            27,
+            284,
+            215,
+            206
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            283,
+            284,
+            205,
+            205
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            549,
+            17,
+            264,
+            293
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            831,
+            107,
+            162,
+            167
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            540,
+            297,
+            209,
+            192
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            790,
+            295,
+            213,
+            194
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            1059,
+            17,
+            263,
+            288
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            1338,
+            109,
+            157,
+            163
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            1055,
+            291,
+            221,
+            200
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            1315,
+            293,
+            200,
+            190
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            39,
+            519,
+            290,
+            279
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            331,
+            608,
+            149,
+            154
+          ],
+          "isolate": true,
+          "flipX": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            27,
+            784,
+            211,
+            208
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            272,
+            785,
+            214,
+            207
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            562,
+            518,
+            273,
+            274
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            848,
+            609,
+            152,
+            159
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            544,
+            786,
+            207,
+            198
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            790,
+            788,
+            208,
+            198
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            1082,
+            520,
+            269,
+            273
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            1362,
+            608,
+            156,
+            159
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            1062,
+            794,
+            212,
+            196
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            1317,
+            790,
+            200,
+            197
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    }
+  },
+  "batLayout": {
+    "body": {
+      "position": [
+        0,
+        -20
+      ],
+      "size": [
+        56,
+        56
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    "head": {
+      "position": [
+        9,
+        -18
+      ],
+      "size": [
+        26,
+        30
+      ]
+    },
+    "headBehindRear": true
+  }
+}
