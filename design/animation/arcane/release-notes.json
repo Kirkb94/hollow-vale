@@ -1,0 +1,28 @@
+{
+  "title": "All factions complete: Arcane Vanguard roster",
+  "groups": [
+    {
+      "name": "Arcane Order",
+      "items": [
+        "All 15 Arcane units now have six-facing layered artwork, separate equipment and matching visual effects.",
+        "Frost, lightning, meteors, healing, Lance, Swap, Rewind, Silence, Flare, mana burn, reflection and wards follow actual gameplay."
+      ]
+    },
+    {
+      "name": "Complete roster",
+      "items": [
+        "All 111 units are integrated: 107 new kits plus four original pilots, across seven factions and the raid boss.",
+        "Workshop audit rendered all 666 facing canvases without missing assets. Cache stayed at24 kits and reloaded evicted artwork.",
+        "Every faction test arena rendered its full roster and completed an end-turn cycle without browser errors."
+      ]
+    },
+    {
+      "name": "Animation fixes",
+      "items": [
+        "Attacks and casts resume from their paused pose instead of jumping to idle.",
+        "Secondary chain/reflection projectiles travel correctly and respect hidden sources.",
+        "Workshop attack selection follows each unit, with direct faction test links."
+      ]
+    }
+  ]
+}
