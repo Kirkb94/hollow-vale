@@ -1659,7 +1659,7 @@
             343
           ],
           "pivot": [
-            0.96,
+            0.94,
             0.48
           ],
           "anchor": [
@@ -1667,12 +1667,13 @@
             64
           ],
           "displaySize": [
-            75,
-            95
+            99.443,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "file": "wings.png",
@@ -1684,19 +1685,20 @@
           ],
           "pivot": [
             0.08,
-            0.4
+            0.48
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            62,
-            95
+            53.222,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         },
         "halo": {
           "file": "equipment.png",
@@ -1731,20 +1733,21 @@
             359
           ],
           "pivot": [
-            0.94,
-            0.36
+            0.93,
+            0.4
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            75,
-            95
+            72.655,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "file": "wings.png",
@@ -1755,20 +1758,21 @@
             346
           ],
           "pivot": [
-            0.1,
-            0.1
+            0.08,
+            0.4
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            62,
-            95
+            64.754,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         },
         "halo": {
           "file": "equipment.png",
@@ -1803,20 +1807,21 @@
             336
           ],
           "pivot": [
-            0.96,
-            0.38
+            0.94,
+            0.42
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            75,
-            95
+            93.553,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "file": "wings.png",
@@ -1827,20 +1832,21 @@
             323
           ],
           "pivot": [
-            0.1,
-            0.12
+            0.06,
+            0.4
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            62,
-            95
+            76.612,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         },
         "halo": {
           "file": "equipment.png",
@@ -1875,20 +1881,21 @@
             369
           ],
           "pivot": [
-            0.96,
-            0.48
+            0.94,
+            0.5
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            75,
-            95
+            90.849,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "file": "wings.png",
@@ -1900,19 +1907,20 @@
           ],
           "pivot": [
             0.08,
-            0.3
+            0.42
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            62,
-            95
+            51.127,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         },
         "halo": {
           "file": "equipment.png",
@@ -1947,20 +1955,21 @@
             370
           ],
           "pivot": [
-            0.96,
-            0.3
+            0.94,
+            0.32
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            75,
-            95
+            73.432,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "file": "wings.png",
@@ -1971,20 +1980,22 @@
             362
           ],
           "pivot": [
-            0.8,
-            0.16
+            0.84,
+            0.15
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            62,
-            95
+            51.499,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "flipX": true,
+          "motionSign": 1
         },
         "halo": {
           "file": "equipment.png",
@@ -2019,20 +2030,21 @@
             380
           ],
           "pivot": [
-            0.96,
-            0.3
+            0.93,
+            0.35
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            75,
-            95
+            78.1,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "file": "wings.png",
@@ -2043,20 +2055,21 @@
             359
           ],
           "pivot": [
-            0.08,
-            0.14
+            0.07,
+            0.4
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            62,
-            95
+            64.737,
+            83.6
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         },
         "halo": {
           "file": "equipment.png",

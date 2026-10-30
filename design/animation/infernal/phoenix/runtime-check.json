@@ -5,253 +5,253 @@
     {
       "direction": "e",
       "state": "idle",
-      "opaquePixels": 14505,
+      "opaquePixels": 12740,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "idle",
-      "opaquePixels": 15071,
+      "opaquePixels": 13003,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "idle",
-      "opaquePixels": 14916,
+      "opaquePixels": 12646,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "idle",
-      "opaquePixels": 14510,
+      "opaquePixels": 12851,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "idle",
-      "opaquePixels": 14207,
+      "opaquePixels": 11373,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "idle",
-      "opaquePixels": 14537,
+      "opaquePixels": 11102,
       "borderPixels": 0
     },
     {
       "direction": "e",
       "state": "walk",
-      "opaquePixels": 14648,
+      "opaquePixels": 11479,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "walk",
-      "opaquePixels": 15158,
+      "opaquePixels": 11953,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "walk",
-      "opaquePixels": 15130,
+      "opaquePixels": 11531,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "walk",
-      "opaquePixels": 14662,
+      "opaquePixels": 11619,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "walk",
-      "opaquePixels": 14484,
+      "opaquePixels": 10354,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "walk",
-      "opaquePixels": 14672,
+      "opaquePixels": 10179,
       "borderPixels": 0
     },
     {
       "direction": "e",
       "state": "cast",
-      "opaquePixels": 10933,
+      "opaquePixels": 11013,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "cast",
-      "opaquePixels": 11961,
+      "opaquePixels": 11515,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "cast",
-      "opaquePixels": 11553,
+      "opaquePixels": 11169,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "cast",
-      "opaquePixels": 11008,
+      "opaquePixels": 11104,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "cast",
-      "opaquePixels": 11264,
+      "opaquePixels": 10340,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "cast",
-      "opaquePixels": 11638,
+      "opaquePixels": 10243,
       "borderPixels": 0
     },
     {
       "direction": "e",
       "state": "cast",
-      "opaquePixels": 10941,
+      "opaquePixels": 10917,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "cast",
-      "opaquePixels": 11940,
+      "opaquePixels": 11408,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "cast",
-      "opaquePixels": 11545,
+      "opaquePixels": 11067,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "cast",
-      "opaquePixels": 11011,
+      "opaquePixels": 10996,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "cast",
-      "opaquePixels": 11247,
+      "opaquePixels": 10262,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "cast",
-      "opaquePixels": 11616,
+      "opaquePixels": 10140,
       "borderPixels": 0
     },
     {
       "direction": "e",
       "state": "hurt",
-      "opaquePixels": 13681,
+      "opaquePixels": 11097,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "hurt",
-      "opaquePixels": 14144,
+      "opaquePixels": 11537,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "hurt",
-      "opaquePixels": 14182,
+      "opaquePixels": 11160,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "hurt",
-      "opaquePixels": 13682,
+      "opaquePixels": 11205,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "hurt",
-      "opaquePixels": 13539,
+      "opaquePixels": 10103,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "hurt",
-      "opaquePixels": 13772,
+      "opaquePixels": 9924,
       "borderPixels": 0
     },
     {
       "direction": "e",
       "state": "death",
-      "opaquePixels": 12191,
+      "opaquePixels": 12079,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "death",
-      "opaquePixels": 13074,
+      "opaquePixels": 12374,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "death",
-      "opaquePixels": 12725,
+      "opaquePixels": 12054,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "death",
-      "opaquePixels": 12263,
+      "opaquePixels": 12150,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "death",
-      "opaquePixels": 12228,
+      "opaquePixels": 10935,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "death",
-      "opaquePixels": 12581,
+      "opaquePixels": 10728,
       "borderPixels": 0
     },
     {
       "direction": "e",
       "state": "spawn",
-      "opaquePixels": 13354,
+      "opaquePixels": 10832,
       "borderPixels": 0
     },
     {
       "direction": "se",
       "state": "spawn",
-      "opaquePixels": 13821,
+      "opaquePixels": 11274,
       "borderPixels": 0
     },
     {
       "direction": "sw",
       "state": "spawn",
-      "opaquePixels": 13854,
+      "opaquePixels": 10910,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "spawn",
-      "opaquePixels": 13409,
+      "opaquePixels": 10973,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "spawn",
-      "opaquePixels": 13244,
+      "opaquePixels": 9903,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "spawn",
-      "opaquePixels": 13481,
+      "opaquePixels": 9706,
       "borderPixels": 0
     }
   ],
@@ -264,5 +264,5 @@
     []
   ],
   "errors": [],
-  "visualReview": "reviewed assembled six facings and seven poses; no clipping"
+  "visualReview": "pending"
 }

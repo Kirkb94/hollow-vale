@@ -929,35 +929,37 @@
           },
           "leftWing": {
             "anchor": [
-              -10,
+              -8,
               -91
             ],
             "displaySize": [
-              95,
+              148.8,
               105
             ],
             "pivot": [
-              0.9,
-              0.1
+              0.94,
+              0.55
             ],
             "phase": 0,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": -1
           },
           "rightWing": {
             "anchor": [
-              10,
+              8,
               -91
             ],
             "displaySize": [
-              95,
+              144.946,
               105
             ],
             "pivot": [
-              0.1,
-              0.1
+              0.06,
+              0.55
             ],
             "phase": 1,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": 1
           }
         },
         "order": [
@@ -1088,35 +1090,37 @@
           },
           "leftWing": {
             "anchor": [
-              -10,
+              -8,
               -91
             ],
             "displaySize": [
-              95,
+              139.251,
               105
             ],
             "pivot": [
-              0.9,
-              0.1
+              0.94,
+              0.55
             ],
             "phase": 0,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": -1
           },
           "rightWing": {
             "anchor": [
-              10,
+              8,
               -91
             ],
             "displaySize": [
-              95,
+              128.145,
               105
             ],
             "pivot": [
-              0.1,
-              0.1
+              0.06,
+              0.55
             ],
             "phase": 1,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": 1
           }
         },
         "order": [
@@ -1246,35 +1250,37 @@
           },
           "leftWing": {
             "anchor": [
-              -10,
+              -8,
               -91
             ],
             "displaySize": [
-              95,
+              130.288,
               105
             ],
             "pivot": [
-              0.9,
-              0.1
+              0.94,
+              0.55
             ],
             "phase": 0,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": -1
           },
           "rightWing": {
             "anchor": [
-              10,
+              8,
               -91
             ],
             "displaySize": [
-              95,
+              127.135,
               105
             ],
             "pivot": [
-              0.1,
-              0.1
+              0.06,
+              0.55
             ],
             "phase": 1,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": 1
           }
         },
         "order": [
@@ -1404,35 +1410,37 @@
           },
           "leftWing": {
             "anchor": [
-              -10,
+              -8,
               -91
             ],
             "displaySize": [
-              95,
+              143.804,
               105
             ],
             "pivot": [
-              0.9,
-              0.1
+              0.94,
+              0.55
             ],
             "phase": 0,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": -1
           },
           "rightWing": {
             "anchor": [
-              10,
+              8,
               -91
             ],
             "displaySize": [
-              95,
+              150.0,
               105
             ],
             "pivot": [
-              0.1,
-              0.1
+              0.06,
+              0.55
             ],
             "phase": 1,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": 1
           }
         },
         "order": [
@@ -1562,35 +1570,37 @@
           },
           "leftWing": {
             "anchor": [
-              -10,
+              -8,
               -91
             ],
             "displaySize": [
-              95,
+              126.917,
               105
             ],
             "pivot": [
-              0.9,
-              0.1
+              0.94,
+              0.55
             ],
             "phase": 0,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": -1
           },
           "rightWing": {
             "anchor": [
-              10,
+              8,
               -91
             ],
             "displaySize": [
-              95,
+              128.216,
               105
             ],
             "pivot": [
-              0.1,
-              0.1
+              0.06,
+              0.55
             ],
             "phase": 1,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": 1
           }
         },
         "order": [
@@ -1721,35 +1731,37 @@
           },
           "leftWing": {
             "anchor": [
-              -10,
+              -8,
               -91
             ],
             "displaySize": [
-              95,
+              114.151,
               105
             ],
             "pivot": [
-              0.9,
-              0.1
+              0.94,
+              0.55
             ],
             "phase": 0,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": -1
           },
           "rightWing": {
             "anchor": [
-              10,
+              8,
               -91
             ],
             "displaySize": [
-              95,
+              116.181,
               105
             ],
             "pivot": [
-              0.1,
-              0.1
+              0.06,
+              0.55
             ],
             "phase": 1,
-            "motion": "wing"
+            "motion": "wing",
+            "motionSign": 1
           }
         },
         "order": [

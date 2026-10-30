@@ -74,6 +74,12 @@
   const portraits=new Set(),portraitVisibility=new WeakMap();
   const portraitObserver=new IntersectionObserver(entries=>{for(const entry of entries){portraitVisibility.set(entry.target,entry.isIntersecting);if(entry.isIntersecting)ensure(entry.target.dataset.rigKey);}},{rootMargin:'120px'});
   function scanPortraits(node){
+    // Legacy popups can hold split SVG/blob portraits created before the catalog loads.
+    const legacy=node.matches?.('.hvf[data-hvk]')?[node]:[...(node.querySelectorAll?.('.hvf[data-hvk]')||[])];
+    for(const el of legacy){if(el.closest('#board')||el.classList.contains('hv-rig-portrait'))continue;
+      el.classList.add('hv-rig-portrait','hv-current-portrait');el.dataset.rigKey=el.dataset.hvk;
+      el.innerHTML='<canvas width="320" height="240" aria-hidden="true"></canvas>';
+    }
     const list=node.matches?.('.hv-rig-portrait')?[node]:[...(node.querySelectorAll?.('.hv-rig-portrait')||[])];
     for(const el of list)if(!portraits.has(el)){portraits.add(el);portraitObserver.observe(el);}
   }
@@ -296,12 +302,13 @@
         draw(canvas,k,dir,state,t,true);
       }
       renderEffects(now);
-      for(const el of portraits){
-        if(!el.isConnected){portraits.delete(el);portraitObserver.unobserve(el);continue;}
-        if(!portraitVisibility.get(el)||!assets.has(el.dataset.rigKey))continue;
-        el.classList.add('ready');draw(el.querySelector('canvas'),el.dataset.rigKey,1,'idle',clock,!el.closest('#draft'));
-      }
       if(flame)for(const c of ground){if(!c.isConnected)continue;const cell=c.closest('.cell');c.style.visibility=cell?.classList.contains('fogw')?'hidden':'';const ctx=c.getContext('2d');ctx.clearRect(0,0,128,128);drawLoop(ctx,flame,groundFrames,reduced.matches?0:clock,720,128,128);}
+    }
+    // Dialog portraits must populate while gameplay is paused; the pose clock stays frozen.
+    if(!document.hidden)for(const el of portraits){
+      if(!el.isConnected){portraits.delete(el);portraitObserver.unobserve(el);continue;}
+      if(!portraitVisibility.get(el)||!assets.has(el.dataset.rigKey))continue;
+      el.classList.add('ready');draw(el.querySelector('canvas'),el.dataset.rigKey,1,'idle',clock,!el.closest('#draft'));
     }
     requestAnimationFrame(frame);
   }
@@ -341,13 +348,15 @@
     .hv-rig-portrait{display:inline-block;position:relative;vertical-align:middle}
     .hv-rig-portrait>canvas{position:absolute;left:-43.333%;top:-20%;width:186.667%;height:140%;pointer-events:none;visibility:hidden}
     .hv-rig-portrait.ready>canvas{visibility:visible}
+    .hv-inline-portrait{width:1.7em;height:2.55em}
+    .hv-inline-portrait>canvas{left:-20%;top:0;width:140%;height:100%;object-fit:contain}
     .hv-current-portrait{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;background:radial-gradient(ellipse at 50% 75%,#526957,#192830 75%)}
     .hv-current-portrait>canvas{left:0;top:0;width:100%;height:100%;object-fit:contain;transform:none!important}
     .hv-rig-portrait.ready>:not(canvas){visibility:hidden}
   `;document.head.appendChild(css);
   if(typeof spr==='function'){
-    const oldPort=port;port=function(k){return registry[k]?`<span class="hvf hv-rig-portrait hv-current-portrait" data-rig-key="${k}"><canvas width="320" height="240" aria-hidden="true"></canvas></span>`:oldPort(k);};
-    const oldSpr=spr;spr=function(k,s,u){const visual=displayKey(k,u);if(u&&assets.has(visual))return `<canvas class="sp pt hv-rig" data-rig-key="${visual}" width="320" height="240" aria-hidden="true"></canvas>`;if(u&&registry[visual]&&!pending.has(visual))ensure(visual);const original=oldSpr.apply(this,arguments);if(!u&&registry[k])return `<span class="hv-rig-portrait" data-rig-key="${k}">${original}<canvas width="240" height="240" aria-hidden="true"></canvas></span>`;return original;};
+    const oldPort=port;port=function(k){return (registry[k]||(typeof H!=='undefined'&&H[k]))?`<span class="hvf hv-rig-portrait hv-current-portrait" data-rig-key="${k}"><canvas width="320" height="240" aria-hidden="true"></canvas></span>`:oldPort(k);};
+    const oldSpr=spr;spr=function(k,s,u){const visual=displayKey(k,u);if(u&&assets.has(visual))return `<canvas class="sp pt hv-rig" data-rig-key="${visual}" width="320" height="240" aria-hidden="true"></canvas>`;if(u&&registry[visual]&&!pending.has(visual))ensure(visual);const original=oldSpr.apply(this,arguments);if(!u&&(registry[k]||(typeof H!=='undefined'&&H[k])))return `<span class="sp pt hv-rig-portrait hv-inline-portrait" data-rig-key="${k}"><canvas width="320" height="240" aria-hidden="true"></canvas></span>`;return original;};
     const oldRender=render;render=function(){const result=oldRender.apply(this,arguments);bind();return result;};
     const oldAct=act;act=function(u,t){if(u&&t&&assets.has(u.k))facing.set(u,direction(u,t,facing.get(u)??1));return oldAct.apply(this,arguments);};
     const oldAtk=atkFx;atkFx=function(u,t){if(u.k==='mage'&&assets.has('mage')&&!RP&&!RUNFAST&&launch(u,t))return;return oldAtk.apply(this,arguments);};
@@ -355,7 +364,7 @@
   function drawParts(canvas,k,dir){const a=assets.get(k)?.[dir];if(!a)return;const ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);a.forEach((s,i)=>{const cw=canvas.width/3,ch=canvas.height/4,scale=Math.min((cw-10)/s.w,(ch-10)/s.h);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,(i%3+.5)*cw-s.w*scale/2,(Math.floor(i/3)+.5)*ch-s.h*scale/2,s.w*scale,s.h*scale);});}
   window.HVRig={directions,direction,pose,draw,drawParts,loopSample,drawLoop,assets,models,registry,load,ensure,bind,failures,loadStatus,face:(u,d)=>facing.set(u,d),register(k,config){registry[k]=config;pending.delete(k);return ensure(k);}};
   const initial=Object.keys(registry);
-  HVRig.ready=Promise.all([json(root+'catalog.json').then(c=>{for(const[k,v]of Object.entries(c.units||{}))if(!registry[k])registry[k]=v;}).catch(e=>{failures.catalog=e.message;console.warn(e.message);}),...initial.map(async k=>({unit:k,ok:await ensure(k)}))]).then(results=>{bind();if(typeof render==='function'&&typeof S!=='undefined'&&S)render();return results.slice(1);});
+  HVRig.ready=Promise.all([json(root+'catalog.json').then(c=>{for(const[k,v]of Object.entries(c.units||{}))if(!registry[k])registry[k]=v;}).catch(e=>{failures.catalog=e.message;console.warn(e.message);}),...initial.map(async k=>({unit:k,ok:await ensure(k)}))]).then(results=>{scanPortraits(document);for(const el of portraits)if(portraitVisibility.get(el))ensure(el.dataset.rigKey);bind();if(typeof render==='function'&&typeof S!=='undefined'&&S)render();return results.slice(1);});
   new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1)scanPortraits(n);}).observe(document.body,{childList:true,subtree:true});
   scanPortraits(document);
   requestAnimationFrame(frame);

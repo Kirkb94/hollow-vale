@@ -1,0 +1,1382 @@
+{
+  "wilds/sprites": {
+    "creature": false,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.97,
+            0.52
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            82.45,
+            76
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.03,
+            0.52
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            85.041,
+            76
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.95,
+            0.58
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            51.149,
+            76
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.03,
+            0.56
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            55.453,
+            76
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.95,
+            0.59
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            37.519,
+            76
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.03,
+            0.57
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            37.245,
+            76
+          ],
+          "motionSign": 1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.12,
+            0.6
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            21.58,
+            76
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.92,
+            0.59
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            23.12,
+            76
+          ],
+          "motionSign": -1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.04,
+            0.57
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            41.498,
+            76
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.95,
+            0.55
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            44.706,
+            76
+          ],
+          "motionSign": -1
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.03,
+            0.57
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            62.429,
+            76
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.97,
+            0.55
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            63.292,
+            76
+          ],
+          "motionSign": -1
+        }
+      }
+    }
+  },
+  "vamp/vlord": {
+    "creature": false,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.93,
+            0.12
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            57.068,
+            80
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.07,
+            0.12
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            55.584,
+            80
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.73,
+            0.1
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            72.027,
+            80
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.36,
+            0.1
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            71.467,
+            80
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.29,
+            0.1
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            66.45,
+            80
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.55,
+            0.1
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            64.675,
+            80
+          ],
+          "motionSign": -1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.16,
+            0.1
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            32.368,
+            80
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.78,
+            0.1
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            39.74,
+            80
+          ],
+          "motionSign": -1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.26,
+            0.1
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            73.355,
+            80
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.7,
+            0.1
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            70.728,
+            80
+          ],
+          "motionSign": -1
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.26,
+            0.1
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            56.131,
+            80
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.7,
+            0.1
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            52.208,
+            80
+          ],
+          "motionSign": -1
+        }
+      }
+    }
+  },
+  "kingdom/seraph": {
+    "creature": false,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.48
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            99.443,
+            83.6
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.08,
+            0.48
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            53.222,
+            83.6
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.93,
+            0.4
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            72.655,
+            83.6
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.08,
+            0.4
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            64.754,
+            83.6
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.42
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            93.553,
+            83.6
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.4
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            76.612,
+            83.6
+          ],
+          "motionSign": 1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.5
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            90.849,
+            83.6
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.08,
+            0.42
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            51.127,
+            83.6
+          ],
+          "motionSign": 1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.32
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            73.432,
+            83.6
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.84,
+            0.15
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            51.499,
+            83.6
+          ],
+          "motionSign": 1,
+          "flipX": true
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.93,
+            0.35
+          ],
+          "anchor": [
+            72,
+            64
+          ],
+          "displaySize": [
+            78.1,
+            83.6
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.07,
+            0.4
+          ],
+          "anchor": [
+            88,
+            64
+          ],
+          "displaySize": [
+            64.737,
+            83.6
+          ],
+          "motionSign": 1
+        }
+      }
+    }
+  },
+  "wilds/stormroc": {
+    "creature": true,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.12
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            112.424,
+            80.96
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.12
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            107.012,
+            80.96
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.06
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            97.71,
+            80.96
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.06
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            94.628,
+            80.96
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.2,
+            0.06
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            86.336,
+            80.96
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.8,
+            0.06
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            79.385,
+            80.96
+          ],
+          "motionSign": -1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.12
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            110.888,
+            80.96
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.12
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            110.152,
+            80.96
+          ],
+          "motionSign": 1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.83,
+            0.08
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            89.214,
+            80.96
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.08,
+            0.08
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            89.532,
+            80.96
+          ],
+          "motionSign": 1
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.25,
+            0.06
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            87.631,
+            80.96
+          ],
+          "motionSign": 1
+        },
+        "rightWing": {
+          "pivot": [
+            0.75,
+            0.06
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            84.283,
+            80.96
+          ],
+          "motionSign": -1
+        }
+      }
+    }
+  },
+  "infernal/dragon": {
+    "creature": true,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.55
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            148.8,
+            105
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.55
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            144.946,
+            105
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.55
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            139.251,
+            105
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.55
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            128.145,
+            105
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.55
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            130.288,
+            105
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.55
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            127.135,
+            105
+          ],
+          "motionSign": 1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.55
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            143.804,
+            105
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.55
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            150.0,
+            105
+          ],
+          "motionSign": 1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.55
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            126.917,
+            105
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.55
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            128.216,
+            105
+          ],
+          "motionSign": 1
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.55
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            114.151,
+            105
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.55
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            116.181,
+            105
+          ],
+          "motionSign": 1
+        }
+      }
+    }
+  },
+  "infernal/imps": {
+    "creature": true,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.78
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            72.154,
+            67
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.78
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            69.209,
+            67
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.78
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            65.948,
+            67
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.78
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            71.232,
+            67
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.78
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            63.201,
+            67
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.78
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            63.564,
+            67
+          ],
+          "motionSign": 1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.78
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            75.281,
+            67
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.78
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            72.36,
+            67
+          ],
+          "motionSign": 1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.78
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            68.727,
+            67
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.78
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            56.182,
+            67
+          ],
+          "motionSign": 1
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.94,
+            0.78
+          ],
+          "anchor": [
+            -8,
+            -91
+          ],
+          "displaySize": [
+            60.589,
+            67
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.06,
+            0.78
+          ],
+          "anchor": [
+            8,
+            -91
+          ],
+          "displaySize": [
+            62.333,
+            67
+          ],
+          "motionSign": 1
+        }
+      }
+    }
+  },
+  "infernal/phoenix": {
+    "creature": true,
+    "views": {
+      "e": {
+        "leftWing": {
+          "pivot": [
+            0.88,
+            0.24
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            108.188,
+            73.568
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.12,
+            0.24
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            93.234,
+            73.568
+          ],
+          "motionSign": 1
+        }
+      },
+      "se": {
+        "leftWing": {
+          "pivot": [
+            0.88,
+            0.24
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            108.68,
+            73.568
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.12,
+            0.24
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            85.326,
+            73.568
+          ],
+          "motionSign": 1
+        }
+      },
+      "sw": {
+        "leftWing": {
+          "pivot": [
+            0.88,
+            0.24
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            100.349,
+            73.568
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.12,
+            0.24
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            89.701,
+            73.568
+          ],
+          "motionSign": 1
+        }
+      },
+      "w": {
+        "leftWing": {
+          "pivot": [
+            0.88,
+            0.24
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            120.598,
+            73.568
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.12,
+            0.24
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            84.226,
+            73.568
+          ],
+          "motionSign": 1
+        }
+      },
+      "nw": {
+        "leftWing": {
+          "pivot": [
+            0.88,
+            0.24
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            94.88,
+            73.568
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.12,
+            0.24
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            73.862,
+            73.568
+          ],
+          "motionSign": 1
+        }
+      },
+      "ne": {
+        "leftWing": {
+          "pivot": [
+            0.88,
+            0.24
+          ],
+          "anchor": [
+            -8,
+            -95
+          ],
+          "displaySize": [
+            84.769,
+            73.568
+          ],
+          "motionSign": -1
+        },
+        "rightWing": {
+          "pivot": [
+            0.12,
+            0.24
+          ],
+          "anchor": [
+            8,
+            -95
+          ],
+          "displaySize": [
+            68.485,
+            73.568
+          ],
+          "motionSign": 1
+        }
+      }
+    }
+  }
+}

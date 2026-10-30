@@ -17,25 +17,25 @@
     {
       "direction": "sw",
       "state": "idle",
-      "opaquePixels": 6857,
+      "opaquePixels": 6859,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "idle",
-      "opaquePixels": 6733,
+      "opaquePixels": 6678,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "idle",
-      "opaquePixels": 6702,
+      "opaquePixels": 6575,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "idle",
-      "opaquePixels": 6783,
+      "opaquePixels": 6492,
       "borderPixels": 0
     },
     {
@@ -53,25 +53,25 @@
     {
       "direction": "sw",
       "state": "walk",
-      "opaquePixels": 6538,
+      "opaquePixels": 6539,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "walk",
-      "opaquePixels": 6443,
+      "opaquePixels": 6392,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "walk",
-      "opaquePixels": 6409,
+      "opaquePixels": 6331,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "walk",
-      "opaquePixels": 6581,
+      "opaquePixels": 6293,
       "borderPixels": 0
     },
     {
@@ -89,25 +89,25 @@
     {
       "direction": "sw",
       "state": "attack",
-      "opaquePixels": 7202,
+      "opaquePixels": 7141,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "attack",
-      "opaquePixels": 7206,
+      "opaquePixels": 7060,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "attack",
-      "opaquePixels": 7135,
+      "opaquePixels": 7002,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "attack",
-      "opaquePixels": 7069,
+      "opaquePixels": 6844,
       "borderPixels": 0
     },
     {
@@ -125,25 +125,25 @@
     {
       "direction": "sw",
       "state": "cast",
-      "opaquePixels": 7116,
+      "opaquePixels": 7136,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "cast",
-      "opaquePixels": 7018,
+      "opaquePixels": 6950,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "cast",
-      "opaquePixels": 7046,
+      "opaquePixels": 6950,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "cast",
-      "opaquePixels": 6969,
+      "opaquePixels": 6777,
       "borderPixels": 0
     },
     {
@@ -161,25 +161,25 @@
     {
       "direction": "sw",
       "state": "hurt",
-      "opaquePixels": 6406,
+      "opaquePixels": 6410,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "hurt",
-      "opaquePixels": 6314,
+      "opaquePixels": 6275,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "hurt",
-      "opaquePixels": 6242,
+      "opaquePixels": 6155,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "hurt",
-      "opaquePixels": 6481,
+      "opaquePixels": 6137,
       "borderPixels": 0
     },
     {
@@ -197,25 +197,25 @@
     {
       "direction": "sw",
       "state": "death",
-      "opaquePixels": 7454,
+      "opaquePixels": 7393,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "death",
-      "opaquePixels": 7403,
+      "opaquePixels": 7227,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "death",
-      "opaquePixels": 7365,
+      "opaquePixels": 7227,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "death",
-      "opaquePixels": 7289,
+      "opaquePixels": 7019,
       "borderPixels": 0
     },
     {
@@ -233,25 +233,25 @@
     {
       "direction": "sw",
       "state": "spawn",
-      "opaquePixels": 6259,
+      "opaquePixels": 6257,
       "borderPixels": 0
     },
     {
       "direction": "w",
       "state": "spawn",
-      "opaquePixels": 6171,
+      "opaquePixels": 6119,
       "borderPixels": 0
     },
     {
       "direction": "nw",
       "state": "spawn",
-      "opaquePixels": 6086,
+      "opaquePixels": 5998,
       "borderPixels": 0
     },
     {
       "direction": "ne",
       "state": "spawn",
-      "opaquePixels": 6305,
+      "opaquePixels": 5980,
       "borderPixels": 0
     }
   ],
@@ -264,5 +264,5 @@
     []
   ],
   "errors": [],
-  "visualReview": "passed"
+  "visualReview": "pending"
 }

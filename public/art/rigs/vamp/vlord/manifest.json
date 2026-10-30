@@ -1154,20 +1154,21 @@
             307
           ],
           "pivot": [
-            0.85,
-            0.08
+            0.93,
+            0.12
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            66,
+            57.068,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "sourceRect": [
@@ -1177,20 +1178,21 @@
             308
           ],
           "pivot": [
-            0.15,
-            0.08
+            0.07,
+            0.12
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            66,
+            55.584,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         }
       },
       "se": {
@@ -1202,20 +1204,21 @@
             301
           ],
           "pivot": [
-            0.85,
-            0.08
+            0.73,
+            0.1
           ],
           "anchor": [
             72,
             64
           ],
           "displaySize": [
-            66,
+            72.027,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": -1
         },
         "rightWing": {
           "sourceRect": [
@@ -1225,20 +1228,21 @@
             300
           ],
           "pivot": [
-            0.15,
-            0.08
+            0.36,
+            0.1
           ],
           "anchor": [
             88,
             64
           ],
           "displaySize": [
-            66,
+            71.467,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": 1
         }
       },
       "sw": {
@@ -1250,20 +1254,21 @@
             307
           ],
           "pivot": [
-            0.85,
-            0.08
+            0.29,
+            0.1
           ],
           "anchor": [
-            72,
+            88,
             64
           ],
           "displaySize": [
-            66,
+            66.45,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": 1
         },
         "rightWing": {
           "sourceRect": [
@@ -1273,20 +1278,21 @@
             308
           ],
           "pivot": [
-            0.15,
-            0.08
+            0.55,
+            0.1
           ],
           "anchor": [
-            88,
+            72,
             64
           ],
           "displaySize": [
-            66,
+            64.675,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": -1
         }
       },
       "w": {
@@ -1298,20 +1304,21 @@
             304
           ],
           "pivot": [
-            0.85,
-            0.08
+            0.16,
+            0.1
           ],
           "anchor": [
-            72,
+            88,
             64
           ],
           "displaySize": [
-            66,
+            32.368,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": 1
         },
         "rightWing": {
           "sourceRect": [
@@ -1321,20 +1328,21 @@
             308
           ],
           "pivot": [
-            0.15,
-            0.08
+            0.78,
+            0.1
           ],
           "anchor": [
-            88,
+            72,
             64
           ],
           "displaySize": [
-            66,
+            39.74,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": -1
         }
       },
       "nw": {
@@ -1346,20 +1354,21 @@
             301
           ],
           "pivot": [
-            0.85,
-            0.08
+            0.26,
+            0.1
           ],
           "anchor": [
-            72,
+            88,
             64
           ],
           "displaySize": [
-            66,
+            73.355,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": 1
         },
         "rightWing": {
           "sourceRect": [
@@ -1369,20 +1378,21 @@
             302
           ],
           "pivot": [
-            0.15,
-            0.08
+            0.7,
+            0.1
           ],
           "anchor": [
-            88,
+            72,
             64
           ],
           "displaySize": [
-            66,
+            70.728,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": -1
         }
       },
       "ne": {
@@ -1394,20 +1404,21 @@
             305
           ],
           "pivot": [
-            0.85,
-            0.08
+            0.26,
+            0.1
           ],
           "anchor": [
-            72,
+            88,
             64
           ],
           "displaySize": [
-            66,
+            56.131,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 0
+          "phase": 0,
+          "motionSign": 1
         },
         "rightWing": {
           "sourceRect": [
@@ -1417,20 +1428,21 @@
             308
           ],
           "pivot": [
-            0.15,
-            0.08
+            0.7,
+            0.1
           ],
           "anchor": [
-            88,
+            72,
             64
           ],
           "displaySize": [
-            66,
+            52.208,
             80
           ],
           "layer": "behind",
           "motion": "wing",
-          "phase": 1
+          "phase": 1,
+          "motionSign": -1
         }
       }
     }

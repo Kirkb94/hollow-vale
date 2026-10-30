@@ -14,7 +14,7 @@
     const spec=layout.parts[n],s=parts[meta.partOrder.indexOf(n)];if(!s||!spec)continue;
     let angle=spec.angle||0,x=spec.anchor[0],y=spec.anchor[1],sx=1,sy=1;
     if(spec.motion==='leg'){angle+=(moving?wave:0)*(spec.phase===1?-1:1)*(fly?.07:.25);angle+=fly?.18:0;}
-    if(spec.motion==='wing'){angle+=flap*(spec.phase===1?-1:1)*(moving?.32:.2);sx=.86+Math.cos(t/125)*.14;}
+    if(spec.motion==='wing'){angle+=flap*(spec.motionSign??(spec.phase===1?-1:1))*(moving?.32:.2);sx=.86+Math.cos(t/125)*.14;}
     if(spec.motion==='tail')angle+=Math.sin(t/260)*.09;
     if(spec.motion==='head'){x+=sign*attack*8;y-=attack*4;angle-=sign*attack*.12;}
     if(spec.motion==='arm')angle-=sign*attack*1.1+(moving?wave*(spec.phase===1?-1:1)*.1:0);
