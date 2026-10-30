@@ -1,4 +1,4 @@
-/* Opt-in local match for reviewing the completed faction representatives. */
+/* Opt-in local match for reviewing the completed faction rosters. */
 (() => {
   if(new URLSearchParams(location.search).get('arttest')!=='factions')return;
   const roster=['mage','knight','blade','necromancer'];
@@ -42,7 +42,7 @@
     const occupied=new Set();
     ['p','e'].forEach(side=>roster.forEach((k,i)=>{
       const tx=side==='p'?minX+(maxX-minX)*.3:minX+(maxX-minX)*.7;
-      const ty=minY+(maxY-minY)*(i+1)/5;
+      const ty=minY+(maxY-minY)*(i+1)/(roster.length+1);
       const cell=cells.filter(c=>!occupied.has(c.x+','+c.y)).sort((a,b)=>((a.x-tx)**2+(a.y-ty)**2)-((b.x-tx)**2+(b.y-ty)**2))[0];
       occupied.add(cell.x+','+cell.y);S.ter[cell.x+','+cell.y]='grass';
       S.units.push(mk(k,side,cell.x,cell.y));
@@ -64,14 +64,14 @@
     waiting=true;
     try{
       await HVRig.ready;
-      bar.querySelector('#faction-links').innerHTML=Object.keys(FAC).filter(f=>{const keys=Object.keys(H).filter(k=>H[k].fac===f);return keys.length&&keys.every(k=>HVRig.registry[k]);}).map(f=>`<a href="?arttest=factions&faction=${encodeURIComponent(f)}">${FAC[f].n} roster</a>`).join('');
+      bar.querySelector('#faction-links').innerHTML=Object.keys(FAC).filter(f=>{const keys=Object.keys(H).filter(k=>H[k].fac===f);return keys.length&&keys.every(k=>HVRig.registry[k]);}).map(f=>`<a href="?arttest=factions&faction=${encodeURIComponent(f)}">${FAC[f].n} roster</a>`).join('')+(HVRig.registry.raidboss?'<a href="?arttest=factions&faction=raidboss">Raid boss</a>':'');
       if(requestedFaction){
-        const keys=Object.keys(HVRig.registry).filter(k=>H[k]?.fac===requestedFaction);
+        const keys=Object.keys(HVRig.registry).filter(k=>H[k]?.fac===requestedFaction||(requestedFaction==='raidboss'&&k==='raidboss'));
         if(!keys.length)throw new Error('No completed kits are available for that faction yet.');
         roster.splice(0,roster.length,...keys);
         bar.querySelector('#faction-unit').innerHTML=roster.map(k=>`<option value="${k}">${H[k].n}</option>`).join('');
         bar.querySelector('summary').textContent=(FAC[requestedFaction]?.n||requestedFaction)+' art test · '+roster.length+' units';
-        const total=Object.values(H).filter(h=>h.fac===requestedFaction).length;
+        const total=requestedFaction==='raidboss'?1:Object.values(H).filter(h=>h.fac===requestedFaction).length;
         bar.querySelector('p').textContent=roster.length+' of '+total+' faction units have integrated new art. Each side uses these kits.';
         await Promise.all(roster.map(k=>HVRig.ensure(k)));
       }

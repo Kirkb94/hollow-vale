@@ -1,0 +1,14 @@
+{
+  "n": "Arcane Sentinel",
+  "e": "🗿",
+  "hp": 23,
+  "mv": 1,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 3,
+  "armor": 1,
+  "d": "A rune-etched construct that guards the order's casters.",
+  "fac": "arcane"
+}

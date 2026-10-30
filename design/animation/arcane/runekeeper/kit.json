@@ -1,0 +1,15 @@
+{
+  "n": "Runekeeper",
+  "e": "👑",
+  "hp": 32,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 7,
+  "armor": 1,
+  "elite": 1,
+  "fac": "arcane",
+  "d": "Boss (5 slots). Rune Ward: The first hit it takes each round deals no damage."
+}

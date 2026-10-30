@@ -1,0 +1,144 @@
+{
+  "result": {
+    "aetherlancer": {
+      "attackDamage": 3,
+      "attackFX": 2,
+      "lance": true,
+      "lanceDamage": 5,
+      "spellFX": 3
+    },
+    "phasewright": {
+      "attackDamage": 2,
+      "attackFX": 2,
+      "swap": true,
+      "positions": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "spellFX": 2
+    },
+    "hourglass": {
+      "attackDamage": 2,
+      "attackFX": 2,
+      "rewind": true,
+      "rewindHP": 8,
+      "position": {
+        "x": 2,
+        "y": 1
+      },
+      "spellFX": 2
+    },
+    "hexweaver": {
+      "attackDamage": 3,
+      "attackFX": 2,
+      "silence": true,
+      "silenced": true,
+      "spellFX": 2
+    },
+    "oracle": {
+      "attackDamage": 4,
+      "attackFX": 2,
+      "flare": true,
+      "spellFX": 2
+    }
+  },
+  "presentation": {
+    "aetherlancer": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "phasewright": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "hourglass": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "hexweaver": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "oracle": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    }
+  },
+  "errors": []
+}

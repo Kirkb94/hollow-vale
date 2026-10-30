@@ -1,0 +1,902 @@
+{
+  "testedAt": "2026-10-30T12:22:35.424Z",
+  "elapsedMs": 21024,
+  "catalogCount": 111,
+  "sixViewKits": 111,
+  "maxResident": 24,
+  "evictions": 87,
+  "selectedKitNeverEvicted": true,
+  "reloadedKey": "mage",
+  "errors": [],
+  "failedRequests": [],
+  "rows": [
+    {
+      "key": "mage",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 4,
+      "failure": null,
+      "status": "Pyromancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "knight",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 4,
+      "failure": null,
+      "status": "Knight · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "blade",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 4,
+      "failure": null,
+      "status": "Bloodblade · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "necromancer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 4,
+      "failure": null,
+      "status": "Necromancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "cleric",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 5,
+      "failure": null,
+      "status": "Cleric · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "paladin",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 6,
+      "failure": null,
+      "status": "Paladin · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "sunspeaker",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 7,
+      "failure": null,
+      "status": "Sunspeaker · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "aegis",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 8,
+      "failure": null,
+      "status": "Aegis Chaplain · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "herald",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 9,
+      "failure": null,
+      "status": "Royal Herald · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "footmen",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 10,
+      "failure": null,
+      "status": "Footmen · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bowmen",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 11,
+      "failure": null,
+      "status": "Bowmen · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "raiders",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 12,
+      "failure": null,
+      "status": "Raiders · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "lookout",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 13,
+      "failure": null,
+      "status": "Royal Lookout · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "marshal",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 14,
+      "failure": null,
+      "status": "Lord Marshal · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "lancer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 15,
+      "failure": null,
+      "status": "Lancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "outrider",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 16,
+      "failure": null,
+      "status": "Outrider · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "kinglion",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 17,
+      "failure": null,
+      "status": "Lionheart King · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "seraph",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 18,
+      "failure": null,
+      "status": "High Seraph · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "warlord",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 19,
+      "failure": null,
+      "status": "Warlord Gideon · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "templar",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 20,
+      "failure": null,
+      "status": "Grand Templar · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "warlock",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 21,
+      "failure": null,
+      "status": "Warlock · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "assassin",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 22,
+      "failure": null,
+      "status": "Nightstalker · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "thrall",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 23,
+      "failure": null,
+      "status": "Blood Thrall · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "countess",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Blood Countess · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bloodhunter",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Blood Hunter · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "nightwatch",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Night Watcher · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "hemomancer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Hemomancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "mesmerist",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Mesmerist · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "duskweaver",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Duskweaver · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "matriarch",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Crimson Matriarch · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bats",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bat · Six views loaded · 4 movable body pieces per view"
+    },
+    {
+      "key": "vlord",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Vampire Lord · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bloodqueen",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Blood Queen · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "nosferatu",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Nosferatu · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "batking",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bat King · Six views loaded · 4 movable body pieces per view"
+    },
+    {
+      "key": "ossomancer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Ossomancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bonewitch",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bone Witch · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "gravedigger",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Gravedigger · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "lich",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Lich King · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "banshee",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Banshee Queen · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "fireeye",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Eye of Ruin · Six views loaded · 4 movable body pieces per view"
+    },
+    {
+      "key": "wraith",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Wraith · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "skeletons",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bone Legion · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "ghoul",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Ghoul · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "graveknight",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Grave Knight · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bonerider",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bone Rider · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "bonecolossus",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bone Colossus · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "deathknight",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Death Knight · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "plaguelord",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Plague Lord · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "wisp",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Grave Wisp · Six views loaded · 4 movable body pieces per view"
+    },
+    {
+      "key": "bomber",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Bombardier · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "infernowitch",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Inferno Witch · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "cinderwarden",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Cinder Warden · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "hellbinder",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Hellbinder · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "pactbroker",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Pactbroker · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "magmagolem",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Magma Golem · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "pitlord",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Pit Lord · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "demonprince",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Demon Prince · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "rogue",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Rogue · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "archer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Archer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "trapper",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Trapper · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "hellhound",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Hellhound · Six views loaded · 8 movable body pieces per view"
+    },
+    {
+      "key": "phoenix",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Phoenix · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "dragon",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Ember Dragon · Six views loaded · 9 movable body pieces per view"
+    },
+    {
+      "key": "imps",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Imps · Six views loaded · 9 movable body pieces per view"
+    },
+    {
+      "key": "druid",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Druid · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "beastcaller",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Beastcaller · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "groveshaper",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Grove Shaper · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "skinchanger",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Skinchanger · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "falconer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Falconer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "treant",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Treant · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "eldertreant",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Elder Treant · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "sprites",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Sprites · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "brute",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Brute · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "sapper",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Sapper · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "gunner",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Dwarf Gunner · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "spotter",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Spotter · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "colossus",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Colossus · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "guard",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Guardian · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "titan",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Stone Titan · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "juggernaut",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Iron Juggernaut · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "thunderking",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Thunder King · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "wolves",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Wolf Pack · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "boarrider",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Boar Rider · Six views loaded · 14 movable body pieces per view"
+    },
+    {
+      "key": "mammoth",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Ancient Mammoth · Six views loaded · 10 movable body pieces per view"
+    },
+    {
+      "key": "direwolf",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Alpha Direwolf · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "stormroc",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Storm Roc · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "cavebear",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Cave Bear · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "ballista",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Ballista · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "wallwright",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Stonewright · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "warengine",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "War Engine · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "forgemaster",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Forge Master · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "runeforger",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Rune Forger · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "cagewright",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Cagewright · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "prospector",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Prospector · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "witch",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Frost Witch · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "storm",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Stormcaller · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "archmage",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Starweaver · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "seer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Aether Seer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "raidboss",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Dread Colossus · Six views loaded · 7 movable body pieces per view"
+    },
+    {
+      "key": "sentinel",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Arcane Sentinel · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "spellblade",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Spellblade · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "chronomancer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Chronomancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "voidlord",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Void Sorcerer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "mirrormage",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Mirror Mage · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "runekeeper",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Runekeeper · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "hexweaver",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Hexweaver · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "oracle",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Star Oracle · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "aetherlancer",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Aetherlancer · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "phasewright",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Phasewright · Six views loaded · 12 movable body pieces per view"
+    },
+    {
+      "key": "hourglass",
+      "sixViews": 6,
+      "resident": true,
+      "cacheSize": 24,
+      "failure": null,
+      "status": "Hourglass Adept · Six views loaded · 12 movable body pieces per view"
+    }
+  ]
+}

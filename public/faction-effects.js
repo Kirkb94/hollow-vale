@@ -34,7 +34,7 @@
       }));
       if (rects.some(r=>r.length!==4||r.some(v=>!Number.isFinite(v))||r[2]<=0||r[3]<=0||r[0]<0||r[1]<0||r[0]+r[2]>im.width||r[1]+r[3]>im.height)) throw Error('Invalid source rectangle '+name);
       const fps=c.fps || count/(c.durationMs/1000||.5);
-      clips[name]={rects,fps,loop:!!c.loop,duration:c.durationMs||count/fps*1000,anchor:c.anchor||c.pivot||[.5,.5],size:c.sizeInHexes||1};
+      clips[name]={rects,fps,loop:!!c.loop,duration:c.durationMs||count/fps*1000,anchor:c.anchor||c.pivot||[.5,.5],size:c.sizeInHexes||1,rotation:c.rotation||0};
     }
     return {image:im,clips,bindings:manifest.bindings||{},delayedEvents:manifest.delayedEvents||{},statusEvents:manifest.statusEvents||{}};
   }
@@ -87,7 +87,7 @@
       const x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t+(e.feet?cell*.16:-cell*.2);
       e.canvas.style.width=e.canvas.style.height=size+'px';e.canvas.style.left=x+'px';e.canvas.style.top=y+'px';
       e.canvas.style.transformOrigin=(e.clip.anchor[0]*100)+'% '+(e.clip.anchor[1]*100)+'%';
-      e.canvas.style.transform=`translate(${-e.clip.anchor[0]*100}%,${-e.clip.anchor[1]*100}%) rotate(${e.rotate?Math.atan2(b[1]-a[1],b[0]-a[0]):0}rad)`;
+      e.canvas.style.transform=`translate(${-e.clip.anchor[0]*100}%,${-e.clip.anchor[1]*100}%) rotate(${e.rotate?Math.atan2(b[1]-a[1],b[0]-a[0])+e.clip.rotation:0}rad)`;
       let n=Math.floor(dt*e.clip.fps/1000);n=e.clip.loop?n%e.clip.rects.length:Math.min(n,e.clip.rects.length-1);
       const ctx=e.canvas.getContext('2d');ctx.clearRect(0,0,192,192);ctx.drawImage(e.pack.image,...e.clip.rects[n],0,0,192,192);return true;
     });
@@ -170,7 +170,7 @@
       return result;
     };
   }
-  const onCast=window.hvOnCast;window.hvOnCast=function(key,u,t,o,originalKey){const result=onCast?.apply(this,arguments);const effectTarget=(key==='rally'||key==='hook')&&t.v?Object.assign({},t,{x:t.v.x,y:t.v.y}):t,packKey=assets.has(originalKey)?originalKey:u.k;dispatch(u,effectTarget,assets.get(packKey)?.bindings.abilities?.[key],packKey);return result;};
+  const onCast=window.hvOnCast;window.hvOnCast=function(key,u,t,o,originalKey){const result=onCast?.apply(this,arguments);const effectTarget=(['rally','hook','swap','rewind'].includes(key))&&t.v?Object.assign({},t,{x:t.v.x,y:t.v.y}):t,packKey=assets.has(originalKey)?originalKey:u.k;dispatch(u,effectTarget,assets.get(packKey)?.bindings.abilities?.[key],packKey);return result;};
   window.addEventListener('hv-unit-effect',event=>{
     const {unitKey,key,target}=Object.assign({key:event.detail.event},event.detail),pack=assets.get(unitKey);
     if(key==='drain'){
@@ -178,7 +178,11 @@
       if(clip&&source)add(unitKey,clip,source,target,{sourceUnit:source,targetUnit:target,delay:Math.max(0,(target.fx?.t||performance.now())-performance.now())+250,travel:true,rotate:true,duration:400});
       return;
     }
-    const binding=pack?.delayedEvents[key]||pack?.statusEvents[key];
+    const binding=pack?.delayedEvents[key]||pack?.statusEvents[key],source=event.detail.source;
+    if(binding?.projectile&&source){
+      if(visible(source,source)&&visible(target,typeof H!=='undefined'&&H[target.k]?target:null))dispatch(source,{x:target.x,y:target.y,v:target},binding,unitKey);
+      return;
+    }
     if(binding?.impact)add(unitKey,binding.impact,target,target,{targetUnit:typeof H!=='undefined'&&H[target.k]?target:null,delay:Math.max(0,(target.fx?.t||performance.now())-performance.now())});
   });
   if(typeof fx==='function'){

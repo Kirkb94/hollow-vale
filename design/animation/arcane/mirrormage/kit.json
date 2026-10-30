@@ -1,0 +1,14 @@
+{
+  "n": "Mirror Mage",
+  "e": "👑",
+  "hp": 20,
+  "mv": 2,
+  "rng": [
+    1,
+    2
+  ],
+  "dmg": 5,
+  "elite": 1,
+  "fac": "arcane",
+  "d": "Boss (5 slots). Reflection: Half the damage it takes (rounded up) is reflected back to the attacker."
+}

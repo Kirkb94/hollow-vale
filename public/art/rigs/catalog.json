@@ -820,6 +820,42 @@
       "effects": "vfx.json",
       "revision": "98d1517bdc01"
     },
+    "witch": {
+      "name": "Frost Witch",
+      "faction": "Arcane Order",
+      "folder": "arcane/witch",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "98179ccc9b0c"
+    },
+    "storm": {
+      "name": "Stormcaller",
+      "faction": "Arcane Order",
+      "folder": "arcane/storm",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "b27924182472"
+    },
+    "archmage": {
+      "name": "Starweaver",
+      "faction": "Arcane Order",
+      "folder": "arcane/archmage",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "b802868fae7b"
+    },
+    "seer": {
+      "name": "Aether Seer",
+      "faction": "Arcane Order",
+      "folder": "arcane/seer",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "50c065a91c7f"
+    },
     "raidboss": {
       "name": "Dread Colossus",
       "faction": "Raid Boss",
@@ -828,6 +864,105 @@
       "attack": "attack",
       "effects": "vfx.json",
       "revision": "7ba15bf45a04"
+    },
+    "sentinel": {
+      "name": "Arcane Sentinel",
+      "faction": "Arcane Order",
+      "folder": "arcane/sentinel",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "3617e5ce348a"
+    },
+    "spellblade": {
+      "name": "Spellblade",
+      "faction": "Arcane Order",
+      "folder": "arcane/spellblade",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "b80b6f648312"
+    },
+    "chronomancer": {
+      "name": "Chronomancer",
+      "faction": "Arcane Order",
+      "folder": "arcane/chronomancer",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "07e178aff7b3"
+    },
+    "voidlord": {
+      "name": "Void Sorcerer",
+      "faction": "Arcane Order",
+      "folder": "arcane/voidlord",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "498ae37e7719"
+    },
+    "mirrormage": {
+      "name": "Mirror Mage",
+      "faction": "Arcane Order",
+      "folder": "arcane/mirrormage",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "2d97e4518d7e"
+    },
+    "runekeeper": {
+      "name": "Runekeeper",
+      "faction": "Arcane Order",
+      "folder": "arcane/runekeeper",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "f0c0089cf7f7"
+    },
+    "hexweaver": {
+      "name": "Hexweaver",
+      "faction": "Arcane Order",
+      "folder": "arcane/hexweaver",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "80e73d4d2cfe"
+    },
+    "oracle": {
+      "name": "Star Oracle",
+      "faction": "Arcane Order",
+      "folder": "arcane/oracle",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "1d01f64bbd6f"
+    },
+    "aetherlancer": {
+      "name": "Aetherlancer",
+      "faction": "Arcane Order",
+      "folder": "arcane/aetherlancer",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "15d496ef4d52"
+    },
+    "phasewright": {
+      "name": "Phasewright",
+      "faction": "Arcane Order",
+      "folder": "arcane/phasewright",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "860749cb6e88"
+    },
+    "hourglass": {
+      "name": "Hourglass Adept",
+      "faction": "Arcane Order",
+      "folder": "arcane/hourglass",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "be731457b484"
     }
   }
 }

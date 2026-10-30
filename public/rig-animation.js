@@ -230,14 +230,23 @@
     ctx.restore();extra('front');
     ctx.restore();
   }
+  // Effect timestamps belong to gameplay/replays. Map each effect to the local
+  // presentation clock once, so a paused attack keeps its remaining pose time.
+  const transientStarts=new WeakMap();
+  function transientElapsed(effect,now){
+    if(!effect)return -1;
+    if(!transientStarts.has(effect))transientStarts.set(effect,clock-(now-effect.t));
+    return clock-transientStarts.get(effect);
+  }
   function frame(now){
     const paused=document.body.classList.contains('hv-paused');
     if(!paused&&!document.hidden)clock+=Math.min(80,now-(last||now));last=now;
+    for(const item of items)if(item.canvas.isConnected)transientElapsed(item.u.fx,now);
     if(!paused&&!document.hidden){
       for(const item of items){const {canvas,u,k}=item;if(!canvas.isConnected)continue;let dir=facing.get(u)??(u.side==='p'?1:4),state='idle',t=clock;
         const walk=window.hvWalk&&hvWalk.get(u);
         if(walk){const step=clamp(Math.floor((now-(walk.t0||now))/walk.dur*walk.n),0,walk.n-1);dir=direction(walk.p[step],walk.p[step+1],dir);facing.set(u,dir);state='walk';t=now-(walk.t0||now);}
-        const f=u.fx,elapsed=f?now-f.t:-1;
+        const f=u.fx,elapsed=transientElapsed(f,now);
         if(elapsed>=0){const map={atk:[registry[k]?.attack||'cast',800],hurt:['hurt',450],dead:['death',1100],spawn:['spawn',600],undying:['spawn',1700]};const def=map[f.n];if(def&&elapsed<def[1]){state=def[0];t=elapsed;if(f.n==='undying')t=Math.max(0,elapsed-850);}}
         draw(canvas,k,dir,state,t);
       }

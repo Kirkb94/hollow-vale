@@ -1,0 +1,14 @@
+{
+  "n": "Void Sorcerer",
+  "e": "👑",
+  "hp": 15,
+  "mv": 2,
+  "rng": [
+    2,
+    4
+  ],
+  "dmg": 5,
+  "elite": 1,
+  "fac": "arcane",
+  "d": "Boss (5 slots). Mana Burn: Each hit burns 2 mana from the target's player and gives you 1."
+}

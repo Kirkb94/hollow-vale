@@ -1,0 +1,40 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 5,
+  "attackFX": 3,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 3
+  },
+  "pause": true,
+  "arcaneFlow": {
+    "cost": 0,
+    "damage": 5,
+    "mana": 0
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "design/animation/arcane/sentinel/test-gameplay.cjs",
+  "testedAt": "2026-10-30T12:14:53.546Z",
+  "pageErrors": []
+}

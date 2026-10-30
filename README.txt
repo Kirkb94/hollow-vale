@@ -313,20 +313,39 @@ Click Menu in the battle toolbar or press Escape to open the battle menu.
 Resume returns to play. Settings opens the saved volume, battle pace, display and accessibility controls. Escape from Settings returns to the battle menu.
 Local AI and pending automatic turn endings wait until Resume. Online matches continue for all players while the menu is open. Return to main menu asks before leaving the battle.
 
-NEW ART TEST MATCH (LOCAL PREVIEW)
-Open /?arttest=factions on the running server. Both squads start with the four
-completed faction representatives: Pyromancer, Knight, Bloodblade and Necromancer.
+ARCANE VANGUARD ART AND LOCAL TEST MATCHES
+All 111 roster units (107 new kits plus the four original pilots) now have
+layered 2D artwork, six facings, articulated pieces and associated visual effects.
+
+Open /animation-preview.html to select any unit, inspect all six facings,
+preview its animation states and separate pieces, and view its effects atlas.
+"Test this faction" opens the selected unit's faction in a local match.
+
+Full roster test links:
+- /?arttest=factions&faction=kingdom  (17 units)
+- /?arttest=factions&faction=vamp     (16 units)
+- /?arttest=factions&faction=undead   (15 units)
+- /?arttest=factions&faction=infernal (14 units)
+- /?arttest=factions&faction=wilds    (17 units)
+- /?arttest=factions&faction=iron     (16 units)
+- /?arttest=factions&faction=arcane   (15 units)
+- /?arttest=factions&faction=raidboss (Dread Colossus)
+The default /?arttest=factions remains a mixed four-pilot test.
+
 Play against the AI normally, or enable Stationary opponents for inspection.
 The bottom panel selects characters/facings, refreshes actions on your turn and
 restarts the match. Collapse the panel to see more of the board.
-Open /animation-preview.html to inspect six facings and movable pieces.
-Open /?arttest=factions&faction=kingdom to play with all 17 updated Kingdom units.
-Kingdom's full roster is complete. The standard mixed test showcases four pilots.
 
-Open /?arttest=factions&faction=vamp to play all 16 updated Vampire units.
-Kingdom and Vampires are complete; remaining factions are in production.
+Abilities retain their existing rules. New visual effects follow actual attacks,
+heals, status changes and summons, and respect fog, pause and reduced motion.
+These are layered cutout animations, not hand-drawn frames for every pose.
+Creature limbs may articulate as whole pieces; source reuse and assembly notes
+are documented with each kit. This batch adds visual effects, not new audio.
 
-Open /?arttest=factions&faction=undead to play all 15 updated Undead units.
-Undead is complete; Infernal and later factions remain in production.
-
-Open /?arttest=factions&faction=infernal to play all 14 updated Infernal units.
+Production prompts, source mappings, pose previews and gameplay validation:
+design/animation/<faction>/<unit>/
+Release progress and commit records: design/animation/batches.json
+Complete-faction gate: node tools/check-faction-art.cjs <faction>
+Browser integration: node tools/all-faction-integration.test.cjs
+Catalog/cache audit: node tools/rig-catalog.test.cjs
+The browser checks use the running local server at http://localhost:4323/.

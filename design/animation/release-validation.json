@@ -1,0 +1,47 @@
+{
+  "testedAt": "2026-10-30T12:26:03.790Z",
+  "total": 111,
+  "passed": 111,
+  "factions": [
+    {
+      "faction": "kingdom",
+      "total": 17,
+      "passed": 17
+    },
+    {
+      "faction": "vamp",
+      "total": 16,
+      "passed": 16
+    },
+    {
+      "faction": "undead",
+      "total": 15,
+      "passed": 15
+    },
+    {
+      "faction": "infernal",
+      "total": 14,
+      "passed": 14
+    },
+    {
+      "faction": "wilds",
+      "total": 17,
+      "passed": 17
+    },
+    {
+      "faction": "iron",
+      "total": 16,
+      "passed": 16
+    },
+    {
+      "faction": "arcane",
+      "total": 15,
+      "passed": 15
+    },
+    {
+      "faction": "raidboss",
+      "total": 1,
+      "passed": 1
+    }
+  ]
+}

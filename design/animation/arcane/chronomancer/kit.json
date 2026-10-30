@@ -1,0 +1,14 @@
+{
+  "n": "Chronomancer",
+  "e": "👑",
+  "hp": 26,
+  "mv": 2,
+  "rng": [
+    2,
+    4
+  ],
+  "dmg": 7,
+  "elite": 1,
+  "fac": "arcane",
+  "d": "Boss (5 slots). Time Slow: Enemies within 2 hexes of her have -1 move."
+}

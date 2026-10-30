@@ -296,7 +296,7 @@
     {
       "faction": "arcane",
       "total": 15,
-      "status": "in_progress",
+      "status": "validated",
       "workers": {
         "root": [
           "witch",
@@ -324,16 +324,29 @@
         "witch",
         "storm",
         "archmage",
-        "seer"
+        "sentinel",
+        "spellblade",
+        "seer",
+        "hexweaver",
+        "chronomancer",
+        "voidlord",
+        "mirrormage",
+        "runekeeper",
+        "oracle",
+        "aetherlancer",
+        "phasewright",
+        "hourglass"
       ]
     },
     {
       "faction": "raidboss",
       "total": 1,
-      "status": "validated",
+      "status": "pushed",
       "validated": [
         "raidboss"
-      ]
+      ],
+      "commit": "45f44aa54b6c",
+      "releaseCommit": "22edc1f"
     }
   ],
   "checksPerUnit": [
@@ -388,6 +401,13 @@
       "faction": "iron",
       "artCommit": "11e2b0974f89",
       "head": "5e386fa",
+      "remote": "origin/main",
+      "verified": true
+    },
+    {
+      "faction": "raidboss",
+      "artCommit": "45f44aa54b6c",
+      "head": "22edc1f",
       "remote": "origin/main",
       "verified": true
     }

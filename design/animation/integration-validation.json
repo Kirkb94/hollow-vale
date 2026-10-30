@@ -1,0 +1,98 @@
+{
+  "results": [
+    {
+      "faction": "iron",
+      "expected": 16,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "wilds",
+      "expected": 17,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "kingdom",
+      "expected": 17,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "infernal",
+      "expected": 14,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "vamp",
+      "expected": 16,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "undead",
+      "expected": 15,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "arcane",
+      "expected": 15,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    },
+    {
+      "faction": "raidboss",
+      "expected": 1,
+      "rosterMatches": true,
+      "uniquePositions": true,
+      "rigs": true,
+      "failures": {},
+      "fxErrors": {},
+      "turnCycle": true,
+      "errors": []
+    }
+  ],
+  "workshop": {
+    "count": 111,
+    "attackSwitch": "cast",
+    "playLink": "/?arttest=factions&faction=infernal"
+  },
+  "testedAt": "2026-10-30T12:22:50.780Z"
+}

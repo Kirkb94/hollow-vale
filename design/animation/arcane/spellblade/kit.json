@@ -1,0 +1,14 @@
+{
+  "n": "Spellblade",
+  "e": "⚔️",
+  "hp": 12,
+  "mv": 2,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "acost": 1,
+  "d": "A mage-warrior. Enchanted strikes are free with Arcane Flow.",
+  "fac": "arcane"
+}

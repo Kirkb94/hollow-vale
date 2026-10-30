@@ -1,0 +1,16 @@
+{
+  "mirrormage": {
+    "effects": 2,
+    "travel": true,
+    "visible": true,
+    "cleanup": true,
+    "hiddenSourceNoEffects": true
+  },
+  "thunderking": {
+    "effects": 2,
+    "travel": true,
+    "visible": true,
+    "cleanup": true,
+    "hiddenSourceNoEffects": true
+  }
+}
