@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[4]
 DIRS=['e','se','sw','w','nw','ne']
 PARTS=['head','torso','cape','pelvis','leftUpperArm','rightUpperArm','leftForearm','rightForearm','leftLeg','rightLeg','leftBoot','rightBoot']
 CONFIG={
- 'footmen':{'attack':'thrust','props':[('spear','right',[16,155],[.5,.66]),('shield','left',[38,60],[.5,.48])],'clips':['thrust','impact','armorContact','arrival'],'bindings':{'attack':{'cast':'thrust','impact':'impact','releaseMs':190,'travelMs':0},'spawn':'arrival'}},
+ 'footmen':{'attack':'thrust','props':[('spear','right',[14,120],[.5,.66]),('shield','left',[38,60],[.5,.48])],'clips':['thrust','impact','armorContact','arrival'],'bindings':{'attack':{'cast':'thrust','impact':'impact','releaseMs':190,'travelMs':0},'spawn':'arrival'}},
  'bowmen':{'attack':'shoot','props':[('bow','left',[34,105],[.5,.5]),('arrow','right',[7,85],[.5,.65]),('quiver','back',[20,62],[.5,.18])],'clips':['projectile','release','impact','arrival'],'bindings':{'attack':{'cast':'release','projectile':'projectile','impact':'impact','releaseMs':110,'travelMs':320},'spawn':'arrival'}},
  'raiders':{'attack':'attack','props':[('sword','right',[18,66],[.5,.85]),('dagger','left',[13,43],[.5,.85])],'clips':['slash','impact','chargeDust','arrival'],'bindings':{'attack':{'cast':'slash','impact':'impact','releaseMs':250,'travelMs':0},'spawn':'arrival'}},
  'lookout':{'attack':'shoot','props':[('spyglass','left',[18,45],[.5,.65]),('flareBaton','right',[12,52],[.5,.8])],'clips':['projectile','impact','flare','reveal'],'bindings':{'attack':{'projectile':'projectile','impact':'impact','releaseMs':180,'travelMs':320},'abilities':{'flare':{'cast':'flare','impact':'reveal'}}}},

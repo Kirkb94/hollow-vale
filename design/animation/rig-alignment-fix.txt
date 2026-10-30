@@ -1,0 +1,19 @@
+Rig alignment corrections
+
+Humanoid upper-arm and forearm cutouts now attach using opaque-band joint centers.
+Each source bone is aligned from its shoulder/elbow root to the next joint;
+diagonal artwork and mirrored pieces no longer inherit a false vertical axis.
+Weapon grips stay at the hand joint. Attack wind-ups retain forward elbow flex.
+
+Demon Prince wings use per-facing shoulder roots and matching screen-side flap
+signs. The membrane fans outward and retains the source aspect ratio. Original
+PNG source artwork is unchanged; build-batch.py preserves the corrected mapping.
+
+Visual QA: down-right idle/action comparisons for Frost Witch, Pyromancer,
+Knight, Brute, Gunner and Seer; Demon Prince all42 pose/facing combinations,
+without edge clipping. Preview images are arm-alignment-review.png and
+infernal/demonprince/runtime-poses.png.
+
+Checks: tools/rig-arm.test.cjs, tools/rig-animation.test.cjs,
+tools/rig-catalog.test.cjs (111 kits,666 views, no load or browser errors),
+tools/rig-pause.test.cjs, and Infernal elite actual gameplay checks.

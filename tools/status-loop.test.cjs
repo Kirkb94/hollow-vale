@@ -1,0 +1,34 @@
+const assert=require('node:assert/strict'),path=require('node:path');
+const {loopSample}=require('../public/rig-animation.js');
+const {chromium}=require(path.join(process.env.USERPROFILE,'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
+assert.deepEqual(loopSample(0,4,1000),loopSample(1000,4,1000));
+assert.equal(loopSample(999.99,4,1000).next,0);
+assert(loopSample(999.99,4,1000).blend>.99999);
+(async()=>{const browser=await chromium.launch({channel:'msedge',headless:true});try{
+ const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://localhost:4323/?arttest=factions&faction=wilds');
+ await page.waitForFunction(()=>typeof S!=='undefined'&&S?.units&&window.HVFactionFX&&HVRig.assets.has('direwolf')&&HVFactionFX.assets.has('direwolf'));
+ const result=await page.evaluate(async()=>{
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));HVFactionFX.clear();hvPause.close();MOPT.sight=false;MOPT.fog=false;
+  const u=mk('direwolf','p',4,4);S.units=[u];render();await wait(350);
+  const canvas=document.querySelector('.hv-faction-fx');if(!canvas)throw Error('Aura absent');
+  const initial=canvas.toDataURL();await wait(2300);
+  const continuous=canvas.isConnected&&document.querySelector('.hv-faction-fx')===canvas;
+  const animated=initial!==canvas.toDataURL();
+  hvPause.open();await wait(80);const frozen=canvas.toDataURL();await wait(350);
+  const paused=canvas.isConnected&&frozen===canvas.toDataURL()&&getComputedStyle(canvas).visibility==='hidden';
+  hvPause.close();await wait(100);const resumed=canvas.isConnected&&getComputedStyle(canvas).visibility==='visible';
+  u.side='e';S.units.push(mk('footmen','p',1,1));MOPT.sight=true;MOPT.fog=true;ME='p';
+  const hidden=GEO.cells.find(c=>!seesCell('p',c.x,c.y));u.x=hidden.x;u.y=hidden.y;render();await wait(100);
+  const concealed=canvas.isConnected&&getComputedStyle(canvas).visibility==='hidden';
+  S.units=S.units.filter(v=>v!==u);render();await wait(100);const removed=!canvas.isConnected;
+  const atlas=document.createElement('canvas');atlas.width=2;atlas.height=1;const a=atlas.getContext('2d');a.fillStyle='rgba(200,100,50,.5)';a.fillRect(0,0,2,1);
+  const c=document.createElement('canvas');c.width=c.height=1;const ctx=c.getContext('2d'),rects=[[0,0,1,1],[1,0,1,1]];
+  const sample=t=>{ctx.clearRect(0,0,1,1);HVRig.drawLoop(ctx,atlas,rects,t,1000,1,1);return [...ctx.getImageData(0,0,1,1).data]};
+  const start=sample(0),middle=sample(250),seam=sample(999.99),end=sample(1000);
+  return {continuous,animated,paused,resumed,concealed,removed,start,middle,seam,end};
+ });
+ assert.equal(errors.length,0);for(const flag of ['continuous','animated','paused','resumed','concealed','removed'])assert(result[flag],flag);
+ for(const name of ['middle','seam','end'])result.start.forEach((v,i)=>assert(Math.abs(v-result[name][i])<=2,`${name} introduces an alpha/color flash`));
+ console.log(JSON.stringify({result,errors},null,2));
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});

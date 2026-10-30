@@ -1,0 +1,560 @@
+{
+  "testedAt": "2026-10-30T13:58:37.264Z",
+  "report": [
+    {
+      "unit": "brute",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "colossus",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "guard",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "sapper",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "ballista",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "titan",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "gunner",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "wallwright",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "warengine",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "forgemaster",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "juggernaut",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "thunderking",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "spotter",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "runeforger",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "cagewright",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "prospector",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "rogue",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "archer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "druid",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "sprites",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "wolves",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "treant",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "boarrider",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "mammoth",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "trapper",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "eldertreant",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "direwolf",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "stormroc",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "cavebear",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "falconer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "beastcaller",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "groveshaper",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "skinchanger",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "knight",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "cleric",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "lancer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "paladin",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "footmen",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bowmen",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "raiders",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "outrider",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "kinglion",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "seraph",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "warlord",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "templar",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "marshal",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "lookout",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "sunspeaker",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "aegis",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "herald",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "mage",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bomber",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "imps",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "dragon",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "hellhound",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "magmagolem",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "pitlord",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "infernowitch",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "demonprince",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "phoenix",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "fireeye",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "cinderwarden",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "hellbinder",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "pactbroker",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "blade",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "warlock",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "assassin",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bats",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "thrall",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "countess",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bloodhunter",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "vlord",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bloodqueen",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "nosferatu",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "matriarch",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "batking",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "nightwatch",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "hemomancer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "mesmerist",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "duskweaver",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "wraith",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "skeletons",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "ghoul",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "necromancer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "graveknight",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bonerider",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "lich",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bonecolossus",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "deathknight",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "banshee",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "plaguelord",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "wisp",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "ossomancer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "bonewitch",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "gravedigger",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "witch",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "storm",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "archmage",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "sentinel",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "spellblade",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "seer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "hexweaver",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "chronomancer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "voidlord",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "mirrormage",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "runekeeper",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "oracle",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "aetherlancer",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "phasewright",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "hourglass",
+      "poses": 42,
+      "issues": []
+    },
+    {
+      "unit": "raidboss",
+      "poses": 42,
+      "issues": []
+    }
+  ]
+}

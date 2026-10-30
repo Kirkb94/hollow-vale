@@ -34,7 +34,14 @@ for key in sys.argv[1:] or CFG:
   eq=Image.open(out/'equipment.png');ep=sorted(components(eq),key=lambda p:p['pixels'],reverse=True)[:24 if key=='demonprince' else len(props)*6];ep.sort(key=lambda p:p['rect'][1]+p['rect'][3]/2);rows=[sorted(ep[j*6:(j+1)*6],key=lambda p:p['rect'][0]) for j in range(4 if key=='demonprince' else len(props))]
   m['equipment']={'file':'equipment.png','views':{d:{name:{'sourceRect':rows[j+2 if key=='demonprince' else j][i]['rect'],'hand':hand,'displaySize':size,'pivot':pivot} for j,(name,hand,size,pivot) in enumerate(props)} for i,d in enumerate(DIRS)}}
  if key=='demonprince':
-  m['extras']={'file':'equipment.png','views':{d:{name:{'sourceRect':rows[j][i]['rect'],'pivot':[.9,.12] if j==0 else [.1,.12],'anchor':[72 if j==0 else 88,64],'displaySize':[65,78],'layer':'behind','motion':'wing','phase':j} for j,name in enumerate(['leftWing','rightWing'])} for i,d in enumerate(DIRS)}}
+  wing_roots={'e':[[.95,.80],[.05,.80]],'se':[[.94,.82],[.06,.83]],'sw':[[.10,.84],[.92,.84]],'w':[[.06,.80],[.94,.80]],'nw':[[.10,.84],[.94,.85]],'ne':[[.08,.84],[.94,.84]]}
+  m['extras']={'file':'equipment.png','views':{}}
+  for i,d in enumerate(DIRS):
+   wings={}
+   for j,name in enumerate(['leftWing','rightWing']):
+    r=rows[j][i]['rect'];pivot=wing_roots[d][j];left=pivot[0]>.5
+    wings[name]={'sourceRect':r,'pivot':pivot,'anchor':[72 if left else 88,64],'displaySize':[78*r[2]/r[3],78],'layer':'behind','motion':'wing','phase':j,'motionSign':-1 if left else 1}
+   m['extras']['views'][d]=wings
  (out/'manifest.json').write_text(json.dumps(m,indent=2))
  fx=Image.open(out/'vfx.png');rects=effect_rects(fx);bindings={'attack':{'cast':clips[0],'impact':'impact','releaseMs':250,'travelMs':0}}
  if key=='wisp':bindings={'attack':{'projectile':'projectile','impact':'impact','releaseMs':250,'travelMs':300},'abilities':{'flare':{'cast':'flare','impact':'mark'}}}

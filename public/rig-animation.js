@@ -20,7 +20,32 @@
     if(state==='spawn'){p.alpha=smooth(t/400);p.bob=-8*(1-smooth(t/400));}
     return p;
   }
-  if(typeof module!=='undefined'&&module.exports){module.exports={directions,direction,pose};return;}
+  // A shoulder can swing behind the body; an elbow still flexes toward the palm.
+  // Attack wind-up is negative, so it must never drive signed elbow extension.
+  function armAngles(dir,left,p,firearm=false){
+    const sign=[1,1,-1,-1,-1,1][dir],nearLeft=dir===2||dir===3||dir===4;
+    const cast=left!==nearLeft?p.cast*.45:p.cast,attack=left?p.attack*.2:p.attack;
+    const shootAngle=firearm?(left?1.15:1.25):(left?1.4:.65);
+    const shoulder=p.arm*(left?1:-1)-sign*cast*1.35-sign*attack*1.65-sign*p.shoot*shootAngle-sign*p.thrust*(left?.3:1.5);
+    const previousFlex=cast*.35+attack*.35,flex=cast*.35+Math.abs(attack)*.35;
+    return {shoulder,elbow:-sign*flex,gripCorrection:sign*(flex-previousFlex),cast,shootAngle};
+  }
+  function armTransform(joints,width,height,length,flipX=false){
+    const flip=flipX?-1:1,dx=(joints.tip[0]-joints.root[0])*width*flip,dy=(joints.tip[1]-joints.root[1])*height;
+    return {angle:Math.atan2(dx,dy),scale:length/Math.max(1,Math.hypot(dx,dy)),flip};
+  }
+  function loopSample(time,count,period){
+    const phase=((time%period)+period)%period/period*count,index=Math.floor(phase),fraction=phase-index;
+    return {index,next:(index+1)%count,blend:fraction*fraction*(3-2*fraction)};
+  }
+  function drawLoop(ctx,image,rects,time,period,width,height){
+    const sample=loopSample(time,rects.length,period);
+    ctx.save();ctx.globalAlpha=1-sample.blend;ctx.drawImage(image,...rects[sample.index],0,0,width,height);
+    // Add weighted premultiplied colors so matching frames do not dim midway.
+    ctx.globalCompositeOperation='lighter';ctx.globalAlpha=sample.blend;
+    ctx.drawImage(image,...rects[sample.next],0,0,width,height);ctx.restore();
+  }
+  if(typeof module!=='undefined'&&module.exports){module.exports={directions,direction,pose,armAngles,armTransform,loopSample,drawLoop};return;}
   const root='art/rigs/',assets=new Map(),models=new Map(),facing=new WeakMap(),pending=new Map(),images=new Map(),groupCanvases=new WeakMap();
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const registry={
@@ -99,6 +124,27 @@
     for(const i of best){const target=((Math.floor(i/w)-t)*out.width+i%w-l)*4;clean.data.set(pixels.data.subarray(i*4,i*4+4),target);}
     oc.putImageData(clean,0,0);return Object.assign({},s,{image:out,x:0,y:0,w:out.width,h:out.height});
   }
+  // Generated limbs can lean inside their source rectangles. Estimate the
+  // attachment centers from the opaque bands, not the rectangle's centerline.
+  function armJoints(s,forearm){
+    const c=document.createElement('canvas');c.width=Math.ceil(s.w);c.height=Math.ceil(s.h);
+    const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(s.image,s.x,s.y,s.w,s.h,0,0,c.width,c.height);
+    const pixels=ctx.getImageData(0,0,c.width,c.height).data;
+    function center(lo,hi,fallback){let weight=0,xsum=0,ysum=0;
+      for(let y=Math.floor(lo*c.height);y<Math.ceil(hi*c.height);y++)for(let x=0;x<c.width;x++){
+        const alpha=pixels[(y*c.width+x)*4+3];if(alpha<64)continue;weight+=alpha;xsum+=(x+.5)*alpha;ysum+=(y+.5)*alpha;
+      }
+      return weight?[xsum/weight/c.width,ysum/weight/c.height]:fallback;
+    }
+    return {root:center(.06,.18,[.5,.12]),tip:forearm?center(.72,.86,[.5,.79]):center(.80,.94,[.5,.87])};
+  }
+  function armPart(ctx,s,width,height,length){
+    if(s.displaySize){width=s.displaySize[0];height=s.displaySize[1];}
+    const joints=s.armJoints||{root:[.5,.08],tip:[.5,.08+length/height]};
+    const transform=armTransform(joints,width,height,length,s.flipX);
+    ctx.save();ctx.rotate(transform.angle);ctx.scale(transform.flip*transform.scale,transform.scale);
+    ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-width*joints.root[0],-height*joints.root[1],width,height);ctx.restore();
+  }
   async function load(k,config){
     loadStatus[k]='loading';delete failures[k];
     try{
@@ -112,6 +158,7 @@
         if(explicit?.rects?.[d])return explicit.rects[d].map((rect,n)=>source(im,rect,{pivot:meta.parts[n]?.pivot}));
         return pieces(im);
       }));
+      if(body[0]?.length===12)for(const parts of body)for(const n of [4,5,6,7])parts[n].armJoints=armJoints(parts[n],n>=6);
       const equipment=directions.map(()=>[]),add=(di,im,rect,pivot,name,hand,w,h,extra={})=>equipment[di].push(Object.assign(source(im,rect),{pivot:pivot||[.5,.85],name,hand,dw:w,dh:h,rotation:extra.rotation||0,offset:extra.offset||[0,0],motion:extra.motion,phase:extra.phase||0}));
       // Kingdom packs all directional weapons in one atlas; Undead has one directional staff atlas.
       if(meta?.equipment?.file&&meta.equipment.views){
@@ -186,7 +233,7 @@
     ctx.rotate(p.fall*sign*1.38);ctx.translate(0,-p.fall*10);ctx.rotate(p.bend*sign);
     function extra(layer){for(const s of model?.extras?.[dir]||[]){if((s.layer||'behind')!==layer)continue;
       const anchor=s.anchor||[80,120],size=s.displaySize||[50,50],pivot=s.pivot||[.5,.5];
-      const motion=reduced.matches?0:s.motion==='wing'?Math.sin(t/210)*(state==='walk'?.35:.12)*(s.name.toLowerCase().includes('left')?-1:1):s.motion==='leg'?p.stride*.24*(s.phase===1?-1:1):0;
+      const motion=reduced.matches?0:s.motion==='wing'?Math.sin(t/210)*(state==='walk'?.35:.12)*(s.motionSign??(s.name.toLowerCase().includes('left')?-1:1)):s.motion==='leg'?p.stride*.24*(s.phase===1?-1:1):0;
       ctx.save();ctx.translate(anchor[0]-80,anchor[1]-178);ctx.rotate((s.rotation||0)+motion);if(s.flipX)ctx.scale(-1,1);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-size[0]*pivot[0],-size[1]*pivot[1],size[0],size[1]);ctx.restore();
     }}
     extra('behind');ctx.save();
@@ -199,15 +246,13 @@
         ctx.drawImage(piece.image,piece.x,piece.y+piece.h/2,piece.w,piece.h/2,-8,0,16,18);part(ctx,a,left?10:11,0,18,23,18,0,.5,.15);ctx.restore();return;
       }
       part(ctx,a,n,x,-44,17,32,s*.22);part(ctx,a,left?10:11,x+s*8,-14-Math.max(0,s)*5,23,20,s*.15);}
-    function arm(left){const far=left!==nearLeft,x=(left?1:-1)*anatomy*19*width;
-      const swing=p.arm*(left?1:-1),cast=far?p.cast*.45:p.cast;
+    function arm(left){const x=(left?1:-1)*anatomy*19*width;
       const firearm=equipment.some(e=>e.name==='gun'||e.name==='pistol');
-      const shootAngle=firearm?(left?1.15:1.25):(left?1.4:.65);
-      const attack=left?p.attack*.2:p.attack,angle=swing-sign*cast*1.35-sign*attack*1.65-sign*p.shoot*shootAngle-sign*p.thrust*(left?.3:1.5);
-      ctx.save();ctx.translate(x,-119);ctx.rotate(angle);part(ctx,a,left?4:5,0,0,20,33);ctx.translate(0,27);ctx.rotate(-sign*(cast*.35+attack*.35));part(ctx,a,left?6:7,0,0,18,35);
+      const joints=armAngles(dir,left,p,firearm),cast=joints.cast,shootAngle=joints.shootAngle;
+      ctx.save();ctx.translate(x,-119);ctx.rotate(joints.shoulder);armPart(ctx,a[left?4:5],20,33,27);ctx.translate(0,27);ctx.rotate(joints.elbow);armPart(ctx,a[left?6:7],18,35,27);
       for(const eq of equipment)if(eq.hand===(left?'left':'right')){
         if(eq.name==='arrow'&&state==='shoot'&&t>330&&t<650)continue;
-        ctx.save();ctx.translate(eq.offset?.[0]||0,27+(eq.offset?.[1]||0));ctx.rotate((eq.rotation||0)+(eq.motion==='wing'&&!reduced.matches?Math.sin(t/180+eq.phase)*.25:0));
+        ctx.save();ctx.translate(eq.offset?.[0]||0,27+(eq.offset?.[1]||0));ctx.rotate(joints.gripCorrection+(eq.rotation||0)+(eq.motion==='wing'&&!reduced.matches?Math.sin(t/180+eq.phase)*.25:0));
         if(['sword','mace','hammer','axe','dagger'].includes(eq.name))ctx.rotate(sign*(-.2+p.attack*3.2));
         if(['spear','lance'].includes(eq.name))ctx.rotate(sign*p.thrust*(Math.PI/2+1.5));
         if(eq.name==='staff')ctx.rotate(sign*cast*1.7);
@@ -248,15 +293,15 @@
         if(walk){const step=clamp(Math.floor((now-(walk.t0||now))/walk.dur*walk.n),0,walk.n-1);dir=direction(walk.p[step],walk.p[step+1],dir);facing.set(u,dir);state='walk';t=now-(walk.t0||now);}
         const f=u.fx,elapsed=transientElapsed(f,now);
         if(elapsed>=0){const map={atk:[registry[k]?.attack||'cast',800],hurt:['hurt',450],dead:['death',1100],spawn:['spawn',600],undying:['spawn',1700]};const def=map[f.n];if(def&&elapsed<def[1]){state=def[0];t=elapsed;if(f.n==='undying')t=Math.max(0,elapsed-850);}}
-        draw(canvas,k,dir,state,t);
+        draw(canvas,k,dir,state,t,true);
       }
       renderEffects(now);
       for(const el of portraits){
         if(!el.isConnected){portraits.delete(el);portraitObserver.unobserve(el);continue;}
         if(!portraitVisibility.get(el)||!assets.has(el.dataset.rigKey))continue;
-        el.classList.add('ready');draw(el.querySelector('canvas'),el.dataset.rigKey,1,'idle',clock);
+        el.classList.add('ready');draw(el.querySelector('canvas'),el.dataset.rigKey,1,'idle',clock,!el.closest('#draft'));
       }
-      if(flame)for(const c of ground){if(!c.isConnected)continue;const cell=c.closest('.cell');c.style.visibility=cell?.classList.contains('fogw')?'hidden':'';const ctx=c.getContext('2d'),col=reduced.matches?0:Math.floor(clock/90)%8;ctx.clearRect(0,0,128,128);ctx.drawImage(flame,col*flame.width/8,flame.height*2/3,flame.width/8,flame.height/3,0,0,128,128);}
+      if(flame)for(const c of ground){if(!c.isConnected)continue;const cell=c.closest('.cell');c.style.visibility=cell?.classList.contains('fogw')?'hidden':'';const ctx=c.getContext('2d');ctx.clearRect(0,0,128,128);drawLoop(ctx,flame,groundFrames,reduced.matches?0:clock,720,128,128);}
     }
     requestAnimationFrame(frame);
   }
@@ -268,8 +313,8 @@
     });
     if(flame)document.querySelectorAll('#board .hvm-fire').forEach(el=>{if(el.tagName.toLowerCase()!=='canvas'){const c=document.createElement('canvas');c.width=c.height=128;c.className='hvm hvm-fire hv-rig-ground';el.replaceWith(c);ground.push(c);}else ground.push(el);});
   }
-  let flame=null;
-  image(root+'infernal/fire-effects.png').then(im=>{flame=im;bind();}).catch(()=>{});
+  let flame=null,groundFrames=[];
+  image(root+'infernal/fire-effects.png').then(im=>{flame=im;groundFrames=Array.from({length:8},(_,i)=>[i*im.width/8,im.height*2/3,im.width/8,im.height/3]);bind();}).catch(()=>{});
   function renderEffects(now){
     fx=fx.filter(f=>{if(!f.canvas.isConnected||f.match!==S||now-f.t>1050){f.canvas.remove();return false;}
       const dt=now-f.t;if(dt<0)return true;
@@ -296,16 +341,19 @@
     .hv-rig-portrait{display:inline-block;position:relative;vertical-align:middle}
     .hv-rig-portrait>canvas{position:absolute;left:-43.333%;top:-20%;width:186.667%;height:140%;pointer-events:none;visibility:hidden}
     .hv-rig-portrait.ready>canvas{visibility:visible}
+    .hv-current-portrait{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;background:radial-gradient(ellipse at 50% 75%,#526957,#192830 75%)}
+    .hv-current-portrait>canvas{left:0;top:0;width:100%;height:100%;object-fit:contain;transform:none!important}
     .hv-rig-portrait.ready>:not(canvas){visibility:hidden}
   `;document.head.appendChild(css);
   if(typeof spr==='function'){
+    const oldPort=port;port=function(k){return registry[k]?`<span class="hvf hv-rig-portrait hv-current-portrait" data-rig-key="${k}"><canvas width="320" height="240" aria-hidden="true"></canvas></span>`:oldPort(k);};
     const oldSpr=spr;spr=function(k,s,u){const visual=displayKey(k,u);if(u&&assets.has(visual))return `<canvas class="sp pt hv-rig" data-rig-key="${visual}" width="320" height="240" aria-hidden="true"></canvas>`;if(u&&registry[visual]&&!pending.has(visual))ensure(visual);const original=oldSpr.apply(this,arguments);if(!u&&registry[k])return `<span class="hv-rig-portrait" data-rig-key="${k}">${original}<canvas width="240" height="240" aria-hidden="true"></canvas></span>`;return original;};
     const oldRender=render;render=function(){const result=oldRender.apply(this,arguments);bind();return result;};
     const oldAct=act;act=function(u,t){if(u&&t&&assets.has(u.k))facing.set(u,direction(u,t,facing.get(u)??1));return oldAct.apply(this,arguments);};
     const oldAtk=atkFx;atkFx=function(u,t){if(u.k==='mage'&&assets.has('mage')&&!RP&&!RUNFAST&&launch(u,t))return;return oldAtk.apply(this,arguments);};
   }
   function drawParts(canvas,k,dir){const a=assets.get(k)?.[dir];if(!a)return;const ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);a.forEach((s,i)=>{const cw=canvas.width/3,ch=canvas.height/4,scale=Math.min((cw-10)/s.w,(ch-10)/s.h);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,(i%3+.5)*cw-s.w*scale/2,(Math.floor(i/3)+.5)*ch-s.h*scale/2,s.w*scale,s.h*scale);});}
-  window.HVRig={directions,direction,pose,draw,drawParts,assets,models,registry,load,ensure,bind,failures,loadStatus,face:(u,d)=>facing.set(u,d),register(k,config){registry[k]=config;pending.delete(k);return ensure(k);}};
+  window.HVRig={directions,direction,pose,draw,drawParts,loopSample,drawLoop,assets,models,registry,load,ensure,bind,failures,loadStatus,face:(u,d)=>facing.set(u,d),register(k,config){registry[k]=config;pending.delete(k);return ensure(k);}};
   const initial=Object.keys(registry);
   HVRig.ready=Promise.all([json(root+'catalog.json').then(c=>{for(const[k,v]of Object.entries(c.units||{}))if(!registry[k])registry[k]=v;}).catch(e=>{failures.catalog=e.message;console.warn(e.message);}),...initial.map(async k=>({unit:k,ok:await ensure(k)}))]).then(results=>{bind();if(typeof render==='function'&&typeof S!=='undefined'&&S)render();return results.slice(1);});
   new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1)scanPortraits(n);}).observe(document.body,{childList:true,subtree:true});

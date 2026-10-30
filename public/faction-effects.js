@@ -52,7 +52,7 @@
     if (!visible(from,options.sourceUnit)||!visible(to,options.targetUnit)) return false;
     const canvas=document.createElement('canvas');canvas.width=canvas.height=192;
     canvas.className='hv-faction-fx';canvas.setAttribute('aria-hidden','true');canvas.style.visibility='hidden';layer.appendChild(canvas);
-    effects.push({canvas,pack,clip:c,key,name:clip,from:point(from),to:point(to),sourceUnit:options.sourceUnit,targetUnit:options.targetUnit,owner:options.owner,match:game(),start:performance.now()+(options.delay||0),duration:options.duration||c.duration,travel:!!options.travel,rotate:!!options.rotate,feet:!!options.feet,size:options.size||c.size});
+    effects.push({canvas,pack,clip:c,key,name:clip,from:point(from),to:point(to),sourceUnit:options.sourceUnit,targetUnit:options.targetUnit,owner:options.owner,match:game(),start:performance.now()+(options.delay||0),duration:options.owner?Infinity:(options.duration||c.duration),loopPeriod:options.duration||c.duration,loop:!!options.owner||c.loop,travel:!!options.travel,rotate:!!options.rotate,feet:!!options.feet,size:options.size||c.size});
     // Cap visual work even if a network peer sends a burst of legitimate actions.
     while(effects.length>96)effects.shift().canvas.remove();
     if(!raf){last=performance.now();raf=requestAnimationFrame(frame);}return true;
@@ -89,7 +89,7 @@
       e.canvas.style.transformOrigin=(e.clip.anchor[0]*100)+'% '+(e.clip.anchor[1]*100)+'%';
       e.canvas.style.transform=`translate(${-e.clip.anchor[0]*100}%,${-e.clip.anchor[1]*100}%) rotate(${e.rotate?Math.atan2(b[1]-a[1],b[0]-a[0])+e.clip.rotation:0}rad)`;
       let n=Math.floor(dt*e.clip.fps/1000);n=e.clip.loop?n%e.clip.rects.length:Math.min(n,e.clip.rects.length-1);
-      const ctx=e.canvas.getContext('2d');ctx.clearRect(0,0,192,192);ctx.drawImage(e.pack.image,...e.clip.rects[n],0,0,192,192);return true;
+      const ctx=e.canvas.getContext('2d');ctx.clearRect(0,0,192,192);if(e.loop&&window.HVRig?.drawLoop)HVRig.drawLoop(ctx,e.pack.image,e.clip.rects,dt,e.loopPeriod,192,192);else ctx.drawImage(e.pack.image,...e.clip.rects[n],0,0,192,192);return true;
     });
     if(effects.length)raf=requestAnimationFrame(frame);else last=0;
   }

@@ -21,15 +21,15 @@
   "zoom": true,
   "zoomMeasurements": {
     "before": {
-      "board": 774,
-      "rig": 145.375
+      "board": 772,
+      "rig": 145
     },
     "after": {
-      "board": 967,
-      "rig": 181.625
+      "board": 964,
+      "rig": 181.0625
     }
   },
   "test": "design/animation/infernal/magmagolem/test-gameplay.cjs",
-  "testedAt": "2026-10-30T11:31:48.765Z",
+  "testedAt": "2026-10-30T13:25:02.287Z",
   "pageErrors": []
 }
