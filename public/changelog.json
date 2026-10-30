@@ -1,6 +1,32 @@
 {
   "versions": [
     {
+      "id": "231be06c5751",
+      "date": "2026-10-30",
+      "title": "Vampires: complete layered faction artwork",
+      "groups": [
+        {
+          "name": "Visuals",
+          "items": [
+            "All 16 Vampire units now have six-direction layered artwork, animated equipment and matching combat effects.",
+            "Bat swarms retain three members; the Bat King has a separate bat rig. Warlock transformation and the Blood Hunter mount are animated.",
+            "Drain, tether, charm, concealment, healing and mana effects follow successful gameplay events.",
+            "Preview the full faction with ?arttest=factions&faction=vamp or inspect individual poses in the animation workshop."
+          ]
+        },
+        {
+          "name": "Fixes",
+          "items": [
+            "Updated art files use revisioned URLs so corrected atlases refresh on clients.",
+            "Effects respect fog, pause and match cleanup; unit artwork scales with board zoom."
+          ]
+        }
+      ],
+      "commits": [
+        "Complete Vampire faction layered art and combat effects"
+      ]
+    },
+    {
       "id": "26ba03c6e5e0",
       "date": "2026-10-30",
       "title": "Kingdom: complete layered character artwork",
@@ -186,43 +212,6 @@
         "Infernal heroes are immune to burning",
         "Phone board: bigger tiles, smaller figures, taps snap to the nearest hex",
         "Spawning: after a spawn, the next reserve hero is picked for you"
-      ]
-    },
-    {
-      "id": "3f7e42a",
-      "date": "2026-10-28",
-      "title": "Rock paper scissors and clearer spells",
-      "groups": [
-        {
-          "name": "New",
-          "items": [
-            "Rock paper scissors decides who goes first in online and Pass & play games: best of 3. With 3-4 players everyone throws at once, points reset after each place is decided, and AI seats throw too. The winner moves first (and in Pass & play also bans and picks first). Turn it off in Match options",
-            "When anyone casts a spell you can see, a callout tells you who cast what on whom and what it does, with the real numbers",
-            "Every status now shows on the board: Aegis shields, cages, Runeforged Edge, tethers, Ossify, Mimic shapes, charms, standing in flames, and a warning when you stand in a Noon Verdict ring"
-          ]
-        },
-        {
-          "name": "Balance",
-          "items": [
-            "Nightstalker (Assassin) now has Charge: it moves and attacks in the same turn. Damage 8 → 6, and it costs 4 gold",
-            "The AI no longer wastes turns and mana on walls, snares, flares and silences it does not need, so AI Stonewrights, Trappers and scouts play much better"
-          ]
-        },
-        {
-          "name": "Visuals",
-          "items": [
-            "Status badges are bigger and filled with their colour",
-            "Tap a hero to see each of its statuses: what it does and how long it lasts",
-            "A coloured chip pops up over a hero when it gains or loses a status"
-          ]
-        }
-      ],
-      "commits": [
-        "AI: skip abilities it scores as not worth it",
-        "Assassin gets Charge; AI no longer builds the walls it meant to skip",
-        "Rock paper scissors: points reset for each place, AI seats throw too",
-        "Rock paper scissors for who goes first (online and Pass & play)",
-        "Spells and statuses read clearly in battle"
       ]
     }
   ]
