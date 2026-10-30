@@ -1279,7 +1279,7 @@ html body.mob #udock .utr{width:20px;height:20px;font-size:12px}
 @media (max-width:380px){html body.mob.ingame #turn{display:none}html body.mob.ingame #mute,html body.mob.ingame #thrb,html body.mob.ingame .bar #mmenu{width:32px;height:32px;min-width:32px!important;min-height:32px!important}}
 
 /* selection card never blocks the board */
-#udock.side{left:14px!important;right:auto;bottom:14px!important;top:auto;transform:none!important}
+#udock.side{left:14px!important;right:auto;bottom:var(--hv-dock-bottom,14px)!important;top:auto;transform:none!important}
 #udock.side.uin{animation:udside .18s ease-out}
 @keyframes udside{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
 #udock.side .uct{flex-wrap:wrap}
@@ -2665,8 +2665,10 @@ const u=S&&!S.over&&$('#game')&&!$('#game').hidden?(sel||insp):null;if(!u){if(!d
 d.innerHTML=ucard(u);if(d.hidden){d.hidden=false;d.classList.remove('uin');void d.offsetWidth;d.classList.add('uin')}placeDock(d);document.body.style.setProperty('--udh',d.classList.contains('side')||document.body.classList.contains('mob')?'0px':d.offsetHeight+'px')}
 function placeDock(d){const mob=document.body.classList.contains('mob'),br=$('#board')&&$('#board').getBoundingClientRect();d.classList.remove('side','top','pass');d.style.top='';d.style.width='';
 if(mob){const tr=document.getElementById('tray');if(tr&&d.parentNode!==tr)tr.insertBefore(d,tr.firstChild);d.classList.add('intray');return}
+if(d.parentNode!==document.body)document.body.appendChild(d);d.classList.remove('intray');
+const reserve=$('#res')?.getBoundingClientRect();d.style.setProperty('--hv-dock-bottom',reserve&&reserve.height&&reserve.top<innerHeight?Math.max(14,innerHeight-reserve.top+10)+'px':'14px');
 if(br&&br.left>=290){d.classList.add('side');d.style.width=Math.min(380,br.left-28)+'px';return}d.classList.add('pass')}
-addEventListener('resize',()=>{const d=document.getElementById('udock');if(d&&!d.hidden)placeDock(d)});addEventListener('scroll',()=>{const d=document.getElementById('udock');if(d&&!d.hidden&&d.classList.contains('top'))placeDock(d)},{passive:true});
+addEventListener('resize',()=>{const d=document.getElementById('udock');if(d&&!d.hidden)placeDock(d)});addEventListener('scroll',()=>{const d=document.getElementById('udock');if(d&&!d.hidden)placeDock(d)},{passive:true});
 function turnBanner(n){let b=document.getElementById('tbanner');if(!b){b=document.createElement('div');b.id='tbanner';document.body.appendChild(b)}
 const mine=isMine(n),go=()=>{b.style.setProperty('--tc',SCOL[n]);b.innerHTML=`<div class="tbs"></div><div class="tbt"><small>Round ${S.round}</small><b>${mine?'Your Turn':esc0(NAMES[n]||SIDEN[n])+(isAI(n)?' (AI)':'')}</b>${mine?'<small>'+S.mana[n]+' mana</small>':''}</div>`;b.className='';void b.offsetWidth;b.className='play'+(mine?' mine':'')};
 const w=(typeof cutUntil=='number'?cutUntil:0)-performance.now();clearTimeout(TBT);if(w>0)TBT=setTimeout(go,w);else go()}

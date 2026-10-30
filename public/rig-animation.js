@@ -289,6 +289,26 @@
     if(!transientStarts.has(effect))transientStarts.set(effect,clock-(now-effect.t));
     return clock-transientStarts.get(effect);
   }
+  const portraitBounds=new Map();
+  let portraitBuffer;
+  function drawInlinePortrait(canvas,k,t,single){
+    if(!portraitBuffer){portraitBuffer=document.createElement('canvas');portraitBuffer.width=320;portraitBuffer.height=240;}
+    draw(portraitBuffer,k,1,'idle',t,single);
+    const key=k+':'+single;
+    if(!portraitBounds.has(key)){
+      const a=portraitBuffer.getContext('2d').getImageData(0,0,320,240).data;
+      let l=320,r=0,top=240,bottom=0;
+      for(let y=0;y<240;y++)for(let x=0;x<320;x++)if(a[(y*320+x)*4+3]>32){l=Math.min(l,x);r=Math.max(r,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}
+      if(r<=l)return;
+      portraitBounds.set(key,[Math.max(0,l-10),Math.max(0,top-10),Math.min(320,r+11)-Math.max(0,l-10),Math.min(240,bottom+11)-Math.max(0,top-10)]);
+    }
+    const [x,y,w,h]=portraitBounds.get(key),ctx=canvas.getContext('2d');
+    // Match the element's aspect ratio so the bitmap is not stretched in square reserve buttons.
+    const box=canvas.getBoundingClientRect(),width=Math.max(1,box.width),height=Math.max(1,box.height);
+    const scale=Math.min(width/w,height/h);
+    const dw=w*scale/width*canvas.width,dh=h*scale/height*canvas.height;
+    ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(portraitBuffer,x,y,w,h,(canvas.width-dw)/2,(canvas.height-dh)/2,dw,dh);
+  }
   function frame(now){
     const paused=document.body.classList.contains('hv-paused');
     if(!paused&&!document.hidden)clock+=Math.min(80,now-(last||now));last=now;
@@ -307,8 +327,11 @@
     // Dialog portraits must populate while gameplay is paused; the pose clock stays frozen.
     if(!document.hidden)for(const el of portraits){
       if(!el.isConnected){portraits.delete(el);portraitObserver.unobserve(el);continue;}
-      if(!portraitVisibility.get(el)||!assets.has(el.dataset.rigKey))continue;
-      el.classList.add('ready');draw(el.querySelector('canvas'),el.dataset.rigKey,1,'idle',clock,!el.closest('#draft'));
+      if(!portraitVisibility.get(el))continue;
+      if(!assets.has(el.dataset.rigKey)){ensure(el.dataset.rigKey);continue;}
+      el.classList.add('ready');
+      if(el.matches('canvas'))drawInlinePortrait(el,el.dataset.rigKey,clock,!el.closest('#draft'));
+      else draw(el.querySelector('canvas'),el.dataset.rigKey,1,'idle',clock,!el.closest('#draft'));
     }
     requestAnimationFrame(frame);
   }
@@ -348,16 +371,18 @@
     .hv-rig-portrait{display:inline-block;position:relative;vertical-align:middle}
     .hv-rig-portrait>canvas{position:absolute;left:-43.333%;top:-20%;width:186.667%;height:140%;pointer-events:none;visibility:hidden}
     .hv-rig-portrait.ready>canvas{visibility:visible}
-    .hv-inline-portrait{width:1.7em;height:2.55em}
-    .hv-inline-portrait>canvas{left:-20%;top:0;width:140%;height:100%;object-fit:contain}
+    canvas.hv-inline-portrait{position:relative;inset:auto;display:block;width:1.7em;height:2.55em;margin:0;object-fit:contain;pointer-events:none;overflow:hidden}
+    .chip>canvas.hv-inline-portrait,.ucs>canvas.hv-inline-portrait{width:100%;height:100%;max-width:100%;max-height:100%}
+    .ucs{position:relative;overflow:hidden}
+    .rchip>canvas.hv-inline-portrait,.hchip>canvas.hv-inline-portrait{width:44px;height:40px}
     .hv-current-portrait{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;background:radial-gradient(ellipse at 50% 75%,#526957,#192830 75%)}
     .hv-current-portrait>canvas{left:0;top:0;width:100%;height:100%;object-fit:contain;transform:none!important}
     .hv-rig-portrait.ready>:not(canvas){visibility:hidden}
   `;document.head.appendChild(css);
   if(typeof spr==='function'){
     const oldPort=port;port=function(k){return (registry[k]||(typeof H!=='undefined'&&H[k]))?`<span class="hvf hv-rig-portrait hv-current-portrait" data-rig-key="${k}"><canvas width="320" height="240" aria-hidden="true"></canvas></span>`:oldPort(k);};
-    const oldSpr=spr;spr=function(k,s,u){const visual=displayKey(k,u);if(u&&assets.has(visual))return `<canvas class="sp pt hv-rig" data-rig-key="${visual}" width="320" height="240" aria-hidden="true"></canvas>`;if(u&&registry[visual]&&!pending.has(visual))ensure(visual);const original=oldSpr.apply(this,arguments);if(!u&&(registry[k]||(typeof H!=='undefined'&&H[k])))return `<span class="sp pt hv-rig-portrait hv-inline-portrait" data-rig-key="${k}"><canvas width="320" height="240" aria-hidden="true"></canvas></span>`;return original;};
-    const oldRender=render;render=function(){const result=oldRender.apply(this,arguments);bind();return result;};
+    const oldSpr=spr;spr=function(k,s,u){const visual=displayKey(k,u);if(u&&assets.has(visual))return `<canvas class="sp pt hv-rig" data-rig-key="${visual}" width="320" height="240" aria-hidden="true"></canvas>`;if(u&&registry[visual]&&!pending.has(visual))ensure(visual);const original=oldSpr.apply(this,arguments);if(!u&&(registry[k]||(typeof H!=='undefined'&&H[k])))return `<canvas class="sp hv-rig-portrait hv-inline-portrait" data-rig-key="${k}" width="320" height="240" aria-hidden="true"></canvas>`;return original;};
+    const oldRender=render;render=function(){const result=oldRender.apply(this,arguments);bind();scanPortraits(document);return result;};
     const oldAct=act;act=function(u,t){if(u&&t&&assets.has(u.k))facing.set(u,direction(u,t,facing.get(u)??1));return oldAct.apply(this,arguments);};
     const oldAtk=atkFx;atkFx=function(u,t){if(u.k==='mage'&&assets.has('mage')&&!RP&&!RUNFAST&&launch(u,t))return;return oldAtk.apply(this,arguments);};
   }
