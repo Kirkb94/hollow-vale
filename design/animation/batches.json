@@ -245,7 +245,7 @@
     {
       "faction": "iron",
       "total": 16,
-      "status": "validated",
+      "status": "pushed",
       "workers": {
         "parent": [
           "brute",
@@ -289,7 +289,9 @@
         "runeforger",
         "cagewright",
         "prospector"
-      ]
+      ],
+      "commit": "11e2b0974f89",
+      "releaseCommit": "5e386fa"
     },
     {
       "faction": "arcane",
@@ -317,12 +319,21 @@
           "mirrormage",
           "runekeeper"
         ]
-      }
+      },
+      "validated": [
+        "witch",
+        "storm",
+        "archmage",
+        "seer"
+      ]
     },
     {
       "faction": "raidboss",
       "total": 1,
-      "status": "queued"
+      "status": "validated",
+      "validated": [
+        "raidboss"
+      ]
     }
   ],
   "checksPerUnit": [
@@ -363,6 +374,20 @@
       "faction": "infernal",
       "artCommit": "f9cc1196d617",
       "head": "0d66ef7",
+      "remote": "origin/main",
+      "verified": true
+    },
+    {
+      "faction": "wilds",
+      "artCommit": "d09f97789fd7",
+      "head": "9dd151f",
+      "remote": "origin/main",
+      "verified": true
+    },
+    {
+      "faction": "iron",
+      "artCommit": "11e2b0974f89",
+      "head": "5e386fa",
       "remote": "origin/main",
       "verified": true
     }

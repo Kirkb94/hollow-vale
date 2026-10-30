@@ -1,0 +1,71 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 3,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "spawnFX": 1,
+  "clipCoverage": {
+    "cleave": true,
+    "impact": true,
+    "spawn": true,
+    "enrage": true,
+    "summon": true
+  },
+  "enrage": {
+    "phase": 1,
+    "bonus": 2,
+    "events": [
+      {
+        "event": "raid:enrage",
+        "active": 1
+      }
+    ]
+  },
+  "summon": {
+    "count": 2,
+    "events": [
+      {
+        "event": "raid:enrage",
+        "active": 1
+      },
+      {
+        "event": "raid:summon",
+        "active": 1
+      },
+      {
+        "event": "raid:summon",
+        "active": 2
+      }
+    ],
+    "active": 2
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "tools/raidboss-rig.test.cjs",
+  "testedAt": "2026-10-30T12:07:12.261Z",
+  "pageErrors": []
+}

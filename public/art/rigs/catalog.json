@@ -819,6 +819,15 @@
       "attack": "attack",
       "effects": "vfx.json",
       "revision": "98d1517bdc01"
+    },
+    "raidboss": {
+      "name": "Dread Colossus",
+      "faction": "Raid Boss",
+      "folder": "raidboss/raidboss",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "7ba15bf45a04"
     }
   }
 }

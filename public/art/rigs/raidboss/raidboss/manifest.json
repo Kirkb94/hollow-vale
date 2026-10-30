@@ -1,0 +1,1392 @@
+{
+  "version": 1,
+  "unit": "raidboss",
+  "faction": "raidboss",
+  "style": "Arcane Vanguard",
+  "skeleton": "quadruped",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partOrder": [
+    "body",
+    "head",
+    "pelvis",
+    "leftArm",
+    "rightArm",
+    "leftLeg",
+    "rightLeg"
+  ],
+  "views": {
+    "e": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            140,
+            12,
+            211,
+            255
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            484,
+            24,
+            165,
+            225
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "pelvis": {
+          "file": "core.png",
+          "sourceRect": [
+            760,
+            26,
+            189,
+            245
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            42,
+            10,
+            219,
+            244
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            295,
+            10,
+            207,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            617,
+            7,
+            148,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            851,
+            9,
+            140,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "se": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            42,
+            265,
+            341,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            443,
+            276,
+            233,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "pelvis": {
+          "file": "core.png",
+          "sourceRect": [
+            732,
+            273,
+            254,
+            254
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            33,
+            261,
+            219,
+            249
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            292,
+            263,
+            210,
+            242
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            620,
+            262,
+            131,
+            249
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            844,
+            262,
+            159,
+            250
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "sw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            63,
+            520,
+            349,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            452,
+            535,
+            222,
+            228
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "pelvis": {
+          "file": "core.png",
+          "sourceRect": [
+            737,
+            528,
+            252,
+            250
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            45,
+            513,
+            209,
+            249
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            307,
+            520,
+            196,
+            242
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            572,
+            517,
+            172,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            835,
+            517,
+            147,
+            250
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "w": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            97,
+            769,
+            235,
+            251
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            459,
+            777,
+            178,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "pelvis": {
+          "file": "core.png",
+          "sourceRect": [
+            729,
+            777,
+            255,
+            242
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            54,
+            778,
+            220,
+            239
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            346,
+            773,
+            161,
+            242
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            561,
+            772,
+            157,
+            245
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            814,
+            770,
+            161,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "nw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            41,
+            1018,
+            366,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            432,
+            1031,
+            249,
+            225
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "pelvis": {
+          "file": "core.png",
+          "sourceRect": [
+            744,
+            1025,
+            249,
+            238
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            56,
+            1026,
+            216,
+            231
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            322,
+            1025,
+            199,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            590,
+            1026,
+            178,
+            240
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            839,
+            1025,
+            164,
+            243
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "ne": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            41,
+            1264,
+            384,
+            239
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            454,
+            1266,
+            233,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "pelvis": {
+          "file": "core.png",
+          "sourceRect": [
+            749,
+            1270,
+            234,
+            243
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            48,
+            1276,
+            211,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightArm": {
+          "file": "limbs.png",
+          "sourceRect": [
+            280,
+            1276,
+            231,
+            241
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "leftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            580,
+            1277,
+            152,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "rightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            829,
+            1277,
+            171,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    }
+  },
+  "creature": {
+    "views": {
+      "e": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -100
+            ],
+            "displaySize": [
+              86,
+              90
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              6,
+              -147
+            ],
+            "displaySize": [
+              75,
+              72
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "pelvis": {
+            "anchor": [
+              0,
+              -61
+            ],
+            "displaySize": [
+              66,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.2
+            ],
+            "phase": 0
+          },
+          "leftArm": {
+            "anchor": [
+              -28,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "rightArm": {
+            "anchor": [
+              28,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "leftLeg": {
+            "anchor": [
+              -22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "rightLeg": {
+            "anchor": [
+              22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          }
+        },
+        "order": [
+          "leftArm",
+          "leftLeg",
+          "rightLeg",
+          "pelvis",
+          "body",
+          "rightArm",
+          "head"
+        ]
+      },
+      "se": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -100
+            ],
+            "displaySize": [
+              106,
+              90
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              6,
+              -147
+            ],
+            "displaySize": [
+              75,
+              72
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "pelvis": {
+            "anchor": [
+              0,
+              -61
+            ],
+            "displaySize": [
+              66,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.2
+            ],
+            "phase": 0
+          },
+          "leftArm": {
+            "anchor": [
+              -43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "rightArm": {
+            "anchor": [
+              43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "leftLeg": {
+            "anchor": [
+              -22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "rightLeg": {
+            "anchor": [
+              22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          }
+        },
+        "order": [
+          "leftArm",
+          "leftLeg",
+          "rightLeg",
+          "pelvis",
+          "body",
+          "rightArm",
+          "head"
+        ]
+      },
+      "sw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -100
+            ],
+            "displaySize": [
+              106,
+              90
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -6,
+              -147
+            ],
+            "displaySize": [
+              75,
+              72
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "pelvis": {
+            "anchor": [
+              0,
+              -61
+            ],
+            "displaySize": [
+              66,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.2
+            ],
+            "phase": 0
+          },
+          "leftArm": {
+            "anchor": [
+              -43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "rightArm": {
+            "anchor": [
+              43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "leftLeg": {
+            "anchor": [
+              -22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "rightLeg": {
+            "anchor": [
+              22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          }
+        },
+        "order": [
+          "leftArm",
+          "leftLeg",
+          "rightLeg",
+          "pelvis",
+          "body",
+          "rightArm",
+          "head"
+        ]
+      },
+      "w": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -100
+            ],
+            "displaySize": [
+              86,
+              90
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -6,
+              -147
+            ],
+            "displaySize": [
+              75,
+              72
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "pelvis": {
+            "anchor": [
+              0,
+              -61
+            ],
+            "displaySize": [
+              66,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.2
+            ],
+            "phase": 0
+          },
+          "leftArm": {
+            "anchor": [
+              -28,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "rightArm": {
+            "anchor": [
+              28,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "leftLeg": {
+            "anchor": [
+              -22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "rightLeg": {
+            "anchor": [
+              22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          }
+        },
+        "order": [
+          "leftArm",
+          "leftLeg",
+          "rightLeg",
+          "pelvis",
+          "body",
+          "rightArm",
+          "head"
+        ]
+      },
+      "nw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -100
+            ],
+            "displaySize": [
+              106,
+              90
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -6,
+              -147
+            ],
+            "displaySize": [
+              75,
+              72
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "pelvis": {
+            "anchor": [
+              0,
+              -61
+            ],
+            "displaySize": [
+              66,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.2
+            ],
+            "phase": 0
+          },
+          "leftArm": {
+            "anchor": [
+              -43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "rightArm": {
+            "anchor": [
+              43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "leftLeg": {
+            "anchor": [
+              -22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "rightLeg": {
+            "anchor": [
+              22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          }
+        },
+        "order": [
+          "leftLeg",
+          "rightLeg",
+          "head",
+          "body",
+          "pelvis",
+          "leftArm",
+          "rightArm"
+        ]
+      },
+      "ne": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -100
+            ],
+            "displaySize": [
+              106,
+              90
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              6,
+              -147
+            ],
+            "displaySize": [
+              75,
+              72
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "pelvis": {
+            "anchor": [
+              0,
+              -61
+            ],
+            "displaySize": [
+              66,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.2
+            ],
+            "phase": 0
+          },
+          "leftArm": {
+            "anchor": [
+              -43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "rightArm": {
+            "anchor": [
+              43,
+              -126
+            ],
+            "displaySize": [
+              46,
+              92
+            ],
+            "pivot": [
+              0.65,
+              0.08
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "leftLeg": {
+            "anchor": [
+              -22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "rightLeg": {
+            "anchor": [
+              22,
+              -54
+            ],
+            "displaySize": [
+              43,
+              66
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          }
+        },
+        "order": [
+          "leftLeg",
+          "rightLeg",
+          "head",
+          "body",
+          "pelvis",
+          "leftArm",
+          "rightArm"
+        ]
+      }
+    },
+    "scale": 0.76
+  },
+  "attack": "attack",
+  "group": 1,
+  "notes": [
+    "Custom upright giant skeleton; whole limbs articulate at shoulders/hips."
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "file": "vfx.png",
+  "size": [
+    1402,
+    1122
+  ],
+  "columns": 4,
+  "rows": 5,
+  "clips": {
+    "cleave": {
+      "row": 0,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          0,
+          350,
+          224
+        ],
+        [
+          350,
+          0,
+          351,
+          224
+        ],
+        [
+          701,
+          0,
+          351,
+          224
+        ],
+        [
+          1052,
+          0,
+          350,
+          224
+        ]
+      ]
+    },
+    "impact": {
+      "row": 1,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          224,
+          350,
+          225
+        ],
+        [
+          350,
+          224,
+          351,
+          225
+        ],
+        [
+          701,
+          224,
+          351,
+          225
+        ],
+        [
+          1052,
+          224,
+          350,
+          225
+        ]
+      ]
+    },
+    "spawn": {
+      "row": 2,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          449,
+          350,
+          224
+        ],
+        [
+          350,
+          449,
+          351,
+          224
+        ],
+        [
+          701,
+          449,
+          351,
+          224
+        ],
+        [
+          1052,
+          449,
+          350,
+          224
+        ]
+      ]
+    },
+    "enrage": {
+      "row": 3,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          673,
+          350,
+          225
+        ],
+        [
+          350,
+          673,
+          351,
+          225
+        ],
+        [
+          701,
+          673,
+          351,
+          225
+        ],
+        [
+          1052,
+          673,
+          350,
+          225
+        ]
+      ]
+    },
+    "summon": {
+      "row": 4,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          898,
+          350,
+          224
+        ],
+        [
+          350,
+          898,
+          351,
+          224
+        ],
+        [
+          701,
+          898,
+          351,
+          224
+        ],
+        [
+          1052,
+          898,
+          350,
+          224
+        ]
+      ]
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "cleave",
+      "impact": "impact",
+      "releaseMs": 260,
+      "travelMs": 0
+    },
+    "spawn": "spawn"
+  },
+  "statusEvents": {
+    "raid:enrage": {
+      "impact": "enrage"
+    },
+    "raid:summon": {
+      "impact": "summon"
+    }
+  },
+  "notes": [
+    "Actual raid phase transitions and successful summons; no added abilities."
+  ]
+}

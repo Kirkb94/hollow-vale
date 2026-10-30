@@ -1,0 +1,268 @@
+{
+  "unit": "raidboss",
+  "attack": "attack",
+  "poses": [
+    {
+      "direction": "e",
+      "state": "idle",
+      "opaquePixels": 7857,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "idle",
+      "opaquePixels": 8533,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "idle",
+      "opaquePixels": 8717,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "idle",
+      "opaquePixels": 7764,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "idle",
+      "opaquePixels": 8591,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "idle",
+      "opaquePixels": 8541,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "walk",
+      "opaquePixels": 7777,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "walk",
+      "opaquePixels": 8454,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "walk",
+      "opaquePixels": 8582,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "walk",
+      "opaquePixels": 7732,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "walk",
+      "opaquePixels": 8497,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "walk",
+      "opaquePixels": 8405,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "attack",
+      "opaquePixels": 7936,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "attack",
+      "opaquePixels": 8801,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "attack",
+      "opaquePixels": 8663,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "attack",
+      "opaquePixels": 8124,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "attack",
+      "opaquePixels": 8821,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "attack",
+      "opaquePixels": 8526,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "cast",
+      "opaquePixels": 8503,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "cast",
+      "opaquePixels": 8845,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "cast",
+      "opaquePixels": 8838,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "cast",
+      "opaquePixels": 8544,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "cast",
+      "opaquePixels": 8967,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "cast",
+      "opaquePixels": 8588,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "hurt",
+      "opaquePixels": 7874,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "hurt",
+      "opaquePixels": 8548,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "hurt",
+      "opaquePixels": 8719,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "hurt",
+      "opaquePixels": 7761,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "hurt",
+      "opaquePixels": 8622,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "hurt",
+      "opaquePixels": 8551,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "death",
+      "opaquePixels": 7866,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "death",
+      "opaquePixels": 8538,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "death",
+      "opaquePixels": 8702,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "death",
+      "opaquePixels": 7762,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "death",
+      "opaquePixels": 8617,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "death",
+      "opaquePixels": 8543,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "spawn",
+      "opaquePixels": 7757,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "spawn",
+      "opaquePixels": 8431,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "spawn",
+      "opaquePixels": 8604,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "spawn",
+      "opaquePixels": 7667,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "spawn",
+      "opaquePixels": 8481,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "spawn",
+      "opaquePixels": 8435,
+      "borderPixels": 0
+    }
+  ],
+  "equipment": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "errors": [],
+  "visualReview": "Reviewed42poses: six independent facings, articulated fists/legs/head, no clipping."
+}
