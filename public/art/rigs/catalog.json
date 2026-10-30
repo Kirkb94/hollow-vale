@@ -487,6 +487,33 @@
       "attack": "attack",
       "revision": "a57d9c471436"
     },
+    "rogue": {
+      "name": "Rogue",
+      "faction": "Wilds",
+      "folder": "wilds/rogue",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "a024b1d7af6b"
+    },
+    "archer": {
+      "name": "Archer",
+      "faction": "Wilds",
+      "folder": "wilds/archer",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json",
+      "revision": "bbdcc06e5e9a"
+    },
+    "trapper": {
+      "name": "Trapper",
+      "faction": "Wilds",
+      "folder": "wilds/trapper",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "2a28a0de628e"
+    },
     "hellhound": {
       "name": "Hellhound",
       "faction": "Infernal",
@@ -522,6 +549,132 @@
       "effects": "vfx.json",
       "attack": "attack",
       "revision": "ecb14ecc9cdb"
+    },
+    "druid": {
+      "name": "Druid",
+      "faction": "Wilds",
+      "folder": "wilds/druid",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "8a275fee3a99"
+    },
+    "beastcaller": {
+      "name": "Beastcaller",
+      "faction": "Wilds",
+      "folder": "wilds/beastcaller",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "f61fba36731e"
+    },
+    "groveshaper": {
+      "name": "Grove Shaper",
+      "faction": "Wilds",
+      "folder": "wilds/groveshaper",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "bb33f7dc2f5e"
+    },
+    "skinchanger": {
+      "name": "Skinchanger",
+      "faction": "Wilds",
+      "folder": "wilds/skinchanger",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "5a3da2ee1c80"
+    },
+    "falconer": {
+      "name": "Falconer",
+      "faction": "Wilds",
+      "folder": "wilds/falconer",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json",
+      "revision": "26d7de7a32e4"
+    },
+    "treant": {
+      "name": "Treant",
+      "faction": "Wilds",
+      "folder": "wilds/treant",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "eb11750700cb"
+    },
+    "eldertreant": {
+      "name": "Elder Treant",
+      "faction": "Wilds",
+      "folder": "wilds/eldertreant",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "3da5224f8179"
+    },
+    "sprites": {
+      "name": "Sprites",
+      "faction": "Wilds",
+      "folder": "wilds/sprites",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "0dcacf597fc1"
+    },
+    "wolves": {
+      "name": "Wolf Pack",
+      "faction": "Wilds",
+      "folder": "wilds/wolves",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "5edc893b4fca"
+    },
+    "boarrider": {
+      "name": "Boar Rider",
+      "faction": "Wilds",
+      "folder": "wilds/boarrider",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "45bd1d67a552"
+    },
+    "mammoth": {
+      "name": "Ancient Mammoth",
+      "faction": "Wilds",
+      "folder": "wilds/mammoth",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "ab7293bdd83b"
+    },
+    "direwolf": {
+      "name": "Alpha Direwolf",
+      "faction": "Wilds",
+      "folder": "wilds/direwolf",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "e646686bfde8"
+    },
+    "stormroc": {
+      "name": "Storm Roc",
+      "faction": "Wilds",
+      "folder": "wilds/stormroc",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "ae8fb4584d59"
+    },
+    "cavebear": {
+      "name": "Cave Bear",
+      "faction": "Wilds",
+      "folder": "wilds/cavebear",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "c27b23474ce6"
     }
   }
 }

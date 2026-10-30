@@ -1,0 +1,14 @@
+{
+  "n": "Elder Treant",
+  "e": "👑",
+  "hp": 35,
+  "mv": 1,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "elite": 1,
+  "fac": "wilds",
+  "d": "Boss (5 slots). Entangle: Its hits root the target: it cannot move on its next turn."
+}

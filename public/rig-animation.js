@@ -191,7 +191,7 @@
     }}
     extra('behind');ctx.save();
     if(model?.meta?.bodyOffset)ctx.translate(...model.meta.bodyOffset);
-    if(model?.meta?.bodyScale)ctx.scale(model.meta.bodyScale,model.meta.bodyScale);
+    if(model?.meta?.bodyScale){const bs=model.meta.bodyScale;ctx.scale(...(Array.isArray(bs)?bs:[bs,bs]));}
     const anatomy=back?-1:1,lx=10*width*anatomy,rx=-10*width*anatomy,held=[];
     function leg(left){const n=left?8:9,x=left?lx:rx,s=p.stride*(left?1:-1);
       if(model?.meta?.mounted){const piece=a[n];ctx.save();ctx.translate(x,-49);ctx.rotate(-sign*.75+s*.04);
@@ -201,7 +201,9 @@
       part(ctx,a,n,x,-44,17,32,s*.22);part(ctx,a,left?10:11,x+s*8,-14-Math.max(0,s)*5,23,20,s*.15);}
     function arm(left){const far=left!==nearLeft,x=(left?1:-1)*anatomy*19*width;
       const swing=p.arm*(left?1:-1),cast=far?p.cast*.45:p.cast;
-      const attack=left?p.attack*.2:p.attack,angle=swing-sign*cast*1.35-sign*attack*1.65-sign*p.shoot*(left?1.4:.65)-sign*p.thrust*(left?.3:1.5);
+      const firearm=equipment.some(e=>e.name==='gun'||e.name==='pistol');
+      const shootAngle=firearm?(left?1.15:1.25):(left?1.4:.65);
+      const attack=left?p.attack*.2:p.attack,angle=swing-sign*cast*1.35-sign*attack*1.65-sign*p.shoot*shootAngle-sign*p.thrust*(left?.3:1.5);
       ctx.save();ctx.translate(x,-119);ctx.rotate(angle);part(ctx,a,left?4:5,0,0,20,33);ctx.translate(0,27);ctx.rotate(-sign*(cast*.35+attack*.35));part(ctx,a,left?6:7,0,0,18,35);
       for(const eq of equipment)if(eq.hand===(left?'left':'right')){
         if(eq.name==='arrow'&&state==='shoot'&&t>330&&t<650)continue;
@@ -211,6 +213,7 @@
         if(eq.name==='staff')ctx.rotate(sign*cast*1.7);
         if(eq.name==='bow')ctx.rotate(sign*p.shoot*(left?1.4:.65));
         if(eq.name==='arrow')ctx.rotate(sign*p.shoot*(Math.PI/2+.65));
+        if(['gun','pistol'].includes(eq.name))ctx.rotate(sign*p.shoot*(Math.PI/2+shootAngle));
         held.push({eq,matrix:ctx.getTransform()});
         ctx.restore();
       }

@@ -1,0 +1,16 @@
+{
+  "n": "Sprites",
+  "e": "🧚",
+  "hp": 4,
+  "mv": 3,
+  "rng": [
+    1,
+    2
+  ],
+  "dmg": 3,
+  "fly": 1,
+  "group": 3,
+  "slots": 2,
+  "d": "3 tiny flying sprites with reach 2.",
+  "fac": "wilds"
+}

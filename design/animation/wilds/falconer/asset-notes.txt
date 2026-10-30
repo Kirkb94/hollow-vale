@@ -1,0 +1,2 @@
+Original imagegen RGBA sources preserved. Six independently drawn directions; each maps 12 independently animated body pieces. Explicit alpha-derived rectangles and hand-relative equipment pivots. Body and gear 1536x1024; VFX 8 frames x 4 actual-kit clips. Source clipping removes bust overlap and separates touching components; no pixel repainting. Game mechanics unchanged. See gameplay-run.json in ../druid and validation.json for actual mechanics tests.
+Falconer bird body and two independently rotating wing cutouts attach to left glove; bow to right.

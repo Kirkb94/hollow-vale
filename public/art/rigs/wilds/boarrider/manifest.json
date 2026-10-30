@@ -1,0 +1,2692 @@
+{
+  "version": 1,
+  "unit": "boarrider",
+  "faction": "wilds",
+  "style": "Arcane Vanguard",
+  "skeleton": "quadruped",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partOrder": [
+    "body",
+    "head",
+    "tail",
+    "frontLeftLeg",
+    "frontRightLeg",
+    "hindLeftLeg",
+    "hindRightLeg",
+    "riderBody",
+    "riderHead",
+    "spear",
+    "riderLeftArm",
+    "riderRightArm",
+    "riderLeftLeg",
+    "riderRightLeg"
+  ],
+  "views": {
+    "e": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            35,
+            6,
+            424,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            482,
+            5,
+            335,
+            242
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            880,
+            72,
+            109,
+            142
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            82,
+            15,
+            136,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            361,
+            15,
+            137,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            579,
+            12,
+            153,
+            233
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            829,
+            13,
+            155,
+            232
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderBody": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            63,
+            7,
+            218,
+            237
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderHead": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            399,
+            11,
+            206,
+            226
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "spear": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            640,
+            39,
+            361,
+            199
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            57,
+            14,
+            209,
+            211
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            313,
+            14,
+            215,
+            225
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            576,
+            13,
+            165,
+            227
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            825,
+            12,
+            161,
+            226
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "se": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            40,
+            241,
+            400,
+            244
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            504,
+            245,
+            313,
+            244
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            876,
+            311,
+            107,
+            141
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            97,
+            264,
+            115,
+            234
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            343,
+            266,
+            117,
+            232
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            587,
+            263,
+            151,
+            234
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            850,
+            264,
+            154,
+            233
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderBody": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            48,
+            243,
+            244,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderHead": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            383,
+            248,
+            207,
+            226
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "spear": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            649,
+            263,
+            345,
+            216
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            80,
+            251,
+            145,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            345,
+            251,
+            134,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            614,
+            254,
+            123,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            860,
+            252,
+            116,
+            232
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "sw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            42,
+            480,
+            400,
+            251
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            482,
+            486,
+            297,
+            243
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            879,
+            554,
+            113,
+            140
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            61,
+            512,
+            155,
+            229
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            334,
+            512,
+            146,
+            229
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            569,
+            512,
+            159,
+            228
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            845,
+            511,
+            144,
+            231
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderBody": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            97,
+            482,
+            247,
+            241
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderHead": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            415,
+            483,
+            215,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "spear": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            659,
+            502,
+            342,
+            218
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            42,
+            504,
+            176,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            365,
+            501,
+            164,
+            219
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            594,
+            500,
+            123,
+            245
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            828,
+            500,
+            147,
+            243
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "w": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            24,
+            736,
+            417,
+            226
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            482,
+            728,
+            343,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            874,
+            801,
+            107,
+            133
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            58,
+            755,
+            145,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            321,
+            759,
+            146,
+            231
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            572,
+            753,
+            164,
+            237
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            823,
+            754,
+            158,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderBody": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            110,
+            724,
+            212,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderHead": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            415,
+            729,
+            209,
+            227
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "spear": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            641,
+            785,
+            369,
+            157
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            16,
+            767,
+            223,
+            228
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            289,
+            767,
+            224,
+            202
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            539,
+            755,
+            213,
+            237
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            823,
+            754,
+            163,
+            233
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "nw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            42,
+            960,
+            401,
+            256
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            475,
+            961,
+            303,
+            255
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            861,
+            1037,
+            116,
+            150
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            64,
+            1004,
+            127,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            331,
+            1004,
+            124,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            602,
+            1005,
+            115,
+            234
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            862,
+            1005,
+            120,
+            234
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderBody": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            86,
+            959,
+            267,
+            252
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderHead": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            403,
+            963,
+            219,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "spear": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            651,
+            993,
+            325,
+            227
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            75,
+            1003,
+            146,
+            239
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            307,
+            1000,
+            166,
+            247
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            589,
+            1003,
+            130,
+            243
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            841,
+            1000,
+            122,
+            246
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "ne": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            36,
+            1218,
+            392,
+            258
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "head": {
+          "file": "core.png",
+          "sourceRect": [
+            495,
+            1218,
+            322,
+            258
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "tail": {
+          "file": "core.png",
+          "sourceRect": [
+            872,
+            1306,
+            118,
+            144
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            90,
+            1258,
+            128,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "frontRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            344,
+            1259,
+            130,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindLeftLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            585,
+            1255,
+            135,
+            239
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "hindRightLeg": {
+          "file": "limbs.png",
+          "sourceRect": [
+            848,
+            1255,
+            138,
+            239
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderBody": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            37,
+            1212,
+            250,
+            267
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderHead": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            386,
+            1214,
+            225,
+            234
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "spear": {
+          "file": "ridercore.png",
+          "sourceRect": [
+            639,
+            1255,
+            360,
+            217
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            51,
+            1261,
+            178,
+            261
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightArm": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            311,
+            1263,
+            158,
+            259
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderLeftLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            591,
+            1261,
+            131,
+            257
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        },
+        "riderRightLeg": {
+          "file": "riderlimbs.png",
+          "sourceRect": [
+            834,
+            1261,
+            145,
+            250
+          ],
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "isolate": true
+        }
+      }
+    }
+  },
+  "creature": {
+    "views": {
+      "e": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -53
+            ],
+            "displaySize": [
+              108,
+              53
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              43,
+              -73
+            ],
+            "displaySize": [
+              58,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              -43,
+              -48
+            ],
+            "displaySize": [
+              29,
+              38
+            ],
+            "pivot": [
+              0.12,
+              0.5
+            ],
+            "phase": 0,
+            "motion": "tail",
+            "flipX": true
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              26,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              36,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              -38,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              -28,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "riderBody": {
+            "anchor": [
+              0,
+              -99
+            ],
+            "displaySize": [
+              38,
+              49
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "riderHead": {
+            "anchor": [
+              2,
+              -126
+            ],
+            "displaySize": [
+              30,
+              32
+            ],
+            "pivot": [
+              0.5,
+              0.8
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "riderLeftArm": {
+            "anchor": [
+              -17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "riderRightArm": {
+            "anchor": [
+              17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "riderLeftLeg": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "riderRightLeg": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "spear": {
+            "anchor": [
+              20,
+              -78
+            ],
+            "displaySize": [
+              17,
+              108
+            ],
+            "pivot": [
+              0.5,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "weapon"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "riderLeftLeg",
+          "body",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head",
+          "riderRightLeg",
+          "riderBody",
+          "riderLeftArm",
+          "riderRightArm",
+          "riderHead",
+          "spear"
+        ]
+      },
+      "se": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -53
+            ],
+            "displaySize": [
+              91,
+              53
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              43,
+              -73
+            ],
+            "displaySize": [
+              58,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              -43,
+              -48
+            ],
+            "displaySize": [
+              29,
+              38
+            ],
+            "pivot": [
+              0.12,
+              0.5
+            ],
+            "phase": 0,
+            "motion": "tail",
+            "flipX": true
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              26,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              36,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              -38,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              -28,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "riderBody": {
+            "anchor": [
+              0,
+              -99
+            ],
+            "displaySize": [
+              38,
+              49
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "riderHead": {
+            "anchor": [
+              2,
+              -126
+            ],
+            "displaySize": [
+              30,
+              32
+            ],
+            "pivot": [
+              0.5,
+              0.8
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "riderLeftArm": {
+            "anchor": [
+              -17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "riderRightArm": {
+            "anchor": [
+              17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "riderLeftLeg": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "riderRightLeg": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "spear": {
+            "anchor": [
+              20,
+              -78
+            ],
+            "displaySize": [
+              17,
+              108
+            ],
+            "pivot": [
+              0.5,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "weapon"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "riderLeftLeg",
+          "body",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head",
+          "riderRightLeg",
+          "riderBody",
+          "riderLeftArm",
+          "riderRightArm",
+          "riderHead",
+          "spear"
+        ]
+      },
+      "sw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -53
+            ],
+            "displaySize": [
+              91,
+              53
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -43,
+              -73
+            ],
+            "displaySize": [
+              58,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              43,
+              -48
+            ],
+            "displaySize": [
+              29,
+              38
+            ],
+            "pivot": [
+              0.12,
+              0.5
+            ],
+            "phase": 0,
+            "motion": "tail"
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              -36,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              -26,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              28,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              38,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "riderBody": {
+            "anchor": [
+              0,
+              -99
+            ],
+            "displaySize": [
+              38,
+              49
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "riderHead": {
+            "anchor": [
+              -2,
+              -126
+            ],
+            "displaySize": [
+              30,
+              32
+            ],
+            "pivot": [
+              0.5,
+              0.8
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "riderLeftArm": {
+            "anchor": [
+              -17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "riderRightArm": {
+            "anchor": [
+              17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "riderLeftLeg": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "riderRightLeg": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "spear": {
+            "anchor": [
+              -20,
+              -78
+            ],
+            "displaySize": [
+              17,
+              108
+            ],
+            "pivot": [
+              0.5,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "weapon"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "riderLeftLeg",
+          "body",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head",
+          "riderRightLeg",
+          "riderBody",
+          "riderLeftArm",
+          "riderRightArm",
+          "riderHead",
+          "spear"
+        ]
+      },
+      "w": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -53
+            ],
+            "displaySize": [
+              108,
+              53
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -43,
+              -73
+            ],
+            "displaySize": [
+              58,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head",
+            "flipX": true
+          },
+          "tail": {
+            "anchor": [
+              43,
+              -48
+            ],
+            "displaySize": [
+              29,
+              38
+            ],
+            "pivot": [
+              0.12,
+              0.5
+            ],
+            "phase": 0,
+            "motion": "tail"
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              -36,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              -26,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              28,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              38,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "riderBody": {
+            "anchor": [
+              0,
+              -99
+            ],
+            "displaySize": [
+              38,
+              49
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "riderHead": {
+            "anchor": [
+              -2,
+              -126
+            ],
+            "displaySize": [
+              30,
+              32
+            ],
+            "pivot": [
+              0.5,
+              0.8
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "riderLeftArm": {
+            "anchor": [
+              -17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "riderRightArm": {
+            "anchor": [
+              17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "riderLeftLeg": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "riderRightLeg": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "spear": {
+            "anchor": [
+              -20,
+              -78
+            ],
+            "displaySize": [
+              17,
+              108
+            ],
+            "pivot": [
+              0.5,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "weapon"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "riderLeftLeg",
+          "body",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head",
+          "riderRightLeg",
+          "riderBody",
+          "riderLeftArm",
+          "riderRightArm",
+          "riderHead",
+          "spear"
+        ]
+      },
+      "nw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -53
+            ],
+            "displaySize": [
+              91,
+              53
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              -43,
+              -73
+            ],
+            "displaySize": [
+              58,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              43,
+              -48
+            ],
+            "displaySize": [
+              29,
+              38
+            ],
+            "pivot": [
+              0.12,
+              0.5
+            ],
+            "phase": 0,
+            "motion": "tail"
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              -36,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              -26,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              28,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              38,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "riderBody": {
+            "anchor": [
+              0,
+              -99
+            ],
+            "displaySize": [
+              38,
+              49
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "riderHead": {
+            "anchor": [
+              -2,
+              -126
+            ],
+            "displaySize": [
+              30,
+              32
+            ],
+            "pivot": [
+              0.5,
+              0.8
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "riderLeftArm": {
+            "anchor": [
+              -17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "riderRightArm": {
+            "anchor": [
+              17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "riderLeftLeg": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "riderRightLeg": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "spear": {
+            "anchor": [
+              -20,
+              -78
+            ],
+            "displaySize": [
+              17,
+              108
+            ],
+            "pivot": [
+              0.5,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "weapon"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "riderLeftLeg",
+          "body",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head",
+          "riderRightLeg",
+          "riderBody",
+          "riderLeftArm",
+          "riderRightArm",
+          "riderHead",
+          "spear"
+        ]
+      },
+      "ne": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -53
+            ],
+            "displaySize": [
+              91,
+              53
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "head": {
+            "anchor": [
+              43,
+              -73
+            ],
+            "displaySize": [
+              58,
+              58
+            ],
+            "pivot": [
+              0.5,
+              0.7
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "tail": {
+            "anchor": [
+              -43,
+              -48
+            ],
+            "displaySize": [
+              29,
+              38
+            ],
+            "pivot": [
+              0.12,
+              0.5
+            ],
+            "phase": 0,
+            "motion": "tail",
+            "flipX": true
+          },
+          "frontLeftLeg": {
+            "anchor": [
+              26,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "frontRightLeg": {
+            "anchor": [
+              36,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "hindLeftLeg": {
+            "anchor": [
+              -38,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "leg"
+          },
+          "hindRightLeg": {
+            "anchor": [
+              -28,
+              -41
+            ],
+            "displaySize": [
+              25,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "leg"
+          },
+          "riderBody": {
+            "anchor": [
+              0,
+              -99
+            ],
+            "displaySize": [
+              38,
+              49
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "phase": 0
+          },
+          "riderHead": {
+            "anchor": [
+              2,
+              -126
+            ],
+            "displaySize": [
+              30,
+              32
+            ],
+            "pivot": [
+              0.5,
+              0.8
+            ],
+            "phase": 0,
+            "motion": "head"
+          },
+          "riderLeftArm": {
+            "anchor": [
+              -17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 0,
+            "motion": "arm"
+          },
+          "riderRightArm": {
+            "anchor": [
+              17,
+              -117
+            ],
+            "displaySize": [
+              17,
+              39
+            ],
+            "pivot": [
+              0.5,
+              0.05
+            ],
+            "phase": 1,
+            "motion": "arm"
+          },
+          "riderLeftLeg": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "riderRightLeg": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              20,
+              44
+            ],
+            "pivot": [
+              0.5,
+              0.08
+            ],
+            "phase": 0
+          },
+          "spear": {
+            "anchor": [
+              20,
+              -78
+            ],
+            "displaySize": [
+              17,
+              108
+            ],
+            "pivot": [
+              0.5,
+              0.75
+            ],
+            "phase": 0,
+            "motion": "weapon"
+          }
+        },
+        "order": [
+          "tail",
+          "frontLeftLeg",
+          "hindRightLeg",
+          "riderLeftLeg",
+          "body",
+          "frontRightLeg",
+          "hindLeftLeg",
+          "head",
+          "riderRightLeg",
+          "riderBody",
+          "riderLeftArm",
+          "riderRightArm",
+          "riderHead",
+          "spear"
+        ]
+      }
+    }
+  },
+  "attack": "thrust",
+  "group": 1,
+  "notes": [
+    "All six facings independently illustrated. Whole limbs articulate at attachment; not separate knee joints."
+  ]
+}

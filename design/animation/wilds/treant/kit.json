@@ -1,0 +1,13 @@
+{
+  "n": "Treant",
+  "e": "🌳",
+  "hp": 27,
+  "mv": 1,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 3,
+  "d": "An ancient tree-guardian. Huge health pool that slowly regrows.",
+  "fac": "wilds"
+}

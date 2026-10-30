@@ -1,0 +1,1287 @@
+{
+  "version": 1,
+  "unit": "eldertreant",
+  "faction": "wilds",
+  "style": "Arcane Vanguard",
+  "attack": "attack",
+  "group": 1,
+  "partOrder": [
+    "head",
+    "torso",
+    "cape",
+    "pelvis",
+    "leftUpperArm",
+    "rightUpperArm",
+    "leftForearm",
+    "rightForearm",
+    "leftLeg",
+    "rightLeg",
+    "leftBoot",
+    "rightBoot"
+  ],
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            20,
+            5,
+            142,
+            158
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            54,
+            62
+          ]
+        },
+        "torso": {
+          "sourceRect": [
+            20,
+            156,
+            116,
+            146
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            52,
+            60
+          ]
+        },
+        "cape": {
+          "sourceRect": [
+            23,
+            307,
+            112,
+            154
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            45,
+            70
+          ]
+        },
+        "pelvis": {
+          "sourceRect": [
+            21,
+            463,
+            128,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            42,
+            48
+          ]
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            39,
+            570,
+            88,
+            96
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            53,
+            674,
+            95,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "leftForearm": {
+          "sourceRect": [
+            36,
+            776,
+            110,
+            116
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "rightForearm": {
+          "sourceRect": [
+            29,
+            893,
+            122,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "leftLeg": {
+          "sourceRect": [
+            48,
+            993,
+            91,
+            139
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            41,
+            1139,
+            93,
+            166
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            29,
+            1311,
+            132,
+            87
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            19,
+            1408,
+            146,
+            103
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            187,
+            5,
+            141,
+            160
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            54,
+            62
+          ]
+        },
+        "torso": {
+          "sourceRect": [
+            188,
+            160,
+            151,
+            143
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            52,
+            60
+          ]
+        },
+        "cape": {
+          "sourceRect": [
+            194,
+            306,
+            136,
+            155
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            45,
+            70
+          ]
+        },
+        "pelvis": {
+          "sourceRect": [
+            192,
+            463,
+            143,
+            100
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            42,
+            48
+          ]
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            215,
+            571,
+            95,
+            96
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            193,
+            672,
+            102,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "leftForearm": {
+          "sourceRect": [
+            191,
+            772,
+            135,
+            108
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "rightForearm": {
+          "sourceRect": [
+            189,
+            880,
+            131,
+            113
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "leftLeg": {
+          "sourceRect": [
+            226,
+            999,
+            86,
+            134
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            210,
+            1141,
+            90,
+            164
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            190,
+            1311,
+            141,
+            89
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            191,
+            1408,
+            146,
+            100
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            359,
+            5,
+            143,
+            161
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            54,
+            62
+          ]
+        },
+        "torso": {
+          "sourceRect": [
+            368,
+            159,
+            142,
+            143
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            52,
+            60
+          ]
+        },
+        "cape": {
+          "sourceRect": [
+            369,
+            306,
+            128,
+            153
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            45,
+            70
+          ]
+        },
+        "pelvis": {
+          "sourceRect": [
+            359,
+            463,
+            142,
+            100
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            42,
+            48
+          ]
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            376,
+            570,
+            95,
+            96
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            390,
+            671,
+            102,
+            100
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "leftForearm": {
+          "sourceRect": [
+            364,
+            772,
+            128,
+            108
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "rightForearm": {
+          "sourceRect": [
+            365,
+            879,
+            122,
+            114
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "leftLeg": {
+          "sourceRect": [
+            380,
+            999,
+            82,
+            134
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            389,
+            1140,
+            88,
+            164
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            361,
+            1311,
+            136,
+            89
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            354,
+            1408,
+            144,
+            100
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            533,
+            5,
+            133,
+            158
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            54,
+            62
+          ]
+        },
+        "torso": {
+          "sourceRect": [
+            547,
+            156,
+            108,
+            146
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            52,
+            60
+          ]
+        },
+        "cape": {
+          "sourceRect": [
+            554,
+            307,
+            110,
+            155
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            45,
+            70
+          ]
+        },
+        "pelvis": {
+          "sourceRect": [
+            540,
+            463,
+            121,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            42,
+            48
+          ]
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            571,
+            569,
+            67,
+            96
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            532,
+            674,
+            99,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "leftForearm": {
+          "sourceRect": [
+            530,
+            773,
+            108,
+            119
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "rightForearm": {
+          "sourceRect": [
+            522,
+            893,
+            121,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "leftLeg": {
+          "sourceRect": [
+            540,
+            992,
+            89,
+            140
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            543,
+            1139,
+            93,
+            166
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            520,
+            1311,
+            122,
+            86
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            521,
+            1408,
+            144,
+            104
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            693,
+            6,
+            139,
+            154
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            54,
+            62
+          ]
+        },
+        "torso": {
+          "sourceRect": [
+            686,
+            158,
+            146,
+            145
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            52,
+            60
+          ]
+        },
+        "cape": {
+          "sourceRect": [
+            694,
+            307,
+            136,
+            152
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            45,
+            70
+          ]
+        },
+        "pelvis": {
+          "sourceRect": [
+            689,
+            465,
+            143,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            42,
+            48
+          ]
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            707,
+            573,
+            99,
+            96
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            724,
+            674,
+            94,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "leftForearm": {
+          "sourceRect": [
+            708,
+            774,
+            107,
+            106
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "rightForearm": {
+          "sourceRect": [
+            700,
+            884,
+            117,
+            102
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "leftLeg": {
+          "sourceRect": [
+            719,
+            997,
+            76,
+            136
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            726,
+            1140,
+            85,
+            164
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            678,
+            1313,
+            154,
+            86
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            685,
+            1407,
+            152,
+            103
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            859,
+            5,
+            141,
+            154
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            54,
+            62
+          ]
+        },
+        "torso": {
+          "sourceRect": [
+            856,
+            158,
+            150,
+            145
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            52,
+            60
+          ]
+        },
+        "cape": {
+          "sourceRect": [
+            860,
+            307,
+            142,
+            154
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            45,
+            70
+          ]
+        },
+        "pelvis": {
+          "sourceRect": [
+            858,
+            465,
+            147,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            42,
+            48
+          ]
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            893,
+            570,
+            79,
+            92
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            879,
+            670,
+            94,
+            101
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            35
+          ]
+        },
+        "leftForearm": {
+          "sourceRect": [
+            877,
+            775,
+            100,
+            105
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "rightForearm": {
+          "sourceRect": [
+            874,
+            883,
+            111,
+            103
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false,
+          "displaySize": [
+            23,
+            37
+          ]
+        },
+        "leftLeg": {
+          "sourceRect": [
+            900,
+            998,
+            73,
+            135
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            885,
+            1140,
+            84,
+            164
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            859,
+            1314,
+            149,
+            84
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            860,
+            1408,
+            153,
+            102
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    }
+  },
+  "status": "ready"
+}

@@ -146,7 +146,7 @@
     {
       "faction": "infernal",
       "total": 14,
-      "status": "validated-release-ready",
+      "status": "pushed",
       "workers": {
         "hollow_kingdom": [
           "bomber",
@@ -186,12 +186,13 @@
         "cinderwarden",
         "hellbinder",
         "pactbroker"
-      ]
+      ],
+      "commit": "f9cc1196d617"
     },
     {
       "faction": "wilds",
       "total": 17,
-      "status": "art-production",
+      "status": "validated",
       "workers": {
         "parent": [
           "rogue",
@@ -222,7 +223,21 @@
       "validated": [
         "rogue",
         "archer",
-        "trapper"
+        "druid",
+        "sprites",
+        "wolves",
+        "treant",
+        "boarrider",
+        "mammoth",
+        "trapper",
+        "eldertreant",
+        "direwolf",
+        "stormroc",
+        "cavebear",
+        "falconer",
+        "beastcaller",
+        "groveshaper",
+        "skinchanger"
       ]
     },
     {
@@ -235,6 +250,20 @@
           "sapper",
           "gunner",
           "spotter"
+        ],
+        "hollow_kingdom": [
+          "runeforger",
+          "cagewright",
+          "prospector",
+          "wallwright",
+          "forgemaster"
+        ],
+        "hollow_undead": [
+          "colossus",
+          "guard",
+          "titan",
+          "juggernaut",
+          "thunderking"
         ]
       }
     },
@@ -280,6 +309,13 @@
       "faction": "undead",
       "artCommit": "d49c06a1071f",
       "head": "5cb2299",
+      "remote": "origin/main",
+      "verified": true
+    },
+    {
+      "faction": "infernal",
+      "artCommit": "f9cc1196d617",
+      "head": "0d66ef7",
       "remote": "origin/main",
       "verified": true
     }

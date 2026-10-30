@@ -1,0 +1,40 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "shoot",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 2,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "flare": {
+    "manaSpent": 1,
+    "placed": true,
+    "effects": 1
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "tools/iron-vanguard.test.cjs",
+  "testedAt": "2026-10-30T11:57:48.643Z",
+  "pageErrors": []
+}

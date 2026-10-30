@@ -1,0 +1,55 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "effects": true,
+  "gameplay": true,
+  "unit": "groveshaper",
+  "method": "Headless Edge actual game runtime; independent assembly and FX screenshots visually inspected.",
+  "actualMechanics": {
+    "attackDamage": 2,
+    "attackFX": 2,
+    "mire": true,
+    "zone": {
+      "k": "mire",
+      "id": 1,
+      "x": 3,
+      "y": 2,
+      "cells": [
+        "2,1",
+        "3,1",
+        "2,2",
+        "3,2",
+        "4,2",
+        "2,3",
+        "3,3"
+      ],
+      "side": "p",
+      "n": 2
+    },
+    "mireFX": 2
+  },
+  "sourceRectsChecked": 72,
+  "poseSweep": {
+    "poses": 42,
+    "edgePixels": 0
+  },
+  "screenshots": [
+    "../druid/batch-review.png",
+    "vfx-review.png"
+  ],
+  "pending": []
+}
