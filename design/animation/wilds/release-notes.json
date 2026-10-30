@@ -1,0 +1,19 @@
+{
+  "title": "Wilds faction art complete",
+  "groups": [
+    {
+      "name": "Art and animation",
+      "items": [
+        "All 17 Wilds units now have six-facing layered character or creature rigs and associated spell effects.",
+        "Separate limbs, equipment, wings and mounts animate during movement, attacks, damage and death."
+      ]
+    },
+    {
+      "name": "Verified gameplay",
+      "items": [
+        "Effects follow actual regrowth, healing, roots, traps, flare, mimic, herd and gale outcomes.",
+        "All 17 passed pose, source bounds, gameplay, pause, fog visibility and zoom checks. Test the complete faction with ?arttest=factions&faction=wilds."
+      ]
+    }
+  ]
+}
