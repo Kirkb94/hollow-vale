@@ -1,6 +1,23 @@
 {
   "versions": [
     {
+      "id": "45f44aa54b6c",
+      "date": "2026-10-30",
+      "title": "Dread Colossus art complete",
+      "groups": [
+        {
+          "name": "Raid boss",
+          "items": [
+            "Dread Colossus now uses six-facing layered art with moving limbs, cleave, impact, enrage and summon effects.",
+            "Enrage and skeleton summon effects follow actual phase thresholds. All eight animation and gameplay checks passed."
+          ]
+        }
+      ],
+      "commits": [
+        "Complete Dread Colossus layered raid boss and phase effects"
+      ]
+    },
+    {
       "id": "11e2b0974f89",
       "date": "2026-10-30",
       "title": "Iron Clan faction art complete",
@@ -202,23 +219,6 @@
       ],
       "commits": [
         "Towers and walls no longer block taps on the hex above them"
-      ]
-    },
-    {
-      "id": "55fa790",
-      "date": "2026-10-28",
-      "title": "Cheaper Bone Legion",
-      "groups": [
-        {
-          "name": "Balance",
-          "items": [
-            "Bone Legion costs 4 gold again and takes 1 slot (was 5 gold, 2 slots)",
-            "Your army can never grow past 50 slots, whatever you build"
-          ]
-        }
-      ],
-      "commits": [
-        "Bone Legion back to 4 gold (1 slot); army cap can never go above 50"
       ]
     }
   ]

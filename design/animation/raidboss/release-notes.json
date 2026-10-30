@@ -1,0 +1,12 @@
+{
+  "title": "Dread Colossus art complete",
+  "groups": [
+    {
+      "name": "Raid boss",
+      "items": [
+        "Dread Colossus now uses six-facing layered art with moving limbs, cleave, impact, enrage and summon effects.",
+        "Enrage and skeleton summon effects follow actual phase thresholds. All eight animation and gameplay checks passed."
+      ]
+    }
+  ]
+}
