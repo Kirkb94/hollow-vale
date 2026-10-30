@@ -108,7 +108,7 @@
       const sheets=await Promise.all(directions.map(d=>assetImage(meta?.views?.[d]?.file||meta?.atlases?.[d]||d+'.png')));
       const body=await Promise.all(sheets.map(async(im,i)=>{
         const d=directions[i];
-        if(meta?.views?.[d]?.parts)return Promise.all((['bat','wisp','quadruped','dragon','bird','imp'].includes(meta.skeleton)?meta.partOrder:partNames).map(async name=>{const p=meta.views[d].parts[name],s=source(p.file?await assetImage(p.file):im,p.renderRect||p.sourceRect,{pivot:p.pivot,flipX:!!p.flipX,displaySize:p.displaySize});return p.isolate?isolate(s):s;}));
+        if(meta?.views?.[d]?.parts)return Promise.all((['bat','wisp','quadruped','dragon','bird','imp','mechanical'].includes(meta.skeleton)?meta.partOrder:partNames).map(async name=>{const p=meta.views[d].parts[name],s=source(p.file?await assetImage(p.file):im,p.renderRect||p.sourceRect,{pivot:p.pivot,flipX:!!p.flipX,displaySize:p.displaySize});return p.isolate?isolate(s):s;}));
         if(explicit?.rects?.[d])return explicit.rects[d].map((rect,n)=>source(im,rect,{pivot:meta.parts[n]?.pivot}));
         return pieces(im);
       }));

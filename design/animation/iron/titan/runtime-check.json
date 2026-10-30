@@ -1,0 +1,268 @@
+{
+  "unit": "titan",
+  "attack": "attack",
+  "poses": [
+    {
+      "direction": "e",
+      "state": "idle",
+      "opaquePixels": 6358,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "idle",
+      "opaquePixels": 7074,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "idle",
+      "opaquePixels": 6970,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "idle",
+      "opaquePixels": 6517,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "idle",
+      "opaquePixels": 6947,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "idle",
+      "opaquePixels": 7038,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "walk",
+      "opaquePixels": 7299,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "walk",
+      "opaquePixels": 8107,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "walk",
+      "opaquePixels": 7892,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "walk",
+      "opaquePixels": 7352,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "walk",
+      "opaquePixels": 6368,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "walk",
+      "opaquePixels": 6387,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "attack",
+      "opaquePixels": 6326,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "attack",
+      "opaquePixels": 7060,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "attack",
+      "opaquePixels": 7439,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "attack",
+      "opaquePixels": 7015,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "attack",
+      "opaquePixels": 6889,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "attack",
+      "opaquePixels": 7492,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "cast",
+      "opaquePixels": 7339,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "cast",
+      "opaquePixels": 7757,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "cast",
+      "opaquePixels": 7632,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "cast",
+      "opaquePixels": 7489,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "cast",
+      "opaquePixels": 7544,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "cast",
+      "opaquePixels": 7625,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "hurt",
+      "opaquePixels": 6367,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "hurt",
+      "opaquePixels": 7101,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "hurt",
+      "opaquePixels": 6995,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "hurt",
+      "opaquePixels": 6511,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "hurt",
+      "opaquePixels": 6943,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "hurt",
+      "opaquePixels": 7061,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "death",
+      "opaquePixels": 3153,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "death",
+      "opaquePixels": 3529,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "death",
+      "opaquePixels": 3464,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "death",
+      "opaquePixels": 3227,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "death",
+      "opaquePixels": 3446,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "death",
+      "opaquePixels": 3511,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "spawn",
+      "opaquePixels": 6273,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "spawn",
+      "opaquePixels": 7004,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "spawn",
+      "opaquePixels": 6905,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "spawn",
+      "opaquePixels": 6416,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "spawn",
+      "opaquePixels": 6869,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "spawn",
+      "opaquePixels": 6960,
+      "borderPixels": 0
+    }
+  ],
+  "equipment": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "errors": [],
+  "visualReview": "passed"
+}

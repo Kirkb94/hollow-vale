@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><base href="/"><title>Iron unit cutout review</title>
+<style>body{background:#172333;color:#eee;font:16px system-ui}section{display:flex}canvas{width:200px;height:150px;border:1px solid #456}h2{margin:8px}</style>
+<h1>Iron units — six directions</h1><button onclick="state=state==='walk'?'attack':'walk'">Walk / attack</button><div id="rows"></div>
+<script src="/rig-animation.js"></script><script>
+let state='walk';const keys=['runeforger','cagewright','prospector','wallwright','forgemaster'],cs=[];
+window.reviewReady=(async()=>{await HVRig.ready;for(const k of keys){await HVRig.register(k,{folder:'iron/'+k,manifest:'manifest.json'});rows.insertAdjacentHTML('beforeend','<h2>'+k+'</h2>');let s=document.createElement('section');rows.append(s);for(let d=0;d<6;d++){let c=document.createElement('canvas');c.width=320;c.height=240;s.append(c);cs.push([c,k,d]);}}function tick(t){for(const[c,k,d]of cs)HVRig.draw(c,k,d,state,t%800);requestAnimationFrame(tick)}requestAnimationFrame(tick);return {loaded:keys.map(k=>[k,HVRig.assets.has(k)]),failures:HVRig.failures}})();
+</script>

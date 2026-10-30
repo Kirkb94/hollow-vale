@@ -1,0 +1,152 @@
+{
+  "result": {
+    "runeforger": {
+      "attackDamage": 4,
+      "attackFX": 2,
+      "edge": true,
+      "edgeStatus": {
+        "n": 2,
+        "by": "p"
+      },
+      "spellFX": 2
+    },
+    "cagewright": {
+      "attackDamage": 2,
+      "attackFX": 2,
+      "cage": true,
+      "cageStatus": {
+        "n": 1,
+        "by": "p"
+      },
+      "spellFX": 2
+    },
+    "prospector": {
+      "attackDamage": 3,
+      "attackFX": 2,
+      "vein": true,
+      "veinStatus": {
+        "x": 3,
+        "y": 3,
+        "n": 2
+      },
+      "spellFX": 2
+    },
+    "wallwright": {
+      "attackDamage": 5,
+      "attackFX": 2,
+      "wall": true,
+      "wallCount": 1,
+      "spellFX": 2
+    },
+    "forgemaster": {
+      "attackDamage": 7,
+      "attackFX": 2,
+      "heal": 2,
+      "repair": 1,
+      "repairFX": 2,
+      "repairEvents": [
+        {
+          "key": "forgemaster",
+          "event": "fieldRepair:heal"
+        },
+        {
+          "key": "forgemaster",
+          "event": "fieldRepair:tower"
+        }
+      ]
+    }
+  },
+  "presentation": {
+    "runeforger": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "cagewright": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "prospector": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "wallwright": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "forgemaster": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    }
+  },
+  "errors": []
+}

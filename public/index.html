@@ -1638,9 +1638,9 @@ S.pool[B]=['skeletons','ghoul'];S.teams[B]=['raidboss'];S.syn[B]={};S.mana[B]=4;
 const hx=spawnHexes(B).sort((a,b)=>dist(a,{x:GEO.BW/2,y:GEO.BH/2})-dist(b,{x:GEO.BW/2,y:GEO.BH/2})),c=hx[0],u=mk('raidboss',B,c.x,c.y);u.mhp=u.hp=[0,24,50,84][np];u.rb0=[0,0,1,2][np];u.used=true;S.units.push(u)}
 const RMIN=['skeletons','ghoul','imps','hellhound','footmen'];
 function raidPhase(n){const b=S.units.find(u=>u.k=='raidboss');if(!b)return;const r=b.hp/b.mhp;
-if(r<=.66&&!b.ph2){b.ph2=1;b.rbuf=2;pop(b,'ENRAGED! +2 dmg');if(!RP)msg('The raid boss is enraged!')}
+if(r<=.66&&!b.ph2){b.ph2=1;b.rbuf=2;pop(b,'ENRAGED! +2 dmg');if(!RP)window.dispatchEvent(new CustomEvent('hv:unit-status-effect',{detail:{key:'raid:enrage',source:b,target:b}}));if(!RP)msg('The raid boss is enraged!')}
 if(r<=.33&&!b.ph3){b.ph3=1;if(!RP)msg('The raid boss calls the dead to its side!')}
-if(b.ph3){let k=0;NB[b.y&1].forEach(([dx,dy])=>{const x=b.x+dx,y=b.y+dy;if(k<2&&free(x,y)){const v=mk('skeletons',n,x,y);v.used=true;v.rez=1;v.sumBy='raidboss';S.units.push(v);spfx(v);k++}})}
+if(b.ph3){let k=0;NB[b.y&1].forEach(([dx,dy])=>{const x=b.x+dx,y=b.y+dy;if(k<2&&free(x,y)){const v=mk('skeletons',n,x,y);v.used=true;v.rez=1;v.sumBy='raidboss';S.units.push(v);spfx(v);if(!RP)window.dispatchEvent(new CustomEvent('hv:unit-status-effect',{detail:{key:'raid:summon',source:b,target:v}}));k++}})}
 if(S.round>=(SIDES.length>2?4:6)&&S.round%3==0&&S.pool[n].length<3)S.pool[n].push(RMIN[Math.floor(srand()*RMIN.length)])}
 function kothWin(n){if(S.over)return;SIDES.forEach(o=>{if(o!=n&&!S.dead[o]){S.dead[o]=true;S.order.push(o)}});if(!RP)msg(`${SHORT[n]} holds the hill and wins!`);check()}
 const IMM=v=>v&&v.k=='juggernaut';

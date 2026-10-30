@@ -1,0 +1,35 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 4,
+  "attackFX": 3,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 3
+  },
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 774,
+      "rig": 145.375
+    },
+    "after": {
+      "board": 967,
+      "rig": 181.625
+    }
+  },
+  "test": "design/animation/iron/colossus/test-gameplay.cjs",
+  "testedAt": "2026-10-30T11:54:37.260Z",
+  "pageErrors": []
+}

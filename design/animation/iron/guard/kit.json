@@ -1,0 +1,15 @@
+{
+  "n": "Guardian",
+  "e": "🧱",
+  "hp": 12,
+  "mv": 1,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 2,
+  "armor": 2,
+  "stun": 1,
+  "d": "Takes 2 less damage. Hits stun the target for its next turn.",
+  "fac": "iron"
+}

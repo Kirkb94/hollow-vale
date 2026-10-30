@@ -1,0 +1,268 @@
+{
+  "unit": "warengine",
+  "attack": "shoot",
+  "poses": [
+    {
+      "direction": "e",
+      "state": "idle",
+      "opaquePixels": 11055,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "idle",
+      "opaquePixels": 11192,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "idle",
+      "opaquePixels": 10799,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "idle",
+      "opaquePixels": 11264,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "idle",
+      "opaquePixels": 11476,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "idle",
+      "opaquePixels": 11237,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "walk",
+      "opaquePixels": 11058,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "walk",
+      "opaquePixels": 11180,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "walk",
+      "opaquePixels": 10736,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "walk",
+      "opaquePixels": 11251,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "walk",
+      "opaquePixels": 11475,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "walk",
+      "opaquePixels": 11214,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "shoot",
+      "opaquePixels": 10965,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "shoot",
+      "opaquePixels": 11090,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "shoot",
+      "opaquePixels": 10713,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "shoot",
+      "opaquePixels": 11142,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "shoot",
+      "opaquePixels": 11455,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "shoot",
+      "opaquePixels": 11233,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "cast",
+      "opaquePixels": 10961,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "cast",
+      "opaquePixels": 11080,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "cast",
+      "opaquePixels": 10705,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "cast",
+      "opaquePixels": 11124,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "cast",
+      "opaquePixels": 11456,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "cast",
+      "opaquePixels": 11239,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "hurt",
+      "opaquePixels": 11071,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "hurt",
+      "opaquePixels": 11177,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "hurt",
+      "opaquePixels": 10800,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "hurt",
+      "opaquePixels": 11250,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "hurt",
+      "opaquePixels": 11486,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "hurt",
+      "opaquePixels": 11222,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "death",
+      "opaquePixels": 11063,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "death",
+      "opaquePixels": 11179,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "death",
+      "opaquePixels": 10808,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "death",
+      "opaquePixels": 11265,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "death",
+      "opaquePixels": 11467,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "death",
+      "opaquePixels": 11232,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "spawn",
+      "opaquePixels": 10957,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "spawn",
+      "opaquePixels": 11083,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "spawn",
+      "opaquePixels": 10714,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "spawn",
+      "opaquePixels": 11128,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "spawn",
+      "opaquePixels": 11385,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "spawn",
+      "opaquePixels": 11139,
+      "borderPixels": 0
+    }
+  ],
+  "equipment": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "errors": [],
+  "visualReview": "Six facings and seven states visually reviewed. Separate wheel rotation and launcher recoil, no clipping."
+}

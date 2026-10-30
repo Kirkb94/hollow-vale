@@ -1,0 +1,14 @@
+{
+  "n": "Thunder King",
+  "e": "👑",
+  "hp": 24,
+  "mv": 2,
+  "rng": [
+    1,
+    3
+  ],
+  "dmg": 6,
+  "elite": 1,
+  "fac": "iron",
+  "d": "Boss (5 slots). Chain Lightning: Each hit arcs to up to 2 more enemies within 2 hexes of the target for 2 damage."
+}

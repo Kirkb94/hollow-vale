@@ -1,0 +1,1349 @@
+{
+  "version": 1,
+  "unit": "warengine",
+  "faction": "iron",
+  "style": "Arcane Vanguard",
+  "skeleton": "mechanical",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partOrder": [
+    "body",
+    "launcher",
+    "stack",
+    "frontLeftWheel",
+    "frontRightWheel",
+    "rearLeftWheel",
+    "rearRightWheel"
+  ],
+  "views": {
+    "e": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            13,
+            38,
+            416,
+            173
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "launcher": {
+          "file": "core.png",
+          "sourceRect": [
+            451,
+            58,
+            409,
+            142
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "stack": {
+          "file": "core.png",
+          "sourceRect": [
+            875,
+            9,
+            118,
+            207
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            24,
+            15,
+            222,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            275,
+            15,
+            221,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            528,
+            15,
+            221,
+            221
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            778,
+            15,
+            223,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "se": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            15,
+            247,
+            416,
+            206
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "launcher": {
+          "file": "core.png",
+          "sourceRect": [
+            466,
+            275,
+            372,
+            153
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "stack": {
+          "file": "core.png",
+          "sourceRect": [
+            872,
+            225,
+            137,
+            229
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            40,
+            257,
+            185,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            292,
+            256,
+            185,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            547,
+            256,
+            185,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            792,
+            257,
+            188,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "sw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            20,
+            492,
+            390,
+            233
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "launcher": {
+          "file": "core.png",
+          "sourceRect": [
+            478,
+            514,
+            313,
+            178
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "stack": {
+          "file": "core.png",
+          "sourceRect": [
+            852,
+            468,
+            146,
+            245
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            26,
+            494,
+            191,
+            224
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            287,
+            495,
+            191,
+            225
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            546,
+            495,
+            192,
+            225
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            806,
+            493,
+            188,
+            225
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "w": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            10,
+            783,
+            423,
+            176
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "launcher": {
+          "file": "core.png",
+          "sourceRect": [
+            457,
+            797,
+            390,
+            141
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "stack": {
+          "file": "core.png",
+          "sourceRect": [
+            884,
+            733,
+            125,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            24,
+            742,
+            222,
+            221
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            273,
+            743,
+            222,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            528,
+            743,
+            223,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            776,
+            742,
+            225,
+            221
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "nw": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            18,
+            1002,
+            426,
+            199
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "launcher": {
+          "file": "core.png",
+          "sourceRect": [
+            483,
+            1017,
+            308,
+            198
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "stack": {
+          "file": "core.png",
+          "sourceRect": [
+            864,
+            978,
+            141,
+            240
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            34,
+            987,
+            191,
+            227
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            291,
+            984,
+            187,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            546,
+            985,
+            187,
+            229
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            799,
+            984,
+            190,
+            228
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "ne": {
+      "file": "core.png",
+      "parts": {
+        "body": {
+          "file": "core.png",
+          "sourceRect": [
+            11,
+            1251,
+            434,
+            244
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "launcher": {
+          "file": "core.png",
+          "sourceRect": [
+            493,
+            1267,
+            341,
+            222
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "stack": {
+          "file": "core.png",
+          "sourceRect": [
+            874,
+            1233,
+            139,
+            256
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            23,
+            1225,
+            201,
+            237
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "frontRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            284,
+            1227,
+            194,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearLeftWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            545,
+            1227,
+            193,
+            235
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        },
+        "rearRightWheel": {
+          "file": "wheels.png",
+          "sourceRect": [
+            796,
+            1225,
+            203,
+            237
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "isolate": true
+        }
+      }
+    }
+  },
+  "creature": {
+    "views": {
+      "e": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -43
+            ],
+            "displaySize": [
+              145,
+              78
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          },
+          "launcher": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              142,
+              65
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "recoil"
+          },
+          "frontLeftWheel": {
+            "anchor": [
+              39,
+              -34
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "frontRightWheel": {
+            "anchor": [
+              55,
+              -20
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearLeftWheel": {
+            "anchor": [
+              -55,
+              -34
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearRightWheel": {
+            "anchor": [
+              -39,
+              -20
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "stack": {
+            "anchor": [
+              -46,
+              -76
+            ],
+            "displaySize": [
+              26,
+              64
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "order": [
+          "frontLeftWheel",
+          "rearLeftWheel",
+          "body",
+          "frontRightWheel",
+          "rearRightWheel",
+          "launcher",
+          "stack"
+        ]
+      },
+      "se": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -43
+            ],
+            "displaySize": [
+              145,
+              78
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          },
+          "launcher": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              142,
+              65
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "recoil"
+          },
+          "frontLeftWheel": {
+            "anchor": [
+              39,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "frontRightWheel": {
+            "anchor": [
+              55,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearLeftWheel": {
+            "anchor": [
+              -55,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearRightWheel": {
+            "anchor": [
+              -39,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "stack": {
+            "anchor": [
+              -46,
+              -76
+            ],
+            "displaySize": [
+              26,
+              64
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "order": [
+          "frontLeftWheel",
+          "rearLeftWheel",
+          "body",
+          "frontRightWheel",
+          "rearRightWheel",
+          "launcher",
+          "stack"
+        ]
+      },
+      "sw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -43
+            ],
+            "displaySize": [
+              145,
+              78
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          },
+          "launcher": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              142,
+              65
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "recoil"
+          },
+          "frontLeftWheel": {
+            "anchor": [
+              -55,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "frontRightWheel": {
+            "anchor": [
+              -39,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearLeftWheel": {
+            "anchor": [
+              39,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearRightWheel": {
+            "anchor": [
+              55,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "stack": {
+            "anchor": [
+              46,
+              -76
+            ],
+            "displaySize": [
+              26,
+              64
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "order": [
+          "frontLeftWheel",
+          "rearLeftWheel",
+          "body",
+          "frontRightWheel",
+          "rearRightWheel",
+          "launcher",
+          "stack"
+        ]
+      },
+      "w": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -43
+            ],
+            "displaySize": [
+              145,
+              78
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          },
+          "launcher": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              142,
+              65
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "recoil"
+          },
+          "frontLeftWheel": {
+            "anchor": [
+              -55,
+              -34
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "frontRightWheel": {
+            "anchor": [
+              -39,
+              -20
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearLeftWheel": {
+            "anchor": [
+              39,
+              -34
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearRightWheel": {
+            "anchor": [
+              55,
+              -20
+            ],
+            "displaySize": [
+              38,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "stack": {
+            "anchor": [
+              46,
+              -76
+            ],
+            "displaySize": [
+              26,
+              64
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "order": [
+          "frontLeftWheel",
+          "rearLeftWheel",
+          "body",
+          "frontRightWheel",
+          "rearRightWheel",
+          "launcher",
+          "stack"
+        ]
+      },
+      "nw": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -43
+            ],
+            "displaySize": [
+              145,
+              78
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          },
+          "launcher": {
+            "anchor": [
+              -12,
+              -79
+            ],
+            "displaySize": [
+              142,
+              65
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "recoil"
+          },
+          "frontLeftWheel": {
+            "anchor": [
+              -55,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "frontRightWheel": {
+            "anchor": [
+              -39,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearLeftWheel": {
+            "anchor": [
+              39,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearRightWheel": {
+            "anchor": [
+              55,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "stack": {
+            "anchor": [
+              46,
+              -76
+            ],
+            "displaySize": [
+              26,
+              64
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "order": [
+          "frontLeftWheel",
+          "rearLeftWheel",
+          "body",
+          "frontRightWheel",
+          "rearRightWheel",
+          "launcher",
+          "stack"
+        ]
+      },
+      "ne": {
+        "parts": {
+          "body": {
+            "anchor": [
+              0,
+              -43
+            ],
+            "displaySize": [
+              145,
+              78
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          },
+          "launcher": {
+            "anchor": [
+              12,
+              -79
+            ],
+            "displaySize": [
+              142,
+              65
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "recoil"
+          },
+          "frontLeftWheel": {
+            "anchor": [
+              39,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "frontRightWheel": {
+            "anchor": [
+              55,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearLeftWheel": {
+            "anchor": [
+              -55,
+              -34
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "rearRightWheel": {
+            "anchor": [
+              -39,
+              -20
+            ],
+            "displaySize": [
+              30,
+              38
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ],
+            "motion": "wheel"
+          },
+          "stack": {
+            "anchor": [
+              -46,
+              -76
+            ],
+            "displaySize": [
+              26,
+              64
+            ],
+            "pivot": [
+              0.5,
+              0.5
+            ]
+          }
+        },
+        "order": [
+          "frontLeftWheel",
+          "rearLeftWheel",
+          "body",
+          "frontRightWheel",
+          "rearRightWheel",
+          "launcher",
+          "stack"
+        ]
+      }
+    }
+  },
+  "attack": "shoot",
+  "group": 1,
+  "notes": [
+    "Wheels, chassis and launcher animate independently. Fixed bow assembly; release bolt is separate."
+  ]
+}

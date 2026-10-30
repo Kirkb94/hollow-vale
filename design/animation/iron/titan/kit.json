@@ -1,0 +1,18 @@
+{
+  "n": "Stone Titan",
+  "e": "🗿",
+  "hp": 20,
+  "mv": 2,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 8,
+  "armor": 2,
+  "aoe": 1,
+  "siege": 2,
+  "elite": 1,
+  "d": "Elite (5 slots). A heavy, armored giant. Its earthquake slam stuns the target and cleaves the 2 hexes beside it for half damage.",
+  "fac": "iron",
+  "stun": 1
+}

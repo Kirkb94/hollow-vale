@@ -1,0 +1,15 @@
+{
+  "n": "Iron Juggernaut",
+  "e": "👑",
+  "hp": 26,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "armor": 2,
+  "elite": 1,
+  "fac": "iron",
+  "d": "Boss (5 slots). Spiked Plating: Melee attackers take 2 damage. Immune to stun, snares and silence."
+}

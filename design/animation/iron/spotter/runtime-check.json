@@ -1,0 +1,280 @@
+{
+  "unit": "spotter",
+  "attack": "shoot",
+  "poses": [
+    {
+      "direction": "e",
+      "state": "idle",
+      "opaquePixels": 7716,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "idle",
+      "opaquePixels": 9219,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "idle",
+      "opaquePixels": 9199,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "idle",
+      "opaquePixels": 7863,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "idle",
+      "opaquePixels": 9271,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "idle",
+      "opaquePixels": 9343,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "walk",
+      "opaquePixels": 8537,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "walk",
+      "opaquePixels": 9968,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "walk",
+      "opaquePixels": 9842,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "walk",
+      "opaquePixels": 8583,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "walk",
+      "opaquePixels": 8922,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "walk",
+      "opaquePixels": 9151,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "shoot",
+      "opaquePixels": 8395,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "shoot",
+      "opaquePixels": 9909,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "shoot",
+      "opaquePixels": 10247,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "shoot",
+      "opaquePixels": 8808,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "shoot",
+      "opaquePixels": 10058,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "shoot",
+      "opaquePixels": 10370,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "cast",
+      "opaquePixels": 8396,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "cast",
+      "opaquePixels": 9759,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "cast",
+      "opaquePixels": 9816,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "cast",
+      "opaquePixels": 8396,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "cast",
+      "opaquePixels": 9826,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "cast",
+      "opaquePixels": 10103,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "hurt",
+      "opaquePixels": 7760,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "hurt",
+      "opaquePixels": 9232,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "hurt",
+      "opaquePixels": 9200,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "hurt",
+      "opaquePixels": 7894,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "hurt",
+      "opaquePixels": 9290,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "hurt",
+      "opaquePixels": 9363,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "death",
+      "opaquePixels": 3852,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "death",
+      "opaquePixels": 4583,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "death",
+      "opaquePixels": 4567,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "death",
+      "opaquePixels": 3919,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "death",
+      "opaquePixels": 4604,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "death",
+      "opaquePixels": 4646,
+      "borderPixels": 0
+    },
+    {
+      "direction": "e",
+      "state": "spawn",
+      "opaquePixels": 7562,
+      "borderPixels": 0
+    },
+    {
+      "direction": "se",
+      "state": "spawn",
+      "opaquePixels": 9085,
+      "borderPixels": 0
+    },
+    {
+      "direction": "sw",
+      "state": "spawn",
+      "opaquePixels": 9063,
+      "borderPixels": 0
+    },
+    {
+      "direction": "w",
+      "state": "spawn",
+      "opaquePixels": 7720,
+      "borderPixels": 0
+    },
+    {
+      "direction": "nw",
+      "state": "spawn",
+      "opaquePixels": 9130,
+      "borderPixels": 0
+    },
+    {
+      "direction": "ne",
+      "state": "spawn",
+      "opaquePixels": 9202,
+      "borderPixels": 0
+    }
+  ],
+  "equipment": [
+    [
+      "pistol"
+    ],
+    [
+      "pistol"
+    ],
+    [
+      "pistol"
+    ],
+    [
+      "pistol"
+    ],
+    [
+      "pistol"
+    ],
+    [
+      "pistol"
+    ]
+  ],
+  "errors": [],
+  "visualReview": "pending"
+}

@@ -15,7 +15,7 @@ function inspect(id,config){
   for(const d of directions){
     const view=m.views?.[d],file=view?.file||m.atlases?.[d];if(!file)throw Error('Missing facing '+d);
     const size=imageSize(resolveAsset(base,file));
-    for(const [i,n]of (['bat','wisp','quadruped','dragon','bird','imp'].includes(m.skeleton)?m.partOrder:names).entries()){const part=view?.parts?.[n],r=part?.renderRect||part?.sourceRect||external?.rects?.[d]?.[i];if(!r)throw Error('Missing '+d+'/'+n);rect(r,part?.file?imageSize(resolveAsset(base,part.file)):size,d+'/'+n);}
+    for(const [i,n]of (['bat','wisp','quadruped','dragon','bird','imp','mechanical'].includes(m.skeleton)?m.partOrder:names).entries()){const part=view?.parts?.[n],r=part?.renderRect||part?.sourceRect||external?.rects?.[d]?.[i];if(!r)throw Error('Missing '+d+'/'+n);rect(r,part?.file?imageSize(resolveAsset(base,part.file)):size,d+'/'+n);}
     const equipment=m.equipment;
     if(equipment?.file&&equipment.views){
       if(!equipment.views[d])throw Error('Missing equipment facing '+d);
@@ -24,7 +24,7 @@ function inspect(id,config){
       for(const [name,e]of Object.entries(equipment))if(e.file&&e.views){const p=e.views[d];if(!p)throw Error('Missing equipment facing '+d+'/'+name);rect(p.renderRect||p.sourceRect,imageSize(resolveAsset(base,e.file)),d+'/equipment/'+name);}
     }
     for(const [name,p]of Object.entries(m.extras?.views?.[d]||{}))rect(p.renderRect||p.sourceRect,imageSize(resolveAsset(base,p.file||m.extras.file)),d+'/extra/'+name);
-    if(['quadruped','dragon','bird','imp'].includes(m.skeleton)){
+    if(['quadruped','dragon','bird','imp','mechanical'].includes(m.skeleton)){
       const layout=m.creature?.views?.[d];if(!layout?.order?.length)throw Error('Missing creature layout '+d);
       for(const name of layout.order){const p=layout.parts?.[name];if(!m.partOrder.includes(name)||!p||p.anchor?.length!==2||p.displaySize?.length!==2||p.anchor.some(v=>!Number.isFinite(v))||p.displaySize.some(v=>!Number.isFinite(v)||v<=0))throw Error('Invalid creature piece '+d+'/'+name);}
     }

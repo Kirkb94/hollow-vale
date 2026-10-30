@@ -192,7 +192,7 @@
     {
       "faction": "wilds",
       "total": 17,
-      "status": "validated",
+      "status": "pushed",
       "workers": {
         "parent": [
           "rogue",
@@ -238,12 +238,14 @@
         "beastcaller",
         "groveshaper",
         "skinchanger"
-      ]
+      ],
+      "commit": "d09f97789fd7",
+      "releaseCommit": "9dd151f"
     },
     {
       "faction": "iron",
       "total": 16,
-      "status": "art-production",
+      "status": "validated",
       "workers": {
         "parent": [
           "brute",
@@ -264,13 +266,58 @@
           "titan",
           "juggernaut",
           "thunderking"
+        ],
+        "hollow_vampires": [
+          "ballista",
+          "warengine"
         ]
-      }
+      },
+      "validated": [
+        "brute",
+        "colossus",
+        "guard",
+        "sapper",
+        "ballista",
+        "titan",
+        "gunner",
+        "wallwright",
+        "warengine",
+        "forgemaster",
+        "juggernaut",
+        "thunderking",
+        "spotter",
+        "runeforger",
+        "cagewright",
+        "prospector"
+      ]
     },
     {
       "faction": "arcane",
       "total": 15,
-      "status": "queued"
+      "status": "in_progress",
+      "workers": {
+        "root": [
+          "witch",
+          "storm",
+          "archmage",
+          "seer"
+        ],
+        "hollow_kingdom": [
+          "aetherlancer",
+          "phasewright",
+          "hourglass",
+          "hexweaver",
+          "oracle"
+        ],
+        "hollow_undead": [
+          "sentinel",
+          "spellblade",
+          "chronomancer",
+          "voidlord",
+          "mirrormage",
+          "runekeeper"
+        ]
+      }
     },
     {
       "faction": "raidboss",

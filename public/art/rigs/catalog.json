@@ -622,6 +622,87 @@
       "effects": "vfx.json",
       "revision": "0dcacf597fc1"
     },
+    "brute": {
+      "name": "Brute",
+      "faction": "Iron Clan",
+      "folder": "iron/brute",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "2689cd24e643"
+    },
+    "sapper": {
+      "name": "Sapper",
+      "faction": "Iron Clan",
+      "folder": "iron/sapper",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "064e2419c5e7"
+    },
+    "gunner": {
+      "name": "Dwarf Gunner",
+      "faction": "Iron Clan",
+      "folder": "iron/gunner",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json",
+      "revision": "180268f881e9"
+    },
+    "spotter": {
+      "name": "Spotter",
+      "faction": "Iron Clan",
+      "folder": "iron/spotter",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json",
+      "revision": "dd5b0f90b7c6"
+    },
+    "colossus": {
+      "name": "Colossus",
+      "faction": "Iron Clan",
+      "folder": "iron/colossus",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "6033dcd84410"
+    },
+    "guard": {
+      "name": "Guardian",
+      "faction": "Iron Clan",
+      "folder": "iron/guard",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "4bcbf4df4562"
+    },
+    "titan": {
+      "name": "Stone Titan",
+      "faction": "Iron Clan",
+      "folder": "iron/titan",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "e6d9eea07322"
+    },
+    "juggernaut": {
+      "name": "Iron Juggernaut",
+      "faction": "Iron Clan",
+      "folder": "iron/juggernaut",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "b58e26cae77b"
+    },
+    "thunderking": {
+      "name": "Thunder King",
+      "faction": "Iron Clan",
+      "folder": "iron/thunderking",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "083f2834ab35"
+    },
     "wolves": {
       "name": "Wolf Pack",
       "faction": "Wilds",
@@ -675,6 +756,69 @@
       "attack": "attack",
       "effects": "vfx.json",
       "revision": "c27b23474ce6"
+    },
+    "ballista": {
+      "name": "Ballista",
+      "faction": "Iron Clan",
+      "folder": "iron/ballista",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json",
+      "revision": "175c6365645d"
+    },
+    "wallwright": {
+      "name": "Stonewright",
+      "faction": "Iron Clan",
+      "folder": "iron/wallwright",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "0acf5cda0075"
+    },
+    "warengine": {
+      "name": "War Engine",
+      "faction": "Iron Clan",
+      "folder": "iron/warengine",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json",
+      "revision": "f723e8b5bae8"
+    },
+    "forgemaster": {
+      "name": "Forge Master",
+      "faction": "Iron Clan",
+      "folder": "iron/forgemaster",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "dcddc41df80b"
+    },
+    "runeforger": {
+      "name": "Rune Forger",
+      "faction": "Iron Clan",
+      "folder": "iron/runeforger",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "a56a02e3cd6e"
+    },
+    "cagewright": {
+      "name": "Cagewright",
+      "faction": "Iron Clan",
+      "folder": "iron/cagewright",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "dfda2bbd47d7"
+    },
+    "prospector": {
+      "name": "Prospector",
+      "faction": "Iron Clan",
+      "folder": "iron/prospector",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "98d1517bdc01"
     }
   }
 }

@@ -1,0 +1,896 @@
+{
+  "version": 1,
+  "unit": "brute",
+  "faction": "iron",
+  "style": "Arcane Vanguard",
+  "attack": "attack",
+  "partOrder": [
+    "head",
+    "torso",
+    "cape",
+    "pelvis",
+    "leftUpperArm",
+    "rightUpperArm",
+    "leftForearm",
+    "rightForearm",
+    "leftLeg",
+    "rightLeg",
+    "leftBoot",
+    "rightBoot"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "parts": {
+        "head": {
+          "sourceRect": [
+            37,
+            17,
+            106,
+            129
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "torso": {
+          "sourceRect": [
+            19,
+            148,
+            140,
+            134
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "cape": {
+          "sourceRect": [
+            20,
+            290,
+            110,
+            122
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "pelvis": {
+          "sourceRect": [
+            31,
+            429,
+            117,
+            91
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            56,
+            534,
+            89,
+            105
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            66,
+            658,
+            82,
+            104
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftForearm": {
+          "sourceRect": [
+            52,
+            763,
+            83,
+            123
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightForearm": {
+          "sourceRect": [
+            77,
+            893,
+            78,
+            121
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftLeg": {
+          "sourceRect": [
+            50,
+            1022,
+            84,
+            130
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            53,
+            1164,
+            88,
+            140
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            56,
+            1316,
+            99,
+            92
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            54,
+            1418,
+            101,
+            94
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "parts": {
+        "head": {
+          "sourceRect": [
+            210,
+            18,
+            115,
+            130
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "torso": {
+          "sourceRect": [
+            171,
+            151,
+            160,
+            132
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "cape": {
+          "sourceRect": [
+            194,
+            293,
+            115,
+            121
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "pelvis": {
+          "sourceRect": [
+            190,
+            431,
+            131,
+            91
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            207,
+            533,
+            91,
+            110
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            231,
+            653,
+            88,
+            105
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftForearm": {
+          "sourceRect": [
+            222,
+            765,
+            83,
+            123
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightForearm": {
+          "sourceRect": [
+            243,
+            896,
+            73,
+            118
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftLeg": {
+          "sourceRect": [
+            214,
+            1020,
+            79,
+            133
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            232,
+            1163,
+            79,
+            140
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            219,
+            1312,
+            91,
+            98
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            227,
+            1418,
+            94,
+            100
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "parts": {
+        "head": {
+          "sourceRect": [
+            376,
+            18,
+            117,
+            129
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "torso": {
+          "sourceRect": [
+            338,
+            148,
+            189,
+            135
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "cape": {
+          "sourceRect": [
+            401,
+            294,
+            115,
+            120
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "pelvis": {
+          "sourceRect": [
+            362,
+            431,
+            143,
+            93
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            369,
+            533,
+            91,
+            110
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            384,
+            652,
+            92,
+            106
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftForearm": {
+          "sourceRect": [
+            378,
+            769,
+            84,
+            117
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightForearm": {
+          "sourceRect": [
+            396,
+            895,
+            81,
+            118
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftLeg": {
+          "sourceRect": [
+            378,
+            1019,
+            73,
+            132
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            391,
+            1165,
+            77,
+            138
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            386,
+            1312,
+            90,
+            99
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            380,
+            1418,
+            88,
+            99
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "parts": {
+        "head": {
+          "sourceRect": [
+            552,
+            17,
+            105,
+            129
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "torso": {
+          "sourceRect": [
+            537,
+            150,
+            145,
+            133
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "cape": {
+          "sourceRect": [
+            568,
+            291,
+            108,
+            123
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "pelvis": {
+          "sourceRect": [
+            543,
+            429,
+            128,
+            93
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            568,
+            533,
+            92,
+            113
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            547,
+            655,
+            88,
+            108
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftForearm": {
+          "sourceRect": [
+            562,
+            766,
+            84,
+            122
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightForearm": {
+          "sourceRect": [
+            549,
+            895,
+            72,
+            120
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftLeg": {
+          "sourceRect": [
+            568,
+            1019,
+            86,
+            138
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            569,
+            1168,
+            87,
+            136
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            537,
+            1316,
+            106,
+            92
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            537,
+            1419,
+            102,
+            95
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "parts": {
+        "head": {
+          "sourceRect": [
+            712,
+            18,
+            111,
+            121
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "torso": {
+          "sourceRect": [
+            699,
+            148,
+            125,
+            135
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "cape": {
+          "sourceRect": [
+            718,
+            290,
+            122,
+            124
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "pelvis": {
+          "sourceRect": [
+            713,
+            430,
+            122,
+            90
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            721,
+            534,
+            90,
+            109
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            710,
+            658,
+            91,
+            104
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftForearm": {
+          "sourceRect": [
+            720,
+            771,
+            83,
+            119
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightForearm": {
+          "sourceRect": [
+            706,
+            898,
+            78,
+            116
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftLeg": {
+          "sourceRect": [
+            725,
+            1020,
+            86,
+            134
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            729,
+            1165,
+            81,
+            138
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            712,
+            1314,
+            101,
+            95
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            710,
+            1418,
+            102,
+            96
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "parts": {
+        "head": {
+          "sourceRect": [
+            884,
+            18,
+            119,
+            119
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "torso": {
+          "sourceRect": [
+            844,
+            151,
+            173,
+            128
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "cape": {
+          "sourceRect": [
+            866,
+            291,
+            145,
+            122
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "pelvis": {
+          "sourceRect": [
+            867,
+            429,
+            137,
+            90
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            879,
+            531,
+            95,
+            112
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            877,
+            657,
+            103,
+            102
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftForearm": {
+          "sourceRect": [
+            882,
+            769,
+            96,
+            120
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightForearm": {
+          "sourceRect": [
+            877,
+            900,
+            87,
+            112
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftLeg": {
+          "sourceRect": [
+            898,
+            1016,
+            80,
+            138
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightLeg": {
+          "sourceRect": [
+            905,
+            1163,
+            70,
+            140
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "leftBoot": {
+          "sourceRect": [
+            907,
+            1313,
+            65,
+            96
+          ],
+          "isolate": true,
+          "flipX": false
+        },
+        "rightBoot": {
+          "sourceRect": [
+            911,
+            1417,
+            65,
+            100
+          ],
+          "isolate": true,
+          "flipX": false
+        }
+      }
+    }
+  },
+  "bodyScale": [
+    1.12,
+    1.03
+  ],
+  "equipment": {
+    "file": "equipment.png",
+    "views": {
+      "e": {
+        "axe": {
+          "sourceRect": [
+            1,
+            26,
+            272,
+            965
+          ],
+          "hand": "right",
+          "displaySize": [
+            24.804145077720207,
+            88.0
+          ],
+          "pivot": [
+            0.15,
+            0.78
+          ]
+        }
+      },
+      "se": {
+        "axe": {
+          "sourceRect": [
+            284,
+            65,
+            218,
+            936
+          ],
+          "hand": "right",
+          "displaySize": [
+            20.495726495726494,
+            88.0
+          ],
+          "pivot": [
+            0.25,
+            0.78
+          ]
+        }
+      },
+      "sw": {
+        "axe": {
+          "sourceRect": [
+            505,
+            12,
+            258,
+            981
+          ],
+          "hand": "right",
+          "displaySize": [
+            23.143730886850154,
+            88.0
+          ],
+          "pivot": [
+            0.76,
+            0.78
+          ]
+        }
+      },
+      "w": {
+        "axe": {
+          "sourceRect": [
+            762,
+            79,
+            264,
+            900
+          ],
+          "hand": "right",
+          "displaySize": [
+            25.813333333333336,
+            88.0
+          ],
+          "pivot": [
+            0.65,
+            0.78
+          ]
+        }
+      },
+      "nw": {
+        "axe": {
+          "sourceRect": [
+            1029,
+            9,
+            231,
+            989
+          ],
+          "hand": "right",
+          "displaySize": [
+            20.554095045500503,
+            88.0
+          ],
+          "pivot": [
+            0.76,
+            0.78
+          ]
+        }
+      },
+      "ne": {
+        "axe": {
+          "sourceRect": [
+            1271,
+            28,
+            262,
+            966
+          ],
+          "hand": "right",
+          "displaySize": [
+            23.86749482401656,
+            88.0
+          ],
+          "pivot": [
+            0.4,
+            0.78
+          ]
+        }
+      }
+    }
+  }
+}

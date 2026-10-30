@@ -1,0 +1,14 @@
+{
+  "n": "Colossus",
+  "e": "🗿",
+  "hp": 20,
+  "mv": 1,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 5,
+  "armor": 1,
+  "d": "Huge and slow. Takes 1 less damage per hit.",
+  "fac": "iron"
+}

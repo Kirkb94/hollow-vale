@@ -1,0 +1,180 @@
+{
+  "file": "vfx.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "columns": 4,
+  "rows": 4,
+  "clips": {
+    "release": {
+      "row": 0,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "muzzle",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          0,
+          384,
+          256
+        ],
+        [
+          384,
+          0,
+          384,
+          256
+        ],
+        [
+          768,
+          0,
+          384,
+          256
+        ],
+        [
+          1152,
+          0,
+          384,
+          256
+        ]
+      ]
+    },
+    "projectile": {
+      "row": 1,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "projectile",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          256,
+          384,
+          256
+        ],
+        [
+          384,
+          256,
+          384,
+          256
+        ],
+        [
+          768,
+          256,
+          384,
+          256
+        ],
+        [
+          1152,
+          256,
+          384,
+          256
+        ]
+      ]
+    },
+    "impact": {
+      "row": 2,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          512,
+          384,
+          256
+        ],
+        [
+          384,
+          512,
+          384,
+          256
+        ],
+        [
+          768,
+          512,
+          384,
+          256
+        ],
+        [
+          1152,
+          512,
+          384,
+          256
+        ]
+      ]
+    },
+    "spawn": {
+      "row": 3,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "ground",
+      "lifecycle": "remove at completion",
+      "sourceRects": [
+        [
+          0,
+          768,
+          384,
+          256
+        ],
+        [
+          384,
+          768,
+          384,
+          256
+        ],
+        [
+          768,
+          768,
+          384,
+          256
+        ],
+        [
+          1152,
+          768,
+          384,
+          256
+        ]
+      ]
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "release",
+      "projectile": "projectile",
+      "impact": "impact",
+      "releaseMs": 260,
+      "travelMs": 350
+    },
+    "spawn": "spawn"
+  },
+  "notes": [
+    "Actual siege attack release, projectile and impact; no balance changes."
+  ]
+}
