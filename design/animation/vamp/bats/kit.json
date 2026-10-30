@@ -1,0 +1,16 @@
+{
+  "n": "Bat",
+  "e": "🦇",
+  "hp": 5.5,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 3,
+  "fly": 1,
+  "group": 3,
+  "slots": 2,
+  "d": "Three vampire bats take the field together. Fast fliers that feed with every bite.",
+  "fac": "vamp"
+}

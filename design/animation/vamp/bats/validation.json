@@ -1,0 +1,39 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 3,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 2,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "death": {
+    "effects": 1,
+    "cleaned": true
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 774,
+      "rig": 145.375
+    },
+    "after": {
+      "board": 967,
+      "rig": 181.625
+    }
+  },
+  "test": "tools/vamp-final.test.cjs",
+  "testedAt": "2026-10-30T11:11:07.631Z",
+  "pageErrors": []
+}

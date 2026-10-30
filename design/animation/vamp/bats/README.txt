@@ -1,0 +1,6 @@
+bats: Arcane Vanguard Vampire rig
+Six real facings, 24 movable body pieces across directions, 5 animated effect clips / 30 frames.
+No wielded equipment: natural claws/fangs are part of moving anatomy.
+Original sources and exact prompts are preserved in provenance.json and prompts.txt. Source artwork is never repainted by scripts. Component rectangles avoid neighboring cells; runtime alpha-island extraction prevents detached slivers. Blood Queen torso duplicate heads are cropped below collar; Vampire Lord upper arms trimmed to avoid duplicate hands; Nosferatu shins trimmed to avoid duplicate boots and SE head mirrored for correct facing. Bat King SW head corrected by imagegen. Group bats=3; all others=1.
+Actual gameplay, fog, pause and zoom evidence: validation.json. Temporary browser registration only; shared catalog unchanged. Body pose evidence: runtime-poses.png and runtime-check.json. VFX alpha composite: ../bats/effects.png. Tool image RGB can show hidden gradients under alpha zero; actual checkerboard render is authoritative.
+Death clip is bound to actual fx dead events, with fog exclusion and completion cleanup tested. Vampire Lord uses nova as attack cast; its supplied slash clip remains unused. These packs change presentation only.

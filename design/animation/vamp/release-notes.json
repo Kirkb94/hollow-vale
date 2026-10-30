@@ -1,0 +1,21 @@
+{
+  "title": "Vampires: complete layered faction artwork",
+  "groups": [
+    {
+      "name": "Visuals",
+      "items": [
+        "All 16 Vampire units now have six-direction layered artwork, animated equipment and matching combat effects.",
+        "Bat swarms retain three members; the Bat King has a separate bat rig. Warlock transformation and the Blood Hunter mount are animated.",
+        "Drain, tether, charm, concealment, healing and mana effects follow successful gameplay events.",
+        "Preview the full faction with ?arttest=factions&faction=vamp or inspect individual poses in the animation workshop."
+      ]
+    },
+    {
+      "name": "Fixes",
+      "items": [
+        "Updated art files use revisioned URLs so corrected atlases refresh on clients.",
+        "Effects respect fog, pause and match cleanup; unit artwork scales with board zoom."
+      ]
+    }
+  ]
+}

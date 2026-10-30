@@ -1,0 +1,26 @@
+{
+  "n": "Mesmerist",
+  "e": "🎭",
+  "hp": 7,
+  "mv": 2,
+  "rng": [
+    1,
+    2
+  ],
+  "dmg": 3,
+  "sp": "command",
+  "spp": 4,
+  "fac": "vamp",
+  "d": "Charms an enemy hero into striking one of its own allies (3 mana).",
+  "spell": {
+    "n": "Sweet Command",
+    "e": "🎭",
+    "c": 3,
+    "cd": 2,
+    "foe": 1,
+    "two": 1,
+    "h": "(an enemy hero within 2), then a unit it can hit that is not yours.",
+    "p2": "Now tap the unit it must attack (violet).",
+    "d": "charm a non-boss enemy hero within 2, then pick a unit it could hit right now that is not yours: it attacks at once, with its own splash, stun, burn and drain, and its mana cost is waived. Kills pay you. It cannot counterattack until its next turn."
+  }
+}

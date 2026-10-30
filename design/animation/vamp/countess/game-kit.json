@@ -1,0 +1,25 @@
+{
+  "H": {
+    "n": "Blood Countess",
+    "e": "🧛‍♀️",
+    "hp": 6,
+    "mv": 2,
+    "rng": [
+      2,
+      3
+    ],
+    "dmg": 5,
+    "acost": 1,
+    "d": "A noble sorceress. Crimson bolts from range 2-3 cost 1 mana and drain life.",
+    "fac": "vamp"
+  },
+  "ANIM": [
+    "float",
+    "cast"
+  ],
+  "AFX": [
+    "orb",
+    "#d62a4a"
+  ],
+  "DEATH": "dissolve"
+}

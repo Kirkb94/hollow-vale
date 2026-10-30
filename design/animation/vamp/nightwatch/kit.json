@@ -1,0 +1,17 @@
+{
+  "n": "Night Watcher",
+  "e": "🦉",
+  "hp": 15,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 7,
+  "fac": "vamp",
+  "sight": 5,
+  "flare": 1,
+  "fcost": 1,
+  "d": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn.",
+  "spell": null
+}

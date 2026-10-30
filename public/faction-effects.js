@@ -39,11 +39,11 @@
     return {image:im,clips,bindings:manifest.bindings||{},delayedEvents:manifest.delayedEvents||{},statusEvents:manifest.statusEvents||{}};
   }
   function load(key,url){if(pending.has(key))return pending.get(key);const task=(async()=>{
-    try {const response=await fetch(url);if(!response.ok)throw Error('Manifest HTTP '+response.status);const m=await response.json();const im=await loadImage(url.slice(0,url.lastIndexOf('/')+1)+(m.file||m.image));assets.set(key,normalize(m,im));return key;}
+    try {const response=await fetch(url);if(!response.ok)throw Error('Manifest HTTP '+response.status);const m=await response.json();const im=await loadImage(url.slice(0,url.lastIndexOf('/')+1)+(m.file||m.image)+new URL(url,location.href).search);assets.set(key,normalize(m,im));return key;}
     catch(e){errors[key]=e.message;console.warn('Faction VFX fallback ('+key+'):',e.message);return null;}
   })();pending.set(key,task);return task;}
   const ready=Promise.all(Object.entries(definitions).map(([key,url])=>load(key,url)));
-  window.addEventListener('hv-rig-ready',event=>{const {key,config}=event.detail,url=config.effects?'art/rigs/'+config.folder+'/'+config.effects:definitions[key];if(url)load(key,url);});
+  window.addEventListener('hv-rig-ready',event=>{const {key,config}=event.detail,url=config.effects?'art/rigs/'+config.folder+'/'+config.effects+(config.revision?'?v='+encodeURIComponent(config.revision):''):definitions[key];if(url)load(key,url);});
   window.addEventListener('hv-rig-evicted',event=>{assets.delete(event.detail.key);pending.delete(event.detail.key);});
   function clear(){effects.forEach(e=>e.canvas.remove());effects=[];if(raf)cancelAnimationFrame(raf);raf=0;last=0;}
   function add(key,clip,from,to,options={}) {
@@ -142,10 +142,16 @@
     };
   }
   if(typeof act==='function'){
-    const original=act;act=function(u,t){const hp=t?.v?.hp,wasUsed=u?.used,result=original.apply(this,arguments);
+    const original=act;act=function(u,t){const hp=t?.v?.hp,wasUsed=u?.used;
+      const priorSummons=t?.summon&&!t.ab&&assets.get(u?.k)?.bindings.summon?new Set(S.units):null;
+      const result=original.apply(this,arguments);
       // Elite cinematics bypass atkFx; use their existing delayed fx timestamp.
       if(typeof CUT!=='undefined'&&CUT[u?.k]&&!t?.heal&&!t?.summon&&!t?.ab&&!t?.sp)attack(u,t);
       if(t?.heal&&t.v.hp>hp)dispatch(u,t,assets.get(u.k)?.bindings.heal);
+      if(priorSummons){
+        const summoned=S.units.find(v=>!priorSummons.has(v)&&v.side===u.side&&v.x===t.x&&v.y===t.y&&v.sumBy===u.k);
+        if(summoned)dispatch(u,{x:summoned.x,y:summoned.y,v:summoned},assets.get(u.k)?.bindings.summon);
+      }
       if(t?.ab&&!wasUsed&&u?.used)dispatch(u,t,assets.get(u.k)?.bindings.abilities?.[t.ab]);
       if(u?.k==='nosferatu'&&u.mist&&!t?.heal&&!t?.ab&&!t?.summon)window.dispatchEvent(new CustomEvent('hv-unit-effect',{detail:{unitKey:u.k,event:'mist:gain',target:u}}));
       return result;
@@ -176,6 +182,14 @@
   });
   if(typeof fx==='function'){
     const original=fx;fx=function(o,n){const result=original.apply(this,arguments);
+      if(n==='dead'&&o&&!disabled()){
+        const clip=assets.get(o.k)?.bindings.death;
+        if(clip)add(o.k,clip,o,o,{sourceUnit:o,targetUnit:o,delay:Math.max(0,(o.fx?.t||performance.now())-performance.now()),feet:true});
+      }
+      if(n==='undying'&&o&&!disabled()){
+        const pack=assets.get(o.k),clip=pack?.bindings.revive||pack?.statusEvents?.undying?.impact;
+        if(clip)add(o.k,clip,o,o,{sourceUnit:o,targetUnit:o,delay:Math.max(0,(o.fx?.t||performance.now())-performance.now())+850,feet:true});
+      }
       if(n==='spawn'&&o&&!disabled()){
         const delay=Math.max(0,(o.fx?.t||performance.now())-performance.now());
         const clip=assets.get(o.k)?.bindings.spawn;

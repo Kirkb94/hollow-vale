@@ -1,0 +1,15 @@
+{
+  "n": "Crimson Matriarch",
+  "e": "👑",
+  "hp": 17,
+  "mv": 2,
+  "rng": [
+    2,
+    3
+  ],
+  "dmg": 5,
+  "elite": 1,
+  "fac": "vamp",
+  "d": "Boss (5 slots). Blood Pact: Each hit steals 1 mana from the target's player.",
+  "spell": null
+}

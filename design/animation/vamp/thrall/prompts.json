@@ -1,0 +1,13 @@
+{
+  "key": "thrall",
+  "design": "Huge muscular gray-pink undead male Blood Thrall, bald head with red eyes and small fangs, bare scarred torso with non-graphic crimson scars, heavy iron collar and shackles, ragged dark burgundy waistcloth, black torn trousers, bulky bare feet with iron ankle cuffs. Detached rear ragged shoulder cloth as cape piece. Broken chain loops belong separate equipment, not attached body silhouette. No armor or weapon sword.",
+  "gear": "two independent short dangling broken iron chain loops attached to wrist shackles",
+  "attack": "attack",
+  "fx": [
+    "heavy crimson fist swing trail",
+    "blunt gray-red ground impact",
+    "small blood life-drain wisps",
+    "dark red spawn smoke"
+  ],
+  "extras": null
+}

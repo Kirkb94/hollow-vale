@@ -321,5 +321,7 @@ The bottom panel selects characters/facings, refreshes actions on your turn and
 restarts the match. Collapse the panel to see more of the board.
 Open /animation-preview.html to inspect six facings and movable pieces.
 Open /?arttest=factions&faction=kingdom to play with all 17 updated Kingdom units.
-Kingdom's full roster is complete. The other factions remain partial until their
-own art batches are finished; the standard mixed test showcases four pilots.
+Kingdom's full roster is complete. The standard mixed test showcases four pilots.
+
+Open /?arttest=factions&faction=vamp to play all 16 updated Vampire units.
+Kingdom and Vampires are complete; remaining factions are in production.

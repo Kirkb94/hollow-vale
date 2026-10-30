@@ -1,0 +1,15 @@
+{
+  "n": "Bat King",
+  "e": "👑",
+  "hp": 20,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 5,
+  "fly": 1,
+  "elite": 1,
+  "fac": "vamp",
+  "d": "Boss (5 slots). Swarm Call: The first time it is hit each round a Bat appears next to it (up to 3)."
+}

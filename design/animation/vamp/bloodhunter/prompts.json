@@ -1,0 +1,13 @@
+{
+  "key": "bloodhunter",
+  "design": "Pale vampire male mounted Blood Hunter RIDER ONLY WITHOUT HORSE. Closed dark burgundy steel helmet with face opening, pale red-eyed face, long crimson helmet plume, black-red breastplate and gauntlets, burgundy split riding tabard, flowing crimson rear cape, black armored riding leggings and boots. Same source vampire knight on black steed; horse will be separate layered asset. Separate long silver lance with burgundy grip.",
+  "gear": "long silver-headed dark lance with crimson pennant",
+  "attack": "thrust",
+  "fx": [
+    "crimson lance thrust trail",
+    "sharp red lance impact",
+    "dark crimson life-drain wisps",
+    "crimson cavalry spawn mist"
+  ],
+  "extras": "Create transparent cutout asset atlas for Blood Hunter's BLACK VAMPIRE WARHORSE, same crisp Arcane Vanguard detailed2D fantasy celshading. Red eyes, black mane, dark charcoal body, burgundy bridle with goldsmall fittings, crimson saddlecloth. No rider. SIX panels THREEacross TWOdown, E(rightprofile),SE(front-right),SW(front-left),W(leftprofile),NW(rear-left),NE(rear-right). EACH panel contains8separate movable parts in FOURcolumns TWOrows: top row horse torso(without legs/head), head+neck, tail, saddle+crimson saddlecloth; bottomrow anatomical leftforeleg,rightforeleg,lefthindleg,righthindleg with hooves. Large transparent gaps, precise48parts, no labels/gridlines/shadows/background. True separate rearperspectives, not mirroredfront. Consistent size within views. Designed to assemble into a horse, no humanoid limbs, headlongmuzzle."
+}

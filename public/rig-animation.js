@@ -133,7 +133,7 @@
       models.set(k,{meta,equipment,extras});assets.set(k,body);loadStatus[k]='ready';
       lastUse.set(k,++usageTick);prune(k);
       if(meta?.attack)config.attack=meta.attack;
-      for(const[state,v]of Object.entries(meta?.variants||{}))registry[k+'_'+state]=Object.assign({},v,{folder:config.folder+'/'+v.folder});
+      for(const[state,v]of Object.entries(meta?.variants||{}))registry[k+'_'+state]=Object.assign({},v,{folder:config.folder+'/'+v.folder,revision:config.revision});
       window.dispatchEvent(new CustomEvent('hv-rig-ready',{detail:{key:k,config}}));
       if(typeof render==='function'&&typeof S!=='undefined'&&S)render();return true;
     }catch(e){failures[k]=e.message;loadStatus[k]='failed';console.warn('Hollow Vale rig fallback:',k,e.message);return false;}
@@ -167,6 +167,7 @@
     }
     dir=clamp(Math.floor(dir),0,5);
     const model=models.get(k),a=all[dir],ctx=canvas.getContext('2d'),p=pose(state,reduced.matches?0:t),equipment=model?.equipment[dir]||[];
+    if(model?.meta?.locomotion==='hover'){p.stride=0;p.arm=0;if(!reduced.matches)p.bob+=Math.sin(t/240)*3-6;}
     const back=dir===4||dir===5,side=dir===0||dir===3,sign=[1,1,-1,-1,-1,1][dir];
     const width=side?.72:1,nearLeft=dir===2||dir===3||dir===4;
     // Forty pixels of side padding and twenty above/below keep full swings and falls inside the bitmap.

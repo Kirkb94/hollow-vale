@@ -1,0 +1,15 @@
+{
+  "n": "Nosferatu",
+  "e": "👑",
+  "hp": 17,
+  "mv": 4,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "fly": 1,
+  "elite": 1,
+  "fac": "vamp",
+  "d": "Boss (5 slots). Mist Step: Flies 4 hexes. After it attacks it turns to mist and takes 2 less damage until its next turn."
+}

@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "unit": "bats",
+  "faction": "vamp",
+  "style": "Arcane Vanguard",
+  "attack": "attack",
+  "group": 3,
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partOrder": [
+    "body",
+    "head",
+    "leftWing",
+    "rightWing"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            70,
+            68,
+            183,
+            183
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "head": {
+          "sourceRect": [
+            359,
+            19,
+            127,
+            175
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            34,
+            264,
+            218,
+            203
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "rightWing": {
+          "sourceRect": [
+            296,
+            265,
+            183,
+            198
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            590,
+            72,
+            164,
+            173
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "head": {
+          "sourceRect": [
+            837,
+            28,
+            130,
+            174
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            561,
+            259,
+            204,
+            201
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "rightWing": {
+          "sourceRect": [
+            801,
+            256,
+            198,
+            204
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            1130,
+            69,
+            165,
+            177
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "head": {
+          "sourceRect": [
+            1340,
+            22,
+            142,
+            179
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            1077,
+            257,
+            204,
+            200
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "rightWing": {
+          "sourceRect": [
+            1313,
+            258,
+            196,
+            195
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            130,
+            588,
+            156,
+            172
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "head": {
+          "sourceRect": [
+            334,
+            538,
+            156,
+            175
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            37,
+            768,
+            204,
+            201
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "rightWing": {
+          "sourceRect": [
+            286,
+            772,
+            209,
+            192
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            620,
+            584,
+            168,
+            178
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "head": {
+          "sourceRect": [
+            808,
+            534,
+            169,
+            171
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            552,
+            769,
+            210,
+            206
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "rightWing": {
+          "sourceRect": [
+            797,
+            763,
+            197,
+            203
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            1098,
+            585,
+            173,
+            173
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "head": {
+          "sourceRect": [
+            1349,
+            535,
+            139,
+            174
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "leftWing": {
+          "sourceRect": [
+            1062,
+            754,
+            208,
+            204
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        },
+        "rightWing": {
+          "sourceRect": [
+            1314,
+            755,
+            198,
+            203
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": true
+        }
+      }
+    }
+  },
+  "status": "ready",
+  "notes": [
+    "Explicit source rectangles are authoritative. PNG sources remain unchanged."
+  ],
+  "skeleton": "bat"
+}

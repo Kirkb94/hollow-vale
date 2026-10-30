@@ -1,0 +1,334 @@
+{
+  "version": 1,
+  "unit": "warlock_bat",
+  "faction": "vamp",
+  "skeleton": "bat",
+  "partOrder": [
+    "body",
+    "head",
+    "leftWing",
+    "rightWing"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            83,
+            13,
+            267,
+            144
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "head": {
+          "sourceRect": [
+            451,
+            4,
+            161,
+            148
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "leftWing": {
+          "sourceRect": [
+            681,
+            5,
+            382,
+            150
+          ],
+          "pivot": [
+            0.9,
+            0.3
+          ]
+        },
+        "rightWing": {
+          "sourceRect": [
+            1083,
+            3,
+            380,
+            151
+          ],
+          "pivot": [
+            0.1,
+            0.3
+          ]
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            81,
+            167,
+            299,
+            160
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "head": {
+          "sourceRect": [
+            445,
+            163,
+            171,
+            157
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "leftWing": {
+          "sourceRect": [
+            713,
+            162,
+            354,
+            159
+          ],
+          "pivot": [
+            0.9,
+            0.3
+          ]
+        },
+        "rightWing": {
+          "sourceRect": [
+            1094,
+            163,
+            358,
+            157
+          ],
+          "pivot": [
+            0.1,
+            0.3
+          ]
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            78,
+            333,
+            293,
+            154
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "head": {
+          "sourceRect": [
+            441,
+            325,
+            181,
+            154
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "leftWing": {
+          "sourceRect": [
+            672,
+            323,
+            390,
+            161
+          ],
+          "pivot": [
+            0.9,
+            0.3
+          ]
+        },
+        "rightWing": {
+          "sourceRect": [
+            1098,
+            319,
+            385,
+            165
+          ],
+          "pivot": [
+            0.1,
+            0.3
+          ]
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            76,
+            495,
+            299,
+            149
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "head": {
+          "sourceRect": [
+            448,
+            480,
+            175,
+            158
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "leftWing": {
+          "sourceRect": [
+            666,
+            490,
+            374,
+            155
+          ],
+          "pivot": [
+            0.9,
+            0.3
+          ]
+        },
+        "rightWing": {
+          "sourceRect": [
+            1108,
+            490,
+            383,
+            155
+          ],
+          "pivot": [
+            0.1,
+            0.3
+          ]
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            79,
+            650,
+            296,
+            171
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "head": {
+          "file": "rear-heads.png",
+          "sourceRect": [
+            78,
+            5,
+            836,
+            714
+          ],
+          "pivot": [
+            0.5,
+            0.7
+          ]
+        },
+        "leftWing": {
+          "sourceRect": [
+            676,
+            647,
+            363,
+            169
+          ],
+          "pivot": [
+            0.9,
+            0.3
+          ]
+        },
+        "rightWing": {
+          "sourceRect": [
+            1114,
+            647,
+            373,
+            168
+          ],
+          "pivot": [
+            0.1,
+            0.3
+          ]
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "parts": {
+        "body": {
+          "sourceRect": [
+            77,
+            831,
+            287,
+            175
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ]
+        },
+        "head": {
+          "file": "rear-heads.png",
+          "sourceRect": [
+            1259,
+            5,
+            836,
+            713
+          ],
+          "pivot": [
+            0.5,
+            0.7
+          ]
+        },
+        "leftWing": {
+          "sourceRect": [
+            678,
+            821,
+            374,
+            179
+          ],
+          "pivot": [
+            0.9,
+            0.3
+          ]
+        },
+        "rightWing": {
+          "sourceRect": [
+            1113,
+            820,
+            374,
+            180
+          ],
+          "pivot": [
+            0.1,
+            0.3
+          ]
+        }
+      }
+    }
+  }
+}

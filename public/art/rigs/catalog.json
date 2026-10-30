@@ -7,7 +7,8 @@
       "folder": "kingdom/cleric",
       "manifest": "manifest.json",
       "attack": "cast",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "44b640b90589"
     },
     "paladin": {
       "name": "Paladin",
@@ -15,7 +16,8 @@
       "folder": "kingdom/paladin",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "5c84fb7961e5"
     },
     "sunspeaker": {
       "name": "Sunspeaker",
@@ -23,7 +25,8 @@
       "folder": "kingdom/sunspeaker",
       "manifest": "manifest.json",
       "attack": "cast",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "a69711cce303"
     },
     "aegis": {
       "name": "Aegis Chaplain",
@@ -31,7 +34,8 @@
       "folder": "kingdom/aegis",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "988980c56b09"
     },
     "herald": {
       "name": "Royal Herald",
@@ -39,7 +43,8 @@
       "folder": "kingdom/herald",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "d5740b97ef81"
     },
     "footmen": {
       "name": "Footmen",
@@ -47,7 +52,8 @@
       "folder": "kingdom/footmen",
       "manifest": "manifest.json",
       "attack": "thrust",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "0bda7f450e04"
     },
     "bowmen": {
       "name": "Bowmen",
@@ -55,7 +61,8 @@
       "folder": "kingdom/bowmen",
       "manifest": "manifest.json",
       "attack": "shoot",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "a48816abbee4"
     },
     "raiders": {
       "name": "Raiders",
@@ -63,7 +70,8 @@
       "folder": "kingdom/raiders",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "f502e437f227"
     },
     "lookout": {
       "name": "Royal Lookout",
@@ -71,7 +79,8 @@
       "folder": "kingdom/lookout",
       "manifest": "manifest.json",
       "attack": "shoot",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "531058522ca8"
     },
     "marshal": {
       "name": "Lord Marshal",
@@ -79,7 +88,8 @@
       "folder": "kingdom/marshal",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "5dd879eda4e1"
     },
     "lancer": {
       "name": "Lancer",
@@ -87,7 +97,8 @@
       "folder": "kingdom/lancer",
       "manifest": "manifest.json",
       "attack": "thrust",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "8000a893967c"
     },
     "outrider": {
       "name": "Outrider",
@@ -95,7 +106,8 @@
       "folder": "kingdom/outrider",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "9ffcbde85b67"
     },
     "kinglion": {
       "name": "Lionheart King",
@@ -103,7 +115,8 @@
       "folder": "kingdom/kinglion",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "90955865d2bc"
     },
     "seraph": {
       "name": "High Seraph",
@@ -111,7 +124,8 @@
       "folder": "kingdom/seraph",
       "manifest": "manifest.json",
       "attack": "cast",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "e97d45104570"
     },
     "warlord": {
       "name": "Warlord Gideon",
@@ -119,7 +133,8 @@
       "folder": "kingdom/warlord",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "45cc8f214c38"
     },
     "templar": {
       "name": "Grand Templar",
@@ -127,7 +142,143 @@
       "folder": "kingdom/templar",
       "manifest": "manifest.json",
       "attack": "attack",
-      "effects": "vfx.json"
+      "effects": "vfx.json",
+      "revision": "ecb20c98d1a3"
+    },
+    "warlock": {
+      "name": "Warlock",
+      "faction": "Vampires",
+      "folder": "vamp/warlock",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "042d2d373e68"
+    },
+    "assassin": {
+      "name": "Nightstalker",
+      "faction": "Vampires",
+      "folder": "vamp/assassin",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "fded89108c46"
+    },
+    "thrall": {
+      "name": "Blood Thrall",
+      "faction": "Vampires",
+      "folder": "vamp/thrall",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "60b989aae49d"
+    },
+    "countess": {
+      "name": "Blood Countess",
+      "faction": "Vampires",
+      "folder": "vamp/countess",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "1a11666b85eb"
+    },
+    "bloodhunter": {
+      "name": "Blood Hunter",
+      "faction": "Vampires",
+      "folder": "vamp/bloodhunter",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json",
+      "revision": "6b75950cfb9b"
+    },
+    "nightwatch": {
+      "name": "Night Watcher",
+      "faction": "Vampires",
+      "folder": "vamp/nightwatch",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "7bbeea50b6e1"
+    },
+    "hemomancer": {
+      "name": "Hemomancer",
+      "faction": "Vampires",
+      "folder": "vamp/hemomancer",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "3f8ad20e6584"
+    },
+    "mesmerist": {
+      "name": "Mesmerist",
+      "faction": "Vampires",
+      "folder": "vamp/mesmerist",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "44651b6aae23"
+    },
+    "duskweaver": {
+      "name": "Duskweaver",
+      "faction": "Vampires",
+      "folder": "vamp/duskweaver",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "c6902f673094"
+    },
+    "matriarch": {
+      "name": "Crimson Matriarch",
+      "faction": "Vampires",
+      "folder": "vamp/matriarch",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json",
+      "revision": "87c042515276"
+    },
+    "bats": {
+      "name": "Bat",
+      "faction": "Vampires",
+      "folder": "vamp/bats",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "ff9775fdba4e"
+    },
+    "vlord": {
+      "name": "Vampire Lord",
+      "faction": "Vampires",
+      "folder": "vamp/vlord",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "3ab766435480"
+    },
+    "bloodqueen": {
+      "name": "Blood Queen",
+      "faction": "Vampires",
+      "folder": "vamp/bloodqueen",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "8303c30f8395"
+    },
+    "nosferatu": {
+      "name": "Nosferatu",
+      "faction": "Vampires",
+      "folder": "vamp/nosferatu",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "788a7e61133b"
+    },
+    "batking": {
+      "name": "Bat King",
+      "faction": "Vampires",
+      "folder": "vamp/batking",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json",
+      "revision": "f35824a5caf7"
     }
   }
 }

@@ -1,0 +1,132 @@
+{
+  "result": {
+    "warlock": {
+      "attackDamage": 3,
+      "attackFX": 3,
+      "netHP": 3,
+      "drainEvent": true,
+      "batEnabled": true,
+      "batCanvas": true,
+      "batDisabled": true,
+      "batLandedHuman": true
+    },
+    "assassin": {
+      "attackDamage": 5,
+      "attackFX": 3,
+      "netHP": -1,
+      "drainEvent": true
+    },
+    "thrall": {
+      "attackDamage": 3,
+      "attackFX": 3,
+      "netHP": 1,
+      "drainEvent": true
+    },
+    "countess": {
+      "attackDamage": 4,
+      "attackFX": 3,
+      "netHP": 3,
+      "drainEvent": true
+    },
+    "bloodhunter": {
+      "attackDamage": 3,
+      "attackFX": 3,
+      "netHP": 0,
+      "drainEvent": true,
+      "mounted": true
+    }
+  },
+  "presentation": {
+    "warlock": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "assassin": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "thrall": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "countess": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "bloodhunter": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    }
+  },
+  "errors": []
+}

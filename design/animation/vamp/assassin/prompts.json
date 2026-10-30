@@ -1,0 +1,13 @@
+{
+  "key": "assassin",
+  "design": "Lean masked Nightstalker in near-black leather stealth tunic and trousers, black hood and facewrap revealing narrow pale red eyes, distinct crimson waist sash, dark steel bracers and black boots, short split black rear cloak. Two separate slim silver daggers. Preserve source ninja-like vampire assassin.",
+  "gear": "two slim silver daggers, each separate, dark red grips",
+  "attack": "thrust",
+  "fx": [
+    "silver twin dagger thrust trails",
+    "small red puncture impact sparks",
+    "black violet dispersal smoke for death",
+    "dark red spawn shimmer"
+  ],
+  "extras": null
+}

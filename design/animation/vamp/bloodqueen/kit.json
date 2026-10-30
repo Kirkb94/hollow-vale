@@ -1,0 +1,14 @@
+{
+  "n": "Blood Queen",
+  "e": "👑",
+  "hp": 24,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "elite": 1,
+  "fac": "vamp",
+  "d": "Boss (5 slots). Exsanguinate: Defeating a unit heals her to full."
+}

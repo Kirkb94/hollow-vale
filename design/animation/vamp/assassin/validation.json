@@ -1,0 +1,52 @@
+{
+  "unit": "assassin",
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "effects": true,
+  "gameplay": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "bodyParts": 72,
+  "effectFrames": 32,
+  "assetChecks": [
+    "Explicit bounds fit source images",
+    "Every mapped cutout has nonempty alpha",
+    "Shared runtime loads all six views without JS errors",
+    "Independent FX clips previewed on dark background, no rectangular haze",
+    "Separate equipment follows hands"
+  ],
+  "notes": [
+    "Two independently held silver daggers; no magical damage added.",
+    "Source left leg contains two trouser legs in some views; cropped or overlapped at rig assembly."
+  ],
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "gameplayEvidence": {
+    "attackDamage": 5,
+    "attackFX": 3,
+    "netHP": -1,
+    "drainEvent": true
+  },
+  "browserErrors": [],
+  "test": "tools/vamp-core.test.cjs",
+  "testURL": "http://localhost:4323/?arttest=factions",
+  "integration": "Dynamically registered in isolated browser QA; catalog untouched.",
+  "poseBounds": {
+    "poses": 42,
+    "edgePixels": 0,
+    "canvas": [
+      320,
+      240
+    ]
+  }
+}

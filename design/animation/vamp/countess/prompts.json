@@ -1,0 +1,13 @@
+{
+  "key": "countess",
+  "design": "Regal pale vampire noblewoman Blood Countess, red eyes, long wine-red hair with small golden crown, fitted dark crimson bodice with gold neckline and waist jewelry, long layered burgundy gown front skirt and black-red rear train/cape, elegant long sleeves, dark red shoes. Distinct feminine court silhouette. Separate slender staff topped by a crimson orb.",
+  "gear": "slender dark wood staff with gold ferrules topped with a brilliant crimson orb",
+  "attack": "cast",
+  "fx": [
+    "crimson blood bolt projectile",
+    "red life-drain curling wisps",
+    "crimson noble casting aura",
+    "crimson spawn shimmer"
+  ],
+  "extras": null
+}

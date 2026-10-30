@@ -1,0 +1,26 @@
+{
+  "H": {
+    "n": "Warlock",
+    "e": "🦇",
+    "hp": 9,
+    "mv": 2,
+    "rng": [
+      2,
+      2
+    ],
+    "dmg": 3,
+    "acost": 1,
+    "drain": 2,
+    "d": "Costs 1 mana. Hits at exactly range 2 and heals 2. Bat Form (free, before moving): fly like a Bat this turn and turn back on landing.",
+    "fac": "vamp"
+  },
+  "ANIM": [
+    "float",
+    "cast"
+  ],
+  "AFX": [
+    "orb",
+    "#b67cff"
+  ],
+  "DEATH": "dissolve"
+}

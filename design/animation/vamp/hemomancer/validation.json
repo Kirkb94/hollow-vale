@@ -1,0 +1,46 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "cast",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 2,
+  "attackFX": 3,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 3
+  },
+  "pause": true,
+  "tether": {
+    "ok": true,
+    "created": true,
+    "castEffects": 2,
+    "damage": 2,
+    "healed": 2,
+    "statusEvent": true,
+    "tickEffects": 1
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "tools/vamp-casters.test.cjs",
+  "testedAt": "2026-10-30T10:46:03.213Z",
+  "pageErrors": [],
+  "registration": "Temporary HVRig.register / HVFactionFX.load; shared catalog unchanged",
+  "artEvidence": "runtime-check.json"
+}

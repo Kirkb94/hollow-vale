@@ -1,0 +1,283 @@
+{
+  "version": 1,
+  "unit": "mesmerist",
+  "file": "vfx.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "columns": 6,
+  "rows": 5,
+  "alpha": [
+    0,
+    253
+  ],
+  "clips": {
+    "projectile": {
+      "row": 0,
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          0,
+          256,
+          205
+        ],
+        [
+          256,
+          0,
+          256,
+          205
+        ],
+        [
+          512,
+          0,
+          256,
+          205
+        ],
+        [
+          768,
+          0,
+          256,
+          205
+        ],
+        [
+          1024,
+          0,
+          256,
+          205
+        ],
+        [
+          1280,
+          0,
+          256,
+          205
+        ]
+      ],
+      "durationMs": 500
+    },
+    "impact": {
+      "row": 1,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          205,
+          256,
+          213
+        ],
+        [
+          256,
+          205,
+          256,
+          213
+        ],
+        [
+          512,
+          205,
+          256,
+          213
+        ],
+        [
+          768,
+          205,
+          258,
+          213
+        ],
+        [
+          1026,
+          205,
+          251,
+          213
+        ],
+        [
+          1277,
+          205,
+          259,
+          213
+        ]
+      ],
+      "durationMs": 500
+    },
+    "command": {
+      "row": 2,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          418,
+          256,
+          196
+        ],
+        [
+          256,
+          418,
+          256,
+          196
+        ],
+        [
+          512,
+          418,
+          256,
+          196
+        ],
+        [
+          768,
+          418,
+          268,
+          196
+        ],
+        [
+          1036,
+          418,
+          245,
+          196
+        ],
+        [
+          1281,
+          418,
+          255,
+          196
+        ]
+      ],
+      "durationMs": 500
+    },
+    "charmed": {
+      "row": 3,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          614,
+          256,
+          202
+        ],
+        [
+          256,
+          614,
+          256,
+          202
+        ],
+        [
+          512,
+          614,
+          256,
+          202
+        ],
+        [
+          768,
+          614,
+          256,
+          202
+        ],
+        [
+          1024,
+          614,
+          256,
+          202
+        ],
+        [
+          1280,
+          614,
+          256,
+          202
+        ]
+      ],
+      "durationMs": 500
+    },
+    "arrival": {
+      "row": 4,
+      "frames": 6,
+      "fps": 8,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.8
+      ],
+      "sourceRects": [
+        [
+          0,
+          816,
+          256,
+          208
+        ],
+        [
+          256,
+          816,
+          250,
+          208
+        ],
+        [
+          506,
+          816,
+          262,
+          208
+        ],
+        [
+          768,
+          816,
+          256,
+          208
+        ],
+        [
+          1024,
+          816,
+          256,
+          208
+        ],
+        [
+          1280,
+          816,
+          256,
+          208
+        ]
+      ],
+      "durationMs": 750
+    }
+  },
+  "bindings": {
+    "attack": {
+      "projectile": "projectile",
+      "impact": "impact",
+      "releaseMs": 250,
+      "travelMs": 300
+    },
+    "abilities": {
+      "command": {
+        "cast": "command",
+        "impact": "charmed"
+      }
+    },
+    "spawn": "arrival"
+  },
+  "statusEvents": {},
+  "notes": [
+    "Effects are presentation only and do not change mechanics.",
+    "Status events are tied to actual tether damage and actual Blood Pact mana gain.",
+    "Respect existing fog/visibility and reduced-motion rules."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "n": "Hemomancer",
+  "e": "🩸",
+  "hp": 8,
+  "mv": 2,
+  "rng": [
+    2,
+    3
+  ],
+  "dmg": 3,
+  "sp": "tether",
+  "spp": 1,
+  "fac": "vamp",
+  "d": "Binds an enemy with a Crimson Tether that drains it for 3 turns (2 mana).",
+  "spell": {
+    "n": "Crimson Tether",
+    "e": "🩸",
+    "c": 2,
+    "cd": 0,
+    "foe": 1,
+    "h": "(an enemy hero 2-3 away) to bind it.",
+    "d": "bind an enemy hero 2-3 away. At the start of your next 3 turns it loses 2 HP and the Hemomancer heals 2 (3 and 3 with the Vampire team bonus). It breaks if they end a turn more than 4 apart, a wall blocks the line, or she is silenced, caged or slain. Her move is 1 while it holds and the target stays revealed. One tether at a time."
+  }
+}

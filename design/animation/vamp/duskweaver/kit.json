@@ -1,0 +1,23 @@
+{
+  "n": "Duskweaver",
+  "e": "🌑",
+  "hp": 9,
+  "mv": 3,
+  "rng": [
+    1,
+    2
+  ],
+  "dmg": 3,
+  "sp": "veil",
+  "spp": 0,
+  "fac": "vamp",
+  "d": "Weaves a Veil of Night that hides your units from enemy eyes and arrows (2 mana).",
+  "spell": {
+    "n": "Veil of Night",
+    "e": "🌑",
+    "c": 2,
+    "cd": 2,
+    "h": "within 4 to darken it and its 6 neighbours.",
+    "d": "darken a hex within 4 and its 6 neighbours until your 2nd turn after casting. Enemies cannot see into it, and only enemies next to your units there can target them; splash still lands. An enemy flare on it blows it away. Each Duskweaver keeps one Veil."
+  }
+}

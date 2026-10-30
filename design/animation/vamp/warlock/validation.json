@@ -1,0 +1,65 @@
+{
+  "unit": "warlock",
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "effects": true,
+  "gameplay": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "bodyParts": 72,
+  "effectFrames": 32,
+  "assetChecks": [
+    "Explicit bounds fit source images",
+    "Every mapped cutout has nonempty alpha",
+    "Shared runtime loads all six views without JS errors",
+    "Independent FX clips previewed on dark background, no rectangular haze",
+    "Separate equipment follows hands"
+  ],
+  "notes": [
+    "Six independent humanoid views plus bat variant with four movable parts per view. Bat rear heads use separate genuinely rear-facing source.",
+    "Torso source includes short hem; separate pelvis overlaps at waist."
+  ],
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "gameplayEvidence": {
+    "attackDamage": 3,
+    "attackFX": 3,
+    "netHP": 3,
+    "drainEvent": true,
+    "batEnabled": true,
+    "batCanvas": true,
+    "batDisabled": true,
+    "batLandedHuman": true
+  },
+  "browserErrors": [],
+  "test": "tools/vamp-core.test.cjs",
+  "testURL": "http://localhost:4323/?arttest=factions",
+  "integration": "Dynamically registered in isolated browser QA; catalog untouched.",
+  "variantProof": {
+    "sixBatViews": true,
+    "separateHeadBodyWings": true,
+    "actualToggleAndLandingVerified": true,
+    "poseBounds": {
+      "poses": 42,
+      "edgePixels": 0
+    }
+  },
+  "poseBounds": {
+    "poses": 42,
+    "edgePixels": 0,
+    "canvas": [
+      320,
+      240
+    ]
+  }
+}

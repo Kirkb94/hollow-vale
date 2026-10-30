@@ -1,0 +1,12 @@
+{
+  "key": "warlock",
+  "design": "Slender pale red-eyed vampire male sorcerer in a deep burgundy hood, black-purple robe with crimson inner skirt, small ivory skull belt clasp, long ragged plum cape. Face concealed except pale eyes and nose. No crown, no armor. Hands channel violet magic; separate held focus orb. Preserve source hooded identity.",
+  "gear": "small floating violet crystal orb in a black claw-shaped palm cradle",
+  "attack": "cast",
+  "fx": [
+    "violet blood magic projectile",
+    "violet life-drain wisps traveling toward caster",
+    "violet casting sigil",
+    "bat-form transformation smoke"
+  ]
+}

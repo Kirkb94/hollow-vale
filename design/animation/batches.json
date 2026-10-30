@@ -12,7 +12,7 @@
     {
       "faction": "kingdom",
       "total": 17,
-      "status": "verified-awaiting-push",
+      "status": "pushed",
       "workers": {
         "hollow_kingdom": [
           "cleric",
@@ -55,12 +55,13 @@
         "sunspeaker",
         "aegis",
         "herald"
-      ]
+      ],
+      "commit": "26ba03c6e5e0f1d3b9b2efaef7360d132b02cfce"
     },
     {
       "faction": "vamp",
       "total": 16,
-      "status": "art-production",
+      "status": "validated-release-ready",
       "workers": {
         "hollow_kingdom": [
           "warlock",
@@ -78,17 +79,50 @@
         ]
       },
       "validated": [
+        "blade",
+        "warlock",
+        "assassin",
+        "bats",
+        "thrall",
+        "countess",
+        "bloodhunter",
+        "vlord",
+        "bloodqueen",
+        "nosferatu",
+        "matriarch",
+        "batking",
         "nightwatch",
         "hemomancer",
         "mesmerist",
-        "duskweaver",
-        "matriarch"
+        "duskweaver"
       ]
     },
     {
       "faction": "undead",
       "total": 15,
-      "status": "queued"
+      "status": "art-production",
+      "workers": {
+        "hollow_kingdom": [
+          "ossomancer",
+          "bonewitch",
+          "gravedigger",
+          "lich",
+          "banshee"
+        ],
+        "hollow_vampires": [
+          "wraith",
+          "skeletons",
+          "ghoul",
+          "graveknight",
+          "bonerider"
+        ],
+        "hollow_undead": [
+          "bonecolossus",
+          "deathknight",
+          "plaguelord",
+          "wisp"
+        ]
+      }
     },
     {
       "faction": "infernal",
@@ -128,5 +162,13 @@
     "zoom",
     "visual assembly"
   ],
-  "pushes": []
+  "pushes": [
+    {
+      "faction": "kingdom",
+      "artCommit": "26ba03c6e5e0f1d3b9b2efaef7360d132b02cfce",
+      "head": "bc24aa3",
+      "remote": "origin/main",
+      "verified": true
+    }
+  ]
 }

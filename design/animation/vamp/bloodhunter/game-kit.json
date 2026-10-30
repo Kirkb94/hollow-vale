@@ -1,0 +1,25 @@
+{
+  "H": {
+    "n": "Blood Hunter",
+    "e": "🩸",
+    "hp": 9,
+    "mv": 3,
+    "rng": [
+      1,
+      1
+    ],
+    "dmg": 4,
+    "charge": 1,
+    "fac": "vamp",
+    "d": "A vampire knight on a black steed. Charges, bites and drains blood in one turn."
+  },
+  "ANIM": [
+    "hop",
+    "dash"
+  ],
+  "AFX": [
+    "slash",
+    "#d23a58"
+  ],
+  "DEATH": "smoke"
+}

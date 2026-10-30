@@ -1,0 +1,17 @@
+{
+  "n": "Vampire Lord",
+  "e": "🦇",
+  "hp": 15,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "fly": 1,
+  "aoe": 1,
+  "drain": 3,
+  "elite": 1,
+  "fac": "vamp",
+  "d": "Elite (5 slots). An ancient lord on bat wings. Blood Nova cleaves the target and the 2 hexes beside it, and drains the life from his prey."
+}

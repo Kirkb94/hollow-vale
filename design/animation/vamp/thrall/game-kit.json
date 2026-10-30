@@ -1,0 +1,25 @@
+{
+  "H": {
+    "n": "Blood Thrall",
+    "e": "🧟",
+    "hp": 24,
+    "mv": 1,
+    "rng": [
+      1,
+      1
+    ],
+    "dmg": 3,
+    "armor": 1,
+    "d": "A chained, bloodied servant. Slow and tough, and it feeds on its victims.",
+    "fac": "vamp"
+  },
+  "ANIM": [
+    "stomp",
+    "smash"
+  ],
+  "AFX": [
+    "ring",
+    "#c04060"
+  ],
+  "DEATH": "collapse"
+}

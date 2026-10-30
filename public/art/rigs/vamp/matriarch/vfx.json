@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "unit": "matriarch",
+  "file": "vfx.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "columns": 6,
+  "rows": 5,
+  "alpha": [
+    0,
+    253
+  ],
+  "clips": {
+    "projectile": {
+      "row": 0,
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          0,
+          256,
+          205
+        ],
+        [
+          256,
+          0,
+          241,
+          205
+        ],
+        [
+          497,
+          0,
+          271,
+          205
+        ],
+        [
+          768,
+          0,
+          271,
+          205
+        ],
+        [
+          1039,
+          0,
+          251,
+          205
+        ],
+        [
+          1290,
+          0,
+          246,
+          205
+        ]
+      ],
+      "durationMs": 500
+    },
+    "impact": {
+      "row": 1,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          205,
+          256,
+          224
+        ],
+        [
+          256,
+          205,
+          253,
+          224
+        ],
+        [
+          509,
+          205,
+          259,
+          224
+        ],
+        [
+          768,
+          205,
+          268,
+          224
+        ],
+        [
+          1036,
+          205,
+          244,
+          224
+        ],
+        [
+          1280,
+          205,
+          256,
+          224
+        ]
+      ],
+      "durationMs": 500
+    },
+    "cast": {
+      "row": 2,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          429,
+          256,
+          200
+        ],
+        [
+          256,
+          429,
+          256,
+          200
+        ],
+        [
+          512,
+          429,
+          256,
+          200
+        ],
+        [
+          768,
+          429,
+          260,
+          200
+        ],
+        [
+          1028,
+          429,
+          260,
+          200
+        ],
+        [
+          1288,
+          429,
+          248,
+          200
+        ]
+      ],
+      "durationMs": 500
+    },
+    "siphon": {
+      "row": 3,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          629,
+          252,
+          190
+        ],
+        [
+          252,
+          629,
+          229,
+          190
+        ],
+        [
+          481,
+          629,
+          280,
+          190
+        ],
+        [
+          761,
+          629,
+          267,
+          190
+        ],
+        [
+          1028,
+          629,
+          262,
+          190
+        ],
+        [
+          1290,
+          629,
+          246,
+          190
+        ]
+      ],
+      "durationMs": 500
+    },
+    "receipt": {
+      "row": 4,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          819,
+          256,
+          205
+        ],
+        [
+          256,
+          819,
+          256,
+          205
+        ],
+        [
+          512,
+          819,
+          256,
+          205
+        ],
+        [
+          768,
+          819,
+          256,
+          205
+        ],
+        [
+          1024,
+          819,
+          256,
+          205
+        ],
+        [
+          1280,
+          819,
+          256,
+          205
+        ]
+      ],
+      "durationMs": 500
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "cast",
+      "projectile": "projectile",
+      "impact": "impact",
+      "releaseMs": 250,
+      "travelMs": 300
+    }
+  },
+  "statusEvents": {
+    "bloodpact:gain": {
+      "impact": "receipt"
+    }
+  },
+  "notes": [
+    "Effects are presentation only and do not change mechanics.",
+    "Status events are tied to actual tether damage and actual Blood Pact mana gain.",
+    "Respect existing fog/visibility and reduced-motion rules."
+  ]
+}

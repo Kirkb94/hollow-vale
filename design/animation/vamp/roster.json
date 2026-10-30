@@ -12,7 +12,7 @@
       "elite": false,
       "charge": false,
       "description": "Heals 2 whenever it hits a unit.",
-      "status": "six-direction-layered-representative-assets-ready"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "warlock",
@@ -23,7 +23,7 @@
       "elite": false,
       "charge": false,
       "description": "Costs 1 mana. Hits at exactly range 2 and heals 2. Bat Form (free, before moving): fly like a Bat this turn and turn back on landing.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "assassin",
@@ -34,7 +34,7 @@
       "elite": false,
       "charge": true,
       "description": "Fragile, but one hit drops most archers, casters and scouts.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "bats",
@@ -45,7 +45,7 @@
       "elite": false,
       "charge": false,
       "description": "Three vampire bats take the field together. Fast fliers that feed with every bite.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "thrall",
@@ -56,7 +56,7 @@
       "elite": false,
       "charge": false,
       "description": "A chained, bloodied servant. Slow and tough, and it feeds on its victims.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "countess",
@@ -67,7 +67,7 @@
       "elite": false,
       "charge": false,
       "description": "A noble sorceress. Crimson bolts from range 2-3 cost 1 mana and drain life.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "bloodhunter",
@@ -78,7 +78,7 @@
       "elite": false,
       "charge": true,
       "description": "A vampire knight on a black steed. Charges, bites and drains blood in one turn.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "vlord",
@@ -89,7 +89,7 @@
       "elite": true,
       "charge": false,
       "description": "Elite (5 slots). An ancient lord on bat wings. Blood Nova cleaves the target and the 2 hexes beside it, and drains the life from his prey.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "bloodqueen",
@@ -100,7 +100,7 @@
       "elite": true,
       "charge": false,
       "description": "Boss (5 slots). Exsanguinate: Defeating a unit heals her to full.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "nosferatu",
@@ -111,7 +111,7 @@
       "elite": true,
       "charge": false,
       "description": "Boss (5 slots). Mist Step: Flies 4 hexes. After it attacks it turns to mist and takes 2 less damage until its next turn.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "matriarch",
@@ -122,7 +122,7 @@
       "elite": true,
       "charge": false,
       "description": "Boss (5 slots). Blood Pact: Each hit steals 1 mana from the target's player.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "batking",
@@ -133,7 +133,7 @@
       "elite": true,
       "charge": false,
       "description": "Boss (5 slots). Swarm Call: The first time it is hit each round a Bat appears next to it (up to 3).",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "nightwatch",
@@ -144,7 +144,7 @@
       "elite": false,
       "charge": false,
       "description": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn.",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "hemomancer",
@@ -155,7 +155,7 @@
       "elite": false,
       "charge": false,
       "description": "Binds an enemy with a Crimson Tether that drains it for 3 turns (2 mana).",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "mesmerist",
@@ -166,7 +166,7 @@
       "elite": false,
       "charge": false,
       "description": "Charms an enemy hero into striking one of its own allies (3 mana).",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     },
     {
       "key": "duskweaver",
@@ -177,7 +177,12 @@
       "elite": false,
       "charge": false,
       "description": "Weaves a Veil of Night that hides your units from enemy eyes and arrows (2 mana).",
-      "status": "existing-art-retained"
+      "status": "integrated-six-direction-cutout-and-effects"
     }
-  ]
+  ],
+  "coverage": {
+    "total": 16,
+    "integrated": 16,
+    "validated": 16
+  }
 }

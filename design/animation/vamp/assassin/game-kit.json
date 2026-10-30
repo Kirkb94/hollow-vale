@@ -1,0 +1,25 @@
+{
+  "H": {
+    "n": "Nightstalker",
+    "e": "🥷",
+    "hp": 4,
+    "mv": 4,
+    "rng": [
+      1,
+      1
+    ],
+    "dmg": 6,
+    "d": "Fragile, but one hit drops most archers, casters and scouts.",
+    "fac": "vamp",
+    "charge": 1
+  },
+  "ANIM": [
+    "twitch",
+    "dash"
+  ],
+  "AFX": [
+    "slash",
+    "#e8eef5"
+  ],
+  "DEATH": "smoke"
+}
