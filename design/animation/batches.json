@@ -296,7 +296,7 @@
     {
       "faction": "arcane",
       "total": 15,
-      "status": "validated",
+      "status": "pushed",
       "workers": {
         "root": [
           "witch",
@@ -336,7 +336,9 @@
         "aetherlancer",
         "phasewright",
         "hourglass"
-      ]
+      ],
+      "commit": "7a3ca3cc6e53",
+      "releaseCommit": "d03ba3e"
     },
     {
       "faction": "raidboss",
@@ -410,6 +412,17 @@
       "head": "22edc1f",
       "remote": "origin/main",
       "verified": true
+    },
+    {
+      "faction": "arcane",
+      "artCommit": "7a3ca3cc6e53",
+      "head": "d03ba3e",
+      "remote": "origin/main",
+      "verified": true
     }
-  ]
+  ],
+  "status": "complete",
+  "completedAt": "2026-10-30T12:27:39.732Z",
+  "completedRoster": 111,
+  "newKitsCompleted": 107
 }
