@@ -1,6 +1,33 @@
 {
   "versions": [
     {
+      "id": "f9cc1196d617",
+      "date": "2026-10-30",
+      "title": "Infernal: complete layered faction artwork",
+      "groups": [
+        {
+          "name": "Visuals",
+          "items": [
+            "All 14 Infernal units now use layered six-direction artwork and matching combat effects.",
+            "Dragon, Phoenix, Hellhound and Imps use creature rigs with separately moving wings, tails and legs. Imp squads retain their three-member formation.",
+            "Eye of Ruin has a separate eye, casing and animated wings; casters and bosses have moving equipment and spell effects.",
+            "Effects follow real fire damage, Hellgate summons, Immolation, Phoenix rebirth, Wall of Flame, pulling hooks and Devil's Bargain.",
+            "Full-faction test links appear as each roster becomes complete. The workshop reports each rig's actual piece count."
+          ]
+        },
+        {
+          "name": "Fixes",
+          "items": [
+            "Effect impacts follow targets after Hellbinder pulls them. Burn effects appear only when damage is applied.",
+            "Creature effects respect fog, pause and zoom; source art remains separate from gameplay rules."
+          ]
+        }
+      ],
+      "commits": [
+        "Complete Infernal faction layered art and creature animation"
+      ]
+    },
+    {
       "id": "d49c06a1071f",
       "date": "2026-10-30",
       "title": "Undead: complete layered faction artwork",
@@ -190,22 +217,6 @@
       "commits": [
         "Painted forests and new structure art",
         "Gold prices: faction re-check after the AI fixes and fireproof Infernals"
-      ]
-    },
-    {
-      "id": "f21ff6a",
-      "date": "2026-10-28",
-      "title": "Phone fix",
-      "groups": [
-        {
-          "name": "Fixes",
-          "items": [
-            "Phone: tapping a glowing hex to spawn or move works again on the zoomed board"
-          ]
-        }
-      ],
-      "commits": [
-        "Phone: fix taps on the zoomed board doing nothing (spawning, moving)"
       ]
     }
   ]
