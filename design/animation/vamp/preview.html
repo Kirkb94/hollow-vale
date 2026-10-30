@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8"><title>Bloodblade layered rig preview</title><style>body{background:#18212a;color:#eee;font:16px system-ui;padding:20px}header{position:sticky;top:0;background:#18212a;padding:10px}main{display:grid;grid-template-columns:repeat(3,minmax(250px,1fr));gap:12px}canvas{width:100%;background:linear-gradient(#283440,#192129)}label{margin:12px}button,select{font:inherit;padding:8px}p{max-width:900px}</style><header><h1>Bloodblade — movable pieces</h1><p>Six authored facing atlases. The cape, coat tails, head, torso, limbs and boots are independently drawn. This fitting preview is separate from the live game.</p><label>Animation <select id="clip"><option>idle</option><option>walk</option><option>attack</option><option>hurt</option><option>death</option></select></label><label><input id="parts" type="checkbox">Explode pieces</label><button id="pause">Pause</button><span id="status"></span></header><main></main><h2>Bloodblade effects</h2><div id="effects" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px"></div><script>
+const dirs=['e','se','sw','w','nw','ne'],root='../../../public/art/rigs/vamp/';let stopped=false,pausedAt=0,skip=0;const parts=document.querySelector('#parts'),clip=document.querySelector('#clip');document.querySelector('#pause').onclick=()=>{stopped=!stopped;if(stopped)pausedAt=performance.now();else skip+=performance.now()-pausedAt;document.querySelector('#pause').textContent=stopped?'Resume':'Pause'};
+function load(url){return new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=url})}
+function pieces(im,regions){
+    const c=document.createElement('canvas');c.width=im.width;c.height=im.height;
+    const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(im,0,0);
+    const data=ctx.getImageData(0,0,c.width,c.height).data,out=[];
+    for(let n=0;n<12;n++){
+      const rr=regions&&regions[n];const x0=rr?rr[0]:Math.round(n%3*c.width/3),x1=rr?rr[0]+rr[2]:Math.round((n%3+1)*c.width/3),y0=rr?rr[1]:Math.round(Math.floor(n/3)*c.height/4),y1=rr?rr[1]+rr[3]:Math.round((Math.floor(n/3)+1)*c.height/4);
+      let l=x1,r=x0,t=y1,b=y0,best=0;
+      const cw=x1-x0,ch=y1-y0,visited=new Uint8Array(cw*ch),queue=new Int32Array(cw*ch);
+      // Generators may leave tiny neighboring slivers at cell edges. Use the main component only.
+      for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){
+        const start=(y-y0)*cw+x-x0;if(visited[start]||data[(y*c.width+x)*4+3]<=64)continue;
+        let head=0,tail=1,cl=x,cr=x,ct=y,cb=y;queue[0]=start;visited[start]=1;
+        while(head<tail){const at=queue[head++],px=at%cw,py=Math.floor(at/cw);cl=Math.min(cl,px+x0);cr=Math.max(cr,px+x0);ct=Math.min(ct,py+y0);cb=Math.max(cb,py+y0);
+          for(const [nx,ny]of [[px-1,py],[px+1,py],[px,py-1],[px,py+1]]){if(nx<0||ny<0||nx>=cw||ny>=ch)continue;const ni=ny*cw+nx;if(!visited[ni]&&data[((ny+y0)*c.width+nx+x0)*4+3]>64){visited[ni]=1;queue[tail++]=ni;}}
+        }
+        if(tail>best){best=tail;l=cl;r=cr;t=ct;b=cb;}
+      }
+      if(r<l||b<t)throw new Error('Empty cutout cell '+n);
+      out.push({image:im,x:l,y:t,w:r-l+1,h:b-t+1});
+    }
+    return out;
+  }
+
+const nwRegions=[[0,0,400,420],[400,0,290,430],[690,0,396,430],[0,430,420,335],[450,430,240,330],[780,430,280,330],[90,765,230,335],[450,765,230,335],[800,750,240,350],[100,1100,210,348],[430,1100,260,348],[820,1100,266,348]];
+function extract(im,dir){return pieces(im,dir==='nw'?nwRegions:null).map(s=>({im:s.image,sx:s.x,sy:s.y,sw:s.w,sh:s.h}))}
+function piece(c,p,x,y,w,h,r=0,px=.5,py=.1){c.save();c.translate(x,y);c.rotate(r);c.drawImage(p.im,p.sx,p.sy,p.sw,p.sh,-w*px,-h*py,w,h);c.restore()}
+const views=dirs.map(dir=>{const el=document.createElement('section');el.innerHTML='<h2>'+dir.toUpperCase()+'</h2><canvas width="360" height="430"></canvas>';document.querySelector('main').append(el);const cv=el.querySelector('canvas');return{dir,cv,c:cv.getContext('2d'),p:null}});
+Promise.all(views.map(async v=>{try{v.p=extract(await load(root+'blade-'+v.dir+'.png'),v.dir)}catch(e){v.err=true}})).then(()=>document.querySelector('#status').textContent=views.filter(v=>v.p).length+'/6 views loaded');
+let sword;load(root+'blade-sword.png').then(im=>{const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const x=c.getContext('2d');x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let l=c.width,t=c.height,r=0,b=0;for(let y=0;y<c.height;y++)for(let z=0;z<c.width;z++)if(d[(y*c.width+z)*4+3]>64){l=Math.min(l,z);r=Math.max(r,z);t=Math.min(t,y);b=Math.max(b,y)}sword={im,sx:l,sy:t,sw:r-l+1,sh:b-t+1}}).catch(()=>{});
+function draw(v,t){const {c,p,dir}=v;c.clearRect(0,0,360,430);if(!p){c.fillStyle='#eee';c.fillText('View generating…',100,200);return}const a=clip.value,ph=t/680*Math.PI*2,walk=a==='walk'?Math.sin(ph):0,atk=a==='attack'?(Math.sin(t/850*Math.PI*2)+1)/2:0,bob=a==='idle'?Math.sin(t/1800*Math.PI*2)*1.5:Math.abs(walk)*3;const rear=dir==='nw'||dir==='ne',sign=['w','sw','nw'].includes(dir)?-1:1,spread=dir==='e'||dir==='w'?18:30;
+c.save();c.translate(180,345);if(a==='hurt')c.translate(Math.sin(t/80)*4,0);if(a==='death'){c.rotate(Math.min(1,(t%1800)/1000)*1.4*sign);c.globalAlpha=1-Math.max(0,(t%1800-1200)/600)}c.translate(-180,-345);const ex=parts.checked?1:0;
+const cape=()=>piece(c,p[2],180-ex*90,150+bob,125,185,Math.sin(ph*.5)*.025,.5,.1);
+if(!rear)cape();
+for(const [i,j,s]of[[8,10,-1],[9,11,1]]){const x=180+s*spread/2+s*ex*55,y=250+(s===1?-walk:walk)*5;piece(c,p[i],x,y,28,70,walk*s*.14);piece(c,p[j],x+walk*s*7,312+(s===1?-walk:walk)*5,45,45,walk*s*.1,.4,.15)}
+piece(c,p[3],180+ex*90,218+bob,98,92,walk*.025);
+const arm=(upper,fore,s)=>{const x=180+s*spread+s*ex*60,y=157+bob,ang=walk*s*.22+(s===1?-atk*1.2*sign:0);c.save();c.translate(x,y);c.rotate(ang);piece(c,p[upper],0,0,34,65,0,.5,.1);piece(c,p[fore],0,51,30,64,-atk*.2*sign,.5,.1);if(s===1&&sword){c.save();c.translate(2,102);c.rotate(-.2*sign);c.drawImage(sword.im,sword.sx,sword.sy,sword.sw,sword.sh,-18,-116,36,132);c.restore()}c.restore()};
+arm(4,6,-sign);piece(c,p[1],180,145+bob,dir==='e'||dir==='w'?66:80,98,0,.5,.1);arm(5,7,sign);if(rear)cape();piece(c,p[0],180+sign*3,139+bob-ex*65,58,70,walk*.015,.5,.9);c.restore()}
+let fxImage,fxClips=[];Promise.all([load(root+'blade-vfx.png'),fetch(root+'blade-vfx.json').then(r=>r.json())]).then(([im,meta])=>{fxImage=im;fxClips=Object.entries(meta.clips).map(([name,c])=>{const d=document.createElement('section');d.innerHTML='<h3>'+name+'</h3><canvas width="250" height="250"></canvas>';document.querySelector('#effects').append(d);return{...c,ctx:d.querySelector('canvas').getContext('2d')}})});
+function frame(now){const t=(stopped?pausedAt:now)-skip;for(const v of views)draw(v,t);for(const f of fxClips){const r=f.frames[Math.floor(t*f.fps/1000)%4];f.ctx.clearRect(0,0,250,250);f.ctx.drawImage(fxImage,...r,10,10,230,230)}requestAnimationFrame(frame)}requestAnimationFrame(frame);
+</script>

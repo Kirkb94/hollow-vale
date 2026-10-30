@@ -1,0 +1,1 @@
+Edit only row1 column2 torso to the BACK of the waistcoat for NW/NE directions. Remove front fasteners, buckle, shirt, stray hair/head. Preserve remaining cutout parts, alpha and placement. Built-in image_gen. NW output spacing changed; explicit measured rects supplied in blade-rects.json.

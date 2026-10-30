@@ -1,0 +1,12 @@
+{
+  "generator": "built-in imagegen",
+  "unit": "bowmen",
+  "bodySource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-6c15c912-5130-4cb2-ad3d-33cee578f010.png",
+  "equipmentSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-8d357332-dca5-4abd-a766-eb59bb7d7fb7.png",
+  "vfxSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-aa24534e-085b-4537-b317-cbb9d819549a.png",
+  "rejectedVfx": [
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-2e817abc-b1b2-40c9-8a68-b301f2b982fa.png",
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-9ca1af6b-d43f-4fa2-8a03-a86762ab1c65.png"
+  ],
+  "notes": []
+}

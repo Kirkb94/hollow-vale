@@ -1,0 +1,27 @@
+{
+  "key": "herald",
+  "unit": {
+    "n": "Royal Herald",
+    "e": "🎺",
+    "hp": 9,
+    "mv": 3,
+    "rng": [
+      1,
+      1
+    ],
+    "dmg": 3,
+    "sp": "rally",
+    "spp": 1,
+    "fac": "kingdom",
+    "d": "Sounds the rally: pulls a friendly hero to his side from 4 hexes away (2 mana)."
+  },
+  "animation": [
+    "sway",
+    "lunge"
+  ],
+  "death": "collapse",
+  "effects": [
+    "slash",
+    "#ffd24a"
+  ]
+}

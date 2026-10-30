@@ -1,0 +1,265 @@
+{
+  "file": "vfx.png",
+  "size": [
+    1774,
+    887
+  ],
+  "columns": 8,
+  "rows": 4,
+  "alpha": [
+    0,
+    255
+  ],
+  "clips": {
+    "slash": {
+      "row": 0,
+      "frames": 8,
+      "durationMs": 400,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          0,
+          222,
+          222
+        ],
+        [
+          222,
+          0,
+          222,
+          222
+        ],
+        [
+          444,
+          0,
+          221,
+          222
+        ],
+        [
+          665,
+          0,
+          222,
+          222
+        ],
+        [
+          887,
+          0,
+          222,
+          222
+        ],
+        [
+          1109,
+          0,
+          221,
+          222
+        ],
+        [
+          1330,
+          0,
+          222,
+          222
+        ],
+        [
+          1552,
+          0,
+          222,
+          222
+        ]
+      ]
+    },
+    "hitSpark": {
+      "row": 1,
+      "frames": 8,
+      "durationMs": 320,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          222,
+          222,
+          222
+        ],
+        [
+          222,
+          222,
+          222,
+          222
+        ],
+        [
+          444,
+          222,
+          221,
+          222
+        ],
+        [
+          665,
+          222,
+          222,
+          222
+        ],
+        [
+          887,
+          222,
+          222,
+          222
+        ],
+        [
+          1109,
+          222,
+          221,
+          222
+        ],
+        [
+          1330,
+          222,
+          222,
+          222
+        ],
+        [
+          1552,
+          222,
+          222,
+          222
+        ]
+      ]
+    },
+    "shieldImpact": {
+      "row": 2,
+      "frames": 8,
+      "durationMs": 450,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          444,
+          222,
+          221
+        ],
+        [
+          222,
+          444,
+          222,
+          221
+        ],
+        [
+          444,
+          444,
+          221,
+          221
+        ],
+        [
+          665,
+          444,
+          222,
+          221
+        ],
+        [
+          887,
+          444,
+          222,
+          221
+        ],
+        [
+          1109,
+          444,
+          221,
+          221
+        ],
+        [
+          1330,
+          444,
+          222,
+          221
+        ],
+        [
+          1552,
+          444,
+          222,
+          221
+        ]
+      ]
+    },
+    "spawn": {
+      "row": 3,
+      "frames": 8,
+      "durationMs": 700,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.85
+      ],
+      "sourceRects": [
+        [
+          0,
+          666,
+          222,
+          221
+        ],
+        [
+          222,
+          666,
+          224,
+          221
+        ],
+        [
+          446,
+          666,
+          225,
+          221
+        ],
+        [
+          671,
+          666,
+          246,
+          221
+        ],
+        [
+          917,
+          666,
+          230,
+          221
+        ],
+        [
+          1147,
+          666,
+          220,
+          221
+        ],
+        [
+          1367,
+          666,
+          210,
+          221
+        ],
+        [
+          1577,
+          666,
+          197,
+          221
+        ]
+      ]
+    }
+  },
+  "triggers": {
+    "slash": "Knight melee swing, rotate toward target",
+    "hitSpark": "Existing melee impact at contact time",
+    "shieldImpact": "Only when existing armor/damage mitigation is confirmed; cosmetic feedback, not a new block ability",
+    "spawn": "Existing unit spawn event, anchor to feet"
+  },
+  "notes": [
+    "Use explicit sourceRects, especially spawn, whose source frame spacing varies slightly. Source art is unmodified.",
+    "Playback should retain a constant target center/foot anchor rather than deriving anchor from opaque bounds."
+  ]
+}

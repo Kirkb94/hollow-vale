@@ -1,0 +1,183 @@
+{
+  "faction": "vamp",
+  "name": "Vampires",
+  "style": "Arcane Vanguard",
+  "units": [
+    {
+      "key": "blade",
+      "name": "Bloodblade",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "Heals 2 whenever it hits a unit.",
+      "status": "six-direction-layered-representative-assets-ready"
+    },
+    {
+      "key": "warlock",
+      "name": "Warlock",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "Costs 1 mana. Hits at exactly range 2 and heals 2. Bat Form (free, before moving): fly like a Bat this turn and turn back on landing.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "assassin",
+      "name": "Nightstalker",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": true,
+      "description": "Fragile, but one hit drops most archers, casters and scouts.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "bats",
+      "name": "Bat",
+      "hidden": false,
+      "fly": true,
+      "group": 3,
+      "elite": false,
+      "charge": false,
+      "description": "Three vampire bats take the field together. Fast fliers that feed with every bite.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "thrall",
+      "name": "Blood Thrall",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "A chained, bloodied servant. Slow and tough, and it feeds on its victims.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "countess",
+      "name": "Blood Countess",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "A noble sorceress. Crimson bolts from range 2-3 cost 1 mana and drain life.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "bloodhunter",
+      "name": "Blood Hunter",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": true,
+      "description": "A vampire knight on a black steed. Charges, bites and drains blood in one turn.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "vlord",
+      "name": "Vampire Lord",
+      "hidden": false,
+      "fly": true,
+      "group": 1,
+      "elite": true,
+      "charge": false,
+      "description": "Elite (5 slots). An ancient lord on bat wings. Blood Nova cleaves the target and the 2 hexes beside it, and drains the life from his prey.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "bloodqueen",
+      "name": "Blood Queen",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "charge": false,
+      "description": "Boss (5 slots). Exsanguinate: Defeating a unit heals her to full.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "nosferatu",
+      "name": "Nosferatu",
+      "hidden": false,
+      "fly": true,
+      "group": 1,
+      "elite": true,
+      "charge": false,
+      "description": "Boss (5 slots). Mist Step: Flies 4 hexes. After it attacks it turns to mist and takes 2 less damage until its next turn.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "matriarch",
+      "name": "Crimson Matriarch",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "charge": false,
+      "description": "Boss (5 slots). Blood Pact: Each hit steals 1 mana from the target's player.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "batking",
+      "name": "Bat King",
+      "hidden": false,
+      "fly": true,
+      "group": 1,
+      "elite": true,
+      "charge": false,
+      "description": "Boss (5 slots). Swarm Call: The first time it is hit each round a Bat appears next to it (up to 3).",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "nightwatch",
+      "name": "Night Watcher",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn.",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "hemomancer",
+      "name": "Hemomancer",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "Binds an enemy with a Crimson Tether that drains it for 3 turns (2 mana).",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "mesmerist",
+      "name": "Mesmerist",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "Charms an enemy hero into striking one of its own allies (3 mana).",
+      "status": "existing-art-retained"
+    },
+    {
+      "key": "duskweaver",
+      "name": "Duskweaver",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "charge": false,
+      "description": "Weaves a Veil of Night that hides your units from enemy eyes and arrows (2 mana).",
+      "status": "existing-art-retained"
+    }
+  ]
+}

@@ -307,3 +307,19 @@ IPHONE TIPS
 
 SOLO
 - Open public/index.html in a browser and choose "Solo: you vs 2 AI".
+
+IN-GAME PAUSE MENU
+Click Menu in the battle toolbar or press Escape to open the battle menu.
+Resume returns to play. Settings opens the saved volume, battle pace, display and accessibility controls. Escape from Settings returns to the battle menu.
+Local AI and pending automatic turn endings wait until Resume. Online matches continue for all players while the menu is open. Return to main menu asks before leaving the battle.
+
+NEW ART TEST MATCH (LOCAL PREVIEW)
+Open /?arttest=factions on the running server. Both squads start with the four
+completed faction representatives: Pyromancer, Knight, Bloodblade and Necromancer.
+Play against the AI normally, or enable Stationary opponents for inspection.
+The bottom panel selects characters/facings, refreshes actions on your turn and
+restarts the match. Collapse the panel to see more of the board.
+Open /animation-preview.html to inspect six facings and movable pieces.
+Open /?arttest=factions&faction=kingdom to play with all 17 updated Kingdom units.
+Kingdom's full roster is complete. The other factions remain partial until their
+own art batches are finished; the standard mixed test showcases four pilots.

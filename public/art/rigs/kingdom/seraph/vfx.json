@@ -1,0 +1,193 @@
+{
+  "file": "vfx.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "columns": 4,
+  "rows": 4,
+  "alpha": [
+    0,
+    255
+  ],
+  "clips": {
+    "holyBolt": {
+      "row": 0,
+      "frames": 4,
+      "fps": 8.333333333333334,
+      "durationMs": 480,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "weapon",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          0,
+          314,
+          314
+        ],
+        [
+          314,
+          0,
+          313,
+          314
+        ],
+        [
+          627,
+          0,
+          313,
+          314
+        ],
+        [
+          940,
+          0,
+          314,
+          314
+        ]
+      ]
+    },
+    "holyImpact": {
+      "row": 1,
+      "frames": 4,
+      "fps": 8.333333333333334,
+      "durationMs": 480,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "target",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          314,
+          314,
+          313
+        ],
+        [
+          314,
+          314,
+          313,
+          313
+        ],
+        [
+          627,
+          314,
+          313,
+          313
+        ],
+        [
+          940,
+          314,
+          314,
+          313
+        ]
+      ]
+    },
+    "holyAura": {
+      "row": 2,
+      "frames": 4,
+      "fps": 3.3333333333333335,
+      "durationMs": 1200,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "while alive and visible",
+      "sourceRects": [
+        [
+          0,
+          627,
+          314,
+          313
+        ],
+        [
+          314,
+          627,
+          313,
+          313
+        ],
+        [
+          627,
+          627,
+          313,
+          313
+        ],
+        [
+          940,
+          627,
+          314,
+          313
+        ]
+      ]
+    },
+    "spawn": {
+      "row": 3,
+      "frames": 4,
+      "fps": 8.333333333333334,
+      "durationMs": 480,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          940,
+          314,
+          314
+        ],
+        [
+          314,
+          940,
+          313,
+          314
+        ],
+        [
+          627,
+          940,
+          313,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ]
+    }
+  },
+  "bindings": {
+    "attack": {
+      "projectile": "holyBolt",
+      "impact": "holyImpact",
+      "releaseMs": 250,
+      "travelMs": 300
+    },
+    "spawn": "spawn",
+    "aura": {
+      "clip": "holyAura",
+      "radiusHexes": 1
+    }
+  },
+  "notes": [
+    "Presentation only; preserves existing unit mechanics.",
+    "Four illustrated frames per clip; interpolate opacity and scale in runtime."
+  ],
+  "statusEvents": {
+    "turn:heal": {
+      "impact": "holyAura"
+    }
+  }
+}

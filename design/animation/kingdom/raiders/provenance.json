@@ -1,0 +1,12 @@
+{
+  "generator": "built-in imagegen",
+  "unit": "raiders",
+  "bodySource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-ca002801-3164-4e26-a11c-b53eb0ed2ce0.png",
+  "equipmentSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-c8a5d5aa-b6a7-4dcf-bb09-ffbb4e12b61c.png",
+  "vfxSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-b18c3050-8611-4e41-a084-ffe742355145.png",
+  "rejectedVfx": [
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-fd3db83a-968a-4036-89b9-afb284a84b37.png",
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-6ff2e98d-1a97-40f3-8984-69683e077ad9.png"
+  ],
+  "notes": []
+}

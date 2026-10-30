@@ -1,0 +1,42 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 4,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "clipCoverage": {
+    "attack": true,
+    "impact": true,
+    "aura": true,
+    "spawn": true
+  },
+  "spawnFX": 1,
+  "passiveAuraFX": 1,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "tools/kingdom-elites.test.cjs",
+  "testedAt": "2026-10-30T10:58:51.577Z",
+  "pageErrors": []
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "unit": "necromancer",
+  "faction": "undead",
+  "file": "necromancer-fx.png",
+  "size": [1536, 1024],
+  "grid": {"columns": 6, "rows": 4, "cellWidth": 256, "cellHeight": 256},
+  "alpha": true,
+  "blend": "source-over",
+  "clips": {
+    "deathBolt": {"row": 0, "frames": [0,1,2,3,4,5], "fps": 12, "loop": true, "anchor": [0.77,0.55], "attachment": "projectile", "nativeDirection": "e", "rotateToTravel": true, "sizeInHexes": 0.8},
+    "necroticImpact": {"row": 1, "frames": [0,1,2,3,4,5], "fps": 14, "loop": false, "anchor": [0.5,0.63], "attachment": "target-contact", "sizeInHexes": 1.0},
+    "raiseSlain": {"row": 2, "frames": [0,1,2,3,4,5], "fps": 8, "loop": false, "anchor": [0.5,0.75], "attachment": "raised-unit-feet", "sizeInHexes": 1.1},
+    "castingAura": {"row": 3, "frames": [0,1,2,3,4,5], "fps": 10, "loop": true, "anchor": [0.5,0.55], "attachment": "caster-feet", "durationMs": 600, "sizeInHexes": 0.9}
+  },
+  "rules": [
+    "Visuals only: retain existing ability damage, timing, ownership and targeting.",
+    "Only play when existing visibility checks allow the caster, projectile or target to be seen.",
+    "Clip loop ends with its owning action; never leave aura active after the cast.",
+    "Honor reduced-motion and existing visual effect settings.",
+    "Very faint generated alpha remains in some cell corners; no opaque backdrop."
+  ],
+  "status": "assets-ready-shared-runtime-hookup-required"
+}

@@ -1,0 +1,12 @@
+{
+  "generator": "built-in imagegen",
+  "unit": "footmen",
+  "bodySource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-4f91f1ee-d29d-4f34-84fd-ce6e24f4b8ec.png",
+  "equipmentSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-935c08f7-f037-490a-9819-46584de8ee5f.png",
+  "vfxSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-286feb82-e6ea-4cd3-93cc-6f66b098318e.png",
+  "rejectedVfx": [
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-d5470f67-8127-4e28-9893-b23286c9ccc7.png",
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-b764af6c-1e9d-4101-906d-5818e98905e2.png"
+  ],
+  "notes": []
+}

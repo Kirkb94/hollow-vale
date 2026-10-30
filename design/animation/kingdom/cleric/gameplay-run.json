@@ -1,0 +1,156 @@
+{
+  "result": {
+    "cleric": {
+      "attackDamage": 2,
+      "attackFX": 2,
+      "healHP": 7,
+      "healFX": 1
+    },
+    "paladin": {
+      "attackDamage": 4,
+      "attackFX": 2,
+      "healHP": 5,
+      "healFX": 1
+    },
+    "sunspeaker": {
+      "attackDamage": 2,
+      "attackFX": 1,
+      "spellOK": true,
+      "spellFX": 1,
+      "zoneCreated": true,
+      "verdictDamage": 4,
+      "verdictEvent": true
+    },
+    "aegis": {
+      "attackDamage": 2,
+      "attackFX": 1,
+      "spellOK": true,
+      "spellFX": 1,
+      "shieldAbsorbed": 2,
+      "shieldEvent": true
+    },
+    "herald": {
+      "attackDamage": 2,
+      "attackFX": 1,
+      "spellOK": true,
+      "spellFX": 2,
+      "relocated": true,
+      "arrivalAtDestination": true
+    },
+    "knight": {
+      "attackDamage": 8,
+      "attackFX": 2
+    }
+  },
+  "presentation": {
+    "cleric": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 772,
+          "rig": 145
+        },
+        "after": {
+          "board": 964,
+          "rig": 181.0625
+        }
+      }
+    },
+    "paladin": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 772,
+          "rig": 145
+        },
+        "after": {
+          "board": 964,
+          "rig": 181.0625
+        }
+      }
+    },
+    "sunspeaker": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 772,
+          "rig": 145
+        },
+        "after": {
+          "board": 964,
+          "rig": 181.0625
+        }
+      }
+    },
+    "aegis": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 772,
+          "rig": 145
+        },
+        "after": {
+          "board": 964,
+          "rig": 181.0625
+        }
+      }
+    },
+    "herald": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 772,
+          "rig": 145
+        },
+        "after": {
+          "board": 964,
+          "rig": 181.0625
+        }
+      }
+    },
+    "knight": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 772,
+          "rig": 145
+        },
+        "after": {
+          "board": 964,
+          "rig": 181.0625
+        }
+      }
+    }
+  },
+  "errors": []
+}

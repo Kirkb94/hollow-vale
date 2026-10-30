@@ -1,0 +1,16 @@
+{
+  "n": "Royal Lookout",
+  "e": "🔭",
+  "hp": 12,
+  "mv": 3,
+  "rng": [
+    1,
+    2
+  ],
+  "dmg": 4,
+  "fac": "kingdom",
+  "sight": 5,
+  "flare": 1,
+  "fcost": 1,
+  "d": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+}

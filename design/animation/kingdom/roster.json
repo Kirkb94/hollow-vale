@@ -1,0 +1,463 @@
+{
+  "faction": "kingdom",
+  "source": "Live H registry at localhost:4323; all active Kingdom entries",
+  "representative": "knight",
+  "units": [
+    {
+      "id": "knight",
+      "name": "Knight",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "Balanced fighter.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "cleric",
+      "name": "Cleric",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "Heals an ally for 5 (1 mana), or pokes an enemy.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn",
+        "cast"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "lancer",
+      "name": "Lancer",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "Charges in and strikes in the same turn. Its spear pierces 2 hexes in a straight line and hits both.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "paladin",
+      "name": "Paladin",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "Fights in melee. Heals an ally for 3 (1 mana).",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn",
+        "cast"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "footmen",
+      "name": "Footmen",
+      "hidden": false,
+      "fly": false,
+      "group": 3,
+      "elite": false,
+      "description": "A squad of 3 spearmen. Takes 1 less damage.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "bowmen",
+      "name": "Bowmen",
+      "hidden": false,
+      "fly": false,
+      "group": 3,
+      "elite": false,
+      "description": "A squad of 3 archers. Volleys from range 2-3.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "raiders",
+      "name": "Raiders",
+      "hidden": false,
+      "fly": false,
+      "group": 3,
+      "elite": false,
+      "description": "A pack of 3 fast raiders that charge in and strike in the same turn.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "outrider",
+      "name": "Outrider",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "A light horseman. Gallops in and strikes in the same turn, but cannot take a beating.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "mounted"
+    },
+    {
+      "id": "kinglion",
+      "name": "Lionheart King",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "description": "Elite (5 slots). The armored king of the realm. His great sword cleaves the target and the 2 hexes beside it.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "seraph",
+      "name": "High Seraph",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "description": "Boss (5 slots). Holy Aura: At the start of your turn, allies next to her and she herself heal 1.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "winged-humanoid"
+    },
+    {
+      "id": "warlord",
+      "name": "Warlord Gideon",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "description": "Boss (5 slots). War Banner: Your other heroes within 2 hexes deal +1 damage.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "templar",
+      "name": "Grand Templar",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "description": "Boss (5 slots). Tower Shield: Attacks from 2 or more hexes away deal half damage to him.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "marshal",
+      "name": "Lord Marshal",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": true,
+      "description": "Boss (5 slots). Momentum: When he defeats a unit he may act again (once per turn).",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "lookout",
+      "name": "Royal Lookout",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn.",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn",
+        "cast"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "sunspeaker",
+      "name": "Sunspeaker",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "A herald of noon. Marks a hex for a delayed 5-damage Noon Verdict (3 mana).",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn",
+        "cast"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "aegis",
+      "name": "Aegis Chaplain",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "A war chaplain. Shields an ally or tower before the blow lands (2 mana).",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn",
+        "cast"
+      ],
+      "rigFamily": "humanoid"
+    },
+    {
+      "id": "herald",
+      "name": "Royal Herald",
+      "hidden": false,
+      "fly": false,
+      "group": 1,
+      "elite": false,
+      "description": "Sounds the rally: pulls a friendly hero to his side from 4 hexes away (2 mana).",
+      "artStatus": "integrated-six-direction-cutout-and-effects",
+      "requiredAnimations": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "death",
+        "spawn",
+        "cast"
+      ],
+      "rigFamily": "humanoid"
+    }
+  ],
+  "coverage": {
+    "totalUnits": 17,
+    "newRigAssets": [
+      "knight",
+      "cleric",
+      "lancer",
+      "paladin",
+      "footmen",
+      "bowmen",
+      "raiders",
+      "outrider",
+      "kinglion",
+      "seraph",
+      "warlord",
+      "templar",
+      "marshal",
+      "lookout",
+      "sunspeaker",
+      "aegis",
+      "herald"
+    ],
+    "otherUnitsRetainExistingArt": 0,
+    "newVfxAssets": {
+      "knight": [
+        "slash",
+        "hitSpark",
+        "shieldImpact",
+        "spawn"
+      ],
+      "cleric": [
+        "holyBolt",
+        "heal",
+        "cast",
+        "spawn"
+      ],
+      "lancer": [
+        "thrust",
+        "hitSpark",
+        "chargeDust",
+        "spawn"
+      ],
+      "paladin": [
+        "hammerTrail",
+        "impact",
+        "heal",
+        "spawn"
+      ],
+      "footmen": [
+        "thrust",
+        "impact",
+        "armorContact",
+        "arrival"
+      ],
+      "bowmen": [
+        "projectile",
+        "release",
+        "impact",
+        "arrival"
+      ],
+      "raiders": [
+        "slash",
+        "impact",
+        "chargeDust",
+        "arrival"
+      ],
+      "outrider": [
+        "slash",
+        "hitSpark",
+        "hoofDust",
+        "spawn"
+      ],
+      "kinglion": [
+        "cleave",
+        "hitSpark",
+        "royalCommand",
+        "spawn"
+      ],
+      "seraph": [
+        "holyBolt",
+        "holyImpact",
+        "holyAura",
+        "spawn"
+      ],
+      "warlord": [
+        "slash",
+        "hitSpark",
+        "warBanner",
+        "spawn"
+      ],
+      "templar": [
+        "maceSwing",
+        "hitSpark",
+        "shieldGuard",
+        "spawn"
+      ],
+      "marshal": [
+        "slash",
+        "impact",
+        "chargeDust",
+        "momentum"
+      ],
+      "lookout": [
+        "projectile",
+        "impact",
+        "flare",
+        "reveal"
+      ],
+      "sunspeaker": [
+        "solarOrb",
+        "verdictMarker",
+        "verdictStrike",
+        "spawn"
+      ],
+      "aegis": [
+        "maceTrail",
+        "aegis",
+        "shieldImpact",
+        "spawn"
+      ],
+      "herald": [
+        "slash",
+        "rally",
+        "rallyArrival",
+        "spawn"
+      ]
+    }
+  }
+}

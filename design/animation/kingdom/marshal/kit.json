@@ -1,0 +1,15 @@
+{
+  "n": "Lord Marshal",
+  "e": "👑",
+  "hp": 15,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 4,
+  "charge": 1,
+  "elite": 1,
+  "fac": "kingdom",
+  "d": "Boss (5 slots). Momentum: When he defeats a unit he may act again (once per turn)."
+}

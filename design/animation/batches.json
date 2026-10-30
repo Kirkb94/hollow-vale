@@ -1,0 +1,132 @@
+{
+  "objective": "Complete the remaining 107 unit art overhauls in full-faction batches, verify and push each completed batch to origin/main, then continue.",
+  "style": "Arcane Vanguard layered 2D, six genuine hex directions, independent equipment and appropriate animated effects",
+  "releaseRule": "Never label a representative-only batch a completed faction. Push only after every roster unit in that batch passes asset, animation, gameplay integration and visual checks.",
+  "baselineIntegrated": [
+    "mage",
+    "knight",
+    "blade",
+    "necromancer"
+  ],
+  "batches": [
+    {
+      "faction": "kingdom",
+      "total": 17,
+      "status": "verified-awaiting-push",
+      "workers": {
+        "hollow_kingdom": [
+          "cleric",
+          "paladin",
+          "sunspeaker",
+          "aegis",
+          "herald"
+        ],
+        "hollow_undead": [
+          "footmen",
+          "bowmen",
+          "raiders",
+          "lookout",
+          "marshal"
+        ],
+        "hollow_vampires": [
+          "lancer",
+          "outrider",
+          "kinglion",
+          "seraph",
+          "warlord",
+          "templar"
+        ]
+      },
+      "validated": [
+        "knight",
+        "cleric",
+        "lancer",
+        "paladin",
+        "footmen",
+        "bowmen",
+        "raiders",
+        "outrider",
+        "kinglion",
+        "seraph",
+        "warlord",
+        "templar",
+        "marshal",
+        "lookout",
+        "sunspeaker",
+        "aegis",
+        "herald"
+      ]
+    },
+    {
+      "faction": "vamp",
+      "total": 16,
+      "status": "art-production",
+      "workers": {
+        "hollow_kingdom": [
+          "warlock",
+          "assassin",
+          "thrall",
+          "countess",
+          "bloodhunter"
+        ],
+        "hollow_undead": [
+          "bats",
+          "vlord",
+          "bloodqueen",
+          "nosferatu",
+          "batking"
+        ]
+      },
+      "validated": [
+        "nightwatch",
+        "hemomancer",
+        "mesmerist",
+        "duskweaver",
+        "matriarch"
+      ]
+    },
+    {
+      "faction": "undead",
+      "total": 15,
+      "status": "queued"
+    },
+    {
+      "faction": "infernal",
+      "total": 14,
+      "status": "queued"
+    },
+    {
+      "faction": "wilds",
+      "total": 17,
+      "status": "queued"
+    },
+    {
+      "faction": "iron",
+      "total": 16,
+      "status": "queued"
+    },
+    {
+      "faction": "arcane",
+      "total": 15,
+      "status": "queued"
+    },
+    {
+      "faction": "raidboss",
+      "total": 1,
+      "status": "queued"
+    }
+  ],
+  "checksPerUnit": [
+    "six distinct facings",
+    "separate movable pieces",
+    "equipment grips",
+    "actual-kit effects",
+    "idle and movement",
+    "attack and applicable cast",
+    "hurt death spawn",
+    "visibility and pause",
+    "zoom",
+    "visual assembly"
+  ],
+  "pushes": []
+}

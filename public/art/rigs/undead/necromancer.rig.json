@@ -1,0 +1,1576 @@
+{
+  "version": 1,
+  "unit": "necromancer",
+  "faction": "undead",
+  "style": "Arcane Vanguard",
+  "status": "art-ready-requires-shared-runtime-integration",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "atlasGrid": [
+    3,
+    4
+  ],
+  "partOrder": [
+    "head",
+    "torso",
+    "cape",
+    "pelvis",
+    "leftUpperArm",
+    "rightUpperArm",
+    "leftForearm",
+    "rightForearm",
+    "leftLeg",
+    "rightLeg",
+    "leftBoot",
+    "rightBoot"
+  ],
+  "views": {
+    "e": {
+      "file": "necromancer-e.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            42,
+            35,
+            305,
+            368
+          ],
+          "renderRect": [
+            42,
+            35,
+            305,
+            368
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 61300
+        },
+        "torso": {
+          "sourceRect": [
+            455,
+            36,
+            232,
+            369
+          ],
+          "renderRect": [
+            455,
+            36,
+            232,
+            244
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 60845
+        },
+        "cape": {
+          "sourceRect": [
+            778,
+            18,
+            261,
+            395
+          ],
+          "renderRect": [
+            778,
+            18,
+            261,
+            395
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 59997
+        },
+        "pelvis": {
+          "sourceRect": [
+            53,
+            426,
+            308,
+            324
+          ],
+          "renderRect": [
+            53,
+            426,
+            308,
+            324
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 65800
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            471,
+            446,
+            184,
+            300
+          ],
+          "renderRect": [
+            471,
+            446,
+            184,
+            300
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 40266
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            818,
+            447,
+            166,
+            289
+          ],
+          "renderRect": [
+            818,
+            447,
+            166,
+            289
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 33854
+        },
+        "leftForearm": {
+          "sourceRect": [
+            123,
+            766,
+            170,
+            311
+          ],
+          "renderRect": [
+            123,
+            766,
+            170,
+            311
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 28276
+        },
+        "rightForearm": {
+          "sourceRect": [
+            470,
+            772,
+            173,
+            306
+          ],
+          "renderRect": [
+            470,
+            772,
+            173,
+            306
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 26584
+        },
+        "leftLeg": {
+          "sourceRect": [
+            858,
+            766,
+            139,
+            324
+          ],
+          "renderRect": [
+            858,
+            766,
+            139,
+            324
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 30310
+        },
+        "rightLeg": {
+          "sourceRect": [
+            114,
+            1103,
+            152,
+            316
+          ],
+          "renderRect": [
+            114,
+            1103,
+            152,
+            316
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 31899
+        },
+        "leftBoot": {
+          "sourceRect": [
+            467,
+            1200,
+            211,
+            198
+          ],
+          "renderRect": [
+            467,
+            1200,
+            211,
+            198
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 24547
+        },
+        "rightBoot": {
+          "sourceRect": [
+            838,
+            1200,
+            198,
+            199
+          ],
+          "renderRect": [
+            838,
+            1200,
+            198,
+            199
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 23228
+        }
+      }
+    },
+    "se": {
+      "file": "necromancer-se.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            28,
+            33,
+            308,
+            336
+          ],
+          "renderRect": [
+            28,
+            33,
+            308,
+            336
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 59706
+        },
+        "torso": {
+          "sourceRect": [
+            405,
+            22,
+            282,
+            358
+          ],
+          "renderRect": [
+            405,
+            22,
+            282,
+            236
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 73791
+        },
+        "cape": {
+          "sourceRect": [
+            752,
+            13,
+            300,
+            361
+          ],
+          "renderRect": [
+            752,
+            13,
+            300,
+            361
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 63370
+        },
+        "pelvis": {
+          "sourceRect": [
+            21,
+            385,
+            333,
+            340
+          ],
+          "renderRect": [
+            21,
+            385,
+            333,
+            340
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 71935
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            436,
+            410,
+            212,
+            286
+          ],
+          "renderRect": [
+            436,
+            410,
+            212,
+            286
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 38354
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            801,
+            412,
+            213,
+            295
+          ],
+          "renderRect": [
+            801,
+            412,
+            213,
+            295
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 43420
+        },
+        "leftForearm": {
+          "sourceRect": [
+            123,
+            735,
+            150,
+            323
+          ],
+          "renderRect": [
+            123,
+            735,
+            150,
+            323
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 29328
+        },
+        "rightForearm": {
+          "sourceRect": [
+            471,
+            731,
+            163,
+            326
+          ],
+          "renderRect": [
+            471,
+            731,
+            163,
+            326
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 25769
+        },
+        "leftLeg": {
+          "sourceRect": [
+            848,
+            733,
+            151,
+            330
+          ],
+          "renderRect": [
+            848,
+            733,
+            151,
+            330
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 34889
+        },
+        "rightLeg": {
+          "sourceRect": [
+            107,
+            1074,
+            155,
+            348
+          ],
+          "renderRect": [
+            107,
+            1074,
+            155,
+            348
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 38116
+        },
+        "leftBoot": {
+          "sourceRect": [
+            450,
+            1126,
+            219,
+            268
+          ],
+          "renderRect": [
+            450,
+            1126,
+            219,
+            268
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 35011
+        },
+        "rightBoot": {
+          "sourceRect": [
+            836,
+            1126,
+            205,
+            266
+          ],
+          "renderRect": [
+            836,
+            1126,
+            205,
+            266
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 32017
+        }
+      }
+    },
+    "sw": {
+      "file": "necromancer-sw.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            69,
+            27,
+            267,
+            370
+          ],
+          "renderRect": [
+            69,
+            27,
+            267,
+            370
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 60872
+        },
+        "torso": {
+          "sourceRect": [
+            390,
+            44,
+            304,
+            352
+          ],
+          "renderRect": [
+            390,
+            44,
+            304,
+            232
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 78817
+        },
+        "cape": {
+          "sourceRect": [
+            755,
+            23,
+            312,
+            389
+          ],
+          "renderRect": [
+            755,
+            23,
+            312,
+            389
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 73289
+        },
+        "pelvis": {
+          "sourceRect": [
+            32,
+            427,
+            361,
+            332
+          ],
+          "renderRect": [
+            32,
+            427,
+            361,
+            332
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 69898
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            446,
+            427,
+            228,
+            328
+          ],
+          "renderRect": [
+            446,
+            427,
+            228,
+            328
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 45866
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            787,
+            428,
+            194,
+            326
+          ],
+          "renderRect": [
+            787,
+            428,
+            194,
+            326
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 37139
+        },
+        "leftForearm": {
+          "sourceRect": [
+            109,
+            771,
+            152,
+            310
+          ],
+          "renderRect": [
+            109,
+            771,
+            152,
+            310
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 22905
+        },
+        "rightForearm": {
+          "sourceRect": [
+            518,
+            774,
+            121,
+            290
+          ],
+          "renderRect": [
+            518,
+            774,
+            121,
+            290
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 21758
+        },
+        "leftLeg": {
+          "sourceRect": [
+            820,
+            767,
+            169,
+            324
+          ],
+          "renderRect": [
+            820,
+            767,
+            169,
+            324
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 37044
+        },
+        "rightLeg": {
+          "sourceRect": [
+            104,
+            1097,
+            164,
+            315
+          ],
+          "renderRect": [
+            104,
+            1097,
+            164,
+            315
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 35414
+        },
+        "leftBoot": {
+          "sourceRect": [
+            418,
+            1125,
+            217,
+            274
+          ],
+          "renderRect": [
+            418,
+            1125,
+            217,
+            274
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 34031
+        },
+        "rightBoot": {
+          "sourceRect": [
+            821,
+            1127,
+            205,
+            273
+          ],
+          "renderRect": [
+            821,
+            1127,
+            205,
+            273
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 32479
+        }
+      }
+    },
+    "w": {
+      "file": "necromancer-w.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            97,
+            35,
+            240,
+            354
+          ],
+          "renderRect": [
+            97,
+            35,
+            240,
+            354
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 51153
+        },
+        "torso": {
+          "sourceRect": [
+            420,
+            24,
+            236,
+            381
+          ],
+          "renderRect": [
+            420,
+            24,
+            236,
+            251
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 63560
+        },
+        "cape": {
+          "sourceRect": [
+            776,
+            12,
+            273,
+            389
+          ],
+          "renderRect": [
+            776,
+            12,
+            273,
+            389
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 58970
+        },
+        "pelvis": {
+          "sourceRect": [
+            50,
+            409,
+            320,
+            319
+          ],
+          "renderRect": [
+            50,
+            409,
+            320,
+            319
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 62857
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            475,
+            426,
+            154,
+            297
+          ],
+          "renderRect": [
+            475,
+            426,
+            154,
+            297
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 32632
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            829,
+            424,
+            176,
+            302
+          ],
+          "renderRect": [
+            829,
+            424,
+            176,
+            302
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 35048
+        },
+        "leftForearm": {
+          "sourceRect": [
+            105,
+            741,
+            162,
+            309
+          ],
+          "renderRect": [
+            105,
+            741,
+            162,
+            309
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 23615
+        },
+        "rightForearm": {
+          "sourceRect": [
+            477,
+            740,
+            156,
+            311
+          ],
+          "renderRect": [
+            477,
+            740,
+            156,
+            311
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 25951
+        },
+        "leftLeg": {
+          "sourceRect": [
+            863,
+            732,
+            139,
+            338
+          ],
+          "renderRect": [
+            863,
+            732,
+            139,
+            338
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 28819
+        },
+        "rightLeg": {
+          "sourceRect": [
+            108,
+            1068,
+            136,
+            328
+          ],
+          "renderRect": [
+            108,
+            1068,
+            136,
+            328
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 28334
+        },
+        "leftBoot": {
+          "sourceRect": [
+            431,
+            1153,
+            222,
+            220
+          ],
+          "renderRect": [
+            431,
+            1153,
+            222,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 27940
+        },
+        "rightBoot": {
+          "sourceRect": [
+            833,
+            1154,
+            221,
+            220
+          ],
+          "renderRect": [
+            833,
+            1154,
+            221,
+            220
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 27954
+        }
+      }
+    },
+    "nw": {
+      "file": "necromancer-nw.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            100,
+            36,
+            260,
+            342
+          ],
+          "renderRect": [
+            100,
+            36,
+            260,
+            342
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 50798
+        },
+        "torso": {
+          "sourceRect": [
+            436,
+            42,
+            268,
+            349
+          ],
+          "renderRect": [
+            436,
+            42,
+            268,
+            230
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 61385
+        },
+        "cape": {
+          "sourceRect": [
+            749,
+            16,
+            316,
+            390
+          ],
+          "renderRect": [
+            749,
+            16,
+            316,
+            390
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 68202
+        },
+        "pelvis": {
+          "sourceRect": [
+            48,
+            403,
+            355,
+            325
+          ],
+          "renderRect": [
+            48,
+            403,
+            355,
+            325
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 66574
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            481,
+            418,
+            148,
+            315
+          ],
+          "renderRect": [
+            481,
+            418,
+            148,
+            315
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 30877
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            820,
+            427,
+            192,
+            296
+          ],
+          "renderRect": [
+            820,
+            427,
+            192,
+            296
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 31058
+        },
+        "leftForearm": {
+          "sourceRect": [
+            83,
+            761,
+            194,
+            291
+          ],
+          "renderRect": [
+            83,
+            761,
+            194,
+            291
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 30833
+        },
+        "rightForearm": {
+          "sourceRect": [
+            527,
+            760,
+            158,
+            295
+          ],
+          "renderRect": [
+            527,
+            760,
+            158,
+            295
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 21546
+        },
+        "leftLeg": {
+          "sourceRect": [
+            852,
+            739,
+            152,
+            317
+          ],
+          "renderRect": [
+            852,
+            739,
+            152,
+            317
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 29291
+        },
+        "rightLeg": {
+          "sourceRect": [
+            129,
+            1073,
+            178,
+            340
+          ],
+          "renderRect": [
+            129,
+            1073,
+            178,
+            340
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 34698
+        },
+        "leftBoot": {
+          "sourceRect": [
+            426,
+            1105,
+            242,
+            273
+          ],
+          "renderRect": [
+            426,
+            1105,
+            242,
+            273
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 37013
+        },
+        "rightBoot": {
+          "sourceRect": [
+            812,
+            1110,
+            224,
+            266
+          ],
+          "renderRect": [
+            812,
+            1110,
+            224,
+            266
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 34920
+        }
+      }
+    },
+    "ne": {
+      "file": "necromancer-ne.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            50,
+            42,
+            279,
+            359
+          ],
+          "renderRect": [
+            50,
+            42,
+            279,
+            359
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 50383
+        },
+        "torso": {
+          "sourceRect": [
+            421,
+            74,
+            247,
+            325
+          ],
+          "renderRect": [
+            421,
+            74,
+            247,
+            214
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 57098
+        },
+        "cape": {
+          "sourceRect": [
+            734,
+            36,
+            332,
+            366
+          ],
+          "renderRect": [
+            734,
+            36,
+            332,
+            366
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 64817
+        },
+        "pelvis": {
+          "sourceRect": [
+            29,
+            412,
+            358,
+            321
+          ],
+          "renderRect": [
+            29,
+            412,
+            358,
+            321
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 68027
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            478,
+            435,
+            163,
+            253
+          ],
+          "renderRect": [
+            478,
+            435,
+            163,
+            253
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 28786
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            825,
+            437,
+            150,
+            263
+          ],
+          "renderRect": [
+            825,
+            437,
+            150,
+            263
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 28714
+        },
+        "leftForearm": {
+          "sourceRect": [
+            105,
+            746,
+            163,
+            298
+          ],
+          "renderRect": [
+            105,
+            746,
+            163,
+            298
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 21536
+        },
+        "rightForearm": {
+          "sourceRect": [
+            476,
+            748,
+            167,
+            317
+          ],
+          "renderRect": [
+            476,
+            748,
+            167,
+            317
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 24626
+        },
+        "leftLeg": {
+          "sourceRect": [
+            827,
+            741,
+            171,
+            327
+          ],
+          "renderRect": [
+            827,
+            741,
+            171,
+            327
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 35370
+        },
+        "rightLeg": {
+          "sourceRect": [
+            112,
+            1076,
+            198,
+            337
+          ],
+          "renderRect": [
+            112,
+            1076,
+            198,
+            337
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 37628
+        },
+        "leftBoot": {
+          "sourceRect": [
+            484,
+            1143,
+            176,
+            245
+          ],
+          "renderRect": [
+            484,
+            1143,
+            176,
+            245
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 29115
+        },
+        "rightBoot": {
+          "sourceRect": [
+            847,
+            1148,
+            188,
+            241
+          ],
+          "renderRect": [
+            847,
+            1148,
+            188,
+            241
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 28309
+        }
+      }
+    }
+  },
+  "notes": [
+    "Use sourceRect/renderRect, not uniform cells: generated padding differs by row.",
+    "Pivots are normalized within renderRect.",
+    "Left/right are anatomical. Back views are independently generated, not mirrored.",
+    "Concept consistency: small buckle/bone decoration variation between views remains.",
+    "Staff is independently movable; attach to right forearm endpoint."
+  ],
+  "equipment": {
+    "staff": {
+      "file": "necromancer-staff.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "attachTo": "rightForearm",
+      "grip": [
+        0.5,
+        0.61
+      ],
+      "views": {
+        "e": {
+          "sourceRect": [
+            354,
+            17,
+            114,
+            485
+          ],
+          "pivot": [
+            0.5,
+            0.61
+          ]
+        },
+        "se": {
+          "sourceRect": [
+            715,
+            15,
+            115,
+            487
+          ],
+          "pivot": [
+            0.5,
+            0.61
+          ]
+        },
+        "sw": {
+          "sourceRect": [
+            1093,
+            15,
+            108,
+            487
+          ],
+          "pivot": [
+            0.5,
+            0.61
+          ]
+        },
+        "w": {
+          "sourceRect": [
+            360,
+            522,
+            112,
+            490
+          ],
+          "pivot": [
+            0.5,
+            0.61
+          ]
+        },
+        "nw": {
+          "sourceRect": [
+            715,
+            519,
+            114,
+            493
+          ],
+          "pivot": [
+            0.5,
+            0.61
+          ]
+        },
+        "ne": {
+          "sourceRect": [
+            1092,
+            519,
+            114,
+            493
+          ],
+          "pivot": [
+            0.5,
+            0.61
+          ]
+        }
+      }
+    }
+  }
+}

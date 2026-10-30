@@ -1,0 +1,31 @@
+{
+  "unit": "knight",
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 108.75
+    },
+    "after": {
+      "board": 964,
+      "rig": 135.796875
+    }
+  },
+  "gameplay": true,
+  "effects": true,
+  "gameplayEvidence": {
+    "attackDamage": 8,
+    "attackFX": 2
+  },
+  "browserErrors": [],
+  "test": "tools/kingdom-holy.test.cjs",
+  "testURL": "http://localhost:4323/?arttest=factions&faction=kingdom",
+  "notes": [
+    "Verified actual attack damage and slash/hit effects, actual spawn presentation, six facings, animated pieces, weapon equipment, fog concealment, pause/resume and zoom. ShieldImpact artwork is not a new block mechanic."
+  ]
+}

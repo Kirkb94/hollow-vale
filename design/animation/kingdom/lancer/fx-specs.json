@@ -1,0 +1,56 @@
+{
+  "lancer": {
+    "clips": [
+      "thrust",
+      "hitSpark",
+      "chargeDust",
+      "spawn"
+    ],
+    "desc": "Row1 narrow horizontal white-gold spear thrust streak progressing left to right. Row2 tiny golden steel hit spark blooming then fading. Row3 small brown boot charge dust puff expanding and fading. Row4 subtle blue-gold arrival ring expanding then fading. No magic projectile."
+  },
+  "outrider": {
+    "clips": [
+      "slash",
+      "hitSpark",
+      "hoofDust",
+      "spawn"
+    ],
+    "desc": "Row1 white steel cavalry sword crescent slash expanding then fading. Row2 small golden steel hit spark blooming then fading. Row3 brown hoof dust burst spreading and dissipating. Row4 subdued blue-gold arrival ring expanding then fading."
+  },
+  "kinglion": {
+    "clips": [
+      "cleave",
+      "hitSpark",
+      "royalCommand",
+      "spawn"
+    ],
+    "desc": "Row1 broad white-gold greatsword crescent cleave across frontal arc expanding and fading. Row2 heavy steel gold impact sparks expanding then fading. Row3 low golden defensive circular ground aura pulsing brighter then dimmer, seamless loop. Row4 crimson-gold royal arrival circle expanding and fading."
+  },
+  "seraph": {
+    "clips": [
+      "holyBolt",
+      "holyImpact",
+      "holyAura",
+      "spawn"
+    ],
+    "desc": "Row1 small elongated golden holy light bolt traveling right with trailing motes, looping motion. Row2 warm gold light impact blooming then fading. Row3 cream-gold healing ground ring with rising tiny golden motes, gently pulsing seamless loop. Row4 white-gold arrival ring and falling white feathers, expanding then fading."
+  },
+  "warlord": {
+    "clips": [
+      "slash",
+      "hitSpark",
+      "warBanner",
+      "spawn"
+    ],
+    "desc": "Row1 steel white sword crescent slash expanding then fading. Row2 gold steel impact spark expanding then fading. Row3 low blue-gold ground ring with tiny upward gold chevrons, subtle rhythmic buff pulse seamless loop. Row4 blue-gold arrival circle expanding then fading."
+  },
+  "templar": {
+    "clips": [
+      "maceSwing",
+      "hitSpark",
+      "shieldGuard",
+      "spawn"
+    ],
+    "desc": "Row1 short white mace-swing curved motion streak expanding then fading. Row2 large compact gold-steel blunt impact star and tiny gray chips expanding and fading. Row3 ivory-gold shield-shaped impact flash expanding then fading representing ranged damage mitigation only. Row4 ivory-gold arrival ring expanding then fading."
+  }
+}

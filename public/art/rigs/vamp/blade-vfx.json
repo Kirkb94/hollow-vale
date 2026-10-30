@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "key": "blade-vfx",
+  "image": "blade-vfx.png",
+  "width": 1254,
+  "height": 1254,
+  "columns": 4,
+  "rows": 4,
+  "layoutNote": "Use explicit frames: generated spacing differs slightly from a perfectly uniform grid.",
+  "alpha": true,
+  "clips": {
+    "slash": {
+      "row": 0,
+      "fps": 12,
+      "loop": false,
+      "attachment": "attacker weapon tip / target contact",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotateWithAttack": true,
+      "frames": [
+        [
+          0,
+          0,
+          320,
+          360
+        ],
+        [
+          320,
+          0,
+          330,
+          360
+        ],
+        [
+          650,
+          0,
+          310,
+          360
+        ],
+        [
+          960,
+          0,
+          294,
+          360
+        ]
+      ]
+    },
+    "drain": {
+      "row": 1,
+      "fps": 12,
+      "loop": true,
+      "attachment": "travel from damaged target to Bloodblade chest",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotateWithAttack": true,
+      "frames": [
+        [
+          0,
+          380,
+          320,
+          240
+        ],
+        [
+          320,
+          380,
+          320,
+          240
+        ],
+        [
+          640,
+          380,
+          320,
+          240
+        ],
+        [
+          960,
+          380,
+          294,
+          240
+        ]
+      ]
+    },
+    "impact": {
+      "row": 2,
+      "fps": 12,
+      "loop": false,
+      "attachment": "target body",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "rotateWithAttack": false,
+      "frames": [
+        [
+          0,
+          630,
+          320,
+          300
+        ],
+        [
+          320,
+          630,
+          320,
+          300
+        ],
+        [
+          640,
+          630,
+          320,
+          300
+        ],
+        [
+          960,
+          630,
+          294,
+          300
+        ]
+      ]
+    },
+    "arrival": {
+      "row": 3,
+      "fps": 8,
+      "loop": false,
+      "attachment": "unit ground anchor on spawn",
+      "pivot": [
+        0.5,
+        0.85
+      ],
+      "rotateWithAttack": false,
+      "frames": [
+        [
+          0,
+          930,
+          320,
+          324
+        ],
+        [
+          320,
+          930,
+          320,
+          324
+        ],
+        [
+          640,
+          930,
+          320,
+          324
+        ],
+        [
+          960,
+          930,
+          294,
+          324
+        ]
+      ]
+    }
+  },
+  "rules": [
+    "Drain plays only after a successful damaging hit that actually heals the attacker.",
+    "Arrival is cosmetic on spawn, not a new passive power.",
+    "Respect gameplay visibility and reduced-motion settings.",
+    "Do not attach persistent aura to Bloodblade during ordinary idle."
+  ]
+}

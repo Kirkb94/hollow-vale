@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "units": {
+    "cleric": {
+      "name": "Cleric",
+      "faction": "Kingdom",
+      "folder": "kingdom/cleric",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json"
+    },
+    "paladin": {
+      "name": "Paladin",
+      "faction": "Kingdom",
+      "folder": "kingdom/paladin",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "sunspeaker": {
+      "name": "Sunspeaker",
+      "faction": "Kingdom",
+      "folder": "kingdom/sunspeaker",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json"
+    },
+    "aegis": {
+      "name": "Aegis Chaplain",
+      "faction": "Kingdom",
+      "folder": "kingdom/aegis",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "herald": {
+      "name": "Royal Herald",
+      "faction": "Kingdom",
+      "folder": "kingdom/herald",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "footmen": {
+      "name": "Footmen",
+      "faction": "Kingdom",
+      "folder": "kingdom/footmen",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json"
+    },
+    "bowmen": {
+      "name": "Bowmen",
+      "faction": "Kingdom",
+      "folder": "kingdom/bowmen",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json"
+    },
+    "raiders": {
+      "name": "Raiders",
+      "faction": "Kingdom",
+      "folder": "kingdom/raiders",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "lookout": {
+      "name": "Royal Lookout",
+      "faction": "Kingdom",
+      "folder": "kingdom/lookout",
+      "manifest": "manifest.json",
+      "attack": "shoot",
+      "effects": "vfx.json"
+    },
+    "marshal": {
+      "name": "Lord Marshal",
+      "faction": "Kingdom",
+      "folder": "kingdom/marshal",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "lancer": {
+      "name": "Lancer",
+      "faction": "Kingdom",
+      "folder": "kingdom/lancer",
+      "manifest": "manifest.json",
+      "attack": "thrust",
+      "effects": "vfx.json"
+    },
+    "outrider": {
+      "name": "Outrider",
+      "faction": "Kingdom",
+      "folder": "kingdom/outrider",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "kinglion": {
+      "name": "Lionheart King",
+      "faction": "Kingdom",
+      "folder": "kingdom/kinglion",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "seraph": {
+      "name": "High Seraph",
+      "faction": "Kingdom",
+      "folder": "kingdom/seraph",
+      "manifest": "manifest.json",
+      "attack": "cast",
+      "effects": "vfx.json"
+    },
+    "warlord": {
+      "name": "Warlord Gideon",
+      "faction": "Kingdom",
+      "folder": "kingdom/warlord",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    },
+    "templar": {
+      "name": "Grand Templar",
+      "faction": "Kingdom",
+      "folder": "kingdom/templar",
+      "manifest": "manifest.json",
+      "attack": "attack",
+      "effects": "vfx.json"
+    }
+  }
+}

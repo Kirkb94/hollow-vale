@@ -1,0 +1,27 @@
+{
+  "key": "sunspeaker",
+  "unit": {
+    "n": "Sunspeaker",
+    "e": "☀️",
+    "hp": 7,
+    "mv": 2,
+    "rng": [
+      2,
+      3
+    ],
+    "dmg": 3,
+    "sp": "verdict",
+    "spp": 2,
+    "fac": "kingdom",
+    "d": "A herald of noon. Marks a hex for a delayed 5-damage Noon Verdict (3 mana)."
+  },
+  "animation": [
+    "float",
+    "cast"
+  ],
+  "death": "dissolve",
+  "effects": [
+    "orb",
+    "#ffe58a"
+  ]
+}

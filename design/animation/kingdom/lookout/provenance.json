@@ -1,0 +1,12 @@
+{
+  "generator": "built-in imagegen",
+  "unit": "lookout",
+  "bodySource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-3be75b54-9c1a-476d-8cf0-fda9cd501f2f.png",
+  "equipmentSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-bd207fcc-e41c-4222-a754-4d75ab40ff94.png",
+  "vfxSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-7f228487-c4c6-44fd-9d4a-4cc214d9bb62.png",
+  "rejectedVfx": [
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-236b3332-d696-4182-a947-a5e104e0056f.png",
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-f3e7af4a-bbae-43ea-9630-f16373cf865c.png"
+  ],
+  "notes": []
+}

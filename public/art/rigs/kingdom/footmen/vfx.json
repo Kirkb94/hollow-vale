@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "unit": "footmen",
+  "file": "vfx.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "columns": 6,
+  "rows": 4,
+  "alpha": [
+    0,
+    254
+  ],
+  "clips": {
+    "thrust": {
+      "row": 0,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          0,
+          256,
+          256
+        ],
+        [
+          256,
+          0,
+          253,
+          256
+        ],
+        [
+          509,
+          0,
+          259,
+          256
+        ],
+        [
+          768,
+          0,
+          263,
+          256
+        ],
+        [
+          1031,
+          0,
+          252,
+          256
+        ],
+        [
+          1283,
+          0,
+          253,
+          256
+        ]
+      ],
+      "durationMs": 500
+    },
+    "impact": {
+      "row": 1,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          256,
+          256,
+          257
+        ],
+        [
+          256,
+          256,
+          256,
+          257
+        ],
+        [
+          512,
+          256,
+          256,
+          257
+        ],
+        [
+          768,
+          256,
+          256,
+          257
+        ],
+        [
+          1024,
+          256,
+          256,
+          257
+        ],
+        [
+          1280,
+          256,
+          256,
+          257
+        ]
+      ],
+      "durationMs": 500
+    },
+    "armorContact": {
+      "row": 2,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          513,
+          256,
+          255
+        ],
+        [
+          256,
+          513,
+          256,
+          255
+        ],
+        [
+          512,
+          513,
+          256,
+          255
+        ],
+        [
+          768,
+          513,
+          256,
+          255
+        ],
+        [
+          1024,
+          513,
+          256,
+          255
+        ],
+        [
+          1280,
+          513,
+          256,
+          255
+        ]
+      ],
+      "durationMs": 500
+    },
+    "arrival": {
+      "row": 3,
+      "frames": 6,
+      "fps": 8,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.8
+      ],
+      "sourceRects": [
+        [
+          0,
+          768,
+          256,
+          256
+        ],
+        [
+          256,
+          768,
+          256,
+          256
+        ],
+        [
+          512,
+          768,
+          267,
+          256
+        ],
+        [
+          779,
+          768,
+          253,
+          256
+        ],
+        [
+          1032,
+          768,
+          248,
+          256
+        ],
+        [
+          1280,
+          768,
+          256,
+          256
+        ]
+      ],
+      "durationMs": 750
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "thrust",
+      "impact": "impact",
+      "releaseMs": 190,
+      "travelMs": 0
+    },
+    "spawn": "arrival"
+  },
+  "notes": [
+    "Effects are presentation only and do not change mechanics.",
+    "Armor, charge-dust and Momentum assets are provided without inventing unconfirmed proc hooks.",
+    "Respect existing fog/visibility and reduced-motion rules."
+  ]
+}

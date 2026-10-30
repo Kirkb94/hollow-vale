@@ -1,0 +1,27 @@
+{
+  "key": "paladin",
+  "unit": {
+    "n": "Paladin",
+    "e": "⚜️",
+    "hp": 10,
+    "mv": 2,
+    "rng": [
+      1,
+      1
+    ],
+    "dmg": 5,
+    "heal": 3,
+    "cost": 1,
+    "d": "Fights in melee. Heals an ally for 3 (1 mana).",
+    "fac": "kingdom"
+  },
+  "animation": [
+    "breathe",
+    "smash"
+  ],
+  "death": "crumble",
+  "effects": [
+    "ring",
+    "#ffe27a"
+  ]
+}

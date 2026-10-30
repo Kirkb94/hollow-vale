@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "unit": "marshal",
+  "file": "vfx.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "columns": 6,
+  "rows": 4,
+  "alpha": [
+    0,
+    254
+  ],
+  "clips": {
+    "slash": {
+      "row": 0,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          0,
+          256,
+          256
+        ],
+        [
+          256,
+          0,
+          238,
+          256
+        ],
+        [
+          494,
+          0,
+          274,
+          256
+        ],
+        [
+          768,
+          0,
+          273,
+          256
+        ],
+        [
+          1041,
+          0,
+          244,
+          256
+        ],
+        [
+          1285,
+          0,
+          251,
+          256
+        ]
+      ],
+      "durationMs": 500
+    },
+    "impact": {
+      "row": 1,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          256,
+          255,
+          256
+        ],
+        [
+          255,
+          256,
+          253,
+          256
+        ],
+        [
+          508,
+          256,
+          273,
+          256
+        ],
+        [
+          781,
+          256,
+          260,
+          256
+        ],
+        [
+          1041,
+          256,
+          239,
+          256
+        ],
+        [
+          1280,
+          256,
+          256,
+          256
+        ]
+      ],
+      "durationMs": 500
+    },
+    "chargeDust": {
+      "row": 2,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.8
+      ],
+      "sourceRects": [
+        [
+          0,
+          512,
+          250,
+          235
+        ],
+        [
+          250,
+          512,
+          262,
+          235
+        ],
+        [
+          512,
+          512,
+          291,
+          235
+        ],
+        [
+          803,
+          512,
+          270,
+          235
+        ],
+        [
+          1073,
+          512,
+          215,
+          235
+        ],
+        [
+          1288,
+          512,
+          248,
+          235
+        ]
+      ],
+      "durationMs": 500
+    },
+    "momentum": {
+      "row": 3,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          747,
+          256,
+          277
+        ],
+        [
+          256,
+          747,
+          256,
+          277
+        ],
+        [
+          512,
+          747,
+          256,
+          277
+        ],
+        [
+          768,
+          747,
+          256,
+          277
+        ],
+        [
+          1024,
+          747,
+          256,
+          277
+        ],
+        [
+          1280,
+          747,
+          256,
+          277
+        ]
+      ],
+      "durationMs": 500
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "slash",
+      "impact": "impact",
+      "releaseMs": 260,
+      "travelMs": 0
+    }
+  },
+  "notes": [
+    "Effects are presentation only and do not change mechanics.",
+    "Armor, charge-dust and Momentum assets are provided without inventing unconfirmed proc hooks.",
+    "Respect existing fog/visibility and reduced-motion rules."
+  ]
+}

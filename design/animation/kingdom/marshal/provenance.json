@@ -1,0 +1,14 @@
+{
+  "generator": "built-in imagegen",
+  "unit": "marshal",
+  "bodySource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-db437070-2358-439f-9dab-e01b82a5b2bc.png",
+  "equipmentSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-8be65973-835f-4ce8-95aa-47587972f20e.png",
+  "vfxSource": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-d98190d0-6a96-4ac6-8858-ae16933c4f96.png",
+  "rejectedVfx": [
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-6d1c2b78-b16b-4a9c-8b5a-cf5a7bca93ae.png",
+    "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-8063-7a71-aac8-457e2eca7797\\exec-8e233504-03cd-4146-a2e2-003ccd141888.png"
+  ],
+  "notes": [
+    "Missing boot repair unsuccessful; source retained; two independently animated boot layers share source."
+  ]
+}

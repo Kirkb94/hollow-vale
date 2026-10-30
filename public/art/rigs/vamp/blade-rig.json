@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "key": "blade",
+  "name": "Bloodblade",
+  "faction": "vamp",
+  "status": "representative-assets-ready-for-integration",
+  "style": "Arcane Vanguard",
+  "representation": "layered-2d-cutout",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "atlasGrid": {
+    "columns": 3,
+    "rows": 4
+  },
+  "atlases": {
+    "e": "blade-e.png",
+    "se": "blade-se.png",
+    "sw": "blade-sw.png",
+    "w": "blade-w.png",
+    "nw": "blade-nw.png",
+    "ne": "blade-ne.png"
+  },
+  "parts": [
+    {
+      "id": "head",
+      "column": 0,
+      "row": 0,
+      "parent": "torso",
+      "pivot": [
+        0.5,
+        0.92
+      ]
+    },
+    {
+      "id": "torso",
+      "column": 1,
+      "row": 0,
+      "parent": null,
+      "pivot": [
+        0.5,
+        0.55
+      ]
+    },
+    {
+      "id": "cape",
+      "column": 2,
+      "row": 0,
+      "parent": "torso",
+      "pivot": [
+        0.5,
+        0.08
+      ]
+    },
+    {
+      "id": "pelvis",
+      "column": 0,
+      "row": 1,
+      "parent": "torso",
+      "pivot": [
+        0.5,
+        0.08
+      ]
+    },
+    {
+      "id": "upperArmL",
+      "column": 1,
+      "row": 1,
+      "parent": "torso",
+      "pivot": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "upperArmR",
+      "column": 2,
+      "row": 1,
+      "parent": "torso",
+      "pivot": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "forearmL",
+      "column": 0,
+      "row": 2,
+      "parent": "upperArmL",
+      "pivot": [
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "id": "forearmR",
+      "column": 1,
+      "row": 2,
+      "parent": "upperArmR",
+      "pivot": [
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "id": "legL",
+      "column": 2,
+      "row": 2,
+      "parent": "pelvis",
+      "pivot": [
+        0.5,
+        0.08
+      ]
+    },
+    {
+      "id": "legR",
+      "column": 0,
+      "row": 3,
+      "parent": "pelvis",
+      "pivot": [
+        0.5,
+        0.08
+      ]
+    },
+    {
+      "id": "bootL",
+      "column": 1,
+      "row": 3,
+      "parent": "legL",
+      "pivot": [
+        0.5,
+        0.12
+      ]
+    },
+    {
+      "id": "bootR",
+      "column": 2,
+      "row": 3,
+      "parent": "legR",
+      "pivot": [
+        0.5,
+        0.12
+      ]
+    }
+  ],
+  "pivotCoordinates": "normalized within alpha-trimmed part bounds; initial fitting values, validate in runtime",
+  "weapons": [
+    {
+      "id": "sword",
+      "file": "blade-sword.png",
+      "parent": "forearmR",
+      "pivot": [
+        0.5,
+        0.87
+      ],
+      "grip": "right",
+      "separate": true
+    }
+  ],
+  "clips": {
+    "idle": {
+      "duration": 1800,
+      "loop": true
+    },
+    "walk": {
+      "duration": 680,
+      "loop": true
+    },
+    "attack": {
+      "duration": 720,
+      "loop": false
+    },
+    "cast": {
+      "duration": 800,
+      "loop": false
+    },
+    "hurt": {
+      "duration": 400,
+      "loop": false
+    },
+    "death": {
+      "duration": 1000,
+      "loop": false
+    },
+    "spawn": {
+      "duration": 600,
+      "loop": false
+    }
+  },
+  "notes": [
+    "Never mirror whole character: sword stays in anatomical right hand.",
+    "Rear cape drawn behind torso; boot and limb order swaps by view.",
+    "Blood drain FX are separate additive effects, never baked into cape or hand.",
+    "Atlas is a source for parts, not a flattened animation sprite sheet.",
+    "Use explicit rects instead of uniform grid, especially corrected NW view."
+  ],
+  "sourceRects": "blade-rects.json",
+  "vfx": "blade-vfx.json",
+  "atlasDimensions": {
+    "e": [
+      1086,
+      1448
+    ],
+    "se": [
+      1086,
+      1448
+    ],
+    "sw": [
+      1086,
+      1448
+    ],
+    "w": [
+      1086,
+      1448
+    ],
+    "nw": [
+      1086,
+      1448
+    ],
+    "ne": [
+      1086,
+      1448
+    ]
+  }
+}

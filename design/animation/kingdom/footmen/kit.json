@@ -1,0 +1,16 @@
+{
+  "n": "Footmen",
+  "e": "🛡️",
+  "hp": 4,
+  "mv": 2,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 2,
+  "armor": 1,
+  "group": 3,
+  "slots": 2,
+  "d": "A squad of 3 spearmen. Takes 1 less damage.",
+  "fac": "kingdom"
+}

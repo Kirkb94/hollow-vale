@@ -1,0 +1,27 @@
+{
+  "key": "cleric",
+  "unit": {
+    "n": "Cleric",
+    "e": "✨",
+    "hp": 10,
+    "mv": 2,
+    "rng": [
+      1,
+      2
+    ],
+    "dmg": 3,
+    "heal": 5,
+    "cost": 1,
+    "d": "Heals an ally for 5 (1 mana), or pokes an enemy.",
+    "fac": "kingdom"
+  },
+  "animation": [
+    "float",
+    "cast"
+  ],
+  "death": "dissolve",
+  "effects": [
+    "orb",
+    "#fff3b0"
+  ]
+}

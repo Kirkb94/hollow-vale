@@ -1,0 +1,16 @@
+{
+  "n": "Raiders",
+  "e": "⚔️",
+  "hp": 5,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 2,
+  "group": 3,
+  "slots": 2,
+  "d": "A pack of 3 fast raiders that charge in and strike in the same turn.",
+  "fac": "kingdom",
+  "charge": 1
+}

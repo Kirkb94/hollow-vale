@@ -1,0 +1,33 @@
+HOLLOW VALE CHARACTER ART AND EFFECTS REQUIREMENTS
+
+Every new character art package includes the associated visual effects needed
+by that character's existing abilities, alongside its movable body and equipment
+pieces. Effects use the same Arcane Vanguard palette, shading and outline style.
+
+For each character, audit its actual abilities and status effects first. Supply
+applicable casting effects, projectiles, trails, impacts, ground effects, auras,
+status overlays and spawn/death effects. Do not invent gameplay mechanics solely
+to justify artwork. Shared effects may be reused if visually appropriate.
+
+Frost Witch example: separate icicle projectile, snowflake particles, frost
+impact, casting frost aura and a frozen-status overlay where the game supports
+that status. Include projectile launch/travel/impact and aura start/loop/fade.
+
+Keep effects separate from body atlases so they can move, rotate and animate
+independently. Use transparent assets with explicit source rectangles, pivots,
+attachment anchors, frame order, timing, looping and cleanup information.
+Provide facing behavior for all six directions: directional frames or rotation
+for symmetric projectiles, and appropriate layering behind/in front of the unit.
+
+Record the gameplay event triggering each effect, its duration and termination
+condition. Effects must respect visibility rules unless an ability explicitly
+reveals targets. Preview idle, cast, impact and effect expiration; check that
+effects do not persist after death, scene reset or interrupted animations.
+
+Visual effects and audio are separate deliverables. Provide event hooks for
+cast, launch, hit and expiration where appropriate; do not claim sound assets
+exist unless they have actually been created and validated.
+
+Each faction report must distinguish generated assets, preview validation,
+game integration and remaining roster coverage. A representative character
+package does not mean the entire faction is complete.

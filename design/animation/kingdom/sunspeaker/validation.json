@@ -1,0 +1,52 @@
+{
+  "unit": "sunspeaker",
+  "bodyParts": 72,
+  "directions": 6,
+  "equipmentProps": 6,
+  "fxFrames": 32,
+  "checks": [
+    "all body bounds within source",
+    "all rendered body parts contain alpha",
+    "32 FX frames contain alpha",
+    "shared runtime loads all six views with no errors",
+    "4 VFX clip previews loaded per unit",
+    "VFX reviewed on dark background; no rectangular haze",
+    "explicit alpha-valley frame boundaries remove adjacent frame slivers",
+    "parent verified 42 poses per unit without errors or edge clipping"
+  ],
+  "notes": [
+    "Body source uses six 3x4 cutout panels in a3x2 arrangement. Use explicit source rectangles, never regular-cell slicing.",
+    "All six views are independently drawn; weapons remain in anatomical hands."
+  ],
+  "integration": "Parent integrates catalog and game event bindings. No gameplay mechanics modified by asset package.",
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 108.75
+    },
+    "after": {
+      "board": 964,
+      "rig": 135.796875
+    }
+  },
+  "gameplay": true,
+  "effects": true,
+  "gameplayEvidence": {
+    "attackDamage": 2,
+    "attackFX": 1,
+    "spellOK": true,
+    "spellFX": 1,
+    "zoneCreated": true,
+    "verdictDamage": 4,
+    "verdictEvent": true
+  },
+  "browserErrors": [],
+  "test": "tools/kingdom-holy.test.cjs",
+  "testURL": "http://localhost:4323/?arttest=factions&faction=kingdom"
+}

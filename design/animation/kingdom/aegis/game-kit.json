@@ -1,0 +1,27 @@
+{
+  "key": "aegis",
+  "unit": {
+    "n": "Aegis Chaplain",
+    "e": "🛡️",
+    "hp": 10,
+    "mv": 2,
+    "rng": [
+      1,
+      2
+    ],
+    "dmg": 3,
+    "sp": "aegis",
+    "spp": 1,
+    "fac": "kingdom",
+    "d": "A war chaplain. Shields an ally or tower before the blow lands (2 mana)."
+  },
+  "animation": [
+    "breathe",
+    "lunge"
+  ],
+  "death": "crumble",
+  "effects": [
+    "slash",
+    "#ffd24a"
+  ]
+}

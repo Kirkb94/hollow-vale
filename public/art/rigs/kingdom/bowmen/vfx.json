@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "unit": "bowmen",
+  "file": "vfx.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "columns": 6,
+  "rows": 4,
+  "alpha": [
+    0,
+    254
+  ],
+  "clips": {
+    "projectile": {
+      "row": 0,
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          0,
+          267,
+          256
+        ],
+        [
+          267,
+          0,
+          259,
+          256
+        ],
+        [
+          526,
+          0,
+          242,
+          256
+        ],
+        [
+          768,
+          0,
+          256,
+          256
+        ],
+        [
+          1024,
+          0,
+          256,
+          256
+        ],
+        [
+          1280,
+          0,
+          256,
+          256
+        ]
+      ],
+      "durationMs": 500
+    },
+    "release": {
+      "row": 1,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          256,
+          256,
+          256
+        ],
+        [
+          256,
+          256,
+          256,
+          256
+        ],
+        [
+          512,
+          256,
+          288,
+          256
+        ],
+        [
+          800,
+          256,
+          226,
+          256
+        ],
+        [
+          1026,
+          256,
+          254,
+          256
+        ],
+        [
+          1280,
+          256,
+          256,
+          256
+        ]
+      ],
+      "durationMs": 500
+    },
+    "impact": {
+      "row": 2,
+      "frames": 6,
+      "fps": 12,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "sourceRects": [
+        [
+          0,
+          512,
+          256,
+          225
+        ],
+        [
+          256,
+          512,
+          256,
+          225
+        ],
+        [
+          512,
+          512,
+          256,
+          225
+        ],
+        [
+          768,
+          512,
+          256,
+          225
+        ],
+        [
+          1024,
+          512,
+          256,
+          225
+        ],
+        [
+          1280,
+          512,
+          256,
+          225
+        ]
+      ],
+      "durationMs": 500
+    },
+    "arrival": {
+      "row": 3,
+      "frames": 6,
+      "fps": 8,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.8
+      ],
+      "sourceRects": [
+        [
+          0,
+          737,
+          256,
+          287
+        ],
+        [
+          256,
+          737,
+          256,
+          287
+        ],
+        [
+          512,
+          737,
+          267,
+          287
+        ],
+        [
+          779,
+          737,
+          245,
+          287
+        ],
+        [
+          1024,
+          737,
+          256,
+          287
+        ],
+        [
+          1280,
+          737,
+          256,
+          287
+        ]
+      ],
+      "durationMs": 750
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "release",
+      "projectile": "projectile",
+      "impact": "impact",
+      "releaseMs": 110,
+      "travelMs": 320
+    },
+    "spawn": "arrival"
+  },
+  "notes": [
+    "Effects are presentation only and do not change mechanics.",
+    "Armor, charge-dust and Momentum assets are provided without inventing unconfirmed proc hooks.",
+    "Respect existing fog/visibility and reduced-motion rules."
+  ]
+}

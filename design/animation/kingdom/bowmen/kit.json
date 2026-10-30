@@ -1,0 +1,15 @@
+{
+  "n": "Bowmen",
+  "e": "🏹",
+  "hp": 2,
+  "mv": 1,
+  "rng": [
+    2,
+    3
+  ],
+  "dmg": 1.5,
+  "group": 3,
+  "slots": 2,
+  "d": "A squad of 3 archers. Volleys from range 2-3.",
+  "fac": "kingdom"
+}

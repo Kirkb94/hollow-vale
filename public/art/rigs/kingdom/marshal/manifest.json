@@ -1,0 +1,1743 @@
+{
+  "version": 1,
+  "unit": "marshal",
+  "faction": "kingdom",
+  "style": "Arcane Vanguard",
+  "attack": "attack",
+  "group": 1,
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "atlasGrid": [
+    9,
+    8
+  ],
+  "partOrder": [
+    "head",
+    "torso",
+    "cape",
+    "pelvis",
+    "leftUpperArm",
+    "rightUpperArm",
+    "leftForearm",
+    "rightForearm",
+    "leftLeg",
+    "rightLeg",
+    "leftBoot",
+    "rightBoot"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            35,
+            16,
+            108,
+            117
+          ],
+          "renderRect": [
+            35,
+            16,
+            108,
+            117
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 6925
+        },
+        "torso": {
+          "sourceRect": [
+            176,
+            34,
+            126,
+            141
+          ],
+          "renderRect": [
+            176,
+            34,
+            126,
+            116
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 12492
+        },
+        "cape": {
+          "sourceRect": [
+            316,
+            33,
+            110,
+            150
+          ],
+          "renderRect": [
+            316,
+            33,
+            110,
+            150
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 10272
+        },
+        "pelvis": {
+          "sourceRect": [
+            39,
+            185,
+            117,
+            106
+          ],
+          "renderRect": [
+            39,
+            185,
+            117,
+            106
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 8621
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            203,
+            188,
+            55,
+            132
+          ],
+          "renderRect": [
+            203,
+            188,
+            55,
+            69
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4928
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            314,
+            192,
+            70,
+            111
+          ],
+          "renderRect": [
+            314,
+            192,
+            70,
+            58
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4482
+        },
+        "leftForearm": {
+          "sourceRect": [
+            65,
+            309,
+            74,
+            104
+          ],
+          "renderRect": [
+            65,
+            309,
+            74,
+            104
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3488
+        },
+        "rightForearm": {
+          "sourceRect": [
+            180,
+            313,
+            65,
+            107
+          ],
+          "renderRect": [
+            180,
+            313,
+            65,
+            107
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3351
+        },
+        "leftLeg": {
+          "sourceRect": [
+            307,
+            312,
+            77,
+            163
+          ],
+          "renderRect": [
+            307,
+            312,
+            77,
+            111
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 7148
+        },
+        "rightLeg": {
+          "sourceRect": [
+            63,
+            415,
+            74,
+            142
+          ],
+          "renderRect": [
+            63,
+            415,
+            74,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 6148
+        },
+        "leftBoot": {
+          "sourceRect": [
+            193,
+            456,
+            84,
+            88
+          ],
+          "renderRect": [
+            193,
+            456,
+            84,
+            88
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4300
+        },
+        "rightBoot": {
+          "sourceRect": [
+            193,
+            456,
+            84,
+            88
+          ],
+          "renderRect": [
+            193,
+            456,
+            84,
+            88
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4300,
+          "flipX": true
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            471,
+            15,
+            110,
+            118
+          ],
+          "renderRect": [
+            471,
+            15,
+            110,
+            118
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 7006
+        },
+        "torso": {
+          "sourceRect": [
+            608,
+            35,
+            130,
+            145
+          ],
+          "renderRect": [
+            608,
+            35,
+            130,
+            119
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 13693
+        },
+        "cape": {
+          "sourceRect": [
+            752,
+            34,
+            119,
+            151
+          ],
+          "renderRect": [
+            752,
+            34,
+            119,
+            151
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 11083
+        },
+        "pelvis": {
+          "sourceRect": [
+            474,
+            184,
+            119,
+            109
+          ],
+          "renderRect": [
+            474,
+            184,
+            119,
+            109
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 8836
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            640,
+            192,
+            59,
+            123
+          ],
+          "renderRect": [
+            640,
+            192,
+            59,
+            64
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4520
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            767,
+            194,
+            73,
+            127
+          ],
+          "renderRect": [
+            767,
+            194,
+            73,
+            66
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4697
+        },
+        "leftForearm": {
+          "sourceRect": [
+            505,
+            312,
+            63,
+            105
+          ],
+          "renderRect": [
+            505,
+            312,
+            63,
+            105
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3401
+        },
+        "rightForearm": {
+          "sourceRect": [
+            634,
+            319,
+            61,
+            97
+          ],
+          "renderRect": [
+            634,
+            319,
+            61,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3140
+        },
+        "leftLeg": {
+          "sourceRect": [
+            752,
+            312,
+            82,
+            166
+          ],
+          "renderRect": [
+            752,
+            312,
+            82,
+            113
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 7311
+        },
+        "rightLeg": {
+          "sourceRect": [
+            515,
+            414,
+            60,
+            148
+          ],
+          "renderRect": [
+            515,
+            414,
+            60,
+            101
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 5974
+        },
+        "leftBoot": {
+          "sourceRect": [
+            643,
+            458,
+            76,
+            87
+          ],
+          "renderRect": [
+            643,
+            458,
+            76,
+            87
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4003
+        },
+        "rightBoot": {
+          "sourceRect": [
+            643,
+            458,
+            76,
+            87
+          ],
+          "renderRect": [
+            643,
+            458,
+            76,
+            87
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4003,
+          "flipX": true
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            952,
+            14,
+            103,
+            120
+          ],
+          "renderRect": [
+            952,
+            14,
+            103,
+            120
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 6285
+        },
+        "torso": {
+          "sourceRect": [
+            1040,
+            35,
+            138,
+            146
+          ],
+          "renderRect": [
+            1040,
+            35,
+            138,
+            120
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 13802
+        },
+        "cape": {
+          "sourceRect": [
+            1203,
+            33,
+            105,
+            150
+          ],
+          "renderRect": [
+            1203,
+            33,
+            105,
+            150
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 10216
+        },
+        "pelvis": {
+          "sourceRect": [
+            930,
+            184,
+            127,
+            112
+          ],
+          "renderRect": [
+            930,
+            184,
+            127,
+            112
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 9307
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            1084,
+            193,
+            67,
+            122
+          ],
+          "renderRect": [
+            1084,
+            193,
+            67,
+            63
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4451
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            1223,
+            192,
+            59,
+            124
+          ],
+          "renderRect": [
+            1223,
+            192,
+            59,
+            64
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4586
+        },
+        "leftForearm": {
+          "sourceRect": [
+            938,
+            310,
+            81,
+            105
+          ],
+          "renderRect": [
+            938,
+            310,
+            81,
+            105
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3674
+        },
+        "rightForearm": {
+          "sourceRect": [
+            1053,
+            322,
+            78,
+            99
+          ],
+          "renderRect": [
+            1053,
+            322,
+            78,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3401
+        },
+        "leftLeg": {
+          "sourceRect": [
+            1200,
+            316,
+            80,
+            163
+          ],
+          "renderRect": [
+            1200,
+            316,
+            80,
+            111
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 7578
+        },
+        "rightLeg": {
+          "sourceRect": [
+            943,
+            414,
+            74,
+            145
+          ],
+          "renderRect": [
+            943,
+            414,
+            74,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 6212
+        },
+        "leftBoot": {
+          "sourceRect": [
+            1056,
+            455,
+            74,
+            91
+          ],
+          "renderRect": [
+            1056,
+            455,
+            74,
+            91
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3929
+        },
+        "rightBoot": {
+          "sourceRect": [
+            1056,
+            455,
+            74,
+            91
+          ],
+          "renderRect": [
+            1056,
+            455,
+            74,
+            91
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3929,
+          "flipX": true
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            40,
+            603,
+            114,
+            114
+          ],
+          "renderRect": [
+            40,
+            603,
+            114,
+            114
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 6653
+        },
+        "torso": {
+          "sourceRect": [
+            177,
+            617,
+            108,
+            142
+          ],
+          "renderRect": [
+            177,
+            617,
+            108,
+            116
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 10726
+        },
+        "cape": {
+          "sourceRect": [
+            306,
+            620,
+            125,
+            152
+          ],
+          "renderRect": [
+            306,
+            620,
+            125,
+            152
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 11182
+        },
+        "pelvis": {
+          "sourceRect": [
+            35,
+            767,
+            122,
+            111
+          ],
+          "renderRect": [
+            35,
+            767,
+            122,
+            111
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 9268
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            190,
+            774,
+            69,
+            127
+          ],
+          "renderRect": [
+            190,
+            774,
+            69,
+            66
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4803
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            330,
+            778,
+            59,
+            120
+          ],
+          "renderRect": [
+            330,
+            778,
+            59,
+            62
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4383
+        },
+        "leftForearm": {
+          "sourceRect": [
+            45,
+            890,
+            83,
+            111
+          ],
+          "renderRect": [
+            45,
+            890,
+            83,
+            111
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3899
+        },
+        "rightForearm": {
+          "sourceRect": [
+            183,
+            904,
+            78,
+            99
+          ],
+          "renderRect": [
+            183,
+            904,
+            78,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3436
+        },
+        "leftLeg": {
+          "sourceRect": [
+            303,
+            902,
+            74,
+            167
+          ],
+          "renderRect": [
+            303,
+            902,
+            74,
+            114
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 7560
+        },
+        "rightLeg": {
+          "sourceRect": [
+            55,
+            999,
+            81,
+            142
+          ],
+          "renderRect": [
+            55,
+            999,
+            81,
+            97
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 6640
+        },
+        "leftBoot": {
+          "sourceRect": [
+            172,
+            1038,
+            83,
+            94
+          ],
+          "renderRect": [
+            172,
+            1038,
+            83,
+            94
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4623
+        },
+        "rightBoot": {
+          "sourceRect": [
+            172,
+            1038,
+            83,
+            94
+          ],
+          "renderRect": [
+            172,
+            1038,
+            83,
+            94
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4623,
+          "flipX": true
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            483,
+            591,
+            121,
+            126
+          ],
+          "renderRect": [
+            483,
+            591,
+            121,
+            126
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 7842
+        },
+        "torso": {
+          "sourceRect": [
+            600,
+            625,
+            140,
+            148
+          ],
+          "renderRect": [
+            600,
+            625,
+            140,
+            121
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 13993
+        },
+        "cape": {
+          "sourceRect": [
+            753,
+            625,
+            130,
+            151
+          ],
+          "renderRect": [
+            753,
+            625,
+            130,
+            151
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 13073
+        },
+        "pelvis": {
+          "sourceRect": [
+            473,
+            763,
+            121,
+            124
+          ],
+          "renderRect": [
+            473,
+            763,
+            121,
+            124
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 10207
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            625,
+            784,
+            77,
+            123
+          ],
+          "renderRect": [
+            625,
+            784,
+            77,
+            64
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4855
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            771,
+            784,
+            61,
+            114
+          ],
+          "renderRect": [
+            771,
+            784,
+            61,
+            59
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4168
+        },
+        "leftForearm": {
+          "sourceRect": [
+            488,
+            901,
+            70,
+            106
+          ],
+          "renderRect": [
+            488,
+            901,
+            70,
+            106
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3910
+        },
+        "rightForearm": {
+          "sourceRect": [
+            634,
+            901,
+            73,
+            103
+          ],
+          "renderRect": [
+            634,
+            901,
+            73,
+            103
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3557
+        },
+        "leftLeg": {
+          "sourceRect": [
+            766,
+            902,
+            62,
+            167
+          ],
+          "renderRect": [
+            766,
+            902,
+            62,
+            114
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 7149
+        },
+        "rightLeg": {
+          "sourceRect": [
+            491,
+            1002,
+            69,
+            148
+          ],
+          "renderRect": [
+            491,
+            1002,
+            69,
+            101
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 6645
+        },
+        "leftBoot": {
+          "sourceRect": [
+            624,
+            1041,
+            74,
+            92
+          ],
+          "renderRect": [
+            624,
+            1041,
+            74,
+            92
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4237
+        },
+        "rightBoot": {
+          "sourceRect": [
+            624,
+            1041,
+            74,
+            92
+          ],
+          "renderRect": [
+            624,
+            1041,
+            74,
+            92
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4237,
+          "flipX": true
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "size": [
+        1329,
+        1183
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "parts": {
+        "head": {
+          "sourceRect": [
+            1166,
+            584,
+            125,
+            120
+          ],
+          "renderRect": [
+            1166,
+            584,
+            125,
+            120
+          ],
+          "pivot": [
+            0.5,
+            0.9
+          ],
+          "alphaPixels": 7453
+        },
+        "torso": {
+          "sourceRect": [
+            1037,
+            617,
+            143,
+            156
+          ],
+          "renderRect": [
+            1037,
+            617,
+            143,
+            128
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 14799
+        },
+        "cape": {
+          "sourceRect": [
+            910,
+            625,
+            126,
+            155
+          ],
+          "renderRect": [
+            910,
+            625,
+            126,
+            155
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 11978
+        },
+        "pelvis": {
+          "sourceRect": [
+            1185,
+            772,
+            123,
+            116
+          ],
+          "renderRect": [
+            1185,
+            772,
+            123,
+            116
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 9169
+        },
+        "leftUpperArm": {
+          "sourceRect": [
+            1080,
+            782,
+            69,
+            118
+          ],
+          "renderRect": [
+            1080,
+            782,
+            69,
+            61
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4619
+        },
+        "rightUpperArm": {
+          "sourceRect": [
+            952,
+            785,
+            66,
+            122
+          ],
+          "renderRect": [
+            952,
+            785,
+            66,
+            63
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4642
+        },
+        "leftForearm": {
+          "sourceRect": [
+            1212,
+            903,
+            80,
+            104
+          ],
+          "renderRect": [
+            1212,
+            903,
+            80,
+            104
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3880
+        },
+        "rightForearm": {
+          "sourceRect": [
+            1096,
+            908,
+            71,
+            103
+          ],
+          "renderRect": [
+            1096,
+            908,
+            71,
+            103
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 3396
+        },
+        "leftLeg": {
+          "sourceRect": [
+            942,
+            905,
+            82,
+            165
+          ],
+          "renderRect": [
+            942,
+            905,
+            82,
+            112
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 6943
+        },
+        "rightLeg": {
+          "sourceRect": [
+            1219,
+            1005,
+            75,
+            145
+          ],
+          "renderRect": [
+            1219,
+            1005,
+            75,
+            99
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 6212
+        },
+        "leftBoot": {
+          "sourceRect": [
+            1085,
+            1040,
+            69,
+            93
+          ],
+          "renderRect": [
+            1085,
+            1040,
+            69,
+            93
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4167
+        },
+        "rightBoot": {
+          "sourceRect": [
+            1085,
+            1040,
+            69,
+            93
+          ],
+          "renderRect": [
+            1085,
+            1040,
+            69,
+            93
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "alphaPixels": 4167,
+          "flipX": true
+        }
+      }
+    }
+  },
+  "notes": [
+    "Atlas has six direction panels, each3x4parts. Use explicit rectangles.",
+    "One rig is one member; actual squad group count is 1.",
+    "Original PNG sources unchanged. Alpha connected components locate pieces.",
+    "Torso/leg render crops remove generated duplicate tunic hem/boot under separate layers.",
+    "Minor hand/cloth shading differences across generated views remain."
+  ],
+  "animationHints": {
+    "idle": {
+      "loopMs": 1800
+    },
+    "walk": {
+      "loopMs": 680,
+      "limbSwingDegrees": 14
+    },
+    "attack": {
+      "durationMs": 800,
+      "weaponHand": "right"
+    },
+    "hurt": {
+      "durationMs": 450
+    },
+    "death": {
+      "durationMs": 1100
+    },
+    "spawn": {
+      "durationMs": 600
+    }
+  },
+  "equipment": {
+    "file": "equipment.png",
+    "size": [
+      2172,
+      724
+    ],
+    "views": {
+      "e": {
+        "sword": {
+          "sourceRect": [
+            123,
+            7,
+            139,
+            355
+          ],
+          "pivot": [
+            0.5,
+            0.85
+          ],
+          "hand": "right",
+          "displaySize": [
+            20,
+            102
+          ]
+        },
+        "baton": {
+          "sourceRect": [
+            163,
+            362,
+            59,
+            337
+          ],
+          "pivot": [
+            0.5,
+            0.76
+          ],
+          "hand": "left",
+          "displaySize": [
+            14,
+            48
+          ]
+        }
+      },
+      "se": {
+        "sword": {
+          "sourceRect": [
+            443,
+            7,
+            142,
+            355
+          ],
+          "pivot": [
+            0.5,
+            0.85
+          ],
+          "hand": "right",
+          "displaySize": [
+            20,
+            102
+          ]
+        },
+        "baton": {
+          "sourceRect": [
+            468,
+            362,
+            114,
+            336
+          ],
+          "pivot": [
+            0.5,
+            0.76
+          ],
+          "hand": "left",
+          "displaySize": [
+            14,
+            48
+          ]
+        }
+      },
+      "sw": {
+        "sword": {
+          "sourceRect": [
+            852,
+            6,
+            143,
+            356
+          ],
+          "pivot": [
+            0.5,
+            0.85
+          ],
+          "hand": "right",
+          "displaySize": [
+            20,
+            102
+          ]
+        },
+        "baton": {
+          "sourceRect": [
+            878,
+            362,
+            89,
+            337
+          ],
+          "pivot": [
+            0.5,
+            0.76
+          ],
+          "hand": "left",
+          "displaySize": [
+            14,
+            48
+          ]
+        }
+      },
+      "w": {
+        "sword": {
+          "sourceRect": [
+            1221,
+            7,
+            130,
+            355
+          ],
+          "pivot": [
+            0.5,
+            0.85
+          ],
+          "hand": "right",
+          "displaySize": [
+            20,
+            102
+          ]
+        },
+        "baton": {
+          "sourceRect": [
+            1242,
+            362,
+            66,
+            336
+          ],
+          "pivot": [
+            0.5,
+            0.76
+          ],
+          "hand": "left",
+          "displaySize": [
+            14,
+            48
+          ]
+        }
+      },
+      "nw": {
+        "sword": {
+          "sourceRect": [
+            1587,
+            7,
+            143,
+            355
+          ],
+          "pivot": [
+            0.5,
+            0.85
+          ],
+          "hand": "right",
+          "displaySize": [
+            20,
+            102
+          ]
+        },
+        "baton": {
+          "sourceRect": [
+            1586,
+            362,
+            130,
+            336
+          ],
+          "pivot": [
+            0.5,
+            0.76
+          ],
+          "hand": "left",
+          "displaySize": [
+            14,
+            48
+          ]
+        }
+      },
+      "ne": {
+        "sword": {
+          "sourceRect": [
+            1902,
+            7,
+            142,
+            355
+          ],
+          "pivot": [
+            0.5,
+            0.85
+          ],
+          "hand": "right",
+          "displaySize": [
+            20,
+            102
+          ]
+        },
+        "baton": {
+          "sourceRect": [
+            1933,
+            362,
+            138,
+            338
+          ],
+          "pivot": [
+            0.5,
+            0.76
+          ],
+          "hand": "left",
+          "displaySize": [
+            14,
+            48
+          ]
+        }
+      }
+    }
+  },
+  "status": "art-ready"
+}
