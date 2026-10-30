@@ -169,7 +169,7 @@
       return result;
     };
   }
-  const onCast=window.hvOnCast;window.hvOnCast=function(key,u,t){const result=onCast?.apply(this,arguments);const effectTarget=key==='rally'&&t.v?Object.assign({},t,{x:t.v.x,y:t.v.y}):t;dispatch(u,effectTarget,assets.get(u.k)?.bindings.abilities?.[key]);return result;};
+  const onCast=window.hvOnCast;window.hvOnCast=function(key,u,t){const result=onCast?.apply(this,arguments);const effectTarget=(key==='rally'||key==='hook')&&t.v?Object.assign({},t,{x:t.v.x,y:t.v.y}):t;dispatch(u,effectTarget,assets.get(u.k)?.bindings.abilities?.[key]);return result;};
   window.addEventListener('hv-unit-effect',event=>{
     const {unitKey,key,target}=Object.assign({key:event.detail.event},event.detail),pack=assets.get(unitKey);
     if(key==='drain'){

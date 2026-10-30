@@ -1,0 +1,40 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 3,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "plague": {
+    "damage": 2,
+    "event": true,
+    "effects": 1
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 786.8905639648438,
+      "rig": 147.79681396484375
+    },
+    "after": {
+      "board": 1233.051025390625,
+      "rig": 231.5968017578125
+    }
+  },
+  "test": "design/animation/undead/bonecolossus/test-gameplay.cjs",
+  "testedAt": "2026-10-30T11:23:36.471Z",
+  "pageErrors": []
+}

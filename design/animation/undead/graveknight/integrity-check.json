@@ -1,0 +1,49 @@
+{
+  "unit": "graveknight",
+  "mappedBodyParts": 72,
+  "extras": 0,
+  "frames": 16,
+  "files": {
+    "public\\art\\rigs\\undead\\graveknight\\body.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\graveknight\\supplement.png": {
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\graveknight\\equipment.png": {
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\graveknight\\vfx.png": {
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    }
+  },
+  "errors": []
+}

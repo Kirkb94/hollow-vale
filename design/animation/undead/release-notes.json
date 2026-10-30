@@ -1,0 +1,22 @@
+{
+  "title": "Undead: complete layered faction artwork",
+  "groups": [
+    {
+      "name": "Visuals",
+      "items": [
+        "All 15 Undead units now have layered six-direction artwork and matching combat effects.",
+        "Skeletal riders have separate mounts. Ghosts hover, the Wisp uses drifting flame pieces, and Bone Legion retains its three-soldier formation.",
+        "Effects follow real summons, resurrection, Wither, plague damage, scouting flares, and destroyed skeletons.",
+        "The full Undead faction is available in the art test match and animation workshop."
+      ]
+    },
+    {
+      "name": "Fixes",
+      "items": [
+        "Lich summon effects now appear only after a skeleton is successfully created.",
+        "Flexible piece proportions improve unusual bodies without stretching their armor or pelvis.",
+        "Pyromancer fireballs use the shared effect renderer for consistent visibility, pause, and scaling."
+      ]
+    }
+  ]
+}

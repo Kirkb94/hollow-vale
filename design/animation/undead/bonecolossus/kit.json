@@ -1,0 +1,14 @@
+{
+  "n": "Bone Colossus",
+  "e": "👑",
+  "hp": 34,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 8,
+  "elite": 1,
+  "fac": "undead",
+  "d": "Boss (5 slots). Ossuary: When it falls it breaks into 3 skeletons."
+}

@@ -1,0 +1,17 @@
+{
+  "n": "Grave Wisp",
+  "e": "👻",
+  "hp": 13,
+  "mv": 4,
+  "rng": [
+    1,
+    2
+  ],
+  "dmg": 4,
+  "fly": 1,
+  "fac": "undead",
+  "sight": 5,
+  "flare": 1,
+  "fcost": 1,
+  "d": "Flying. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+}

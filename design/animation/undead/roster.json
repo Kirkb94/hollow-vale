@@ -8,7 +8,7 @@
     "group": 1,
     "description": "Moves through units and slips past blockers.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "skeletons",
@@ -19,7 +19,7 @@
     "group": 3,
     "description": "A squad of 3 skeletons. Each rises once after falling.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "ghoul",
@@ -30,7 +30,7 @@
     "group": 1,
     "description": "A ravenous grave-dweller with heavy claws.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "necromancer",
@@ -41,7 +41,7 @@
     "group": 1,
     "description": "A frail summoner. Death bolts from range 2-3 cost 1 mana. Raise the Slain: enemy heroes it kills rise as Undead that fight for it for 3 turns.",
     "ability": null,
-    "rigStatus": "art-ready-requires-shared-runtime-integration",
+    "rigStatus": "integrated-six-direction-cutout-and-effects",
     "manifest": "public/art/rigs/undead/necromancer.rig.json"
   },
   {
@@ -53,7 +53,7 @@
     "group": 1,
     "description": "An armored dead champion that refuses to stay down.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "bonerider",
@@ -64,7 +64,7 @@
     "group": 1,
     "description": "A skeleton on a skeletal steed. Rides down a target and rises once when it falls.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "lich",
@@ -75,7 +75,7 @@
     "group": 1,
     "description": "Elite (5 slots). A crowned sorcerer of the grave. Soul Storm costs 2 mana, hits an area and stuns the target. Raise Dead: 2 mana summons a skeleton beside him.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "bonecolossus",
@@ -86,7 +86,7 @@
     "group": 1,
     "description": "Boss (5 slots). Ossuary: When it falls it breaks into 3 skeletons.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "deathknight",
@@ -97,7 +97,7 @@
     "group": 1,
     "description": "Boss (5 slots). Withering Strike: Its targets cannot be healed for 2 turns.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "banshee",
@@ -108,7 +108,7 @@
     "group": 1,
     "description": "Boss (5 slots). Wail: Each attack also deals 1 damage to every other enemy next to her.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "plaguelord",
@@ -119,7 +119,7 @@
     "group": 1,
     "description": "Boss (5 slots). Plague Aura: Enemies that start their turn next to him take 2 damage.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "wisp",
@@ -130,7 +130,7 @@
     "group": 1,
     "description": "Flying. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn.",
     "ability": null,
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "ossomancer",
@@ -141,7 +141,7 @@
     "group": 1,
     "description": "Detonates spent or summoned undead as a 4-damage burst of Bone Shrapnel (1 mana).",
     "ability": "shrapnel",
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "bonewitch",
@@ -152,7 +152,7 @@
     "group": 1,
     "description": "Ossifies an enemy hero into a weak skeleton for a turn (3 mana).",
     "ability": "ossify",
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   },
   {
     "id": "gravedigger",
@@ -163,6 +163,6 @@
     "group": 1,
     "description": "Digs Open Graves you can spawn next to, and earns gold from enemy deaths nearby (2 mana).",
     "ability": "grave",
-    "rigStatus": "existing_art_retained"
+    "rigStatus": "integrated-six-direction-cutout-and-effects"
   }
 ]

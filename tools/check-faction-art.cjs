@@ -15,10 +15,10 @@ function inspect(id,config){
   for(const d of directions){
     const view=m.views?.[d],file=view?.file||m.atlases?.[d];if(!file)throw Error('Missing facing '+d);
     const size=imageSize(resolveAsset(base,file));
-    for(const [i,n]of (m.skeleton==='bat'?m.partOrder:names).entries()){const part=view?.parts?.[n],r=part?.renderRect||part?.sourceRect||external?.rects?.[d]?.[i];if(!r)throw Error('Missing '+d+'/'+n);rect(r,part?.file?imageSize(resolveAsset(base,part.file)):size,d+'/'+n);}
+    for(const [i,n]of (['bat','wisp'].includes(m.skeleton)?m.partOrder:names).entries()){const part=view?.parts?.[n],r=part?.renderRect||part?.sourceRect||external?.rects?.[d]?.[i];if(!r)throw Error('Missing '+d+'/'+n);rect(r,part?.file?imageSize(resolveAsset(base,part.file)):size,d+'/'+n);}
   }
   const fxFile=config.effects||'vfx.json',fx=read(resolveAsset(base,fxFile));
-  imageSize(resolveAsset(base,fx.file||fx.image));
+  imageSize(resolveAsset(path.dirname(resolveAsset(base,fxFile)),fx.file||fx.image));
   if(!Object.keys(fx.clips||{}).length)throw Error('No effect clips');
   const evidence=path.join(root,'design/animation',m.faction||config.folder.split('/')[0],id,'validation.json');
   if(!fs.existsSync(evidence))throw Error('Missing per-unit visual and gameplay validation');
@@ -31,7 +31,7 @@ if(require.main===module){
   const roster=read(path.join(root,'design/animation/game-roster.json')).filter(u=>u.faction===faction);
   if(!roster.length)throw Error('Unknown faction '+faction);
   const catalog=read(path.join(art,'catalog.json')).units;
-  const legacy={knight:{folder:'kingdom/knight',manifest:'manifest.json',effects:'vfx.json'},blade:{folder:'vamp',manifest:'blade-rig.json',effects:'blade-vfx.json'},necromancer:{folder:'undead',manifest:'necromancer.rig.json',effects:'necromancer-fx.json'},mage:{folder:'infernal/mage',manifest:'manifest.json',effects:'../fire-effects.json'}};
+  const legacy={knight:{folder:'kingdom/knight',manifest:'manifest.json',effects:'vfx.json'},blade:{folder:'vamp',manifest:'blade-rig.json',effects:'blade-vfx.json'},necromancer:{folder:'undead',manifest:'necromancer.rig.json',effects:'necromancer-fx.json'},mage:{folder:'infernal/mage',manifest:'manifest.json',effects:'vfx.json'}};
   const report=roster.map(u=>{try{return {...inspect(u.id,catalog[u.id]||legacy[u.id]),ok:true};}catch(e){return {id:u.id,ok:false,reason:e.message};}});
   console.log(JSON.stringify({faction,total:roster.length,passed:report.filter(r=>r.ok).length,report},null,2));
   if(report.some(r=>!r.ok))process.exitCode=1;

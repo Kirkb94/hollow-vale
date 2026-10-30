@@ -1,0 +1,247 @@
+{
+  "report": {
+    "wraith": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "attackPose": "attack",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 5,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "revive": {
+        "rez": 1,
+        "hp": 1,
+        "effect": {
+          "before": 2,
+          "after": 3
+        }
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "revive": true,
+        "movement": true
+      },
+      "movementFX": {
+        "ok": true,
+        "active": 1
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "skeletons": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "group": 3,
+      "attackPose": "thrust",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 1,
+      "attackFX": 3,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 3
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "revive": {
+        "rez": 1,
+        "hp": 1,
+        "effect": {
+          "before": 2,
+          "after": 3
+        }
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "revive": true
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "ghoul": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "attackPose": "attack",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 4,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "revive": {
+        "rez": 1,
+        "hp": 1,
+        "effect": {
+          "before": 2,
+          "after": 3
+        }
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "revive": true
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "graveknight": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "attackPose": "attack",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 2,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "revive": {
+        "rez": 1,
+        "hp": 1,
+        "effect": {
+          "before": 2,
+          "after": 3
+        }
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "revive": true
+      },
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    },
+    "bonerider": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "attackPose": "attack",
+      "correctGroup": true,
+      "groupRendered": true,
+      "damage": 2,
+      "attackFX": 2,
+      "gameplay": true,
+      "effects": true,
+      "pauseEvidence": {
+        "hidden": true,
+        "held": true,
+        "resumed": true,
+        "count": 2
+      },
+      "pause": true,
+      "spawnFX": 1,
+      "revive": {
+        "rez": 1,
+        "hp": 1,
+        "effect": {
+          "before": 2,
+          "after": 3
+        }
+      },
+      "clipCoverage": {
+        "attack": true,
+        "impact": true,
+        "spawn": true,
+        "revive": true,
+        "movement": true
+      },
+      "movementFX": {
+        "ok": true,
+        "active": 1
+      },
+      "extras": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 774,
+          "rig": 145.375
+        },
+        "after": {
+          "board": 967,
+          "rig": 181.625
+        }
+      }
+    }
+  },
+  "errors": []
+}

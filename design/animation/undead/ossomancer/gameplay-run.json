@@ -1,0 +1,142 @@
+{
+  "result": {
+    "ossomancer": {
+      "attackDamage": 3,
+      "attackFX": 2,
+      "spell": true,
+      "shrapnelDamage": 4,
+      "bombRemoved": true,
+      "spellFX": 2,
+      "undyingRevived": true,
+      "undyingFX": 1
+    },
+    "bonewitch": {
+      "attackDamage": 2,
+      "attackFX": 2,
+      "spell": true,
+      "transformed": true,
+      "spellFX": 2,
+      "undyingRevived": true,
+      "undyingFX": 1
+    },
+    "gravedigger": {
+      "attackDamage": 4,
+      "attackFX": 2,
+      "spell": true,
+      "openGrave": true,
+      "spellFX": 1,
+      "undyingRevived": true,
+      "undyingFX": 1
+    },
+    "lich": {
+      "attackDamage": 5,
+      "attackFX": 2,
+      "summon": true,
+      "skeleton": true,
+      "summonFX": 2,
+      "undyingRevived": true,
+      "undyingFX": 1
+    },
+    "banshee": {
+      "attackDamage": 5,
+      "attackFX": 2,
+      "wailSplash": 1,
+      "hover": true,
+      "undyingRevived": true,
+      "undyingFX": 1
+    }
+  },
+  "presentation": {
+    "ossomancer": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "bonewitch": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "gravedigger": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "lich": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    },
+    "banshee": {
+      "sixFacings": true,
+      "movableParts": true,
+      "equipment": true,
+      "pause": true,
+      "visibility": true,
+      "zoom": true,
+      "zoomMeasurements": {
+        "before": {
+          "board": 726,
+          "rig": 136.359375
+        },
+        "after": {
+          "board": 908,
+          "rig": 170.546875
+        }
+      }
+    }
+  },
+  "errors": []
+}

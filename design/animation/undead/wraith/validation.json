@@ -1,0 +1,54 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "attackPose": "attack",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 5,
+  "attackFX": 2,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 2
+  },
+  "pause": true,
+  "spawnFX": 1,
+  "revive": {
+    "rez": 1,
+    "hp": 1,
+    "effect": {
+      "before": 2,
+      "after": 3
+    }
+  },
+  "clipCoverage": {
+    "attack": true,
+    "impact": true,
+    "spawn": true,
+    "revive": true,
+    "movement": true
+  },
+  "movementFX": {
+    "ok": true,
+    "active": 1
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 772,
+      "rig": 145
+    },
+    "after": {
+      "board": 964,
+      "rig": 181.0625
+    }
+  },
+  "test": "tools/undead-vanguard.test.cjs",
+  "testedAt": "2026-10-30T11:23:32.810Z",
+  "pageErrors": []
+}

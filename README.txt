@@ -325,3 +325,6 @@ Kingdom's full roster is complete. The standard mixed test showcases four pilots
 
 Open /?arttest=factions&faction=vamp to play all 16 updated Vampire units.
 Kingdom and Vampires are complete; remaining factions are in production.
+
+Open /?arttest=factions&faction=undead to play all 15 updated Undead units.
+Undead is complete; Infernal and later factions remain in production.

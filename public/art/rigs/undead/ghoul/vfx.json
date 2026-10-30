@@ -1,0 +1,181 @@
+{
+  "file": "vfx.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "columns": 4,
+  "rows": 4,
+  "clips": {
+    "clawSlash": {
+      "row": 0,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "weapon",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          0,
+          314,
+          314
+        ],
+        [
+          314,
+          0,
+          313,
+          314
+        ],
+        [
+          627,
+          0,
+          313,
+          314
+        ],
+        [
+          940,
+          0,
+          314,
+          314
+        ]
+      ]
+    },
+    "impact": {
+      "row": 1,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "attachment": "target",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          314,
+          314,
+          313
+        ],
+        [
+          314,
+          314,
+          313,
+          313
+        ],
+        [
+          627,
+          314,
+          313,
+          313
+        ],
+        [
+          940,
+          314,
+          314,
+          313
+        ]
+      ]
+    },
+    "spawn": {
+      "row": 2,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          627,
+          314,
+          313
+        ],
+        [
+          314,
+          627,
+          313,
+          313
+        ],
+        [
+          627,
+          627,
+          313,
+          313
+        ],
+        [
+          940,
+          627,
+          314,
+          313
+        ]
+      ]
+    },
+    "revive": {
+      "row": 3,
+      "frames": 4,
+      "fps": 8,
+      "durationMs": 500,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.65
+      ],
+      "attachment": "ground",
+      "lifecycle": "one-shot; remove at completion",
+      "sourceRects": [
+        [
+          0,
+          940,
+          314,
+          314
+        ],
+        [
+          314,
+          940,
+          313,
+          314
+        ],
+        [
+          627,
+          940,
+          313,
+          314
+        ],
+        [
+          940,
+          940,
+          314,
+          314
+        ]
+      ]
+    }
+  },
+  "bindings": {
+    "attack": {
+      "cast": "clawSlash",
+      "impact": "impact",
+      "releaseMs": 260,
+      "travelMs": 0
+    },
+    "spawn": "spawn",
+    "revive": "revive"
+  },
+  "notes": [
+    "Actual attack, spawn and Undying presentation; no added gameplay abilities.",
+    "Four illustrated frames per animation; pause/fog handled by shared runtime."
+  ]
+}

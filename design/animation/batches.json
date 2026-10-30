@@ -61,7 +61,7 @@
     {
       "faction": "vamp",
       "total": 16,
-      "status": "validated-release-ready",
+      "status": "pushed",
       "workers": {
         "hollow_kingdom": [
           "warlock",
@@ -95,12 +95,13 @@
         "hemomancer",
         "mesmerist",
         "duskweaver"
-      ]
+      ],
+      "commit": "231be06c5751"
     },
     {
       "faction": "undead",
       "total": 15,
-      "status": "art-production",
+      "status": "validated-release-ready",
       "workers": {
         "hollow_kingdom": [
           "ossomancer",
@@ -122,12 +123,57 @@
           "plaguelord",
           "wisp"
         ]
-      }
+      },
+      "validated": [
+        "wraith",
+        "skeletons",
+        "ghoul",
+        "necromancer",
+        "graveknight",
+        "bonerider",
+        "lich",
+        "bonecolossus",
+        "deathknight",
+        "banshee",
+        "plaguelord",
+        "wisp",
+        "ossomancer",
+        "bonewitch",
+        "gravedigger"
+      ]
     },
     {
       "faction": "infernal",
       "total": 14,
-      "status": "queued"
+      "status": "art-production",
+      "workers": {
+        "hollow_kingdom": [
+          "bomber",
+          "infernowitch",
+          "cinderwarden",
+          "hellbinder",
+          "pactbroker"
+        ],
+        "parent": [
+          "mage",
+          "fireeye"
+        ],
+        "hollow_vampires": [
+          "imps",
+          "dragon",
+          "hellhound",
+          "phoenix"
+        ],
+        "hollow_undead": [
+          "magmagolem",
+          "pitlord",
+          "demonprince"
+        ]
+      },
+      "validated": [
+        "mage",
+        "fireeye"
+      ]
     },
     {
       "faction": "wilds",
@@ -167,6 +213,13 @@
       "faction": "kingdom",
       "artCommit": "26ba03c6e5e0f1d3b9b2efaef7360d132b02cfce",
       "head": "bc24aa3",
+      "remote": "origin/main",
+      "verified": true
+    },
+    {
+      "faction": "vamp",
+      "artCommit": "231be06c5751",
+      "head": "efee8d1",
       "remote": "origin/main",
       "verified": true
     }

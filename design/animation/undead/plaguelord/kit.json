@@ -1,0 +1,14 @@
+{
+  "n": "Plague Lord",
+  "e": "👑",
+  "hp": 28,
+  "mv": 3,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 4,
+  "elite": 1,
+  "fac": "undead",
+  "d": "Boss (5 slots). Plague Aura: Enemies that start their turn next to him take 2 damage."
+}

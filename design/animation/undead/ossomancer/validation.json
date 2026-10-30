@@ -1,0 +1,42 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "pause": true,
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 726,
+      "rig": 136.359375
+    },
+    "after": {
+      "board": 908,
+      "rig": 170.546875
+    }
+  },
+  "effects": true,
+  "gameplay": true,
+  "unit": "ossomancer",
+  "method": "Headless Edge actual game runtime; independent assembly and FX screenshots visually inspected.",
+  "actualMechanics": {
+    "attackDamage": 3,
+    "attackFX": 2,
+    "spell": true,
+    "shrapnelDamage": 4,
+    "bombRemoved": true,
+    "spellFX": 2,
+    "undyingRevived": true,
+    "undyingFX": 1
+  },
+  "sourceRectsChecked": 72,
+  "poseSweep": {
+    "poses": 42,
+    "edgePixels": 0
+  },
+  "screenshots": [
+    "../ossomancer/batch-review.png",
+    "vfx-review.png"
+  ],
+  "pending": []
+}

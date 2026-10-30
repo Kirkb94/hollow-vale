@@ -1,0 +1,29 @@
+{
+  "unit": "ghoul",
+  "mappedBodyParts": 72,
+  "extras": 0,
+  "frames": 16,
+  "files": {
+    "public\\art\\rigs\\undead\\ghoul\\body.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\ghoul\\vfx.png": {
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    }
+  },
+  "errors": []
+}

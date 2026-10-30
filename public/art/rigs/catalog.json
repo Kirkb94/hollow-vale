@@ -279,6 +279,132 @@
       "attack": "attack",
       "effects": "vfx.json",
       "revision": "f35824a5caf7"
+    },
+    "ossomancer": {
+      "name": "Ossomancer",
+      "faction": "Undead",
+      "folder": "undead/ossomancer",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "96789178f573"
+    },
+    "bonewitch": {
+      "name": "Bone Witch",
+      "faction": "Undead",
+      "folder": "undead/bonewitch",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "d59b8102207a"
+    },
+    "gravedigger": {
+      "name": "Gravedigger",
+      "faction": "Undead",
+      "folder": "undead/gravedigger",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "29d1b04a141c"
+    },
+    "lich": {
+      "name": "Lich King",
+      "faction": "Undead",
+      "folder": "undead/lich",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "86e86cc09805"
+    },
+    "banshee": {
+      "name": "Banshee Queen",
+      "faction": "Undead",
+      "folder": "undead/banshee",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "99d34b64c6a1"
+    },
+    "wraith": {
+      "name": "Wraith",
+      "faction": "Undead",
+      "folder": "undead/wraith",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "53ee731251a5"
+    },
+    "skeletons": {
+      "name": "Bone Legion",
+      "faction": "Undead",
+      "folder": "undead/skeletons",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "thrust",
+      "revision": "94ee6414c1ed"
+    },
+    "ghoul": {
+      "name": "Ghoul",
+      "faction": "Undead",
+      "folder": "undead/ghoul",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "d9a51badca7f"
+    },
+    "graveknight": {
+      "name": "Grave Knight",
+      "faction": "Undead",
+      "folder": "undead/graveknight",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "7f923685c9d0"
+    },
+    "bonerider": {
+      "name": "Bone Rider",
+      "faction": "Undead",
+      "folder": "undead/bonerider",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "bd00aede83df"
+    },
+    "bonecolossus": {
+      "name": "Bone Colossus",
+      "faction": "Undead",
+      "folder": "undead/bonecolossus",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "e9ebe9e216a5"
+    },
+    "deathknight": {
+      "name": "Death Knight",
+      "faction": "Undead",
+      "folder": "undead/deathknight",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "021dc098fc0a"
+    },
+    "plaguelord": {
+      "name": "Plague Lord",
+      "faction": "Undead",
+      "folder": "undead/plaguelord",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "attack",
+      "revision": "62aa7d6a23ad"
+    },
+    "wisp": {
+      "name": "Grave Wisp",
+      "faction": "Undead",
+      "folder": "undead/wisp",
+      "manifest": "manifest.json",
+      "effects": "vfx.json",
+      "attack": "cast",
+      "revision": "c8a7f4054108"
     }
   }
 }

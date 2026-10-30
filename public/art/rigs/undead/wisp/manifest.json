@@ -1,0 +1,416 @@
+{
+  "version": 1,
+  "unit": "wisp",
+  "faction": "undead",
+  "style": "Arcane Vanguard",
+  "attack": "cast",
+  "group": 1,
+  "partOrder": [
+    "body",
+    "head",
+    "leftWing",
+    "rightWing"
+  ],
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "views": {
+    "e": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            82,
+            17,
+            174,
+            272
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            116,
+            337,
+            104,
+            127
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            29,
+            488,
+            195,
+            266
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            72,
+            751,
+            211,
+            254
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        }
+      }
+    },
+    "se": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            316,
+            16,
+            171,
+            281
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            335,
+            335,
+            122,
+            132
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            330,
+            489,
+            128,
+            259
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            354,
+            751,
+            113,
+            258
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        }
+      }
+    },
+    "sw": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            553,
+            16,
+            167,
+            277
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            573,
+            331,
+            117,
+            136
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            567,
+            489,
+            134,
+            266
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            554,
+            752,
+            155,
+            255
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        }
+      }
+    },
+    "w": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            805,
+            19,
+            172,
+            273
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            830,
+            335,
+            116,
+            130
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            831,
+            488,
+            194,
+            265
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            772,
+            751,
+            228,
+            253
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        }
+      }
+    },
+    "nw": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            1059,
+            16,
+            184,
+            278
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            1087,
+            332,
+            123,
+            131
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            1098,
+            488,
+            134,
+            248
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            1110,
+            737,
+            144,
+            275
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        }
+      }
+    },
+    "ne": {
+      "file": "body.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "parts": {
+        "body": {
+          "sourceRect": [
+            1319,
+            16,
+            184,
+            278
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "head": {
+          "sourceRect": [
+            1335,
+            333,
+            121,
+            130
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "leftWing": {
+          "sourceRect": [
+            1332,
+            489,
+            144,
+            251
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        },
+        "rightWing": {
+          "sourceRect": [
+            1308,
+            754,
+            145,
+            253
+          ],
+          "pivot": [
+            0.5,
+            0.08
+          ],
+          "isolate": false,
+          "flipX": false
+        }
+      }
+    }
+  },
+  "status": "ready",
+  "skeleton": "wisp"
+}

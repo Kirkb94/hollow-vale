@@ -1,0 +1,4 @@
+{
+  "prompt": "Generate transparent2D celshaded sprite VFX atlas for skeleton infantry, ivory/green/gray palette. 4columns4rows16frames, eachrow animation evolves lefttoright fourstages. Row1 spear thrust streak paleivory sharp narrow tapered trail towardright; row2 weapon hit spark grayivory chippedbone shards harmless decorativeimpact; row3 summoning green groundrunering rises smallbone motes and fades; row4 Undying resurrection green spectral flame with bone fragments assembling upward then dissipating. Nocharacters, noequipment, no words, no background, no panel lines, truealpha gutters. Each isolatedframe within equalcells, largepadding. Art crispdarkcontours andclean celcolor, not photoreal. Squaremaxresolution.",
+  "source": "C:\\Users\\Uno\\.codex\\generated_images\\01a18bf8-4ed7-76d1-ace0-3a07be0c6945\\exec-038afe39-0cd6-4eea-a538-063a2b0cb1e2.png"
+}

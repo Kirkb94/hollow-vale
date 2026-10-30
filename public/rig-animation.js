@@ -24,7 +24,7 @@
   const root='art/rigs/',assets=new Map(),models=new Map(),facing=new WeakMap(),pending=new Map(),images=new Map(),groupCanvases=new WeakMap();
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const registry={
-    mage:{folder:'infernal/mage',weapon:null},
+    mage:{folder:'infernal/mage',manifest:'manifest.json',attack:'cast',effects:'vfx.json'},
     knight:{folder:'kingdom/knight',manifest:'manifest.json',attack:'attack'},
     blade:{folder:'vamp',manifest:'blade-rig.json',attack:'attack'},
     necromancer:{folder:'undead',manifest:'necromancer.rig.json',attack:'cast'}
@@ -108,7 +108,7 @@
       const sheets=await Promise.all(directions.map(d=>assetImage(meta?.views?.[d]?.file||meta?.atlases?.[d]||d+'.png')));
       const body=await Promise.all(sheets.map(async(im,i)=>{
         const d=directions[i];
-        if(meta?.views?.[d]?.parts)return Promise.all((meta.skeleton==='bat'?meta.partOrder:partNames).map(async name=>{const p=meta.views[d].parts[name],s=source(p.file?await assetImage(p.file):im,p.renderRect||p.sourceRect,{pivot:p.pivot,flipX:!!p.flipX});return p.isolate?isolate(s):s;}));
+        if(meta?.views?.[d]?.parts)return Promise.all((['bat','wisp'].includes(meta.skeleton)?meta.partOrder:partNames).map(async name=>{const p=meta.views[d].parts[name],s=source(p.file?await assetImage(p.file):im,p.renderRect||p.sourceRect,{pivot:p.pivot,flipX:!!p.flipX,displaySize:p.displaySize});return p.isolate?isolate(s):s;}));
         if(explicit?.rects?.[d])return explicit.rects[d].map((rect,n)=>source(im,rect,{pivot:meta.parts[n]?.pivot}));
         return pieces(im);
       }));
@@ -146,16 +146,24 @@
   }
   function displayKey(k,u){return u?.bat&&registry[k+'_bat']?k+'_bat':k;}
   function part(ctx,a,n,x,y,w,h,angle=0,px=.5,py=.08){
-    const s=a[n];ctx.save();ctx.translate(x,y);ctx.rotate(angle);if(s.flipX)ctx.scale(-1,1);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-w*px,-h*py,w,h);ctx.restore();
+    const s=a[n];if(s.displaySize){w=s.displaySize[0];h=s.displaySize[1];}ctx.save();ctx.translate(x,y);ctx.rotate(angle);if(s.flipX)ctx.scale(-1,1);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-w*px,-h*py,w,h);ctx.restore();
   }
   function draw(canvas,k,dir,state,t,single=false){
     const all=assets.get(k);if(!all)return;
     lastUse.set(k,++usageTick);
+    if(models.get(k)?.meta?.skeleton==='wisp'){
+      const a=all[clamp(Math.floor(dir),0,5)],ctx=canvas.getContext('2d'),p=pose(state,reduced.matches?0:t),sway=reduced.matches?0:Math.sin(t/240)*.16;
+      ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.scale(canvas.width/320,canvas.height/240);ctx.translate(160,146+p.bob);ctx.globalAlpha=p.alpha;ctx.rotate(p.fall*1.2);
+      part(ctx,a,2,-10,-2,29,64,sway,.5,.05);part(ctx,a,3,12,-2,25,58,-sway,.5,.05);
+      part(ctx,a,0,0,-35,56,72,0,.5,.5);part(ctx,a,1,[1,1,-1,-1,-1,1][dir]*5,-29,24,26,0,.5,.5);ctx.restore();return;
+    }
     if(models.get(k)?.meta?.skeleton==='bat'&&(single||(models.get(k).meta.group||(typeof H!=='undefined'?H[k]?.group:1)||1)===1)){
       const a=all[clamp(Math.floor(dir),0,5)],ctx=canvas.getContext('2d'),p=pose(state,reduced.matches?0:t),flap=reduced.matches?0:Math.sin(t/(state==='attack'?65:110))*.45;
       ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.scale(canvas.width/320,canvas.height/240);ctx.translate(160,158+p.bob);ctx.globalAlpha=p.alpha;ctx.rotate(p.fall*1.3);
       part(ctx,a,2,-8,-30,70,75,-flap,.9,.22);part(ctx,a,3,8,-30,70,75,flap,.1,.22);
-      part(ctx,a,0,0,-30,30,55,0,.5,.1);part(ctx,a,1,[1,1,-1,-1,-1,1][dir]*5,-40,28,29,0,.5,.5);ctx.restore();return;
+      const layout=models.get(k)?.meta?.batLayout||{},body=layout.body||{},head=layout.head||{},sign=[1,1,-1,-1,-1,1][dir];
+      const drawHead=()=>part(ctx,a,1,sign*(head.position?.[0]??5),head.position?.[1]??-40,head.size?.[0]??28,head.size?.[1]??29,0,.5,.5),behind=layout.headBehindRear&&dir>=4;
+      if(behind)drawHead();part(ctx,a,0,body.position?.[0]??0,body.position?.[1]??-30,body.size?.[0]??30,body.size?.[1]??55,0,.5,body.pivot?.[1]??.1);if(!behind)drawHead();ctx.restore();return;
     }
     const group=models.get(k)?.meta?.group||(typeof H!=='undefined'?H[k]?.group:1)||1;
     if(group>1&&!single){

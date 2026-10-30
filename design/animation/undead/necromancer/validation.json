@@ -1,0 +1,39 @@
+{
+  "sixFacings": true,
+  "movableParts": true,
+  "equipment": true,
+  "group": 1,
+  "attackPose": "cast",
+  "correctGroup": true,
+  "groupRendered": true,
+  "damage": 2,
+  "attackFX": 3,
+  "gameplay": true,
+  "effects": true,
+  "pauseEvidence": {
+    "hidden": true,
+    "held": true,
+    "resumed": true,
+    "count": 3
+  },
+  "pause": true,
+  "raise": {
+    "raised": true,
+    "effects": 4
+  },
+  "visibility": true,
+  "zoom": true,
+  "zoomMeasurements": {
+    "before": {
+      "board": 774,
+      "rig": 145.375
+    },
+    "after": {
+      "board": 967,
+      "rig": 181.625
+    }
+  },
+  "test": "tools/undead-necromancer.test.cjs",
+  "testedAt": "2026-10-30T11:13:25.332Z",
+  "pageErrors": []
+}

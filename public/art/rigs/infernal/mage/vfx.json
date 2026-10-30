@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "unit": "mage",
+  "faction": "infernal",
+  "file": "../fire-effects.png",
+  "grid": {
+    "columns": 8,
+    "rows": 3
+  },
+  "clips": {
+    "fireball": {
+      "row": 0,
+      "frames": 8,
+      "fps": 22,
+      "loop": true,
+      "sizeInHexes": 1.1
+    },
+    "explosion": {
+      "row": 1,
+      "frames": 8,
+      "fps": 11,
+      "sizeInHexes": 1.4
+    },
+    "groundFire": {
+      "row": 2,
+      "frames": 8,
+      "fps": 11,
+      "loop": true,
+      "sizeInHexes": 1
+    }
+  },
+  "bindings": {
+    "attack": {
+      "projectile": "fireball",
+      "impact": "explosion",
+      "releaseMs": 340,
+      "travelMs": 300
+    }
+  },
+  "notes": [
+    "Ground fire tiles retain the existing rig-animation ground renderer."
+  ]
+}

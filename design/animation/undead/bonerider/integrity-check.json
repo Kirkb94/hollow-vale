@@ -1,0 +1,69 @@
+{
+  "unit": "bonerider",
+  "mappedBodyParts": 72,
+  "extras": 48,
+  "frames": 16,
+  "files": {
+    "public\\art\\rigs\\undead\\bonerider\\body.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\bonerider\\supplement.png": {
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\bonerider\\equipment.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\bonerider\\mount-supplement.png": {
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\bonerider\\mount.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\bonerider\\vfx.png": {
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        255
+      ]
+    }
+  },
+  "errors": []
+}

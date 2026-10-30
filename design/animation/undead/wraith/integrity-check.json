@@ -1,0 +1,39 @@
+{
+  "unit": "wraith",
+  "mappedBodyParts": 72,
+  "extras": 0,
+  "frames": 16,
+  "files": {
+    "public\\art\\rigs\\undead\\wraith\\body.png": {
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\wraith\\supplement.png": {
+      "size": [
+        1024,
+        1536
+      ],
+      "alpha": [
+        0,
+        254
+      ]
+    },
+    "public\\art\\rigs\\undead\\wraith\\vfx.png": {
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha": [
+        0,
+        253
+      ]
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,16 @@
+{
+  "n": "Death Knight",
+  "e": "👑",
+  "hp": 25,
+  "mv": 2,
+  "rng": [
+    1,
+    1
+  ],
+  "dmg": 6,
+  "armor": 1,
+  "elite": 1,
+  "fac": "undead",
+  "d": "Boss (5 slots). Withering Strike: Its targets cannot be healed for 2 turns.",
+  "charge": 1
+}

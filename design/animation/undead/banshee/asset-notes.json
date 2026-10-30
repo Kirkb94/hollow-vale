@@ -1,0 +1,28 @@
+{
+  "unit": "banshee",
+  "status": "complete-art-and-dynamic-gameplay-QA",
+  "body": "body.png",
+  "manifest": "manifest.json",
+  "equipment": "equipment.png",
+  "effects": "vfx.png",
+  "effectMetadata": "vfx.json",
+  "directions": [
+    "e",
+    "se",
+    "sw",
+    "w",
+    "nw",
+    "ne"
+  ],
+  "partsPerDirection": 12,
+  "gearPerDirection": 1,
+  "effectFrames": 32,
+  "sourcePolicy": "Original imagegen PNG alpha preserved. Source rectangles and render rectangles control extraction; no procedural replacement artwork.",
+  "corrections": [
+    "Regenerated 72-part layout. body-original.png supplies genuine SW head. Floating robe tails occupy leg/boot slots; locomotion hover. Independent scepter-only atlas regenerated."
+  ],
+  "mechanicsUnchanged": true,
+  "validation": "validation.json",
+  "test": "tools/undead-core.test.cjs",
+  "fullBatchClaim": "This delivery contains five units; other Undead units are handled separately."
+}
