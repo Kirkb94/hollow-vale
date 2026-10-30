@@ -1,6 +1,34 @@
 {
   "versions": [
     {
+      "id": "26ba03c6e5e0",
+      "date": "2026-10-30",
+      "title": "Kingdom: complete layered character artwork",
+      "groups": [
+        {
+          "name": "Visuals",
+          "items": [
+            "All 17 Kingdom units now use six-direction layered artwork with animated body parts and separate equipment.",
+            "Outriders have articulated horses and seated riders. High Seraphs have separate wings and halos. Soldier squads retain their three-member formations.",
+            "New attack, projectile, healing, spell, aura and movement effects follow real combat events, including elite cinematic attacks.",
+            "The animation workshop previews each available character's directions and movable parts. A Kingdom test match places the complete faction on both sides.",
+            "Updated terrain and the existing Pyromancer, Bloodblade and Necromancer art pilots are included. Other faction overhauls are still in progress."
+          ]
+        },
+        {
+          "name": "Fixes",
+          "items": [
+            "Character artwork scales consistently with board zoom. Weapon animation canvases have extra room for long equipment.",
+            "Local battles pause through the in-game menu, including pending AI turns. Online matches continue while the menu is open.",
+            "New effects respect fog visibility, pause, reduced-motion settings and match cleanup."
+          ]
+        }
+      ],
+      "commits": [
+        "Complete Kingdom layered art, animation and combat effects"
+      ]
+    },
+    {
       "id": "ab86d38",
       "date": "2026-10-28",
       "title": "No attacks into the fog",
@@ -195,22 +223,6 @@
         "Rock paper scissors: points reset for each place, AI seats throw too",
         "Rock paper scissors for who goes first (online and Pass & play)",
         "Spells and statuses read clearly in battle"
-      ]
-    },
-    {
-      "id": "5563b9f",
-      "date": "2026-10-28",
-      "title": "Fixes",
-      "groups": [
-        {
-          "name": "Fixes",
-          "items": [
-            "Phone: the ban confirm bar now goes away after you confirm a ban"
-          ]
-        }
-      ],
-      "commits": [
-        "Ban phase on phone: the ban confirm bar now closes after a ban is confirmed"
       ]
     }
   ]
