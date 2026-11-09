@@ -1,6 +1,23 @@
 {
   "versions": [
     {
+      "id": "warfront-rts-20261109",
+      "date": "2026-11-09",
+      "title": "Warfront: a real-time mode",
+      "groups": [
+        {
+          "name": "New mode (separate page)",
+          "items": [
+            "Warfront (rts.html) is a real-time base builder set in the Vale. Workers mine gold, you build Farms, Cottages, Barracks, Mana Wells, Watchtowers, Towers and a Hero Shrine, and you burn down every rival Keep.",
+            "Every faction and hero is in, with the same pixel art. Hero stats, keywords (Armor, Splash, Stun, Drain, Heal, Siege, Flying, Charge, Squad) and faction powers work in real time; heroes still earn stars from kills.",
+            "Army slots work as in Hollow Vale, and squads give slots back as members fall. Play against 1 to 3 AI rivals on Easy, Normal or Hard.",
+            "Open it from the Warfront button under the title on the main menu."
+          ]
+        }
+      ],
+      "commits": []
+    },
+    {
       "id": "squad-slots-20261109",
       "date": "2026-11-09",
       "title": "Squads give slots back",

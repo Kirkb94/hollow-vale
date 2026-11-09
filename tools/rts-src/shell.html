@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hollow Vale: Warfront</title>
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Pirata+One&display=swap">
+<style>
+  :root { --bg: #14161c; --panel: #232733; --panel2: #2c3140; --edge: #3d4457; --gold: #e2b84a; --gold2: #f3d27a; --fg: #ece6d6; --dim: #a6a196; --bad: #e5574a; --good: #74d06a; --mana: #a77bf0; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif; user-select: none; }
+  canvas#view { position: fixed; inset: 0; display: block; image-rendering: pixelated; }
+  .panel { background: var(--panel); border: 2px solid var(--edge); border-radius: 8px; box-shadow: 0 0 0 1px #000a, 0 6px 18px #0008; }
+  .ic { display: inline-block; width: 27px; height: 18px; background: url(art/ui-icons-pocket-chibi.png) no-repeat; background-size: 600% 600%; vertical-align: -4px; }
+  #top { position: fixed; left: 8px; right: 8px; top: 8px; height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 10px; z-index: 5; }
+  #top .r { display: flex; align-items: center; gap: 6px; padding: 3px 10px; background: var(--panel2); border-radius: 6px; font-weight: 700; font-size: 15px; }
+  #top .r small { color: var(--dim); font-weight: 400; }
+  #top .r.warn { color: var(--bad); }
+  #top .sp { flex: 1; }
+  #top button, .btn { background: var(--panel2); color: var(--fg); border: 2px solid var(--edge); border-radius: 6px; padding: 4px 10px; font: 700 13px inherit; cursor: pointer; }
+  #top button.on { background: var(--gold); color: #1a1408; border-color: var(--gold2); }
+  #clock { font: 700 16px Cinzel, serif; color: var(--gold2); min-width: 54px; text-align: center; }
+  #bottom { position: fixed; left: 8px; right: 8px; bottom: 8px; height: 196px; display: flex; gap: 8px; z-index: 5; pointer-events: none; }
+  #bottom > * { pointer-events: auto; }
+  #cmd { width: 372px; padding: 8px; display: grid; grid-template-columns: repeat(5, 1fr); grid-auto-rows: 56px; gap: 5px; align-content: start; }
+  .cb { position: relative; background: var(--panel2); border: 2px solid var(--edge); border-radius: 6px; color: var(--fg); cursor: pointer; overflow: hidden; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; font-size: 10.5px; line-height: 1.1; }
+  .cb:hover { border-color: var(--gold); }
+  .cb.na { opacity: .45; }
+  .cb .k { position: absolute; top: 1px; right: 3px; color: var(--gold2); font-weight: 700; font-size: 11px; }
+  .cb .pic { position: absolute; inset: 2px 2px 14px; background-repeat: no-repeat; background-position: center; background-size: contain; image-rendering: pixelated; }
+  .cb .icn { position: absolute; left: 50%; top: 4px; width: 51px; height: 34px; margin-left: -25px; background: url(art/ui-icons-pocket-chibi.png) no-repeat; background-size: 600% 600%; image-rendering: pixelated; }
+  .cb .lb { position: relative; background: #000a; width: 100%; text-align: center; padding: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cb.back { justify-content: center; font-size: 13px; font-weight: 700; }
+  #info { flex: 1; padding: 10px 14px; overflow-y: auto; font-size: 13.5px; line-height: 1.4; }
+  #info h3 { margin: 0 0 4px; font: 700 19px Cinzel, serif; color: var(--gold2); display: flex; align-items: center; gap: 8px; }
+  #info .dim, .dim { color: var(--dim); }
+  #info .row { margin: 2px 0; }
+  #info .bar { height: 7px; background: #0008; border-radius: 4px; overflow: hidden; margin: 3px 0 6px; max-width: 320px; }
+  #info .bar i { display: block; height: 100%; }
+  #info .stats { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 4px 0; }
+  #info .stats span { white-space: nowrap; }
+  #info .grid { display: flex; flex-wrap: wrap; gap: 4px; }
+  #info .mini { width: 46px; height: 50px; position: relative; background: var(--panel2); border: 2px solid var(--edge); border-radius: 5px; cursor: pointer; background-size: contain; background-repeat: no-repeat; background-position: center 30%; image-rendering: pixelated; }
+  #info .mini i { position: absolute; left: 2px; right: 2px; bottom: 2px; height: 4px; background: #0008; } #info .mini i b { display: block; height: 100%; background: var(--good); }
+  #info .q { display: inline-flex; flex-direction: column; align-items: center; width: 54px; margin-right: 4px; font-size: 10px; cursor: pointer; }
+  #info .q .pic { width: 44px; height: 44px; background-size: contain; background-repeat: no-repeat; background-position: center; image-rendering: pixelated; border: 2px solid var(--edge); border-radius: 5px; background-color: var(--panel2); }
+  #info .kw b { color: var(--gold2); }
+  #mini { width: 196px; padding: 6px; } #mini canvas { width: 180px; height: 180px; display: block; image-rendering: pixelated; cursor: pointer; }
+  #alerts { position: fixed; left: 50%; transform: translateX(-50%); bottom: 214px; z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
+  #alerts div { background: #000c; padding: 5px 12px; border-radius: 6px; font-size: 14px; border-left: 3px solid var(--gold); }
+  #alerts div.bad { border-color: var(--bad); } #alerts div.good { border-color: var(--good); }
+  #tip { position: fixed; z-index: 30; max-width: 340px; padding: 8px 10px; font-size: 13px; line-height: 1.35; pointer-events: none; }
+  #tip b { color: var(--gold2); } #tip .warn { color: var(--bad); }
+  .menu { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 20; width: min(640px, 94vw); max-height: 92vh; overflow-y: auto; padding: 22px 26px; text-align: center; }
+  .menu h1 { font: 400 54px "Pirata One", Cinzel, serif; color: var(--gold2); margin: 0; letter-spacing: 1px; }
+  .menu h2 { font: 700 26px Cinzel, serif; color: var(--gold2); margin: 0 0 8px; }
+  .menu .sub { color: var(--dim); margin: 4px 0 14px; }
+  .opt { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin: 8px 0; align-items: center; }
+  .opt > span { width: 100%; color: var(--dim); font-size: 13px; }
+  .opt button { background: var(--panel2); color: var(--fg); border: 2px solid var(--edge); border-radius: 6px; padding: 5px 11px; cursor: pointer; font: 700 13px inherit; display: flex; align-items: center; gap: 5px; }
+  .opt button.on { border-color: var(--gold); background: #3a3324; color: var(--gold2); }
+  .opt button i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .big { display: block; width: 100%; margin: 8px 0 0; padding: 11px; font: 700 17px Cinzel, serif; border-radius: 7px; border: 2px solid var(--edge); background: var(--panel2); color: var(--fg); cursor: pointer; }
+  .big.primary { background: var(--gold); color: #1a1408; border-color: var(--gold2); }
+  #facInfo { min-height: 44px; font-size: 13.5px; color: var(--fg); margin: 2px 0 6px; }
+  #help { text-align: left; } #help ul { padding-left: 18px; line-height: 1.45; font-size: 14px; } #help b { color: var(--gold2); }
+  #shade { position: fixed; inset: 0; background: radial-gradient(#0000, #000a); z-index: 15; }
+  #loading { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 22px Cinzel, serif; color: var(--gold2); z-index: 40; background: var(--bg); }
+</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="loading">Gathering the armies…</div>
+<div id="top" class="panel" hidden>
+  <div class="r" data-tip="gold"><span class="ic" style="background-position:80% 0"></span><b id="rGold">0</b></div>
+  <div class="r" data-tip="mana"><span class="ic" style="background-position:60% 0"></span><b id="rMana">0</b></div>
+  <div class="r" id="rArmyBox" data-tip="army"><span class="ic" style="background-position:20% 100%"></span><b id="rArmy">0/20</b></div>
+  <div class="r" data-tip="workers"><span class="ic" style="background-position:0 60%"></span><b id="rWork">0</b></div>
+  <div class="sp"></div>
+  <div id="rivals" class="r"></div>
+  <div id="clock">0:00</div>
+  <button data-speed="1" class="on">1×</button><button data-speed="2">2×</button><button data-speed="3">3×</button>
+  <button id="btnMenu">Menu</button>
+</div>
+<div id="bottom" hidden>
+  <div id="cmd" class="panel"></div>
+  <div id="info" class="panel"></div>
+  <div id="mini" class="panel"><canvas id="mm" width="180" height="180"></canvas></div>
+</div>
+<div id="alerts"></div>
+<div id="tip" class="panel" hidden></div>
+<div id="shade"></div>
+<div class="menu panel" id="title" hidden>
+  <h1>Hollow Vale</h1>
+  <div style="font:700 20px Cinzel,serif;color:var(--fg);margin-top:-6px">Warfront</div>
+  <p class="sub">Real-time war in the Vale. Mine gold, raise a town, train heroes from your faction and burn down every rival Keep.</p>
+  <div class="opt" id="optFac"><span>Your faction</span></div>
+  <div id="facInfo"></div>
+  <div class="opt" id="optRivals"><span>Rivals (AI)</span><button data-v="1" class="on">1</button><button data-v="2">2</button><button data-v="3">3</button></div>
+  <div class="opt" id="optDiff"><span>Difficulty</span><button data-v="0">Easy</button><button data-v="1" class="on">Normal</button><button data-v="2">Hard</button></div>
+  <button class="big primary" id="btnStart">March to War</button>
+  <button class="big" id="btnHelp">How to Play</button>
+  <a class="big" href="./" style="text-decoration:none;box-sizing:border-box">Back to Hollow Vale</a>
+</div>
+<div class="menu panel" id="help" hidden>
+  <h2>How to Play</h2>
+  <ul>
+    <li><b>Goal:</b> destroy every rival <b>Keep</b>. Lose yours and you are out.</li>
+    <li><b>Gold:</b> select Workers and right-click a <b>Gold Mine</b>. They carry gold back to your nearest Keep. Farms also trickle gold.</li>
+    <li><b>Mana:</b> a <b>Mana Well</b> slowly fills your mana. Casters, healers and Elites cost mana to train.</li>
+    <li><b>Building:</b> select a Worker, pick a building from the command card (or its hotkey) and click the ground. Workers build it.</li>
+    <li><b>Heroes:</b> the <b>Barracks</b> trains your faction's heroes. The <b>Hero Shrine</b> trains Elites (one of each at a time). Squads come out as 3 units.</li>
+    <li><b>Army slots:</b> heroes take 1 to 5 slots by price, as in Hollow Vale. Cottages and the Hero Shrine raise the cap. A squad gives slots back as members fall (whole slots for survivors, rounded down). Workers don't use slots.</li>
+    <li><b>Commands:</b> left-click or drag to select. Right-click to move, attack or mine. <b>A</b> then click: attack-move. <b>S</b>: stop. <b>H</b>: hold position. Ctrl+1-9 saves a group, 1-9 recalls it. Space selects your army, . (period) an idle worker, Tab cycles your Keeps.</li>
+    <li><b>Faction powers</b> from Hollow Vale work in real time: Formation, Bloodthirst, Undying, Burn, Regrowth, Siegecraft and Arcane Flow. Heroes keep their keywords: Armor, Splash, Stun, Drain, Heal, Siege, Flying, Charge and Squad. Kills earn XP; at 2 and 5 XP a hero earns a star.</li>
+    <li><b>Camera:</b> arrow keys, push the mouse to the screen edge, or drag the minimap. Mouse wheel zooms. P pauses.</li>
+  </ul>
+  <button class="big primary" id="btnHelpBack">Back</button>
+</div>
+<div class="menu panel" id="pause" hidden>
+  <h2>Paused</h2>
+  <button class="big primary" id="btnResume">Resume</button>
+  <button class="big" id="btnPauseHelp">How to Play</button>
+  <button class="big" id="btnQuit">Quit to Menu</button>
+</div>
+<div class="menu panel" id="end" hidden>
+  <h2 id="endTitle">Victory</h2>
+  <p class="sub" id="endSub"></p>
+  <div id="endStats" class="dim"></div>
+  <button class="big primary" id="btnAgain">Play Again</button>
+  <button class="big" id="btnEndMenu">Main Menu</button>
+</div>
+<script>
+/*JS*/
+</script>
+</body>
+</html>

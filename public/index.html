@@ -4473,6 +4473,8 @@ diff.innerHTML='<legend>AI difficulty</legend>'+['Easy','Normal','Hard'].map((l,
 const kick=document.createElement('p');kick.className='hvm-kick';kick.textContent='Journeys';kick.setAttribute('aria-hidden','true');
 const tok=document.createElement('img');tok.className='hvm-tok';tok.alt='';tok.setAttribute('aria-hidden','true');tok.dataset.src=TK+'lich.webp';
 list.append(B.online,B.vsai,tok,diff,B.pass,kick,B.camp,B.daily);links.append(B.how,B.stats);
+/* HV_WARFRONT: link to the separate real-time mode (rts.html) */
+{const a=document.createElement('a');a.href='rts.html';a.className='hvm-rts';a.innerHTML='⚔ <b>Warfront</b> <small>real-time base building (new)</small>';a.style.cssText='display:inline-block;margin-top:14px;padding:8px 14px;border:2px solid #e2b84a;border-radius:8px;background:#1d1a14cc;color:#f3d27a;text-decoration:none;font-weight:700;pointer-events:auto';brand.append(a);}
 const m5now=document.getElementById('m5');if(m5now)list.insertBefore(m5now,B.online);
 const vs=document.getElementById('vswitch');
 const vsp=menu.querySelector(':scope>.vsw');

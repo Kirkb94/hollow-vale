@@ -2,6 +2,14 @@ HOLLOW VALE
 ===========
 1v1, 3-player or 4-player battles, online or on one device.
 
+WARFRONT (real-time mode, public/rts.html)
+- A separate real-time base builder: mine gold, build a town, train heroes
+  from your faction and destroy every rival Keep. 1 to 3 AI rivals.
+- Open it from the Warfront button on the main menu, or go to /rts.html.
+- Source lives in tools/rts-src/; rebuild with: python3 tools/build-rts.py
+- Hero data comes from public/rts-data.json. Regenerate it after changing
+  heroes (server running): python3 tools/export-rts-data.py http://localhost:3000/
+
 GAME MODES (main menu)
 - Play online: create a game, pick 1v1 / 3 players / 4 players in the lobby,
   and send friends the link or room code. Empty seats are played by the AI.
