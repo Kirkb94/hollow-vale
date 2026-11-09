@@ -1,6 +1,20 @@
 {
   "versions": [
     {
+      "id": "squad-slots-20261109",
+      "date": "2026-11-09",
+      "title": "Squads give slots back",
+      "groups": [
+        {
+          "name": "Army cap",
+          "items": [
+            "A squad now frees army slots as its members fall. It only holds whole slots for its survivors, rounded down: a 2-slot squad holds 2 slots with 3 alive, 1 with 2 and none with 1, so a lone survivor no longer locks you out of hiring."
+          ]
+        }
+      ],
+      "commits": []
+    },
+    {
       "id": "pocket-chibi-20261109",
       "date": "2026-11-09",
       "title": "Pocket Chibi art direction",
