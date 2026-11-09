@@ -1,0 +1,51 @@
+/* Arcane Vanguard: crisp illustrated surfaces, shared gold/slate palette. */
+html:not(.hc){--av-ink:#101d26;--av-panel:#223641;--av-edge:#b58d43;--av-paper:#f2e4be;--av-blue:#375e78;--av-gold:#e8bf69}
+html:not(.hc) body{background-color:#14242e;color:var(--av-paper)}
+html:not(.hc) :is(button,.go,.ft,select,input,textarea){border-color:#a58a54!important;border-radius:5px!important;box-shadow:inset 0 1px 0 #fff2,0 2px 0 #0a141d!important}
+html:not(.hc) :is(button,.go,.ft,select){background:linear-gradient(170deg,#385563 0 48%,#263e4b 49% 100%)!important;color:#f8e9c6!important;text-shadow:0 1px #101821}
+html:not(.hc) :is(button,.go,.ft):hover{border-color:#f4cf81!important;background:linear-gradient(170deg,#496e7b 0 48%,#324e5b 49%)!important}
+html:not(.hc) :is(button,.go,.ft):disabled{opacity:.5;filter:saturate(.5)}
+html:not(.hc) :is(button.on,button.sel,.go:not(.sec),.ft.on){background:linear-gradient(170deg,#b99145 0 48%,#82602b 49%)!important;color:#fff3ce!important;border-color:#eed294!important}
+html:not(.hc) :is(.sheet,.modal,.dialog,.panel,#hud,#info,#reserve,#shop,#hv-pause-panel,.hv-pause-card,.hvm-panel,.hvn-card,.hvn-head,.hvm-help,#hvm-rules,#hvfm>div,#tip,.tip){background-color:#20343f!important;background-image:linear-gradient(145deg,#30475255,transparent 50%)!important;border-color:#a88c55!important;color:#f0e5cc}
+html:not(.hc) :is(h1,h2,h3,.hvm-title,.hvm-b b){color:#f2cf83;text-shadow:0 2px #172029}
+html:not(.hc) .hvm-ring .e,html:not(.hc) .hvm-ring .e2{stroke:#182a32}
+html:not(.hc) .hvm-ring .g{stroke:#d9b76d}
+html:not(.hc) :is(.hvm-ic,.hvm-go,.hvm-arw){color:#f0ca79;filter:drop-shadow(0 1px #101b22)}
+html:not(.hc) :is(.card,.ucs,.rchip,.hchip){border-color:#8d805c!important;background-color:#263d44!important}
+html:not(.hc) :is(.hvf,.hv-current-portrait){background:radial-gradient(ellipse at 50% 80%,#546d54,#233941 78%)!important}
+html:not(.hc) :is(input,textarea){background:#162933!important;color:#f5e9cb!important}
+html:not(.hc) :focus-visible{outline:3px solid #f8d178!important;outline-offset:3px}
+.hv-ui-icon{display:inline-block;position:relative;width:1.25em;height:1.25em;vertical-align:-.23em;background-image:url(art/ui-icons-pocket-chibi.png);background-size:600% 600%;background-repeat:no-repeat;flex:none;pointer-events:none}
+.hv-icon-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.hv-illustrated-object{object-fit:contain!important}
+html.hv-illustrated-objects #board .hvz-m{display:none!important}
+html.hv-arcane #hvbg>.o{opacity:.18}
+@media(prefers-reduced-motion:reduce){.hv-ui-icon{animation:none!important}}
+
+html:not(.hc) :is(button,input,select,textarea,small,.chip,.ft){font-family:"Alegreya Sans",system-ui,sans-serif!important}
+
+html:not(.hc) input{accent-color:#d8b76d}
+
+/* Pocket Chibi: hard-edged pixels, compact flat surfaces, readable game controls. */
+html:not(.hc){--av-ink:#172a30;--av-panel:#293f46;--av-paper:#f6e6be;--av-gold:#f0c76b}
+html:not(.hc) :is(button,.go,.ft,select,input,textarea,.card,.ucs,.rchip,.hchip){border-radius:0!important;border-width:2px!important;box-shadow:inset 2px 2px #ffffff20,inset -2px -2px #00000035,3px 3px 0 #10212b!important}
+html:not(.hc) :is(button,.go,.ft,select){background:#36535c!important;text-shadow:1px 1px #11242b}
+html:not(.hc) :is(button,.go,.ft):hover{background:#46686d!important}
+html:not(.hc) :is(button.on,button.sel,.go:not(.sec),.ft.on){background:#a97a37!important}
+html:not(.hc) :is(.sheet,.modal,.dialog,.panel,#info,#tip,.hv-pause-card,.hvm-panel,.hvn-card,.hvn-head,#hvtut,#hvh){background-image:none!important;background-color:#293f46!important;border-radius:0!important;box-shadow:4px 4px 0 #11232b!important}
+html:not(.hc) :is(button,input,select,textarea,small,.chip,.ft,h1,h2,h3,.hvm-title){font-family:ui-monospace,Consolas,"Courier New",monospace!important}
+html:not(.hc) #menu.hvm .hvm-title{font-family:ui-monospace,Consolas,monospace!important;font-weight:900;letter-spacing:-.065em;text-shadow:4px 4px 0 #162b32;line-height:.95}
+.hv-ui-icon,.hv-illustrated-object,img[data-current-art],.hvm-tile{image-rendering:pixelated!important}
+html:not(.hc) :is(.hvf,.hv-current-portrait){background:#344e46!important}
+#menu.hvm.ms-rose :is(.hvm-mist,.hvm-fogb){display:none!important}
+#menu.hvm.ms-rose .hvm-fogt{background:#243b40}
+#menu.hvm.ms-rose .hvm-fogt img{visibility:hidden}
+#menu.hvm.ms-rose .hvm-hex::before{background:transparent!important}
+#menu.hvm.ms-rose .hvm-hex .hvm-tile{filter:brightness(.9)!important}
+/* Carry the pixel interface through combat banners, reserve cards and popups. */
+html:not(.hc) body,html:not(.hc) body :is(b,summary,.bar,.pt,.ab,.rb,.rl,.dst,.rbh,.cname,.tban,.rnm,.dpn){font-family:ui-monospace,Consolas,"Courier New",monospace!important}
+html:not(.hc) :is(#hud,#reserve,#shop,#hv-pause-panel,.hvm-help,#hvm-rules,#hvfm>div,.bar,#evc){background-image:none!important;background-color:#293f46!important;border-radius:0!important;border-color:#a88c55!important}
+html:not(.hc) #tbanner .tbs{background:color-mix(in srgb,var(--tc) 55%,#293f46)!important;box-shadow:0 4px 0 #11232b!important}
+html:not(.hc) #tbanner .tbs::after{display:none!important}
+html:not(.hc) #tbanner .tbt{text-shadow:2px 2px 0 #172a30}
+html:not(.hc) #fxl .tban{background:#293f46;border-radius:0;box-shadow:3px 3px 0 #11232b}

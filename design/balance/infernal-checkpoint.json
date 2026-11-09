@@ -1,0 +1,9560 @@
+{
+  "testedAt": "2026-10-30T19:39:04.312Z",
+  "metadata": {
+    "infernal": {
+      "mage": {
+        "name": "Pyromancer",
+        "hp": 4,
+        "damage": 3,
+        "range": [
+          2,
+          3
+        ],
+        "slots": 2,
+        "group": 1
+      },
+      "bomber": {
+        "name": "Bombardier",
+        "hp": 3,
+        "damage": 2,
+        "range": [
+          2,
+          3
+        ],
+        "slots": 2,
+        "group": 1
+      },
+      "imps": {
+        "name": "Imps",
+        "hp": 5.5,
+        "damage": 2.5,
+        "range": [
+          1,
+          1
+        ],
+        "slots": 2,
+        "group": 3
+      },
+      "dragon": {
+        "name": "Ember Dragon",
+        "hp": 8,
+        "damage": 6,
+        "range": [
+          2,
+          3
+        ],
+        "slots": 5,
+        "group": 1
+      },
+      "hellhound": {
+        "name": "Hellhound",
+        "hp": 9,
+        "damage": 6,
+        "range": [
+          1,
+          1
+        ],
+        "slots": 3,
+        "group": 1
+      },
+      "magmagolem": {
+        "name": "Magma Golem",
+        "hp": 21,
+        "damage": 4,
+        "range": [
+          1,
+          1
+        ],
+        "slots": 2,
+        "group": 1
+      },
+      "pitlord": {
+        "name": "Pit Lord",
+        "hp": 33,
+        "damage": 5,
+        "range": [
+          1,
+          1
+        ],
+        "slots": 5,
+        "group": 1
+      },
+      "infernowitch": {
+        "name": "Inferno Witch",
+        "hp": 20,
+        "damage": 4,
+        "range": [
+          2,
+          3
+        ],
+        "slots": 5,
+        "group": 1
+      },
+      "demonprince": {
+        "name": "Demon Prince",
+        "hp": 21,
+        "damage": 5,
+        "range": [
+          1,
+          1
+        ],
+        "slots": 5,
+        "group": 1
+      },
+      "phoenix": {
+        "name": "Phoenix",
+        "hp": 14,
+        "damage": 5,
+        "range": [
+          1,
+          2
+        ],
+        "slots": 5,
+        "group": 1
+      },
+      "fireeye": {
+        "name": "Eye of Ruin",
+        "hp": 13,
+        "damage": 5,
+        "range": [
+          2,
+          2
+        ],
+        "slots": 3,
+        "group": 1
+      },
+      "cinderwarden": {
+        "name": "Cinder Warden",
+        "hp": 7,
+        "damage": 3,
+        "range": [
+          2,
+          3
+        ],
+        "slots": 3,
+        "group": 1
+      },
+      "hellbinder": {
+        "name": "Hellbinder",
+        "hp": 10,
+        "damage": 3,
+        "range": [
+          1,
+          2
+        ],
+        "slots": 2,
+        "group": 1
+      },
+      "pactbroker": {
+        "name": "Pactbroker",
+        "hp": 8,
+        "damage": 2,
+        "range": [
+          2,
+          3
+        ],
+        "slots": 2,
+        "group": 1
+      }
+    },
+    "knobs": {
+      "fireAll": false,
+      "fireCap": 8,
+      "fireDur": 2,
+      "ashCap": 4,
+      "graveCap": 6,
+      "graveDur": 4,
+      "growCap": 6,
+      "heatMax": 10,
+      "heatCost": 5,
+      "ovhDmg": 2,
+      "graveRange": 3,
+      "graveTower": 2
+    }
+  },
+  "results": [
+    {
+      "foe": "kingdom",
+      "seed": 104729,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "lookout",
+        "outrider",
+        "bowmen",
+        "bowmen",
+        "lookout",
+        "cleric"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 208,
+      "mechanics": {
+        "ign": 34,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 104729,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "lookout",
+        "outrider",
+        "bowmen",
+        "bowmen",
+        "lookout",
+        "cleric"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 230,
+      "mechanics": {
+        "ign": 23,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 36
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 112648,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellbinder",
+        "hellbinder",
+        "imps",
+        "imps"
+      ],
+      "opponent": [
+        "sunspeaker",
+        "sunspeaker",
+        "bowmen",
+        "paladin",
+        "knight",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 14,
+      "failed": 0,
+      "actions": 151,
+      "mechanics": {
+        "ign": 23,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 112648,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellbinder",
+        "hellbinder",
+        "imps",
+        "imps"
+      ],
+      "opponent": [
+        "sunspeaker",
+        "sunspeaker",
+        "bowmen",
+        "paladin",
+        "knight",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 186,
+      "mechanics": {
+        "ign": 36,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 19
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 120567,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "mage",
+        "magmagolem",
+        "bomber"
+      ],
+      "opponent": [
+        "aegis",
+        "lancer",
+        "bowmen",
+        "sunspeaker",
+        "herald"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 192,
+      "mechanics": {
+        "ign": 43,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 30
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 120567,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "mage",
+        "magmagolem",
+        "bomber"
+      ],
+      "opponent": [
+        "aegis",
+        "lancer",
+        "bowmen",
+        "sunspeaker",
+        "herald"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 202,
+      "mechanics": {
+        "ign": 39,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 33
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 128486,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "hellhound",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "herald",
+        "knight",
+        "raiders",
+        "bowmen",
+        "paladin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 14,
+      "failed": 0,
+      "actions": 139,
+      "mechanics": {
+        "ign": 31,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 22
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 128486,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "hellhound",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "herald",
+        "knight",
+        "raiders",
+        "bowmen",
+        "paladin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 12,
+      "failed": 0,
+      "actions": 102,
+      "mechanics": {
+        "ign": 19,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 22
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 136405,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "magmagolem",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "lookout",
+        "cleric",
+        "herald",
+        "bowmen",
+        "sunspeaker",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 15,
+      "failed": 0,
+      "actions": 140,
+      "mechanics": {
+        "ign": 22,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 31
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 136405,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "magmagolem",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "lookout",
+        "cleric",
+        "herald",
+        "bowmen",
+        "sunspeaker",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 13,
+      "failed": 0,
+      "actions": 137,
+      "mechanics": {
+        "ign": 15,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 144324,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "mage",
+        "fireeye",
+        "hellhound"
+      ],
+      "opponent": [
+        "bowmen",
+        "lancer",
+        "paladin",
+        "raiders",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 18,
+      "failed": 0,
+      "actions": 195,
+      "mechanics": {
+        "ign": 25,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 144324,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "mage",
+        "fireeye",
+        "hellhound"
+      ],
+      "opponent": [
+        "bowmen",
+        "lancer",
+        "paladin",
+        "raiders",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 7,
+      "failed": 0,
+      "actions": 68,
+      "mechanics": {
+        "ign": 13,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 1,
+        "risen": 0,
+        "grow": 0,
+        "heat": 11
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 152243,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "imps",
+        "hellbinder",
+        "mage",
+        "bomber"
+      ],
+      "opponent": [
+        "footmen",
+        "lookout",
+        "raiders",
+        "sunspeaker",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 9,
+      "failed": 0,
+      "actions": 104,
+      "mechanics": {
+        "ign": 24,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 26
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 152243,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "imps",
+        "hellbinder",
+        "mage",
+        "bomber"
+      ],
+      "opponent": [
+        "footmen",
+        "lookout",
+        "raiders",
+        "sunspeaker",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 174,
+      "mechanics": {
+        "ign": 37,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 36
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 160162,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "fireeye",
+        "mage",
+        "hellhound"
+      ],
+      "opponent": [
+        "herald",
+        "bowmen",
+        "cleric",
+        "raiders",
+        "footmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 9,
+      "failed": 0,
+      "actions": 94,
+      "mechanics": {
+        "ign": 15,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 15
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 160162,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "fireeye",
+        "mage",
+        "hellhound"
+      ],
+      "opponent": [
+        "herald",
+        "bowmen",
+        "cleric",
+        "raiders",
+        "footmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 177,
+      "mechanics": {
+        "ign": 28,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 21
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 168081,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellhound",
+        "hellbinder",
+        "imps",
+        "fireeye"
+      ],
+      "opponent": [
+        "lookout",
+        "outrider",
+        "bowmen",
+        "raiders",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 16,
+      "failed": 0,
+      "actions": 154,
+      "mechanics": {
+        "ign": 20,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 168081,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellhound",
+        "hellbinder",
+        "imps",
+        "fireeye"
+      ],
+      "opponent": [
+        "lookout",
+        "outrider",
+        "bowmen",
+        "raiders",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 16,
+      "failed": 0,
+      "actions": 162,
+      "mechanics": {
+        "ign": 23,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 176000,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "bomber",
+        "magmagolem",
+        "magmagolem",
+        "imps"
+      ],
+      "opponent": [
+        "lookout",
+        "aegis",
+        "raiders",
+        "footmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 232,
+      "mechanics": {
+        "ign": 40,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 8,
+        "risen": 0,
+        "grow": 0,
+        "heat": 41
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 176000,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "bomber",
+        "magmagolem",
+        "magmagolem",
+        "imps"
+      ],
+      "opponent": [
+        "lookout",
+        "aegis",
+        "raiders",
+        "footmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 18,
+      "failed": 0,
+      "actions": 246,
+      "mechanics": {
+        "ign": 34,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 30
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 183919,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "hellhound",
+        "cinderwarden",
+        "hellbinder"
+      ],
+      "opponent": [
+        "lancer",
+        "aegis",
+        "lancer",
+        "outrider"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 11,
+      "failed": 0,
+      "actions": 88,
+      "mechanics": {
+        "ign": 10,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 183919,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "hellhound",
+        "cinderwarden",
+        "hellbinder"
+      ],
+      "opponent": [
+        "lancer",
+        "aegis",
+        "lancer",
+        "outrider"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 16,
+      "failed": 0,
+      "actions": 124,
+      "mechanics": {
+        "ign": 12,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 1,
+        "risen": 0,
+        "grow": 0,
+        "heat": 9
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 191838,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "cinderwarden",
+        "pactbroker",
+        "hellbinder"
+      ],
+      "opponent": [
+        "herald",
+        "herald",
+        "outrider",
+        "outrider",
+        "bowmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 19,
+      "failed": 0,
+      "actions": 160,
+      "mechanics": {
+        "ign": 28,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 18
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 191838,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "cinderwarden",
+        "pactbroker",
+        "hellbinder"
+      ],
+      "opponent": [
+        "herald",
+        "herald",
+        "outrider",
+        "outrider",
+        "bowmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 168,
+      "mechanics": {
+        "ign": 23,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 18
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 199757,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "pactbroker",
+        "mage",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "lookout",
+        "cleric",
+        "knight",
+        "outrider",
+        "herald"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 13,
+      "failed": 0,
+      "actions": 114,
+      "mechanics": {
+        "ign": 21,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 24
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 199757,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "pactbroker",
+        "mage",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "lookout",
+        "cleric",
+        "knight",
+        "outrider",
+        "herald"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 164,
+      "mechanics": {
+        "ign": 28,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 207676,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "cinderwarden",
+        "imps",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "bowmen",
+        "lancer",
+        "footmen",
+        "outrider",
+        "bowmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 10,
+      "failed": 0,
+      "actions": 114,
+      "mechanics": {
+        "ign": 17,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 11
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 207676,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "cinderwarden",
+        "imps",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "bowmen",
+        "lancer",
+        "footmen",
+        "outrider",
+        "bowmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 15,
+      "failed": 0,
+      "actions": 205,
+      "mechanics": {
+        "ign": 28,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 18
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 215595,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "magmagolem",
+        "hellhound"
+      ],
+      "opponent": [
+        "lancer",
+        "footmen",
+        "sunspeaker",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 19,
+      "failed": 0,
+      "actions": 172,
+      "mechanics": {
+        "ign": 29,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 39
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 215595,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "magmagolem",
+        "hellhound"
+      ],
+      "opponent": [
+        "lancer",
+        "footmen",
+        "sunspeaker",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 19,
+      "failed": 0,
+      "actions": 204,
+      "mechanics": {
+        "ign": 32,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 26
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 223514,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "hellbinder",
+        "cinderwarden",
+        "fireeye"
+      ],
+      "opponent": [
+        "herald",
+        "bowmen",
+        "cleric",
+        "outrider",
+        "bowmen",
+        "cleric"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 173,
+      "mechanics": {
+        "ign": 30,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 29
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 223514,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "hellbinder",
+        "cinderwarden",
+        "fireeye"
+      ],
+      "opponent": [
+        "herald",
+        "bowmen",
+        "cleric",
+        "outrider",
+        "bowmen",
+        "cleric"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 13,
+      "failed": 0,
+      "actions": 162,
+      "mechanics": {
+        "ign": 16,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 231433,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "pactbroker",
+        "imps",
+        "hellbinder"
+      ],
+      "opponent": [
+        "outrider",
+        "raiders",
+        "lookout",
+        "herald",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 200,
+      "mechanics": {
+        "ign": 33,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 34
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 231433,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "pactbroker",
+        "imps",
+        "hellbinder"
+      ],
+      "opponent": [
+        "outrider",
+        "raiders",
+        "lookout",
+        "herald",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 14,
+      "failed": 0,
+      "actions": 170,
+      "mechanics": {
+        "ign": 33,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 26
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 239352,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellhound",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "footmen",
+        "lookout",
+        "herald",
+        "lookout",
+        "bowmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 155,
+      "mechanics": {
+        "ign": 35,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 31
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 239352,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellhound",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "footmen",
+        "lookout",
+        "herald",
+        "lookout",
+        "bowmen",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 186,
+      "mechanics": {
+        "ign": 28,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 26
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 247271,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "cleric",
+        "aegis",
+        "paladin",
+        "lookout",
+        "knight"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 148,
+      "mechanics": {
+        "ign": 27,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 19
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 247271,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "cleric",
+        "aegis",
+        "paladin",
+        "lookout",
+        "knight"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 14,
+      "failed": 0,
+      "actions": 137,
+      "mechanics": {
+        "ign": 20,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 33
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 255190,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "pactbroker",
+        "magmagolem",
+        "pactbroker",
+        "pactbroker"
+      ],
+      "opponent": [
+        "herald",
+        "lookout",
+        "lookout",
+        "raiders",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 182,
+      "mechanics": {
+        "ign": 31,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 33
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 255190,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "pactbroker",
+        "magmagolem",
+        "pactbroker",
+        "pactbroker"
+      ],
+      "opponent": [
+        "herald",
+        "lookout",
+        "lookout",
+        "raiders",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 208,
+      "mechanics": {
+        "ign": 29,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 27
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 104729,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "fireeye",
+        "magmagolem"
+      ],
+      "opponent": [
+        "seraph",
+        "lookout",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 20,
+      "failed": 0,
+      "actions": 177,
+      "mechanics": {
+        "ign": 26,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 24
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 104729,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "fireeye",
+        "magmagolem"
+      ],
+      "opponent": [
+        "seraph",
+        "lookout",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 168,
+      "mechanics": {
+        "ign": 23,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 112648,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "warlord",
+        "bowmen",
+        "sunspeaker",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 14,
+      "failed": 0,
+      "actions": 98,
+      "mechanics": {
+        "ign": 19,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 14
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 112648,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "warlord",
+        "bowmen",
+        "sunspeaker",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 153,
+      "mechanics": {
+        "ign": 21,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 21
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 120567,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "hellhound"
+      ],
+      "opponent": [
+        "templar",
+        "lancer",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 18,
+      "failed": 0,
+      "actions": 128,
+      "mechanics": {
+        "ign": 23,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 28
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 120567,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "hellhound"
+      ],
+      "opponent": [
+        "templar",
+        "lancer",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 107,
+      "mechanics": {
+        "ign": 17,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 128486,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "hellhound",
+        "bomber"
+      ],
+      "opponent": [
+        "templar",
+        "herald",
+        "knight",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 14,
+      "failed": 0,
+      "actions": 104,
+      "mechanics": {
+        "ign": 18,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 21
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 128486,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "hellhound",
+        "bomber"
+      ],
+      "opponent": [
+        "templar",
+        "herald",
+        "knight",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 9,
+      "failed": 0,
+      "actions": 69,
+      "mechanics": {
+        "ign": 13,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 136405,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "imps"
+      ],
+      "opponent": [
+        "marshal",
+        "lookout",
+        "cleric",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 6,
+      "failed": 0,
+      "actions": 52,
+      "mechanics": {
+        "ign": 8,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 0,
+        "risen": 0,
+        "grow": 0,
+        "heat": 5
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 136405,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "imps"
+      ],
+      "opponent": [
+        "marshal",
+        "lookout",
+        "cleric",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 14,
+      "failed": 0,
+      "actions": 127,
+      "mechanics": {
+        "ign": 23,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 25
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 144324,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "mage",
+        "fireeye"
+      ],
+      "opponent": [
+        "kinglion",
+        "bowmen",
+        "lancer",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 13,
+      "failed": 0,
+      "actions": 90,
+      "mechanics": {
+        "ign": 19,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 19
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 144324,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "mage",
+        "fireeye"
+      ],
+      "opponent": [
+        "kinglion",
+        "bowmen",
+        "lancer",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 18,
+      "failed": 0,
+      "actions": 177,
+      "mechanics": {
+        "ign": 34,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 26
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 152243,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "kinglion",
+        "lancer",
+        "footmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 18,
+      "failed": 0,
+      "actions": 138,
+      "mechanics": {
+        "ign": 25,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 152243,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "kinglion",
+        "lancer",
+        "footmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 16,
+      "failed": 0,
+      "actions": 129,
+      "mechanics": {
+        "ign": 21,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 160162,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "fireeye",
+        "mage"
+      ],
+      "opponent": [
+        "seraph",
+        "herald",
+        "bowmen",
+        "knight"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 11,
+      "failed": 0,
+      "actions": 70,
+      "mechanics": {
+        "ign": 16,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 13
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 160162,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "fireeye",
+        "mage"
+      ],
+      "opponent": [
+        "seraph",
+        "herald",
+        "bowmen",
+        "knight"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 9,
+      "failed": 0,
+      "actions": 67,
+      "mechanics": {
+        "ign": 10,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 10
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 168081,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "hellbinder",
+        "hellhound"
+      ],
+      "opponent": [
+        "warlord",
+        "lookout",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 13,
+      "failed": 0,
+      "actions": 94,
+      "mechanics": {
+        "ign": 25,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 11
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 168081,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "hellbinder",
+        "hellhound"
+      ],
+      "opponent": [
+        "warlord",
+        "lookout",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 106,
+      "mechanics": {
+        "ign": 11,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 176000,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "warlord",
+        "bowmen",
+        "lookout",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 111,
+      "mechanics": {
+        "ign": 19,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 176000,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "warlord",
+        "bowmen",
+        "lookout",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 16,
+      "failed": 0,
+      "actions": 146,
+      "mechanics": {
+        "ign": 31,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 38
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 183919,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "hellhound",
+        "hellbinder"
+      ],
+      "opponent": [
+        "templar",
+        "lancer",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 14,
+      "failed": 0,
+      "actions": 95,
+      "mechanics": {
+        "ign": 17,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 14
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 183919,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "hellhound",
+        "hellbinder"
+      ],
+      "opponent": [
+        "templar",
+        "lancer",
+        "aegis"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 16,
+      "failed": 0,
+      "actions": 100,
+      "mechanics": {
+        "ign": 26,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 25
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 191838,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "cinderwarden",
+        "pactbroker"
+      ],
+      "opponent": [
+        "marshal",
+        "herald",
+        "herald",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 11,
+      "failed": 0,
+      "actions": 79,
+      "mechanics": {
+        "ign": 16,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 15
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 191838,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "cinderwarden",
+        "pactbroker"
+      ],
+      "opponent": [
+        "marshal",
+        "herald",
+        "herald",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 166,
+      "mechanics": {
+        "ign": 22,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 25
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 199757,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "pactbroker",
+        "hellhound"
+      ],
+      "opponent": [
+        "marshal",
+        "lookout",
+        "cleric",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 9,
+      "failed": 0,
+      "actions": 77,
+      "mechanics": {
+        "ign": 14,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 1,
+        "risen": 0,
+        "grow": 0,
+        "heat": 7
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 199757,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "pactbroker",
+        "hellhound"
+      ],
+      "opponent": [
+        "marshal",
+        "lookout",
+        "cleric",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 159,
+      "mechanics": {
+        "ign": 30,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 207676,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "kinglion",
+        "bowmen",
+        "lancer",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 11,
+      "failed": 0,
+      "actions": 108,
+      "mechanics": {
+        "ign": 14,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 1,
+        "risen": 0,
+        "grow": 0,
+        "heat": 9
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 207676,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "kinglion",
+        "bowmen",
+        "lancer",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 182,
+      "mechanics": {
+        "ign": 27,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 11
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 215595,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "seraph",
+        "lancer",
+        "footmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 163,
+      "mechanics": {
+        "ign": 30,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 215595,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "seraph",
+        "lancer",
+        "footmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 17,
+      "failed": 0,
+      "actions": 186,
+      "mechanics": {
+        "ign": 32,
+        "ash": 4,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 31
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 223514,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "seraph",
+        "herald",
+        "bowmen",
+        "cleric"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 14,
+      "failed": 0,
+      "actions": 104,
+      "mechanics": {
+        "ign": 12,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 223514,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "seraph",
+        "herald",
+        "bowmen",
+        "cleric"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 12,
+      "failed": 0,
+      "actions": 116,
+      "mechanics": {
+        "ign": 15,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 1,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 231433,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "warlord",
+        "lookout",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 14,
+      "failed": 0,
+      "actions": 121,
+      "mechanics": {
+        "ign": 19,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 25
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 231433,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "warlord",
+        "lookout",
+        "outrider",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 105,
+      "mechanics": {
+        "ign": 18,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 13
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 239352,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellhound",
+        "mage"
+      ],
+      "opponent": [
+        "templar",
+        "footmen",
+        "lookout",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 20,
+      "failed": 0,
+      "actions": 169,
+      "mechanics": {
+        "ign": 39,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 30
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 239352,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellhound",
+        "mage"
+      ],
+      "opponent": [
+        "templar",
+        "footmen",
+        "lookout",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 19,
+      "failed": 0,
+      "actions": 161,
+      "mechanics": {
+        "ign": 36,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 24
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 247271,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "bomber"
+      ],
+      "opponent": [
+        "templar",
+        "cleric",
+        "aegis",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 12,
+      "failed": 0,
+      "actions": 81,
+      "mechanics": {
+        "ign": 17,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 247271,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "bomber"
+      ],
+      "opponent": [
+        "templar",
+        "cleric",
+        "aegis",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "kingdom",
+      "round": 16,
+      "failed": 0,
+      "actions": 155,
+      "mechanics": {
+        "ign": 22,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 33
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 255190,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "pactbroker",
+        "fireeye"
+      ],
+      "opponent": [
+        "marshal",
+        "aegis",
+        "herald",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 13,
+      "failed": 0,
+      "actions": 109,
+      "mechanics": {
+        "ign": 13,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 13
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "kingdom",
+      "seed": 255190,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "pactbroker",
+        "fireeye"
+      ],
+      "opponent": [
+        "marshal",
+        "aegis",
+        "herald",
+        "bowmen"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 10,
+      "failed": 0,
+      "actions": 86,
+      "mechanics": {
+        "ign": 11,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 14
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 104729,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "hemomancer",
+        "bloodhunter",
+        "thrall",
+        "thrall",
+        "hemomancer"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 18,
+      "failed": 0,
+      "actions": 183,
+      "mechanics": {
+        "ign": 32,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 39
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 104729,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "hemomancer",
+        "bloodhunter",
+        "thrall",
+        "thrall",
+        "hemomancer"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 187,
+      "mechanics": {
+        "ign": 30,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 33
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 112648,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellbinder",
+        "hellbinder",
+        "imps",
+        "imps"
+      ],
+      "opponent": [
+        "hemomancer",
+        "hemomancer",
+        "thrall",
+        "assassin",
+        "blade",
+        "warlock"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 197,
+      "mechanics": {
+        "ign": 36,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 9,
+        "risen": 0,
+        "grow": 0,
+        "heat": 50
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 112648,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellbinder",
+        "hellbinder",
+        "imps",
+        "imps"
+      ],
+      "opponent": [
+        "hemomancer",
+        "hemomancer",
+        "thrall",
+        "assassin",
+        "blade",
+        "warlock"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 20,
+      "failed": 0,
+      "actions": 215,
+      "mechanics": {
+        "ign": 40,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 9,
+        "risen": 0,
+        "grow": 0,
+        "heat": 53
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 120567,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "mage",
+        "magmagolem",
+        "bomber"
+      ],
+      "opponent": [
+        "mesmerist",
+        "assassin",
+        "thrall",
+        "hemomancer",
+        "duskweaver",
+        "warlock",
+        "countess"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 20,
+      "failed": 0,
+      "actions": 189,
+      "mechanics": {
+        "ign": 38,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 8,
+        "risen": 0,
+        "grow": 0,
+        "heat": 40
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 120567,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "mage",
+        "magmagolem",
+        "bomber"
+      ],
+      "opponent": [
+        "mesmerist",
+        "assassin",
+        "thrall",
+        "hemomancer",
+        "duskweaver",
+        "warlock",
+        "countess"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 175,
+      "mechanics": {
+        "ign": 34,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 40
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 128486,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "hellhound",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "duskweaver",
+        "blade",
+        "bloodhunter",
+        "countess",
+        "bats",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 11,
+      "failed": 0,
+      "actions": 102,
+      "mechanics": {
+        "ign": 23,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 128486,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "hellhound",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "duskweaver",
+        "blade",
+        "bloodhunter",
+        "countess",
+        "bats",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 14,
+      "failed": 0,
+      "actions": 132,
+      "mechanics": {
+        "ign": 21,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 15
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 136405,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "magmagolem",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nightwatch",
+        "warlock",
+        "duskweaver",
+        "countess",
+        "hemomancer",
+        "mesmerist",
+        "warlock"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 164,
+      "mechanics": {
+        "ign": 35,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 35,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 136405,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "magmagolem",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nightwatch",
+        "warlock",
+        "duskweaver",
+        "countess",
+        "hemomancer",
+        "mesmerist",
+        "warlock"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 11,
+      "failed": 0,
+      "actions": 104,
+      "mechanics": {
+        "ign": 16,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 144324,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "mage",
+        "fireeye",
+        "hellhound"
+      ],
+      "opponent": [
+        "countess",
+        "assassin",
+        "bats",
+        "countess",
+        "bats",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 5,
+      "failed": 0,
+      "actions": 42,
+      "mechanics": {
+        "ign": 10,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 0,
+        "risen": 0,
+        "grow": 0,
+        "heat": 14
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 144324,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "mage",
+        "fireeye",
+        "hellhound"
+      ],
+      "opponent": [
+        "countess",
+        "assassin",
+        "bats",
+        "countess",
+        "bats",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 16,
+      "failed": 0,
+      "actions": 119,
+      "mechanics": {
+        "ign": 24,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 21
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 152243,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "imps",
+        "hellbinder",
+        "mage",
+        "bomber"
+      ],
+      "opponent": [
+        "thrall",
+        "nightwatch",
+        "countess",
+        "mesmerist",
+        "nightwatch",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 13,
+      "failed": 0,
+      "actions": 112,
+      "mechanics": {
+        "ign": 38,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 28
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 152243,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "imps",
+        "hellbinder",
+        "mage",
+        "bomber"
+      ],
+      "opponent": [
+        "thrall",
+        "nightwatch",
+        "countess",
+        "mesmerist",
+        "nightwatch",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 154,
+      "mechanics": {
+        "ign": 35,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 37,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 160162,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "fireeye",
+        "mage",
+        "hellhound"
+      ],
+      "opponent": [
+        "duskweaver",
+        "countess",
+        "warlock",
+        "countess",
+        "bats",
+        "nightwatch"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 169,
+      "mechanics": {
+        "ign": 32,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 36,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 160162,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "imps",
+        "fireeye",
+        "mage",
+        "hellhound"
+      ],
+      "opponent": [
+        "duskweaver",
+        "countess",
+        "warlock",
+        "countess",
+        "bats",
+        "nightwatch"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 10,
+      "failed": 0,
+      "actions": 94,
+      "mechanics": {
+        "ign": 15,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 168081,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellhound",
+        "hellbinder",
+        "imps",
+        "fireeye"
+      ],
+      "opponent": [
+        "nightwatch",
+        "bloodhunter",
+        "countess",
+        "bloodhunter",
+        "mesmerist",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 166,
+      "mechanics": {
+        "ign": 27,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 30
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 168081,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellhound",
+        "hellbinder",
+        "imps",
+        "fireeye"
+      ],
+      "opponent": [
+        "nightwatch",
+        "bloodhunter",
+        "countess",
+        "bloodhunter",
+        "mesmerist",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 9,
+      "failed": 0,
+      "actions": 73,
+      "mechanics": {
+        "ign": 17,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 176000,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "bomber",
+        "magmagolem",
+        "magmagolem",
+        "imps"
+      ],
+      "opponent": [
+        "hemomancer",
+        "mesmerist",
+        "bloodhunter",
+        "thrall",
+        "countess",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 12,
+      "failed": 0,
+      "actions": 132,
+      "mechanics": {
+        "ign": 26,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 21
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 176000,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "bomber",
+        "magmagolem",
+        "magmagolem",
+        "imps"
+      ],
+      "opponent": [
+        "hemomancer",
+        "mesmerist",
+        "bloodhunter",
+        "thrall",
+        "countess",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 203,
+      "mechanics": {
+        "ign": 29,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 34
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 183919,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "hellhound",
+        "cinderwarden",
+        "hellbinder"
+      ],
+      "opponent": [
+        "assassin",
+        "mesmerist",
+        "assassin",
+        "bloodhunter",
+        "mesmerist",
+        "thrall",
+        "bloodhunter"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 158,
+      "mechanics": {
+        "ign": 23,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 42
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 183919,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "magmagolem",
+        "hellhound",
+        "cinderwarden",
+        "hellbinder"
+      ],
+      "opponent": [
+        "assassin",
+        "mesmerist",
+        "assassin",
+        "bloodhunter",
+        "mesmerist",
+        "thrall",
+        "bloodhunter"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 174,
+      "mechanics": {
+        "ign": 32,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 28,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 191838,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "cinderwarden",
+        "pactbroker",
+        "hellbinder"
+      ],
+      "opponent": [
+        "duskweaver",
+        "duskweaver",
+        "bloodhunter",
+        "bloodhunter",
+        "thrall",
+        "thrall"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 12,
+      "failed": 0,
+      "actions": 108,
+      "mechanics": {
+        "ign": 15,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 24
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 191838,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "cinderwarden",
+        "pactbroker",
+        "hellbinder"
+      ],
+      "opponent": [
+        "duskweaver",
+        "duskweaver",
+        "bloodhunter",
+        "bloodhunter",
+        "thrall",
+        "thrall"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 15,
+      "failed": 0,
+      "actions": 163,
+      "mechanics": {
+        "ign": 23,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 34
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 199757,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "pactbroker",
+        "mage",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nightwatch",
+        "warlock",
+        "blade",
+        "bloodhunter",
+        "duskweaver",
+        "bats"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 19,
+      "failed": 0,
+      "actions": 166,
+      "mechanics": {
+        "ign": 40,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 10,
+        "risen": 0,
+        "grow": 0,
+        "heat": 55
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 199757,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "fireeye",
+        "pactbroker",
+        "mage",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nightwatch",
+        "warlock",
+        "blade",
+        "bloodhunter",
+        "duskweaver",
+        "bats"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 20,
+      "failed": 0,
+      "actions": 188,
+      "mechanics": {
+        "ign": 44,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 33
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 207676,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "cinderwarden",
+        "imps",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "thrall",
+        "assassin",
+        "thrall",
+        "bloodhunter",
+        "thrall",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 18,
+      "failed": 0,
+      "actions": 184,
+      "mechanics": {
+        "ign": 42,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 9,
+        "risen": 0,
+        "grow": 0,
+        "heat": 52
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 207676,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "cinderwarden",
+        "imps",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "thrall",
+        "assassin",
+        "thrall",
+        "bloodhunter",
+        "thrall",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 9,
+      "failed": 0,
+      "actions": 95,
+      "mechanics": {
+        "ign": 18,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 25
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 215595,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "magmagolem",
+        "hellhound"
+      ],
+      "opponent": [
+        "warlock",
+        "bats",
+        "hemomancer",
+        "nightwatch",
+        "duskweaver",
+        "assassin",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 12,
+      "failed": 0,
+      "actions": 106,
+      "mechanics": {
+        "ign": 18,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 15,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 215595,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "fireeye",
+        "magmagolem",
+        "hellhound"
+      ],
+      "opponent": [
+        "warlock",
+        "bats",
+        "hemomancer",
+        "nightwatch",
+        "duskweaver",
+        "assassin",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 18,
+      "failed": 0,
+      "actions": 187,
+      "mechanics": {
+        "ign": 41,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 36
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 223514,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "hellbinder",
+        "cinderwarden",
+        "fireeye"
+      ],
+      "opponent": [
+        "duskweaver",
+        "countess",
+        "warlock",
+        "nightwatch",
+        "countess",
+        "warlock",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 171,
+      "mechanics": {
+        "ign": 37,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 223514,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "hellbinder",
+        "hellbinder",
+        "cinderwarden",
+        "fireeye"
+      ],
+      "opponent": [
+        "duskweaver",
+        "countess",
+        "warlock",
+        "nightwatch",
+        "countess",
+        "warlock",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 20,
+      "failed": 0,
+      "actions": 191,
+      "mechanics": {
+        "ign": 27,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 23
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 231433,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "pactbroker",
+        "imps",
+        "hellbinder"
+      ],
+      "opponent": [
+        "bloodhunter",
+        "countess",
+        "nightwatch",
+        "duskweaver",
+        "blade",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 18,
+      "failed": 0,
+      "actions": 187,
+      "mechanics": {
+        "ign": 51,
+        "ash": 4,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 9,
+        "risen": 0,
+        "grow": 0,
+        "heat": 48
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 231433,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "bomber",
+        "pactbroker",
+        "imps",
+        "hellbinder"
+      ],
+      "opponent": [
+        "bloodhunter",
+        "countess",
+        "nightwatch",
+        "duskweaver",
+        "blade",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 16,
+      "failed": 0,
+      "actions": 146,
+      "mechanics": {
+        "ign": 39,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 41
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 239352,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellhound",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "thrall",
+        "nightwatch",
+        "duskweaver",
+        "nightwatch",
+        "countess",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 10,
+      "failed": 0,
+      "actions": 90,
+      "mechanics": {
+        "ign": 18,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 26
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 239352,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "pactbroker",
+        "hellhound",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "thrall",
+        "nightwatch",
+        "duskweaver",
+        "nightwatch",
+        "countess",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 9,
+      "failed": 0,
+      "actions": 79,
+      "mechanics": {
+        "ign": 13,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 19
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 247271,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "warlock",
+        "mesmerist",
+        "bats",
+        "nightwatch",
+        "blade",
+        "duskweaver",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 179,
+      "mechanics": {
+        "ign": 40,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 24
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 247271,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "mage",
+        "cinderwarden",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "warlock",
+        "mesmerist",
+        "bats",
+        "nightwatch",
+        "blade",
+        "duskweaver",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 9,
+      "failed": 0,
+      "actions": 88,
+      "mechanics": {
+        "ign": 22,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 28
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 255190,
+      "swap": false,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "pactbroker",
+        "magmagolem",
+        "pactbroker",
+        "pactbroker"
+      ],
+      "opponent": [
+        "duskweaver",
+        "nightwatch",
+        "nightwatch",
+        "countess",
+        "mesmerist",
+        "blade"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 197,
+      "mechanics": {
+        "ign": 37,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 36
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 255190,
+      "swap": true,
+      "boss": false,
+      "variant": "baseline",
+      "infernal": [
+        "bomber",
+        "pactbroker",
+        "magmagolem",
+        "pactbroker",
+        "pactbroker"
+      ],
+      "opponent": [
+        "duskweaver",
+        "nightwatch",
+        "nightwatch",
+        "countess",
+        "mesmerist",
+        "blade"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 13,
+      "failed": 0,
+      "actions": 115,
+      "mechanics": {
+        "ign": 18,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 18
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 104729,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "fireeye",
+        "magmagolem"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "hemomancer",
+        "bloodhunter",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 116,
+      "mechanics": {
+        "ign": 17,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 104729,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "fireeye",
+        "magmagolem"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "hemomancer",
+        "bloodhunter",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 14,
+      "failed": 0,
+      "actions": 109,
+      "mechanics": {
+        "ign": 13,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 19
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 112648,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nosferatu",
+        "countess",
+        "hemomancer",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 18,
+      "failed": 0,
+      "actions": 152,
+      "mechanics": {
+        "ign": 31,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 23
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 112648,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nosferatu",
+        "countess",
+        "hemomancer",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 14,
+      "failed": 0,
+      "actions": 95,
+      "mechanics": {
+        "ign": 15,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 18
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 120567,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "hellhound"
+      ],
+      "opponent": [
+        "matriarch",
+        "assassin",
+        "mesmerist",
+        "assassin",
+        "thrall"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 9,
+      "failed": 0,
+      "actions": 56,
+      "mechanics": {
+        "ign": 14,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 0,
+        "risen": 0,
+        "grow": 0,
+        "heat": 11
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 120567,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "hellhound"
+      ],
+      "opponent": [
+        "matriarch",
+        "assassin",
+        "mesmerist",
+        "assassin",
+        "thrall"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 143,
+      "mechanics": {
+        "ign": 29,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 28
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 128486,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "hellhound",
+        "bomber"
+      ],
+      "opponent": [
+        "matriarch",
+        "duskweaver",
+        "blade",
+        "bloodhunter"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 15,
+      "failed": 0,
+      "actions": 109,
+      "mechanics": {
+        "ign": 23,
+        "ash": 4,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 30
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 128486,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "hellhound",
+        "bomber"
+      ],
+      "opponent": [
+        "matriarch",
+        "duskweaver",
+        "blade",
+        "bloodhunter"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 10,
+      "failed": 0,
+      "actions": 77,
+      "mechanics": {
+        "ign": 15,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 13
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 136405,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "imps"
+      ],
+      "opponent": [
+        "batking",
+        "nightwatch",
+        "warlock",
+        "duskweaver",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 150,
+      "mechanics": {
+        "ign": 26,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 32
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 136405,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "imps"
+      ],
+      "opponent": [
+        "batking",
+        "nightwatch",
+        "warlock",
+        "duskweaver",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 13,
+      "failed": 0,
+      "actions": 92,
+      "mechanics": {
+        "ign": 19,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 144324,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "mage",
+        "fireeye"
+      ],
+      "opponent": [
+        "vlord",
+        "countess",
+        "assassin",
+        "bats"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 13,
+      "failed": 0,
+      "actions": 76,
+      "mechanics": {
+        "ign": 23,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 13
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 144324,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "mage",
+        "fireeye"
+      ],
+      "opponent": [
+        "vlord",
+        "countess",
+        "assassin",
+        "bats"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 147,
+      "mechanics": {
+        "ign": 27,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 29
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 152243,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "vlord",
+        "assassin",
+        "thrall",
+        "nightwatch"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 120,
+      "mechanics": {
+        "ign": 23,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 14
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 152243,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "imps",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "vlord",
+        "assassin",
+        "thrall",
+        "nightwatch"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 20,
+      "failed": 0,
+      "actions": 173,
+      "mechanics": {
+        "ign": 28,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 27,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 160162,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "fireeye",
+        "mage"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "duskweaver",
+        "countess",
+        "warlock",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 19,
+      "failed": 0,
+      "actions": 141,
+      "mechanics": {
+        "ign": 27,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 23
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 160162,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "fireeye",
+        "mage"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "duskweaver",
+        "countess",
+        "warlock",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 11,
+      "failed": 0,
+      "actions": 80,
+      "mechanics": {
+        "ign": 8,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 17
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 168081,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "hellbinder",
+        "hellhound"
+      ],
+      "opponent": [
+        "nosferatu",
+        "nightwatch",
+        "bloodhunter",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 135,
+      "mechanics": {
+        "ign": 28,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 25
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 168081,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "pitlord",
+        "hellbinder",
+        "hellhound"
+      ],
+      "opponent": [
+        "nosferatu",
+        "nightwatch",
+        "bloodhunter",
+        "assassin"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 15,
+      "failed": 0,
+      "actions": 108,
+      "mechanics": {
+        "ign": 18,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 176000,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "nosferatu",
+        "thrall",
+        "hemomancer",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 19,
+      "failed": 0,
+      "actions": 154,
+      "mechanics": {
+        "ign": 31,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 27
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 176000,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "bomber",
+        "fireeye"
+      ],
+      "opponent": [
+        "nosferatu",
+        "thrall",
+        "hemomancer",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 20,
+      "failed": 0,
+      "actions": 173,
+      "mechanics": {
+        "ign": 47,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 38
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 183919,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "hellhound",
+        "hellbinder"
+      ],
+      "opponent": [
+        "matriarch",
+        "assassin",
+        "mesmerist",
+        "assassin",
+        "bloodhunter"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 6,
+      "failed": 0,
+      "actions": 36,
+      "mechanics": {
+        "ign": 7,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 0,
+        "risen": 0,
+        "grow": 0,
+        "heat": 5
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 183919,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "hellhound",
+        "hellbinder"
+      ],
+      "opponent": [
+        "matriarch",
+        "assassin",
+        "mesmerist",
+        "assassin",
+        "bloodhunter"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 13,
+      "failed": 0,
+      "actions": 93,
+      "mechanics": {
+        "ign": 17,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 1,
+        "risen": 0,
+        "grow": 0,
+        "heat": 9
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 191838,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "cinderwarden",
+        "pactbroker"
+      ],
+      "opponent": [
+        "batking",
+        "duskweaver",
+        "duskweaver",
+        "bloodhunter",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 11,
+      "failed": 0,
+      "actions": 98,
+      "mechanics": {
+        "ign": 19,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 32
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 191838,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "infernowitch",
+        "cinderwarden",
+        "pactbroker"
+      ],
+      "opponent": [
+        "batking",
+        "duskweaver",
+        "duskweaver",
+        "bloodhunter",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 13,
+      "failed": 0,
+      "actions": 102,
+      "mechanics": {
+        "ign": 16,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 22
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 199757,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "pactbroker",
+        "hellhound"
+      ],
+      "opponent": [
+        "batking",
+        "nightwatch",
+        "warlock",
+        "blade"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 13,
+      "failed": 0,
+      "actions": 125,
+      "mechanics": {
+        "ign": 26,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 12
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 199757,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "pactbroker",
+        "hellhound"
+      ],
+      "opponent": [
+        "batking",
+        "nightwatch",
+        "warlock",
+        "blade"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 16,
+      "failed": 0,
+      "actions": 129,
+      "mechanics": {
+        "ign": 23,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 29,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 207676,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "vlord",
+        "thrall",
+        "assassin",
+        "thrall"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 18,
+      "failed": 0,
+      "actions": 163,
+      "mechanics": {
+        "ign": 38,
+        "ash": 3,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 8,
+        "risen": 0,
+        "grow": 0,
+        "heat": 46
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 207676,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "imps",
+        "hellhound"
+      ],
+      "opponent": [
+        "vlord",
+        "thrall",
+        "assassin",
+        "thrall"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 154,
+      "mechanics": {
+        "ign": 33,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 24
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 215595,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "warlock",
+        "bats",
+        "hemomancer"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 174,
+      "mechanics": {
+        "ign": 39,
+        "ash": 4,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 23
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 215595,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "demonprince",
+        "fireeye",
+        "imps"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "warlock",
+        "bats",
+        "hemomancer"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 12,
+      "failed": 0,
+      "actions": 111,
+      "mechanics": {
+        "ign": 20,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20,
+        "bat": 1
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 223514,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "duskweaver",
+        "countess",
+        "warlock",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 125,
+      "mechanics": {
+        "ign": 29,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 7,
+        "risen": 0,
+        "grow": 0,
+        "heat": 36
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 223514,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellbinder",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "bloodqueen",
+        "duskweaver",
+        "countess",
+        "warlock",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 122,
+      "mechanics": {
+        "ign": 17,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 20
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 231433,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nosferatu",
+        "nightwatch",
+        "bloodhunter",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 13,
+      "failed": 0,
+      "actions": 82,
+      "mechanics": {
+        "ign": 15,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 14
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 231433,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "bomber",
+        "cinderwarden"
+      ],
+      "opponent": [
+        "nosferatu",
+        "nightwatch",
+        "bloodhunter",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 17,
+      "failed": 0,
+      "actions": 127,
+      "mechanics": {
+        "ign": 32,
+        "ash": 2,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 3,
+        "risen": 0,
+        "grow": 0,
+        "heat": 19
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 239352,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellhound",
+        "mage"
+      ],
+      "opponent": [
+        "matriarch",
+        "thrall",
+        "nightwatch",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 19,
+      "failed": 0,
+      "actions": 143,
+      "mechanics": {
+        "ign": 32,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 34
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 239352,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "phoenix",
+        "hellhound",
+        "mage"
+      ],
+      "opponent": [
+        "matriarch",
+        "thrall",
+        "nightwatch",
+        "duskweaver"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 17,
+      "failed": 0,
+      "actions": 130,
+      "mechanics": {
+        "ign": 24,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 6,
+        "risen": 0,
+        "grow": 0,
+        "heat": 34
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 247271,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "bomber"
+      ],
+      "opponent": [
+        "matriarch",
+        "warlock",
+        "mesmerist",
+        "bats",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 11,
+      "failed": 0,
+      "actions": 86,
+      "mechanics": {
+        "ign": 17,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 2,
+        "risen": 0,
+        "grow": 0,
+        "heat": 16,
+        "bat": 3
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 247271,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "cinderwarden",
+        "bomber"
+      ],
+      "opponent": [
+        "matriarch",
+        "warlock",
+        "mesmerist",
+        "bats",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "infernal",
+      "round": 18,
+      "failed": 0,
+      "actions": 138,
+      "mechanics": {
+        "ign": 27,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 23
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 255190,
+      "swap": false,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "pactbroker",
+        "fireeye"
+      ],
+      "opponent": [
+        "batking",
+        "mesmerist",
+        "duskweaver",
+        "nightwatch",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 12,
+      "failed": 0,
+      "actions": 100,
+      "mechanics": {
+        "ign": 15,
+        "ash": 1,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 4,
+        "risen": 0,
+        "grow": 0,
+        "heat": 27
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    },
+    {
+      "foe": "vamp",
+      "seed": 255190,
+      "swap": true,
+      "boss": true,
+      "variant": "baseline",
+      "infernal": [
+        "dragon",
+        "pactbroker",
+        "fireeye"
+      ],
+      "opponent": [
+        "batking",
+        "mesmerist",
+        "duskweaver",
+        "nightwatch",
+        "mesmerist"
+      ],
+      "slots": [
+        10,
+        10
+      ],
+      "winner": "vamp",
+      "round": 15,
+      "failed": 0,
+      "actions": 122,
+      "mechanics": {
+        "ign": 23,
+        "ash": 0,
+        "gr": 0,
+        "grs": 0,
+        "cons": 0,
+        "ovh": 5,
+        "risen": 0,
+        "grow": 0,
+        "heat": 28
+      },
+      "options": {
+        "rps": true,
+        "shrines": true,
+        "sdeath": true,
+        "fog": false,
+        "levels": true,
+        "bans": true,
+        "cards": false,
+        "bounty": false,
+        "truce": false,
+        "koth": false,
+        "raid": false,
+        "ults": false,
+        "clash": true,
+        "sight": true,
+        "terrain": true,
+        "combos": true,
+        "gold": true,
+        "map": "classic"
+      }
+    }
+  ]
+}

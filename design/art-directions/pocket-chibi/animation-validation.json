@@ -1,0 +1,454 @@
+{
+  "units": 112,
+  "errors": [],
+  "results": [
+    {
+      "k": "mage",
+      "frames": 23
+    },
+    {
+      "k": "knight",
+      "frames": 23
+    },
+    {
+      "k": "blade",
+      "frames": 23
+    },
+    {
+      "k": "necromancer",
+      "frames": 23
+    },
+    {
+      "k": "cleric",
+      "frames": 23
+    },
+    {
+      "k": "paladin",
+      "frames": 23
+    },
+    {
+      "k": "sunspeaker",
+      "frames": 23
+    },
+    {
+      "k": "aegis",
+      "frames": 23
+    },
+    {
+      "k": "herald",
+      "frames": 23
+    },
+    {
+      "k": "footmen",
+      "frames": 23
+    },
+    {
+      "k": "bowmen",
+      "frames": 23
+    },
+    {
+      "k": "raiders",
+      "frames": 23
+    },
+    {
+      "k": "lookout",
+      "frames": 23
+    },
+    {
+      "k": "marshal",
+      "frames": 23
+    },
+    {
+      "k": "lancer",
+      "frames": 23
+    },
+    {
+      "k": "outrider",
+      "frames": 23
+    },
+    {
+      "k": "kinglion",
+      "frames": 23
+    },
+    {
+      "k": "seraph",
+      "frames": 23
+    },
+    {
+      "k": "warlord",
+      "frames": 23
+    },
+    {
+      "k": "templar",
+      "frames": 23
+    },
+    {
+      "k": "warlock",
+      "frames": 23
+    },
+    {
+      "k": "assassin",
+      "frames": 23
+    },
+    {
+      "k": "thrall",
+      "frames": 23
+    },
+    {
+      "k": "countess",
+      "frames": 23
+    },
+    {
+      "k": "bloodhunter",
+      "frames": 23
+    },
+    {
+      "k": "nightwatch",
+      "frames": 23
+    },
+    {
+      "k": "hemomancer",
+      "frames": 23
+    },
+    {
+      "k": "mesmerist",
+      "frames": 23
+    },
+    {
+      "k": "duskweaver",
+      "frames": 23
+    },
+    {
+      "k": "matriarch",
+      "frames": 23
+    },
+    {
+      "k": "bats",
+      "frames": 23
+    },
+    {
+      "k": "vlord",
+      "frames": 23
+    },
+    {
+      "k": "bloodqueen",
+      "frames": 23
+    },
+    {
+      "k": "nosferatu",
+      "frames": 23
+    },
+    {
+      "k": "batking",
+      "frames": 23
+    },
+    {
+      "k": "ossomancer",
+      "frames": 23
+    },
+    {
+      "k": "bonewitch",
+      "frames": 23
+    },
+    {
+      "k": "gravedigger",
+      "frames": 23
+    },
+    {
+      "k": "lich",
+      "frames": 23
+    },
+    {
+      "k": "banshee",
+      "frames": 23
+    },
+    {
+      "k": "fireeye",
+      "frames": 23
+    },
+    {
+      "k": "wraith",
+      "frames": 23
+    },
+    {
+      "k": "skeletons",
+      "frames": 23
+    },
+    {
+      "k": "ghoul",
+      "frames": 23
+    },
+    {
+      "k": "graveknight",
+      "frames": 23
+    },
+    {
+      "k": "bonerider",
+      "frames": 23
+    },
+    {
+      "k": "bonecolossus",
+      "frames": 23
+    },
+    {
+      "k": "deathknight",
+      "frames": 23
+    },
+    {
+      "k": "plaguelord",
+      "frames": 23
+    },
+    {
+      "k": "wisp",
+      "frames": 23
+    },
+    {
+      "k": "bomber",
+      "frames": 23
+    },
+    {
+      "k": "infernowitch",
+      "frames": 23
+    },
+    {
+      "k": "cinderwarden",
+      "frames": 23
+    },
+    {
+      "k": "hellbinder",
+      "frames": 23
+    },
+    {
+      "k": "pactbroker",
+      "frames": 23
+    },
+    {
+      "k": "magmagolem",
+      "frames": 23
+    },
+    {
+      "k": "pitlord",
+      "frames": 23
+    },
+    {
+      "k": "demonprince",
+      "frames": 23
+    },
+    {
+      "k": "rogue",
+      "frames": 23
+    },
+    {
+      "k": "archer",
+      "frames": 23
+    },
+    {
+      "k": "trapper",
+      "frames": 23
+    },
+    {
+      "k": "hellhound",
+      "frames": 23
+    },
+    {
+      "k": "phoenix",
+      "frames": 23
+    },
+    {
+      "k": "dragon",
+      "frames": 23
+    },
+    {
+      "k": "imps",
+      "frames": 23
+    },
+    {
+      "k": "druid",
+      "frames": 23
+    },
+    {
+      "k": "beastcaller",
+      "frames": 23
+    },
+    {
+      "k": "groveshaper",
+      "frames": 23
+    },
+    {
+      "k": "skinchanger",
+      "frames": 23
+    },
+    {
+      "k": "falconer",
+      "frames": 23
+    },
+    {
+      "k": "treant",
+      "frames": 23
+    },
+    {
+      "k": "eldertreant",
+      "frames": 23
+    },
+    {
+      "k": "sprites",
+      "frames": 23
+    },
+    {
+      "k": "brute",
+      "frames": 23
+    },
+    {
+      "k": "sapper",
+      "frames": 23
+    },
+    {
+      "k": "gunner",
+      "frames": 23
+    },
+    {
+      "k": "spotter",
+      "frames": 23
+    },
+    {
+      "k": "colossus",
+      "frames": 23
+    },
+    {
+      "k": "guard",
+      "frames": 23
+    },
+    {
+      "k": "titan",
+      "frames": 23
+    },
+    {
+      "k": "juggernaut",
+      "frames": 23
+    },
+    {
+      "k": "thunderking",
+      "frames": 23
+    },
+    {
+      "k": "wolves",
+      "frames": 23
+    },
+    {
+      "k": "boarrider",
+      "frames": 23
+    },
+    {
+      "k": "mammoth",
+      "frames": 23
+    },
+    {
+      "k": "direwolf",
+      "frames": 23
+    },
+    {
+      "k": "stormroc",
+      "frames": 23
+    },
+    {
+      "k": "cavebear",
+      "frames": 23
+    },
+    {
+      "k": "ballista",
+      "frames": 23
+    },
+    {
+      "k": "wallwright",
+      "frames": 23
+    },
+    {
+      "k": "warengine",
+      "frames": 23
+    },
+    {
+      "k": "forgemaster",
+      "frames": 23
+    },
+    {
+      "k": "runeforger",
+      "frames": 23
+    },
+    {
+      "k": "cagewright",
+      "frames": 23
+    },
+    {
+      "k": "prospector",
+      "frames": 23
+    },
+    {
+      "k": "witch",
+      "frames": 23
+    },
+    {
+      "k": "storm",
+      "frames": 23
+    },
+    {
+      "k": "archmage",
+      "frames": 23
+    },
+    {
+      "k": "seer",
+      "frames": 23
+    },
+    {
+      "k": "raidboss",
+      "frames": 23
+    },
+    {
+      "k": "sentinel",
+      "frames": 23
+    },
+    {
+      "k": "spellblade",
+      "frames": 23
+    },
+    {
+      "k": "chronomancer",
+      "frames": 23
+    },
+    {
+      "k": "voidlord",
+      "frames": 23
+    },
+    {
+      "k": "mirrormage",
+      "frames": 23
+    },
+    {
+      "k": "runekeeper",
+      "frames": 23
+    },
+    {
+      "k": "hexweaver",
+      "frames": 23
+    },
+    {
+      "k": "oracle",
+      "frames": 23
+    },
+    {
+      "k": "aetherlancer",
+      "frames": 23
+    },
+    {
+      "k": "phasewright",
+      "frames": 23
+    },
+    {
+      "k": "hourglass",
+      "frames": 23
+    },
+    {
+      "k": "warlock_bat",
+      "frames": 23
+    }
+  ]
+}

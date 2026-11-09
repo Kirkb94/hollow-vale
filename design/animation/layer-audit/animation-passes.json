@@ -1,0 +1,563 @@
+{
+  "testedAt": "2026-10-31T23:53:48.815Z",
+  "kits": 111,
+  "frames": 23976,
+  "errors": [],
+  "rows": [
+    {
+      "key": "mage",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "knight",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "blade",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "necromancer",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "cleric",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "paladin",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "sunspeaker",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "aegis",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "herald",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "footmen",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "bowmen",
+      "frames": 216,
+      "draws": 3306
+    },
+    {
+      "key": "raiders",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "lookout",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "marshal",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "lancer",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "outrider",
+      "frames": 216,
+      "draws": 5256
+    },
+    {
+      "key": "kinglion",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "seraph",
+      "frames": 216,
+      "draws": 3528
+    },
+    {
+      "key": "warlord",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "templar",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "warlock",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "assassin",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "thrall",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "countess",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "bloodhunter",
+      "frames": 216,
+      "draws": 5040
+    },
+    {
+      "key": "nightwatch",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "hemomancer",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "mesmerist",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "duskweaver",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "matriarch",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "bats",
+      "frames": 216,
+      "draws": 864
+    },
+    {
+      "key": "vlord",
+      "frames": 216,
+      "draws": 3312
+    },
+    {
+      "key": "bloodqueen",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "nosferatu",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "batking",
+      "frames": 216,
+      "draws": 864
+    },
+    {
+      "key": "ossomancer",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "bonewitch",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "gravedigger",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "lich",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "banshee",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "fireeye",
+      "frames": 216,
+      "draws": 864
+    },
+    {
+      "key": "wraith",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "skeletons",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "ghoul",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "graveknight",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "bonerider",
+      "frames": 216,
+      "draws": 5040
+    },
+    {
+      "key": "bonecolossus",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "deathknight",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "plaguelord",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "wisp",
+      "frames": 216,
+      "draws": 864
+    },
+    {
+      "key": "bomber",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "infernowitch",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "cinderwarden",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "hellbinder",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "pactbroker",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "magmagolem",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "pitlord",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "demonprince",
+      "frames": 216,
+      "draws": 3528
+    },
+    {
+      "key": "rogue",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "archer",
+      "frames": 216,
+      "draws": 3306
+    },
+    {
+      "key": "trapper",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "hellhound",
+      "frames": 216,
+      "draws": 1728
+    },
+    {
+      "key": "phoenix",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "dragon",
+      "frames": 216,
+      "draws": 1944
+    },
+    {
+      "key": "imps",
+      "frames": 216,
+      "draws": 1944
+    },
+    {
+      "key": "druid",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "beastcaller",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "groveshaper",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "skinchanger",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "falconer",
+      "frames": 216,
+      "draws": 3528
+    },
+    {
+      "key": "treant",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "eldertreant",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "sprites",
+      "frames": 216,
+      "draws": 3312
+    },
+    {
+      "key": "brute",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "sapper",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "gunner",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "spotter",
+      "frames": 216,
+      "draws": 3312
+    },
+    {
+      "key": "colossus",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "guard",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "titan",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "juggernaut",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "thunderking",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "wolves",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "boarrider",
+      "frames": 216,
+      "draws": 3024
+    },
+    {
+      "key": "mammoth",
+      "frames": 216,
+      "draws": 2160
+    },
+    {
+      "key": "direwolf",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "stormroc",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "cavebear",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "ballista",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "wallwright",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "warengine",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "forgemaster",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "runeforger",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "cagewright",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "prospector",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "witch",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "storm",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "archmage",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "seer",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "raidboss",
+      "frames": 216,
+      "draws": 1512
+    },
+    {
+      "key": "sentinel",
+      "frames": 216,
+      "draws": 2664
+    },
+    {
+      "key": "spellblade",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "chronomancer",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "voidlord",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "mirrormage",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "runekeeper",
+      "frames": 216,
+      "draws": 3096
+    },
+    {
+      "key": "hexweaver",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "oracle",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "aetherlancer",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "phasewright",
+      "frames": 216,
+      "draws": 2880
+    },
+    {
+      "key": "hourglass",
+      "frames": 216,
+      "draws": 2880
+    }
+  ]
+}

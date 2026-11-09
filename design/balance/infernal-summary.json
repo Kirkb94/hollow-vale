@@ -1,0 +1,67 @@
+{
+  "testedAt": "2026-10-30T19:43:02.924Z",
+  "totalGames": 280,
+  "method": "Live rules and hard AI; seeded faction-pure 10-slot drafts, with and without a starting boss, mirrored seats, classic 1v1. Economy and recruitment enabled; cards and ultimates disabled. Baseline sample sizes differ by matchup; paired ablation uses identical configurations only.",
+  "baseline": {
+    "games": 208,
+    "infernalWins": 86,
+    "winPercent": 41.3
+  },
+  "matchups": {
+    "kingdom": {
+      "games": 80,
+      "infernalWins": 44,
+      "winPercent": 55
+    },
+    "vamp": {
+      "games": 80,
+      "infernalWins": 25,
+      "winPercent": 31.3
+    },
+    "undead": {
+      "games": 12,
+      "infernalWins": 5,
+      "winPercent": 41.7
+    },
+    "wilds": {
+      "games": 12,
+      "infernalWins": 6,
+      "winPercent": 50
+    },
+    "iron": {
+      "games": 12,
+      "infernalWins": 4,
+      "winPercent": 33.3
+    },
+    "arcane": {
+      "games": 12,
+      "infernalWins": 2,
+      "winPercent": 16.7
+    }
+  },
+  "pairedOverheat": {
+    "enabled": {
+      "games": 72,
+      "infernalWins": 26,
+      "winPercent": 36.1
+    },
+    "disabled": {
+      "games": 72,
+      "infernalWins": 19,
+      "winPercent": 26.4
+    }
+  },
+  "checks": {
+    "equalDraftBudgets": true,
+    "noFailedActions": true,
+    "noTimeouts": true,
+    "ablationHadNoOverheatActivations": true
+  },
+  "limitations": [
+    "AI results do not establish human competitive balance.",
+    "Small samples for four factions; repeated seeds and mirrored games are correlated.",
+    "Boss composition and map can materially change outcomes.",
+    "Economy may recruit additional units during a match."
+  ],
+  "confirmedBug": "Inferno Witch bossHit sets burn duration to 3, then generic Infernal attack handling overwrites it to 2."
+}

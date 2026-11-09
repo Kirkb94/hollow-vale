@@ -1,0 +1,25 @@
+{
+  "prompt": "Create a production game VFX sprite atlas in simplified Pocket Chibi pixel art: bold dark outlines, flat 3-tone colors, square pixels, no blur or bloom. Transparent PNG background (genuine alpha zero, no checkerboard, no haze). EXACT uniform grid: EIGHT columns by SIX rows, 48 square cells. Every cell has a centered isolated effect fully within its cell with 15% empty transparent margins. Each row contains TWO different four-frame animations, columns 1-4 animation A and columns 5-8 animation B. The four frames progress small anticipation, full burst, fragments, fading sparse fragments. ROW 1: A orange fire burst; B cyan icicle and snowflake burst. ROW 2: A green healing plus signs and sparkles; B acid green poison bubbles and tiny skull puff. ROW 3: A golden angular lightning bolt crackle; B violet arcane rune pulse. ROW 4: A silver curved sword slash and hit sparks; B brown stone shatter and dust blocks. ROW 5: A green leafy roots sprouting and curling; B burgundy red blood/vampire mist burst. ROW 6: A golden holy star rays; B blue protective shield pulse. Consistent cell spacing, readable simple shapes suitable for a cute fantasy tactics game. No characters, UI panels, text, labels, borders, grid lines or background.",
+  "source": "C:\\Users\\Uno\\.codex\\generated_images\\01a1766b-9440-7ca0-9ec6-2d5d79abef90\\exec-c76fe706-c3d9-4966-b777-c561b77d479d.png",
+  "method": "Built-in image_gen",
+  "asset": "public/art/effects-pocket-chibi.png",
+  "families": [
+    "fire",
+    "frost",
+    "healing",
+    "poison",
+    "lightning",
+    "arcane",
+    "steel",
+    "stone",
+    "roots",
+    "blood",
+    "holy",
+    "shield"
+  ],
+  "layout": {
+    "columns": 8,
+    "rows": 6,
+    "framesPerFamily": 4
+  }
+}

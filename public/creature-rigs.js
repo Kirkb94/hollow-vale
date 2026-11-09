@@ -2,6 +2,15 @@
 (function(){
  'use strict';
  const supported=new Set(['quadruped','dragon','bird','imp','mechanical']);
+ function drawOrder(layout,dir,skeleton){
+  if(skeleton!=='dragon')return layout.order;
+  const wings=layout.order.filter(n=>layout.parts[n]?.motion==='wing');
+  const rear=dir===4||dir===5,near=n=>(layout.parts[n].anchor[0]>=0)===(dir===0||dir===1||dir===5);
+  const behind=wings.filter(n=>!rear&&!near(n)),front=wings.filter(n=>rear||near(n));
+  const order=layout.order.filter(n=>!wings.includes(n)),body=order.indexOf('body');
+  order.splice(body,0,...behind);order.splice(order.indexOf('body')+1,0,...front);return order;
+ }
+ if(typeof module!=='undefined'&&module.exports){module.exports={drawOrder};return;}
  function draw(canvas,model,parts,dir,state,time,pose,single=false){
   const meta=model?.meta;if(!supported.has(meta?.skeleton))return false;
   const layout=meta.creature?.views?.[['e','se','sw','w','nw','ne'][dir]];if(!layout)return false;
@@ -10,7 +19,7 @@
   function one(ox,oy,scale,phase){
    const t=time+phase,wave=Math.sin(t/105),fly=!['quadruped','mechanical'].includes(meta.skeleton),moving=state==='walk',attack=Math.max(0,pose.attack||pose.cast||pose.shoot||pose.thrust||0),flap=Math.sin(t/(attack?65:125));
    ctx.save();ctx.translate(160+ox,178+oy-pose.fall*24+(fly?Math.sin(t/240)*2:pose.bob)+(state==='hurt'?pose.bob:0));ctx.scale(scale,scale);ctx.rotate(sign*pose.fall*1.35+pose.bend);ctx.globalAlpha=pose.alpha;
-   for(const n of layout.order){
+   for(const n of drawOrder(layout,dir,meta.skeleton)){
     const spec=layout.parts[n],s=parts[meta.partOrder.indexOf(n)];if(!s||!spec)continue;
     let angle=spec.angle||0,x=spec.anchor[0],y=spec.anchor[1],sx=1,sy=1;
     if(spec.motion==='leg'){angle+=(moving?wave:0)*(spec.phase===1?-1:1)*(fly?.07:.25);angle+=fly?.18:0;}

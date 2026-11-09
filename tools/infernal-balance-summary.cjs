@@ -1,0 +1,16 @@
+const fs=require('node:fs');
+const assert=require('node:assert/strict');
+const input=JSON.parse(fs.readFileSync('design/balance/infernal-results.json','utf8'));
+const rows=input.results;
+const key=r=>JSON.stringify([r.foe,r.seed,r.swap,r.boss]);
+assert.equal(new Set(rows.map(r=>r.variant+key(r))).size,rows.length,'Duplicate trials');
+assert(rows.every(r=>r.slots.every(n=>n===10)),'Unequal draft budgets');
+assert(rows.every(r=>r.failed===0),'Failed submitted actions');
+assert(rows.every(r=>r.winner!=='timeout'),'Unfinished matches');
+const stats=r=>({games:r.length,infernalWins:r.filter(x=>x.winner==='infernal').length,winPercent:r.length?+(100*r.filter(x=>x.winner==='infernal').length/r.length).toFixed(1):null});
+const baseline=rows.filter(r=>r.variant==='baseline'),ablation=rows.filter(r=>r.variant==='no-overheat');
+assert(ablation.every(r=>!r.mechanics.ovh),'Overheat ablation failed');
+const paired=baseline.filter(r=>ablation.some(a=>key(a)===key(r)));
+const summary={testedAt:input.testedAt,totalGames:rows.length,method:'Live rules and hard AI; seeded faction-pure 10-slot drafts, with and without a starting boss, mirrored seats, classic 1v1. Economy and recruitment enabled; cards and ultimates disabled. Baseline sample sizes differ by matchup; paired ablation uses identical configurations only.',baseline:stats(baseline),matchups:Object.fromEntries([...new Set(baseline.map(r=>r.foe))].map(f=>[f,stats(baseline.filter(r=>r.foe===f))])),pairedOverheat:{enabled:stats(paired),disabled:stats(ablation)},checks:{equalDraftBudgets:true,noFailedActions:true,noTimeouts:true,ablationHadNoOverheatActivations:true},limitations:['AI results do not establish human competitive balance.','Small samples for four factions; repeated seeds and mirrored games are correlated.','Boss composition and map can materially change outcomes.','Economy may recruit additional units during a match.'],confirmedBug:'Inferno Witch bossHit sets burn duration to 3, then generic Infernal attack handling overwrites it to 2.'};
+fs.writeFileSync('design/balance/infernal-summary.json',JSON.stringify(summary,null,2));
+console.log(JSON.stringify(summary,null,2));

@@ -1,0 +1,668 @@
+[
+  {
+    "id": "brute",
+    "name": "Brute",
+    "faction": "iron",
+    "description": "Slow and brutal. One hit drops most archers and casters."
+  },
+  {
+    "id": "rogue",
+    "name": "Rogue",
+    "faction": "wilds",
+    "description": "One of the fastest heroes. Wins tower races."
+  },
+  {
+    "id": "archer",
+    "name": "Archer",
+    "faction": "wilds",
+    "description": "Shoots at range 2-3, not point blank."
+  },
+  {
+    "id": "knight",
+    "name": "Knight",
+    "faction": "kingdom",
+    "description": "Balanced fighter."
+  },
+  {
+    "id": "cleric",
+    "name": "Cleric",
+    "faction": "kingdom",
+    "description": "Heals an ally for 5 (1 mana), or pokes an enemy."
+  },
+  {
+    "id": "colossus",
+    "name": "Colossus",
+    "faction": "iron",
+    "description": "Huge and slow. Takes 1 less damage per hit."
+  },
+  {
+    "id": "blade",
+    "name": "Bloodblade",
+    "faction": "vamp",
+    "description": "Heals 2 whenever it hits a unit."
+  },
+  {
+    "id": "lancer",
+    "name": "Lancer",
+    "faction": "kingdom",
+    "description": "Charges in and strikes in the same turn. Its spear pierces 2 hexes in a straight line and hits both."
+  },
+  {
+    "id": "guard",
+    "name": "Guardian",
+    "faction": "iron",
+    "description": "Takes 2 less damage. Hits stun the target for its next turn."
+  },
+  {
+    "id": "sapper",
+    "name": "Sapper",
+    "faction": "iron",
+    "description": "Weak in a fight, deals +6 to towers."
+  },
+  {
+    "id": "wraith",
+    "name": "Wraith",
+    "faction": "undead",
+    "description": "Moves through units and slips past blockers."
+  },
+  {
+    "id": "bomber",
+    "name": "Bombardier",
+    "faction": "infernal",
+    "description": "Free splash: hits the target, and its neighbors for half damage."
+  },
+  {
+    "id": "witch",
+    "name": "Frost Witch",
+    "faction": "arcane",
+    "description": "Free with Arcane Flow. Freezes a unit out of its next turn."
+  },
+  {
+    "id": "storm",
+    "name": "Stormcaller",
+    "faction": "arcane",
+    "description": "Costs 2 mana. Huge damage from range 2-3."
+  },
+  {
+    "id": "druid",
+    "name": "Druid",
+    "faction": "wilds",
+    "description": "Free heal of 4 on an ally, or pokes an enemy."
+  },
+  {
+    "id": "paladin",
+    "name": "Paladin",
+    "faction": "kingdom",
+    "description": "Fights in melee. Heals an ally for 3 (1 mana)."
+  },
+  {
+    "id": "warlock",
+    "name": "Warlock",
+    "faction": "vamp",
+    "description": "Costs 1 mana. Hits at exactly range 2 and heals 2. Bat Form (free, before moving): fly like a Bat this turn and turn back on landing."
+  },
+  {
+    "id": "assassin",
+    "name": "Nightstalker",
+    "faction": "vamp",
+    "description": "Fragile, but one hit drops most archers, casters and scouts."
+  },
+  {
+    "id": "ballista",
+    "name": "Ballista",
+    "faction": "iron",
+    "description": "Slow siege weapon. Range 3-4, +2 to towers."
+  },
+  {
+    "id": "footmen",
+    "name": "Footmen",
+    "faction": "kingdom",
+    "description": "A squad of 3 spearmen. Takes 1 less damage."
+  },
+  {
+    "id": "bowmen",
+    "name": "Bowmen",
+    "faction": "kingdom",
+    "description": "A squad of 3 archers. Volleys from range 2-3."
+  },
+  {
+    "id": "imps",
+    "name": "Imps",
+    "faction": "infernal",
+    "description": "A swarm of 3 flying imps."
+  },
+  {
+    "id": "raiders",
+    "name": "Raiders",
+    "faction": "kingdom",
+    "description": "A pack of 3 fast raiders that charge in and strike in the same turn."
+  },
+  {
+    "id": "sprites",
+    "name": "Sprites",
+    "faction": "wilds",
+    "description": "3 tiny flying sprites with reach 2."
+  },
+  {
+    "id": "dragon",
+    "name": "Ember Dragon",
+    "faction": "infernal",
+    "description": "Elite (5 slots). A flying drake whose fire breath burns the target and splashes its neighbors for half damage. Costs 2 mana."
+  },
+  {
+    "id": "titan",
+    "name": "Stone Titan",
+    "faction": "iron",
+    "description": "Elite (5 slots). A heavy, armored giant. Its earthquake slam stuns the target and cleaves the 2 hexes beside it for half damage."
+  },
+  {
+    "id": "archmage",
+    "name": "Starweaver",
+    "faction": "arcane",
+    "description": "Elite (5 slots). A fragile caster. Meteor Storm costs 1 mana and blasts an area."
+  },
+  {
+    "id": "bats",
+    "name": "Bat",
+    "faction": "vamp",
+    "description": "Three vampire bats take the field together. Fast fliers that feed with every bite."
+  },
+  {
+    "id": "thrall",
+    "name": "Blood Thrall",
+    "faction": "vamp",
+    "description": "A chained, bloodied servant. Slow and tough, and it feeds on its victims."
+  },
+  {
+    "id": "countess",
+    "name": "Blood Countess",
+    "faction": "vamp",
+    "description": "A noble sorceress. Crimson bolts from range 2-3 cost 1 mana and drain life."
+  },
+  {
+    "id": "skeletons",
+    "name": "Bone Legion",
+    "faction": "undead",
+    "description": "A squad of 3 skeletons. Each rises once after falling."
+  },
+  {
+    "id": "ghoul",
+    "name": "Ghoul",
+    "faction": "undead",
+    "description": "A ravenous grave-dweller with heavy claws."
+  },
+  {
+    "id": "necromancer",
+    "name": "Necromancer",
+    "faction": "undead",
+    "description": "A frail summoner. Death bolts from range 2-3 cost 1 mana. Raise the Slain: enemy heroes it kills rise as Undead that fight for it for 3 turns."
+  },
+  {
+    "id": "graveknight",
+    "name": "Grave Knight",
+    "faction": "undead",
+    "description": "An armored dead champion that refuses to stay down."
+  },
+  {
+    "id": "hellhound",
+    "name": "Hellhound",
+    "faction": "infernal",
+    "description": "A blazing hound that charges in and sets targets alight in the same turn."
+  },
+  {
+    "id": "magmagolem",
+    "name": "Magma Golem",
+    "faction": "infernal",
+    "description": "A walking furnace of molten rock. Slow, armored and burning."
+  },
+  {
+    "id": "wolves",
+    "name": "Wolf Pack",
+    "faction": "wilds",
+    "description": "A pack of 3 wolves. They charge in and bite in the same turn, and heal as they run."
+  },
+  {
+    "id": "treant",
+    "name": "Treant",
+    "faction": "wilds",
+    "description": "An ancient tree-guardian. Huge health pool that slowly regrows."
+  },
+  {
+    "id": "gunner",
+    "name": "Dwarf Gunner",
+    "faction": "iron",
+    "description": "A dwarven marksman. Powder blasts from range 2-3, with Iron Clan siegecraft against towers."
+  },
+  {
+    "id": "sentinel",
+    "name": "Arcane Sentinel",
+    "faction": "arcane",
+    "description": "A rune-etched construct that guards the order's casters."
+  },
+  {
+    "id": "spellblade",
+    "name": "Spellblade",
+    "faction": "arcane",
+    "description": "A mage-warrior. Enchanted strikes are free with Arcane Flow."
+  },
+  {
+    "id": "seer",
+    "name": "Aether Seer",
+    "faction": "arcane",
+    "description": "Heals an ally for 4 (1 mana)."
+  },
+  {
+    "id": "outrider",
+    "name": "Outrider",
+    "faction": "kingdom",
+    "description": "A light horseman. Gallops in and strikes in the same turn, but cannot take a beating."
+  },
+  {
+    "id": "boarrider",
+    "name": "Boar Rider",
+    "faction": "wilds",
+    "description": "A tusked war-boar and its wild rider. Charges in and gores, then slowly regrows."
+  },
+  {
+    "id": "bonerider",
+    "name": "Bone Rider",
+    "faction": "undead",
+    "description": "A skeleton on a skeletal steed. Rides down a target and rises once when it falls."
+  },
+  {
+    "id": "bloodhunter",
+    "name": "Blood Hunter",
+    "faction": "vamp",
+    "description": "A vampire knight on a black steed. Charges, bites and drains blood in one turn."
+  },
+  {
+    "id": "kinglion",
+    "name": "Lionheart King",
+    "faction": "kingdom",
+    "description": "Elite (5 slots). The armored king of the realm. His great sword cleaves the target and the 2 hexes beside it."
+  },
+  {
+    "id": "vlord",
+    "name": "Vampire Lord",
+    "faction": "vamp",
+    "description": "Elite (5 slots). An ancient lord on bat wings. Blood Nova cleaves the target and the 2 hexes beside it, and drains the life from his prey."
+  },
+  {
+    "id": "lich",
+    "name": "Lich King",
+    "faction": "undead",
+    "description": "Elite (5 slots). A crowned sorcerer of the grave. Soul Storm costs 2 mana, hits an area and stuns the target. Raise Dead: 2 mana summons a skeleton beside him."
+  },
+  {
+    "id": "mammoth",
+    "name": "Ancient Mammoth",
+    "faction": "wilds",
+    "description": "Elite (5 slots). A towering beast of the old forest. Its stampede knocks the target down and tramples the 2 hexes beside it."
+  },
+  {
+    "id": "trapper",
+    "name": "Trapper",
+    "faction": "wilds",
+    "description": "Hides snares (1 mana, up to 3). An enemy that walks onto one stops there and cannot move on its next turn."
+  },
+  {
+    "id": "wallwright",
+    "name": "Stonewright",
+    "faction": "iron",
+    "description": "Builds 6 HP stone walls next to itself (2 mana, up to 3). Walls block movement and ranged shots."
+  },
+  {
+    "id": "hexweaver",
+    "name": "Hexweaver",
+    "faction": "arcane",
+    "description": "Casts Silence (1 mana) on a 3-hex-wide area up to 3 away. Enemies there cannot attack or use abilities on their next turn."
+  },
+  {
+    "id": "seraph",
+    "name": "High Seraph",
+    "faction": "kingdom",
+    "description": "Boss (5 slots). Holy Aura: At the start of your turn, allies next to her and she herself heal 1."
+  },
+  {
+    "id": "warlord",
+    "name": "Warlord Gideon",
+    "faction": "kingdom",
+    "description": "Boss (5 slots). War Banner: Your other heroes within 2 hexes deal +1 damage."
+  },
+  {
+    "id": "templar",
+    "name": "Grand Templar",
+    "faction": "kingdom",
+    "description": "Boss (5 slots). Tower Shield: Attacks from 2 or more hexes away deal half damage to him."
+  },
+  {
+    "id": "marshal",
+    "name": "Lord Marshal",
+    "faction": "kingdom",
+    "description": "Boss (5 slots). Momentum: When he defeats a unit he may act again (once per turn)."
+  },
+  {
+    "id": "bloodqueen",
+    "name": "Blood Queen",
+    "faction": "vamp",
+    "description": "Boss (5 slots). Exsanguinate: Defeating a unit heals her to full."
+  },
+  {
+    "id": "nosferatu",
+    "name": "Nosferatu",
+    "faction": "vamp",
+    "description": "Boss (5 slots). Mist Step: Flies 4 hexes. After it attacks it turns to mist and takes 2 less damage until its next turn."
+  },
+  {
+    "id": "matriarch",
+    "name": "Crimson Matriarch",
+    "faction": "vamp",
+    "description": "Boss (5 slots). Blood Pact: Each hit steals 1 mana from the target's player."
+  },
+  {
+    "id": "batking",
+    "name": "Bat King",
+    "faction": "vamp",
+    "description": "Boss (5 slots). Swarm Call: The first time it is hit each round a Bat appears next to it (up to 3)."
+  },
+  {
+    "id": "bonecolossus",
+    "name": "Bone Colossus",
+    "faction": "undead",
+    "description": "Boss (5 slots). Ossuary: When it falls it breaks into 3 skeletons."
+  },
+  {
+    "id": "deathknight",
+    "name": "Death Knight",
+    "faction": "undead",
+    "description": "Boss (5 slots). Withering Strike: Its targets cannot be healed for 2 turns."
+  },
+  {
+    "id": "banshee",
+    "name": "Banshee Queen",
+    "faction": "undead",
+    "description": "Boss (5 slots). Wail: Each attack also deals 1 damage to every other enemy next to her."
+  },
+  {
+    "id": "plaguelord",
+    "name": "Plague Lord",
+    "faction": "undead",
+    "description": "Boss (5 slots). Plague Aura: Enemies that start their turn next to him take 2 damage."
+  },
+  {
+    "id": "pitlord",
+    "name": "Pit Lord",
+    "faction": "infernal",
+    "description": "Boss (5 slots). Immolation: At the start of your turn enemies next to him take 2 damage and burn."
+  },
+  {
+    "id": "infernowitch",
+    "name": "Inferno Witch",
+    "faction": "infernal",
+    "description": "Boss (5 slots). Hellfire: Her targets burn for 2 damage a turn for 3 turns."
+  },
+  {
+    "id": "demonprince",
+    "name": "Demon Prince",
+    "faction": "infernal",
+    "description": "Boss (5 slots). Hellgate: At the start of your turn an Imp crawls out next to him (up to 2 at a time)."
+  },
+  {
+    "id": "phoenix",
+    "name": "Phoenix",
+    "faction": "infernal",
+    "description": "Boss (5 slots). Rebirth: The first time it falls it rises again with half HP."
+  },
+  {
+    "id": "eldertreant",
+    "name": "Elder Treant",
+    "faction": "wilds",
+    "description": "Boss (5 slots). Entangle: Its hits root the target: it cannot move on its next turn."
+  },
+  {
+    "id": "direwolf",
+    "name": "Alpha Direwolf",
+    "faction": "wilds",
+    "description": "Boss (5 slots). Pack Howl: Your other heroes within 2 hexes get +1 move."
+  },
+  {
+    "id": "stormroc",
+    "name": "Storm Roc",
+    "faction": "wilds",
+    "description": "Boss (5 slots). Gale: Its hits push the target 1 hex away. If the target cannot move it takes 1 more damage."
+  },
+  {
+    "id": "cavebear",
+    "name": "Cave Bear",
+    "faction": "wilds",
+    "description": "Boss (5 slots). Thick Hide: Heals 3 at the start of your turn and gets +1 armor below half HP."
+  },
+  {
+    "id": "warengine",
+    "name": "War Engine",
+    "faction": "iron",
+    "description": "Boss (5 slots). Ballistic Arc: Its shells fly over walls and ignore line of sight, and splash every enemy next to the target for half damage."
+  },
+  {
+    "id": "forgemaster",
+    "name": "Forge Master",
+    "faction": "iron",
+    "description": "Boss (5 slots). Field Repairs: At the start of your turn he heals adjacent allies 2 and repairs your weakest tower by 1."
+  },
+  {
+    "id": "juggernaut",
+    "name": "Iron Juggernaut",
+    "faction": "iron",
+    "description": "Boss (5 slots). Spiked Plating: Melee attackers take 2 damage. Immune to stun, snares and silence."
+  },
+  {
+    "id": "thunderking",
+    "name": "Thunder King",
+    "faction": "iron",
+    "description": "Boss (5 slots). Chain Lightning: Each hit arcs to up to 2 more enemies within 2 hexes of the target for 2 damage."
+  },
+  {
+    "id": "chronomancer",
+    "name": "Chronomancer",
+    "faction": "arcane",
+    "description": "Boss (5 slots). Time Slow: Enemies within 2 hexes of her have -1 move."
+  },
+  {
+    "id": "voidlord",
+    "name": "Void Sorcerer",
+    "faction": "arcane",
+    "description": "Boss (5 slots). Mana Burn: Each hit burns 2 mana from the target's player and gives you 1."
+  },
+  {
+    "id": "mirrormage",
+    "name": "Mirror Mage",
+    "faction": "arcane",
+    "description": "Boss (5 slots). Reflection: Half the damage it takes (rounded up) is reflected back to the attacker."
+  },
+  {
+    "id": "runekeeper",
+    "name": "Runekeeper",
+    "faction": "arcane",
+    "description": "Boss (5 slots). Rune Ward: The first hit it takes each round deals no damage."
+  },
+  {
+    "id": "raidboss",
+    "name": "Dread Colossus",
+    "faction": "raidboss",
+    "description": "The raid boss. Huge health, cleaving blows, enrages at 2/3 HP and raises skeletons at 1/3."
+  },
+  {
+    "id": "lookout",
+    "name": "Royal Lookout",
+    "faction": "kingdom",
+    "description": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "nightwatch",
+    "name": "Night Watcher",
+    "faction": "vamp",
+    "description": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "wisp",
+    "name": "Grave Wisp",
+    "faction": "undead",
+    "description": "Flying. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "fireeye",
+    "name": "Eye of Ruin",
+    "faction": "infernal",
+    "description": "Flying. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "falconer",
+    "name": "Falconer",
+    "faction": "wilds",
+    "description": "Sees 5 hexes. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "spotter",
+    "name": "Spotter",
+    "faction": "iron",
+    "description": "Sees 5 hexes. Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "oracle",
+    "name": "Star Oracle",
+    "faction": "arcane",
+    "description": "Scout. Sees far through the fog of war. Flare (1 mana): light up 2 hexes around a hex up to 5 away until your next turn; enemies there take +1 damage from your attacks and enemy snares there burn."
+  },
+  {
+    "id": "sunspeaker",
+    "name": "Sunspeaker",
+    "faction": "kingdom",
+    "description": "A herald of noon. Marks a hex for a delayed 5-damage Noon Verdict (3 mana)."
+  },
+  {
+    "id": "aegis",
+    "name": "Aegis Chaplain",
+    "faction": "kingdom",
+    "description": "A war chaplain. Shields an ally or tower before the blow lands (2 mana)."
+  },
+  {
+    "id": "herald",
+    "name": "Royal Herald",
+    "faction": "kingdom",
+    "description": "Sounds the rally: pulls a friendly hero to his side from 4 hexes away (2 mana)."
+  },
+  {
+    "id": "hemomancer",
+    "name": "Hemomancer",
+    "faction": "vamp",
+    "description": "Binds an enemy with a Crimson Tether that drains it for 3 turns (2 mana)."
+  },
+  {
+    "id": "mesmerist",
+    "name": "Mesmerist",
+    "faction": "vamp",
+    "description": "Charms an enemy hero into striking one of its own allies (3 mana)."
+  },
+  {
+    "id": "duskweaver",
+    "name": "Duskweaver",
+    "faction": "vamp",
+    "description": "Weaves a Veil of Night that hides your units from enemy eyes and arrows (2 mana)."
+  },
+  {
+    "id": "ossomancer",
+    "name": "Ossomancer",
+    "faction": "undead",
+    "description": "Detonates spent or summoned undead as a 4-damage burst of Bone Shrapnel (1 mana)."
+  },
+  {
+    "id": "bonewitch",
+    "name": "Bone Witch",
+    "faction": "undead",
+    "description": "Ossifies an enemy hero into a weak skeleton for a turn (3 mana)."
+  },
+  {
+    "id": "gravedigger",
+    "name": "Gravedigger",
+    "faction": "undead",
+    "description": "Digs Open Graves you can spawn next to, and earns gold from enemy deaths nearby (2 mana)."
+  },
+  {
+    "id": "cinderwarden",
+    "name": "Cinder Warden",
+    "faction": "infernal",
+    "description": "Raises a 3-hex Wall of Flame that burns enemies who cross it (2 mana)."
+  },
+  {
+    "id": "hellbinder",
+    "name": "Hellbinder",
+    "faction": "infernal",
+    "description": "Hooks an enemy from 4 hexes away and drags it into your lines (2 mana)."
+  },
+  {
+    "id": "pactbroker",
+    "name": "Pactbroker",
+    "faction": "infernal",
+    "description": "Trades an ally's blood for mana and gold with a Devil's Bargain (free)."
+  },
+  {
+    "id": "beastcaller",
+    "name": "Beastcaller",
+    "faction": "wilds",
+    "description": "Sends a Thundering Herd down a line, hitting and pushing every enemy in it (3 mana)."
+  },
+  {
+    "id": "groveshaper",
+    "name": "Grove Shaper",
+    "faction": "wilds",
+    "description": "Sinks 7 hexes into a swamp that stops walking enemies (2 mana)."
+  },
+  {
+    "id": "skinchanger",
+    "name": "Skinchanger",
+    "faction": "wilds",
+    "description": "Takes the body of any non-boss hero within 2, ally or enemy (2 mana)."
+  },
+  {
+    "id": "runeforger",
+    "name": "Rune Forger",
+    "faction": "iron",
+    "description": "Runeforges an ally's weapon: its next hit deals +3 and ignores armor (2 mana)."
+  },
+  {
+    "id": "cagewright",
+    "name": "Cagewright",
+    "faction": "iron",
+    "description": "Drops an Iron Cage on any non-boss hero: it can neither act nor be hurt (3 mana)."
+  },
+  {
+    "id": "prospector",
+    "name": "Prospector",
+    "faction": "iron",
+    "description": "Strikes a rich vein in your mine and guards mines from enemy claims (2 mana)."
+  },
+  {
+    "id": "aetherlancer",
+    "name": "Aetherlancer",
+    "faction": "arcane",
+    "description": "Pours X mana into an Overflow Lance that pierces a whole line (X mana)."
+  },
+  {
+    "id": "phasewright",
+    "name": "Phasewright",
+    "faction": "arcane",
+    "description": "Swaps the places of any two units near her with Transposition (2 mana)."
+  },
+  {
+    "id": "hourglass",
+    "name": "Hourglass Adept",
+    "faction": "arcane",
+    "description": "Rewinds an ally to where and how it stood at the start of your last turn (2 mana)."
+  },
+  {
+    "id": "warlock_bat",
+    "name": "Warlock bat form",
+    "faction": "vamp",
+    "description": "A single dark purple vampire bat with red eyes, broad membranous wings and sharp fangs. Full animal bat, not a humanoid."
+  }
+]

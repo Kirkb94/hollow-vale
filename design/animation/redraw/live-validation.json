@@ -1,0 +1,180 @@
+{
+  "errors": [],
+  "results": [
+    {
+      "faction": "iron",
+      "units": 32,
+      "types": [
+        "brute",
+        "sapper",
+        "gunner",
+        "spotter",
+        "colossus",
+        "guard",
+        "titan",
+        "juggernaut",
+        "thunderking",
+        "ballista",
+        "wallwright",
+        "warengine",
+        "forgemaster",
+        "runeforger",
+        "cagewright",
+        "prospector"
+      ],
+      "icons": 97,
+      "oldCanvas": 32
+    },
+    {
+      "faction": "wilds",
+      "units": 34,
+      "types": [
+        "rogue",
+        "archer",
+        "trapper",
+        "druid",
+        "beastcaller",
+        "groveshaper",
+        "skinchanger",
+        "falconer",
+        "treant",
+        "eldertreant",
+        "sprites",
+        "wolves",
+        "boarrider",
+        "mammoth",
+        "direwolf",
+        "stormroc",
+        "cavebear"
+      ],
+      "icons": 103,
+      "oldCanvas": 34
+    },
+    {
+      "faction": "kingdom",
+      "units": 34,
+      "types": [
+        "knight",
+        "cleric",
+        "paladin",
+        "sunspeaker",
+        "aegis",
+        "herald",
+        "footmen",
+        "bowmen",
+        "raiders",
+        "lookout",
+        "marshal",
+        "lancer",
+        "outrider",
+        "kinglion",
+        "seraph",
+        "warlord",
+        "templar"
+      ],
+      "icons": 104,
+      "oldCanvas": 34
+    },
+    {
+      "faction": "infernal",
+      "units": 28,
+      "types": [
+        "mage",
+        "fireeye",
+        "bomber",
+        "infernowitch",
+        "cinderwarden",
+        "hellbinder",
+        "pactbroker",
+        "magmagolem",
+        "pitlord",
+        "demonprince",
+        "hellhound",
+        "phoenix",
+        "dragon",
+        "imps"
+      ],
+      "icons": 123,
+      "oldCanvas": 28
+    },
+    {
+      "faction": "vamp",
+      "units": 32,
+      "types": [
+        "blade",
+        "warlock",
+        "assassin",
+        "thrall",
+        "countess",
+        "bloodhunter",
+        "nightwatch",
+        "hemomancer",
+        "mesmerist",
+        "duskweaver",
+        "matriarch",
+        "bats",
+        "vlord",
+        "bloodqueen",
+        "nosferatu",
+        "batking"
+      ],
+      "icons": 134,
+      "oldCanvas": 32
+    },
+    {
+      "faction": "undead",
+      "units": 30,
+      "types": [
+        "necromancer",
+        "ossomancer",
+        "bonewitch",
+        "gravedigger",
+        "lich",
+        "banshee",
+        "wraith",
+        "skeletons",
+        "ghoul",
+        "graveknight",
+        "bonerider",
+        "bonecolossus",
+        "deathknight",
+        "plaguelord",
+        "wisp"
+      ],
+      "icons": 100,
+      "oldCanvas": 30
+    },
+    {
+      "faction": "arcane",
+      "units": 30,
+      "types": [
+        "witch",
+        "storm",
+        "archmage",
+        "seer",
+        "sentinel",
+        "spellblade",
+        "chronomancer",
+        "voidlord",
+        "mirrormage",
+        "runekeeper",
+        "hexweaver",
+        "oracle",
+        "aetherlancer",
+        "phasewright",
+        "hourglass"
+      ],
+      "icons": 93,
+      "oldCanvas": 30
+    },
+    {
+      "faction": "raidboss",
+      "units": 2,
+      "types": [
+        "raidboss"
+      ],
+      "icons": 52,
+      "oldCanvas": 2
+    }
+  ]
+}

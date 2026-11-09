@@ -1,0 +1,25 @@
+{
+  "method": "Built-in image_gen; original images copied into public/art/frames. No skeletal exports.",
+  "reference": "public/art/frames/mage-pocket-chibi-v1.png",
+  "direction": "07 — Pocket Chibi",
+  "sheetRequirements": [
+    "Complete single character per pose, fixed facing, transparent background.",
+    "Six columns and six rows: idle, walk, action, hurt, death, spawn.",
+    "Match approved Pyromancer pixel-art proportions, outlines and shading while retaining faction colors and unit identity.",
+    "Clear gutters, stable scale and position, no labels or separate limb pieces."
+  ],
+  "corrections": [
+    "Single-figure sheets for footmen, bowmen, raiders, imps, sprites, bats, wolves and skeletons.",
+    "Stormcaller corrected to a human lightning wizard.",
+    "Frost Witch, Thunder King and War Engine backgrounds removed.",
+    "Matriarch background cleanup; Bone Colossus collapse corrected to a single skeleton.",
+    "Sunspeaker and Bone Witch opaque backgrounds removed."
+  ],
+  "integration": "tools/register-pocket-chibi.py; short selected clips and whole-pose anchoring. See validation.json and animation-validation.json for current coverage.",
+  "coverage": {
+    "rosterUnits": 111,
+    "alternateForms": 1,
+    "totalSheets": 112
+  },
+  "generationRecord": "generation-record.json"
+}

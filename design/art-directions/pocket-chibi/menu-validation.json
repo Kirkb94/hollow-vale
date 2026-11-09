@@ -1,0 +1,20 @@
+[
+  {
+    "viewport": 390,
+    "content": 390,
+    "icons": 72,
+    "errors": []
+  },
+  {
+    "viewport": 768,
+    "content": 768,
+    "icons": 72,
+    "errors": []
+  },
+  {
+    "viewport": 1440,
+    "content": 1440,
+    "icons": 72,
+    "errors": []
+  }
+]

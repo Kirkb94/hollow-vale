@@ -41,5 +41,5 @@
     else {fx(subject,action);render();}
   };
   const ready=()=>{if(!HVRig.assets.has('mage')||!window.HVArcaneTerrain?.ready){timers.push(setTimeout(ready,100));return;}reset();};
-  timers.push(setTimeout(ready,300));
+  HVRig.ready.then(()=>Promise.all([HVRig.ensure('mage'),HVRig.ensure('brute')])).then(()=>ready());
 })();

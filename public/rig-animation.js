@@ -34,6 +34,11 @@
     const flip=flipX?-1:1,dx=(joints.tip[0]-joints.root[0])*width*flip,dy=(joints.tip[1]-joints.root[1])*height;
     return {angle:Math.atan2(dx,dy),scale:length/Math.max(1,Math.hypot(dx,dy)),flip};
   }
+  function wingLayer(dir,anchorX,center=80){
+    if(dir===4||dir===5)return 'shoulders';
+    if(dir===0||dir===3)return (anchorX<center)===(dir===0)?'shoulders':'behind';
+    return 'behind';
+  }
   function loopSample(time,count,period){
     const phase=((time%period)+period)%period/period*count,index=Math.floor(phase),fraction=phase-index;
     return {index,next:(index+1)%count,blend:fraction*fraction*(3-2*fraction)};
@@ -45,7 +50,7 @@
     ctx.globalCompositeOperation='lighter';ctx.globalAlpha=sample.blend;
     ctx.drawImage(image,...rects[sample.next],0,0,width,height);ctx.restore();
   }
-  if(typeof module!=='undefined'&&module.exports){module.exports={directions,direction,pose,armAngles,armTransform,loopSample,drawLoop};return;}
+  if(typeof module!=='undefined'&&module.exports){module.exports={directions,direction,pose,armAngles,armTransform,wingLayer,loopSample,drawLoop};return;}
   const root='art/rigs/',assets=new Map(),models=new Map(),facing=new WeakMap(),pending=new Map(),images=new Map(),groupCanvases=new WeakMap();
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const registry={
@@ -214,10 +219,11 @@
     if(models.get(k)?.meta?.skeleton==='bat'&&(single||(models.get(k).meta.group||(typeof H!=='undefined'?H[k]?.group:1)||1)===1)){
       const a=all[clamp(Math.floor(dir),0,5)],ctx=canvas.getContext('2d'),p=pose(state,reduced.matches?0:t),flap=reduced.matches?0:Math.sin(t/(state==='attack'?65:110))*.45;
       ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.scale(canvas.width/320,canvas.height/240);ctx.translate(160,158+p.bob);ctx.globalAlpha=p.alpha;ctx.rotate(p.fall*1.3);
-      part(ctx,a,2,-8,-30,70,75,-flap,.9,.22);part(ctx,a,3,8,-30,70,75,flap,.1,.22);
+      const wings=layer=>{for(const [n,x,angle,px] of [[2,-8,-flap,.9],[3,8,flap,.1]])if(wingLayer(dir,x,0)===layer)part(ctx,a,n,x,-30,70,75,angle,px,.22);};
+      wings('behind');
       const layout=models.get(k)?.meta?.batLayout||{},body=layout.body||{},head=layout.head||{},sign=[1,1,-1,-1,-1,1][dir];
       const drawHead=()=>part(ctx,a,1,sign*(head.position?.[0]??5),head.position?.[1]??-40,head.size?.[0]??28,head.size?.[1]??29,0,.5,.5),behind=layout.headBehindRear&&dir>=4;
-      if(behind)drawHead();part(ctx,a,0,body.position?.[0]??0,body.position?.[1]??-30,body.size?.[0]??30,body.size?.[1]??55,0,.5,body.pivot?.[1]??.1);if(!behind)drawHead();ctx.restore();return;
+      if(behind)drawHead();part(ctx,a,0,body.position?.[0]??0,body.position?.[1]??-30,body.size?.[0]??30,body.size?.[1]??55,0,.5,body.pivot?.[1]??.1);wings('shoulders');if(!behind)drawHead();ctx.restore();return;
     }
     const group=models.get(k)?.meta?.group||(typeof H!=='undefined'?H[k]?.group:1)||1;
     if(group>1&&!single){
@@ -237,10 +243,11 @@
     ctx.translate(160,198+p.bob);ctx.globalAlpha=p.alpha;
     ctx.translate(-sign*30*p.fall,0);ctx.scale(1-.35*p.fall,1-.35*p.fall);
     ctx.rotate(p.fall*sign*1.38);ctx.translate(0,-p.fall*10);ctx.rotate(p.bend*sign);
-    function extra(layer){for(const s of model?.extras?.[dir]||[]){if((s.layer||'behind')!==layer)continue;
+    const attachmentTransform=ctx.getTransform();
+    function extra(layer){for(const s of model?.extras?.[dir]||[]){const depth=s.motion==='wing'?wingLayer(dir,(s.anchor||[80])[0]):s.layer||'behind';if(depth!==layer)continue;
       const anchor=s.anchor||[80,120],size=s.displaySize||[50,50],pivot=s.pivot||[.5,.5];
       const motion=reduced.matches?0:s.motion==='wing'?Math.sin(t/210)*(state==='walk'?.35:.12)*(s.motionSign??(s.name.toLowerCase().includes('left')?-1:1)):s.motion==='leg'?p.stride*.24*(s.phase===1?-1:1):0;
-      ctx.save();ctx.translate(anchor[0]-80,anchor[1]-178);ctx.rotate((s.rotation||0)+motion);if(s.flipX)ctx.scale(-1,1);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-size[0]*pivot[0],-size[1]*pivot[1],size[0],size[1]);ctx.restore();
+      ctx.save();ctx.setTransform(attachmentTransform);ctx.translate(anchor[0]-80,anchor[1]-178);ctx.rotate((s.rotation||0)+motion);if(s.flipX)ctx.scale(-1,1);ctx.drawImage(s.image,s.x,s.y,s.w,s.h,-size[0]*pivot[0],-size[1]*pivot[1],size[0],size[1]);ctx.restore();
     }}
     extra('behind');ctx.save();
     if(model?.meta?.bodyOffset)ctx.translate(...model.meta.bodyOffset);
@@ -268,15 +275,20 @@
         held.push({eq,matrix:ctx.getTransform()});
         ctx.restore();
       }
-      ctx.restore();}
+      ctx.restore();
+      // Equipment in the far hand must share that arm's depth in rear views.
+      if(back&&left!==nearLeft)drawHeld();
+    }
+    function drawHeld(){for(const{eq,matrix}of held.splice(0)){ctx.save();ctx.setTransform(matrix);ctx.drawImage(eq.image,eq.x,eq.y,eq.w,eq.h,-eq.pivot[0]*eq.dw,-eq.pivot[1]*eq.dh,eq.dw,eq.dh);ctx.restore();}}
     part(ctx,a,2,0,-131,70*width,116,p.stride*.035,.5,.02);
     for(const eq of equipment)if(eq.hand==='back'){ctx.save();ctx.translate(-sign*12,-124);ctx.rotate(-sign*.2);ctx.drawImage(eq.image,eq.x,eq.y,eq.w,eq.h,-eq.pivot[0]*eq.dw,-eq.pivot[1]*eq.dh,eq.dw,eq.dh);ctx.restore();}
     leg(!nearLeft);if(back)arm(!nearLeft);leg(nearLeft);
     part(ctx,a,3,0,-88,65*width,73,p.stride*.035,.5,.02);
     part(ctx,a,1,0,-127,52*width,55,0,.5,.02);
     if(back)part(ctx,a,2,0,-131,65*width,105,p.stride*.025,.5,.02);
+    extra('shoulders');
     if(!back)arm(!nearLeft);arm(nearLeft);
-    for(const{eq,matrix}of held){ctx.save();ctx.setTransform(matrix);ctx.drawImage(eq.image,eq.x,eq.y,eq.w,eq.h,-eq.pivot[0]*eq.dw,-eq.pivot[1]*eq.dh,eq.dw,eq.dh);ctx.restore();}
+    drawHeld();
     part(ctx,a,0,sign*(side?4:2),-158,41*(side?.85:1),44,p.cast*sign*.035,.5,.05);
     ctx.restore();extra('front');
     ctx.restore();

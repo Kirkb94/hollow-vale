@@ -1,0 +1,557 @@
+[
+  {
+    "key": "aegis",
+    "file": "aegis-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "aetherlancer",
+    "file": "aetherlancer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "archer",
+    "file": "archer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "archmage",
+    "file": "archmage-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "assassin",
+    "file": "assassin-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "ballista",
+    "file": "ballista-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "banshee",
+    "file": "banshee-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "batking",
+    "file": "batking-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bats",
+    "file": "bats-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "beastcaller",
+    "file": "beastcaller-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "blade",
+    "file": "blade-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bloodhunter",
+    "file": "bloodhunter-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bloodqueen",
+    "file": "bloodqueen-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "boarrider",
+    "file": "boarrider-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bomber",
+    "file": "bomber-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bonecolossus",
+    "file": "bonecolossus-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bonerider",
+    "file": "bonerider-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bonewitch",
+    "file": "bonewitch-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "bowmen",
+    "file": "bowmen-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "brute",
+    "file": "brute-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "cagewright",
+    "file": "cagewright-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "cavebear",
+    "file": "cavebear-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "chronomancer",
+    "file": "chronomancer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "cinderwarden",
+    "file": "cinderwarden-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "cleric",
+    "file": "cleric-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "colossus",
+    "file": "colossus-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "countess",
+    "file": "countess-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "deathknight",
+    "file": "deathknight-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "demonprince",
+    "file": "demonprince-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "direwolf",
+    "file": "direwolf-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "dragon",
+    "file": "dragon-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "druid",
+    "file": "druid-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "duskweaver",
+    "file": "duskweaver-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "eldertreant",
+    "file": "eldertreant-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "falconer",
+    "file": "falconer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "fireeye",
+    "file": "fireeye-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "footmen",
+    "file": "footmen-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "forgemaster",
+    "file": "forgemaster-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "ghoul",
+    "file": "ghoul-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "gravedigger",
+    "file": "gravedigger-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "graveknight",
+    "file": "graveknight-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "groveshaper",
+    "file": "groveshaper-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "guard",
+    "file": "guard-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "gunner",
+    "file": "gunner-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "hellbinder",
+    "file": "hellbinder-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "hellhound",
+    "file": "hellhound-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "hemomancer",
+    "file": "hemomancer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "herald",
+    "file": "herald-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "hexweaver",
+    "file": "hexweaver-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "hourglass",
+    "file": "hourglass-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "imps",
+    "file": "imps-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "infernowitch",
+    "file": "infernowitch-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "juggernaut",
+    "file": "juggernaut-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "kinglion",
+    "file": "kinglion-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "knight",
+    "file": "knight-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "lancer",
+    "file": "lancer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "lich",
+    "file": "lich-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "lookout",
+    "file": "lookout-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "magmagolem",
+    "file": "magmagolem-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "mammoth",
+    "file": "mammoth-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "marshal",
+    "file": "marshal-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "matriarch",
+    "file": "matriarch-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "mesmerist",
+    "file": "mesmerist-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "mirrormage",
+    "file": "mirrormage-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "necromancer",
+    "file": "necromancer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "nightwatch",
+    "file": "nightwatch-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "nosferatu",
+    "file": "nosferatu-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "oracle",
+    "file": "oracle-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "ossomancer",
+    "file": "ossomancer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "outrider",
+    "file": "outrider-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "pactbroker",
+    "file": "pactbroker-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "paladin",
+    "file": "paladin-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "phasewright",
+    "file": "phasewright-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "phoenix",
+    "file": "phoenix-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "pitlord",
+    "file": "pitlord-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "plaguelord",
+    "file": "plaguelord-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "prospector",
+    "file": "prospector-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "raidboss",
+    "file": "raidboss-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "raiders",
+    "file": "raiders-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "rogue",
+    "file": "rogue-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "runeforger",
+    "file": "runeforger-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "runekeeper",
+    "file": "runekeeper-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "sapper",
+    "file": "sapper-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "seer",
+    "file": "seer-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "sentinel",
+    "file": "sentinel-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "seraph",
+    "file": "seraph-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "skeletons",
+    "file": "skeletons-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "skinchanger",
+    "file": "skinchanger-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "spellblade",
+    "file": "spellblade-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "spotter",
+    "file": "spotter-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "sprites",
+    "file": "sprites-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "storm",
+    "file": "storm-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "stormroc",
+    "file": "stormroc-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "sunspeaker",
+    "file": "sunspeaker-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "templar",
+    "file": "templar-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "thrall",
+    "file": "thrall-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "thunderking",
+    "file": "thunderking-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "titan",
+    "file": "titan-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "trapper",
+    "file": "trapper-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "treant",
+    "file": "treant-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "vlord",
+    "file": "vlord-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "voidlord",
+    "file": "voidlord-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "wallwright",
+    "file": "wallwright-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "warengine",
+    "file": "warengine-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "warlock",
+    "file": "warlock-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "warlock_bat",
+    "file": "warlock_bat-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "warlord",
+    "file": "warlord-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "wisp",
+    "file": "wisp-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "witch",
+    "file": "witch-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "wolves",
+    "file": "wolves-pocket-chibi-v1.png",
+    "frames": 36
+  },
+  {
+    "key": "wraith",
+    "file": "wraith-pocket-chibi-v1.png",
+    "frames": 36
+  }
+]

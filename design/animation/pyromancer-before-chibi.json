@@ -1,0 +1,148 @@
+{
+  "folder": "infernal/mage",
+  "manifest": "manifest.json",
+  "attack": "cast",
+  "effects": "vfx.json",
+  "file": "mage-original-v2.png",
+  "group": 1,
+  "name": "Pyromancer",
+  "faction": "infernal",
+  "artwork": "new-whole-character",
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "columns": 4,
+  "frameOffsets": [
+    [
+      3.0,
+      3.0,
+      3.0,
+      3.0
+    ],
+    [
+      5.44,
+      4.62,
+      6.25,
+      5.44
+    ],
+    [
+      5.44,
+      5.44,
+      5.44,
+      5.44
+    ],
+    [
+      6.25,
+      6.25,
+      7.06,
+      5.44
+    ],
+    [
+      18.44,
+      20.88,
+      20.06,
+      23.31
+    ],
+    [
+      12.75,
+      7.88,
+      6.25,
+      5.44
+    ]
+  ],
+  "clips": {
+    "idle": {
+      "row": 0,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        2,
+        1
+      ],
+      "duration": 1600,
+      "loop": true
+    },
+    "walk": {
+      "row": 1,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 600,
+      "loop": true
+    },
+    "cast": {
+      "row": 2,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 800
+    },
+    "hurt": {
+      "row": 3,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 450
+    },
+    "death": {
+      "row": 4,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 1100
+    },
+    "spawn": {
+      "row": 5,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 600
+    },
+    "attack": {
+      "row": 2,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 800
+    },
+    "shoot": {
+      "row": 2,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 800
+    },
+    "thrust": {
+      "row": 2,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "duration": 800
+    }
+  }
+}

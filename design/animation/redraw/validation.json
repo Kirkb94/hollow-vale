@@ -1,0 +1,1005 @@
+[
+  {
+    "key": "aegis",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 942622,
+    "frames": 24
+  },
+  {
+    "key": "aetherlancer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1138872,
+    "frames": 24
+  },
+  {
+    "key": "archer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1052806,
+    "frames": 24
+  },
+  {
+    "key": "archmage",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 923162,
+    "frames": 24
+  },
+  {
+    "key": "assassin",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1047667,
+    "frames": 24
+  },
+  {
+    "key": "ballista",
+    "warning": "Could not locate 24 whole poses; using fixed complete-frame cells"
+  },
+  {
+    "key": "ballista",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 890979,
+    "frames": 24
+  },
+  {
+    "key": "banshee",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 955452,
+    "frames": 24
+  },
+  {
+    "key": "batking",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1005972,
+    "frames": 24
+  },
+  {
+    "key": "bats",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1097278,
+    "frames": 24
+  },
+  {
+    "key": "beastcaller",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 844696,
+    "frames": 24
+  },
+  {
+    "key": "blade",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1051377,
+    "frames": 24
+  },
+  {
+    "key": "bloodhunter",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 925178,
+    "frames": 24
+  },
+  {
+    "key": "bloodqueen",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 940120,
+    "frames": 24
+  },
+  {
+    "key": "boarrider",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 834792,
+    "frames": 24
+  },
+  {
+    "key": "bomber",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1016435,
+    "frames": 24
+  },
+  {
+    "key": "bonecolossus",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 890877,
+    "frames": 24
+  },
+  {
+    "key": "bonerider",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 869226,
+    "frames": 24
+  },
+  {
+    "key": "bonewitch",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 970137,
+    "frames": 24
+  },
+  {
+    "key": "bowmen",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1081982,
+    "frames": 24
+  },
+  {
+    "key": "brute",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 834342,
+    "frames": 24
+  },
+  {
+    "key": "cagewright",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 929397,
+    "frames": 24
+  },
+  {
+    "key": "cavebear",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 855571,
+    "frames": 24
+  },
+  {
+    "key": "chronomancer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 913910,
+    "frames": 24
+  },
+  {
+    "key": "cinderwarden",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1030254,
+    "frames": 24
+  },
+  {
+    "key": "cleric",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1043646,
+    "frames": 24
+  },
+  {
+    "key": "colossus",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 873081,
+    "frames": 24
+  },
+  {
+    "key": "countess",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 954384,
+    "frames": 24
+  },
+  {
+    "key": "deathknight",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 958824,
+    "frames": 24
+  },
+  {
+    "key": "demonprince",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 871359,
+    "frames": 24
+  },
+  {
+    "key": "direwolf",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 933423,
+    "frames": 24
+  },
+  {
+    "key": "dragon",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 923175,
+    "frames": 24
+  },
+  {
+    "key": "druid",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 916677,
+    "frames": 24
+  },
+  {
+    "key": "duskweaver",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1056512,
+    "frames": 24
+  },
+  {
+    "key": "eldertreant",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 890876,
+    "frames": 24
+  },
+  {
+    "key": "falconer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1043693,
+    "frames": 24
+  },
+  {
+    "key": "fireeye",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1018580,
+    "frames": 24
+  },
+  {
+    "key": "footmen",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1121607,
+    "frames": 24
+  },
+  {
+    "key": "forgemaster",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 860901,
+    "frames": 24
+  },
+  {
+    "key": "ghoul",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 996751,
+    "frames": 24
+  },
+  {
+    "key": "gravedigger",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 978972,
+    "frames": 24
+  },
+  {
+    "key": "graveknight",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 979875,
+    "frames": 24
+  },
+  {
+    "key": "groveshaper",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 958983,
+    "frames": 24
+  },
+  {
+    "key": "guard",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 934097,
+    "frames": 24
+  },
+  {
+    "key": "gunner",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 962994,
+    "frames": 24
+  },
+  {
+    "key": "hellbinder",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1041146,
+    "frames": 24
+  },
+  {
+    "key": "hellhound",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1132488,
+    "frames": 24
+  },
+  {
+    "key": "hemomancer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1016070,
+    "frames": 24
+  },
+  {
+    "key": "herald",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 988213,
+    "frames": 24
+  },
+  {
+    "key": "hexweaver",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 941264,
+    "frames": 24
+  },
+  {
+    "key": "hourglass",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 916787,
+    "frames": 24
+  },
+  {
+    "key": "imps",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1126074,
+    "frames": 24
+  },
+  {
+    "key": "infernowitch",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 947871,
+    "frames": 24
+  },
+  {
+    "key": "juggernaut",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 853522,
+    "frames": 24
+  },
+  {
+    "key": "kinglion",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 860460,
+    "frames": 24
+  },
+  {
+    "key": "knight",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1001856,
+    "frames": 24
+  },
+  {
+    "key": "lancer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1108032,
+    "frames": 24
+  },
+  {
+    "key": "lich",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 902498,
+    "frames": 24
+  },
+  {
+    "key": "lookout",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 933779,
+    "frames": 24
+  },
+  {
+    "key": "magmagolem",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 622301,
+    "frames": 24
+  },
+  {
+    "key": "mammoth",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 887766,
+    "frames": 24
+  },
+  {
+    "key": "marshal",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 902029,
+    "frames": 24
+  },
+  {
+    "key": "matriarch",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 895126,
+    "frames": 24
+  },
+  {
+    "key": "mesmerist",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 970966,
+    "frames": 24
+  },
+  {
+    "key": "mirrormage",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 966970,
+    "frames": 24
+  },
+  {
+    "key": "necromancer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1004283,
+    "frames": 24
+  },
+  {
+    "key": "nightwatch",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1058350,
+    "frames": 24
+  },
+  {
+    "key": "nosferatu",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 944089,
+    "frames": 24
+  },
+  {
+    "key": "oracle",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 958305,
+    "frames": 24
+  },
+  {
+    "key": "ossomancer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 705997,
+    "frames": 24
+  },
+  {
+    "key": "outrider",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 979386,
+    "frames": 24
+  },
+  {
+    "key": "pactbroker",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 993748,
+    "frames": 24
+  },
+  {
+    "key": "paladin",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 958330,
+    "frames": 24
+  },
+  {
+    "key": "phasewright",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 876388,
+    "frames": 24
+  },
+  {
+    "key": "phoenix",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 938849,
+    "frames": 24
+  },
+  {
+    "key": "pitlord",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 896868,
+    "frames": 24
+  },
+  {
+    "key": "plaguelord",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 908184,
+    "frames": 24
+  },
+  {
+    "key": "prospector",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 958737,
+    "frames": 24
+  },
+  {
+    "key": "raidboss",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 908448,
+    "frames": 24
+  },
+  {
+    "key": "raiders",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1061163,
+    "frames": 24
+  },
+  {
+    "key": "rogue",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1113736,
+    "frames": 24
+  },
+  {
+    "key": "runeforger",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 901945,
+    "frames": 24
+  },
+  {
+    "key": "runekeeper",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 762752,
+    "frames": 24
+  },
+  {
+    "key": "sapper",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1036989,
+    "frames": 24
+  },
+  {
+    "key": "seer",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 975483,
+    "frames": 24
+  },
+  {
+    "key": "sentinel",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 812041,
+    "frames": 24
+  },
+  {
+    "key": "seraph",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 698056,
+    "frames": 24
+  },
+  {
+    "key": "skeletons",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1066268,
+    "frames": 24
+  },
+  {
+    "key": "skinchanger",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1000963,
+    "frames": 24
+  },
+  {
+    "key": "spellblade",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1062006,
+    "frames": 24
+  },
+  {
+    "key": "spotter",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 638770,
+    "frames": 24
+  },
+  {
+    "key": "sprites",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1154968,
+    "frames": 24
+  },
+  {
+    "key": "storm",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 837625,
+    "frames": 24
+  },
+  {
+    "key": "stormroc",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 861057,
+    "frames": 24
+  },
+  {
+    "key": "sunspeaker",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1015859,
+    "frames": 24
+  },
+  {
+    "key": "templar",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 884802,
+    "frames": 24
+  },
+  {
+    "key": "thrall",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 970499,
+    "frames": 24
+  },
+  {
+    "key": "thunderking",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 923572,
+    "frames": 24
+  },
+  {
+    "key": "titan",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 863893,
+    "frames": 24
+  },
+  {
+    "key": "trapper",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 981931,
+    "frames": 24
+  },
+  {
+    "key": "treant",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 878241,
+    "frames": 24
+  },
+  {
+    "key": "vlord",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 896375,
+    "frames": 24
+  },
+  {
+    "key": "voidlord",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1025958,
+    "frames": 24
+  },
+  {
+    "key": "wallwright",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 885444,
+    "frames": 24
+  },
+  {
+    "key": "warengine",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 894837,
+    "frames": 24
+  },
+  {
+    "key": "warlock",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1048867,
+    "frames": 24
+  },
+  {
+    "key": "warlock_bat",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1047385,
+    "frames": 24
+  },
+  {
+    "key": "warlord",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 871557,
+    "frames": 24
+  },
+  {
+    "key": "wisp",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1113231,
+    "frames": 24
+  },
+  {
+    "key": "witch",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 964887,
+    "frames": 24
+  },
+  {
+    "key": "wolves",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1027444,
+    "frames": 24
+  },
+  {
+    "key": "wraith",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparentPixels": 1000795,
+    "frames": 24
+  }
+]

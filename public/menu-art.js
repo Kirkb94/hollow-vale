@@ -6,11 +6,11 @@
   const atlas=new Image();
   const ready=new Promise(resolve=>{atlas.onload=()=>{
     ['grass','forest','hill','swamp','shrine','keep','mine','sand','shallow','deep'].forEach((type,i)=>{
-      const c=document.createElement('canvas');c.width=atlas.width/5;c.height=atlas.height/2;
-      c.getContext('2d').drawImage(atlas,i%5*c.width,Math.floor(i/5)*c.height,c.width,c.height,0,0,c.width,c.height);
+      const c=document.createElement('canvas');c.width=atlas.width/4;c.height=atlas.height/3;
+      c.getContext('2d').imageSmoothingEnabled=false;c.getContext('2d').drawImage(atlas,i%4*c.width,Math.floor(i/4)*c.height,c.width,c.height,0,0,c.width,c.height);
       tiles.set(type,c.toDataURL());
     });resolve();
-  };atlas.onerror=resolve;});atlas.src='art/terrain-arcane.png';
+  };atlas.onerror=resolve;});atlas.src='art/terrain-pocket-chibi.png';
   async function update(img){
     if(img.closest('#board,#hvbg,.hv-rig-portrait'))return;
     const src=img.getAttribute('src')||img.dataset.src||'';

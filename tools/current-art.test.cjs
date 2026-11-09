@@ -13,12 +13,13 @@ const{chromium}=require('C:/Users/Uno/.cache/codex-runtimes/codex-primary-runtim
    // Shape occupancy is stable despite idle bob. One figure must be much taller than a pack.
    const bounds=a=>{let top=c.height,bottom=0;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(a[(y*c.width+x)*4+3]>64){top=Math.min(top,y);bottom=Math.max(bottom,y);}return bottom-top;};
    HVRig.draw(test,'footmen',1,'idle',0,true);const one=bounds(test.getContext('2d').getImageData(0,0,c.width,c.height).data);
+   const oneOptions=HVRig.clipFor('footmen','idle').frames.map((_,i)=>{HVRig.paintFrame(test,'footmen','idle',i,true);return bounds(test.getContext('2d').getImageData(0,0,c.width,c.height).data)});
    HVRig.draw(test,'footmen',1,'idle',0,false);const pack=bounds(test.getContext('2d').getImageData(0,0,c.width,c.height).data);
    let bg=document.querySelector('#hvbg');if(!bg){bg=document.createElement('div');bg.id='hvbg';document.querySelector('#bw').append(bg);}
    const probes=Array.from({length:6},(_,i)=>{const e=document.createElement('i');e.className=`t r${i} m tt-forest_0`;bg.append(e);return e;});
    const forest=probes.map(e=>getComputedStyle(e).transform);probes.forEach(e=>e.remove());
-   return{battle:bounds(source),one,pack,group:H.footmen.group,forest};
- });assert(Math.abs(result.battle-result.one)<6,JSON.stringify(result));assert.equal(result.group,3);assert(result.forest.length);assert(result.forest.every(x=>x==='matrix(1.04, 0, 0, 1.04, 0, 0)'));
+   return{battle:bounds(source),one,oneOptions,pack,group:H.footmen.group,forest};
+ });assert(result.oneOptions.some(h=>Math.abs(result.battle-h)<3),JSON.stringify(result));assert.equal(result.group,3);assert(result.forest.length);assert(result.forest.every(x=>x==='matrix(1.015, 0, 0, 1.015, 0, 0)'));
  await p.goto('http://localhost:4323/');await p.evaluate(()=>HVRig.ready);await p.waitForTimeout(1500);
  await p.screenshot({path:'design/animation/current-menu.png'});
  await p.evaluate(()=>{document.querySelector('#hvfm')?.remove();openDraft('Ready',()=>{});});

@@ -1,6 +1,51 @@
 {
   "versions": [
     {
+      "id": "pocket-chibi-20261109",
+      "date": "2026-11-09",
+      "title": "Pocket Chibi art direction",
+      "groups": [
+        {
+          "name": "Pixel characters",
+          "items": [
+            "Complete-character pixel sprites use the approved Pyromancer look, with one facing and short, anchored animation loops.",
+            "Battlefield figures, reserve portraits and selection cards share the active character artwork. Squads show one figure in combat and three in selection."
+          ]
+        },
+        {
+          "name": "World and interface",
+          "items": [
+            "Pixel terrain, buildings, icons and fire share a consistent palette and hard outlines.",
+            "Full-bleed terrain closes gaps between hex tiles; forests stay upright at every zoom.",
+            "Menus, combat banners and popups use flat slate panels, gold accents and crisp borders."
+          ]
+        }
+      ],
+      "commits": []
+    },
+    {
+      "id": "whole-character-illustrated-20261108",
+      "date": "2026-11-08",
+      "title": "A unified illustrated Hollow Vale",
+      "groups": [
+        {
+          "name": "Whole-character animation",
+          "items": [
+            "New complete-character artwork follows the approved Pyromancer style across the roster. Characters use one facing and painted animation poses instead of separately moving limbs.",
+            "Battlefield units, reserve portraits, selection cards and popups share the new artwork. Squad selections retain their three-figure preview."
+          ]
+        },
+        {
+          "name": "The world and interface",
+          "items": [
+            "Terrain, buildings, menu tiles and illustrated status icons share the same crisp outlines and cel-shaded palette.",
+            "Slate panels, gold borders and readable controls bring menus and the battlefield interface together."
+          ]
+        }
+      ],
+      "commits": []
+    },
+    {
       "id": "7a3ca3cc6e53",
       "date": "2026-10-30",
       "title": "All factions complete: Arcane Vanguard roster",

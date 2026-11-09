@@ -22,6 +22,36 @@
   function loadImage(url) {
     return new Promise((resolve,reject) => {const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('Image failed: '+url));im.src=url;});
   }
+  // Share the new pixel atlas while retaining each unit's event bindings,
+  // durations, anchors and fog-of-war checks from its existing manifest.
+  let pixelAtlas;
+  function effectFamily(key,name,faction){
+    const n=name.toLowerCase();
+    if(/heal|restore|renew|revive|regener/.test(n))return 2;
+    if(/shield|ward|block|armor|protect|mitigat/.test(n))return 11;
+    if(/frost|snow|ice|freeze|blizzard/.test(n))return 1;
+    if(/poison|plague|necrot|deathbolt|soul|bone|raise|ossuary/.test(n))return 3;
+    if(/lightning|thunder|shock|electric/.test(n))return 4;
+    if(/blood|drain|vamp|mist|bat/.test(n))return 9;
+    if(/root|leaf|vine|grove|nature|wild/.test(n))return 8;
+    if(/holy|sun|radiance|bless|rally|banner/.test(n))return 10;
+    if(/fire|flame|ember|lava|burn|cinder|inferno|explosion/.test(n))return 0;
+    if(/slash|spark|steel|arrow|bullet|pierce|lance|sword|cleave/.test(n))return 6;
+    if(/dust|stone|quake|stomp|crack|shatter|siege|rubble/.test(n))return 7;
+    if(/rune|arcane|void|portal|teleport|mirror|time|mana|hex|spell/.test(n))return 5;
+    if(key==='witch')return 1;if(key==='storm'||key==='thunderking')return 4;
+    return {kingdom:10,vamp:9,undead:3,infernal:0,wilds:8,iron:6,arcane:5,raidboss:3}[faction]??5;
+  }
+  function pixelManifest(key,m,im){
+    const faction=(window.HVRig?.registry[key]?.folder||m.faction||'').split('/')[0],clips={};
+    for(const [name,c]of Object.entries(m.clips||{})){
+      const count=Array.isArray(c.frames)?c.frames.length:c.frames;
+      const duration=c.durationMs||count/(c.fps||8)*1000;
+      const family=effectFamily(key,name,faction),order=c.loop?[0,1,2,1]:[0,1,2,3];
+      clips[name]={...c,frames:order,sourceRects:order.map(frame=>{const col=(family%2)*4+frame,row=Math.floor(family/2);return [col*im.width/8,row*im.height/6,im.width/8,im.height/6];}),durationMs:duration,fps:4/(duration/1000)};
+    }
+    return {...m,columns:8,rows:6,clips};
+  }
   function normalize(manifest, im) {
     const cols=manifest.columns||manifest.grid?.columns, rows=manifest.rows||manifest.grid?.rows, clips={};
     if (!(cols>0 && rows>0)) throw Error('Invalid VFX grid');
@@ -39,20 +69,48 @@
     return {image:im,clips,bindings:manifest.bindings||{},delayedEvents:manifest.delayedEvents||{},statusEvents:manifest.statusEvents||{}};
   }
   function load(key,url){if(pending.has(key))return pending.get(key);const task=(async()=>{
-    try {const response=await fetch(url);if(!response.ok)throw Error('Manifest HTTP '+response.status);const m=await response.json();const im=await loadImage(url.slice(0,url.lastIndexOf('/')+1)+(m.file||m.image)+new URL(url,location.href).search);assets.set(key,normalize(m,im));return key;}
+    try {const response=await fetch(url);if(!response.ok)throw Error('Manifest HTTP '+response.status);const m=await response.json();const im=await(pixelAtlas||(pixelAtlas=loadImage('art/effects-pocket-chibi.png')));assets.set(key,normalize(pixelManifest(key,m,im),im));return key;}
     catch(e){errors[key]=e.message;console.warn('Faction VFX fallback ('+key+'):',e.message);return null;}
   })();pending.set(key,task);return task;}
   const ready=Promise.all(Object.entries(definitions).map(([key,url])=>load(key,url)));
   window.addEventListener('hv-rig-ready',event=>{const {key,config}=event.detail,url=config.effects?'art/rigs/'+config.folder+'/'+config.effects+(config.revision?'?v='+encodeURIComponent(config.revision):''):definitions[key];if(url)load(key,url);});
   window.addEventListener('hv-rig-evicted',event=>{assets.delete(event.detail.key);pending.delete(event.detail.key);});
   function clear(){effects.forEach(e=>e.canvas.remove());effects=[];if(raf)cancelAnimationFrame(raf);raf=0;last=0;}
+  function projectileKind(key,name=''){
+    if(['bowmen','archer','lookout','trapper','falconer'].includes(key)||/arrow/i.test(name))return 'arrow';
+    if(['ballista','cagewright'].includes(key))return 'bolt';
+    if(['gunner','spotter'].includes(key))return 'bullet';
+    if(['sapper','bomber','warengine'].includes(key))return 'bomb';
+    return null;
+  }
+  function drawProjectile(ctx,kind){
+    ctx.save();ctx.scale(6,6);
+    if(kind==='bomb'){
+      ctx.fillStyle='#182630';ctx.fillRect(10,10,14,13);ctx.fillRect(13,7,8,3);
+      ctx.fillStyle='#647b86';ctx.fillRect(12,12,9,8);ctx.fillStyle='#f0c76b';ctx.fillRect(18,5,3,5);ctx.fillStyle='#ffe6a0';ctx.fillRect(21,3,3,3);
+    }else if(kind==='bullet'){
+      ctx.fillStyle='#563d26';ctx.fillRect(9,13,16,6);ctx.fillStyle='#f0c76b';ctx.fillRect(10,14,16,4);ctx.fillStyle='#fff1c9';ctx.fillRect(25,15,3,2);
+    }else{
+      const heavy=kind==='bolt'||kind==='lance';
+      ctx.fillStyle='#172a30';ctx.fillRect(3,14,23,4);
+      ctx.fillStyle=heavy?'#8295a1':'#bb884d';ctx.fillRect(3,15,23,2);
+      ctx.fillStyle='#172a30';ctx.fillRect(24,10,2,12);ctx.fillRect(26,12,2,8);ctx.fillRect(28,14,3,4);
+      ctx.fillStyle='#d9edf0';ctx.fillRect(24,12,2,8);ctx.fillRect(26,14,3,4);
+      if(kind!=='lance'){ctx.fillStyle='#f6e6be';ctx.fillRect(3,11,3,3);ctx.fillRect(6,13,3,2);ctx.fillRect(3,18,3,3);ctx.fillRect(6,17,3,2);}
+    }
+    ctx.restore();
+  }
   function add(key,clip,from,to,options={}) {
     const pack=assets.get(key),c=pack?.clips[clip],layer=document.getElementById('fxl');
     if (!c||!layer||disabled()||!inGame()) return false;
     if (!visible(from,options.sourceUnit)||!visible(to,options.targetUnit)) return false;
     const canvas=document.createElement('canvas');canvas.width=canvas.height=192;
+    canvas.getContext('2d').imageSmoothingEnabled=false;
     canvas.className='hv-faction-fx';canvas.setAttribute('aria-hidden','true');canvas.style.visibility='hidden';layer.appendChild(canvas);
     effects.push({canvas,pack,clip:c,key,name:clip,from:point(from),to:point(to),sourceUnit:options.sourceUnit,targetUnit:options.targetUnit,owner:options.owner,match:game(),start:performance.now()+(options.delay||0),duration:options.owner?Infinity:(options.duration||c.duration),loopPeriod:options.duration||c.duration,loop:!!options.owner||c.loop,travel:!!options.travel,rotate:!!options.rotate,feet:!!options.feet,size:options.size||c.size});
+    Object.assign(effects[effects.length-1],{projectile:options.projectile,beam:!!options.beam});
+    if(options.projectile)canvas.dataset.projectile=options.projectile;
+    if(options.beam)canvas.dataset.beam='lance';
     // Cap visual work even if a network peer sends a burst of legitimate actions.
     while(effects.length>96)effects.shift().canvas.remove();
     if(!raf){last=performance.now();raf=requestAnimationFrame(frame);}return true;
@@ -87,9 +145,17 @@
       const x=a[0]+(b[0]-a[0])*t,y=a[1]+(b[1]-a[1])*t+(e.feet?cell*.16:-cell*.2);
       e.canvas.style.width=e.canvas.style.height=size+'px';e.canvas.style.left=x+'px';e.canvas.style.top=y+'px';
       e.canvas.style.transformOrigin=(e.clip.anchor[0]*100)+'% '+(e.clip.anchor[1]*100)+'%';
-      e.canvas.style.transform=`translate(${-e.clip.anchor[0]*100}%,${-e.clip.anchor[1]*100}%) rotate(${e.rotate?Math.atan2(b[1]-a[1],b[0]-a[0])+e.clip.rotation:0}rad)`;
+      e.canvas.style.transform=`translate(${-e.clip.anchor[0]*100}%,${-e.clip.anchor[1]*100}%) rotate(${e.rotate?Math.atan2(b[1]-a[1],b[0]-a[0])+(e.projectile?0:e.clip.rotation):0}rad)`;
+      if(e.beam){
+        const reach=Math.hypot(b[0]-a[0],b[1]-a[1])+cell*.4;
+        const extension=Math.min(1,dt/140,Math.max(0,(e.duration-dt)/160));
+        e.canvas.style.width=reach*extension+'px';e.canvas.style.height=cell*.3+'px';
+        e.canvas.style.left=a[0]+'px';e.canvas.style.top=(a[1]-cell*.2)+'px';
+        e.canvas.style.transformOrigin='0 50%';e.canvas.style.transform=`translateY(-50%) rotate(${Math.atan2(b[1]-a[1],b[0]-a[0])}rad)`;
+      }
       let n=Math.floor(dt*e.clip.fps/1000);n=e.clip.loop?n%e.clip.rects.length:Math.min(n,e.clip.rects.length-1);
-      const ctx=e.canvas.getContext('2d');ctx.clearRect(0,0,192,192);if(e.loop&&window.HVRig?.drawLoop)HVRig.drawLoop(ctx,e.pack.image,e.clip.rects,dt,e.loopPeriod,192,192);else ctx.drawImage(e.pack.image,...e.clip.rects[n],0,0,192,192);return true;
+      if(e.loop)n=Math.floor(dt%e.loopPeriod/e.loopPeriod*e.clip.rects.length);
+      const ctx=e.canvas.getContext('2d');ctx.clearRect(0,0,192,192);ctx.imageSmoothingEnabled=false;if(e.projectile||e.beam)drawProjectile(ctx,e.beam?'lance':e.projectile);else ctx.drawImage(e.pack.image,...e.clip.rects[n],0,0,192,192);return true;
     });
     if(effects.length)raf=requestAnimationFrame(frame);else last=0;
   }
@@ -100,7 +166,7 @@
     const delay=Math.max(0,(u.fx?.t||performance.now())-performance.now());
     const release=binding.releaseMs??250,travel=binding.projectile?(binding.travelMs??300):0;
     if(names.includes('cast'))add(packKey,binding.cast,u,u,{sourceUnit:u,targetUnit:u,delay,feet:true});
-    if(names.includes('projectile'))add(packKey,binding.projectile,u,t,{sourceUnit:u,targetUnit:t.v,delay:delay+release,travel:true,rotate:true,duration:travel});
+    if(names.includes('projectile')){const kind=projectileKind(packKey,binding.projectile);add(packKey,binding.projectile,u,t,{sourceUnit:u,targetUnit:t.v,delay:delay+release,travel:true,rotate:true,duration:travel,projectile:kind,size:kind?(kind==='bullet'?.65:.9):undefined});}
     if(names.includes('impact'))add(packKey,binding.impact,t,t,{targetUnit:t.v,delay:delay+release+travel});
     return true;
   }
@@ -108,6 +174,15 @@
     if(!u||!t||t.heal||t.summon||t.ab||!assets.has(u.k)||disabled()||!inGame())return false;
     // A successful cosmetic dispatch may draw nothing if the attack is concealed.
     if(!visible(u,u)||!visible(t,t.v))return true;
+    if(u.k==='lancer'){
+      const cells=typeof pierceCells==='function'?pierceCells(u,t):[t];
+      const seen=[];for(const cell of cells){if((typeof VALID!=='undefined'&&!VALID.has(cell.x+','+cell.y))||!visible(cell))break;seen.push(cell);}
+      if(!seen.length)return true;
+      const delay=Math.max(0,(u.fx?.t||performance.now())-performance.now())+100;
+      add(u.k,'thrust',u,seen[seen.length-1],{sourceUnit:u,beam:true,delay,duration:550});
+      seen.forEach((cell,i)=>add(u.k,'hitSpark',cell,cell,{delay:delay+150+i*80,size:.65}));
+      return true;
+    }
     if(dispatch(u,t,assets.get(u.k)?.bindings.attack))return true;
     const speed=typeof PACEMODE!=='undefined'&&PACEMODE==='fast'?.65:1;
     const delayed=Math.max(0,(u.fx?.t||performance.now())-performance.now());
@@ -206,7 +281,7 @@
       return result;
     };
   }
-  const style=document.createElement('style');style.textContent='.hv-faction-fx{position:absolute;pointer-events:none;z-index:4;user-select:none}';document.head.appendChild(style);
+  const style=document.createElement('style');style.textContent='.hv-faction-fx{position:absolute;pointer-events:none;z-index:4;user-select:none;image-rendering:pixelated}';document.head.appendChild(style);
   // Cosmetic foot-level auras belong to living, visible units and never grant vision.
   setInterval(()=>{
     if(!inGame()||disabled()||document.hidden||document.body.classList.contains('hv-paused'))return;
@@ -215,5 +290,5 @@
       add(u.k,aura.clip,u,u,{sourceUnit:u,targetUnit:u,owner:u,feet:true,size:aura.sizeInHexes||1,duration:aura.durationMs||1000});
     }
   },200);
-  window.HVFactionFX=window.HVFactionEffects={ready,assets,errors,clear,load,get active(){return effects.length;},get loaded(){return [...assets.keys()];}};
+  window.HVFactionFX=window.HVFactionEffects={ready,assets,errors,clear,load,effectFamily,readyFor:keys=>Promise.all(keys.map(k=>pending.get(k)).filter(Boolean)),get active(){return effects.length;},get loaded(){return [...assets.keys()];}};
 })();

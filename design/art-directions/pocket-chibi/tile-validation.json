@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "zoom": 75,
+      "samples": 468,
+      "gaps": 0,
+      "pixelAtlas": true,
+      "upright": true
+    },
+    {
+      "zoom": 100,
+      "samples": 468,
+      "gaps": 0,
+      "pixelAtlas": true,
+      "upright": true
+    },
+    {
+      "zoom": 160,
+      "samples": 468,
+      "gaps": 0,
+      "pixelAtlas": true,
+      "upright": true
+    }
+  ],
+  "errors": []
+}

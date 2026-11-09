@@ -1,0 +1,57 @@
+{
+  "witch": {
+    "stats": {
+      "n": "Inferno Witch",
+      "e": "👑",
+      "hp": 20,
+      "mv": 2,
+      "rng": [
+        2,
+        3
+      ],
+      "dmg": 4,
+      "elite": 1,
+      "fac": "infernal",
+      "d": "Boss (5 slots). Hellfire: Her targets burn for 2 damage a turn for 3 turns."
+    },
+    "effective": {
+      "dmg": 4,
+      "armor": 0,
+      "drain": 0,
+      "siege": 0,
+      "acost": 0,
+      "slcost": 0,
+      "heal": 0,
+      "cost": 0,
+      "burn": 2
+    },
+    "directDamage": 3,
+    "burnTurns": 2,
+    "burnPerTurn": 2
+  },
+  "faction": {
+    "n": "Infernal",
+    "c": "#f2702a",
+    "p": "Burn",
+    "pd": "its attacks set units ablaze: 1 damage at the start of their owner's next 2 turns. Infernal heroes never burn and take no damage from fire abilities (Wall of Flame, Rain of Fire, Fireball cards, Immolation, a dragon's fly-over); normal attacks still hurt them.",
+    "sy": "Burn deals 2 damage per turn.",
+    "x": "<b>Scorched Earth</b>: Infernal splash attacks (and Overheats), Infernal killing blows and Infernal deaths ignite the hex: Burning Ground for 2 rounds (max 8, oldest out first). Non-Infernal walking heroes that enter or start there take 1 damage and Burn; fliers and Infernal are immune. Burned forest becomes Ash (no cover) for the match (max 4 Ash). Fire burns away Graves. <b>Heat</b>: every Burn tick on an enemy gives your side +1 Heat (max 10). At 5, your next Infernal attack Overheats: +2 damage and splash, spending 5 Heat."
+  },
+  "synergy": {
+    "infernal": 1
+  },
+  "knobs": {
+    "fireAll": false,
+    "fireCap": 8,
+    "fireDur": 2,
+    "ashCap": 4,
+    "graveCap": 6,
+    "graveDur": 4,
+    "growCap": 6,
+    "heatMax": 10,
+    "heatCost": 5,
+    "ovhDmg": 2,
+    "graveRange": 3,
+    "graveTower": 2
+  }
+}
