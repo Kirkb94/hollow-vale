@@ -1,6 +1,23 @@
 {
   "versions": [
     {
+      "id": "undead-graves-20261109",
+      "date": "2026-11-09",
+      "title": "Undead Graves reined in",
+      "groups": [
+        {
+          "name": "Undead",
+          "items": [
+            "Only fallen Undead heroes leave Graves now, not every unit that dies.",
+            "Graves last 3 rounds instead of 4, and at most 4 stand at once instead of 6.",
+            "Undead can only spawn at a Grave with an Undead unit within 2 hexes (was 3), and never within 3 hexes of an enemy tower (was 2).",
+            "Heroes that come out of a Grave have already used Undying, so they don't rise again."
+          ]
+        }
+      ],
+      "commits": []
+    },
+    {
       "id": "warfront-rts-20261109",
       "date": "2026-11-09",
       "title": "Warfront: a real-time mode",
