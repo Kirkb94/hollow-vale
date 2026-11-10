@@ -3,10 +3,19 @@ HOLLOW VALE
 1v1, 3-player or 4-player battles, online or on one device.
 
 WARFRONT (real-time mode, public/rts.html)
-- A separate real-time base builder: mine gold, build a town, train heroes
-  from your faction and destroy every rival Keep. 1 to 3 AI rivals.
+- A separate real-time town builder that runs on the Hearthlands engine:
+  villagers with jobs, homes and seasons, production chains, roads, walls,
+  ages, doctrines and diplomacy. 1 to 3 AI rivals, Skirmish only, with
+  save/load (pause menu) and autosave.
+- Pick a Hollow Vale faction; rivals get the others. Every faction trains its
+  own heroes: Barracks (infantry, ranged, casters, squads), Stable (cavalry and
+  chargers), Siege Workshop (siege heroes, plus rams, catapults and siege
+  towers for everyone) and the Hero Shrine (Castle Age, one of each Elite).
+- Faction passives and unit traits carry over (Formation, Bloodthirst,
+  Undying, Burn, Regrowth, Siegecraft, Arcane Flow, flying, charge, splash,
+  stun, drain, healing, stars from kills).
 - Open it from the Warfront button on the main menu, or go to /rts.html.
-- Source lives in tools/rts-src/; rebuild with: python3 tools/build-rts.py
+- Source lives in tools/warfront-src/; rebuild with: python3 tools/build-rts.py
 - Hero data comes from public/rts-data.json. Regenerate it after changing
   heroes (server running): python3 tools/export-rts-data.py http://localhost:3000/
 

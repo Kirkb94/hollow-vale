@@ -1,6 +1,25 @@
 {
   "versions": [
     {
+      "id": "warfront-hearth-20261109",
+      "date": "2026-11-09",
+      "title": "Warfront rebuilt as a town builder",
+      "groups": [
+        {
+          "name": "Warfront",
+          "items": [
+            "Warfront now plays like Hearthlands: villagers run their own jobs, families, seasons and winters, production chains, roads, walls and siege, ages, doctrines and diplomacy.",
+            "Pick any Hollow Vale faction on the menu; rival towns take the others.",
+            "Heroes train by class: Barracks for infantry, ranged, casters and squads; Stable for cavalry and chargers; Siege Workshop for siege heroes; and the new Hero Shrine (Castle Age) for Elites, one of each at a time.",
+            "Every faction can still build rams, catapults and siege towers.",
+            "Faction passives carry over: Formation, Bloodthirst, Undying, Burn, Regrowth, Siegecraft and Arcane Flow. So do fliers, charges, splash, stun, drain and healers. Heroes earn stars from kills.",
+            "Elites lead from the front: their aura lifts nearby troops, and losing one shakes your army.",
+            "Skirmish with save/load and autosave. No campaign or survival."
+          ]
+        }
+      ]
+    },
+    {
       "id": "undead-graves-20261109",
       "date": "2026-11-09",
       "title": "Undead Graves reined in",
